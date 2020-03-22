@@ -1,5 +1,6 @@
 import VueRouter from 'vue-router'
 
+
 // Pages
 import Home from './pages/Home'
 // import Register from './pages/Register'
