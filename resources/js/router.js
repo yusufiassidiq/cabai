@@ -10,10 +10,13 @@ import AdminDashboard from './pages/admin/Dashboard'
 import UserDetails from './pages/admin/userDetails'
 import UnverifiedDashboard from './pages/user/UnverifiedDashboard'
 
-// Component
+// Pages - SCM
 import AdminMaster from './pages/scm/admin/Master'
 import UserManagement from './pages/scm/admin/UserManagement'
 import UserValidation from './pages/scm/admin/UserValidation'
+
+// Pages - Bisnis Analitik
+import BAMaster from './pages/ba/Master'
 
 // Routes
 const routes = [
@@ -35,13 +38,13 @@ const routes = [
           },
       ]
     },
-    // {
-    //     path: '/',
-    //     name: 'ba',
-    //     components: {
-    //         navbar: AdminMaster
-    //     }
-    // },
+    {
+        path: '/',
+        name: 'bisnisanalitik',
+        components: {
+            content: BAMaster
+        }
+    },
     // {
     //   path: '/',
     //   name: 'home',
