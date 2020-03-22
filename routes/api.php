@@ -31,4 +31,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     // Users
     Route::get('users', 'UserController@index')->middleware('isAdmin');
     Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
+    //Test
+    Route::delete('/user/{id}','AdminController@delete')->middleware('isAdmin');
+    Route::post('/terima/{id}','AdminController@terima')->middleware('isAdmin');
+    //Get Custom Payload
+    Route::get('user/getcustompayloads','UserController@seeToken');
 });

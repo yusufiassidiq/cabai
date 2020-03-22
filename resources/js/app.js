@@ -22,6 +22,7 @@ Vue.use(VueRouter)
 // Set Vue authentication
 Vue.use(VueAxios, axios)
 axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api`
+// console.log(process.env.MIX_APP_URL)
 Vue.use(VueAuth, auth)
 
 // Load Index
