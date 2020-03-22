@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="card card-default">
-            <div class="card-header">Inscription</div>            
+            <div class="card-header">Register</div>            
             
             <div class="card-body">
                 <div class="alert alert-danger" v-if="has_error && !success">
@@ -12,15 +12,27 @@
                 <form autocomplete="off" @submit.prevent="register" v-if="!success" method="post">                    
                     <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.name }">
                         <label for="name">Nama</label>
-                        <input type="name" id="name" class="form-control" placeholder="user@example.com" v-model="name">
+                        <input type="name" id="name" class="form-control" placeholder="Masukkan Nama" v-model="name">
                         <span class="help-block" v-if="has_error && errors.name">{{ errors.name }}</span>
                     </div>    
 
                     <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.email }">
                         <label for="email">E-mail</label>
-                        <input type="email" id="email" class="form-control" placeholder="user@example.com" v-model="email">
+                        <input type="email" id="email" class="form-control" placeholder="Masukkan Email" v-model="email">
                         <span class="help-block" v-if="has_error && errors.email">{{ errors.email }}</span>
-                    </div>                    
+                    </div>
+
+                    <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.role }">
+                        <label for="role">Role</label>
+                        <select id="role" class="form-control"  v-model="role">
+                          <!-- <option value="" selected disabled>Role Pengguna</option> -->
+                          <option value="2">Petani</option>
+                          <option value="3">Pengepul</option>
+                          <option value="4">Grosir</option>
+                          <option value="5">Eceran</option>
+                        </select>
+                        <span class="help-block" v-if="has_error && errors.role">{{ errors.role }}</span>
+                    </div>                     
                     
                     <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.password }">
                         <label for="password">Password</label>
@@ -45,6 +57,7 @@
       return {
         name: '',
         email: '',
+        role: '',
         password: '',
         password_confirmation: '',
         has_error: false,
@@ -61,6 +74,7 @@
           data: {
             name: app.name,
             email: app.email,
+            role: app.role,
             password: app.password,
             password_confirmation: app.password_confirmation
           },

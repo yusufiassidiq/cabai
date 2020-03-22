@@ -3361,11 +3361,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       name: '',
       email: '',
+      role: '',
       password: '',
       password_confirmation: '',
       has_error: false,
@@ -3381,6 +3394,7 @@ __webpack_require__.r(__webpack_exports__);
         data: {
           name: app.name,
           email: app.email,
+          role: app.role,
           password: app.password,
           password_confirmation: app.password_confirmation
         },
@@ -40605,7 +40619,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "card card-default" }, [
-      _c("div", { staticClass: "card-header" }, [_vm._v("Inscription")]),
+      _c("div", { staticClass: "card-header" }, [_vm._v("Register")]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _vm.has_error && !_vm.success
@@ -40659,7 +40673,7 @@ var render = function() {
                       attrs: {
                         type: "name",
                         id: "name",
-                        placeholder: "user@example.com"
+                        placeholder: "Masukkan Nama"
                       },
                       domProps: { value: _vm.name },
                       on: {
@@ -40704,7 +40718,7 @@ var render = function() {
                       attrs: {
                         type: "email",
                         id: "email",
-                        placeholder: "user@example.com"
+                        placeholder: "Masukkan Email"
                       },
                       domProps: { value: _vm.email },
                       on: {
@@ -40720,6 +40734,71 @@ var render = function() {
                     _vm.has_error && _vm.errors.email
                       ? _c("span", { staticClass: "help-block" }, [
                           _vm._v(_vm._s(_vm.errors.email))
+                        ])
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "form-group",
+                    class: { "has-error": _vm.has_error && _vm.errors.role }
+                  },
+                  [
+                    _c("label", { attrs: { for: "role" } }, [_vm._v("Role")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.role,
+                            expression: "role"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "role" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.role = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "2" } }, [
+                          _vm._v("Petani")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "3" } }, [
+                          _vm._v("Pengepul")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "4" } }, [
+                          _vm._v("Grosir")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "5" } }, [
+                          _vm._v("Eceran")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.has_error && _vm.errors.role
+                      ? _c("span", { staticClass: "help-block" }, [
+                          _vm._v(_vm._s(_vm.errors.role))
                         ])
                       : _vm._e()
                   ]
