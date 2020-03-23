@@ -15,6 +15,13 @@ import VueAuth from '@websanova/vue-auth'
 // Set Vue globally
 window.Vue = require('vue');
 
+// import vform library 
+// Doc = https://github.com/cretueusebiu/vform
+import { Form, HasError, AlertError } from 'vform'
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+window.Form = Form;
+
 // Set Vue router
 Vue.router = router
 Vue.use(VueRouter)

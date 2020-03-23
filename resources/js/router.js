@@ -12,6 +12,7 @@ import UnverifiedDashboard from './pages/user/UnverifiedDashboard'
 
 // Pages - SCM
 import AdminMaster from './pages/scm/admin/Master'
+import DashboardAdmin from './pages/scm/admin/Dashboard'
 import UserManagement from './pages/scm/admin/UserManagement'
 import UserValidation from './pages/scm/admin/UserValidation'
 import UserMaster from './pages/scm/user/Master'
@@ -32,68 +33,76 @@ const routes = [
     // SCM
     {
         path: '/admin',
-        name: 'adminscm',
-        components: {
-            content: AdminMaster,
-        },
+        component: AdminMaster,
         children: [
             {
+                path: '',
+                component: DashboardAdmin,
+                name: "DashboardAdmin"
+            },
+            {
                 path: 'usermanagement',
-                component: UserManagement
+                component: UserManagement,
+                name: "UserManagement"
             },
             {
                 path: 'uservalidation',
-                component: UserValidation
+                component: UserValidation,
+                name: "UserValidation"
             },
         ]
     },
     {
         path: '/user',
-        name: 'userscm',
-        components: {
-            content: UserMaster,
-        },
+        component: UserMaster,
         children: [
             {
                 path: '',
-                component: DashboardUser
+                component: DashboardUser,
+                name: "DashboardUser"
             },
             {
                 path: 'manajemenlahan',
-                component: ManajemenLahan
+                component: ManajemenLahan,
+                name: "ManajemenLahan"
             },
             {
                 path: 'riwayatpengeluaran',
-                component: RiwayatPengeluaran
+                component: RiwayatPengeluaran,
+                name: "RiwayatPengeluaran"
             },
             {
                 path: 'daftarmitra',
-                component: DaftarMitra
+                component: DaftarMitra,
+                name: "DaftarMitra"
             },
             {
                 path: 'permintaanmitra',
-                component: PermintaanMitra
+                component: PermintaanMitra,
+                name: "PermintaanMitra"
+
             },
             {
                 path: 'pengajuanmitra',
-                component: PengajuanMitra
+                component: PengajuanMitra,
+                name: "PengajuanMitra"
             },
             {
                 path: 'transaksipemasok',
-                component: TransaksiPemasok
+                component: TransaksiPemasok,
+                name: "TransaksiPemasok"
             },
             {
                 path: 'transaksipelanggan',
-                component: TransaksiPelanggan
+                component: TransaksiPelanggan,
+                name: "TransaksiPelanggan"
             },
         ]
     },
     {
         path: '/',
         name: 'bisnisanalitik',
-        components: {
-            content: BAMaster
-        }
+        component: BAMaster
     },
     // {
     //   path: '/',
