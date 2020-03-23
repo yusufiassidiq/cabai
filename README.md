@@ -14,7 +14,11 @@ composer install
 npm install
 ~~~
 
-- Edit .env sesuai example
+- Edit .env sesuai example, pastikan APP URL = http://127.0.0.1:8000 dan diakhir sisipkan
+~~~
+MIX_APP_URL="${APP_URL}"
+~~~
+
 - Inisisasi key generate dan jwt
 
 ~~~
