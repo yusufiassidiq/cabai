@@ -15,15 +15,39 @@ import AdminMaster from './pages/scm/admin/Master'
 import DashboardAdmin from './pages/scm/admin/Dashboard'
 import UserManagement from './pages/scm/admin/UserManagement'
 import UserValidation from './pages/scm/admin/UserValidation'
-import UserMaster from './pages/scm/user/Master'
-import DashboardUser from './pages/scm/user/Dashboard'
-import ManajemenLahan from './pages/scm/user/ManajemenLahan'
-import RiwayatPengeluaran from './pages/scm/user/RiwayatPengeluaran'
-import DaftarMitra from './pages/scm/user/DaftarMitra'
-import PermintaanMitra from './pages/scm/user/PermintaanMitra'
-import PengajuanMitra from './pages/scm/user/PengajuanMitra'
-import TransaksiPemasok from './pages/scm/user/TransaksiPemasok'
-import TransaksiPelanggan from './pages/scm/user/TransaksiPelanggan'
+
+import MasterProd from './pages/scm/produsen/Master' // prod == produsen
+import DashboardProd from './pages/scm/produsen/Dashboard' 
+import ManajemenLahan from './pages/scm/produsen/ManajemenLahan'
+import RiwayatPengeluaran from './pages/scm/produsen/RiwayatPengeluaran'
+import DaftarMitraProd from './pages/scm/produsen/DaftarMitra'
+import PengajuanMitraProd from './pages/scm/produsen/PengajuanMitra'
+import PermintaanMitraProd from './pages/scm/produsen/PermintaanMitra'
+import TransaksiPelangganProd from './pages/scm/produsen/TransaksiPelanggan'
+
+import MasterPengepul from './pages/scm/pengepul/Master' // pengepul
+import DashboardPengepul from './pages/scm/pengepul/Dashboard'
+import DaftarMitraPengepul from './pages/scm/pengepul/DaftarMitra'
+import PengajuanMitraPengepul from './pages/scm/pengepul/PengajuanMitra'
+import PermintaanMitraPengepul from './pages/scm/pengepul/PermintaanMitra'
+import TransaksiPelangganPengepul from './pages/scm/pengepul/TransaksiPelanggan'
+import TransaksiPemasokPengepul from './pages/scm/pengepul/TransaksiPemasok'
+
+import MasterGrosir from './pages/scm/grosir/Master' // grosir
+import DashboardGrosir from './pages/scm/grosir/Dashboard'
+import DaftarMitraGrosir from './pages/scm/grosir/DaftarMitra'
+import PengajuanMitraGrosir from './pages/scm/grosir/PengajuanMitra'
+import PermintaanMitraGrosir from './pages/scm/grosir/PermintaanMitra'
+import TransaksiPelangganGrosir from './pages/scm/grosir/TransaksiPelanggan'
+import TransaksiPemasokGrosir from './pages/scm/grosir/TransaksiPemasok'
+
+import MasterPengecer from './pages/scm/pengecer/Master' // pengecer
+import DashboardPengecer from './pages/scm/pengecer/Dashboard'
+import DaftarMitraPengecer from './pages/scm/pengecer/DaftarMitra'
+import PengajuanMitraPengecer from './pages/scm/pengecer/PengajuanMitra'
+import PermintaanMitraPengecer from './pages/scm/pengecer/PermintaanMitra'
+import TransaksiPelangganPengecer from './pages/scm/pengecer/TransaksiPelanggan'
+import TransaksiPemasokPengecer from './pages/scm/pengecer/TransaksiPemasok'
 
 // Pages - Bisnis Analitik
 import BAMaster from './pages/ba/Master'
@@ -61,17 +85,18 @@ const routes = [
         ]
     },
     {
-        path: '/user',
-        component: UserMaster,
-        children: [{
+        path: '/produsen',
+        component: MasterProd,
+        children: [
+            {
                 path: '',
-                component: DashboardUser,
-                name: "DashboardUser"
+                component: DashboardProd,
+                name: "DashboardProd"
             },
             {
                 path: 'manajemenlahan',
                 component: ManajemenLahan,
-                name: "ManajemenLahan"
+                name: "ManajemenLahanProd"
             },
             {
                 path: 'riwayatpengeluaran',
@@ -80,29 +105,135 @@ const routes = [
             },
             {
                 path: 'daftarmitra',
-                component: DaftarMitra,
-                name: "DaftarMitra"
+                component: DaftarMitraProd,
+                name: "DaftarMitraProd"
             },
             {
                 path: 'permintaanmitra',
-                component: PermintaanMitra,
-                name: "PermintaanMitra"
+                component: PermintaanMitraProd,
+                name: "PermintaanMitraProd"
 
             },
             {
                 path: 'pengajuanmitra',
-                component: PengajuanMitra,
-                name: "PengajuanMitra"
-            },
-            {
-                path: 'transaksipemasok',
-                component: TransaksiPemasok,
-                name: "TransaksiPemasok"
+                component: PengajuanMitraProd,
+                name: "PengajuanMitraProd"
             },
             {
                 path: 'transaksipelanggan',
-                component: TransaksiPelanggan,
-                name: "TransaksiPelanggan"
+                component: TransaksiPelangganProd,
+                name: "TransaksiPelangganProd"
+            },
+        ]
+    },
+    {
+        path: '/grosir',
+        component: MasterGrosir,
+        children: [
+            {
+                path: '',
+                component: DashboardGrosir,
+                name: "DashboardGrosir"
+            },
+            {
+                path: 'daftarmitra',
+                component: DaftarMitraGrosir,
+                name: "DaftarMitraGrosir"
+            },
+            {
+                path: 'permintaanmitra',
+                component: PermintaanMitraGrosir,
+                name: "PermintaanMitraGrosir"
+
+            },
+            {
+                path: 'pengajuanmitra',
+                component: PengajuanMitraGrosir,
+                name: "PengajuanMitraGrosir"
+            },
+            {
+                path: 'transaksipelanggan',
+                component: TransaksiPelangganGrosir,
+                name: "TransaksiPelangganGrosir"
+            },
+            {
+                path: 'transaksipemasok',
+                component: TransaksiPemasokGrosir,
+                name: "TransaksiPemasokGrosir"
+            },
+        ]
+    },
+    {
+        path: '/pengecer',
+        component: MasterPengecer,
+        children: [
+            {
+                path: '',
+                component: DashboardPengecer,
+                name: "DashboardPengecer"
+            },
+            {
+                path: 'daftarmitra',
+                component: DaftarMitraPengecer,
+                name: "DaftarMitraPengecer"
+            },
+            {
+                path: 'permintaanmitra',
+                component: PermintaanMitraPengecer,
+                name: "PermintaanMitraPengecer"
+
+            },
+            {
+                path: 'pengajuanmitra',
+                component: PengajuanMitraPengecer,
+                name: "PengajuanMitraPengecer"
+            },
+            {
+                path: 'transaksipelanggan',
+                component: TransaksiPelangganPengecer,
+                name: "TransaksiPelangganPengecer"
+            },
+            {
+                path: 'transaksipemasok',
+                component: TransaksiPemasokPengecer,
+                name: "TransaksiPemasokPengecer"
+            },
+        ]
+    },
+    {
+        path: '/pengepul',
+        component: MasterPengepul,
+        children: [
+            {
+                path: '',
+                component: DashboardPengepul,
+                name: "DashboardPengepul"
+            },
+            {
+                path: 'daftarmitra',
+                component: DaftarMitraPengepul,
+                name: "DaftarMitraPengepul"
+            },
+            {
+                path: 'permintaanmitra',
+                component: PermintaanMitraPengepul,
+                name: "PermintaanMitraPengepul"
+
+            },
+            {
+                path: 'pengajuanmitra',
+                component: PengajuanMitraPengepul,
+                name: "PengajuanMitraPengepul"
+            },
+            {
+                path: 'transaksipelanggan',
+                component: TransaksiPelangganPengepul,
+                name: "TransaksiPelangganPengepul"
+            },
+            {
+                path: 'transaksipemasok',
+                component: TransaksiPemasokPengepul,
+                name: "TransaksiPemasokPengepul"
             },
         ]
     },
@@ -111,14 +242,6 @@ const routes = [
         name: 'bisnisanalitik',
         component: BAMaster
     },
-    // {
-    //   path: '/',
-    //   name: 'home',
-    //   component: {
-    //     navbar: navbarscm,
-    //     wrapper: wrapperscm
-    //   }
-    // },
     {
         path: '/register',
         name: 'register',
@@ -219,7 +342,7 @@ const routes = [
                 forbiddenRedirect: '/403'
             }
         }
-    }
+    },
 ]
 
 const router = new VueRouter({
