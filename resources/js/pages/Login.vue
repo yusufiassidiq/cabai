@@ -5,7 +5,7 @@
             
             <div class="card-body">
                 <div class="alert alert-danger" v-if="has_error">
-                    <p>Erreur, impossible de se connecter avec ces identifiants.</p>
+                    <p>Error, data yang anda masukkan salah.</p>
                 </div>
                 <form autocomplete="off" @submit.prevent="login" method="post">
                     <div class="form-group">

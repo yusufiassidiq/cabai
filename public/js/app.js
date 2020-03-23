@@ -3277,6 +3277,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -41512,11 +41551,7 @@ var render = function() {
       _c("div", { staticClass: "card-body" }, [
         _vm.has_error
           ? _c("div", { staticClass: "alert alert-danger" }, [
-              _c("p", [
-                _vm._v(
-                  "Erreur, impossible de se connecter avec ces identifiants."
-                )
-              ])
+              _c("p", [_vm._v("Error, data yang anda masukkan salah.")])
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -41809,6 +41844,12 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._m(2),
+                _vm._v(" "),
                 _c(
                   "div",
                   {
@@ -41897,7 +41938,86 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "form_post" } }, [
+          _vm._v("Kab / Kota "),
+          _c("small", [_vm._v("*")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            staticClass: "form-control m-b",
+            attrs: { name: "kabupaten", id: "kabupaten" }
+          },
+          [
+            _c("option", { attrs: { selected: "", value: "" } }, [
+              _vm._v("-- Pilih Kabupaten --")
+            ])
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "form_sex" } }, [
+          _vm._v("Kecamatan "),
+          _c("small", [_vm._v("*")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            staticClass: "form-control m-b",
+            attrs: { name: "kecamatan", id: "kecamatan" }
+          },
+          [
+            _c("option", { attrs: { selected: "", value: "" } }, [
+              _vm._v("-- Pilih Kecamatan --")
+            ])
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "form_post" } }, [
+          _vm._v("Kelurahan / Desa "),
+          _c("small", [_vm._v("*")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            staticClass: "form-control m-b",
+            attrs: { name: "kelurahan", id: "kelurahan" }
+          },
+          [
+            _c("option", { attrs: { selected: "", value: "" } }, [
+              _vm._v("-- Pilih Kelurahan --")
+            ])
+          ]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -64055,6 +64175,15 @@ var routes = [// SCM
 {
   path: '/admin',
   component: _pages_scm_admin_Master__WEBPACK_IMPORTED_MODULE_8__["default"],
+  meta: {
+    auth: {
+      roles: 1,
+      redirect: {
+        name: 'login'
+      },
+      forbiddenRedirect: '/403'
+    }
+  },
   children: [{
     path: '',
     component: _pages_scm_admin_Dashboard__WEBPACK_IMPORTED_MODULE_9__["default"],
@@ -64241,8 +64370,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

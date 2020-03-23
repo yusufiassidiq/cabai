@@ -32,7 +32,46 @@
                           <option value="5">Eceran</option>
                         </select>
                         <span class="help-block" v-if="has_error && errors.role">{{ errors.role }}</span>
-                    </div>                     
+                    </div>
+
+                    
+                      
+                    <!-- <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="form_sex">Provinsi <small>*</small></label>
+                          <select class="form-control m-b" name="provinsi" id="propinsi">
+                            <option selected value="">-- Pilih Provinsi --</option>
+                          </select>
+                      
+                      </div>
+                    </div> -->
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="form_post">Kab / Kota <small>*</small></label>
+                          <select class="form-control m-b" name="kabupaten" id="kabupaten">
+                            <option selected value="">-- Pilih Kabupaten --</option>
+                          </select>
+                      </div>
+                    </div>
+                     
+                    
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="form_sex">Kecamatan <small>*</small></label>
+                          <select class="form-control m-b" name="kecamatan" id="kecamatan">
+                            <option selected value="">-- Pilih Kecamatan --</option>
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="form_post">Kelurahan / Desa <small>*</small></label>
+                          <select class="form-control m-b" name="kelurahan" id="kelurahan">
+                            <option selected value="">-- Pilih Kelurahan --</option>
+                          </select>
+                      </div>
+                    </div>
+                      
                     
                     <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.password }">
                         <label for="password">Password</label>
