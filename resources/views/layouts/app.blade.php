@@ -82,6 +82,7 @@
     <!-- <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script> -->
     <!-- AdminLTE for demo purposes -->
     <!-- <script src="{{ asset('dist/js/demo.js') }}"></script> -->
+
     <script type = "text/javascript" >
         var return_first = function() {
             var tmp = null;
@@ -98,45 +99,44 @@
             return tmp;
         }();
         $(document).ready(function() {
-            // $.ajax({
-            //     url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/provinsi',
-            //     type: 'GET',
-            //     dataType: 'json',
-            //     success: function(json) {
-            //         console.log(json.data[11]);
-            //         if (json.code == 200) {
-            //             for (i = 0; i < Object.keys(json.data).length; i++) {
-                            
-            //                 $('#propinsi').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
-            //             }
-            //         } else {
-            //             $('#kabupaten').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
-            //         }
-            //     }
-            // });
-            // $("#propinsi").change(function() {
-                // var propinsi = $("#propinsi").val();
-                var propinsi = 32 //id jawa barat
-                $.ajax({
-                    url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/kabupaten',
-                    data: "idpropinsi=" + propinsi,
-                    type: 'GET',
-                    cache: false,
-                    dataType: 'json',
-                    success: function(json) {
-                        $("#kabupaten").html('');
-                        if (json.code == 200) {
-                            for (i = 0; i < Object.keys(json.data).length; i++) {
-                                $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
-                            }
-                            $('#kecamatan').html($('<option>').text('-- Pilih Kecamatan --').attr('value', '-- Pilih Kecamatan --'));
-                            $('#kelurahan').html($('<option>').text('-- Pilih Kelurahan --').attr('value', '-- Pilih Kelurahan --'));
-                          
-                        } else {
-                            $('#kabupaten').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
+            var propinsi = 32; //id jawa barat
+            $.ajax({
+                url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/kabupaten',
+                data: "idpropinsi=" + propinsi,
+                type: 'GET',
+                dataType: 'json',
+                success: function(json) {
+                    if (json.code == 200) {
+                        for (i = 0; i < Object.keys(json.data).length; i++) {
+                            $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
                         }
+                    } else {
+                        $('#kecamatan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
                     }
-                });
+                }
+            });
+            // $("#propinsi").change(function() {
+            //     var propinsi = $("#propinsi").val();
+            //     $.ajax({
+            //         url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/kabupaten',
+            //         data: "idpropinsi=" + propinsi,
+            //         type: 'GET',
+            //         cache: false,
+            //         dataType: 'json',
+            //         success: function(json) {
+            //             $("#kabupaten").html('');
+            //             if (json.code == 200) {
+            //                 for (i = 0; i < Object.keys(json.data).length; i++) {
+            //                     $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+            //                 }
+            //                 $('#kecamatan').html($('<option>').text('-- Pilih Kecamatan --').attr('value', '-- Pilih Kecamatan --'));
+            //                 $('#kelurahan').html($('<option>').text('-- Pilih Kelurahan --').attr('value', '-- Pilih Kelurahan --'));
+
+            //             } else {
+            //                 $('#kabupaten').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
+            //             }
+            //         }
+            //     });
             // });
             $("#kabupaten").change(function() {
                 var kabupaten = $("#kabupaten").val();
@@ -153,7 +153,7 @@
                                 $('#kecamatan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
                             }
                             $('#kelurahan').html($('<option>').text('-- Pilih Kelurahan --').attr('value', '-- Pilih Kelurahan --'));
-
+                            
                         } else {
                             $('#kecamatan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
                         }
