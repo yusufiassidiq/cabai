@@ -143,8 +143,8 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <form action>
+          <form @submit.prevent="createuser">
+            <div class="modal-body">
               <div class="form-group">
                 <input
                   v-model="form.name"
@@ -156,12 +156,42 @@
                 />
                 <has-error :form="form" field="name"></has-error>
               </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+              <div class="form-group">
+                <input
+                  v-model="form.email"
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="email"
+                  :class="{ 'is-invalid': form.errors.has('email') }"
+                />
+                <has-error :form="form" field="email"></has-error>
+              </div>
+              <div class="form-group">
+                <input
+                  v-model="form.password"
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="password"
+                  :class="{ 'is-invalid': form.errors.has('password') }"
+                />
+                <has-error :form="form" field="password"></has-error>
+              </div>
+              <div class="form-group">
+                <select v-model="form.role" class="form-control" placeholder="role">
+                  <option value disabled selected>Select role</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Produsen</option>
+                  <option value="3">Eceran</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -172,13 +202,18 @@ export default {
   data() {
     return {
       form: new Form({
-        username: "",
+        name: "",
         email: "",
         password: "",
         role: "",
-        status: ""
+        status: "hhh"
       })
     };
+  },
+  methods:{
+      createuser(){
+          this.form.post('/user');
+      }
   },
   mounted() {
     console.log("User Management Mounted");

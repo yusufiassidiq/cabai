@@ -37,3 +37,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Get Custom Payload
     Route::get('user/getcustompayloads','UserController@seeToken');
 });
+
+Route::resources([
+    'user' => 'API\DummyController',
+]);
