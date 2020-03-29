@@ -15,12 +15,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <!-- <a class="nav-link" href="#"></a> -->
                     <router-link to="/register" class="nav-link">Daftar</router-link>
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Masuk</a>
+                    <router-link to="/login" class="nav-link">Masuk</router-link>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
