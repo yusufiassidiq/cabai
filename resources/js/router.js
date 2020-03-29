@@ -7,14 +7,14 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Dashboard from './pages/user/Dashboard'
 import AdminDashboard from './pages/admin/Dashboard'
-import UserDetails from './pages/admin/userDetails'
+// import UserDetails from './pages/admin/userDetails'
 import UnverifiedDashboard from './pages/user/UnverifiedDashboard'
 
 // Pages - SCM
-import AdminMaster from './pages/scm/admin/Master'
-import DashboardAdmin from './pages/scm/admin/Dashboard'
-import UserManagement from './pages/scm/admin/UserManagement'
-import UserValidation from './pages/scm/admin/UserValidation'
+import AdminMaster from './pages/admin/Master'
+import DashboardAdmin from './pages/admin/Dashboard'
+import UserManagement from './pages/admin/UserManagement'
+import UserValidation from './pages/admin/UserValidation'
 
 import MasterProd from './pages/scm/produsen/Master' // prod == produsen
 import DashboardProd from './pages/scm/produsen/Dashboard' 
@@ -329,20 +329,20 @@ const routes = [
             }
         }
     },
-    {
-        path: '/:userId/details',
-        name: 'userDetails',
-        component: UserDetails,
-        meta: {
-            auth: {
-                roles: 1,
-                redirect: {
-                    name: 'login'
-                },
-                forbiddenRedirect: '/403'
-            }
-        }
-    },
+    // {
+    //     path: '/:userId/details',
+    //     name: 'userDetails',
+    //     component: UserDetails,
+    //     meta: {
+    //         auth: {
+    //             roles: 1,
+    //             redirect: {
+    //                 name: 'login'
+    //             },
+    //             forbiddenRedirect: '/403'
+    //         }
+    //     }
+    // },
 ]
 
 const router = new VueRouter({

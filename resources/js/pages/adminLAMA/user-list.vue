@@ -24,8 +24,8 @@
             </td>
             <td>{{ user.created_at}}</td>
             <td><button class="btn btn-danger" v-on:click="deleteUser(user.id)">Tolak</button>
-            <router-link :to="{ name: 'userDetails', params: { userId: user.id, userObj: user }}" class="btn btn-primary">
-                Detail </router-link>       
+            <!-- <router-link :to="{ name: 'userDetails', params: { userId: user.id, userObj: user }}" class="btn btn-primary">
+                Detail </router-link>        -->
             </td>        
         </tr>
     </table>
