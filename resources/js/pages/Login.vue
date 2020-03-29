@@ -55,7 +55,7 @@
             if (redirect){
               redirectTo = redirect.from.name
             } else if (this.$auth.user().role === 1){
-              redirectTo = 'admin.dashboard'
+              redirectTo = 'DashboardAdmin'
             } else if (this.$auth.user().role === 2){
               if(this.$auth.user().status === 0){
                 redirectTo = 'unverifiedDashboard'
