@@ -15,8 +15,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Daftar</a>
+                    <!-- <a class="nav-link" href="#"></a> -->
+                    <router-link to="/register" class="nav-link">Daftar</router-link>
                 </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="#">Masuk</a>
                 </li>
