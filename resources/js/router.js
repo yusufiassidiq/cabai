@@ -58,15 +58,15 @@ const routes = [
     {
         path: '/admin',
         component: AdminMaster,
-        meta: {
-            auth: {
-                roles: 1,
-                redirect: {
-                    name: 'login'
-                },
-                forbiddenRedirect: '/403'
-            }
-        },
+        // meta: {
+        //     auth: {
+        //         roles: 1,
+        //         redirect: {
+        //             name: 'login'
+        //         },
+        //         forbiddenRedirect: '/403'
+        //     }
+        // },
         children: [{
                 path: '',
                 component: DashboardAdmin,

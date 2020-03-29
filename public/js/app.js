@@ -69816,6 +69816,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _websanova_vue_auth__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_websanova_vue_auth__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.common.js");
 /* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(vform__WEBPACK_IMPORTED_MODULE_10__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'vue-progressbar'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'sweetalert2'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 
@@ -69828,13 +69830,47 @@ __webpack_require__.r(__webpack_exports__);
 
  // Set Vue globally
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); // import vform library 
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); // import vform library create these global variable
 // Doc = https://github.com/cretueusebiu/vform
 
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component(vform__WEBPACK_IMPORTED_MODULE_10__["HasError"].name, vform__WEBPACK_IMPORTED_MODULE_10__["HasError"]);
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component(vform__WEBPACK_IMPORTED_MODULE_10__["AlertError"].name, vform__WEBPACK_IMPORTED_MODULE_10__["AlertError"]);
-window.Form = vform__WEBPACK_IMPORTED_MODULE_10__["Form"]; // Set Vue router
+window.Form = vform__WEBPACK_IMPORTED_MODULE_10__["Form"]; // import progress bar library
+// Doc = https://github.com/hilongjw/vue-progressbar
+
+
+var options = {
+  color: '#bffaf3',
+  failedColor: '#874b4b',
+  thickness: '5px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  location: 'top',
+  inverse: false
+};
+vue__WEBPACK_IMPORTED_MODULE_7___default.a.use(!(function webpackMissingModule() { var e = new Error("Cannot find module 'vue-progressbar'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), options); // Import Sweet Alert Library
+// Doc = https://sweetalert2.github.io/
+// import Swal from 'sweetalert2'
+
+
+window.swal = !(function webpackMissingModule() { var e = new Error("Cannot find module 'sweetalert2'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+var toast = !(function webpackMissingModule() { var e = new Error("Cannot find module 'sweetalert2'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: function onOpen(toast) {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
+window.toast = toast; // Set Vue router
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.router = _router__WEBPACK_IMPORTED_MODULE_3__["default"];
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]); // Set Vue authentication
@@ -69844,7 +69880,9 @@ axios__WEBPACK_IMPORTED_MODULE_6___default.a.defaults.baseURL = "".concat("http:
 console.log("http://127.0.0.1:8000");
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.use(_websanova_vue_auth__WEBPACK_IMPORTED_MODULE_9___default.a, _auth__WEBPACK_IMPORTED_MODULE_2__["default"]); // Load Index
 
-vue__WEBPACK_IMPORTED_MODULE_7___default.a.component('index', _Index__WEBPACK_IMPORTED_MODULE_1__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_7___default.a.component('index', _Index__WEBPACK_IMPORTED_MODULE_1__["default"]); // Filter
+
+window.Fire = new vue__WEBPACK_IMPORTED_MODULE_7___default.a();
 var app = new vue__WEBPACK_IMPORTED_MODULE_7___default.a({
   el: '#app',
   router: _router__WEBPACK_IMPORTED_MODULE_3__["default"]
