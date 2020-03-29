@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Monitoring Produksi dan Distribusi Cabai Jawa Barat</title>
+    <!-- Load css -->
+    <link rel="stylesheet" href="/css/app.css">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -22,9 +24,9 @@
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css')}}">
+    <!-- <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css')}}"> -->
     <!-- summernote -->
-    <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css')}}">
+    <!-- <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css')}}"> -->
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -56,6 +58,10 @@
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
+    <!-- overlayScrollbars -->
+    <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+    <!-- daterangepicker -->
+    <!-- <script src="{{ asset('plugins/moment/moment.min.js') }}"></script> -->
     <!-- Bootstrap 4 -->
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- ChartJS -->
@@ -67,15 +73,11 @@
     <!-- <script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script> -->
     <!-- jQuery Knob Chart -->
     <!-- <script src="{{ asset('plugins/jquery-knob/jquery.knob.min.js') }}"></script> -->
-    <!-- daterangepicker -->
-    <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
     <!-- <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script> -->
     <!-- Tempusdominus Bootstrap 4 -->
     <!-- <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script> -->
     <!-- Summernote -->
     <!-- <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script> -->
-    <!-- overlayScrollbars -->
-    <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/adminlte.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

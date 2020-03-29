@@ -57,7 +57,7 @@
             >
             <li class="nav-item">
                 <router-link to="/admin/" class="nav-link">
-                  <i class="nav-icon fas fa-user-cog"></i>
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                 </router-link>
               </li>
@@ -69,7 +69,7 @@
               </li>
               <li class="nav-item">
                 <router-link to="/admin/uservalidation" class="nav-link">
-                  <i class="nav-icon fas fa-user-check"></i>
+                  <i class="nav-icon fas fa-user-check blue"></i>
                   <p>Validasi User</p>
                 </router-link>
               </li>
@@ -81,6 +81,7 @@
       </aside>
     </div>
     <router-view></router-view>
+    <vue-progress-bar></vue-progress-bar>
     <footer class="main-footer">
         <strong>
           Copyright &copy; 2014-2019

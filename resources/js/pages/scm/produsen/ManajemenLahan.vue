@@ -13,7 +13,7 @@
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item">
-                  <a href="#">Produsen</a>
+                  <a href="#">Produsen</a> 
                 </li>
                 <li class="breadcrumb-item active">Manajemen Lahan</li>
               </ol>
@@ -175,5 +175,101 @@
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+    <!-- Start Modal -->
+    <div
+      class="modal fade"
+      id="AddNewUser"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="AddNewUserLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="AddNewUserLabel">Add New User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form @submit.prevent="createuser">
+            <div class="modal-body">
+              <div class="form-group">
+                <input
+                  v-model="form.name"
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  placeholder="name"
+                  :class="{ 'is-invalid': form.errors.has('name') }"
+                />
+                <has-error :form="form" field="name"></has-error>
+              </div>
+              <div class="form-group">
+                <input
+                  v-model="form.email"
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="email"
+                  :class="{ 'is-invalid': form.errors.has('email') }"
+                />
+                <has-error :form="form" field="email"></has-error>
+              </div>
+              <div class="form-group">
+                <input
+                  v-model="form.password"
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="password"
+                  :class="{ 'is-invalid': form.errors.has('password') }"
+                />
+                <has-error :form="form" field="password"></has-error>
+              </div>
+              <div class="form-group">
+                <select v-model="form.role" class="form-control" placeholder="role">
+                  <option value disabled selected>Select role</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Produsen</option>
+                  <option value="3">Eceran</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      form: new Form({
+        // name: "",
+        // email: "",
+        // password: "",
+        // role: "",
+        // status: "hhh"
+      })
+    };
+  },
+  methods: {
+    addchilifields(){
+      console.log("Berhasil ditambahkan")
+        // this.form.post("/user");
+    }
+  },
+  mounted() {
+    console.log("User Management Mounted");
+  }
+};
+</script>
