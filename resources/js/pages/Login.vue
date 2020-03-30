@@ -1,5 +1,5 @@
 <template>
-  <div class="hold-transition login-page">
+  <div class="login-page">
     <div class="login-box">
       <div class="login-logo">
         <p>
@@ -12,7 +12,7 @@
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <form autocomplete="off" @submit.prevent="login" v-if="!success" method="post">
+        <form autocomplete="on" @submit.prevent="login" v-if="!success" method="post">
           <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.email }">
             <input
               type="email"
@@ -38,6 +38,7 @@
               class="form-control"
               placeholder="Password"
               v-model="password"
+              autocomplete="on"
               required
             />
             <div class="input-group-append">
@@ -65,35 +66,6 @@
       <!-- /.login-card-body -->
     </div>
   </div>
-  <!-- <div class="container">
-    <div class="card card-default">
-      <div class="card-header">Connexion</div>
-
-      <div class="card-body">
-        <div class="alert alert-danger" v-if="has_error">
-          <p>Error, data yang anda masukkan salah.</p>
-        </div>
-        <form autocomplete="off" @submit.prevent="login" method="post">
-          <div class="form-group">
-            <label for="email">E-mail</label>
-            <input
-              type="email"
-              id="email"
-              class="form-control"
-              placeholder="user@example.com"
-              v-model="email"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" class="form-control" v-model="password" required />
-          </div>
-          <button type="submit" class="btn btn-default">Login</button>
-        </form>
-      </div>
-    </div>
-  </div>-->
 </template>
 
 <script>
@@ -152,7 +124,7 @@ export default {
           // console.log("aa")
           // console.log(sts)
           // console.log("zz")
-          // localStorage.setItem('LS_STAT_KEY', sts)
+          // localStorage.setItem('LS_STATx_KEY', sts)
           this.$router
             .push({ name: redirectTo, params: { usrId: this.$auth.user().id } })
             .catch(err => {});

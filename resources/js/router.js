@@ -2,17 +2,18 @@ import VueRouter from 'vue-router'
 
 
 // Pages
-import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
-import Dashboard from './pages/user/Dashboard'
-import AdminDashboard from './pages/admin/Dashboard'
+// import Dashboard from './pages/user/Dashboard'
+// import AdminDashboard from './pages/admin/Dashboard'
 // import UserDetails from './pages/admin/userDetails'
-import UnverifiedDashboard from './pages/user/UnverifiedDashboard'
+import UnverifiedDashboard from './pages/UnverifiedDashboard'
+import NotfoundLoggedUser from './pages/NotFoundLoggedUser'
+import NotFoundNonLoggedUser from './pages/NotFoundNonLoggedUser'
 
 // Pages - SCM
-import AdminMaster from './pages/admin/Master'
-import DashboardAdmin from './pages/admin/Dashboard'
+import AdminMaster from './pages/scm/admin/Master'
+import DashboardAdmin from './pages/scm/admin/Dashboard'
 // import UserManagement from './pages/admin/UserManagement'
 // import UserValidation from './pages/admin/UserValidation'
 import UserValidation from './pages/scm/admin/UserValidation'
@@ -64,15 +65,15 @@ const routes = [
     {
         path: '/admin',
         component: AdminMaster,
-        // meta: {
-        //     auth: {
-        //         roles: 1,
-        //         redirect: {
-        //             name: 'login'
-        //         },
-        //         forbiddenRedirect: '/403'
-        //     }
-        // },
+        meta: {
+            auth: {
+                roles: 1,
+                redirect: {
+                    name: 'login'
+                },
+                forbiddenRedirect: '/403'
+            }
+        },
         children: [{
                 path: '',
                 component: DashboardAdmin,
@@ -88,6 +89,7 @@ const routes = [
                 component: UserValidation,
                 name: "UserValidation"
             },
+            { path: '*', component: NotfoundLoggedUser },
         ]
     },
     {
@@ -263,6 +265,7 @@ const routes = [
             },
         ]
     },
+    { path: '*', component: NotFoundNonLoggedUser },
     {
         path: '/',
         name: 'bisnisanalitik',
@@ -285,36 +288,36 @@ const routes = [
         }
     },
     // USER ROUTES
-    {
-        path: '/dashboard/',
-        name: 'dashboard',
-        component: Dashboard,
-        beforeEnter: (to, from, next) => {
-            if (to.meta.requiresVerified) {
-                console.log("dirouterjs")
+    // {
+    //     path: '/dashboard/',
+    //     name: 'dashboard',
+    //     component: Dashboard,
+    //     beforeEnter: (to, from, next) => {
+    //         if (to.meta.requiresVerified) {
+    //             console.log("dirouterjs")
 
-                // custom payloads
-                var datatoken = []
-                const url = "/user/getcustompayloads"
-                const axiosTest = axios.get
-                axiosTest(url).then(function (axiosTestResult) {
-                    datatoken = axiosTestResult.data
-                    var status = (datatoken.confirmed)
-                    if (status === 0) {
-                        next('unverified')
-                    } else {
-                        next();
-                    }
-                    // console.log(datatoken.email)
-                    console.log("kalomuncultandanyasukses")
-                });
-            }
-        },
-        meta: {
-            auth: true,
-            requiresVerified: true,
-        }
-    },
+    //             // custom payloads
+    //             var datatoken = []
+    //             const url = "/user/getcustompayloads"
+    //             const axiosTest = axios.get
+    //             axiosTest(url).then(function (axiosTestResult) {
+    //                 datatoken = axiosTestResult.data
+    //                 var status = (datatoken.confirmed)
+    //                 if (status === 0) {
+    //                     next('unverified')
+    //                 } else {
+    //                     next();
+    //                 }
+    //                 // console.log(datatoken.email)
+    //                 console.log("kalomuncultandanyasukses")
+    //             });
+    //         }
+    //     },
+    //     meta: {
+    //         auth: true,
+    //         requiresVerified: true,
+    //     }
+    // },
     {
         path: '/unverified',
         name: 'unverifiedDashboard',
@@ -341,20 +344,20 @@ const routes = [
         }
     },
     // ADMIN ROUTES
-    {
-        path: '/admin',
-        name: 'admin.dashboard',
-        component: AdminDashboard,
-        meta: {
-            auth: {
-                roles: 1,
-                redirect: {
-                    name: 'login'
-                },
-                forbiddenRedirect: '/403'
-            }
-        }
-    },
+    // {
+    //     path: '/admin',
+    //     name: 'admin.dashboard',
+    //     component: AdminDashboard,
+    //     meta: {
+    //         auth: {
+    //             roles: 1,
+    //             redirect: {
+    //                 name: 'login'
+    //             },
+    //             forbiddenRedirect: '/403'
+    //         }
+    //     }
+    // },
     // {
     //     path: '/:userId/details',
     //     name: 'userDetails',
