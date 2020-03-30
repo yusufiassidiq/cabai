@@ -67,45 +67,25 @@
                     </thead>
 
                     <tbody>
-                      <!-- <tr v-for="user in users" :key="user.id">
-                        <td>{{ user.id }}</td>
+                      <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
+                        <th scope="row">{{ user.id }}</th>
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
-                        <td>status</td>
-                        <td>role</td>
                         <td>
-                          <a href="#">
-                            <i class="fas fa-edit blue"></i>
-                          </a>
-                          /
-                          <a href="#">
-                            <i class="fas fa-trash red"></i>
-                          </a>
+                          <div v-if="user.status===1">Verified</div>
+                          <div v-else>Unverified</div>
                         </td>
-                      </tr>-->
-                      <tr>
-                        <td>ID</td>
-                        <td>Nama</td>
-                        <td>Email</td>
-                        <td>Status</td>
-                        <td>Role</td>
-                        <td>Aksi</td>
-                      </tr>
-                      <tr>
-                        <td>ID</td>
-                        <td>Nama</td>
-                        <td>Email</td>
-                        <td>Status</td>
-                        <td>Role</td>
-                        <td>Aksi</td>
-                      </tr>
-                      <tr>
-                        <td>ID</td>
-                        <td>Nama</td>
-                        <td>Email</td>
-                        <td>Status</td>
-                        <td>Role</td>
-                        <td>Aksi</td>
+                        <td>
+                          <div v-if="user.role===1">Admin</div>
+                          <div v-else-if="user.role===2">Produsen</div>
+                          <div v-else-if="user.role===3">Pedagang Pengepul</div>
+                          <div v-else-if="user.role===4">Pedagang Grosir</div>
+                          <div v-else-if="user.role===5">Pedagang Eceran</div>
+                        </td>
+                        <td>
+                          <button class="btn btn-success" @click="selectUser(user)">Detail</button>
+                          <!-- <router-link :to="{ name: 'userDetails', params: { userId: user.id, userObj: user }}" class="btn btn-primary"> Detail </router-link>        -->
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -118,6 +98,114 @@
       </section>
       <!-- /.content -->
     </div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="detailUser"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="detailUserLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailUserLabel">Detail User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- <form @submit.prevent="createuser"> -->
+          <div class="modal-body">
+            <!-- <form class="form-horizontal" method="post" name="" action=""> -->
+            <div class="form-group">
+              <tr>Nama : {{ userDetail.name }}</tr>
+              <tr>
+                <div v-if="userDetail.role===1">Role : Admin</div>
+                <div v-else-if="userDetail.role===2">Role : Produsen</div>
+                <div v-else-if="userDetail.role===3">Role : Pedagang Pengepul</div>
+                <div v-else-if="userDetail.role===4">Role : Pedagang Grosir</div>
+                <div v-else-if="userDetail.role===5">Role : Pedagang Eceran</div>
+              </tr>
+              <tr>Tanggal Registrasi : {{ userDetail.created_at }}</tr>
+            </div>
+            <!-- </form> -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-danger" v-on:click="deleteUser(userDetail.id)">Tolak</button>
+            <button class="btn btn-success" v-on:click="terima(userDetail.id)">Terima</button>
+          </div>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
     <!-- /.content-wrapper -->
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      userDetail: "",
+      has_error: false,
+      users: null,
+      selectedUser: undefined
+    };
+  },
+  methods: {
+    selectUser(user) {
+      this.userDetail = user;
+      $("#detailUser").modal("show");
+    },
+    getUsers() {
+      this.$http({
+        url: `requesteduser`,
+        method: "GET"
+      }).then(
+        res => {
+          this.users = res.data.users;
+        },
+        () => {
+          this.has_error = true;
+        }
+      );
+    },
+    deleteUser(id) {
+      // delete data
+      if (confirm("Are you sure?")) {
+        this.loading = !this.loading;
+        axios
+          .delete("/user/" + id)
+          .then(response => {
+            UpdateData.$emit("RefreshData");
+            $("#detailUser").modal("hide");
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    },
+    terima(id) {
+      axios
+        .post("/terima/" + id)
+        .then(response => {
+          UpdateData.$emit("RefreshData");
+          $("#detailUser").modal("hide");
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  },
+  mounted() {
+    this.getUsers();
+  },
+  created(){
+    // custom event vue to update data changes
+    UpdateData.$on("RefreshData", () => {
+      this.getUsers();
+    });
+  }
+};
+</script>

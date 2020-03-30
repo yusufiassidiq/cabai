@@ -37,6 +37,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/terima/{id}','AdminController@terima')->middleware('isAdmin');
     //Get Custom Payload
     Route::get('user/getcustompayloads','UserController@seeToken');
+    // get user yang belum divalidasi
+    Route::get('requesteduser', 'UserController@requesteduser')->middleware('isAdmin');
+    // get user yang sudah divalidasi
+    Route::get('validateduser', 'UserController@validateduser')->middleware('isAdmin');
 });
 
 // Route::resources([

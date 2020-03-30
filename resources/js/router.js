@@ -13,8 +13,10 @@ import UnverifiedDashboard from './pages/user/UnverifiedDashboard'
 // Pages - SCM
 import AdminMaster from './pages/admin/Master'
 import DashboardAdmin from './pages/admin/Dashboard'
-import UserManagement from './pages/admin/UserManagement'
-import UserValidation from './pages/admin/UserValidation'
+// import UserManagement from './pages/admin/UserManagement'
+// import UserValidation from './pages/admin/UserValidation'
+import UserValidation from './pages/scm/admin/UserValidation'
+import UserManagement from './pages/scm/admin/UserManagement'
 
 import MasterProd from './pages/scm/produsen/Master' // prod == produsen
 import DashboardProd from './pages/scm/produsen/Dashboard' 

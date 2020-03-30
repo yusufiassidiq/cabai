@@ -61,7 +61,7 @@
             >
             <li class="nav-item">
                 <router-link to="/admin/" class="nav-link">
-                  <i class="nav-icon fas fa-user-cog"></i>
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                 </router-link>
               </li>

@@ -74,7 +74,7 @@ Vue.component('index', Index)
 // Filter
 
 
-window.Fire = new Vue();
+window.UpdateData = new Vue();
 
 const app = new Vue({
     el: '#app',
