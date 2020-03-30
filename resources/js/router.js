@@ -53,6 +53,10 @@ import TransaksiPemasokPengecer from './pages/scm/pengecer/TransaksiPemasok'
 
 // Pages - Bisnis Analitik
 import BAMaster from './pages/ba/Master'
+import BisnisAnalitikProd from './pages/ba/produsen/bisnisAnalitik'
+import BisnisAnalitikPengepul from './pages/ba/pengepul/BisnisAnalitik'
+import BisnisAnalitikGrosir from './pages/ba/grosir/BisnisAnalitik'
+import BisnisAnalitikPengecer from './pages/ba/pengecer/BisnisAnalitik'
 
 // Routes
 const routes = [
@@ -126,6 +130,11 @@ const routes = [
                 component: TransaksiPelangganProd,
                 name: "TransaksiPelangganProd"
             },
+            {
+                path: 'analitik',
+                component: BisnisAnalitikProd,
+                name: "BisnisAnalitikProd"
+            },
         ]
     },
     {
@@ -162,6 +171,11 @@ const routes = [
                 path: 'transaksipemasok',
                 component: TransaksiPemasokGrosir,
                 name: "TransaksiPemasokGrosir"
+            },
+            {
+                path: 'analitik',
+                component: BisnisAnalitikGrosir,
+                name: "BisnisAnalitikGrosir"
             },
         ]
     },
@@ -200,6 +214,11 @@ const routes = [
                 component: TransaksiPemasokPengecer,
                 name: "TransaksiPemasokPengecer"
             },
+            {
+                path: 'analitik',
+                component: BisnisAnalitikPengecer,
+                name: "BisnisAnalitikPengecer"
+            },
         ]
     },
     {
@@ -236,6 +255,11 @@ const routes = [
                 path: 'transaksipemasok',
                 component: TransaksiPemasokPengepul,
                 name: "TransaksiPemasokPengepul"
+            },
+            {
+                path: 'analitik',
+                component: BisnisAnalitikPengepul,
+                name: "BisnisAnalitikPengepul"
             },
         ]
     },

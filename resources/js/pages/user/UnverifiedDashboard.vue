@@ -5,7 +5,9 @@
             
             <div class="card-body">
                 Akun anda belum terverifikasi, mohon tunggu admin untuk memverifikasinya
+                <a href="" @click.prevent="$auth.logout();clearLocalStorage()">Logout</a>
             </div>
+            
         </div>
     </div>
 </template>

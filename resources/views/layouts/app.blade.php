@@ -47,7 +47,7 @@
 
 </head>
 
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
     @yield('content')
 
     <!-- jQuery -->

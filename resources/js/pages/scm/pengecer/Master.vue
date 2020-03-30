@@ -119,6 +119,12 @@
                   </li>
                 </ul>
               </li>
+              <li class="nav-item">
+                <router-link to="/pengecer/analitik" class="nav-link">
+                  <i class="nav-icon fas fa-chart-bar"></i>
+                  <p>Bisnis Analitik</p>
+                </router-link>
+              </li>
             </ul>
           </nav>
           <!-- /.sidebar-menu -->

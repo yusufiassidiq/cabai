@@ -35,7 +35,7 @@
             <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.role }">
               <select id="role" class="form-control" v-model="role">
                 <option value selected disabled>Pilih Peran Keanggotaan</option>
-                <option value="2">Petani</option>
+                <option value="2">Produsen</option>
                 <option value="3">Pengepul</option>
                 <option value="4">Grosir</option>
                 <option value="5">Pengecer</option>
