@@ -4528,13 +4528,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -57272,8 +57265,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "wrapper" }, [
+  return _c("div", { staticClass: "content-wrapper" }, [
     _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
     _vm._v(" "),
     _c(
       "div",
@@ -57296,7 +57291,7 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "form",
@@ -57489,7 +57484,7 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(2)
+                  _vm._m(3)
                 ]
               )
             ])
@@ -57504,241 +57499,239 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-wrapper" }, [
-      _c("div", { staticClass: "content-header" }, [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("div", { staticClass: "row mb-2" }, [
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c("h1", { staticClass: "m-0 text-dark" }, [
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [
+              _vm._v("Manajemen Lahan")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
                 _vm._v("Manajemen Lahan")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
-                _c("li", { staticClass: "breadcrumb-item" }, [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "breadcrumb-item active" }, [
-                  _vm._v("Manajemen Lahan")
-                ])
               ])
             ])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("section", { staticClass: "content" }, [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("div", { staticClass: "row justify-content-center" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-header" }, [
-                  _c("h3", { staticClass: "card-title" }, [
-                    _vm._v("Manajemen Lahan")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-tools" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "input-group input-group-sm",
-                        staticStyle: { width: "150px" }
-                      },
-                      [
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _c("h3", { staticClass: "card-title" }, [
+                  _vm._v("Manajemen Lahan")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-tools" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "input-group input-group-sm",
+                      staticStyle: { width: "150px" }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: {
+                            "data-toggle": "modal",
+                            "data-target": "#exampleModal"
+                          }
+                        },
+                        [_vm._v("Add new")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control float-right",
+                        attrs: {
+                          type: "text",
+                          name: "table_search",
+                          placeholder: "Search"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group-append" }, [
                         _c(
                           "button",
                           {
-                            staticClass: "btn btn-success",
-                            attrs: {
-                              "data-toggle": "modal",
-                              "data-target": "#exampleModal"
-                            }
+                            staticClass: "btn btn-default",
+                            attrs: { type: "submit" }
                           },
-                          [_vm._v("Add new")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control float-right",
-                          attrs: {
-                            type: "text",
-                            name: "table_search",
-                            placeholder: "Search"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "input-group-append" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-default",
-                              attrs: { type: "submit" }
-                            },
-                            [_c("i", { staticClass: "fas fa-search" })]
-                          )
-                        ])
-                      ]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body table-responsive p-0" }, [
-                  _c(
-                    "table",
-                    { staticClass: "table table-hover text-nowrap" },
-                    [
-                      _c("thead", [
-                        _c("tr", [
-                          _c("th", [_vm._v("Kode Lahan")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Jenis Cabai")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Luas Lahan")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Lokasi")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Tanggal tanam")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Total Pengeluaran")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Action")])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("tbody", [
-                        _c("tr", [
-                          _c("td", [_vm._v("P12")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Cabai Keriting")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("2 ha")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Bogor")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("01-02-2020")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("2.000.000")]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", { staticClass: "fa fa-edit blue" })
-                            ]),
-                            _vm._v(
-                              "\n                      /\n                      "
-                            ),
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", { staticClass: "fa fa-trash red" })
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("td", [_vm._v("P11")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Cabai Besar")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("10 ha")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Garut")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("02-02-2020")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("2.030.000")]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", { staticClass: "fa fa-edit blue" })
-                            ]),
-                            _vm._v(
-                              "\n                      /\n                      "
-                            ),
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", { staticClass: "fa fa-trash red" })
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("td", [_vm._v("P90")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Cabai Rawit")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("3 ha")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Bekasi")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("09-02-2020")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("2.110.000")]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", { staticClass: "fa fa-edit blue" })
-                            ]),
-                            _vm._v(
-                              "\n                      /\n                      "
-                            ),
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", { staticClass: "fa fa-trash red" })
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("td", [_vm._v("P70")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Cabai Rawit")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("3 ha")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Cianjur")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("10-02-2020")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("6.000.000")]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", { staticClass: "fa fa-edit blue" })
-                            ]),
-                            _vm._v(
-                              "\n                      /\n                      "
-                            ),
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", { staticClass: "fa fa-trash red" })
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("td", [_vm._v("P29")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Cabai Rawit")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("3 ha")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Sukabumi")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("11-02-2020")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("2.230.000")]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", { staticClass: "fa fa-edit blue" })
-                            ]),
-                            _vm._v(
-                              "\n                      /\n                      "
-                            ),
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", { staticClass: "fa fa-trash red" })
-                            ])
-                          ])
-                        ])
+                          [_c("i", { staticClass: "fas fa-search" })]
+                        )
                       ])
                     ]
                   )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body table-responsive p-0" }, [
+                _c("table", { staticClass: "table table-hover text-nowrap" }, [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", [_vm._v("Kode Lahan")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Jenis Cabai")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Luas Lahan")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Lokasi")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Tanggal tanam")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Total Pengeluaran")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Action")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tbody", [
+                    _c("tr", [
+                      _c("td", [_vm._v("P12")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Cabai Keriting")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("2 ha")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Bogor")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("01-02-2020")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("2.000.000")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-edit blue" })
+                        ]),
+                        _vm._v(
+                          "\n                      /\n                      "
+                        ),
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-trash red" })
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("P11")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Cabai Besar")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("10 ha")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Garut")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("02-02-2020")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("2.030.000")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-edit blue" })
+                        ]),
+                        _vm._v(
+                          "\n                      /\n                      "
+                        ),
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-trash red" })
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("P90")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Cabai Rawit")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("3 ha")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Bekasi")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("09-02-2020")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("2.110.000")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-edit blue" })
+                        ]),
+                        _vm._v(
+                          "\n                      /\n                      "
+                        ),
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-trash red" })
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("P70")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Cabai Rawit")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("3 ha")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Cianjur")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("10-02-2020")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("6.000.000")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-edit blue" })
+                        ]),
+                        _vm._v(
+                          "\n                      /\n                      "
+                        ),
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-trash red" })
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("P29")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Cabai Rawit")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("3 ha")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Sukabumi")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("11-02-2020")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("2.230.000")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-edit blue" })
+                        ]),
+                        _vm._v(
+                          "\n                      /\n                      "
+                        ),
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-trash red" })
+                        ])
+                      ])
+                    ])
+                  ])
                 ])
               ])
             ])
@@ -57818,8 +57811,38 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "masterscm" }, [
-        _vm._m(0),
+      _c("div", { staticClass: "wrapper" }, [
+        _c(
+          "nav",
+          {
+            staticClass:
+              "main-header navbar navbar-expand navbar-white navbar-light"
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+              _vm.$auth.check()
+                ? _c("li", [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.$auth.logout()
+                            _vm.clearLocalStorage()
+                          }
+                        }
+                      },
+                      [_vm._v("Logout")]
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]
+        ),
         _vm._v(" "),
         _c(
           "aside",
@@ -57864,7 +57887,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "li",
-                      { staticClass: "nav-item has-treeview menu-closed" },
+                      { staticClass: "nav-item has-treeview menu-open" },
                       [
                         _vm._m(2),
                         _vm._v(" "),
@@ -57918,7 +57941,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "li",
-                      { staticClass: "nav-item has-treeview menu-closed" },
+                      { staticClass: "nav-item has-treeview menu-open" },
                       [
                         _vm._m(3),
                         _vm._v(" "),
@@ -57994,7 +58017,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "li",
-                      { staticClass: "nav-item has-treeview menu-closed" },
+                      { staticClass: "nav-item has-treeview menu-open" },
                       [
                         _vm._m(4),
                         _vm._v(" "),
@@ -58055,9 +58078,7 @@ var render = function() {
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
-      _vm._m(5),
-      _vm._v(" "),
-      _c("aside", { staticClass: "control-sidebar control-sidebar-dark" })
+      _vm._m(5)
     ],
     1
   )
@@ -58067,67 +58088,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "nav",
-      {
-        staticClass:
-          "main-header navbar navbar-expand navbar-white navbar-light"
-      },
-      [
-        _c("ul", { staticClass: "navbar-nav" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { "data-widget": "pushmenu", href: "#" }
-              },
-              [_c("i", { staticClass: "fas fa-bars" })]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-          _c("li", { staticClass: "nac-item" }, [
-            _c("form", { staticClass: "form-inline ml-3" }, [
-              _c("div", { staticClass: "input-group input-group-sm" }, [
-                _c("input", {
-                  staticClass: "form-control form-control-navbar",
-                  attrs: {
-                    type: "search",
-                    placeholder: "Search",
-                    "aria-label": "Search"
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group-append" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-navbar",
-                      attrs: { type: "submit" }
-                    },
-                    [_c("i", { staticClass: "fas fa-search" })]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
+    return _c("ul", { staticClass: "navbar-nav" }, [
+      _c("li", { staticClass: "nav-item" }, [
+        _c(
+          "a",
+          {
+            staticClass: "nav-link",
+            attrs: { "data-widget": "pushmenu", href: "#" }
+          },
+          [_c("i", { staticClass: "fas fa-bars" })]
+        )
+      ])
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("a", { staticClass: "brand-link", attrs: { href: "#" } }, [
-      _c("img", {
-        staticClass: "brand-image img-circle elevation-3",
-        staticStyle: { opacity: ".8" },
-        attrs: { src: "dist/img/AdminLTELogo.png", alt: "AdminLTE Logo" }
-      }),
-      _vm._v(" "),
       _c("span", { staticClass: "brand-text font-weight-light" }, [
         _vm._v("SCM Cabai")
       ])

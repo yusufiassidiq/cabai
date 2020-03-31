@@ -8,7 +8,7 @@
               <i class="fas fa-bars"></i>
             </a>
           </li>
-        </ul>
+        </ul> 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
           <!-- logout -->

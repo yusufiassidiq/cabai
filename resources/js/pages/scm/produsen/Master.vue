@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="masterscm">
+    <div class="wrapper">
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
@@ -12,8 +12,12 @@
         </ul>
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
+          <!-- logout -->
+          <li v-if="$auth.check()">
+            <a href @click.prevent="$auth.logout();clearLocalStorage()">Logout</a>
+          </li>
           <!-- SEARCH FORM -->
-          <li class="nac-item">
+          <!-- <li class="nac-item">
             <form class="form-inline ml-3">
               <div class="input-group input-group-sm">
                 <input
@@ -29,19 +33,19 @@
                 </div>
               </div>
             </form>
-          </li>
+          </li>-->
         </ul>
       </nav>
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="#" class="brand-link">
-          <img
+          <!-- <img
             src="dist/img/AdminLTELogo.png"
             alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3"
             style="opacity: .8"
-          />
+          />-->
           <span class="brand-text font-weight-light">SCM Cabai</span>
         </a>
 
@@ -61,8 +65,8 @@
                   <p>Dashboard</p>
                 </router-link>
               </li>
-
-              <li class="nav-item has-treeview menu-closed">
+              <!--  Masalah blm fix, menunya ga bisa ke buka dan ke tutup-->
+              <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link disable">
                   <i class="nav-icon fas fa-seedling"></i>
                   <p>
@@ -86,7 +90,7 @@
                 </ul>
               </li>
 
-              <li class="nav-item has-treeview menu-closed">
+              <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link disable">
                   <i class="nav-icon fas fa-address-book"></i>
                   <p>
@@ -116,7 +120,7 @@
                 </ul>
               </li>
 
-              <li class="nav-item has-treeview menu-closed">
+              <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link disable">
                   <i class="nav-icon fas fa-shopping-cart"></i>
                   <p>
@@ -157,10 +161,5 @@
         <b>Version</b> 3.0.2
       </div>
     </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
   </div>
 </template>
