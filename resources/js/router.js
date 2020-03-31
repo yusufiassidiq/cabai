@@ -4,9 +4,6 @@ import VueRouter from 'vue-router'
 // Pages
 import Register from './pages/Register'
 import Login from './pages/Login'
-// import Dashboard from './pages/user/Dashboard'
-// import AdminDashboard from './pages/admin/Dashboard'
-// import UserDetails from './pages/admin/userDetails'
 import UnverifiedDashboard from './pages/UnverifiedDashboard'
 import NotfoundLoggedUser from './pages/NotFoundLoggedUser'
 import NotFoundNonLoggedUser from './pages/NotFoundNonLoggedUser'
@@ -14,8 +11,6 @@ import NotFoundNonLoggedUser from './pages/NotFoundNonLoggedUser'
 // Pages - SCM
 import AdminMaster from './pages/scm/admin/Master'
 import DashboardAdmin from './pages/scm/admin/Dashboard'
-// import UserManagement from './pages/admin/UserManagement'
-// import UserValidation from './pages/admin/UserValidation'
 import UserValidation from './pages/scm/admin/UserValidation'
 import UserManagement from './pages/scm/admin/UserManagement'
 

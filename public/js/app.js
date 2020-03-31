@@ -76707,17 +76707,12 @@ __webpack_require__.r(__webpack_exports__);
  // Pages
 
 
- // import Dashboard from './pages/user/Dashboard'
-// import AdminDashboard from './pages/admin/Dashboard'
-// import UserDetails from './pages/admin/userDetails'
 
 
 
  // Pages - SCM
 
 
- // import UserManagement from './pages/admin/UserManagement'
-// import UserValidation from './pages/admin/UserValidation'
 
 
 
@@ -77057,8 +77052,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
