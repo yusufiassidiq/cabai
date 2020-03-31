@@ -47,6 +47,12 @@ class User extends Authenticatable implements JWTSubject
         return [
         'id'                => $this->id,
         'confirmed'         => $this->status,
+        'role'              => $this->role,
         ];
+    }
+
+    public function lokasi()
+    {
+        return $this->hasOne('App\Lokasi');
     }
 }

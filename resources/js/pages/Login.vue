@@ -12,7 +12,7 @@
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <form autocomplete="on" @submit.prevent="login" v-if="!success" method="post">
+        <form autocomplete="on" @submit.prevent="login" method="post">
           <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.email }">
             <input
               type="email"

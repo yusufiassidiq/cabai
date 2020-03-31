@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Lokasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -16,6 +18,9 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password'  => 'required|min:3|confirmed',
             'role' => 'required',
+            'kabupaten' => 'required',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required',
         ]);        
         
         if ($v->fails())
@@ -31,8 +36,16 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->role = $request->role;
         $user->password = bcrypt($request->password);
+        $user->fotosk = Str::random(5);
         $user->save();        
-        
+        $lokasi = new Lokasi([
+            'user_id'=>$user->id
+        ]);
+        $lokasi->user()->associate($user);
+        $lokasi->kabupaten = $request->kabupaten;
+        $lokasi->kecamatan = $request->kecamatan;
+        $lokasi->kelurahan = $request->kelurahan;
+        $lokasi->save();
         return response()->json(['status' => 'success'], 200);
     }    
     

@@ -3506,6 +3506,9 @@ __webpack_require__.r(__webpack_exports__);
       name: "",
       email: "",
       role: "",
+      kabupaten: "",
+      kecamatan: "",
+      kelurahan: "",
       password: "",
       password_confirmation: "",
       has_error: false,
@@ -3513,6 +3516,121 @@ __webpack_require__.r(__webpack_exports__);
       errors: {},
       success: false
     };
+  },
+  mounted: function mounted() {
+    function makeRequest(method, url, done) {
+      var xhr = new XMLHttpRequest();
+      xhr.open(method, url);
+
+      xhr.onload = function () {
+        done(null, xhr.response);
+      };
+
+      xhr.onerror = function () {
+        done(xhr.response);
+      };
+
+      xhr.send();
+    }
+
+    var hasil = makeRequest('GET', 'https://x.rajaapi.com/poe', function (err, datums) {
+      if (err) {
+        throw err;
+      }
+
+      hasil = JSON.parse(datums);
+      var return_first = hasil.token; // var return_first = function() {
+      // var tmp = null;
+      // $.ajax({
+      //     'async': false,
+      //     'type': "get",
+      //     'global': false,
+      //     'dataType': 'json',
+      //     'url': 'https://x.rajaapi.com/poe',
+      //     'success': function(data) {
+      //         tmp = data.token;
+      //     },
+      // });
+      // // console.log(tmp)
+      // return tmp;
+      // }();
+
+      $(document).ready(function () {
+        var propinsi = 32; //id jawa barat
+
+        $.ajax({
+          url: 'https://x.rajaapi.com/MeP7c5ne' + return_first + '/m/wilayah/kabupaten',
+          data: "idpropinsi=" + propinsi,
+          type: 'GET',
+          dataType: 'json',
+          success: function success(json) {
+            if (json.code == 200) {
+              for (var i = 0; i < Object.keys(json.data).length; i++) {
+                $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+              }
+            } else {
+              $('#kecamatan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
+            }
+          }
+        });
+        $("#kabupaten").change(function () {
+          var kabupaten = $("#kabupaten").val();
+          $.ajax({
+            url: 'https://x.rajaapi.com/MeP7c5ne' + return_first + '/m/wilayah/kecamatan',
+            data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi,
+            type: 'GET',
+            cache: false,
+            dataType: 'json',
+            success: function success(json) {
+              $("#kecamatan").html('');
+
+              if (json.code == 200) {
+                $('#kecamatan').append($('<option>').text('Pilih Kecamatan').attr('value', ''));
+
+                for (var i = 0; i < Object.keys(json.data).length; i++) {
+                  $('#kecamatan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+                }
+
+                $('#kelurahan').html($('<option>').text('Pilih Kelurahan').attr('value', ''));
+              } else {
+                $('#kecamatan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
+              }
+            }
+          });
+        });
+        $("#kecamatan").change(function () {
+          var kecamatan = $("#kecamatan").val();
+          $.ajax({
+            url: 'https://x.rajaapi.com/MeP7c5ne' + return_first + '/m/wilayah/kelurahan',
+            data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi + "&idkecamatan=" + kecamatan,
+            type: 'GET',
+            dataType: 'json',
+            cache: false,
+            success: function success(json) {
+              $("#kelurahan").html('');
+
+              if (json.code == 200) {
+                $('#kelurahan').html($('<option>').text('Pilih Kelurahan').attr('value', ''));
+
+                for (var i = 0; i < Object.keys(json.data).length; i++) {
+                  $('#kelurahan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+                }
+              } else {
+                $('#kelurahan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
+              }
+            }
+          });
+        });
+      }); // if (localStorage.getItem('reloaded')) {
+      //     // The page was just reloaded. Clear the value from local storage
+      //     // so that it will reload the next time this page is visited.
+      //     localStorage.removeItem('reloaded');
+      // } else {
+      //     // Set a flag so that we know not to reload the page twice.
+      //     localStorage.setItem('reloaded', '1');
+      //     location.reload();
+      // }
+    });
   },
   methods: {
     register: function register() {
@@ -3522,6 +3640,9 @@ __webpack_require__.r(__webpack_exports__);
           name: app.name,
           email: app.email,
           role: app.role,
+          kabupaten: app.kabupaten,
+          kecamatan: app.kecamatan,
+          kelurahan: app.kelurahan,
           password: app.password,
           password_confirmation: app.password_confirmation
         },
@@ -45149,99 +45270,97 @@ var render = function() {
           _vm._v("Sign in to start your session")
         ]),
         _vm._v(" "),
-        !_vm.success
-          ? _c(
-              "form",
+        _c(
+          "form",
+          {
+            attrs: { autocomplete: "on", method: "post" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.login($event)
+              }
+            }
+          },
+          [
+            _c(
+              "div",
               {
-                attrs: { autocomplete: "on", method: "post" },
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.login($event)
-                  }
-                }
+                staticClass: "input-group mb-3",
+                class: { "has-error": _vm.has_error && _vm.errors.email }
               },
               [
-                _c(
-                  "div",
-                  {
-                    staticClass: "input-group mb-3",
-                    class: { "has-error": _vm.has_error && _vm.errors.email }
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.email,
+                      expression: "email"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "email",
+                    id: "email",
+                    placeholder: "Email",
+                    required: ""
                   },
-                  [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.email,
-                          expression: "email"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "email",
-                        id: "email",
-                        placeholder: "Email",
-                        required: ""
-                      },
-                      domProps: { value: _vm.email },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.email = $event.target.value
-                        }
+                  domProps: { value: _vm.email },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                    }),
-                    _vm._v(" "),
-                    _vm._m(1)
-                  ]
-                ),
+                      _vm.email = $event.target.value
+                    }
+                  }
+                }),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "input-group mb-3",
-                    class: { "has-error": _vm.has_error && _vm.errors.password }
-                  },
-                  [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.password,
-                          expression: "password"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "password",
-                        placeholder: "Password",
-                        autocomplete: "on",
-                        required: ""
-                      },
-                      domProps: { value: _vm.password },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.password = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm._m(2)
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._m(3)
+                _vm._m(1)
               ]
-            )
-          : _vm._e()
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "input-group mb-3",
+                class: { "has-error": _vm.has_error && _vm.errors.password }
+              },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password,
+                      expression: "password"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "password",
+                    placeholder: "Password",
+                    autocomplete: "on",
+                    required: ""
+                  },
+                  domProps: { value: _vm.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.password = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(2)
+              ]
+            ),
+            _vm._v(" "),
+            _vm._m(3)
+          ]
+        )
       ])
     ])
   ])
@@ -45707,11 +45826,119 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _c("div", { staticClass: "input-group mb-3" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.kabupaten,
+                            expression: "kabupaten"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "kabupaten" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.kabupaten = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { selected: "", value: "" } }, [
+                          _vm._v("Pilih Kabupaten")
+                        ])
+                      ]
+                    )
+                  ]),
                   _vm._v(" "),
-                  _vm._m(4),
+                  _c("div", { staticClass: "input-group mb-3" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.kecamatan,
+                            expression: "kecamatan"
+                          }
+                        ],
+                        staticClass: "form-control m-b",
+                        attrs: { id: "kecamatan" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.kecamatan = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { selected: "", value: "" } }, [
+                          _vm._v("Pilih Kecamatan")
+                        ])
+                      ]
+                    )
+                  ]),
                   _vm._v(" "),
-                  _vm._m(5),
+                  _c("div", { staticClass: "input-group mb-3" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.kelurahan,
+                            expression: "kelurahan"
+                          }
+                        ],
+                        staticClass: "form-control m-b",
+                        attrs: { id: "kelurahan" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.kelurahan = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { selected: "", value: "" } }, [
+                          _vm._v("Pilih Kelurahan")
+                        ])
+                      ]
+                    )
+                  ]),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -45744,7 +45971,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(6)
+                      _vm._m(3)
                     ]
                   ),
                   _vm._v(" "),
@@ -45789,7 +46016,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(7)
+                      _vm._m(4)
                     ]
                   ),
                   _vm._v(" "),
@@ -45799,7 +46026,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm._m(8)
+                  _vm._m(5)
                 ]
               )
             : _vm._e()
@@ -45835,63 +46062,6 @@ var staticRenderFns = [
       _c("div", { staticClass: "input-group-text" }, [
         _c("span", { staticClass: "fas fa-envelope" })
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group mb-3" }, [
-      _c(
-        "select",
-        {
-          staticClass: "form-control",
-          attrs: { name: "kabupaten", id: "kabupaten" }
-        },
-        [
-          _c("option", { attrs: { selected: "", value: "" } }, [
-            _vm._v("Pilih Kabupaten")
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group mb-3" }, [
-      _c(
-        "select",
-        {
-          staticClass: "form-control m-b",
-          attrs: { name: "kecamatan", id: "kecamatan" }
-        },
-        [
-          _c("option", { attrs: { selected: "", value: "" } }, [
-            _vm._v("Pilih Kecamatan")
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group mb-3" }, [
-      _c(
-        "select",
-        {
-          staticClass: "form-control m-b",
-          attrs: { name: "kelurahan", id: "kelurahan" }
-        },
-        [
-          _c("option", { attrs: { selected: "", value: "" } }, [
-            _vm._v("Pilih Kelurahan")
-          ])
-        ]
-      )
     ])
   },
   function() {
@@ -73933,8 +74103,8 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.router = _router__WEBPACK_IMPORTED_MO
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]); // Set Vue authentication
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_5___default.a, axios__WEBPACK_IMPORTED_MODULE_6___default.a);
-axios__WEBPACK_IMPORTED_MODULE_6___default.a.defaults.baseURL = "".concat("http://127.0.0.1:8000", "/api");
-console.log("http://127.0.0.1:8000");
+axios__WEBPACK_IMPORTED_MODULE_6___default.a.defaults.baseURL = "".concat("http://127.0.0.1:8000", "/api"); // console.log(process.env.MIX_APP_URL)
+
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.use(_websanova_vue_auth__WEBPACK_IMPORTED_MODULE_9___default.a, _auth__WEBPACK_IMPORTED_MODULE_2__["default"]); // Load Index
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component('index', _Index__WEBPACK_IMPORTED_MODULE_1__["default"]); // Filter
@@ -76815,6 +76985,8 @@ var routes = [// SCM
       axiosTest(url).then(function (axiosTestResult) {
         datatoken = axiosTestResult.data;
         var status = datatoken.confirmed;
+        var role = datatoken.role;
+        console.log(role);
 
         if (status === 1) {
           next('dashboard');
@@ -76885,8 +77057,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

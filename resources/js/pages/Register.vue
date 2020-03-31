@@ -44,19 +44,19 @@
             <span class="help-block" v-if="has_error && errors.role">{{ errors.role }}</span>
 
             <div class="input-group mb-3">
-              <select class="form-control" name="kabupaten" id="kabupaten">
+              <select class="form-control" v-model="kabupaten" id="kabupaten">
                 <option selected value>Pilih Kabupaten</option>
               </select>
             </div>
 
             <div class="input-group mb-3">
-              <select class="form-control m-b" name="kecamatan" id="kecamatan">
+              <select class="form-control m-b" v-model="kecamatan" id="kecamatan">
                 <option selected value>Pilih Kecamatan</option>
               </select>
             </div>
 
             <div class="input-group mb-3">
-              <select class="form-control m-b" name="kelurahan" id="kelurahan">
+              <select class="form-control m-b" v-model="kelurahan" id="kelurahan">
                 <option selected value>Pilih Kelurahan</option>
               </select>
             </div>
@@ -108,6 +108,9 @@ export default {
       name: "",
       email: "",
       role: "",
+      kabupaten: "",
+      kecamatan: "",
+      kelurahan: "",
       password: "",
       password_confirmation: "",
       has_error: false,
@@ -116,7 +119,113 @@ export default {
       success: false
     };
   },
+  mounted: function(){
+    function makeRequest (method, url, done) {
+      var xhr = new XMLHttpRequest();
+      xhr.open(method, url);
+      xhr.onload = function () {
+        done(null, xhr.response);
+      };
+      xhr.onerror = function () {
+        done(xhr.response);
+      };
+      xhr.send();
+    }
 
+    var hasil = makeRequest('GET', 'https://x.rajaapi.com/poe', function (err, datums) {
+      if (err) { throw err; }
+      hasil = JSON.parse(datums)
+      var return_first = hasil.token
+    
+      // var return_first = function() {
+      // var tmp = null;
+      // $.ajax({
+      //     'async': false,
+      //     'type': "get",
+      //     'global': false,
+      //     'dataType': 'json',
+      //     'url': 'https://x.rajaapi.com/poe',
+      //     'success': function(data) {
+      //         tmp = data.token;
+      //     },
+      // });
+      // // console.log(tmp)
+      // return tmp;
+      // }();
+
+      $(document).ready(function() {
+          var propinsi = 32; //id jawa barat
+          $.ajax({
+              url: 'https://x.rajaapi.com/MeP7c5ne' + return_first + '/m/wilayah/kabupaten',
+              data: "idpropinsi=" + propinsi,
+              type: 'GET',
+              dataType: 'json',
+              success: function(json) {
+                  if (json.code == 200) {
+                      for (var i = 0; i < Object.keys(json.data).length; i++) {
+                          $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+                      }
+                  } else {
+                      $('#kecamatan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
+                  }
+              }
+          });
+          $("#kabupaten").change(function() {
+              var kabupaten = $("#kabupaten").val();
+              $.ajax({
+                  url: 'https://x.rajaapi.com/MeP7c5ne' + return_first + '/m/wilayah/kecamatan',
+                  data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi,
+                  type: 'GET',
+                  cache: false,
+                  dataType: 'json',
+                  success: function(json) {
+                      $("#kecamatan").html('');
+                      if (json.code == 200) {
+                        $('#kecamatan').append($('<option>').text('Pilih Kecamatan').attr('value', ''));
+                          for (var i = 0; i < Object.keys(json.data).length; i++) {
+                              $('#kecamatan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+                          }
+                          $('#kelurahan').html($('<option>').text('Pilih Kelurahan').attr('value', ''));
+
+                      } else {
+                          $('#kecamatan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
+                      }
+                  }
+              });
+          });
+          $("#kecamatan").change(function() {
+              var kecamatan = $("#kecamatan").val();
+              $.ajax({
+                  url: 'https://x.rajaapi.com/MeP7c5ne' + return_first + '/m/wilayah/kelurahan',
+                  data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi + "&idkecamatan=" + kecamatan,
+                  type: 'GET',
+                  dataType: 'json',
+                  cache: false,
+                  success: function(json) {
+                      $("#kelurahan").html('');
+                      if (json.code == 200) {
+                        $('#kelurahan').html($('<option>').text('Pilih Kelurahan').attr('value', ''));
+                          for (var i = 0; i < Object.keys(json.data).length; i++) {
+                              $('#kelurahan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+                          }
+                      } else {
+                          $('#kelurahan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
+                      }
+                  }
+              });
+          });
+      });
+      // if (localStorage.getItem('reloaded')) {
+      //     // The page was just reloaded. Clear the value from local storage
+      //     // so that it will reload the next time this page is visited.
+      //     localStorage.removeItem('reloaded');
+      // } else {
+      //     // Set a flag so that we know not to reload the page twice.
+      //     localStorage.setItem('reloaded', '1');
+      //     location.reload();
+      // }
+    });
+  },
   methods: {
     register() {
       var app = this;
@@ -125,6 +234,9 @@ export default {
           name: app.name,
           email: app.email,
           role: app.role,
+          kabupaten: app.kabupaten,
+          kecamatan: app.kecamatan,
+          kelurahan: app.kelurahan,
           password: app.password,
           password_confirmation: app.password_confirmation
         },

@@ -330,6 +330,8 @@ const routes = [
                 axiosTest(url).then(function (axiosTestResult) {
                     datatoken = axiosTestResult.data
                     var status = (datatoken.confirmed)
+                    var role = datatoken.role
+                    console.log(role)
                     if (status === 1) {
                         next('dashboard')
                     } else {
