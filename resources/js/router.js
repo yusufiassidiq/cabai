@@ -9,10 +9,10 @@ import NotfoundLoggedUser from './pages/NotFoundLoggedUser'
 import NotFoundNonLoggedUser from './pages/NotFoundNonLoggedUser'
 
 // Pages - SCM
-import AdminMaster from './pages/scm/admin/Master'
-import DashboardAdmin from './pages/scm/admin/Dashboard'
-import UserValidation from './pages/scm/admin/UserValidation'
-import UserManagement from './pages/scm/admin/UserManagement'
+import AdminMaster from './pages/admin/Master'
+import DashboardAdmin from './pages/admin/Dashboard'
+import UserValidation from './pages/admin/UserValidation'
+import UserManagement from './pages/admin/UserManagement'
 
 import MasterProd from './pages/scm/produsen/Master' // prod == produsen
 import DashboardProd from './pages/scm/produsen/Dashboard' 

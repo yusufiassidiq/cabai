@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
     <!-- Daterange picker -->
     <!-- <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css')}}"> -->
     <!-- summernote -->
@@ -60,8 +62,9 @@
     </script>
     <!-- overlayScrollbars -->
     <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+
     <!-- daterangepicker -->
-    <!-- <script src="{{ asset('plugins/moment/moment.min.js') }}"></script> -->
+    <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- ChartJS -->
@@ -84,7 +87,7 @@
     <!-- <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script> -->
     <!-- AdminLTE for demo purposes -->
     <!-- <script src="{{ asset('dist/js/demo.js') }}"></script> -->
-
+    
 </body>
 
 </html>

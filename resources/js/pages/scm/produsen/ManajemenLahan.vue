@@ -35,25 +35,25 @@
                 <h3 class="card-title">Manajemen Lahan</h3>
 
                 <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <button
-                      class="btn btn-success"
-                      data-toggle="modal"
-                      data-target="#exampleModal"
-                    >Add new</button>
-                    <input
+                  <button
+                    class="btn btn-success"
+                    data-toggle="modal"
+                    data-target="#addfield"
+                  >Tambah Lahan</button>
+                  <!-- <div class="input-group input-group-sm" style="width: 150px;"> -->
+                  <!-- <input
                       type="text"
                       name="table_search"
                       class="form-control float-right"
                       placeholder="Search"
-                    />
+                  />-->
 
-                    <div class="input-group-append">
+                  <!-- <div class="input-group-append">
                       <button type="submit" class="btn btn-default">
                         <i class="fas fa-search"></i>
                       </button>
-                    </div>
-                  </div>
+                  </div>-->
+                  <!-- </div> -->
                 </div>
               </div>
               <!-- /.card-header -->
@@ -72,6 +72,7 @@
                   </thead>
 
                   <tbody>
+                    <!-- example data -->
                     <tr>
                       <td>P12</td>
                       <td>Cabai Keriting</td>
@@ -89,74 +90,7 @@
                         </a>
                       </td>
                     </tr>
-                    <tr>
-                      <td>P11</td>
-                      <td>Cabai Besar</td>
-                      <td>10 ha</td>
-                      <td>Garut</td>
-                      <td>02-02-2020</td>
-                      <td>2.030.000</td>
-                      <td>
-                        <a href="#">
-                          <i class="fa fa-edit blue"></i>
-                        </a>
-                        /
-                        <a href="#">
-                          <i class="fa fa-trash red"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>P90</td>
-                      <td>Cabai Rawit</td>
-                      <td>3 ha</td>
-                      <td>Bekasi</td>
-                      <td>09-02-2020</td>
-                      <td>2.110.000</td>
-                      <td>
-                        <a href="#">
-                          <i class="fa fa-edit blue"></i>
-                        </a>
-                        /
-                        <a href="#">
-                          <i class="fa fa-trash red"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>P70</td>
-                      <td>Cabai Rawit</td>
-                      <td>3 ha</td>
-                      <td>Cianjur</td>
-                      <td>10-02-2020</td>
-                      <td>6.000.000</td>
-                      <td>
-                        <a href="#">
-                          <i class="fa fa-edit blue"></i>
-                        </a>
-                        /
-                        <a href="#">
-                          <i class="fa fa-trash red"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>P29</td>
-                      <td>Cabai Rawit</td>
-                      <td>3 ha</td>
-                      <td>Sukabumi</td>
-                      <td>11-02-2020</td>
-                      <td>2.230.000</td>
-                      <td>
-                        <a href="#">
-                          <i class="fa fa-edit blue"></i>
-                        </a>
-                        /
-                        <a href="#">
-                          <i class="fa fa-trash red"></i>
-                        </a>
-                      </td>
-                    </tr>
+                    <!-- end example data -->
                   </tbody>
                 </table>
               </div>
@@ -167,9 +101,72 @@
       </div>
     </section>
     <!-- /.content -->
-    
+
     <!-- Start Modal -->
+    <!-- Modal -->
     <div
+      class="modal fade"
+      id="addfield"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="detailUserLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailUserLabel">Tambahkan Lahan</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form @submit.prevent="addchilifields">
+            <div class="modal-body"></div>
+            <div class="form-group col-md">
+              <input
+                v-model="form.kodelahan"
+                type="text"
+                name="kodelahan"
+                class="form-control"
+                placeholder="Kode lahan"
+                :class="{ 'is-invalid': form.errors.has('kodelahan') }"
+              />
+              <has-error :form="form" field="kodelahan"></has-error>
+            </div>
+            <div class="form-group col-md">
+              <select v-model="form.jeniscabai" class="form-control">
+                <option value disabled selected>Jenis cabai</option>
+                <option value="Cabai rawit">Cabai rawit</option>
+                <option value="Cabai keriting">Cabai keriting</option>
+                <option value="Cabai besar">Cabai besar</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md">
+              <input
+                v-model="form.luaslahan"
+                type="number"
+                name="luaslahan"
+                class="form-control"
+                placeholder="Luas lahan (ha)"
+                :class="{ 'is-invalid': form.errors.has('luaslahan') }"
+              />
+              <has-error :form="form" field="luaslahan"></has-error>
+            </div>
+            <div class="form-group col-md">
+              
+            </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+              <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+          </form>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
+    <!-- <div
       class="modal fade"
       id="AddNewUser"
       tabindex="-1"
@@ -236,7 +233,7 @@
           </form>
         </div>
       </div>
-    </div>
+    </div>-->
     <!-- End Modal -->
   </div>
   <!-- /.content-wrapper -->
@@ -247,11 +244,12 @@ export default {
   data() {
     return {
       form: new Form({
-        // name: "",
-        // email: "",
-        // password: "",
-        // role: "",
-        // status: "hhh"
+        kodelahan: "",
+        jeniscabai: "",
+        luaslahan: "",
+        lokasi: "",
+        tgltanam: "",
+        vmodelexample:""
       })
     };
   },

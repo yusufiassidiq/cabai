@@ -4,7 +4,8 @@
 <script src="{{ asset('js/app.js') }}" defer></script>  
 
 <div id="app">
-  <index></index>
+  <!-- <index></index> -->
+  <router-view></router-view>
 </div>
 
 </html>
