@@ -57883,11 +57883,83 @@ var render = function() {
                             attrs: { to: "/produsen/analitik" }
                           },
                           [
-                            _c("i", {
-                              staticClass: "nav-icon fas fa-chart-bar"
-                            }),
+                            _c("i", { staticClass: "nav-icon fas fa-tasks" }),
                             _vm._v(" "),
-                            _c("p", [_vm._v("Bisnis Analitik")])
+                            _c("p", [_vm._v("Rekap Target")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item has-treeview menu-open" },
+                      [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c("ul", { staticClass: "nav nav-treeview" }, [
+                          _c(
+                            "li",
+                            { staticClass: "nav-item" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "nav-link",
+                                  attrs: { to: "/produsen/analitik" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "far fa-circle nav-icon"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("p", [_vm._v("Penjualan")])
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "li",
+                            { staticClass: "nav-item" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "nav-link",
+                                  attrs: { to: "/produsen/analitik" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "far fa-circle nav-icon"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("p", [_vm._v("Pengeluaran")])
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/produsen/analitik" }
+                          },
+                          [
+                            _c("i", { staticClass: "nav-icon fas fa-tasks" }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Rekap Harga Cabai")])
                           ]
                         )
                       ],
@@ -57903,7 +57975,7 @@ var render = function() {
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
-      _vm._m(5)
+      _vm._m(6)
     ],
     1
   )
@@ -57971,6 +58043,19 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [
         _vm._v("\n                  Transaksi\n                  "),
+        _c("i", { staticClass: "right fas fa-angle-left" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link disable", attrs: { href: "#" } }, [
+      _c("i", { staticClass: "nav-icon fas fa-address-book" }),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("Rekap Laporan\n                    "),
         _c("i", { staticClass: "right fas fa-angle-left" })
       ])
     ])
@@ -76298,7 +76383,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(vue_progressbar__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 
 
 
@@ -76368,7 +76453,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_7___default.a({
   el: '#app',
   router: _router__WEBPACK_IMPORTED_MODULE_3__["default"],
   components: {
-    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_13__["default"]
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_14__["default"]
   }
 });
 

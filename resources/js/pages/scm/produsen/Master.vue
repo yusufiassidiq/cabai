@@ -138,20 +138,8 @@
               </li>
               <li class="nav-item">
                 <router-link to="/produsen/analitik" class="nav-link">
-                  <i class="nav-icon fas fa-chart-bar"></i>
-                  <p>Bisnis Analitik</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/produsen/analitik" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Dashboard</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/produsen/analitik" class="nav-link">
                   <i class="nav-icon fas fa-tasks"></i>
-                  <p>Target</p>
+                  <p>Rekap Target</p>
                 </router-link>
               </li>
               <li class="nav-item has-treeview menu-open">
