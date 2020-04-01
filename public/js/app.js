@@ -58025,11 +58025,83 @@ var render = function() {
                             attrs: { to: "/produsen/analitik" }
                           },
                           [
-                            _c("i", {
-                              staticClass: "nav-icon fas fa-chart-bar"
-                            }),
+                            _c("i", { staticClass: "nav-icon fas fa-tasks" }),
                             _vm._v(" "),
-                            _c("p", [_vm._v("Bisnis Analitik")])
+                            _c("p", [_vm._v("Rekap Target")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item has-treeview menu-open" },
+                      [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c("ul", { staticClass: "nav nav-treeview" }, [
+                          _c(
+                            "li",
+                            { staticClass: "nav-item" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "nav-link",
+                                  attrs: { to: "/produsen/analitik" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "far fa-circle nav-icon"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("p", [_vm._v("Penjualan")])
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "li",
+                            { staticClass: "nav-item" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "nav-link",
+                                  attrs: { to: "/produsen/analitik" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "far fa-circle nav-icon"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("p", [_vm._v("Pengeluaran")])
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/produsen/analitik" }
+                          },
+                          [
+                            _c("i", { staticClass: "nav-icon fas fa-tasks" }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Rekap Harga Cabai")])
                           ]
                         )
                       ],
@@ -58045,7 +58117,7 @@ var render = function() {
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
-      _vm._m(5)
+      _vm._m(6)
     ],
     1
   )
@@ -58113,6 +58185,19 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [
         _vm._v("\n                  Transaksi\n                  "),
+        _c("i", { staticClass: "right fas fa-angle-left" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link disable", attrs: { href: "#" } }, [
+      _c("i", { staticClass: "nav-icon fas fa-address-book" }),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("Rekap Laporan\n                    "),
         _c("i", { staticClass: "right fas fa-angle-left" })
       ])
     ])
