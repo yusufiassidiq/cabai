@@ -112,65 +112,66 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalLahanLabel">Tambahkan Lahan</h5>
+            <h5 class="modal-title" id="modalLahanLabel">Informasi Lahan</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <form @submit.prevent="editmode? updateLahan() : addLahan()">
-            <div class="modal-body"></div>
-            <div class="form-group col-md">
-              <input
-                v-model="form.kodelahan"
-                type="text"
-                name="kodelahan"
-                class="form-control"
-                placeholder="Kode lahan"
-                :class="{ 'is-invalid': form.errors.has('kodelahan') }"
-              />
-              <has-error :form="form" field="kodelahan"></has-error>
-            </div>
-            <div class="form-group col-md">
-              <select
-                v-model="form.jeniscabai"
-                class="form-control"
-                :class="{ 'is-invalid': form.errors.has('jeniscabai') }"
-              >
-                <option value disabled selected>Jenis cabai</option>
-                <option value="Cabai rawit">Cabai rawit</option>
-                <option value="Cabai keriting">Cabai keriting</option>
-                <option value="Cabai besar">Cabai besar</option>
-              </select>
-              <has-error :form="form" field="jeniscabai"></has-error>
-            </div>
+            <div class="modal-body">
+              <div class="form-group col-md">
+                <input
+                  v-model="form.kodelahan"
+                  type="text"
+                  name="kodelahan"
+                  class="form-control"
+                  placeholder="Kode lahan"
+                  :class="{ 'is-invalid': form.errors.has('kodelahan') }"
+                />
+                <has-error :form="form" field="kodelahan"></has-error>
+              </div>
+              <div class="form-group col-md">
+                <select
+                  v-model="form.jeniscabai"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('jeniscabai') }"
+                >
+                  <option value disabled selected>Jenis cabai</option>
+                  <option value="Cabai rawit">Cabai rawit</option>
+                  <option value="Cabai keriting">Cabai keriting</option>
+                  <option value="Cabai besar">Cabai besar</option>
+                </select>
+                <has-error :form="form" field="jeniscabai"></has-error>
+              </div>
 
-            <div class="form-group col-md">
-              <input
-                v-model="form.luaslahan"
-                type="number"
-                name="luaslahan"
-                class="form-control"
-                placeholder="Luas lahan (ha)"
-                :class="{ 'is-invalid': form.errors.has('luaslahan') }"
-              />
-              <has-error :form="form" field="luaslahan"></has-error>
-            </div>
-            <div class="form-group">
-              <datepicker
-                class="col-sm-10"
-                placeholder="Tanggal tanam"
-                v-model="form.tgltanam"
-                id="tanggaltanam"
-                :class="{ 'is-invalid': form.errors.has('tgltanam') }"
-              ></datepicker>
-              <has-error :form="form" field="tgltanam"></has-error>
+              <div class="form-group col-md">
+                <input
+                  v-model="form.luaslahan"
+                  type="number"
+                  name="luaslahan"
+                  class="form-control"
+                  placeholder="Luas lahan (ha)"
+                  :class="{ 'is-invalid': form.errors.has('luaslahan') }"
+                />
+                <has-error :form="form" field="luaslahan"></has-error>
+              </div>
+              <div class="form-group">
+                <datepicker
+                  class="col-sm-10"
+                  placeholder="Tanggal tanam"
+                  v-model="form.tgltanam"
+                  id="tanggaltanam"
+                  :class="{ 'is-invalid': form.errors.has('tgltanam') }"
+                ></datepicker>
+                <has-error :form="form" field="tgltanam"></has-error>
+              </div>
             </div>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
               <!-- <vue-button-spinner :is-loading="isLoading" :disabled="isLoading" :status="status"> -->
-              <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
-              <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
+              <button v-show="editmode" type="submit" class="btn btn-success">Perbarui</button>
+              <button v-show="!editmode" type="submit" class="btn btn-primary">Tambahkan</button>
               <!-- <span>Simpan</span> -->
               <!-- </vue-button-spinner> -->
             </div>
@@ -192,14 +193,14 @@ import datepicker from "vuejs-datepicker";
 
 export default {
   components: {
-    datepicker,
+    datepicker
     // VueButtonSpinner
   },
   data() {
     return {
       datalahan: {},
-      isLoading: false, // vuebutton spinner
-      status: "", // vuebutton spinner
+      // isLoading: false, // vuebutton spinner
+      // status: "", // vuebutton spinner
       editmode: false, // buat ngebedain modal yg di klik modal tambah lahan /edit lahan
       // form buat simpan data
       form: new Form({
@@ -215,94 +216,106 @@ export default {
   },
   methods: {
     // CRUD
+    // Menambahkan data lahan Produsen
     addLahan() {
-      this.isLoading = true;
+      // this.isLoading = true;
+      // Menampilkan progress bar di mozila
       this.$Progress.start();
+      // Http Request axios dgn menggunakan vform
+      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       this.form
-        .post("https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai")
+        .post(url)
         .then(() => {
           this.isLoading = false;
-          this.status = true; // or success
-          setTimeout(() => {
-            this.status = "";
-          }, 2000); // to clear the status :)
+          // this.status = true; // or success
+          // setTimeout(() => {
+          //   this.status = "";
+          // }, 2000);
           // custom event
           UpdateData.$emit("update");
-          // hide modal add new user (dengan cara bruteforce karena kalo cara hide fadenya ga hilang)
+          // hide modal
           $("#modalLahan").trigger("click");
           // show Toast if success
           toast.fire({
             icon: "success",
-            title: "data berhasil disimpan"
+            title: "Lahan berhasil ditambahkan"
           });
           this.$Progress.finish();
         })
         .catch(error => {
           this.$Progress.fail();
           console.error(error);
-          this.isLoading = false;
-          this.status = false; //or error
+          // this.isLoading = false;
+          // this.status = false; //or error
         });
     },
+    // Mendapatkan data lahan produsen
     getLahan() {
-      axios
-        .get("https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai")
-        .then(response => {
-          this.datalahan = response.data;
-        });
+      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
+      axios.get(url).then(response => {
+        this.datalahan = response.data;
+      });
     },
-    updateLahan(){
+    // Memperbarui data lahan produsen
+    updateLahan() {
       // console.log("Lagi diedi?t nih GANS");
       this.$Progress.start();
+      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       this.form
-        .put("https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai/" + this.form.id)
+        .put(url + "/" + this.form.id)
         .then(() => {
-          // success
-          $("#modalLahan").trigger("click");
-          swal.fire(
-            "Updated!",
-            "Data lahan berhasil di simpan.",
-            "success"
-          );
-          this.$Progress.finish();
           UpdateData.$emit("update");
+          // hide modal
+          $("#modalLahan").trigger("click");
+          toast.fire({
+            icon: "success",
+            title: "Lahan berhasil diperbarui"
+          });
         })
         .catch(() => {
           this.$Progress.fail();
         });
     },
+    // menghapus data lahan produsen
     deleteLahan(id) {
+      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       swal
         .fire({
-          title: "Are you sure?",
-          text: "You won't be able to revert this!",
+          title: "Apakah kamu yakin?",
+          text: "Data yang dihapus tidak dapat dikembalikan",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, delete it!"
+          confirmButtonText: "Ya, hapus data!"
         })
         .then(result => {
           if (result.value) {
             // send request to the server
             axios
-              .delete("https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai/" + id)
+              .delete(url + "/" + id)
               .then(() => {
-                swal.fire("Deleted!", "Your file has been deleted.", "success");
                 UpdateData.$emit("update");
+                swal.fire("Tehapus!", "Data lahan berhasil dihapus", "success");
               })
               .catch(() => {
-                swal.fire("Failed!", "There was something wrong.", "waning");
+                swal.fire(
+                  "Gagal!",
+                  "Terdapat masalah ketika menghapus",
+                  "waning"
+                );
               });
           }
         });
     },
     // MODAL
+    // Menampilkan Modal utk menambahkan lahan baru
     newModal() {
       this.editmode = false;
       this.form.reset();
       $("#modalLahan").modal("show");
     },
+    // Menampilkan Modal utk Mengedit lahan baru
     editModal(data) {
       this.editmode = true;
       this.form.reset();
@@ -314,7 +327,7 @@ export default {
     this.getLahan();
   },
   mounted() {
-    console.log("User Management Mounted");
+    // Custom event on Vue js
     UpdateData.$on("update", () => {
       this.getLahan();
     });

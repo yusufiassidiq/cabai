@@ -137,7 +137,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <router-link to="/produsen/analitik" class="nav-link">
+                <router-link to="/produsen/target" class="nav-link">
                   <i class="nav-icon fas fa-tasks"></i>
                   <p>Rekap Target</p>
                 </router-link>
