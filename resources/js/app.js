@@ -71,15 +71,9 @@ Vue.use(VueAuth, auth)
 // Load Index
 Vue.component('index', Index)
 
-import Datepicker from 'vuejs-datepicker';
-
-
 window.UpdateData = new Vue();
 
 const app = new Vue({
     el: '#app',
     router,
-    components: {
-      Datepicker
-    }
   });

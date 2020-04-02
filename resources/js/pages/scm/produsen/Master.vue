@@ -119,7 +119,6 @@
                   </li>
                 </ul>
               </li>
-
               <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link disable">
                   <i class="nav-icon fas fa-shopping-cart"></i>
@@ -139,10 +138,38 @@
               </li>
               <li class="nav-item">
                 <router-link to="/produsen/analitik" class="nav-link">
-                  <i class="nav-icon fas fa-chart-bar"></i>
-                  <p>Bisnis Analitik</p>
+                  <i class="nav-icon fas fa-tasks"></i>
+                  <p>Rekap Target</p>
                 </router-link>
               </li>
+              <li class="nav-item has-treeview menu-open">
+                <a href="#" class="nav-link disable">
+                  <i class="nav-icon fas fa-address-book"></i>
+                    <p>Rekap Laporan
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <router-link to="/produsen/analitik" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                      <p>Penjualan</p>
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/produsen/analitik" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                      <p>Pengeluaran</p>
+                  </router-link>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <router-link to="/produsen/analitik" class="nav-link">
+                <i class="nav-icon fas fa-tasks"></i>
+                  <p>Rekap Harga Cabai</p>
+              </router-link>
+            </li>
             </ul>
           </nav>
           <!-- /.sidebar-menu -->
