@@ -295,8 +295,8 @@ export default {
             axios
               .delete(url + "/" + id)
               .then(() => {
-                swal.fire("Tehapus!", "Data lahan berhasil dihapus", "success");
                 UpdateData.$emit("update");
+                swal.fire("Tehapus!", "Data lahan berhasil dihapus", "success");
               })
               .catch(() => {
                 swal.fire(
