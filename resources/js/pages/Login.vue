@@ -120,11 +120,7 @@ export default {
           }
 
           // var sts = this.$auth.user()
-          // let LS_STAT_KEY = null
-          // console.log("aa")
-          // console.log(sts)
-          // console.log("zz")
-          // localStorage.setItem('LS_STATx_KEY', sts)
+          window.localStorage.setItem('isLoggedUser',true)
           this.$router
             .push({ name: redirectTo, params: { usrId: this.$auth.user().id } })
             .catch(err => {});

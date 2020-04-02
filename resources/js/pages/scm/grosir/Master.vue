@@ -12,8 +12,11 @@
         </ul>
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
+          <li v-if="$auth.check()">
+            <a href @click.prevent="$auth.logout();clearLocalStorage()">Logout</a>
+          </li>
           <!-- SEARCH FORM -->
-          <li class="nac-item">
+          <!-- <li class="nac-item">
             <form class="form-inline ml-3">
               <div class="input-group input-group-sm">
                 <input
@@ -29,7 +32,7 @@
                 </div>
               </div>
             </form>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- Main Sidebar Container -->
@@ -150,3 +153,15 @@
     </aside>
   </div>
 </template>
+<script>
+export default {
+  mounted() {
+    //
+  },
+  methods: {
+    clearLocalStorage() {
+      localStorage.clear();
+    }
+  }
+};
+</script>

@@ -423,25 +423,29 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(route => route.meta.checkStatus)) {
-    // if (true) {
+    if (to.matched.some(route => route.meta.checkStatus)) {
         // (console.log("masuk"))
-        var datauser = []
-        axios.get('/auth/user').then(response => {
-            datauser = response.data.data
-        //     console.log(datauser)
-            var status = datauser.status
-        //     console.log(status)
-            if(status === 0){
-                // console.log("disini")
-                next('/unverified');
-            } else{
-                next();
-            }
-        })
+        // var datauser = []
+        const authUser = window.localStorage.getItem('isLoggedUser')
+        if (!authUser===true){
+            next({ path: '/login' });
+        } else {
+            axios.get('/auth/user').then(response => {
+                var datauser = response.data.data
+            //     console.log(datauser)
+                var status = datauser.status
+            //     console.log(status)
+                if(status === 0){
+                    // console.log("disini")
+                    next('/unverified');
+                } else{
+                    next();
+                }
+            });
+        }
     }
     else{
-    next();
-  }
+        next();
+    }
 });
 export default router

@@ -13,7 +13,7 @@
         <ul class="navbar-nav ml-auto">
           <!-- logout -->
           <li v-if="$auth.check()">
-            <a href @click.prevent="$auth.logout()">Logout</a>
+            <a href @click.prevent="$auth.logout();clearLocalStorage()">Logout</a>
           </li>
           <!-- SEARCH FORM -->
           <!-- <li class="nac-item"> -->
@@ -103,9 +103,9 @@ export default {
     //
   },
   methods: {
-    // clearLocalStorage() {
-    //   localStorage.clear();
-    // }
+    clearLocalStorage() {
+      localStorage.clear();
+    }
   }
 };
 </script>
