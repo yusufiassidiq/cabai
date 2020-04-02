@@ -11,29 +11,15 @@
         </div>
     </div>
 </template>
-
-<script>  
-
+<script>
 export default {
-    data() {
-      // var asd = JSON.parse(localStorage.getItem('LS_STAT_KEY'))
-      // console.log("dipageunverified")
-      // console.log(asd)
-      // console.log("kalomuncultandanyasukses")
-      return {
-        
-        // user : []
-      }
-    },
-    components: {
-      //
-    },
-    methods:{
-      // userDetails(){
-      //   axios.get("/users/"+3).then(response => {
-      //       this.user = response.data;
-      //       });
-      // }
+  mounted() {
+    //
+  },
+  methods: {
+    clearLocalStorage() {
+      localStorage.clear();
     }
   }
+};
 </script>

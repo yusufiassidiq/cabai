@@ -91,6 +91,16 @@ const routes = [
     {
         path: '/produsen',
         component: MasterProd,
+        meta: {
+            checkStatus: true,
+            auth: {
+                roles: 2,
+                redirect: {
+                    name: 'login'
+                },
+                forbiddenRedirect: '/403'
+            },
+        },
         children: [
             {
                 path: '',
@@ -144,6 +154,16 @@ const routes = [
     {
         path: '/grosir',
         component: MasterGrosir,
+        meta: {
+            checkStatus: true,
+            auth: {
+                roles: 4,
+                redirect: {
+                    name: 'login'
+                },
+                forbiddenRedirect: '/403'
+            }
+        },
         children: [
             {
                 path: '',
@@ -186,6 +206,17 @@ const routes = [
     {
         path: '/pengecer',
         component: MasterPengecer,
+        meta: {
+            checkStatus: true,
+            auth: {
+                roles: 5,
+                redirect: {
+                    name: 'login'
+                },
+                forbiddenRedirect: '/403'
+            },
+            
+        },
         children: [
             {
                 path: '',
@@ -228,6 +259,16 @@ const routes = [
     {
         path: '/pengepul',
         component: MasterPengepul,
+        meta: {
+            checkStatus: true,
+            auth: {
+                roles: 3,
+                redirect: {
+                    name: 'login'
+                },
+                forbiddenRedirect: '/403'
+            }
+        },
         children: [
             {
                 path: '',
@@ -326,16 +367,20 @@ const routes = [
         component: UnverifiedDashboard,
         beforeEnter: (to, from, next) => {
             if (to.meta.requiresVerified) {
-                var datatoken = []
-                const url = "/user/getcustompayloads"
+                var datauser = []
+                const url = "/auth/user"
                 const axiosTest = axios.get
-                axiosTest(url).then(function (axiosTestResult) {
-                    datatoken = axiosTestResult.data
-                    var status = (datatoken.confirmed)
-                    var role = datatoken.role
+                axiosTest(url).then(function (axiosResult) {
+                    datauser = axiosResult.data.data
+                    // console.log(datauser)
+                    var status = (datauser.status)
+                    var role = datauser.role
                     console.log(role)
                     if (status === 1) {
-                        next('dashboard')
+                        if(role === 2){next('/produsen') }
+                        else if(role === 3){next('/pengepul') }
+                        else if(role === 4){next('/grosir') }
+                        else if(role === 5){next('/pengecer') }
                     } else {
                         next();
                     }
@@ -384,4 +429,30 @@ const router = new VueRouter({
     routes,
 })
 
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(route => route.meta.checkStatus)) {
+        // (console.log("masuk"))
+        // var datauser = []
+        const authUser = window.localStorage.getItem('isLoggedUser')
+        if (!authUser===true){
+            next({ path: '/login' });
+        } else {
+            axios.get('/auth/user').then(response => {
+                var datauser = response.data.data
+            //     console.log(datauser)
+                var status = datauser.status
+            //     console.log(status)
+                if(status === 0){
+                    // console.log("disini")
+                    next('/unverified');
+                } else{
+                    next();
+                }
+            });
+        }
+    }
+    else{
+        next();
+    }
+});
 export default router

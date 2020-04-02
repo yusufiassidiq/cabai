@@ -190,3 +190,15 @@
     </footer>
   </div>
 </template>
+<script>
+export default {
+  mounted() {
+    //
+  },
+  methods: {
+    clearLocalStorage() {
+      localStorage.clear();
+    }
+  }
+};
+</script>
