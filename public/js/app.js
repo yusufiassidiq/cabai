@@ -80295,20 +80295,6 @@ var routes = [// SCM
   }
 } // ADMIN ROUTES
 // {
-//     path: '/admin',
-//     name: 'admin.dashboard',
-//     component: AdminDashboard,
-//     meta: {
-//         auth: {
-//             roles: 1,
-//             redirect: {
-//                 name: 'login'
-//             },
-//             forbiddenRedirect: '/403'
-//         }
-//     }
-// },
-// {
 //     path: '/:userId/details',
 //     name: 'userDetails',
 //     component: UserDetails,
@@ -80327,33 +80313,83 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   history: true,
   mode: 'history',
   routes: routes
-});
+}); // router.beforeEach((to, from, next) => {
+//     if (to.matched.some(route => route.meta.checkStatus)) {
+//         // (console.log("masuk"))
+//         // var datauser = []
+//         const authUser = window.localStorage.getItem('isLoggedUser')
+//         if (!authUser===true){
+//             next({ path: '/login' });
+//         } else {
+//             axios.get('/auth/user').then(response => {
+//                 var datauser = response.data.data
+//             //     console.log(datauser)
+//                 var status = datauser.status
+//             //     console.log(status)
+//                 if(status === 0){
+//                     // console.log("disini")
+//                     next('/unverified');
+//                 } else{
+//                     next();
+//                 }
+//             });
+//         }
+//     }
+//     else{
+//         next();
+//     }
+// });
+
 router.beforeEach(function (to, from, next) {
   if (to.matched.some(function (route) {
     return route.meta.checkStatus;
   })) {
-    // (console.log("masuk"))
-    // var datauser = []
-    var authUser = window.localStorage.getItem('isLoggedUser');
-
-    if (!authUser === true) {
-      next({
-        path: '/login'
-      });
-    } else {
+    var requestAjax = function requestAjax(callback) {
       axios.get('/auth/user').then(function (response) {
-        var datauser = response.data.data; //     console.log(datauser)
-
-        var status = datauser.status; //     console.log(status)
-
-        if (status === 0) {
-          // console.log("disini")
-          next('/unverified');
+        if (response.data.status === "success") {
+          callback(response.data.data);
         } else {
-          next();
+          callback("error");
         }
       });
-    }
+    };
+
+    var showResult = function showResult(data) {
+      var authUser = window.localStorage.getItem('isLoggedUser');
+
+      if (!authUser === true) {
+        next({
+          path: '/login'
+        });
+      } else {
+        if (data != "error") {
+          if (data.status === 0) {
+            next('/unverified');
+          } else {
+            next();
+          }
+        }
+      }
+    };
+
+    requestAjax(showResult); // -------------------------------------------------------
+    // const authUser = window.localStorage.getItem('isLoggedUser')
+    // if (!authUser===true){
+    //     next({ path: '/login' });
+    // } else {
+    //     axios.get('/auth/user').then(response => {
+    //         var datauser = response.data.data
+    //     //     console.log(datauser)
+    //         var status = datauser.status
+    //     //     console.log(status)
+    //         if(status === 0){
+    //             // console.log("disini")
+    //             next('/unverified');
+    //         } else{
+    //             next();
+    //         }
+    //     });
+    // }
   } else {
     next();
   }
