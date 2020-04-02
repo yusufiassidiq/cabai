@@ -5,35 +5,9 @@
             
             <div class="card-body">
                 Akun anda belum terverifikasi, mohon tunggu admin untuk memverifikasinya
-                <a href="" @click.prevent="$auth.logout();clearLocalStorage()">Logout</a>
+                <a href="" @click.prevent="$auth.logout();">Logout</a>
             </div>
             
         </div>
     </div>
 </template>
-
-<script>  
-
-export default {
-    data() {
-      // var asd = JSON.parse(localStorage.getItem('LS_STAT_KEY'))
-      // console.log("dipageunverified")
-      // console.log(asd)
-      // console.log("kalomuncultandanyasukses")
-      return {
-        
-        // user : []
-      }
-    },
-    components: {
-      //
-    },
-    methods:{
-      // userDetails(){
-      //   axios.get("/users/"+3).then(response => {
-      //       this.user = response.data;
-      //       });
-      // }
-    }
-  }
-</script>

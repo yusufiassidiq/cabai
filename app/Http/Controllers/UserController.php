@@ -29,11 +29,11 @@ class UserController extends Controller
             ], 200);
     }
 
-    public function seeToken(){
-        $token = JWTAuth::getToken();
-        $isiToken = JWTAuth::getPayload($token)->toArray();
-        return $isiToken;
-    }
+    // public function seeToken(){
+    //     $token = JWTAuth::getToken();
+    //     $isiToken = JWTAuth::getPayload($token)->toArray();
+    //     return $isiToken;
+    // }
 
     public function requesteduser()
     {

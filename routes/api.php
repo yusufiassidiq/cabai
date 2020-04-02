@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('/user/{id}','AdminController@delete')->middleware('isAdmin');
     Route::post('/terima/{id}','AdminController@terima')->middleware('isAdmin');
     //Get Custom Payload
-    Route::get('user/getcustompayloads','UserController@seeToken');
+    // Route::get('user/getcustompayloads','UserController@seeToken');
     // get user yang belum divalidasi
     Route::get('requesteduser', 'UserController@requesteduser')->middleware('isAdmin');
     // get user yang sudah divalidasi
