@@ -6,21 +6,21 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <daftarMitra></daftarMitra>
+    <inventaris></inventaris>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 </template>
 <script>
-import headerPengepul from "../../../components/pengepul/HeaderDaftarMitra";
-import daftarMitra from "../../../components/DaftarMitra";
+import headerPengepul from "../../../components/pengepul/HeaderInventaris";
+import inventaris from "../../../components/Inventaris";
 export default {
   data() {
     return {};
   },
   components: {
     headerPengepul: headerPengepul,
-    daftarMitra: daftarMitra
+    inventaris: inventaris
   },
   methods: {},
   created() {},

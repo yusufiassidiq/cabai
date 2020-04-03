@@ -30,6 +30,7 @@ import PengajuanMitraPengepul from './pages/scm/pengepul/PengajuanMitra'
 import PermintaanMitraPengepul from './pages/scm/pengepul/PermintaanMitra'
 import TransaksiPelangganPengepul from './pages/scm/pengepul/TransaksiPelanggan'
 import TransaksiPemasokPengepul from './pages/scm/pengepul/TransaksiPemasok'
+import InventarisPengepul from './pages/scm/pengepul/Inventaris'
 
 import MasterGrosir from './pages/scm/grosir/Master' // grosir
 import DashboardGrosir from './pages/scm/grosir/Dashboard'
@@ -259,16 +260,16 @@ const routes = [
     {
         path: '/pengepul',
         component: MasterPengepul,
-        meta: {
-            checkStatus: true,
-            auth: {
-                roles: 3,
-                redirect: {
-                    name: 'login'
-                },
-                forbiddenRedirect: '/403'
-            }
-        },
+        // meta: {
+        //     checkStatus: true,
+        //     auth: {
+        //         roles: 3,
+        //         redirect: {
+        //             name: 'login'
+        //         },
+        //         forbiddenRedirect: '/403'
+        //     }
+        // },
         children: [
             {
                 path: '',
@@ -305,6 +306,11 @@ const routes = [
                 path: 'analitik',
                 component: BisnisAnalitikPengepul,
                 name: "BisnisAnalitikPengepul"
+            },
+            {
+                path: 'inventaris',
+                component: InventarisPengepul,
+                name: "InventarisPengepul"
             },
         ]
     },
