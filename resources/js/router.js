@@ -49,6 +49,7 @@ import PengajuanMitraPengecer from './pages/scm/pengecer/PengajuanMitra'
 import PermintaanMitraPengecer from './pages/scm/pengecer/PermintaanMitra'
 import TransaksiPelangganPengecer from './pages/scm/pengecer/TransaksiPelanggan'
 import TransaksiPemasokPengecer from './pages/scm/pengecer/TransaksiPemasok'
+import InventarisPengecer from './pages/scm/pengecer/Inventaris'
 
 // Pages - Bisnis Analitik
 import BAMaster from './pages/ba/Master'
@@ -214,17 +215,17 @@ const routes = [
     {
         path: '/pengecer',
         component: MasterPengecer,
-        meta: {
-            checkStatus: true,
-            auth: {
-                roles: 5,
-                redirect: {
-                    name: 'login'
-                },
-                forbiddenRedirect: '/403'
-            },
+        // meta: {
+        //     checkStatus: true,
+        //     auth: {
+        //         roles: 5,
+        //         redirect: {
+        //             name: 'login'
+        //         },
+        //         forbiddenRedirect: '/403'
+        //     },
             
-        },
+        // },
         children: [
             {
                 path: '',
@@ -261,6 +262,11 @@ const routes = [
                 path: 'analitik',
                 component: BisnisAnalitikPengecer,
                 name: "BisnisAnalitikPengecer"
+            },
+            {
+                path: 'inventaris',
+                component: InventarisPengecer,
+                name: "InventarisPengecer"
             },
         ]
     },
