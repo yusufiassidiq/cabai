@@ -9,11 +9,6 @@
 
               <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <button
-                    class="btn btn-success"
-                    data-toggle="modal"
-                    data-target="#exampleModal"
-                  >Add Target</button>
                   <input
                     type="text"
                     name="table_search"
@@ -38,17 +33,15 @@
                     <th>Jenis</th>
                     <th>Jumlah/kg</th>
                     <th>Ketersediaan</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>cabai rawit</td>
-                    <td>!00</td>
-                    <td>69</td>
-                    <td>aksi</td>
+                  <tr v-for="data in inventaris" :key="data.id">
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.jenis }}</td>
+                    <td>{{ data.jumlah }}</td>
+                    <td>{{ data.ketersediaan }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -60,3 +53,30 @@
     </div>
   </section>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      inventaris: {},
+    };
+  },
+  methods: {
+    // Mendapatkan data Pengajuan Mitra
+    getInventaris() {
+      var url = "https://5e8730b2781e48001676b86c.mockapi.io/inventaris";
+      axios.get(url).then(response => {
+        this.inventaris = response.data;
+      });
+    },
+  },
+  created() {
+    this.getInventaris();
+  },
+  mounted() {
+    // Custom event on Vue js
+    UpdateData.$on("update", () => {
+      this.getInventaris();
+    });
+  }
+};
+</script>

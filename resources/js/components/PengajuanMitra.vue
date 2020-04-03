@@ -9,11 +9,6 @@
 
               <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <button
-                    class="btn btn-success"
-                    data-toggle="modal"
-                    data-target="#exampleModal"
-                  >Add new</button>
                   <input
                     type="text"
                     name="table_search"
@@ -34,27 +29,22 @@
               <table class="table table-hover text-nowrap">
                 <thead>
                   <tr>
+                    <th>Id</th>
                     <th>Nama</th>
                     <th>Role</th>
                     <th>Lokasi</th>
-                    <th>Action</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr>
-                    <td>Yahya</td>
-                    <td>Pengepul</td>
-                    <td>Depok</td>
-                    <td>
-                      <!-- <a href="#">
-                            <i class="fa fa-edit blue"></i>
-                        </a>
-                        /
-                        <a href="#">
-                            <i class="fa fa-trash red"></i>
-                      </a>-->
-                    </td>
+                  <tr v-for="data in dataMitra" :key="data.id">
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.role }}</td>
+                    <td>{{ data.lokasi }}</td>
+                    <td>{{ data.status }}</td>
+                    
                   </tr>
                 </tbody>
               </table>
@@ -66,3 +56,38 @@
     </div>
   </section>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      dataMitra: {},
+      // isLoading: false, // vuebutton spinner
+      // status: "", // vuebutton spinner
+      form: new Form({
+        id: "",
+        name: "",
+        role: "",
+        lokasi: ""
+      })
+    };
+  },
+  methods: {
+    // Mendapatkan data Pengajuan Mitra
+    getMitra() {
+      var url = "https://5e8730b2781e48001676b86c.mockapi.io/pengajuanmitra";
+      axios.get(url).then(response => {
+        this.dataMitra = response.data;
+      });
+    },
+  },
+  created() {
+    this.getMitra();
+  },
+  mounted() {
+    // Custom event on Vue js
+    UpdateData.$on("update", () => {
+      this.getMitra();
+    });
+  }
+};
+</script>

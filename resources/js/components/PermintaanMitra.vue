@@ -9,11 +9,6 @@
 
               <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <button
-                    class="btn btn-success"
-                    data-toggle="modal"
-                    data-target="#exampleModal"
-                  >Add new</button>
                   <input
                     type="text"
                     name="table_search"
@@ -33,6 +28,7 @@
               <table class="table table-hover text-nowrap">
                 <thead>
                   <tr>
+                    <th>Id</th>
                     <th>Nama</th>
                     <th>Role</th>
                     <th>Lokasi</th>
@@ -41,19 +37,24 @@
                 </thead>
 
                 <tbody>
-                  <tr>
-                    <td>Yahya</td>
-                    <td>Pengepul</td>
-                    <td>Depok</td>
+                  <tr v-for="data in dataMitra" :key="data.id">
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.role }}</td>
+                    <td>{{ data.lokasi }}</td>
                     <td>
-                      <!-- <a href="#">
-                            <i class="fa fa-edit blue"></i>
-                        </a>
-                        /
-                        <a href="#">
-                            <i class="fa fa-trash red"></i>
-                      </a>-->
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        @click="terimaMitra(data.id)"
+                      >Terima</button>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="tolakMitra(data.id)"
+                      >Tolak</button>
                     </td>
+                    <!-- end example data -->
                   </tr>
                 </tbody>
               </table>
@@ -65,3 +66,97 @@
     </div>
   </section>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      dataMitra: {},
+      // isLoading: false, // vuebutton spinner
+      // status: "", // vuebutton spinner
+      form: new Form({
+        id: "",
+        name: "",
+        role: "",
+        lokasi: ""
+      })
+    };
+  },
+  methods: {
+    // Mendapatkan data Permintaan Mitra
+    getMitra() {
+      console.log("data berhasil didapatkan");
+      var url =
+        "https://5e844114a8fdea00164ac49e.mockapi.io/api/permintaanmitra";
+      axios.get(url).then(response => {
+        this.dataMitra = response.data;
+      });
+    },
+    // menerima pembentukan mitra
+    terimaMitra(id) {
+      console.log("data berhasil diterima");
+      swal
+        .fire({
+          title: "Apakah kamu yakin?",
+          text: "",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya, Terima!"
+        })
+        .then(result => {
+          if (result.value) {
+            // send request to the server
+
+            UpdateData.$emit("update");
+            swal.fire("Permintaan diterima", "Kemitraan terbentuk", "success");
+          }
+        });
+    },
+    // menolak pembentukan mitra
+    tolakMitra(id) {
+      console.log("data berhasil ditolak");
+      var url =
+        "https://5e844114a8fdea00164ac49e.mockapi.io/api/permintaanmitra";
+      swal
+        .fire({
+          title: "Apakah kamu yakin?",
+          text:
+            "Mitra yang ditolak perlu mengajukan permintaan ulang untuk bermitra",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya, Tolak!"
+        })
+        .then(result => {
+          if (result.value) {
+            // send request to the server
+            axios
+              .delete(url + "/" + id)
+              .then(() => {
+                UpdateData.$emit("update");
+                swal.fire(
+                  "Permintaan ditolak",
+                  "Mitra tidak terbentuk",
+                  "success"
+                );
+              })
+              .catch(() => {
+                swal.fire("Gagal!", "Terdapat masalah", "waning");
+              });
+          }
+        });
+    }
+  },
+  created() {
+    this.getMitra();
+  },
+  mounted() {
+    // Custom event on Vue js
+    UpdateData.$on("update", () => {
+      this.getMitra();
+    });
+  }
+};
+</script>
