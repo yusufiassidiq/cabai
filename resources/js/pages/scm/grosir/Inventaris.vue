@@ -6,21 +6,21 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <transaksiPelanggan></transaksiPelanggan>
+    <inventaris></inventaris>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 </template>
 <script>
-import headerGrosir from "../../../components/grosir/HeaderTransaksiPelanggan";
-import transaksiPelanggan from "../../../components/TransaksiPelanggan";
+import headerGrosir from "../../../components/grosir/HeaderInventaris";
+import inventaris from "../../../components/Inventaris";
 export default {
   data() {
     return {};
   },
   components: {
     headerGrosir: headerGrosir,
-    transaksiPelanggan: transaksiPelanggan
+    inventaris: inventaris
   },
   methods: {},
   created() {},

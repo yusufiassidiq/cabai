@@ -39,6 +39,8 @@ import PengajuanMitraGrosir from './pages/scm/grosir/PengajuanMitra'
 import PermintaanMitraGrosir from './pages/scm/grosir/PermintaanMitra'
 import TransaksiPelangganGrosir from './pages/scm/grosir/TransaksiPelanggan'
 import TransaksiPemasokGrosir from './pages/scm/grosir/TransaksiPemasok'
+import InventarisGrosir from './pages/scm/grosir/Inventaris'
+
 
 import MasterPengecer from './pages/scm/pengecer/Master' // pengecer
 import DashboardPengecer from './pages/scm/pengecer/Dashboard'
@@ -155,16 +157,16 @@ const routes = [
     {
         path: '/grosir',
         component: MasterGrosir,
-        meta: {
-            checkStatus: true,
-            auth: {
-                roles: 4,
-                redirect: {
-                    name: 'login'
-                },
-                forbiddenRedirect: '/403'
-            }
-        },
+        // meta: {
+        //     checkStatus: true,
+        //     auth: {
+        //         roles: 4,
+        //         redirect: {
+        //             name: 'login'
+        //         },
+        //         forbiddenRedirect: '/403'
+        //     }
+        // },
         children: [
             {
                 path: '',
@@ -201,6 +203,11 @@ const routes = [
                 path: 'analitik',
                 component: BisnisAnalitikGrosir,
                 name: "BisnisAnalitikGrosir"
+            },
+            {
+                path: 'inventaris',
+                component: InventarisGrosir,
+                name: "InventarisGrosir"
             },
         ]
     },
