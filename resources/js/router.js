@@ -91,16 +91,16 @@ const routes = [
     {
         path: '/produsen',
         component: MasterProd,
-        meta: {
-            checkStatus: true,
-            auth: {
-                roles: 2,
-                redirect: {
-                    name: 'login'
-                },
-                forbiddenRedirect: '/403'
-            },
-        },
+        // meta: {
+        //     checkStatus: true,
+        //     auth: {
+        //         roles: 2,
+        //         redirect: {
+        //             name: 'login'
+        //         },
+        //         forbiddenRedirect: '/403'
+        //     },
+        // },
         children: [
             {
                 path: '',

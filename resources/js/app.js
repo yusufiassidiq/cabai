@@ -71,7 +71,9 @@ Vue.use(VueAuth, auth)
 // Load Index
 Vue.component('index', Index)
 
-window.UpdateData = new Vue();
+// Create new vue instance with name Update data, for custom event
+let UpdateData = new Vue();
+window.UpdateData = UpdateData;
 
 const app = new Vue({
     el: '#app',
