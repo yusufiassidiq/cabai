@@ -41,6 +41,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('requesteduser', 'UserController@requesteduser')->middleware('isAdmin');
     // get user yang sudah divalidasi
     Route::get('validateduser', 'UserController@validateduser')->middleware('isAdmin');
+    //Manajemen lahan
+    Route::post('/addLahan','ProdusenController@addLahan');
+    Route::get('/readLahan','ProdusenController@readLahan');
 });
 
 // Route::resources([

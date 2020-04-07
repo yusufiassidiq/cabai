@@ -4570,7 +4570,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("validateduser").then(function (response) {
-        console.log(response);
+        // console.log(response);
         _this.users = response.data.users;
       });
     },
@@ -6568,6 +6568,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 // datetimepicker doc : https://github.com/charliekassel/vuejs-datepicker#demo
 // laravel vue spinner doc : https://www.npmjs.com/package/vue-button-spinner
  // import VueButtonSpinner from "vue-button-spinner";
@@ -6581,24 +6583,28 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      datalahan: {},
+      datalahan: null,
       // isLoading: false, // vuebutton spinner
       // status: "", // vuebutton spinner
       editmode: false,
       // buat ngebedain modal yg di klik modal tambah lahan /edit lahan
       // form buat simpan data
       form: new Form({
-        id: "100",
-        name: "testing",
-        kodelahan: "",
-        jeniscabai: "",
-        luaslahan: "",
-        lokasi: "test",
-        tgltanam: ""
-      })
+        // id: "100",
+        // name: "testing",
+        kode_lahan: "",
+        jenis_cabai: "",
+        luas_lahan: "",
+        // lokasi: "",
+        tanggal_tanam: ""
+      }) // id: id,
+
     };
   },
   methods: {
+    customFormatter: function customFormatter(date) {
+      return moment(date).format('DD MMMM YYYY');
+    },
     // CRUD
     // Menambahkan data lahan Produsen
     addLahan: function addLahan() {
@@ -6607,9 +6613,9 @@ __webpack_require__.r(__webpack_exports__);
       // this.isLoading = true;
       // Menampilkan progress bar di mozila
       this.$Progress.start(); // Http Request axios dgn menggunakan vform
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
 
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
-      this.form.post(url).then(function () {
+      this.form.post('/addLahan').then(function () {
         _this.isLoading = false; // this.status = true; // or success
         // setTimeout(() => {
         //   this.status = "";
@@ -6637,9 +6643,9 @@ __webpack_require__.r(__webpack_exports__);
     getLahan: function getLahan() {
       var _this2 = this;
 
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
-      axios.get(url).then(function (response) {
-        _this2.datalahan = response.data;
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
+      axios.get('/readLahan').then(function (response) {
+        _this2.datalahan = response.data.data; // console.log(response.data.data)
       });
     },
     // Memperbarui data lahan produsen
@@ -60307,15 +60313,15 @@ var render = function() {
                           return _c("tr", { key: data.id }, [
                             _c("td", [_vm._v(_vm._s(data.id))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(data.kodelahan))]),
+                            _c("td", [_vm._v(_vm._s(data.kode_lahan))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(data.jeniscabai))]),
+                            _c("td", [_vm._v(_vm._s(data.jenis_cabai))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(data.luaslahan))]),
+                            _c("td", [_vm._v(_vm._s(data.luas_lahan))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(data.lokasi))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(data.tgltanam))]),
+                            _c("td", [_vm._v(_vm._s(data.tanggal_tanam))]),
                             _vm._v(" "),
                             _c("td", [_vm._v("ini total")]),
                             _vm._v(" "),
@@ -60403,20 +60409,20 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.kodelahan,
-                                expression: "form.kodelahan"
+                                value: _vm.form.kode_lahan,
+                                expression: "form.kode_lahan"
                               }
                             ],
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.form.errors.has("kodelahan")
+                              "is-invalid": _vm.form.errors.has("kode_lahan")
                             },
                             attrs: {
                               type: "text",
-                              name: "kodelahan",
+                              name: "kode_lahan",
                               placeholder: "Kode lahan"
                             },
-                            domProps: { value: _vm.form.kodelahan },
+                            domProps: { value: _vm.form.kode_lahan },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
@@ -60424,7 +60430,7 @@ var render = function() {
                                 }
                                 _vm.$set(
                                   _vm.form,
-                                  "kodelahan",
+                                  "kode_lahan",
                                   $event.target.value
                                 )
                               }
@@ -60432,7 +60438,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("has-error", {
-                            attrs: { form: _vm.form, field: "kodelahan" }
+                            attrs: { form: _vm.form, field: "kode_lahan" }
                           })
                         ],
                         1
@@ -60449,13 +60455,13 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.form.jeniscabai,
-                                  expression: "form.jeniscabai"
+                                  value: _vm.form.jenis_cabai,
+                                  expression: "form.jenis_cabai"
                                 }
                               ],
                               staticClass: "form-control",
                               class: {
-                                "is-invalid": _vm.form.errors.has("jeniscabai")
+                                "is-invalid": _vm.form.errors.has("jenis_cabai")
                               },
                               on: {
                                 change: function($event) {
@@ -60470,7 +60476,7 @@ var render = function() {
                                     })
                                   _vm.$set(
                                     _vm.form,
-                                    "jeniscabai",
+                                    "jenis_cabai",
                                     $event.target.multiple
                                       ? $$selectedVal
                                       : $$selectedVal[0]
@@ -60512,7 +60518,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("has-error", {
-                            attrs: { form: _vm.form, field: "jeniscabai" }
+                            attrs: { form: _vm.form, field: "jenis_cabai" }
                           })
                         ],
                         1
@@ -60527,20 +60533,20 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.luaslahan,
-                                expression: "form.luaslahan"
+                                value: _vm.form.luas_lahan,
+                                expression: "form.luas_lahan"
                               }
                             ],
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.form.errors.has("luaslahan")
+                              "is-invalid": _vm.form.errors.has("luas_lahan")
                             },
                             attrs: {
                               type: "number",
-                              name: "luaslahan",
+                              name: "luas_lahan",
                               placeholder: "Luas lahan (ha)"
                             },
-                            domProps: { value: _vm.form.luaslahan },
+                            domProps: { value: _vm.form.luas_lahan },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
@@ -60548,7 +60554,7 @@ var render = function() {
                                 }
                                 _vm.$set(
                                   _vm.form,
-                                  "luaslahan",
+                                  "luas_lahan",
                                   $event.target.value
                                 )
                               }
@@ -60556,7 +60562,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("has-error", {
-                            attrs: { form: _vm.form, field: "luaslahan" }
+                            attrs: { form: _vm.form, field: "luas_lahan" }
                           })
                         ],
                         1
@@ -60569,23 +60575,24 @@ var render = function() {
                           _c("datepicker", {
                             staticClass: "col-sm-10",
                             class: {
-                              "is-invalid": _vm.form.errors.has("tgltanam")
+                              "is-invalid": _vm.form.errors.has("tanggal_tanam")
                             },
                             attrs: {
                               placeholder: "Tanggal tanam",
-                              id: "tanggaltanam"
+                              format: _vm.customFormatter,
+                              id: "tanggal_tanam"
                             },
                             model: {
-                              value: _vm.form.tgltanam,
+                              value: _vm.form.tanggal_tanam,
                               callback: function($$v) {
-                                _vm.$set(_vm.form, "tgltanam", $$v)
+                                _vm.$set(_vm.form, "tanggal_tanam", $$v)
                               },
-                              expression: "form.tgltanam"
+                              expression: "form.tanggal_tanam"
                             }
                           }),
                           _vm._v(" "),
                           _c("has-error", {
-                            attrs: { form: _vm.form, field: "tgltanam" }
+                            attrs: { form: _vm.form, field: "tanggal_tanam" }
                           })
                         ],
                         1
@@ -84365,7 +84372,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanMitra */ "./resources/js/pages/scm/pengecer/PermintaanMitra.vue");
 /* harmony import */ var _pages_scm_pengecer_TransaksiPelanggan__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./pages/scm/pengecer/TransaksiPelanggan */ "./resources/js/pages/scm/pengecer/TransaksiPelanggan.vue");
 /* harmony import */ var _pages_scm_pengecer_TransaksiPemasok__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./pages/scm/pengecer/TransaksiPemasok */ "./resources/js/pages/scm/pengecer/TransaksiPemasok.vue");
-/* harmony import */ var _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./pages/scm/pengecer/Inventaris */ "./resources/js/pages/scm/pengecer/Inventaris.vue");
+/* harmony import */ var _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./pages/scm/pengecer/Inventaris */ "./resources/js/pages/scm/pengecer/Inventaris.vue");
 /* harmony import */ var _pages_ba_Master__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./pages/ba/Master */ "./resources/js/pages/ba/Master.vue");
 /* harmony import */ var _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./pages/ba/produsen/Target */ "./resources/js/pages/ba/produsen/Target.vue");
 /* harmony import */ var _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./pages/ba/produsen/bisnisAnalitik */ "./resources/js/pages/ba/produsen/bisnisAnalitik.vue");
@@ -84597,7 +84604,7 @@ var routes = [// SCM
     name: "BisnisAnalitikPengecer"
   }, {
     path: 'inventaris',
-    component: _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_48__["default"],
+    component: _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_41__["default"],
     name: "InventarisPengecer"
   }]
 }, {
@@ -84856,8 +84863,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

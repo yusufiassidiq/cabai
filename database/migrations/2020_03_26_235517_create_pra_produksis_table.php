@@ -15,10 +15,11 @@ class CreatePraProduksisTable extends Migration
     {
         Schema::create('pra_produksi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('kode_lahan');
             $table->string('jenis_cabai');
             $table->integer('luas_lahan');
             $table->date('tanggal_tanam');
+            $table->timestamps();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

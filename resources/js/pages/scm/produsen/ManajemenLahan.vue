@@ -52,11 +52,11 @@
                     <!-- example data -->
                     <tr v-for="data in datalahan" :key="data.id">
                       <td>{{ data.id }}</td>
-                      <td>{{ data.kodelahan }}</td>
-                      <td>{{ data.jeniscabai }}</td>
-                      <td>{{ data.luaslahan }}</td>
+                      <td>{{ data.kode_lahan }}</td>
+                      <td>{{ data.jenis_cabai }}</td>
+                      <td>{{ data.luas_lahan }}</td>
                       <td>{{ data.lokasi }}</td>
-                      <td>{{ data.tgltanam }}</td>
+                      <td>{{ data.tanggal_tanam }}</td>
                       <td>ini total</td>
                       <td>
                         <a href="#">
@@ -101,49 +101,51 @@
             <div class="modal-body">
               <div class="form-group col-md">
                 <input
-                  v-model="form.kodelahan"
+                  v-model="form.kode_lahan"
                   type="text"
-                  name="kodelahan"
+                  name="kode_lahan"
                   class="form-control"
                   placeholder="Kode lahan"
-                  :class="{ 'is-invalid': form.errors.has('kodelahan') }"
+                  :class="{ 'is-invalid': form.errors.has('kode_lahan') }"
                 />
-                <has-error :form="form" field="kodelahan"></has-error>
+                <has-error :form="form" field="kode_lahan"></has-error>
               </div>
               <div class="form-group col-md">
                 <select
-                  v-model="form.jeniscabai"
+                  v-model="form.jenis_cabai"
                   class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('jeniscabai') }"
+                  :class="{ 'is-invalid': form.errors.has('jenis_cabai') }"
                 >
                   <option value disabled selected>Jenis cabai</option>
                   <option value="Cabai rawit">Cabai rawit</option>
                   <option value="Cabai keriting">Cabai keriting</option>
                   <option value="Cabai besar">Cabai besar</option>
                 </select>
-                <has-error :form="form" field="jeniscabai"></has-error>
+                <has-error :form="form" field="jenis_cabai"></has-error>
               </div>
 
               <div class="form-group col-md">
                 <input
-                  v-model="form.luaslahan"
+                  v-model="form.luas_lahan"
                   type="number"
-                  name="luaslahan"
+                  name="luas_lahan"
                   class="form-control"
                   placeholder="Luas lahan (ha)"
-                  :class="{ 'is-invalid': form.errors.has('luaslahan') }"
+                  :class="{ 'is-invalid': form.errors.has('luas_lahan') }"
                 />
-                <has-error :form="form" field="luaslahan"></has-error>
+                <has-error :form="form" field="luas_lahan"></has-error>
               </div>
               <div class="form-group">
                 <datepicker
                   class="col-sm-10"
                   placeholder="Tanggal tanam"
-                  v-model="form.tgltanam"
-                  id="tanggaltanam"
-                  :class="{ 'is-invalid': form.errors.has('tgltanam') }"
+                  v-model="form.tanggal_tanam"
+                  
+                  :format="customFormatter"
+                  id="tanggal_tanam"
+                  :class="{ 'is-invalid': form.errors.has('tanggal_tanam') }"
                 ></datepicker>
-                <has-error :form="form" field="tgltanam"></has-error>
+                <has-error :form="form" field="tanggal_tanam"></has-error>
               </div>
             </div>
 
@@ -180,23 +182,27 @@ export default {
   },
   data() {
     return {
-      datalahan: {},
+      datalahan: null,
       // isLoading: false, // vuebutton spinner
       // status: "", // vuebutton spinner
       editmode: false, // buat ngebedain modal yg di klik modal tambah lahan /edit lahan
       // form buat simpan data
       form: new Form({
-        id: "100",
-        name: "testing",
-        kodelahan: "",
-        jeniscabai: "",
-        luaslahan: "",
-        lokasi: "test",
-        tgltanam: ""
-      })
+        // id: "100",
+        // name: "testing",
+        kode_lahan: "",
+        jenis_cabai: "",
+        luas_lahan: "",
+        // lokasi: "",
+        tanggal_tanam: ""
+      }),
+      // id: id,
     };
   },
   methods: {
+    customFormatter(date) {
+      return moment(date).format('DD MMMM YYYY');
+    },
     // CRUD
     // Menambahkan data lahan Produsen
     addLahan() {
@@ -204,9 +210,9 @@ export default {
       // Menampilkan progress bar di mozila
       this.$Progress.start();
       // Http Request axios dgn menggunakan vform
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       this.form
-        .post(url)
+        .post('/addLahan')
         .then(() => {
           this.isLoading = false;
           // this.status = true; // or success
@@ -233,9 +239,10 @@ export default {
     },
     // Mendapatkan data lahan produsen
     getLahan() {
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
-      axios.get(url).then(response => {
-        this.datalahan = response.data;
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
+      axios.get('/readLahan').then(response => {
+        this.datalahan = response.data.data;
+        // console.log(response.data.data)
       });
     },
     // Memperbarui data lahan produsen

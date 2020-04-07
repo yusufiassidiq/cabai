@@ -168,7 +168,7 @@ export default {
   methods: {
     getUsers() {
       axios.get("validateduser").then(response => {
-        console.log(response);
+        // console.log(response);
         this.users = response.data.users;
       });
     },
