@@ -95,16 +95,16 @@ const routes = [
     {
         path: '/produsen',
         component: MasterProd,
-        // meta: {
-        //     checkStatus: true,
-        //     auth: {
-        //         roles: 2,
-        //         redirect: {
-        //             name: 'login'
-        //         },
-        //         forbiddenRedirect: '/403'
-        //     },
-        // },
+        meta: {
+            checkStatus: true,
+            auth: {
+                roles: 2,
+                redirect: {
+                    name: 'login'
+                },
+                forbiddenRedirect: '/403'
+            },
+        },
         children: [
             {
                 path: '',
@@ -158,16 +158,16 @@ const routes = [
     {
         path: '/grosir',
         component: MasterGrosir,
-        // meta: {
-        //     checkStatus: true,
-        //     auth: {
-        //         roles: 4,
-        //         redirect: {
-        //             name: 'login'
-        //         },
-        //         forbiddenRedirect: '/403'
-        //     }
-        // },
+        meta: {
+            checkStatus: true,
+            auth: {
+                roles: 4,
+                redirect: {
+                    name: 'login'
+                },
+                forbiddenRedirect: '/403'
+            }
+        },
         children: [
             {
                 path: '',
@@ -215,17 +215,17 @@ const routes = [
     {
         path: '/pengecer',
         component: MasterPengecer,
-        // meta: {
-        //     checkStatus: true,
-        //     auth: {
-        //         roles: 5,
-        //         redirect: {
-        //             name: 'login'
-        //         },
-        //         forbiddenRedirect: '/403'
-        //     },
+        meta: {
+            checkStatus: true,
+            auth: {
+                roles: 5,
+                redirect: {
+                    name: 'login'
+                },
+                forbiddenRedirect: '/403'
+            },
             
-        // },
+        },
         children: [
             {
                 path: '',
@@ -273,16 +273,16 @@ const routes = [
     {
         path: '/pengepul',
         component: MasterPengepul,
-        // meta: {
-        //     checkStatus: true,
-        //     auth: {
-        //         roles: 3,
-        //         redirect: {
-        //             name: 'login'
-        //         },
-        //         forbiddenRedirect: '/403'
-        //     }
-        // },
+        meta: {
+            checkStatus: true,
+            auth: {
+                roles: 3,
+                redirect: {
+                    name: 'login'
+                },
+                forbiddenRedirect: '/403'
+            }
+        },
         children: [
             {
                 path: '',

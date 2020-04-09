@@ -28,7 +28,7 @@ class ProdusenController extends Controller
         $idUser = Auth::user()->id;
         $tgltnm = $request->tanggal_tanam;
         $parsed_date = Carbon::parse($tgltnm)->toDateTimeString();
-
+        dd($parsed_date);
         $lahan = new PraProduksi;
         $lahan->kode_lahan = $request->kode_lahan;
         $lahan->jenis_cabai = $request->jenis_cabai;
@@ -45,5 +45,20 @@ class ProdusenController extends Controller
             'status' => 'success',
             'data' => $praProduksi->toArray(),
         ]);
+    }
+    public function updateLahan(Request $request, $id){
+        $praProduksi = PraProduksi::find($id);
+        $praProduksi->update([
+            'kode_lahan' => request('kode_lahan'),
+            'jenis_cabai' => request('jenis_cabai'),
+            'luas_lahan' => request('luas_lahan'),
+            'tanggal_tanam' => request('tanggal_tanam'),
+        ]);
+        return response()->json(['status' => 'success'], 200);
+    }
+    public function deleteLahan($id){
+        $praProduksi = PraProduksi::find($id);
+        $praProduksi->delete();
+        return 204;
     }
 }

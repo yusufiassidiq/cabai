@@ -6570,6 +6570,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // datetimepicker doc : https://github.com/charliekassel/vuejs-datepicker#demo
 // laravel vue spinner doc : https://www.npmjs.com/package/vue-button-spinner
  // import VueButtonSpinner from "vue-button-spinner";
@@ -6592,6 +6602,7 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         // id: "100",
         // name: "testing",
+        id: "",
         kode_lahan: "",
         jenis_cabai: "",
         luas_lahan: "",
@@ -6652,10 +6663,15 @@ __webpack_require__.r(__webpack_exports__);
     updateLahan: function updateLahan() {
       var _this3 = this;
 
-      // console.log("Lagi diedi?t nih GANS");
-      this.$Progress.start();
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
-      this.form.put(url + "/" + this.form.id).then(function () {
+      console.log(this.form.id);
+      this.$Progress.start(); // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
+
+      this.form.put("updateLahan/" + this.form.id, {
+        kode_lahan: this.form.kode_lahan,
+        jenis_cabai: this.form.jenis_cabai,
+        luas_lahan: this.form.luas_lahan,
+        tanggal_tanam: this.form.tanggal_tanam
+      }).then(function () {
         UpdateData.$emit("update"); // hide modal
 
         $("#modalLahan").trigger("click");
@@ -6669,7 +6685,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     // menghapus data lahan produsen
     deleteLahan: function deleteLahan(id) {
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       swal.fire({
         title: "Apakah kamu yakin?",
         text: "Data yang dihapus tidak dapat dikembalikan",
@@ -6681,7 +6697,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           // send request to the server
-          axios["delete"](url + "/" + id).then(function () {
+          axios["delete"]("deleteLahan/" + id).then(function () {
             UpdateData.$emit("update");
             swal.fire("Tehapus!", "Data lahan berhasil dihapus", "success");
           })["catch"](function () {
@@ -6699,10 +6715,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Menampilkan Modal utk Mengedit lahan baru
     editModal: function editModal(data) {
+      console.log(data);
       this.editmode = true;
       this.form.reset();
       $("#modalLahan").modal("show");
       this.form.fill(data);
+      console.log(this.form);
     }
   },
   created: function created() {
@@ -60402,6 +60420,41 @@ var render = function() {
                     _c("div", { staticClass: "modal-body" }, [
                       _c(
                         "div",
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.id,
+                                expression: "form.id"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("id_form")
+                            },
+                            attrs: { type: "text", name: "id_form" },
+                            domProps: { value: _vm.form.id },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "id", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "id_form" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
                         { staticClass: "form-group col-md" },
                         [
                           _c("input", {
@@ -84467,16 +84520,16 @@ var routes = [// SCM
 }, {
   path: '/produsen',
   component: _pages_scm_produsen_Master__WEBPACK_IMPORTED_MODULE_10__["default"],
-  // meta: {
-  //     checkStatus: true,
-  //     auth: {
-  //         roles: 2,
-  //         redirect: {
-  //             name: 'login'
-  //         },
-  //         forbiddenRedirect: '/403'
-  //     },
-  // },
+  meta: {
+    checkStatus: true,
+    auth: {
+      roles: 2,
+      redirect: {
+        name: 'login'
+      },
+      forbiddenRedirect: '/403'
+    }
+  },
   children: [{
     path: '',
     component: _pages_scm_produsen_Dashboard__WEBPACK_IMPORTED_MODULE_11__["default"],
@@ -84518,16 +84571,16 @@ var routes = [// SCM
 }, {
   path: '/grosir',
   component: _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_26__["default"],
-  // meta: {
-  //     checkStatus: true,
-  //     auth: {
-  //         roles: 4,
-  //         redirect: {
-  //             name: 'login'
-  //         },
-  //         forbiddenRedirect: '/403'
-  //     }
-  // },
+  meta: {
+    checkStatus: true,
+    auth: {
+      roles: 4,
+      redirect: {
+        name: 'login'
+      },
+      forbiddenRedirect: '/403'
+    }
+  },
   children: [{
     path: '',
     component: _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_27__["default"],
@@ -84564,16 +84617,16 @@ var routes = [// SCM
 }, {
   path: '/pengecer',
   component: _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_34__["default"],
-  // meta: {
-  //     checkStatus: true,
-  //     auth: {
-  //         roles: 5,
-  //         redirect: {
-  //             name: 'login'
-  //         },
-  //         forbiddenRedirect: '/403'
-  //     },
-  // },
+  meta: {
+    checkStatus: true,
+    auth: {
+      roles: 5,
+      redirect: {
+        name: 'login'
+      },
+      forbiddenRedirect: '/403'
+    }
+  },
   children: [{
     path: '',
     component: _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_35__["default"],
@@ -84610,16 +84663,16 @@ var routes = [// SCM
 }, {
   path: '/pengepul',
   component: _pages_scm_pengepul_Master__WEBPACK_IMPORTED_MODULE_18__["default"],
-  // meta: {
-  //     checkStatus: true,
-  //     auth: {
-  //         roles: 3,
-  //         redirect: {
-  //             name: 'login'
-  //         },
-  //         forbiddenRedirect: '/403'
-  //     }
-  // },
+  meta: {
+    checkStatus: true,
+    auth: {
+      roles: 3,
+      redirect: {
+        name: 'login'
+      },
+      forbiddenRedirect: '/403'
+    }
+  },
   children: [{
     path: '',
     component: _pages_scm_pengepul_Dashboard__WEBPACK_IMPORTED_MODULE_19__["default"],

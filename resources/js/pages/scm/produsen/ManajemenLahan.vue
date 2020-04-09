@@ -99,6 +99,16 @@
           </div>
           <form @submit.prevent="editmode? updateLahan() : addLahan()">
             <div class="modal-body">
+              <div>
+                <input
+                  v-model="form.id"
+                  type = "text"
+                  name = "id_form"
+                  class="form-control"
+                   :class="{ 'is-invalid': form.errors.has('id_form') }"
+                />
+                <has-error :form="form" field="id_form"></has-error>
+              </div>
               <div class="form-group col-md">
                 <input
                   v-model="form.kode_lahan"
@@ -190,6 +200,7 @@ export default {
       form: new Form({
         // id: "100",
         // name: "testing",
+        id: "",
         kode_lahan: "",
         jenis_cabai: "",
         luas_lahan: "",
@@ -247,11 +258,16 @@ export default {
     },
     // Memperbarui data lahan produsen
     updateLahan() {
-      // console.log("Lagi diedi?t nih GANS");
+      console.log(this.form.id);
       this.$Progress.start();
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       this.form
-        .put(url + "/" + this.form.id)
+        .put("updateLahan/" + this.form.id,{
+          kode_lahan: this.form.kode_lahan,
+          jenis_cabai: this.form.jenis_cabai,
+          luas_lahan: this.form.luas_lahan,
+          tanggal_tanam: this.form.tanggal_tanam
+        })
         .then(() => {
           UpdateData.$emit("update");
           // hide modal
@@ -267,7 +283,7 @@ export default {
     },
     // menghapus data lahan produsen
     deleteLahan(id) {
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       swal
         .fire({
           title: "Apakah kamu yakin?",
@@ -282,7 +298,7 @@ export default {
           if (result.value) {
             // send request to the server
             axios
-              .delete(url + "/" + id)
+              .delete("deleteLahan/" + id)
               .then(() => {
                 UpdateData.$emit("update");
                 swal.fire("Tehapus!", "Data lahan berhasil dihapus", "success");
@@ -306,10 +322,12 @@ export default {
     },
     // Menampilkan Modal utk Mengedit lahan baru
     editModal(data) {
+      console.log(data)
       this.editmode = true;
       this.form.reset();
       $("#modalLahan").modal("show");
       this.form.fill(data);
+      console.log(this.form)
     }
   },
   created() {
