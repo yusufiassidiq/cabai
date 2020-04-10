@@ -235,27 +235,5 @@
 </template>
 
 <script>
-// export default {
-//   data() {
-//     return {
-//       form: new Form({
-//         kodelahan: "",
-//         jeniscabai: "",
-//         luaslahan: "",
-//         lokasi: "",
-//         tgltanam: "",
-//         vmodelexample:""
-//       })
-//     };
-//   },
-//   methods: {
-//     addchilifields() {
-//       console.log("Berhasil ditambahkan");
-      // this.form.post("/user");
-//     }
-//   },
-//   mounted() {
-//     console.log("User Management Mounted");
-//   }
-// };
+
 </script>
