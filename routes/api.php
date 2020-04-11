@@ -46,6 +46,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/readLahan','ProdusenController@readLahan');
     Route::put('/updateLahan/{id}','ProdusenController@updateLahan');
     Route::delete('/deleteLahan/{id}','ProdusenController@deleteLahan');
+    Route::post('/addTarget','AnalysisController@addTarget');
+    Route::get('/readTarget','AnalysisController@readTarget');
 });
 
 // Route::resources([

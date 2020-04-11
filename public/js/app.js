@@ -4837,9 +4837,11 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/produsen/Target.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -5026,79 +5028,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// export default {
-//   data() {
-//     return {
-//       form: new Form({
-//         kodelahan: "",
-//         jeniscabai: "",
-//         luaslahan: "",
-//         lokasi: "",
-//         tgltanam: "",
-//         vmodelexample:""
-//       })
-//     };
-//   },
-//   methods: {
-//     addchilifields() {
-//       console.log("Berhasil ditambahkan");
-// this.form.post("/user");
-//     }
-//   },
-//   mounted() {
-//     console.log("User Management Mounted");
-//   }
-// };
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      target: {},
+      form: new Form({
+        tahun: "",
+        bulan: "",
+        jenis_cabai: "",
+        jumlah_cabai: ""
+      })
+    };
+  },
+  methods: {
+    loadTarget: function loadTarget() {
+      var _this = this;
+
+      axios.get('/readTarget').then(function (_ref) {
+        var data = _ref.data;
+        return _this.target = data.data;
+      });
+    },
+    addTarget: function addTarget() {
+      this.form.post('/addTarget');
+    }
+  },
+  created: function created() {
+    this.loadTarget();
+  }
+});
 
 /***/ }),
 
@@ -53475,124 +53433,476 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-wrapper" }, [
-      _c("div", { staticClass: "content-header" }, [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("div", { staticClass: "row mb-2" }, [
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c("h1", { staticClass: "m-0 text-dark" }, [
-                _vm._v("Target Penjualan Cabai")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
-                _c("li", { staticClass: "breadcrumb-item" }, [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "breadcrumb-item active" }, [
-                  _vm._v("Rekap Target")
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("section", { staticClass: "content" }, [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("div", { staticClass: "row justify-content-center" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-header" }, [
-                  _c("h3", { staticClass: "card-title" }, [
-                    _vm._v("Rekap Target Tahun 2020")
-                  ]),
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body table-responsive p-0" }, [
+                _c("table", { staticClass: "table table-hover text-nowrap" }, [
+                  _vm._m(2),
                   _vm._v(" "),
-                  _c("div", { staticClass: "card-tools" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: {
-                          "data-toggle": "modal",
-                          "data-target": "#addfield"
-                        }
-                      },
-                      [_vm._v("Tambah Target")]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body table-responsive p-0" }, [
                   _c(
-                    "table",
-                    { staticClass: "table table-hover text-nowrap" },
-                    [
-                      _c("thead", [
-                        _c("tr", [
-                          _c("th", [_vm._v("No")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Jenis Cabai")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Bulan")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Total Target")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Action")])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("tbody", [
-                        _c("tr", [
-                          _c("td", [_vm._v("1")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Cabai Keriting")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Januari")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Rp20.000")]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", { staticClass: "fa fa-edit blue" })
-                            ]),
-                            _vm._v(
-                              "\n                      /\n                      "
-                            ),
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", { staticClass: "fa fa-trash red" })
-                            ])
-                          ])
-                        ])
+                    "tbody",
+                    _vm._l(_vm.target, function(t) {
+                      return _c("tr", { key: t.id }, [
+                        _c("td", [_vm._v(_vm._s(t.tahun))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(t.bulan))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(t.jenis_cabai))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(t.jumlah_cabai))]),
+                        _vm._v(" "),
+                        _vm._m(3, true)
                       ])
-                    ]
+                    }),
+                    0
                   )
                 ])
               ])
             ])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", {
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
         staticClass: "modal fade",
         attrs: {
           id: "addfield",
           tabindex: "-1",
           role: "dialog",
-          "aria-labelledby": "detailUserLabel",
+          "aria-labelledby": "addfieldLabel",
           "aria-hidden": "true"
         }
-      })
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.addTarget($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.tahun,
+                              expression: "form.tahun"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: { "is-invalid": _vm.form.errors.has("tahun") },
+                          attrs: {
+                            type: "text",
+                            name: "tahun",
+                            placeholder: "Tahun"
+                          },
+                          domProps: { value: _vm.form.tahun },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "tahun", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "tahun" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md" },
+                      [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.bulan,
+                                expression: "form.bulan"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("bulan")
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "bulan",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "", disabled: "", selected: "" }
+                              },
+                              [_vm._v("Bulan")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Januari" } }, [
+                              _vm._v("Januari")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Februari" } }, [
+                              _vm._v("Februari")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Maret" } }, [
+                              _vm._v("Maret")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "April" } }, [
+                              _vm._v("April")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Mei" } }, [
+                              _vm._v("Mei")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Juni" } }, [
+                              _vm._v("Juni")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Juli" } }, [
+                              _vm._v("Juli")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Agustus" } }, [
+                              _vm._v("Agustus")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "September" } }, [
+                              _vm._v("September")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Oktober" } }, [
+                              _vm._v("Oktober")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "November" } }, [
+                              _vm._v("November")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Desember" } }, [
+                              _vm._v("Desember")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "bulan" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md" },
+                      [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.jenis_cabai,
+                                expression: "form.jenis_cabai"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("jenis_cabai")
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "jenis_cabai",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "", disabled: "", selected: "" }
+                              },
+                              [_vm._v("Jenis cabai")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Cabai rawit" } }, [
+                              _vm._v("Cabai rawit")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "option",
+                              { attrs: { value: "Cabai keriting" } },
+                              [_vm._v("Cabai keriting")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Cabai besar" } }, [
+                              _vm._v("Cabai besar")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "jenis_cabai" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.jumlah_cabai,
+                              expression: "form.jumlah_cabai"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("jumlah_cabai")
+                          },
+                          attrs: {
+                            type: "text",
+                            name: "jumlah_cabai",
+                            placeholder: "Jumlah Cabai"
+                          },
+                          domProps: { value: _vm.form.jumlah_cabai },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "jumlah_cabai",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "jumlah_cabai" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(5)
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [
+              _vm._v("Target Penjualan Cabai")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Rekap Target")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _vm._v("Rekap Target Tahun 2020")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            attrs: { "data-toggle": "modal", "data-target": "#addfield" }
+          },
+          [
+            _vm._v("Tambah Target \n                    "),
+            _c("i", { staticClass: "fas fa-plus fa-fw" })
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Tahun")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Bulan")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Jenis Cabai")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Total Target")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Action")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fa fa-edit blue" })
+      ]),
+      _vm._v("\n                        /\n                        "),
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fa fa-trash red" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title", attrs: { id: "addfieldLabel" } }, [
+        _vm._v("Tambahkan Target")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Tutup")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Simpan")]
+      )
     ])
   }
 ]
@@ -82110,15 +82420,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************************!*\
   !*** ./resources/js/pages/ba/produsen/Target.vue ***!
   \***************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Target_vue_vue_type_template_id_6656cb9b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Target.vue?vue&type=template&id=6656cb9b& */ "./resources/js/pages/ba/produsen/Target.vue?vue&type=template&id=6656cb9b&");
 /* harmony import */ var _Target_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Target.vue?vue&type=script&lang=js& */ "./resources/js/pages/ba/produsen/Target.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Target_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Target_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -82148,15 +82457,13 @@ component.options.__file = "resources/js/pages/ba/produsen/Target.vue"
 /*!****************************************************************************!*\
   !*** ./resources/js/pages/ba/produsen/Target.vue?vue&type=script&lang=js& ***!
   \****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Target_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Target.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Target.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Target_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Target_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Target_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Target_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Target_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Target_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -84916,8 +85223,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

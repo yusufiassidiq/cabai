@@ -28,7 +28,7 @@ class ProdusenController extends Controller
         $idUser = Auth::user()->id;
         $tgltnm = $request->tanggal_tanam;
         $parsed_date = Carbon::parse($tgltnm)->toDateTimeString();
-        dd($parsed_date);
+        // dd($parsed_date);
         $lahan = new PraProduksi;
         $lahan->kode_lahan = $request->kode_lahan;
         $lahan->jenis_cabai = $request->jenis_cabai;

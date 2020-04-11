@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
+use Auth;
 use App\Target;
 
 class AnalysisController extends Controller
@@ -13,19 +14,32 @@ class AnalysisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function readTarget()
     {
-        //
+        return Target::latest()->paginate(10);
     }
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function addTarget(Request $request)
     {
-        //
+        $this->validate($request, [
+            'tahun' => 'required|integer|min:2020',
+            'bulan' => 'required',
+            'jenis_cabai' => 'required',
+            'jumlah_cabai' => 'required|integer'
+		]);
+        $idUser = Auth::user()->id;
+        $target = new Target;
+        $target->user_id = $idUser;
+        $target->tahun = $request->tahun;
+        $target->bulan = $request->bulan;
+        $target->jenis_cabai = $request->jenis_cabai;
+        $target->jumlah_cabai = $request->jumlah_cabai;
+        $target->save();
+        return response()->json(['status' => 'success'], 200);
     }
 
     /**
