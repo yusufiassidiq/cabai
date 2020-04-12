@@ -47,7 +47,7 @@
               </div>
             </div>
           </div>
-
+          <center class="red" v-for="error in errors" :key="error.message">{{ error }}</center>
           <div class="row">
             <div class="col-4">
               <!-- <div class="icheck-primary">
@@ -57,7 +57,10 @@
             </div>
             <!-- /.col -->
             <div class="col-8">
-              <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+              <button  id="btnmasuk" type="submit" class="btn btn-primary btn-block">
+                Masuk
+              </button>
+              
             </div>
             <!-- /.col -->
           </div>
@@ -72,6 +75,7 @@
 export default {
   data() {
     return {
+      errors: [],
       email: null,
       password: null,
       has_error: false
@@ -84,6 +88,8 @@ export default {
 
   methods: {
     login() {
+      document.getElementById("btnmasuk").disabled = true;
+      this.errors = [];
       // get the redirect object
       var redirect = this.$auth.redirect();
       var app = this;
@@ -120,14 +126,14 @@ export default {
           }
 
           // var sts = this.$auth.user()
-          window.localStorage.setItem('isLoggedUser',true)
+          window.localStorage.setItem("isLoggedUser", true);
           this.$router
             .push({ name: redirectTo, params: { usrId: this.$auth.user().id } })
             .catch(err => {});
         },
         error: function() {
-          alert("Data yang anda masukan salah");
-          // app.has_error = true;
+          this.errors.push("Maaf, Email atau kata sandi Anda salah.");
+          document.getElementById("btnmasuk").disabled = false;
         },
         rememberMe: true,
         fetchUser: true
