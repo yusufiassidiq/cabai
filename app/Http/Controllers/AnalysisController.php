@@ -16,7 +16,12 @@ class AnalysisController extends Controller
      */
     public function readTarget()
     {
-        return Target::latest()->paginate(10);
+        $idUser = Auth::user()->id;
+        $target = Target::where('user_id',$idUser)->get();
+        return response()->json([
+            'status' => 'success',
+            'data' => $target->toArray(),
+        ]);
     }
     /**
      * Show the form for creating a new resource.
@@ -82,9 +87,16 @@ class AnalysisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateTarget(Request $request, $id)
     {
-        //
+        $target = Target::find($id);
+        $target->update([
+            'tahun' => request('tahun'),
+            'bulan' => request('bulan'),
+            'jenis_cabai' => request('jenis_cabai'),
+            'jumlah_cabai' => request('jumlah_cabai'),
+        ]);
+        return response()->json(['status' => 'success'], 200);
     }
 
     /**
@@ -93,9 +105,11 @@ class AnalysisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteTarget($id)
     {
-        //
+        $target = Target::find($id);
+        $target->delete();
+        return 204;
     }
     
 }

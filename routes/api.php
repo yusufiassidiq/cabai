@@ -48,6 +48,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('/deleteLahan/{id}','ProdusenController@deleteLahan');
     Route::post('/addTarget','AnalysisController@addTarget');
     Route::get('/readTarget','AnalysisController@readTarget');
+    Route::put('/updateTarget/{id}','AnalysisController@updateTarget');
+    Route::delete('/deleteTarget/{id}','AnalysisController@deleteTarget');
 });
 
 // Route::resources([

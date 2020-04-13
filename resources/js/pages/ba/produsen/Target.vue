@@ -35,7 +35,7 @@
                 <h3 class="card-title">Rekap Target Tahun 2020</h3>
 
                 <div class="card-tools">
-                  <button class="btn btn-success" data-toggle="modal" data-target="#addfield">Tambah Target 
+                  <button class="btn btn-success" @click="newModal">Tambah Target 
                     <i class="fas fa-plus fa-fw"></i>
                   </button>
                   <!-- <div class="input-group input-group-sm" style="width: 150px;"> -->
@@ -60,6 +60,7 @@
                   <thead>
                     <tr>
                       <!-- <th>No</th> -->
+                      <!-- <th>ID </th> -->
                       <th>Tahun</th>
                       <th>Bulan</th>
                       <th>Jenis Cabai</th>
@@ -68,19 +69,19 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- example data -->
-                    <tr v-for="t in target" :key="t.id">
+                    <tr v-for="data in datatarget" :key="data.id">
                       <!-- <td></td> -->
-                      <td>{{ t.tahun }}</td>
-                      <td>{{ t.bulan }}</td>
-                      <td>{{ t.jenis_cabai }}</td>
-                      <td>{{ t.jumlah_cabai }}</td>
+                      <!-- <td>{{ data.id }}</td> -->
+                      <td>{{ data.tahun }}</td>
+                      <td>{{ data.bulan }}</td>
+                      <td>{{ data.jenis_cabai }}</td>
+                      <td>{{ data.jumlah_cabai }}</td>
                       <td>
-                        <a href="#">
+                        <a href="#" @click="editModal(data)">
                           <i class="fa fa-edit blue"></i>
                         </a>
                         /
-                        <a href="#">
+                        <a href="#" @click="deleteTarget(data.id)">
                           <i class="fa fa-trash red"></i>
                         </a>
                       </td>
@@ -99,18 +100,29 @@
 
     <!-- Start Modal -->
     <!-- Modal -->
-    <div class="modal fade" id="addfield" tabindex="-1" role="dialog"
-    aria-labelledby="addfieldLabel" aria-hidden="true">
+    <div class="modal fade" id="modalTarget" tabindex="-1" role="dialog"
+    aria-labelledby="modalTargetLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="addfieldLabel">Tambahkan Target</h5>
+            <h5 class="modal-title" v-show="!editmode" id="modalTargetLabel">Tambahkan Target</h5>
+            <h5 class="modal-title" v-show="editmode" id="modalTargetLabel">Edit Target</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form @submit.prevent="addTarget">
+          <form @submit.prevent="editmode ? updateTarget() : addTarget()">
             <div class="modal-body">
+              <!-- <div >
+                <input
+                  v-model="form.id"
+                  type="text"
+                  name="id_form"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('id_form') }"
+                />
+                <has-error :form="form" field="id"></has-error>
+              </div>  -->
               <div class="form-group col-md">
                 <input
                   v-model="form.tahun"
@@ -171,7 +183,8 @@
             </div> 
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-              <button type="submit" class="btn btn-primary">Simpan</button>
+              <button v-show="!editmode" type="submit" class="btn btn-primary">Tambahkan</button>
+              <button v-show="editmode" type="submit" class="btn btn-success">Perbarui</button>
             </div>
           </form>
         </div>
@@ -188,26 +201,115 @@
   export default{
     data(){
       return {
-        target :{},
+        editmode : false,
+        datatarget :{},
         form : new Form({
+          id: "",
           tahun : "",
           bulan : "",
           jenis_cabai: "",
           jumlah_cabai:"",
         })
-      }
+      };
     },
     methods:{
-      loadTarget(){
-        axios.get('/readTarget').then(({data}) =>
-        (this.target = data.data));
+      newModal(){
+        this.editmode = false,
+        this.form.reset();
+        $("#modalTarget").modal("show");
       },
       addTarget(){
-        this.form.post('/addTarget');
-      }
+        this.$Progress.start();
+        this.form.post('/addTarget')
+        .then(()=>{
+          // this.isLoading = false;
+          UpdateData.$emit("update");
+          // hide modal
+          $("#modalTarget").trigger("click");
+          // show Toast if success
+          toast.fire({
+            icon: "success",
+            title: "Target berhasil ditambahkan"
+          });
+          this.$Progress.finish();
+        })
+      },
+      loadTarget(){
+        axios.get('/readTarget').then(response =>{
+          this.datatarget = response.data.data;
+        });
+        console.log(response.data.data)
+      },
+      editModal(t){
+        this.editmode = true,
+        this.form.reset();
+        $("#modalTarget").modal("show");
+        this.form.fill(t);
+        console.log(t)
+      },
+      updateTarget(){
+        console.log("satu")
+        this.$Progress.start();
+        this.form
+          .put("updateTarget/" + this.form.id,{
+            tahun : this.form.tahun,
+            bulan : this.form.bulan,
+            jenis_cabai : this.form.jenis_cabai,
+            jumlah_cabai : this.form.jumlah_cabai
+          })
+          .then(() => {
+          UpdateData.$emit("update");
+          // hide modal
+          $("#modalTarget").trigger("click");
+          toast.fire({
+            icon: "success",
+            title: "Target berhasil diperbarui"
+          });
+        })
+        .catch(() => {
+          this.$Progress.fail();
+        });
+      },
+      deleteTarget(id){
+        swal
+        .fire({
+          title: "Apakah kamu yakin?",
+          text: "Data yang dihapus tidak dapat dikembalikan",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya, hapus data!"
+        })
+        .then(result => {
+          if (result.value) {
+            // send request to the server
+            axios
+              .delete("deleteTarget/" + id)
+              .then(() => {
+                UpdateData.$emit("update");
+                swal.fire("Tehapus!", "Data Target berhasil dihapus", "success");
+              })
+              .catch(() => {
+                swal.fire(
+                  "Gagal!",
+                  "Terdapat masalah ketika menghapus",
+                  "waning"
+                );
+              });
+          }
+        });
+      },
     },
     created(){
       this.loadTarget();
-    }
+      // setInterval(()=> this.loadTarget(), 3000);
+    },
+    mounted() {
+    // Custom event on Vue js
+    UpdateData.$on("update", () => {
+      this.loadTarget();
+    });
   }
+};
 </script>
