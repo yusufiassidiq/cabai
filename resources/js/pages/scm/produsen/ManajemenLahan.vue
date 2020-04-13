@@ -37,7 +37,6 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>id</th>
                       <th>Kode Lahan</th>
                       <th>Jenis Cabai</th>
                       <th>Luas Lahan</th>
@@ -51,7 +50,6 @@
                   <tbody>
                     <!-- example data -->
                     <tr v-for="data in datalahan" :key="data.id">
-                      <td>{{ data.id }}</td>
                       <td>{{ data.kode_lahan }}</td>
                       <td>{{ data.jenis_cabai }}</td>
                       <td>{{ data.luas_lahan }}</td>
@@ -104,6 +102,7 @@
                   v-model="form.id"
                   type = "text"
                   name = "id_form"
+                  hidden
                   class="form-control"
                    :class="{ 'is-invalid': form.errors.has('id_form') }"
                 />
@@ -161,11 +160,8 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-              <!-- <vue-button-spinner :is-loading="isLoading" :disabled="isLoading" :status="status"> -->
-              <button v-show="editmode" type="submit" class="btn btn-success">Perbarui</button>
-              <button v-show="!editmode" type="submit" class="btn btn-primary">Tambahkan</button>
-              <!-- <span>Simpan</span> -->
-              <!-- </vue-button-spinner> -->
+              <button id="btnupdate" v-show="editmode" type="submit" class="btn btn-success">Perbarui</button>
+              <button id="btnadd" v-show="!editmode" type="submit" class="btn btn-primary">Tambahkan</button>
             </div>
           </form>
           <!-- </form> -->
@@ -181,33 +177,25 @@
 // datetimepicker doc : https://github.com/charliekassel/vuejs-datepicker#demo
 // laravel vue spinner doc : https://www.npmjs.com/package/vue-button-spinner
 import datepicker from "vuejs-datepicker";
-// import VueButtonSpinner from "vue-button-spinner";
 import HeaderProdusen from '../../../components/produsen/HeaderManajemenLahan'
 
 export default {
   components: {
     datepicker,
     'headerProdusen' : HeaderProdusen
-    // VueButtonSpinner
   },
   data() {
     return {
       datalahan: null,
-      // isLoading: false, // vuebutton spinner
-      // status: "", // vuebutton spinner
       editmode: false, // buat ngebedain modal yg di klik modal tambah lahan /edit lahan
       // form buat simpan data
       form: new Form({
-        // id: "100",
-        // name: "testing",
         id: "",
         kode_lahan: "",
         jenis_cabai: "",
         luas_lahan: "",
-        // lokasi: "",
         tanggal_tanam: ""
       }),
-      // id: id,
     };
   },
   methods: {
@@ -217,19 +205,13 @@ export default {
     // CRUD
     // Menambahkan data lahan Produsen
     addLahan() {
-      // this.isLoading = true;
-      // Menampilkan progress bar di mozila
-      this.$Progress.start();
       // Http Request axios dgn menggunakan vform
       // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
+      document.getElementById("btnadd").disabled = true;
       this.form
         .post('/addLahan')
         .then(() => {
           this.isLoading = false;
-          // this.status = true; // or success
-          // setTimeout(() => {
-          //   this.status = "";
-          // }, 2000);
           // custom event
           UpdateData.$emit("update");
           // hide modal
@@ -239,13 +221,11 @@ export default {
             icon: "success",
             title: "Lahan berhasil ditambahkan"
           });
-          this.$Progress.finish();
+          document.getElementById("btnadd").disabled = false;
         })
         .catch(error => {
-          this.$Progress.fail();
           console.error(error);
-          // this.isLoading = false;
-          // this.status = false; //or error
+          document.getElementById("btnadd").disabled = false;
         });
     },
     // Mendapatkan data lahan produsen
@@ -258,16 +238,11 @@ export default {
     },
     // Memperbarui data lahan produsen
     updateLahan() {
+      document.getElementById("btnupdate").disabled = true;
       console.log(this.form.id);
-      this.$Progress.start();
       // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       this.form
-        .put("updateLahan/" + this.form.id,{
-          kode_lahan: this.form.kode_lahan,
-          jenis_cabai: this.form.jenis_cabai,
-          luas_lahan: this.form.luas_lahan,
-          tanggal_tanam: this.form.tanggal_tanam
-        })
+        .put("updateLahan/" + this.form.id)
         .then(() => {
           UpdateData.$emit("update");
           // hide modal
@@ -276,9 +251,10 @@ export default {
             icon: "success",
             title: "Lahan berhasil diperbarui"
           });
+          document.getElementById("btnupdate").disabled = false;
         })
         .catch(() => {
-          this.$Progress.fail();
+          document.getElementById("btnupdate").disabled = false;
         });
     },
     // menghapus data lahan produsen
