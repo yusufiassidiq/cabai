@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">User Managemennt</h1>
+            <h1 class="m-0 text-dark">Manajemen User</h1>
           </div>
           <!-- /.col -->
           <div class="col-sm-6">
@@ -14,7 +14,7 @@
               <li class="breadcrumb-item">
                 <a href="#">Admin</a>
               </li>
-              <li class="breadcrumb-item active">User Management</li>
+              <li class="breadcrumb-item active">Manajemen User</li>
             </ol>
           </div>
           <!-- /.col -->
@@ -35,7 +35,7 @@
                 <h3 class="card-title">Management User</h3>
 
                 <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
+                  <!-- <div class="input-group input-group-sm" style="width: 150px;">
                     <input
                       type="text"
                       name="table_search"
@@ -48,7 +48,7 @@
                         <i class="fas fa-search"></i>
                       </button>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <!-- /.card-header -->
@@ -56,7 +56,7 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <!-- <th>ID</th> -->
                       <th>Nama</th>
                       <th>Email</th>
                       <th>Role</th>
@@ -66,7 +66,7 @@
 
                   <tbody>
                     <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
-                      <th scope="row">{{ user.id }}</th>
+                      <!-- <th scope="row">{{ user.id }}</th> -->
                       <td>{{ user.name }}</td>
                       <td>{{ user.email }}</td>
                       <td>
@@ -116,31 +116,11 @@
           <form @submit.prevent="updateUser()">
             <div class="modal-body">
               <div class="form-group">
-                <input type="email" name="email" class="form-control" placeholder="email" />
-              </div>
-              <div class="form-group">
-                <select class="form-control">
-                  <option value disabled selected>Select role</option>
-                  <option value="2">Produsen</option>
-                  <option value="3">Pengepul</option>
-                  <option value="4">Grosir</option>
-                  <option value="5">Pengecer</option>
-                </select>
-              </div>
-              <div class="form-group">
                 <select class="form-control" placeholder="status">
                   <option value disabled selected>Select status</option>
                   <option value="1">Aktif</option>
                   <option value="0">Non-aktif</option>
                 </select>
-              </div>
-              <div class="form-group">
-                <input
-                  type="password"
-                  name="password"
-                  class="form-control"
-                  placeholder="kata sandi baru (kosongkan jika tidak diperbarui)"
-                />
               </div>
             </div>
             <div class="modal-footer">
@@ -175,13 +155,13 @@ export default {
     deleteUser(id) {
       swal
         .fire({
-          title: "Are you sure?",
-          text: "You won't be able to revert this!",
+          title: "Apakah kamu yakin?",
+          text: "Data yang dihapus tidak dapat dikembalikan!",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, delete it!"
+          confirmButtonText: "Yes, hapus!"
         })
         .then(result => {
           if (result.value) {
@@ -189,11 +169,11 @@ export default {
             axios
               .delete("/user/" + id)
               .then(() => {
-                swal.fire("Deleted!", "Your file has been deleted.", "success");
+                swal.fire("Terhapus!", "Data user berhasil dihapus", "success");
                 UpdateData.$emit("RefreshData");
               })
               .catch(() => {
-                swal.fire("Failed!", "There was something wrong.", "waning");
+                swal.fire("Gagal!", "Terdapat masalah ketika menghapus", "waning");
               });
           }
         });
