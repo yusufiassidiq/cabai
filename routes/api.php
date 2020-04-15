@@ -46,6 +46,12 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/readLahan','ProdusenController@readLahan');
     Route::put('/updateLahan/{id}','ProdusenController@updateLahan');
     Route::delete('/deleteLahan/{id}','ProdusenController@deleteLahan');
+    //Pengeluaran Produksi
+    Route::post('/addPengeluaran','ProdusenController@addPengeluaran');
+    Route::get('/readPengeluaran','ProdusenController@readPengeluaran');
+    Route::put('updatePengeluaran/{id}','ProdusenController@updatePengeluaran');
+    Route::delete('/deletePengeluaran','ProdusenController@deletePengeluaran');
+    //Business Analytic
     Route::post('/addTarget','AnalysisController@addTarget');
     Route::get('/readTarget','AnalysisController@readTarget');
     Route::put('/updateTarget/{id}','AnalysisController@updateTarget');

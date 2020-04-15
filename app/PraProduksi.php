@@ -13,4 +13,8 @@ class PraProduksi extends Model
     {
         return $this->belongsTo('App\User');
     }
+    
+    public function pengeluaranProduksi(){
+        return $this->hasMany('App\PengeluaranProduksi');
+    }
 }

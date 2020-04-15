@@ -200,9 +200,9 @@ export default {
       // Menampilkan progress bar di mozila
       this.$Progress.start();
       // Http Request axios dgn menggunakan vform
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
       this.form
-        .post(url)
+        .post('/addPengeluaran')
         .then(() => {
           this.isLoading = false;
           // this.status = true; // or success
