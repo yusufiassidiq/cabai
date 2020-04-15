@@ -6632,8 +6632,92 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // datetimepicker doc : https://github.com/charliekassel/vuejs-datepicker#demo
-// laravel vue spinner doc : https://www.npmjs.com/package/vue-button-spinner
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6653,6 +6737,12 @@ __webpack_require__.r(__webpack_exports__);
         jenis_cabai: "",
         luas_lahan: "",
         tanggal_tanam: ""
+      }),
+      formriwayat: new Form({
+        pra_produksi_id: "",
+        nama_pengeluaran: "",
+        jml_pengeluaran: "",
+        rincian: ""
       })
     };
   },
@@ -6663,14 +6753,11 @@ __webpack_require__.r(__webpack_exports__);
     // CRUD
     // Menambahkan data lahan Produsen
     addLahan: function addLahan() {
-      var _this = this;
-
       // Http Request axios dgn menggunakan vform
       // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       document.getElementById("btnadd").disabled = true;
       this.form.post('/addLahan').then(function () {
-        _this.isLoading = false; // custom event
-
+        // custom event
         UpdateData.$emit("update"); // hide modal
 
         $("#modalLahan").trigger("click"); // show Toast if success
@@ -6687,11 +6774,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Mendapatkan data lahan produsen
     getLahan: function getLahan() {
-      var _this2 = this;
+      var _this = this;
 
       // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       axios.get('/readLahan').then(function (response) {
-        _this2.datalahan = response.data.data; // console.log(response.data.data)
+        _this.datalahan = response.data.data; // console.log(response.data.data)
       });
     },
     // Memperbarui data lahan produsen
@@ -6735,6 +6822,27 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    addPengeluaran: function addPengeluaran() {
+      console.log("Tambah pengeluaran");
+      document.getElementById("btnaddpengeluaran").disabled = true; // Tinggal sesuain apinya aja
+      // tinggal uncomment
+      // this.form
+      //   .post('#')
+      //   .then(() => {
+      //     // hide modal
+      //     $("#modalPengeluaran").trigger("click");
+      //     // show Toast if success
+      //     toast.fire({
+      //       icon: "success",
+      //       title: "Pengeluaran berhasil ditambahkan"
+      //     });
+      //     document.getElementById("btnaddpengeluaran").disabled = false;
+      //   })
+      //   .catch(error => {
+      //     console.error(error);
+      //     document.getElementById("btnaddpengeluaran").disabled = false;
+      //   });
+    },
     // MODAL
     // Menampilkan Modal utk menambahkan lahan baru
     newModal: function newModal() {
@@ -6750,17 +6858,22 @@ __webpack_require__.r(__webpack_exports__);
       $("#modalLahan").modal("show");
       this.form.fill(data);
       console.log(this.form);
+    },
+    pengeluaranModal: function pengeluaranModal(id) {
+      $("#modalPengeluaran").modal("show");
+      console.log("ini id lahannya : " + id);
+      document.getElementById("pra_produksi_id").value = id;
     }
   },
   created: function created() {
     this.getLahan();
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this2 = this;
 
     // Custom event on Vue js
     UpdateData.$on("update", function () {
-      _this3.getLahan();
+      _this2.getLahan();
     });
   }
 });
@@ -60753,23 +60866,23 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(data.luas_lahan))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(data.lokasi))]),
-                            _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(data.tanggal_tanam))]),
                             _vm._v(" "),
                             _c("td", [_vm._v("ini total")]),
                             _vm._v(" "),
                             _c("td", [
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("i", {
-                                  staticClass: "fas fa-edit blue",
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "#" },
                                   on: {
                                     click: function($event) {
                                       return _vm.editModal(data)
                                     }
                                   }
-                                })
-                              ]),
+                                },
+                                [_c("i", { staticClass: "fas fa-edit blue" })]
+                              ),
                               _vm._v(
                                 "\n                      /\n                      "
                               ),
@@ -60784,6 +60897,29 @@ var render = function() {
                                   }
                                 },
                                 [_c("i", { staticClass: "fas fa-trash red" })]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-success btn-xs",
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.pengeluaranModal(data.id)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-plus-square white"
+                                  }),
+                                  _vm._v(
+                                    "\n                        Tambah\n                      "
+                                  )
+                                ]
                               )
                             ])
                           ])
@@ -61122,6 +61258,264 @@ var render = function() {
             ]
           )
         ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modalPengeluaran",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "modalRiwayatLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.addPengeluaran()
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "form-group col-md" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formriwayat.pra_produksi_id,
+                              expression: "formriwayat.pra_produksi_id"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "number",
+                            id: "pra_produksi_id",
+                            name: "pra_produksi_id",
+                            hidden: ""
+                          },
+                          domProps: { value: _vm.formriwayat.pra_produksi_id },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formriwayat,
+                                "pra_produksi_id",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group col-md" },
+                        [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formriwayat.nama_pengeluaran,
+                                  expression: "formriwayat.nama_pengeluaran"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.formriwayat.errors.has(
+                                  "nama_pengeluaran"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.formriwayat,
+                                    "nama_pengeluaran",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "option",
+                                {
+                                  attrs: {
+                                    value: "",
+                                    disabled: "",
+                                    selected: ""
+                                  }
+                                },
+                                [_vm._v("Jenis pengeluaran")]
+                              ),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Pupuk" } }, [
+                                _vm._v("Pupuk")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Alat Tani" } }, [
+                                _vm._v("Alat Tani")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Pestisida" } }, [
+                                _vm._v("Pestisida")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Lainnya" } }, [
+                                _vm._v("Lainnya")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: {
+                              form: _vm.formriwayat,
+                              field: "nama_pengeluaran"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group col-md" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.formriwayat.jml_pengeluaran,
+                                expression: "formriwayat.jml_pengeluaran"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.formriwayat.errors.has(
+                                "jml_pengeluaran"
+                              )
+                            },
+                            attrs: {
+                              type: "number",
+                              name: "jml_pengeluaran",
+                              placeholder: "Jumlah Pengeluaran (dalam rupiah)"
+                            },
+                            domProps: {
+                              value: _vm.formriwayat.jml_pengeluaran
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.formriwayat,
+                                  "jml_pengeluaran",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: {
+                              form: _vm.formriwayat,
+                              field: "jml_pengeluaran"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group col-md" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.formriwayat.rincian,
+                                expression: "formriwayat.rincian"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.formriwayat.errors.has(
+                                "rincian"
+                              )
+                            },
+                            attrs: {
+                              type: "text",
+                              name: "rincian",
+                              placeholder: "Rincian pengeluaran (Opsional)"
+                            },
+                            domProps: { value: _vm.formriwayat.rincian },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.formriwayat,
+                                  "rincian",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "rincian" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(3)
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
       )
     ],
     1
@@ -61140,13 +61534,13 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Luas Lahan")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Tanggal tanam")]),
         _vm._v(" "),
         _c("th", [_vm._v("Total Pengeluaran")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Action")])
+        _c("th", [_vm._v("Action")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Pengeluaran")])
       ])
     ])
   },
@@ -61172,6 +61566,55 @@ var staticRenderFns = [
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "modalPengeluaranLabel" } },
+        [_vm._v("Tambahkan Pengeluaran")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Tutup")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { id: "btnaddpengeluaran", type: "submit" }
+        },
+        [_vm._v("Tambah")]
       )
     ])
   }
