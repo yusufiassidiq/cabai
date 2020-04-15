@@ -246,7 +246,7 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-              <button type="submit" class="btn btn-primary">Tambah</button>
+              <button id="btnaddpengeluaran" type="submit" class="btn btn-primary">Tambah</button>
             </div>
           </form>
           <!-- </form> -->
@@ -301,7 +301,6 @@ export default {
       this.form
         .post('/addLahan')
         .then(() => {
-          this.isLoading = false;
           // custom event
           UpdateData.$emit("update");
           // hide modal
@@ -379,8 +378,27 @@ export default {
           }
         });
     },
-    addPengeluaran(id){
+    addPengeluaran(){
       console.log("Tambah pengeluaran")
+      document.getElementById("btnaddpengeluaran").disabled = true;
+      // Tinggal sesuain apinya aja
+      // tinggal uncomment
+      // this.form
+      //   .post('#')
+      //   .then(() => {
+      //     // hide modal
+      //     $("#modalPengeluaran").trigger("click");
+      //     // show Toast if success
+      //     toast.fire({
+      //       icon: "success",
+      //       title: "Pengeluaran berhasil ditambahkan"
+      //     });
+      //     document.getElementById("btnaddpengeluaran").disabled = false;
+      //   })
+      //   .catch(error => {
+      //     console.error(error);
+      //     document.getElementById("btnaddpengeluaran").disabled = false;
+      //   });
     },
     // MODAL
     // Menampilkan Modal utk menambahkan lahan baru
