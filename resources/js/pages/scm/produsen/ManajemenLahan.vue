@@ -40,10 +40,10 @@
                       <th>Kode Lahan</th>
                       <th>Jenis Cabai</th>
                       <th>Luas Lahan</th>
-                      <th>Lokasi</th>
                       <th>Tanggal tanam</th>
                       <th>Total Pengeluaran</th>
                       <th>Action</th>
+                      <th>Pengeluaran</th>
                     </tr>
                   </thead>
 
@@ -53,16 +53,21 @@
                       <td>{{ data.kode_lahan }}</td>
                       <td>{{ data.jenis_cabai }}</td>
                       <td>{{ data.luas_lahan }}</td>
-                      <td>{{ data.lokasi }}</td>
                       <td>{{ data.tanggal_tanam }}</td>
                       <td>ini total</td>
                       <td>
-                        <a href="#">
-                          <i class="fas fa-edit blue" @click="editModal(data)"></i>
+                        <a href="#" @click="editModal(data)">
+                          <i class="fas fa-edit blue"></i>
                         </a>
                         /
                         <a href="#" @click="deleteLahan(data.id)">
                           <i class="fas fa-trash red"></i>
+                        </a>
+                      </td>
+                      <td>
+                        <a href="#" class="btn btn-success btn-xs" @click="pengeluaranModal(data.id)">
+                          <i class="fas fa-plus-square white"></i>
+                          Tambah
                         </a>
                       </td>
                       <!-- end example data -->
@@ -78,7 +83,7 @@
     </section>
     <!-- /.content -->
 
-    <!-- Modal -->
+    <!-- Modal Manajemen Lahan-->
     <div
       class="modal fade"
       id="modalLahan"
@@ -169,13 +174,92 @@
       </div>
     </div>
     <!-- </modal> -->
+
+    <!-- Modal Pengeluaran -->
+    <div
+      class="modal fade"
+      id="modalPengeluaran"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalRiwayatLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalPengeluaranLabel">Tambahkan Pengeluaran</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form @submit.prevent="addPengeluaran()">
+            <div class="modal-body">
+              <div class="form-group col-md">
+                <input
+                  v-model="formriwayat.pra_produksi_id"
+                  type="number"
+                  id="pra_produksi_id"
+                  name="pra_produksi_id"
+                  class="form-control"
+                  hidden
+                />
+              </div>
+              <div class="form-group col-md">
+                <select
+                  v-model="formriwayat.nama_pengeluaran"
+                  class="form-control"
+                  :class="{ 'is-invalid': formriwayat.errors.has('nama_pengeluaran') }"
+                >
+                  <option value disabled selected>Jenis pengeluaran</option>
+                  <option value="Pupuk">Pupuk</option>
+                  <option value="Alat Tani">Alat Tani</option>
+                  <option value="Pestisida">Pestisida</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+                <has-error :form="formriwayat" field="nama_pengeluaran"></has-error>
+              </div>
+
+              <div class="form-group col-md">
+                <input
+                  v-model="formriwayat.jml_pengeluaran"
+                  type="number"
+                  name="jml_pengeluaran"
+                  class="form-control"
+                  placeholder="Jumlah Pengeluaran (dalam rupiah)"
+                  :class="{ 'is-invalid': formriwayat.errors.has('jml_pengeluaran') }"
+                />
+                <has-error :form="formriwayat" field="jml_pengeluaran"></has-error>
+              </div>
+
+              <div class="form-group col-md">
+                <input
+                  v-model="formriwayat.rincian"
+                  type="text"
+                  name="rincian"
+                  class="form-control"
+                  placeholder="Rincian pengeluaran (Opsional)"
+                  :class="{ 'is-invalid': formriwayat.errors.has('rincian') }"
+                />
+                <has-error :form="form" field="rincian"></has-error>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+              <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>
+          </form>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
+    <!-- </modal> -->
   </div>
   <!-- /.content-wrapper -->
 </template>
 
 <script>
 // datetimepicker doc : https://github.com/charliekassel/vuejs-datepicker#demo
-// laravel vue spinner doc : https://www.npmjs.com/package/vue-button-spinner
 import datepicker from "vuejs-datepicker";
 import HeaderProdusen from '../../../components/produsen/HeaderManajemenLahan'
 
@@ -196,6 +280,12 @@ export default {
         luas_lahan: "",
         tanggal_tanam: ""
       }),
+      formriwayat: new Form({
+        pra_produksi_id:"",
+        nama_pengeluaran:"",
+        jml_pengeluaran:"",
+        rincian:""
+      })
     };
   },
   methods: {
@@ -289,6 +379,9 @@ export default {
           }
         });
     },
+    addPengeluaran(id){
+      console.log("Tambah pengeluaran")
+    },
     // MODAL
     // Menampilkan Modal utk menambahkan lahan baru
     newModal() {
@@ -304,7 +397,12 @@ export default {
       $("#modalLahan").modal("show");
       this.form.fill(data);
       console.log(this.form)
-    }
+    },
+    pengeluaranModal(id){
+      $("#modalPengeluaran").modal("show");
+      console.log("ini id lahannya : " + id);
+      document.getElementById("pra_produksi_id").value = id;
+    },
   },
   created() {
     this.getLahan();
