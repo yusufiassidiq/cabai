@@ -36,7 +36,7 @@
                   <h3 class="card-title">Validasi User</h3>
 
                   <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
+                    <!-- <div class="input-group input-group-sm" style="width: 150px;">
                       <input
                         type="text"
                         name="table_search"
@@ -49,7 +49,7 @@
                           <i class="fas fa-search"></i>
                         </button>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 <!-- /.card-header -->
@@ -57,7 +57,7 @@
                   <table class="table table-hover text-nowrap">
                     <thead>
                       <tr>
-                        <th>ID</th>
+                        <!-- <th>ID</th> -->
                         <th>Nama</th>
                         <th>Email</th>
                         <th>Status</th>
@@ -68,7 +68,7 @@
 
                     <tbody>
                       <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
-                        <th scope="row">{{ user.id }}</th>
+                        <!-- <th scope="row">{{ user.id }}</th> -->
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
                         <td>
@@ -83,7 +83,7 @@
                           <div v-else-if="user.role===5">Pedagang Eceran</div>
                         </td>
                         <td>
-                          <button class="btn btn-success" @click="selectUser(user)">Detail</button>
+                          <button class="btn btn-success btn-xs" @click="selectUser(user)">Detail</button>
                           <!-- <router-link :to="{ name: 'userDetails', params: { userId: user.id, userObj: user }}" class="btn btn-primary"> Detail </router-link>        -->
                         </td>
                       </tr>
@@ -159,17 +159,10 @@ export default {
       $("#detailUser").modal("show");
     },
     getUsers() {
-      this.$http({
-        url: `requesteduser`,
-        method: "GET"
-      }).then(
-        res => {
-          this.users = res.data.users;
-        },
-        () => {
-          this.has_error = true;
-        }
-      );
+      axios.get("requesteduser").then(response => {
+        // console.log(response);
+        this.users = response.data.users;
+      });
     },
     deleteUser(id) {
       // delete data
