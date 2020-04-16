@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Test
     Route::delete('/user/{id}','AdminController@delete')->middleware('isAdmin');
     Route::post('/terima/{id}','AdminController@terima')->middleware('isAdmin');
+    Route::post('/tolak/{id}','AdminController@tolak')->middleware('isAdmin');
     //Get Custom Payload
     // Route::get('user/getcustompayloads','UserController@seeToken');
     // get user yang belum divalidasi
@@ -49,8 +50,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Pengeluaran Produksi
     Route::post('/addPengeluaran','ProdusenController@addPengeluaran');
     Route::get('/readPengeluaran','ProdusenController@readPengeluaran');
-    Route::put('updatePengeluaran/{id}','ProdusenController@updatePengeluaran');
-    Route::delete('/deletePengeluaran','ProdusenController@deletePengeluaran');
+    Route::put('/updatePengeluaran/{id}','ProdusenController@updatePengeluaran');
+    Route::delete('/deletePengeluaran/{id}','ProdusenController@deletePengeluaran');
     //Business Analytic
     Route::post('/addTarget','AnalysisController@addTarget');
     Route::get('/readTarget','AnalysisController@readTarget');

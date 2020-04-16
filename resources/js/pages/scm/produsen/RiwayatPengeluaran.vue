@@ -15,7 +15,7 @@
                 <h3 class="card-title">Riwayat Pengeluaran</h3>
 
                 <div class="card-tools">
-                  <button class="btn btn-success" @click="newModal">Tambahkan Pengeluaran</button>
+                  <!-- <button class="btn btn-success" @click="newModal">Tambahkan Pengeluaran</button> -->
                   <!-- <div class="input-group input-group-sm" style="width: 150px;">
                     <input
                       type="text"
@@ -39,23 +39,23 @@
                     <tr>
                       <th>id</th>
                       <th>Kode Lahan</th>
+                      <th>Nama Pengeluaran</th>
                       <th>Jumlah Pengeluaran</th>
-                      <th>Tanggal</th>
                       <th>Rincian</th>
-                      <th>Catatan</th>
+                      <th>Tanggal</th>
                       <th>Action</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     <tr></tr>
-                    <tr v-for="data in dataPengeluaran" :key="data.id">
+                    <tr v-for="data in dataPengeluaran" :key="data.id" >
                       <td>{{ data.id }}</td>
                       <td>{{ data.kodeLahan }}</td>
-                      <td>{{ data.jmlPengeluaran }}</td>
-                      <td>{{ data.tglPengeluaran }}</td>
+                      <td>{{ data.nama_pengeluaran }}</td>
+                      <td>{{ data.jumlah_pengeluaran }}</td>
                       <td>{{ data.rincian }}</td>
-                      <td>{{ data.note }}</td>
+                      <td>{{ data.created_at }}</td>
                       <td>
                         <a href="#">
                           <i class="fas fa-edit blue" @click="editModal(data)"></i>
@@ -96,10 +96,10 @@
           </div>
           <form @submit.prevent="editmode? updatePengeluaran() : addPengeluaran()">
             <div class="modal-body">
-              <div class="form-group col-md">
-                <!-- OPTION SEMENTARA, NANTINYA PERLU AMBIL DATA DARI API
+              <!-- <div class="form-group col-md">
+                OPTION SEMENTARA, NANTINYA PERLU AMBIL DATA DARI API
                 LAHAN APA AJA YG PRODUSEN INI PUNYA
-                -->
+               
                 <select
                   v-model="form.kodeLahan"
                   class="form-control"
@@ -111,46 +111,62 @@
                   <option value="p13">P13</option>
                 </select>
                 <has-error :form="form" field="kodeLahan"></has-error>
-              </div>
-
+              </div> -->
+              
               <div class="form-group col-md">
                 <input
-                  v-model="form.jmlPengeluaran"
-                  type="number"
-                  name="jmlPengeluaran"
+                  disabled
+                  v-model="form.kodeLahan"
+                  type="text"
+                  name="kodeLahan"
                   class="form-control"
-                  placeholder="Jumlah Pengeluaran (dalam rupiah)"
-                  :class="{ 'is-invalid': form.errors.has('jmlPengeluaran') }"
+                  placeholder=""
+                  :class="{ 'is-invalid': form.errors.has('kodeLahan') }"
                 />
-                <has-error :form="form" field="jmlPengeluaran"></has-error>
+                <has-error :form="form" field="kodeLahan"></has-error>
               </div>
 
               <div class="form-group col-md">
                 <select
-                  v-model="form.rincian"
+                  v-model="form.nama_pengeluaran"
                   class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('rincian') }"
+                  :class="{ 'is-invalid': form.errors.has('nama_pengeluaran') }"
                 >
-                  <option value disabled selected>Pilih rincian</option>
+                  <option :value="form.nama_pengeluaran" disabled hidden selected>{{form.nama_pengeluaran}}</option>
                   <option value="Pupuk">Pupuk</option>
                   <option value="Alat Tani">Alat Tani</option>
                   <option value="Pestisida">Pestisida</option>
                   <option value="Lainnya">Lainnya</option>
                 </select>
-                <has-error :form="form" field="rincian"></has-error>
+                <has-error :form="form" field="nama_pengeluaran"></has-error>
               </div>
 
               <div class="form-group col-md">
                 <input
-                  v-model="form.note"
-                  type="text"
-                  name="note"
+                  v-model="form.jumlah_pengeluaran"
+                  type="number"
+                  name="jumlah_pengeluaran"
                   class="form-control"
-                  placeholder="Catatan rincian (Opsional)"
-                  :class="{ 'is-invalid': form.errors.has('note') }"
+                  placeholder="Jumlah Pengeluaran (dalam rupiah)"
+                  :class="{ 'is-invalid': form.errors.has('jumlah_pengeluaran') }"
                 />
-                <has-error :form="form" field="note"></has-error>
+                <has-error :form="form" field="jumlah_pengeluaran"></has-error>
               </div>
+
+              <div class="form-group col-md">
+                <input
+                  v-model="form.rincian"
+                  type="text"
+                  name="rincian"
+                  class="form-control"
+                  placeholder=""
+                  :class="{ 'is-invalid': form.errors.has('rincian') }"
+                />
+                <has-error :form="form" field="rincian"></has-error>
+              </div>
+
+              
+
             </div>
 
             <div class="modal-footer">
@@ -181,10 +197,10 @@ export default {
       form: new Form({
         id: "",
         kodeLahan: "",
-        jmlPengeluaran: "",
-        tglPengeluaran: new Date(),
+        jumlah_pengeluaran: "",
+        nama_pengeluaran: "",
+        tanggal_pengeluaran: new Date(),
         rincian: "",
-        note: ""
       })
     };
   },
@@ -194,54 +210,54 @@ export default {
   methods: {
     // CRUD
     // Menambahkan Riwayat Pengeluaran
-    addPengeluaran() {
-      console.log("tambah data berhasil");
-      // this.isLoading = true;
-      // Menampilkan progress bar di mozila
-      this.$Progress.start();
-      // Http Request axios dgn menggunakan vform
-      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
-      this.form
-        .post('/addPengeluaran')
-        .then(() => {
-          this.isLoading = false;
-          // this.status = true; // or success
-          // setTimeout(() => {
-          //   this.status = "";
-          // }, 2000);
-          // custom event
-          UpdateData.$emit("update");
-          // hide modal
-          $("#modalPengeluaran").trigger("click");
-          // show Toast if success
-          toast.fire({
-            icon: "success",
-            title: "Pengeluaran berhasil ditambahkan"
-          });
-          this.$Progress.finish();
-        })
-        .catch(error => {
-          this.$Progress.fail();
-          console.error(error);
-          // this.isLoading = false;
-          // this.status = false; //or error
-        });
-    },
+    // addPengeluaran() {
+    //   console.log("tambah data berhasil");
+    //   // this.isLoading = true;
+    //   // Menampilkan progress bar di mozila
+    //   this.$Progress.start();
+    //   // Http Request axios dgn menggunakan vform
+    //   // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
+    //   this.form
+    //     .post('/addPengeluaran')
+    //     .then(() => {
+    //       this.isLoading = false;
+    //       // this.status = true; // or success
+    //       // setTimeout(() => {
+    //       //   this.status = "";
+    //       // }, 2000);
+    //       // custom event
+    //       UpdateData.$emit("update");
+    //       // hide modal
+    //       $("#modalPengeluaran").trigger("click");
+    //       // show Toast if success
+    //       toast.fire({
+    //         icon: "success",
+    //         title: "Pengeluaran berhasil ditambahkan"
+    //       });
+    //       this.$Progress.finish();
+    //     })
+    //     .catch(error => {
+    //       this.$Progress.fail();
+    //       console.error(error);
+    //       // this.isLoading = false;
+    //       // this.status = false; //or error
+    //     });
+    // },
     // Menghapus Riwayat Pengeluaran
     getPengeluaran() {
       console.log("Ambil data berhasil");
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
-      axios.get(url).then(response => {
-        this.dataPengeluaran = response.data;
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
+      axios.get('/readPengeluaran').then(response => {
+        this.dataPengeluaran = response.data.data;
       });
     },
     // Memperbarui Riwayat Pengeluaran
     updatePengeluaran() {
       console.log("Update berhasil");
       this.$Progress.start();
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
       this.form
-        .put(url + "/" + this.form.id)
+        .put("/updatePengeluaran/" + this.form.id)
         .then(() => {
           UpdateData.$emit("update");
           // hide modal
@@ -257,11 +273,11 @@ export default {
     },
     deletePengeluaran(id) {
       console.log("Hapus Berhasil");
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
       swal
         .fire({
           title: "Apakah kamu yakin?",
-          text: "Data yang dihapus tidak dapat dikembalikan",
+          text: "Data pengeluaran yang dihapus tidak dapat dikembalikan",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -272,7 +288,7 @@ export default {
           if (result.value) {
             // send request to the server
             axios
-              .delete(url + "/" + id)
+              .delete("/deletePengeluaran/" + id)
               .then(() => {
                 UpdateData.$emit("update");
                 swal.fire("Tehapus!", "Data lahan berhasil dihapus", "success");
@@ -301,6 +317,7 @@ export default {
       this.form.reset();
       $("#modalPengeluaran").modal("show");
       this.form.fill(data);
+      // console.log(this.form)
     }
   },
   created() {

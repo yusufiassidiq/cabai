@@ -6741,7 +6741,7 @@ __webpack_require__.r(__webpack_exports__);
       formriwayat: new Form({
         pra_produksi_id: "",
         nama_pengeluaran: "",
-        jml_pengeluaran: "",
+        jumlah_pengeluaran: "",
         rincian: ""
       })
     };
@@ -6783,8 +6783,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Memperbarui data lahan produsen
     updateLahan: function updateLahan() {
-      document.getElementById("btnupdate").disabled = true;
-      console.log(this.form.id); // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
+      document.getElementById("btnupdate").disabled = true; // console.log(this.form.id);
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
 
       this.form.put("updateLahan/" + this.form.id).then(function () {
         UpdateData.$emit("update"); // hide modal
@@ -6804,7 +6804,7 @@ __webpack_require__.r(__webpack_exports__);
       // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       swal.fire({
         title: "Apakah kamu yakin?",
-        text: "Data yang dihapus tidak dapat dikembalikan",
+        text: "Menghapus lahan akan menghapus semua data pengeluaran lahan ini",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -6826,22 +6826,20 @@ __webpack_require__.r(__webpack_exports__);
       console.log("Tambah pengeluaran");
       document.getElementById("btnaddpengeluaran").disabled = true; // Tinggal sesuain apinya aja
       // tinggal uncomment
-      // this.form
-      //   .post('#')
-      //   .then(() => {
-      //     // hide modal
-      //     $("#modalPengeluaran").trigger("click");
-      //     // show Toast if success
-      //     toast.fire({
-      //       icon: "success",
-      //       title: "Pengeluaran berhasil ditambahkan"
-      //     });
-      //     document.getElementById("btnaddpengeluaran").disabled = false;
-      //   })
-      //   .catch(error => {
-      //     console.error(error);
-      //     document.getElementById("btnaddpengeluaran").disabled = false;
-      //   });
+
+      this.formriwayat.post('addPengeluaran').then(function () {
+        // hide modal
+        $("#modalPengeluaran").trigger("click"); // show Toast if success
+
+        toast.fire({
+          icon: "success",
+          title: "Pengeluaran berhasil ditambahkan"
+        });
+        document.getElementById("btnaddpengeluaran").disabled = false;
+      })["catch"](function (error) {
+        console.error(error);
+        document.getElementById("btnaddpengeluaran").disabled = false;
+      });
     },
     // MODAL
     // Menampilkan Modal utk menambahkan lahan baru
@@ -6852,17 +6850,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Menampilkan Modal utk Mengedit lahan baru
     editModal: function editModal(data) {
-      console.log(data);
+      // console.log(data)
       this.editmode = true;
       this.form.reset();
       $("#modalLahan").modal("show");
-      this.form.fill(data);
-      console.log(this.form);
+      this.form.fill(data); // console.log(this.form)
     },
     pengeluaranModal: function pengeluaranModal(id) {
-      $("#modalPengeluaran").modal("show");
-      console.log("ini id lahannya : " + id);
-      document.getElementById("pra_produksi_id").value = id;
+      $("#modalPengeluaran").modal("show"); // console.log(data);
+
+      this.formriwayat.pra_produksi_id = id; // console.log(this.formriwayat)
+      // document.getElementById("pra_produksi_id").value = data.id;
     }
   },
   created: function created() {
@@ -7326,6 +7324,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -7337,10 +7351,10 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         id: "",
         kodeLahan: "",
-        jmlPengeluaran: "",
-        tglPengeluaran: new Date(),
-        rincian: "",
-        note: ""
+        jumlah_pengeluaran: "",
+        nama_pengeluaran: "",
+        tanggal_pengeluaran: new Date(),
+        rincian: ""
       })
     };
   },
@@ -7350,57 +7364,57 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // CRUD
     // Menambahkan Riwayat Pengeluaran
-    addPengeluaran: function addPengeluaran() {
-      var _this = this;
-
-      console.log("tambah data berhasil"); // this.isLoading = true;
-      // Menampilkan progress bar di mozila
-
-      this.$Progress.start(); // Http Request axios dgn menggunakan vform
-      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
-
-      this.form.post('/addPengeluaran').then(function () {
-        _this.isLoading = false; // this.status = true; // or success
-        // setTimeout(() => {
-        //   this.status = "";
-        // }, 2000);
-        // custom event
-
-        UpdateData.$emit("update"); // hide modal
-
-        $("#modalPengeluaran").trigger("click"); // show Toast if success
-
-        toast.fire({
-          icon: "success",
-          title: "Pengeluaran berhasil ditambahkan"
-        });
-
-        _this.$Progress.finish();
-      })["catch"](function (error) {
-        _this.$Progress.fail();
-
-        console.error(error); // this.isLoading = false;
-        // this.status = false; //or error
-      });
-    },
+    // addPengeluaran() {
+    //   console.log("tambah data berhasil");
+    //   // this.isLoading = true;
+    //   // Menampilkan progress bar di mozila
+    //   this.$Progress.start();
+    //   // Http Request axios dgn menggunakan vform
+    //   // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
+    //   this.form
+    //     .post('/addPengeluaran')
+    //     .then(() => {
+    //       this.isLoading = false;
+    //       // this.status = true; // or success
+    //       // setTimeout(() => {
+    //       //   this.status = "";
+    //       // }, 2000);
+    //       // custom event
+    //       UpdateData.$emit("update");
+    //       // hide modal
+    //       $("#modalPengeluaran").trigger("click");
+    //       // show Toast if success
+    //       toast.fire({
+    //         icon: "success",
+    //         title: "Pengeluaran berhasil ditambahkan"
+    //       });
+    //       this.$Progress.finish();
+    //     })
+    //     .catch(error => {
+    //       this.$Progress.fail();
+    //       console.error(error);
+    //       // this.isLoading = false;
+    //       // this.status = false; //or error
+    //     });
+    // },
     // Menghapus Riwayat Pengeluaran
     getPengeluaran: function getPengeluaran() {
-      var _this2 = this;
+      var _this = this;
 
-      console.log("Ambil data berhasil");
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
-      axios.get(url).then(function (response) {
-        _this2.dataPengeluaran = response.data;
+      console.log("Ambil data berhasil"); // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
+
+      axios.get('/readPengeluaran').then(function (response) {
+        _this.dataPengeluaran = response.data.data;
       });
     },
     // Memperbarui Riwayat Pengeluaran
     updatePengeluaran: function updatePengeluaran() {
-      var _this3 = this;
+      var _this2 = this;
 
       console.log("Update berhasil");
-      this.$Progress.start();
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
-      this.form.put(url + "/" + this.form.id).then(function () {
+      this.$Progress.start(); // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
+
+      this.form.put("/updatePengeluaran/" + this.form.id).then(function () {
         UpdateData.$emit("update"); // hide modal
 
         $("#modalPengeluaran").trigger("click");
@@ -7409,15 +7423,15 @@ __webpack_require__.r(__webpack_exports__);
           title: "Pengeluaran berhasil diperbarui"
         });
       })["catch"](function () {
-        _this3.$Progress.fail();
+        _this2.$Progress.fail();
       });
     },
     deletePengeluaran: function deletePengeluaran(id) {
-      console.log("Hapus Berhasil");
-      var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
+      console.log("Hapus Berhasil"); // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/pengeluaran";
+
       swal.fire({
         title: "Apakah kamu yakin?",
-        text: "Data yang dihapus tidak dapat dikembalikan",
+        text: "Data pengeluaran yang dihapus tidak dapat dikembalikan",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -7426,7 +7440,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           // send request to the server
-          axios["delete"](url + "/" + id).then(function () {
+          axios["delete"]("/deletePengeluaran/" + id).then(function () {
             UpdateData.$emit("update");
             swal.fire("Tehapus!", "Data lahan berhasil dihapus", "success");
           })["catch"](function () {
@@ -7448,18 +7462,18 @@ __webpack_require__.r(__webpack_exports__);
       this.editmode = true;
       this.form.reset();
       $("#modalPengeluaran").modal("show");
-      this.form.fill(data);
+      this.form.fill(data); // console.log(this.form)
     }
   },
   created: function created() {
     this.getPengeluaran();
   },
   mounted: function mounted() {
-    var _this4 = this;
+    var _this3 = this;
 
     // Custom event on Vue js
     UpdateData.$on("update", function () {
-      _this4.getPengeluaran();
+      _this3.getPengeluaran();
     });
   }
 });
@@ -60972,45 +60986,6 @@ var render = function() {
                     _c("div", { staticClass: "modal-body" }, [
                       _c(
                         "div",
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.id,
-                                expression: "form.id"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-invalid": _vm.form.errors.has("id_form")
-                            },
-                            attrs: {
-                              type: "text",
-                              name: "id_form",
-                              hidden: ""
-                            },
-                            domProps: { value: _vm.form.id },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.form, "id", $event.target.value)
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "id_form" }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
                         { staticClass: "form-group col-md" },
                         [
                           _c("input", {
@@ -61295,39 +61270,6 @@ var render = function() {
                   },
                   [
                     _c("div", { staticClass: "modal-body" }, [
-                      _c("div", { staticClass: "form-group col-md" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.formriwayat.pra_produksi_id,
-                              expression: "formriwayat.pra_produksi_id"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "number",
-                            id: "pra_produksi_id",
-                            name: "pra_produksi_id",
-                            hidden: ""
-                          },
-                          domProps: { value: _vm.formriwayat.pra_produksi_id },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.formriwayat,
-                                "pra_produksi_id",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
                       _c(
                         "div",
                         { staticClass: "form-group col-md" },
@@ -61420,23 +61362,23 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.formriwayat.jml_pengeluaran,
-                                expression: "formriwayat.jml_pengeluaran"
+                                value: _vm.formriwayat.jumlah_pengeluaran,
+                                expression: "formriwayat.jumlah_pengeluaran"
                               }
                             ],
                             staticClass: "form-control",
                             class: {
                               "is-invalid": _vm.formriwayat.errors.has(
-                                "jml_pengeluaran"
+                                "jumlah_pengeluaran"
                               )
                             },
                             attrs: {
                               type: "number",
-                              name: "jml_pengeluaran",
+                              name: "jumlah_pengeluaran",
                               placeholder: "Jumlah Pengeluaran (dalam rupiah)"
                             },
                             domProps: {
-                              value: _vm.formriwayat.jml_pengeluaran
+                              value: _vm.formriwayat.jumlah_pengeluaran
                             },
                             on: {
                               input: function($event) {
@@ -61445,7 +61387,7 @@ var render = function() {
                                 }
                                 _vm.$set(
                                   _vm.formriwayat,
-                                  "jml_pengeluaran",
+                                  "jumlah_pengeluaran",
                                   $event.target.value
                                 )
                               }
@@ -61455,7 +61397,7 @@ var render = function() {
                           _c("has-error", {
                             attrs: {
                               form: _vm.formriwayat,
-                              field: "jml_pengeluaran"
+                              field: "jumlah_pengeluaran"
                             }
                           })
                         ],
@@ -62111,29 +62053,14 @@ var render = function() {
           _c("div", { staticClass: "row justify-content-center" }, [
             _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-header" }, [
-                  _c("h3", { staticClass: "card-title" }, [
-                    _vm._v("Riwayat Pengeluaran")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-tools" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        on: { click: _vm.newModal }
-                      },
-                      [_vm._v("Tambahkan Pengeluaran")]
-                    )
-                  ])
-                ]),
+                _vm._m(0),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body table-responsive p-0" }, [
                   _c(
                     "table",
                     { staticClass: "table table-hover text-nowrap" },
                     [
-                      _vm._m(0),
+                      _vm._m(1),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -62146,13 +62073,15 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(data.kodeLahan))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(data.jmlPengeluaran))]),
+                              _c("td", [_vm._v(_vm._s(data.nama_pengeluaran))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(data.tglPengeluaran))]),
+                              _c("td", [
+                                _vm._v(_vm._s(data.jumlah_pengeluaran))
+                              ]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(data.rincian))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(data.note))]),
+                              _c("td", [_vm._v(_vm._s(data.created_at))]),
                               _vm._v(" "),
                               _c("td", [
                                 _c("a", { attrs: { href: "#" } }, [
@@ -62216,7 +62145,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(1),
+                _vm._m(2),
                 _vm._v(" "),
                 _c(
                   "form",
@@ -62236,68 +62165,39 @@ var render = function() {
                         "div",
                         { staticClass: "form-group col-md" },
                         [
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.kodeLahan,
-                                  expression: "form.kodeLahan"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              class: {
-                                "is-invalid": _vm.form.errors.has("kodeLahan")
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.form,
-                                    "kodeLahan",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.kodeLahan,
+                                expression: "form.kodeLahan"
                               }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("kodeLahan")
                             },
-                            [
-                              _c(
-                                "option",
-                                {
-                                  attrs: {
-                                    value: "",
-                                    disabled: "",
-                                    selected: ""
-                                  }
-                                },
-                                [_vm._v("Pilih Lahan")]
-                              ),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "p11" } }, [
-                                _vm._v("P11")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "p12" } }, [
-                                _vm._v("P12")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "p13" } }, [
-                                _vm._v("P13")
-                              ])
-                            ]
-                          ),
+                            attrs: {
+                              disabled: "",
+                              type: "text",
+                              name: "kodeLahan",
+                              placeholder: ""
+                            },
+                            domProps: { value: _vm.form.kodeLahan },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "kodeLahan",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
                           _vm._v(" "),
                           _c("has-error", {
                             attrs: { form: _vm.form, field: "kodeLahan" }
@@ -62310,52 +62210,6 @@ var render = function() {
                         "div",
                         { staticClass: "form-group col-md" },
                         [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.jmlPengeluaran,
-                                expression: "form.jmlPengeluaran"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-invalid": _vm.form.errors.has(
-                                "jmlPengeluaran"
-                              )
-                            },
-                            attrs: {
-                              type: "number",
-                              name: "jmlPengeluaran",
-                              placeholder: "Jumlah Pengeluaran (dalam rupiah)"
-                            },
-                            domProps: { value: _vm.form.jmlPengeluaran },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.form,
-                                  "jmlPengeluaran",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "jmlPengeluaran" }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "form-group col-md" },
-                        [
                           _c(
                             "select",
                             {
@@ -62363,13 +62217,15 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.form.rincian,
-                                  expression: "form.rincian"
+                                  value: _vm.form.nama_pengeluaran,
+                                  expression: "form.nama_pengeluaran"
                                 }
                               ],
                               staticClass: "form-control",
                               class: {
-                                "is-invalid": _vm.form.errors.has("rincian")
+                                "is-invalid": _vm.form.errors.has(
+                                  "nama_pengeluaran"
+                                )
                               },
                               on: {
                                 change: function($event) {
@@ -62384,7 +62240,7 @@ var render = function() {
                                     })
                                   _vm.$set(
                                     _vm.form,
-                                    "rincian",
+                                    "nama_pengeluaran",
                                     $event.target.multiple
                                       ? $$selectedVal
                                       : $$selectedVal[0]
@@ -62397,12 +62253,13 @@ var render = function() {
                                 "option",
                                 {
                                   attrs: {
-                                    value: "",
                                     disabled: "",
+                                    hidden: "",
                                     selected: ""
-                                  }
+                                  },
+                                  domProps: { value: _vm.form.nama_pengeluaran }
                                 },
-                                [_vm._v("Pilih rincian")]
+                                [_vm._v(_vm._s(_vm.form.nama_pengeluaran))]
                               ),
                               _vm._v(" "),
                               _c("option", { attrs: { value: "Pupuk" } }, [
@@ -62424,7 +62281,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("has-error", {
-                            attrs: { form: _vm.form, field: "rincian" }
+                            attrs: { form: _vm.form, field: "nama_pengeluaran" }
                           })
                         ],
                         1
@@ -62439,32 +62296,85 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.note,
-                                expression: "form.note"
+                                value: _vm.form.jumlah_pengeluaran,
+                                expression: "form.jumlah_pengeluaran"
                               }
                             ],
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.form.errors.has("note")
+                              "is-invalid": _vm.form.errors.has(
+                                "jumlah_pengeluaran"
+                              )
                             },
                             attrs: {
-                              type: "text",
-                              name: "note",
-                              placeholder: "Catatan rincian (Opsional)"
+                              type: "number",
+                              name: "jumlah_pengeluaran",
+                              placeholder: "Jumlah Pengeluaran (dalam rupiah)"
                             },
-                            domProps: { value: _vm.form.note },
+                            domProps: { value: _vm.form.jumlah_pengeluaran },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.$set(_vm.form, "note", $event.target.value)
+                                _vm.$set(
+                                  _vm.form,
+                                  "jumlah_pengeluaran",
+                                  $event.target.value
+                                )
                               }
                             }
                           }),
                           _vm._v(" "),
                           _c("has-error", {
-                            attrs: { form: _vm.form, field: "note" }
+                            attrs: {
+                              form: _vm.form,
+                              field: "jumlah_pengeluaran"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group col-md" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.rincian,
+                                expression: "form.rincian"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("rincian")
+                            },
+                            attrs: {
+                              type: "text",
+                              name: "rincian",
+                              placeholder: ""
+                            },
+                            domProps: { value: _vm.form.rincian },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "rincian",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "rincian" }
                           })
                         ],
                         1
@@ -62531,19 +62441,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Riwayat Pengeluaran")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("id")]),
         _vm._v(" "),
         _c("th", [_vm._v("Kode Lahan")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Jumlah Pengeluaran")]),
+        _c("th", [_vm._v("Nama Pengeluaran")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Tanggal")]),
+        _c("th", [_vm._v("Jumlah Pengeluaran")]),
         _vm._v(" "),
         _c("th", [_vm._v("Rincian")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Catatan")]),
+        _c("th", [_vm._v("Tanggal")]),
         _vm._v(" "),
         _c("th", [_vm._v("Action")])
       ])

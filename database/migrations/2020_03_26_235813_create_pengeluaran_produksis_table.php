@@ -15,7 +15,6 @@ class CreatePengeluaranProduksisTable extends Migration
     {
         Schema::create('pengeluaran_produksi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('kode_lahan');
             $table->string('nama_pengeluaran');
             $table->integer('jumlah_pengeluaran');
             $table->string('rincian')->nullable();

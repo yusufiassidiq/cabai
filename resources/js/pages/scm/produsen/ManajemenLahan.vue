@@ -102,7 +102,7 @@
           </div>
           <form @submit.prevent="editmode? updateLahan() : addLahan()">
             <div class="modal-body">
-              <div>
+              <!-- <div>
                 <input
                   v-model="form.id"
                   type = "text"
@@ -112,7 +112,7 @@
                    :class="{ 'is-invalid': form.errors.has('id_form') }"
                 />
                 <has-error :form="form" field="id_form"></has-error>
-              </div>
+              </div> -->
               <div class="form-group col-md">
                 <input
                   v-model="form.kode_lahan"
@@ -194,16 +194,16 @@
           </div>
           <form @submit.prevent="addPengeluaran()">
             <div class="modal-body">
-              <div class="form-group col-md">
+              <!-- <div class="form-group col-md">
                 <input
                   v-model="formriwayat.pra_produksi_id"
                   type="number"
                   id="pra_produksi_id"
                   name="pra_produksi_id"
                   class="form-control"
-                  hidden
+                  
                 />
-              </div>
+              </div> -->
               <div class="form-group col-md">
                 <select
                   v-model="formriwayat.nama_pengeluaran"
@@ -221,14 +221,14 @@
 
               <div class="form-group col-md">
                 <input
-                  v-model="formriwayat.jml_pengeluaran"
+                  v-model="formriwayat.jumlah_pengeluaran"
                   type="number"
-                  name="jml_pengeluaran"
+                  name="jumlah_pengeluaran"
                   class="form-control"
                   placeholder="Jumlah Pengeluaran (dalam rupiah)"
-                  :class="{ 'is-invalid': formriwayat.errors.has('jml_pengeluaran') }"
+                  :class="{ 'is-invalid': formriwayat.errors.has('jumlah_pengeluaran') }"
                 />
-                <has-error :form="formriwayat" field="jml_pengeluaran"></has-error>
+                <has-error :form="formriwayat" field="jumlah_pengeluaran"></has-error>
               </div>
 
               <div class="form-group col-md">
@@ -283,7 +283,7 @@ export default {
       formriwayat: new Form({
         pra_produksi_id:"",
         nama_pengeluaran:"",
-        jml_pengeluaran:"",
+        jumlah_pengeluaran:"",
         rincian:""
       })
     };
@@ -328,7 +328,7 @@ export default {
     // Memperbarui data lahan produsen
     updateLahan() {
       document.getElementById("btnupdate").disabled = true;
-      console.log(this.form.id);
+      // console.log(this.form.id);
       // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       this.form
         .put("updateLahan/" + this.form.id)
@@ -352,7 +352,7 @@ export default {
       swal
         .fire({
           title: "Apakah kamu yakin?",
-          text: "Data yang dihapus tidak dapat dikembalikan",
+          text: "Menghapus lahan akan menghapus semua data pengeluaran lahan ini",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -383,22 +383,22 @@ export default {
       document.getElementById("btnaddpengeluaran").disabled = true;
       // Tinggal sesuain apinya aja
       // tinggal uncomment
-      // this.form
-      //   .post('#')
-      //   .then(() => {
-      //     // hide modal
-      //     $("#modalPengeluaran").trigger("click");
-      //     // show Toast if success
-      //     toast.fire({
-      //       icon: "success",
-      //       title: "Pengeluaran berhasil ditambahkan"
-      //     });
-      //     document.getElementById("btnaddpengeluaran").disabled = false;
-      //   })
-      //   .catch(error => {
-      //     console.error(error);
-      //     document.getElementById("btnaddpengeluaran").disabled = false;
-      //   });
+      this.formriwayat
+        .post('addPengeluaran')
+        .then(() => {
+          // hide modal
+          $("#modalPengeluaran").trigger("click");
+          // show Toast if success
+          toast.fire({
+            icon: "success",
+            title: "Pengeluaran berhasil ditambahkan"
+          });
+          document.getElementById("btnaddpengeluaran").disabled = false;
+        })
+        .catch(error => {
+          console.error(error);
+          document.getElementById("btnaddpengeluaran").disabled = false;
+        });
     },
     // MODAL
     // Menampilkan Modal utk menambahkan lahan baru
@@ -409,17 +409,19 @@ export default {
     },
     // Menampilkan Modal utk Mengedit lahan baru
     editModal(data) {
-      console.log(data)
+      // console.log(data)
       this.editmode = true;
       this.form.reset();
       $("#modalLahan").modal("show");
       this.form.fill(data);
-      console.log(this.form)
+      // console.log(this.form)
     },
     pengeluaranModal(id){
       $("#modalPengeluaran").modal("show");
-      console.log("ini id lahannya : " + id);
-      document.getElementById("pra_produksi_id").value = id;
+      // console.log(data);
+      this.formriwayat.pra_produksi_id = id
+      // console.log(this.formriwayat)
+      // document.getElementById("pra_produksi_id").value = data.id;
     },
   },
   created() {
