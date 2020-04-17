@@ -51,12 +51,15 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-    public function lokasi()
-    {
+    public function lokasi(){
         return $this->hasOne('App\Lokasi');
     }
 
     public function praProduksi(){
         return $this->hasMany('App\PraProduksi');
+    }
+
+    public function kemitraan(){
+        return $this->hasMany('App\Kemitraan');
     }
 }

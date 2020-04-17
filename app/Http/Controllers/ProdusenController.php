@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\PraProduksi;
 use App\PengeluaranProduksi;
+use App\Kemitraan;
 use Illuminate\Support\Facades\Validator;
 use Auth;
 use Carbon\Carbon;
@@ -115,4 +116,5 @@ class ProdusenController extends Controller
         $pengeluaran->delete();
         return 204;
     }
+    
 }

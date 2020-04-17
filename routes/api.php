@@ -32,27 +32,35 @@ Route::group(['middleware' => 'auth:api'], function(){
     // Users
     Route::get('users', 'UserController@index')->middleware('isAdmin');
     Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
-    //Test
+
     Route::delete('/user/{id}','AdminController@delete')->middleware('isAdmin');
     Route::post('/terima/{id}','AdminController@terima')->middleware('isAdmin');
     Route::post('/tolak/{id}','AdminController@tolak')->middleware('isAdmin');
     //Get Custom Payload
     // Route::get('user/getcustompayloads','UserController@seeToken');
+
     // get user yang belum divalidasi
     Route::get('requesteduser', 'UserController@requesteduser')->middleware('isAdmin');
+
     // get user yang sudah divalidasi
-    // Route::get('validateduser', 'UserController@validateduser')->middleware('isAdmin');
-    Route::get('validateduser', 'UserController@validateduser');
+    Route::get('validateduser', 'UserController@validateduser')->middleware('isAdmin');
+
+    //Kemitraan
+    Route::post('requestMitra/{id}','UserController@requestMitra');
+    Route::post('terimaMitra/{id}','UserController@terimaMitra');
+
     //Manajemen lahan
     Route::post('/addLahan','ProdusenController@addLahan');
     Route::get('/readLahan','ProdusenController@readLahan');
     Route::put('/updateLahan/{id}','ProdusenController@updateLahan');
     Route::delete('/deleteLahan/{id}','ProdusenController@deleteLahan');
+
     //Pengeluaran Produksi
     Route::post('/addPengeluaran','ProdusenController@addPengeluaran');
     Route::get('/readPengeluaran','ProdusenController@readPengeluaran');
     Route::put('/updatePengeluaran/{id}','ProdusenController@updatePengeluaran');
     Route::delete('/deletePengeluaran/{id}','ProdusenController@deletePengeluaran');
+    
     //Business Analytic
     Route::post('/addTarget','AnalysisController@addTarget');
     Route::get('/readTarget','AnalysisController@readTarget');
