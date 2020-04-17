@@ -40,14 +40,20 @@ Route::group(['middleware' => 'auth:api'], function(){
     // Route::get('user/getcustompayloads','UserController@seeToken');
 
     // get user yang belum divalidasi
-    Route::get('requesteduser', 'UserController@requesteduser')->middleware('isAdmin');
+    Route::get('/requesteduser', 'UserController@requesteduser')->middleware('isAdmin');
 
     // get user yang sudah divalidasi
-    Route::get('validateduser', 'UserController@validateduser')->middleware('isAdmin');
+    Route::get('/validateduser', 'UserController@validateduser')->middleware('isAdmin');
 
     //Kemitraan
-    Route::post('requestMitra/{id}','UserController@requestMitra');
-    Route::post('terimaMitra/{id}','UserController@terimaMitra');
+    Route::post('/requestMitra/{id}','UserController@requestMitra');
+    Route::post('/terimaMitra/{id}','UserController@terimaMitra');
+    Route::post('/tolakMitra/{id}','UserController@tolakMitra');
+
+    Route::get('/getMitraProdusen','UserController@getMitraProdusen');
+    Route::get('/getMitraPengepul','UserController@getMitraPengepul');
+    Route::get('/getMitraGrosir','UserController@getMitraGrosir');
+    Route::get('/getMitraPengecer','UserController@getMitraPengecer');
 
     //Manajemen lahan
     Route::post('/addLahan','ProdusenController@addLahan');
