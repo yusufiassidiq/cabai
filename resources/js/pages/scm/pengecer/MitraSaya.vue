@@ -2,9 +2,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <headerProdusen></headerProdusen>
-    <!-- /.content-header -->
-
+    <headerPengecer></headerPengecer>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -16,40 +14,37 @@
                   <li class="nav-item">
                     <a
                       class="nav-link active"
-                      id="custom-tabs-three-home-tab"
+                      id="custom-tabs-three-grosir-tab"
                       data-toggle="pill"
-                      href="#custom-tabs-three-home"
+                      href="#custom-tabs-three-grosir"
                       role="tab"
-                      aria-controls="custom-tabs-three-home"
+                      aria-controls="custom-tabs-three-grosir"
                       aria-selected="true"
-                    >Pengepul</a>
+                    >Grosir</a>
                   </li>
                 </ul>
               </div>
               <div class="card-body">
                 <div class="tab-content" id="custom-tabs-three-tabContent">
-                  <listpengepul></listpengepul>
+                  <grosir></grosir>
                 </div>
               </div>
-              <!-- /.card -->
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
 </template>
 <script>
-import headerProdusen from "../../../components/produsen/HeaderMitraSaya";
-import listPengepul from "../../../components/MS_ListPengepul";
+import headerPengecer from "../../../components/pengecer/HeaderMitraSaya";
+import listGrosir from "../../../components/MS_ListGrosir";
 
 export default {
   components: {
     // component : source
-    headerProdusen: headerProdusen,
-    listpengepul: listPengepul
+    headerPengecer: headerPengecer,
+    grosir: listGrosir,
   }
 };
 </script>
