@@ -2,9 +2,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <headerProdusen></headerProdusen>
-    <!-- /.content-header -->
-
+    <headerGrosir></headerGrosir>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -16,40 +14,51 @@
                   <li class="nav-item">
                     <a
                       class="nav-link active"
-                      id="custom-tabs-three-home-tab"
+                      id="custom-tabs-three-pengepul-tab"
                       data-toggle="pill"
-                      href="#custom-tabs-three-home"
+                      href="#custom-tabs-three-pengepul"
                       role="tab"
-                      aria-controls="custom-tabs-three-home"
+                      aria-controls="custom-tabs-three-pengepul"
                       aria-selected="true"
                     >Pengepul</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      id="custom-tabs-three-pengecer-tab"
+                      data-toggle="pill"
+                      href="#custom-tabs-three-pengecer"
+                      role="tab"
+                      aria-controls="custom-tabs-three-pengecer"
+                      aria-selected="false"
+                    >Pengecer</a>
                   </li>
                 </ul>
               </div>
               <div class="card-body">
                 <div class="tab-content" id="custom-tabs-three-tabContent">
-                  <listpengepul></listpengepul>
+                  <pengepul></pengepul>
+                  <pengecer></pengecer>
                 </div>
               </div>
-              <!-- /.card -->
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
 </template>
 <script>
-import headerProdusen from "../../../components/produsen/HeaderMitraSaya";
-import listPengepul from "../../../components/MS_ListPengepul";
+import headerGrosir from "../../../components/grosir/HeaderMitraSaya";
+import listpengepul from "../../../components/MS_ListPengepul";
+import listpengecer from "../../../components/MS_ListPengecer";
 
 export default {
   components: {
     // component : source
-    headerProdusen: headerProdusen,
-    listpengepul: listPengepul
+    headerGrosir: headerGrosir,
+    pengepul: listpengepul,
+    pengecer: listpengecer,
   }
 };
 </script>

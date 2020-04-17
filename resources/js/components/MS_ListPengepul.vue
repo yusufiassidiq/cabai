@@ -2,9 +2,9 @@
   <!-- MS : Ini merupakan komponen bagian pada Mitra Saya-->
   <div
     class="tab-pane fade active show"
-    id="custom-tabs-three-home"
+    id="custom-tabs-three-pengepul"
     role="tabpanel"
-    aria-labelledby="custom-tabs-three-home-tab"
+    aria-labelledby="custom-tabs-three-pengepul-tab"
   >
     <div class="col-md-12">
       <div class="card">

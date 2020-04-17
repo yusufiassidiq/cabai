@@ -16,11 +16,11 @@
                   <li class="nav-item">
                     <a
                       class="nav-link active"
-                      id="custom-tabs-three-home-tab"
+                      id="custom-tabs-three-pengepul-tab"
                       data-toggle="pill"
-                      href="#custom-tabs-three-home"
+                      href="#custom-tabs-three-pengepul"
                       role="tab"
-                      aria-controls="custom-tabs-three-home"
+                      aria-controls="custom-tabs-three-pengepul"
                       aria-selected="true"
                     >Pengepul</a>
                   </li>

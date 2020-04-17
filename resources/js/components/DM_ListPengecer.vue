@@ -1,15 +1,15 @@
 <template>
   <!-- DM : Ini merupakan komponen bagian pada Daftar Mitra -->
   <div
-    class="tab-pane fade active show"
-    id="custom-tabs-three-pengepul"
+    class="tab-pane fade"
+    id="custom-tabs-three-pengecer"
     role="tabpanel"
-    aria-labelledby="custom-tabs-three-pengepul-tab"
+    aria-labelledby="custom-tabs-three-pengecer-tab"
   >
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Daftar Pengepul</h3>
+          <h3 class="card-title">Daftar Pengecer</h3>
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
               <input
@@ -40,7 +40,7 @@
             </thead>
 
             <tbody>
-              <tr v-for="data in dataMitra" :key="data.id">
+              <!-- <tr v-for="data in dataMitra" :key="data.id">
                 <td>{{data.name}}</td>
                 <td>{{data.lokasiKelurahan}}, {{data.lokasiKecamatan}}, {{data.lokasiKabupaten}}</td>
                 <td>
@@ -49,19 +49,17 @@
                     Tambah sebagai mitra
                   </a>
                 </td>
+              </tr>-->
+              <tr>
+                <td>Example</td>
+                <td>ogor</td>
+                <td>
+                  <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
+                    <i class="fas fa-plus-square white"></i>
+                    Tambah sebagai mitra
+                  </a>
+                </td>
               </tr>
-              <!-- <tr v-for="data in dataMitra" :key="data.id"> -->
-              <!-- <td>{{ data.id }}</td> -->
-              <!-- <td>{{ data.name }}</td>
-                  <td>{{ data.lokasi }}</td>
-                  <td>
-                    <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
-                      <i class="fas fa-plus-square white"></i>
-                      Tambah sebagai mitra
-                    </a>
-              </td>-->
-              <!-- end example data -->
-              <!-- </tr> -->
             </tbody>
           </table>
         </div>
