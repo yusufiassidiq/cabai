@@ -41,18 +41,28 @@
               </thead>
 
               <tbody>
-                <tr v-for="data in dataMitra" :key="data.id">
-                  <!-- <td>{{ data.id }}</td> -->
-                  <td>{{ data.name }}</td>
-                  <td>{{ data.lokasi }}</td>
+                <tr>
+                  <td>Example data pengepul</td>
+                  <td>Bogor</td>
                   <td>
                     <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
                       <i class="fas fa-plus-square white"></i>
                       Tambah sebagai mitra
                     </a>
                   </td>
-                  <!-- end example data -->
                 </tr>
+                <!-- <tr v-for="data in dataMitra" :key="data.id"> -->
+                <!-- <td>{{ data.id }}</td> -->
+                <!-- <td>{{ data.name }}</td>
+                  <td>{{ data.lokasi }}</td>
+                  <td>
+                    <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
+                      <i class="fas fa-plus-square white"></i>
+                      Tambah sebagai mitra
+                    </a>
+                </td>-->
+                <!-- end example data -->
+                <!-- </tr> -->
               </tbody>
             </table>
           </div>
@@ -72,10 +82,7 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      axios.get("validateduser").then(response => {
-        console.log(response);
-        this.dataMitra = response.data.users;
-      });
+      console.log("get berhasil");
     },
     addMitra() {
       console.log("requestt berhasil");

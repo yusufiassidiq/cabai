@@ -78,10 +78,7 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      axios.get("validateduser").then(response => {
-        console.log(response);
-        this.dataMitra = response.data.users;
-      });
+      console.log("test berhasil")
     },
     deleteMitra(){
       console.log("berhasil dihapus");

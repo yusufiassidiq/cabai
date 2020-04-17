@@ -3762,6 +3762,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3771,12 +3781,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // Mendapatkan data Mitra
     getMitra: function getMitra() {
-      var _this = this;
-
-      axios.get("validateduser").then(function (response) {
-        console.log(response);
-        _this.dataMitra = response.data.users;
-      });
+      console.log("get berhasil");
     },
     addMitra: function addMitra() {
       console.log("requestt berhasil");
@@ -3786,11 +3791,11 @@ __webpack_require__.r(__webpack_exports__);
     this.getMitra();
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this = this;
 
     // Custom event on Vue js
     UpdateData.$on("update", function () {
-      _this2.getMitra();
+      _this.getMitra();
     });
   }
 });
@@ -3885,12 +3890,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // Mendapatkan data Mitra
     getMitra: function getMitra() {
-      var _this = this;
-
-      axios.get("validateduser").then(function (response) {
-        console.log(response);
-        _this.dataMitra = response.data.users;
-      });
+      console.log("test berhasil");
     },
     deleteMitra: function deleteMitra() {
       console.log("berhasil dihapus");
@@ -3900,11 +3900,11 @@ __webpack_require__.r(__webpack_exports__);
     this.getMitra();
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this = this;
 
     // Custom event on Vue js
     UpdateData.$on("update", function () {
-      _this2.getMitra();
+      _this.getMitra();
     });
   }
 });
@@ -50757,40 +50757,36 @@ var render = function() {
                 _c("table", { staticClass: "table table-hover text-nowrap" }, [
                   _vm._m(1),
                   _vm._v(" "),
-                  _c(
-                    "tbody",
-                    _vm._l(_vm.dataMitra, function(data) {
-                      return _c("tr", { key: data.id }, [
-                        _c("td", [_vm._v(_vm._s(data.name))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(data.lokasi))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-success btn-xs",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.addMitra()
-                                }
+                  _c("tbody", [
+                    _c("tr", [
+                      _c("td", [_vm._v("Example data pengepul")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Bogor")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-success btn-xs",
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.addMitra()
                               }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fas fa-plus-square white"
-                              }),
-                              _vm._v(
-                                "\n                    Tambah sebagai mitra\n                  "
-                              )
-                            ]
-                          )
-                        ])
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-plus-square white"
+                            }),
+                            _vm._v(
+                              "\n                    Tambah sebagai mitra\n                  "
+                            )
+                          ]
+                        )
                       ])
-                    }),
-                    0
-                  )
+                    ])
+                  ])
                 ])
               ])
             ])
