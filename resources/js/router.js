@@ -32,6 +32,7 @@ import PermintaanMitraPengepul from './pages/scm/pengepul/PermintaanMitra'
 import TransaksiPelangganPengepul from './pages/scm/pengepul/TransaksiPelanggan'
 import TransaksiPemasokPengepul from './pages/scm/pengepul/TransaksiPemasok'
 import InventarisPengepul from './pages/scm/pengepul/Inventaris'
+import MitraSayaPengepul from './pages/scm/pengepul/MitraSaya'
 
 import MasterGrosir from './pages/scm/grosir/Master' // grosir
 import DashboardGrosir from './pages/scm/grosir/Dashboard'
@@ -41,6 +42,7 @@ import PermintaanMitraGrosir from './pages/scm/grosir/PermintaanMitra'
 import TransaksiPelangganGrosir from './pages/scm/grosir/TransaksiPelanggan'
 import TransaksiPemasokGrosir from './pages/scm/grosir/TransaksiPemasok'
 import InventarisGrosir from './pages/scm/grosir/Inventaris'
+import MitraSayaGrosir from './pages/scm/grosir/MitraSaya'
 
 
 import MasterPengecer from './pages/scm/pengecer/Master' // pengecer
@@ -51,6 +53,7 @@ import PermintaanMitraPengecer from './pages/scm/pengecer/PermintaanMitra'
 import TransaksiPelangganPengecer from './pages/scm/pengecer/TransaksiPelanggan'
 import TransaksiPemasokPengecer from './pages/scm/pengecer/TransaksiPemasok'
 import InventarisPengecer from './pages/scm/pengecer/Inventaris'
+import MitraSayaPengecer from './pages/scm/pengecer/MitraSaya'
 
 // Pages - Bisnis Analitik
 import BAMaster from './pages/ba/Master'
@@ -186,6 +189,11 @@ const routes = [
                 name: "DaftarMitraGrosir"
             },
             {
+                path: 'mitrasaya',
+                component: MitraSayaGrosir,
+                name: "MitraSayaGrosir"
+            },
+            {
                 path: 'permintaanmitra',
                 component: PermintaanMitraGrosir,
                 name: "PermintaanMitraGrosir"
@@ -244,6 +252,11 @@ const routes = [
                 name: "DaftarMitraPengecer"
             },
             {
+                path: 'mitrasaya',
+                component: MitraSayaPengecer,
+                name: "MitraSayaPengecer"
+            },
+            {
                 path: 'permintaanmitra',
                 component: PermintaanMitraPengecer,
                 name: "PermintaanMitraPengecer"
@@ -299,6 +312,11 @@ const routes = [
                 path: 'daftarmitra',
                 component: DaftarMitraPengepul,
                 name: "DaftarMitraPengepul"
+            },
+            {
+                path: 'mitrasaya',
+                component: MitraSayaPengepul,
+                name: "MitraSayaPengepul"
             },
             {
                 path: 'permintaanmitra',

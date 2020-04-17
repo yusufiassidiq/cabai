@@ -2,14 +2,14 @@
   <!-- DM : Ini merupakan komponen bagian pada Daftar Mitra -->
   <div
     class="tab-pane fade active show"
-    id="custom-tabs-three-pengepul"
+    id="custom-tabs-three-grosir"
     role="tabpanel"
-    aria-labelledby="custom-tabs-three-pengepul-tab"
+    aria-labelledby="custom-tabs-three-grosir-tab"
   >
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Daftar Pengepul</h3>
+          <h3 class="card-title">Daftar Grosir</h3>
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
               <input
@@ -40,7 +40,17 @@
             </thead>
 
             <tbody>
-              <tr v-for="data in dataMitra" :key="data.id">
+              <tr>
+                <td>Example1 HAHA</td>
+                <td>Bogor</td>
+                <td>
+                  <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
+                    <i class="fas fa-plus-square white"></i>
+                    Tambah sebagai mitra
+                  </a>
+                </td>
+              </tr>
+              <!-- <tr v-for="data in dataMitra" :key="data.id">
                 <td>{{data.name}}</td>
                 <td>{{data.lokasiKelurahan}}, {{data.lokasiKecamatan}}, {{data.lokasiKabupaten}}</td>
                 <td>
@@ -49,19 +59,7 @@
                     Tambah sebagai mitra
                   </a>
                 </td>
-              </tr>
-              <!-- <tr v-for="data in dataMitra" :key="data.id"> -->
-              <!-- <td>{{ data.id }}</td> -->
-              <!-- <td>{{ data.name }}</td>
-                  <td>{{ data.lokasi }}</td>
-                  <td>
-                    <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
-                      <i class="fas fa-plus-square white"></i>
-                      Tambah sebagai mitra
-                    </a>
-              </td>-->
-              <!-- end example data -->
-              <!-- </tr> -->
+              </tr>-->
             </tbody>
           </table>
         </div>
@@ -82,10 +80,10 @@ export default {
     getMitra() {
       console.log("data berhasil didapatkan");
       // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
-      axios.get("/getMitraPengepul").then(response => {
-        this.dataMitra = response.data.data;
-        console.log(this.dataMitra);
-      });
+      // axios.get("/getMitraPengepul").then(response => {
+      //   this.dataMitra = response.data.data;
+      //   console.log(this.dataMitra);
+      // });
     },
     addMitra() {
       console.log("requestt berhasil");

@@ -1,15 +1,15 @@
 <template>
-  <!-- DM : Ini merupakan komponen bagian pada Daftar Mitra -->
+  <!-- MS : Ini merupakan komponen bagian pada Mitra Saya-->
   <div
     class="tab-pane fade active show"
-    id="custom-tabs-three-pengepul"
+    id="custom-tabs-three-grosir"
     role="tabpanel"
-    aria-labelledby="custom-tabs-three-pengepul-tab"
+    aria-labelledby="custom-tabs-three-grosir-tab"
   >
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Daftar Pengepul</h3>
+          <h3 class="card-title">Daftar Grosir</h3>
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
               <input
@@ -40,28 +40,24 @@
             </thead>
 
             <tbody>
-              <tr v-for="data in dataMitra" :key="data.id">
-                <td>{{data.name}}</td>
-                <td>{{data.lokasiKelurahan}}, {{data.lokasiKecamatan}}, {{data.lokasiKabupaten}}</td>
-                <td>
-                  <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
-                    <i class="fas fa-plus-square white"></i>
-                    Tambah sebagai mitra
-                  </a>
-                </td>
-              </tr>
-              <!-- <tr v-for="data in dataMitra" :key="data.id"> -->
-              <!-- <td>{{ data.id }}</td> -->
-              <!-- <td>{{ data.name }}</td>
+              <!-- <tr v-for="data in dataMitra" :key="data.id">
+                  <td>{{ data.name }}</td>
                   <td>{{ data.lokasi }}</td>
                   <td>
-                    <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
-                      <i class="fas fa-plus-square white"></i>
-                      Tambah sebagai mitra
-                    </a>
-              </td>-->
-              <!-- end example data -->
-              <!-- </tr> -->
+                    <a href="#" class="btn btn-success btn-xs" @click="pengeluaranModal(data.id)">
+                    <i class="fas fa-plus-square white"></i>
+                    Hapus Mitra
+                  </a>
+                  </td>
+              </tr>-->
+              <td>Example Mitra Saya 1</td>
+              <td>Bogor</td>
+              <td>
+                <a href="#" class="btn btn-danger btn-xs" @click="deleteMitra()">
+                  <i class="fas fa-trash white"></i>
+                  Hapus Mitra
+                </a>
+              </td>
             </tbody>
           </table>
         </div>
@@ -80,15 +76,10 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      console.log("data berhasil didapatkan");
-      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
-      axios.get("/getMitraPengepul").then(response => {
-        this.dataMitra = response.data.data;
-        console.log(this.dataMitra);
-      });
+      console.log("test berhasil");
     },
-    addMitra() {
-      console.log("requestt berhasil");
+    deleteMitra() {
+      console.log("berhasil dihapus");
     }
   },
   created() {

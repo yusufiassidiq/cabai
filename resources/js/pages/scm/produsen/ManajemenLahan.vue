@@ -39,7 +39,7 @@
                     <tr>
                       <th>Kode Lahan</th>
                       <th>Jenis Cabai</th>
-                      <th>Luas Lahan</th>
+                      <th>Luas Lahan (ha)</th>
                       <th>Tanggal tanam</th>
                       <th>Total Pengeluaran</th>
                       <th>Action</th>

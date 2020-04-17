@@ -66,8 +66,14 @@
             <li class="nav-header">Mitra</li>
             <li class="nav-item">
               <router-link to="/grosir/daftarmitra" class="nav-link">
-                <i class="fas fa-user-friends nav-icon"></i>
+                <i class="fas fa-users nav-icon"></i>
                 <p>Daftar Mitra</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/grosir/mitrasaya" class="nav-link">
+                <i class="fas fa-user-friends nav-icon"></i>
+                <p>Mitra Saya</p>
               </router-link>
             </li>
             <li class="nav-item">
