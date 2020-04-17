@@ -37,7 +37,7 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>id</th>
+                      <!-- <th>id</th> -->
                       <th>Kode Lahan</th>
                       <th>Nama Pengeluaran</th>
                       <th>Jumlah Pengeluaran</th>
@@ -50,7 +50,7 @@
                   <tbody>
                     <tr></tr>
                     <tr v-for="data in dataPengeluaran" :key="data.id" >
-                      <td>{{ data.id }}</td>
+                      <!-- <td>{{ data.id }}</td> -->
                       <td>{{ data.kodeLahan }}</td>
                       <td>{{ data.nama_pengeluaran }}</td>
                       <td>{{ data.jumlah_pengeluaran }}</td>

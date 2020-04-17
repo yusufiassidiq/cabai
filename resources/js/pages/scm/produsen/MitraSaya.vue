@@ -3,12 +3,13 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <headerProdusen></headerProdusen>
+    <!-- /.content-header -->
 
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row justify-content-center">
-          <div class="col-12">
+          <div class="col-md-12">
             <div class="card card-primary card-outline card-outline-tabs">
               <div class="card-header p-0 border-bottom-0">
                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -21,52 +22,32 @@
                       role="tab"
                       aria-controls="custom-tabs-three-home"
                       aria-selected="true"
-                    >Permintaan</a>
-                  </li>
-                  <li class="nav-item">
-                    <a
-                      class="nav-link"
-                      id="custom-tabs-three-profile-tab"
-                      data-toggle="pill"
-                      href="#custom-tabs-three-profile"
-                      role="tab"
-                      aria-controls="custom-tabs-three-profile"
-                      aria-selected="false"
-                    >Riwayat</a>
+                    >Pengepul</a>
                   </li>
                 </ul>
               </div>
               <div class="card-body">
-                <div class="tab-content" id="custom-tabs-three-tabContent">
-                  <!-- content permintaan -->
-                  <permintaan></permintaan>
-                  <!-- content riwayat -->
-                  <riwayat></riwayat>
-                </div>
+                <listpengepul></listpengepul>
               </div>
+              <!-- /.card -->
             </div>
           </div>
         </div>
       </div>
     </section>
+    <!-- /.content -->
   </div>
+  <!-- /.content-wrapper -->
 </template>
 <script>
-import headerProdusen from "../../../components/produsen/HeaderPermintaanMitra";
-import listPermintaan from "../../../components/produsen/PM_ListPermintaan";
-import listRiwayat from "../../../components/produsen/PM_ListRiwayat";
+import headerProdusen from "../../../components/produsen/HeaderMitraSaya";
+import listPengepul from "../../../components/produsen/MS_ListPengepul";
 
 export default {
-  data() {
-    return {};
-  },
   components: {
+    // component : source
     headerProdusen: headerProdusen,
-    permintaan: listPermintaan,
-    riwayat: listRiwayat,
-  },
-  methods: {},
-  created() {},
-  mounted() {}
+    listpengepul: listPengepul
+  }
 };
 </script>
