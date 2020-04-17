@@ -46,7 +46,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('validateduser', 'UserController@validateduser')->middleware('isAdmin');
 
     //Kemitraan
-    Route::post('requestMitra/{id}','ProdusenController@requestMitra');
+    Route::post('requestMitra/{id}','UserController@requestMitra');
+    Route::post('terimaMitra/{id}','UserController@terimaMitra');
 
     //Manajemen lahan
     Route::post('/addLahan','ProdusenController@addLahan');

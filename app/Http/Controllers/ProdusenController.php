@@ -116,33 +116,5 @@ class ProdusenController extends Controller
         $pengeluaran->delete();
         return 204;
     }
-    public function requestMitra($id){
-        $idUser1 = Auth::user()->id;
-        $idUser2 = $id;
-        $action_user = Auth::user()->id;
-        
-        //cek id user 1 harus lebih kecil
-        if($idUser2 < $idUser1) {
-            $temp = $idUser2;
-            $idUser2 = $idUser1;
-            $idUser1 = $temp;
-        }
-
-        $checkIsEmpty = Kemitraan::where('user1_id',$idUser1)->where('user2_id',$idUser2)->where('status',0)->get();
-        // return $checkIsEmpty;
-        if ($checkIsEmpty->isNotEmpty()){
-            return response()->json([
-                'status' => 'failed',
-                'data' => 'Pengguna ini atau Anda telah mengajukan permintaan kemitraan sebelumnya'                                    
-                ], 200);
-        }
-        $kemitraan = new Kemitraan;
-        $kemitraan->status = 0;
-        $kemitraan->action_user = $action_user;
-        $kemitraan->user1_id = $idUser1;
-        $kemitraan->user2_id = $idUser2;
-        $kemitraan->save();
-        return response()->json(['status' => 'success'], 200);
-        
-    }
+    
 }
