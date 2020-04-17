@@ -27,7 +27,9 @@
                 </ul>
               </div>
               <div class="card-body">
-                <listpengepul></listpengepul>
+                <div class="tab-content" id="custom-tabs-three-tabContent">
+                  <listpengepul></listpengepul>
+                </div>
               </div>
               <!-- /.card -->
             </div>

@@ -3198,8 +3198,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3550,8 +3548,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -5967,6 +5963,72 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/MitraSaya.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/grosir/MitraSaya.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_produsen_HeaderMitraSaya__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/produsen/HeaderMitraSaya */ "./resources/js/components/produsen/HeaderMitraSaya.vue");
+/* harmony import */ var _components_MS_ListPengepul__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/MS_ListPengepul */ "./resources/js/components/MS_ListPengepul.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    // component : source
+    headerProdusen: _components_produsen_HeaderMitraSaya__WEBPACK_IMPORTED_MODULE_0__["default"],
+    listpengepul: _components_MS_ListPengepul__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/PengajuanMitra.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/grosir/PengajuanMitra.vue?vue&type=script&lang=js& ***!
@@ -6366,6 +6428,72 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/MitraSaya.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengecer/MitraSaya.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_produsen_HeaderMitraSaya__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/produsen/HeaderMitraSaya */ "./resources/js/components/produsen/HeaderMitraSaya.vue");
+/* harmony import */ var _components_MS_ListPengepul__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/MS_ListPengepul */ "./resources/js/components/MS_ListPengepul.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    // component : source
+    headerProdusen: _components_produsen_HeaderMitraSaya__WEBPACK_IMPORTED_MODULE_0__["default"],
+    listpengepul: _components_MS_ListPengepul__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/PengajuanMitra.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengecer/PengajuanMitra.vue?vue&type=script&lang=js& ***!
@@ -6751,6 +6879,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {//
   },
@@ -6758,6 +6892,72 @@ __webpack_require__.r(__webpack_exports__);
     clearLocalStorage: function clearLocalStorage() {
       localStorage.clear();
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/MitraSaya.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengepul/MitraSaya.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_produsen_HeaderMitraSaya__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/produsen/HeaderMitraSaya */ "./resources/js/components/produsen/HeaderMitraSaya.vue");
+/* harmony import */ var _components_MS_ListPengepul__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/MS_ListPengepul */ "./resources/js/components/MS_ListPengepul.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    // component : source
+    headerProdusen: _components_produsen_HeaderMitraSaya__WEBPACK_IMPORTED_MODULE_0__["default"],
+    listpengepul: _components_MS_ListPengepul__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -6938,6 +7138,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_produsen_HeaderDaftarMitra__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/produsen/HeaderDaftarMitra */ "./resources/js/components/produsen/HeaderDaftarMitra.vue");
 /* harmony import */ var _components_DM_ListPengepul__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/DM_ListPengepul */ "./resources/js/components/DM_ListPengepul.vue");
+//
+//
 //
 //
 //
@@ -7622,6 +7824,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_produsen_HeaderMitraSaya__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/produsen/HeaderMitraSaya */ "./resources/js/components/produsen/HeaderMitraSaya.vue");
 /* harmony import */ var _components_MS_ListPengepul__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/MS_ListPengepul */ "./resources/js/components/MS_ListPengepul.vue");
+//
+//
 //
 //
 //
@@ -48931,77 +49135,66 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "tab-content",
-      attrs: { id: "custom-tabs-three-tabContent" }
+      staticClass: "tab-pane fade active show",
+      attrs: {
+        id: "custom-tabs-three-home",
+        role: "tabpanel",
+        "aria-labelledby": "custom-tabs-three-home-tab"
+      }
     },
     [
-      _c(
-        "div",
-        {
-          staticClass: "tab-pane fade active show",
-          attrs: {
-            id: "custom-tabs-three-home",
-            role: "tabpanel",
-            "aria-labelledby": "custom-tabs-three-home-tab"
-          }
-        },
-        [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _vm._m(0),
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive p-0" }, [
+            _c("table", { staticClass: "table table-hover text-nowrap" }, [
+              _vm._m(1),
               _vm._v(" "),
-              _c("div", { staticClass: "card-body table-responsive p-0" }, [
-                _c("table", { staticClass: "table table-hover text-nowrap" }, [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c(
-                    "tbody",
-                    _vm._l(_vm.dataMitra, function(data) {
-                      return _c("tr", { key: data.id }, [
-                        _c("td", [_vm._v(_vm._s(data.name))]),
-                        _vm._v(" "),
-                        _c("td", [
+              _c(
+                "tbody",
+                _vm._l(_vm.dataMitra, function(data) {
+                  return _c("tr", { key: data.id }, [
+                    _c("td", [_vm._v(_vm._s(data.name))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(data.lokasiKelurahan) +
+                          ", " +
+                          _vm._s(data.lokasiKecamatan) +
+                          ", " +
+                          _vm._s(data.lokasiKabupaten)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-success btn-xs",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.addMitra()
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-plus-square white" }),
                           _vm._v(
-                            _vm._s(data.lokasiKelurahan) +
-                              ", " +
-                              _vm._s(data.lokasiKecamatan) +
-                              ", " +
-                              _vm._s(data.lokasiKabupaten)
+                            "\n                  Tambah sebagai mitra\n                "
                           )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-success btn-xs",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.addMitra()
-                                }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fas fa-plus-square white"
-                              }),
-                              _vm._v(
-                                "\n                    Tambah sebagai mitra\n                  "
-                              )
-                            ]
-                          )
-                        ])
-                      ])
-                    }),
-                    0
-                  )
-                ])
-              ])
+                        ]
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
             ])
           ])
-        ]
-      )
+        ])
+      ])
     ]
   )
 }
@@ -49475,61 +49668,50 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "tab-content",
-      attrs: { id: "custom-tabs-three-tabContent" }
+      staticClass: "tab-pane fade active show",
+      attrs: {
+        id: "custom-tabs-three-home",
+        role: "tabpanel",
+        "aria-labelledby": "custom-tabs-three-home-tab"
+      }
     },
     [
-      _c(
-        "div",
-        {
-          staticClass: "tab-pane fade active show",
-          attrs: {
-            id: "custom-tabs-three-home",
-            role: "tabpanel",
-            "aria-labelledby": "custom-tabs-three-home-tab"
-          }
-        },
-        [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _vm._m(0),
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive p-0" }, [
+            _c("table", { staticClass: "table table-hover text-nowrap" }, [
+              _vm._m(1),
               _vm._v(" "),
-              _c("div", { staticClass: "card-body table-responsive p-0" }, [
-                _c("table", { staticClass: "table table-hover text-nowrap" }, [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c("tbody", [
-                    _c("td", [_vm._v("Example Mitra Saya 1")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Bogor")]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-danger btn-xs",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteMitra()
-                            }
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-trash white" }),
-                          _vm._v(
-                            "\n                  Hapus Mitra\n                "
-                          )
-                        ]
-                      )
-                    ])
-                  ])
+              _c("tbody", [
+                _c("td", [_vm._v("Example Mitra Saya 1")]),
+                _vm._v(" "),
+                _c("td", [_vm._v("Bogor")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-danger btn-xs",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteMitra()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-trash white" }),
+                      _vm._v("\n                Hapus Mitra\n              ")
+                    ]
+                  )
                 ])
               ])
             ])
           ])
-        ]
-      )
+        ])
+      ])
     ]
   )
 }
@@ -55030,6 +55212,102 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/MitraSaya.vue?vue&type=template&id=8a6c34be&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/grosir/MitraSaya.vue?vue&type=template&id=8a6c34be& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "content-wrapper" },
+    [
+      _c("headerProdusen"),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "card card-primary card-outline card-outline-tabs"
+                },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-content",
+                        attrs: { id: "custom-tabs-three-tabContent" }
+                      },
+                      [_c("listpengepul")],
+                      1
+                    )
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
+      _c(
+        "ul",
+        {
+          staticClass: "nav nav-tabs",
+          attrs: { id: "custom-tabs-three-tab", role: "tablist" }
+        },
+        [
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link active",
+                attrs: {
+                  id: "custom-tabs-three-home-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-home",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-home",
+                  "aria-selected": "true"
+                }
+              },
+              [_vm._v("Pengepul")]
+            )
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/PengajuanMitra.vue?vue&type=template&id=670fe7e8&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/grosir/PengajuanMitra.vue?vue&type=template&id=670fe7e8& ***!
@@ -55726,6 +56004,102 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/MitraSaya.vue?vue&type=template&id=6e27aee2&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengecer/MitraSaya.vue?vue&type=template&id=6e27aee2& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "content-wrapper" },
+    [
+      _c("headerProdusen"),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "card card-primary card-outline card-outline-tabs"
+                },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-content",
+                        attrs: { id: "custom-tabs-three-tabContent" }
+                      },
+                      [_c("listpengepul")],
+                      1
+                    )
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
+      _c(
+        "ul",
+        {
+          staticClass: "nav nav-tabs",
+          attrs: { id: "custom-tabs-three-tab", role: "tablist" }
+        },
+        [
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link active",
+                attrs: {
+                  id: "custom-tabs-three-home-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-home",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-home",
+                  "aria-selected": "true"
+                }
+              },
+              [_vm._v("Pengepul")]
+            )
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/PengajuanMitra.vue?vue&type=template&id=9a5a8172&":
 /*!*************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengecer/PengajuanMitra.vue?vue&type=template&id=9a5a8172& ***!
@@ -56208,11 +56582,31 @@ var render = function() {
                           attrs: { to: "/pengepul/daftarmitra" }
                         },
                         [
+                          _c("i", { staticClass: "fas fa-users nav-icon" }),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Daftar Mitra")])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: "/pengepul/mitrasaya" }
+                        },
+                        [
                           _c("i", {
                             staticClass: "fas fa-user-friends nav-icon"
                           }),
                           _vm._v(" "),
-                          _c("p", [_vm._v("Daftar Mitra")])
+                          _c("p", [_vm._v("Mitra Saya")])
                         ]
                       )
                     ],
@@ -56422,6 +56816,102 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/MitraSaya.vue?vue&type=template&id=f67d554e&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengepul/MitraSaya.vue?vue&type=template&id=f67d554e& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "content-wrapper" },
+    [
+      _c("headerProdusen"),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "card card-primary card-outline card-outline-tabs"
+                },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-content",
+                        attrs: { id: "custom-tabs-three-tabContent" }
+                      },
+                      [_c("listpengepul")],
+                      1
+                    )
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
+      _c(
+        "ul",
+        {
+          staticClass: "nav nav-tabs",
+          attrs: { id: "custom-tabs-three-tab", role: "tablist" }
+        },
+        [
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link active",
+                attrs: {
+                  id: "custom-tabs-three-home-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-home",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-home",
+                  "aria-selected": "true"
+                }
+              },
+              [_vm._v("Pengepul")]
+            )
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/PengajuanMitra.vue?vue&type=template&id=393ce9a0&":
 /*!*************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengepul/PengajuanMitra.vue?vue&type=template&id=393ce9a0& ***!
@@ -56572,12 +57062,17 @@ var render = function() {
                 [
                   _vm._m(0),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "card-body" },
-                    [_c("listpengepul")],
-                    1
-                  )
+                  _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-content",
+                        attrs: { id: "custom-tabs-three-tabContent" }
+                      },
+                      [_c("listpengepul")],
+                      1
+                    )
+                  ])
                 ]
               )
             ])
@@ -58539,7 +59034,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Jenis Cabai")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Luas Lahan")]),
+        _c("th", [_vm._v("Luas Lahan (ha)")]),
         _vm._v(" "),
         _c("th", [_vm._v("Tanggal tanam")]),
         _vm._v(" "),
@@ -58781,9 +59276,7 @@ var render = function() {
                           attrs: { to: "/produsen/daftarmitra" }
                         },
                         [
-                          _c("i", {
-                            staticClass: "fas fa-user-friends nav-icon"
-                          }),
+                          _c("i", { staticClass: "fas fa-users nav-icon" }),
                           _vm._v(" "),
                           _c("p", [_vm._v("Daftar Mitra")])
                         ]
@@ -59090,12 +59583,17 @@ var render = function() {
                 [
                   _vm._m(0),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "card-body" },
-                    [_c("listpengepul")],
-                    1
-                  )
+                  _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-content",
+                        attrs: { id: "custom-tabs-three-tabContent" }
+                      },
+                      [_c("listpengepul")],
+                      1
+                    )
+                  ])
                 ]
               )
             ])
@@ -81031,6 +81529,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/scm/grosir/MitraSaya.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/pages/scm/grosir/MitraSaya.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MitraSaya_vue_vue_type_template_id_8a6c34be___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MitraSaya.vue?vue&type=template&id=8a6c34be& */ "./resources/js/pages/scm/grosir/MitraSaya.vue?vue&type=template&id=8a6c34be&");
+/* harmony import */ var _MitraSaya_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MitraSaya.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/grosir/MitraSaya.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MitraSaya_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MitraSaya_vue_vue_type_template_id_8a6c34be___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MitraSaya_vue_vue_type_template_id_8a6c34be___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/scm/grosir/MitraSaya.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/grosir/MitraSaya.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/pages/scm/grosir/MitraSaya.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MitraSaya.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/MitraSaya.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/grosir/MitraSaya.vue?vue&type=template&id=8a6c34be&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/pages/scm/grosir/MitraSaya.vue?vue&type=template&id=8a6c34be& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_template_id_8a6c34be___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MitraSaya.vue?vue&type=template&id=8a6c34be& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/MitraSaya.vue?vue&type=template&id=8a6c34be&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_template_id_8a6c34be___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_template_id_8a6c34be___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/pages/scm/grosir/PengajuanMitra.vue":
 /*!**********************************************************!*\
   !*** ./resources/js/pages/scm/grosir/PengajuanMitra.vue ***!
@@ -81567,6 +82134,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/scm/pengecer/MitraSaya.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/pages/scm/pengecer/MitraSaya.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MitraSaya_vue_vue_type_template_id_6e27aee2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MitraSaya.vue?vue&type=template&id=6e27aee2& */ "./resources/js/pages/scm/pengecer/MitraSaya.vue?vue&type=template&id=6e27aee2&");
+/* harmony import */ var _MitraSaya_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MitraSaya.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/pengecer/MitraSaya.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MitraSaya_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MitraSaya_vue_vue_type_template_id_6e27aee2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MitraSaya_vue_vue_type_template_id_6e27aee2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/scm/pengecer/MitraSaya.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/pengecer/MitraSaya.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/pages/scm/pengecer/MitraSaya.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MitraSaya.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/MitraSaya.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/pengecer/MitraSaya.vue?vue&type=template&id=6e27aee2&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/pages/scm/pengecer/MitraSaya.vue?vue&type=template&id=6e27aee2& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_template_id_6e27aee2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MitraSaya.vue?vue&type=template&id=6e27aee2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/MitraSaya.vue?vue&type=template&id=6e27aee2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_template_id_6e27aee2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_template_id_6e27aee2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/pages/scm/pengecer/PengajuanMitra.vue":
 /*!************************************************************!*\
   !*** ./resources/js/pages/scm/pengecer/PengajuanMitra.vue ***!
@@ -82098,6 +82734,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Master_vue_vue_type_template_id_90cbdb94___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Master_vue_vue_type_template_id_90cbdb94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/pengepul/MitraSaya.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/pages/scm/pengepul/MitraSaya.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MitraSaya_vue_vue_type_template_id_f67d554e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MitraSaya.vue?vue&type=template&id=f67d554e& */ "./resources/js/pages/scm/pengepul/MitraSaya.vue?vue&type=template&id=f67d554e&");
+/* harmony import */ var _MitraSaya_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MitraSaya.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/pengepul/MitraSaya.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MitraSaya_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MitraSaya_vue_vue_type_template_id_f67d554e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MitraSaya_vue_vue_type_template_id_f67d554e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/scm/pengepul/MitraSaya.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/pengepul/MitraSaya.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/pages/scm/pengepul/MitraSaya.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MitraSaya.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/MitraSaya.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/pengepul/MitraSaya.vue?vue&type=template&id=f67d554e&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/pages/scm/pengepul/MitraSaya.vue?vue&type=template&id=f67d554e& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_template_id_f67d554e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MitraSaya.vue?vue&type=template&id=f67d554e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/MitraSaya.vue?vue&type=template&id=f67d554e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_template_id_f67d554e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitraSaya_vue_vue_type_template_id_f67d554e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -83020,28 +83725,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_scm_pengepul_TransaksiPelanggan__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./pages/scm/pengepul/TransaksiPelanggan */ "./resources/js/pages/scm/pengepul/TransaksiPelanggan.vue");
 /* harmony import */ var _pages_scm_pengepul_TransaksiPemasok__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./pages/scm/pengepul/TransaksiPemasok */ "./resources/js/pages/scm/pengepul/TransaksiPemasok.vue");
 /* harmony import */ var _pages_scm_pengepul_Inventaris__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/scm/pengepul/Inventaris */ "./resources/js/pages/scm/pengepul/Inventaris.vue");
-/* harmony import */ var _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./pages/scm/grosir/Master */ "./resources/js/pages/scm/grosir/Master.vue");
-/* harmony import */ var _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./pages/scm/grosir/Dashboard */ "./resources/js/pages/scm/grosir/Dashboard.vue");
-/* harmony import */ var _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./pages/scm/grosir/DaftarMitra */ "./resources/js/pages/scm/grosir/DaftarMitra.vue");
-/* harmony import */ var _pages_scm_grosir_PengajuanMitra__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./pages/scm/grosir/PengajuanMitra */ "./resources/js/pages/scm/grosir/PengajuanMitra.vue");
-/* harmony import */ var _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./pages/scm/grosir/PermintaanMitra */ "./resources/js/pages/scm/grosir/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_grosir_TransaksiPelanggan__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./pages/scm/grosir/TransaksiPelanggan */ "./resources/js/pages/scm/grosir/TransaksiPelanggan.vue");
-/* harmony import */ var _pages_scm_grosir_TransaksiPemasok__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./pages/scm/grosir/TransaksiPemasok */ "./resources/js/pages/scm/grosir/TransaksiPemasok.vue");
-/* harmony import */ var _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./pages/scm/grosir/Inventaris */ "./resources/js/pages/scm/grosir/Inventaris.vue");
-/* harmony import */ var _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./pages/scm/pengecer/Master */ "./resources/js/pages/scm/pengecer/Master.vue");
-/* harmony import */ var _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./pages/scm/pengecer/Dashboard */ "./resources/js/pages/scm/pengecer/Dashboard.vue");
-/* harmony import */ var _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./pages/scm/pengecer/DaftarMitra */ "./resources/js/pages/scm/pengecer/DaftarMitra.vue");
-/* harmony import */ var _pages_scm_pengecer_PengajuanMitra__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./pages/scm/pengecer/PengajuanMitra */ "./resources/js/pages/scm/pengecer/PengajuanMitra.vue");
-/* harmony import */ var _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanMitra */ "./resources/js/pages/scm/pengecer/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_pengecer_TransaksiPelanggan__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./pages/scm/pengecer/TransaksiPelanggan */ "./resources/js/pages/scm/pengecer/TransaksiPelanggan.vue");
-/* harmony import */ var _pages_scm_pengecer_TransaksiPemasok__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./pages/scm/pengecer/TransaksiPemasok */ "./resources/js/pages/scm/pengecer/TransaksiPemasok.vue");
-/* harmony import */ var _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./pages/scm/pengecer/Inventaris */ "./resources/js/pages/scm/pengecer/Inventaris.vue");
-/* harmony import */ var _pages_ba_Master__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./pages/ba/Master */ "./resources/js/pages/ba/Master.vue");
-/* harmony import */ var _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./pages/ba/produsen/Target */ "./resources/js/pages/ba/produsen/Target.vue");
-/* harmony import */ var _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./pages/ba/produsen/bisnisAnalitik */ "./resources/js/pages/ba/produsen/bisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./pages/ba/pengepul/BisnisAnalitik */ "./resources/js/pages/ba/pengepul/BisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./pages/ba/grosir/BisnisAnalitik */ "./resources/js/pages/ba/grosir/BisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./pages/ba/pengecer/BisnisAnalitik */ "./resources/js/pages/ba/pengecer/BisnisAnalitik.vue");
+/* harmony import */ var _pages_scm_pengepul_MitraSaya__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./pages/scm/pengepul/MitraSaya */ "./resources/js/pages/scm/pengepul/MitraSaya.vue");
+/* harmony import */ var _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./pages/scm/grosir/Master */ "./resources/js/pages/scm/grosir/Master.vue");
+/* harmony import */ var _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./pages/scm/grosir/Dashboard */ "./resources/js/pages/scm/grosir/Dashboard.vue");
+/* harmony import */ var _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./pages/scm/grosir/DaftarMitra */ "./resources/js/pages/scm/grosir/DaftarMitra.vue");
+/* harmony import */ var _pages_scm_grosir_PengajuanMitra__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./pages/scm/grosir/PengajuanMitra */ "./resources/js/pages/scm/grosir/PengajuanMitra.vue");
+/* harmony import */ var _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./pages/scm/grosir/PermintaanMitra */ "./resources/js/pages/scm/grosir/PermintaanMitra.vue");
+/* harmony import */ var _pages_scm_grosir_TransaksiPelanggan__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./pages/scm/grosir/TransaksiPelanggan */ "./resources/js/pages/scm/grosir/TransaksiPelanggan.vue");
+/* harmony import */ var _pages_scm_grosir_TransaksiPemasok__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./pages/scm/grosir/TransaksiPemasok */ "./resources/js/pages/scm/grosir/TransaksiPemasok.vue");
+/* harmony import */ var _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./pages/scm/grosir/Inventaris */ "./resources/js/pages/scm/grosir/Inventaris.vue");
+/* harmony import */ var _pages_scm_grosir_MitraSaya__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./pages/scm/grosir/MitraSaya */ "./resources/js/pages/scm/grosir/MitraSaya.vue");
+/* harmony import */ var _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./pages/scm/pengecer/Master */ "./resources/js/pages/scm/pengecer/Master.vue");
+/* harmony import */ var _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./pages/scm/pengecer/Dashboard */ "./resources/js/pages/scm/pengecer/Dashboard.vue");
+/* harmony import */ var _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./pages/scm/pengecer/DaftarMitra */ "./resources/js/pages/scm/pengecer/DaftarMitra.vue");
+/* harmony import */ var _pages_scm_pengecer_PengajuanMitra__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./pages/scm/pengecer/PengajuanMitra */ "./resources/js/pages/scm/pengecer/PengajuanMitra.vue");
+/* harmony import */ var _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanMitra */ "./resources/js/pages/scm/pengecer/PermintaanMitra.vue");
+/* harmony import */ var _pages_scm_pengecer_TransaksiPelanggan__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./pages/scm/pengecer/TransaksiPelanggan */ "./resources/js/pages/scm/pengecer/TransaksiPelanggan.vue");
+/* harmony import */ var _pages_scm_pengecer_TransaksiPemasok__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./pages/scm/pengecer/TransaksiPemasok */ "./resources/js/pages/scm/pengecer/TransaksiPemasok.vue");
+/* harmony import */ var _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./pages/scm/pengecer/Inventaris */ "./resources/js/pages/scm/pengecer/Inventaris.vue");
+/* harmony import */ var _pages_scm_pengecer_MitraSaya__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./pages/scm/pengecer/MitraSaya */ "./resources/js/pages/scm/pengecer/MitraSaya.vue");
+/* harmony import */ var _pages_ba_Master__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./pages/ba/Master */ "./resources/js/pages/ba/Master.vue");
+/* harmony import */ var _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./pages/ba/produsen/Target */ "./resources/js/pages/ba/produsen/Target.vue");
+/* harmony import */ var _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./pages/ba/produsen/bisnisAnalitik */ "./resources/js/pages/ba/produsen/bisnisAnalitik.vue");
+/* harmony import */ var _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./pages/ba/pengepul/BisnisAnalitik */ "./resources/js/pages/ba/pengepul/BisnisAnalitik.vue");
+/* harmony import */ var _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./pages/ba/grosir/BisnisAnalitik */ "./resources/js/pages/ba/grosir/BisnisAnalitik.vue");
+/* harmony import */ var _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./pages/ba/pengecer/BisnisAnalitik */ "./resources/js/pages/ba/pengecer/BisnisAnalitik.vue");
  // Pages
 
 
@@ -83073,6 +83781,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
  // grosir
 
 
@@ -83082,7 +83791,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
  // pengecer
+
 
 
 
@@ -83176,16 +83887,16 @@ var routes = [// SCM
   }, //BA
   {
     path: 'analitik',
-    component: _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_45__["default"],
+    component: _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_48__["default"],
     name: "BisnisAnalitikProd"
   }, {
     path: 'target',
-    component: _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_44__["default"],
+    component: _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_47__["default"],
     name: "TargetProd"
   }]
 }, {
   path: '/grosir',
-  component: _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_27__["default"],
+  component: _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_28__["default"],
   meta: {
     checkStatus: true,
     auth: {
@@ -83198,40 +83909,44 @@ var routes = [// SCM
   },
   children: [{
     path: '',
-    component: _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_28__["default"],
+    component: _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_29__["default"],
     name: "DashboardGrosir"
   }, {
     path: 'daftarmitra',
-    component: _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_29__["default"],
+    component: _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_30__["default"],
     name: "DaftarMitraGrosir"
   }, {
+    path: 'mitrasaya',
+    component: _pages_scm_grosir_MitraSaya__WEBPACK_IMPORTED_MODULE_36__["default"],
+    name: "MitraSayaGrosir"
+  }, {
     path: 'permintaanmitra',
-    component: _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_31__["default"],
+    component: _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_32__["default"],
     name: "PermintaanMitraGrosir"
   }, {
     path: 'pengajuanmitra',
-    component: _pages_scm_grosir_PengajuanMitra__WEBPACK_IMPORTED_MODULE_30__["default"],
+    component: _pages_scm_grosir_PengajuanMitra__WEBPACK_IMPORTED_MODULE_31__["default"],
     name: "PengajuanMitraGrosir"
   }, {
     path: 'transaksipelanggan',
-    component: _pages_scm_grosir_TransaksiPelanggan__WEBPACK_IMPORTED_MODULE_32__["default"],
+    component: _pages_scm_grosir_TransaksiPelanggan__WEBPACK_IMPORTED_MODULE_33__["default"],
     name: "TransaksiPelangganGrosir"
   }, {
     path: 'transaksipemasok',
-    component: _pages_scm_grosir_TransaksiPemasok__WEBPACK_IMPORTED_MODULE_33__["default"],
+    component: _pages_scm_grosir_TransaksiPemasok__WEBPACK_IMPORTED_MODULE_34__["default"],
     name: "TransaksiPemasokGrosir"
   }, {
     path: 'analitik',
-    component: _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_47__["default"],
+    component: _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_50__["default"],
     name: "BisnisAnalitikGrosir"
   }, {
     path: 'inventaris',
-    component: _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_34__["default"],
+    component: _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_35__["default"],
     name: "InventarisGrosir"
   }]
 }, {
   path: '/pengecer',
-  component: _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_35__["default"],
+  component: _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_37__["default"],
   meta: {
     checkStatus: true,
     auth: {
@@ -83244,35 +83959,39 @@ var routes = [// SCM
   },
   children: [{
     path: '',
-    component: _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_36__["default"],
+    component: _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_38__["default"],
     name: "DashboardPengecer"
   }, {
     path: 'daftarmitra',
-    component: _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_37__["default"],
+    component: _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_39__["default"],
     name: "DaftarMitraPengecer"
   }, {
+    path: 'mitrasaya',
+    component: _pages_scm_pengecer_MitraSaya__WEBPACK_IMPORTED_MODULE_45__["default"],
+    name: "MitraSayaPengecer"
+  }, {
     path: 'permintaanmitra',
-    component: _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_39__["default"],
+    component: _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_41__["default"],
     name: "PermintaanMitraPengecer"
   }, {
     path: 'pengajuanmitra',
-    component: _pages_scm_pengecer_PengajuanMitra__WEBPACK_IMPORTED_MODULE_38__["default"],
+    component: _pages_scm_pengecer_PengajuanMitra__WEBPACK_IMPORTED_MODULE_40__["default"],
     name: "PengajuanMitraPengecer"
   }, {
     path: 'transaksipelanggan',
-    component: _pages_scm_pengecer_TransaksiPelanggan__WEBPACK_IMPORTED_MODULE_40__["default"],
+    component: _pages_scm_pengecer_TransaksiPelanggan__WEBPACK_IMPORTED_MODULE_42__["default"],
     name: "TransaksiPelangganPengecer"
   }, {
     path: 'transaksipemasok',
-    component: _pages_scm_pengecer_TransaksiPemasok__WEBPACK_IMPORTED_MODULE_41__["default"],
+    component: _pages_scm_pengecer_TransaksiPemasok__WEBPACK_IMPORTED_MODULE_43__["default"],
     name: "TransaksiPemasokPengecer"
   }, {
     path: 'analitik',
-    component: _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_48__["default"],
+    component: _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_51__["default"],
     name: "BisnisAnalitikPengecer"
   }, {
     path: 'inventaris',
-    component: _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_42__["default"],
+    component: _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_44__["default"],
     name: "InventarisPengecer"
   }]
 }, {
@@ -83297,6 +84016,10 @@ var routes = [// SCM
     component: _pages_scm_pengepul_DaftarMitra__WEBPACK_IMPORTED_MODULE_21__["default"],
     name: "DaftarMitraPengepul"
   }, {
+    path: 'mitrasaya',
+    component: _pages_scm_pengepul_MitraSaya__WEBPACK_IMPORTED_MODULE_27__["default"],
+    name: "MitraSayaPengepul"
+  }, {
     path: 'permintaanmitra',
     component: _pages_scm_pengepul_PermintaanMitra__WEBPACK_IMPORTED_MODULE_23__["default"],
     name: "PermintaanMitraPengepul"
@@ -83314,7 +84037,7 @@ var routes = [// SCM
     name: "TransaksiPemasokPengepul"
   }, {
     path: 'analitik',
-    component: _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_46__["default"],
+    component: _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_49__["default"],
     name: "BisnisAnalitikPengepul"
   }, {
     path: 'inventaris',
@@ -83327,7 +84050,7 @@ var routes = [// SCM
 }, {
   path: '/',
   name: 'bisnisanalitik',
-  component: _pages_ba_Master__WEBPACK_IMPORTED_MODULE_43__["default"]
+  component: _pages_ba_Master__WEBPACK_IMPORTED_MODULE_46__["default"]
 }, {
   path: '/register',
   name: 'register',

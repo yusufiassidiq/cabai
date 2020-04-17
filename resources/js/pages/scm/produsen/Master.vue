@@ -80,7 +80,7 @@
             <li class="nav-header">Mitra</li>
             <li class="nav-item">
               <router-link to="/produsen/daftarmitra" class="nav-link">
-                <i class="fas fa-user-friends nav-icon"></i>
+                <i class="fas fa-users nav-icon"></i>
                 <p>Daftar Mitra</p>
               </router-link>
             </li>
