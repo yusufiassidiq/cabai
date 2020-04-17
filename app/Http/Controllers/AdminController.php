@@ -11,6 +11,9 @@ class AdminController extends Controller
     {
         $user = User::find($id);
         $user->lokasi()->delete();
+        $user->praProduksi()->pengeluaranProduksi()->delete();
+        $user->praProduksi()->delete();
+        $user->kemitraan()->delete();
         $user->delete();
         return 204;
     }
