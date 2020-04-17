@@ -41,7 +41,7 @@
 </template>
 <script>
 import headerProdusen from "../../../components/produsen/HeaderMitraSaya";
-import listPengepul from "../../../components/produsen/MS_ListPengepul";
+import listPengepul from "../../../components/MS_ListPengepul";
 
 export default {
   components: {

@@ -56,8 +56,8 @@
 </template>
 <script>
 import headerProdusen from "../../../components/produsen/HeaderPengajuanMitra";
-import listRiwayat from "../../../components/produsen/PNM_ListRiwayat";
-import listPengajuan from "../../../components/produsen/PNM_ListPengajuan";
+import listRiwayat from "../../../components/PNM_ListRiwayat";
+import listPengajuan from "../../../components/PNM_ListPengajuan";
 
 export default {
   data() {

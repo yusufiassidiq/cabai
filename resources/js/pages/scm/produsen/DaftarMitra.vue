@@ -41,7 +41,7 @@
 </template>
 <script>
 import headerProdusen from "../../../components/produsen/HeaderDaftarMitra";
-import listPengepul from "../../../components/produsen/DM_ListPengepul";
+import listPengepul from "../../../components/DM_ListPengepul";
 
 export default {
   components: {

@@ -53,8 +53,8 @@
 </template>
 <script>
 import headerProdusen from "../../../components/produsen/HeaderPermintaanMitra";
-import listPermintaan from "../../../components/produsen/PM_ListPermintaan";
-import listRiwayat from "../../../components/produsen/PM_ListRiwayat";
+import listPermintaan from "../../../components/PM_ListPermintaan";
+import listRiwayat from "../../../components/PM_ListRiwayat";
 
 export default {
   data() {
