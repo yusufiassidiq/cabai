@@ -22,6 +22,7 @@ import DaftarMitraProd from './pages/scm/produsen/DaftarMitra'
 import PengajuanMitraProd from './pages/scm/produsen/PengajuanMitra'
 import PermintaanMitraProd from './pages/scm/produsen/PermintaanMitra'
 import TransaksiPelangganProd from './pages/scm/produsen/TransaksiPelanggan'
+import MitraSayaProd from './pages/scm/produsen/MitraSaya'
 
 import MasterPengepul from './pages/scm/pengepul/Master' // pengepul
 import DashboardPengepul from './pages/scm/pengepul/Dashboard'
@@ -125,6 +126,11 @@ const routes = [
                 path: 'daftarmitra',
                 component: DaftarMitraProd,
                 name: "DaftarMitraProd"
+            },
+            {
+                path: 'mitrasaya',
+                component: MitraSayaProd,
+                name: "MitraSayaProd"
             },
             {
                 path: 'permintaanmitra',

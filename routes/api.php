@@ -60,7 +60,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/readPengeluaran','ProdusenController@readPengeluaran');
     Route::put('/updatePengeluaran/{id}','ProdusenController@updatePengeluaran');
     Route::delete('/deletePengeluaran/{id}','ProdusenController@deletePengeluaran');
-
+    
     //Business Analytic
     Route::post('/addTarget','AnalysisController@addTarget');
     Route::get('/readTarget','AnalysisController@readTarget');
