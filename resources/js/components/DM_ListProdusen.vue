@@ -40,17 +40,7 @@
             </thead>
 
             <tbody>
-              <tr>
-                <td>Example1</td>
-                <td>Bogor</td>
-                <td>
-                  <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
-                    <i class="fas fa-plus-square white"></i>
-                    Tambah sebagai mitra
-                  </a>
-                </td>
-              </tr>
-              <!-- <tr v-for="data in dataMitra" :key="data.id">
+              <tr v-for="data in dataMitra" :key="data.id">
                 <td>{{data.name}}</td>
                 <td>{{data.lokasiKelurahan}}, {{data.lokasiKecamatan}}, {{data.lokasiKabupaten}}</td>
                 <td>
@@ -59,7 +49,7 @@
                     Tambah sebagai mitra
                   </a>
                 </td>
-              </tr>-->
+              </tr>
             </tbody>
           </table>
         </div>
@@ -79,11 +69,10 @@ export default {
     // Mendapatkan data Mitra
     getMitra() {
       console.log("data berhasil didapatkan");
-      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
-      // axios.get("/getMitraPengepul").then(response => {
-      //   this.dataMitra = response.data.data;
-      //   console.log(this.dataMitra);
-      // });
+      axios.get("/getMitraProdusen").then(response => {
+        this.dataMitra = response.data.data;
+        console.log(this.dataMitra);
+      });
     },
     addMitra() {
       console.log("requestt berhasil");
