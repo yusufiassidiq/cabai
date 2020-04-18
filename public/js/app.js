@@ -3202,17 +3202,23 @@ __webpack_require__.r(__webpack_exports__);
         _this.dataMitra = response.data.data;
       });
     },
-    addMitra: function addMitra(id_grosir) {
-      axios.post("/requestMitra/" + id_grosir).then(function (response) {
-        toast.fire({
-          icon: "success",
-          title: "Berhasil mengajukan kemitraan"
-        });
-      })["catch"](function (error) {
-        toast.fire({
-          icon: "error",
-          title: "Pengguna ini telah mendaftarkan anda sebagai mitra"
-        });
+    addMitra: function addMitra(id_grosir, nama) {
+      swal.fire({
+        title: "Mengajukan Permintaan",
+        text: "Apakah anda yakin menambahkan " + nama + " sebagai mitra?",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, tambahkan"
+      }).then(function (result) {
+        if (result.value) {
+          // send request to the server
+          axios.post("/requestMitra/" + id_grosir).then(function (response) {
+            swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
+          })["catch"](function (error) {
+            swal.fire("gagal!", "Pengguna ini telah mendaftarkan anda sebagai mitra", "error");
+          });
+        }
       });
     }
   },
@@ -3318,17 +3324,23 @@ __webpack_require__.r(__webpack_exports__);
         console.log(_this.dataMitra);
       });
     },
-    addMitra: function addMitra(id_pengecer) {
-      axios.post("/requestMitra/" + id_pengecer).then(function (response) {
-        toast.fire({
-          icon: "success",
-          title: "Berhasil mengajukan kemitraan"
-        });
-      })["catch"](function (error) {
-        toast.fire({
-          icon: "error",
-          title: "Pengguna ini telah mendaftarkan anda sebagai mitra"
-        });
+    addMitra: function addMitra(id_pengecer, nama) {
+      swal.fire({
+        title: "Mengajukan Permintaan",
+        text: "Apakah anda yakin menambahkan " + nama + " sebagai mitra?",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, tambahkan"
+      }).then(function (result) {
+        if (result.value) {
+          // send request to the server
+          axios.post("/requestMitra/" + id_pengecer).then(function (response) {
+            swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
+          })["catch"](function (error) {
+            swal.fire("gagal!", "Pengguna ini telah mendaftarkan anda sebagai mitra", "error");
+          });
+        }
       });
     }
   },
@@ -3446,17 +3458,23 @@ __webpack_require__.r(__webpack_exports__);
         console.log(_this.dataMitra);
       });
     },
-    addMitra: function addMitra(id_pengepul) {
-      axios.post("/requestMitra/" + id_pengepul).then(function (response) {
-        toast.fire({
-          icon: "success",
-          title: "Berhasil mengajukan kemitraan"
-        });
-      })["catch"](function (error) {
-        toast.fire({
-          icon: "error",
-          title: "Pengguna ini telah mendaftarkan anda sebagai mitra"
-        });
+    addMitra: function addMitra(id_pengepul, nama) {
+      swal.fire({
+        title: "Mengajukan Permintaan",
+        text: "Apakah anda yakin menambahkan " + nama + " sebagai mitra?",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, tambahkan"
+      }).then(function (result) {
+        if (result.value) {
+          // send request to the server
+          axios.post("/requestMitra/" + id_pengepul).then(function (response) {
+            swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
+          })["catch"](function (error) {
+            swal.fire("gagal!", "Pengguna ini telah mendaftarkan anda sebagai mitra", "error");
+          });
+        }
       });
     }
   },
@@ -3559,17 +3577,23 @@ __webpack_require__.r(__webpack_exports__);
         _this.dataMitra = response.data.data;
       });
     },
-    addMitra: function addMitra(id_produsen) {
-      axios.post("/requestMitra/" + id_produsen).then(function (response) {
-        toast.fire({
-          icon: "success",
-          title: "Berhasil mengajukan kemitraan"
-        });
-      })["catch"](function (error) {
-        toast.fire({
-          icon: "error",
-          title: "Pengguna ini telah mendaftarkan anda sebagai mitra"
-        });
+    addMitra: function addMitra(id_produsen, nama) {
+      swal.fire({
+        title: "Mengajukan Permintaan",
+        text: "Apakah anda yakin menambahkan " + nama + " sebagai mitra?",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, tambahkan"
+      }).then(function (result) {
+        if (result.value) {
+          // send request to the server
+          axios.post("/requestMitra/" + id_produsen).then(function (response) {
+            swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
+          })["catch"](function (error) {
+            swal.fire("gagal!", "Pengguna ini telah mendaftarkan anda sebagai mitra", "error");
+          });
+        }
       });
     }
   },
@@ -49734,7 +49758,7 @@ var render = function() {
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
-                              return _vm.addMitra(data.id)
+                              return _vm.addMitra(data.id, data.name)
                             }
                           }
                         },
@@ -49873,7 +49897,7 @@ var render = function() {
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
-                              return _vm.addMitra(data.id)
+                              return _vm.addMitra(data.id, data.name)
                             }
                           }
                         },
@@ -50012,7 +50036,7 @@ var render = function() {
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
-                              return _vm.addMitra(data.id)
+                              return _vm.addMitra(data.id, data.name)
                             }
                           }
                         },
@@ -50151,7 +50175,7 @@ var render = function() {
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
-                              return _vm.addMitra(data.id)
+                              return _vm.addMitra(data.id, data.name)
                             }
                           }
                         },
