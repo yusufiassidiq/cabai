@@ -4220,7 +4220,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dataListPermintaanMitra: {}
+    };
+  },
+  methods: {
+    getPermintaanMitra: function getPermintaanMitra() {
+      var _this = this;
+
+      axios.get('/listPermintaanMitra').then(function (response) {
+        _this.dataListPermintaanMitra = response.data.data;
+        console.log(_this.dataListPermintaanMitra);
+      });
+    },
+    acceptMitra: function acceptMitra() {
+      console.log("Berhasil diterima");
+    },
+    rejectMitra: function rejectMitra() {
+      console.log("Berhasil ditolak");
+    }
+  },
+  created: function created() {
+    this.getPermintaanMitra();
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    UpdateData.$on("update", function () {
+      _this2.getPermintaanMitra();
+    });
+  }
+});
 
 /***/ }),
 
@@ -4396,24 +4438,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dataListPengajuanMitra: {}
+    };
+  },
   methods: {
-    acceptMitra: function acceptMitra() {
-      console.log("Berhasil diterima");
-    },
-    rejectMitra: function rejectMitra() {
-      console.log("Berhasil ditolak");
+    getPengajuanMitra: function getPengajuanMitra() {
+      var _this = this;
+
+      axios.get('/listPengajuanMitra').then(function (response) {
+        _this.dataListPengajuanMitra = response.data.data;
+        console.log(_this.dataListPengajuanMitra);
+      });
     }
+  },
+  created: function created() {
+    this.getPengajuanMitra();
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    UpdateData.$on("update", function () {
+      _this2.getPengajuanMitra();
+    });
   }
 });
 
@@ -51013,92 +51062,127 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass: "tab-pane fade active show",
+      attrs: {
+        id: "custom-tabs-three-home",
+        role: "tabpanel",
+        "aria-labelledby": "custom-tabs-three-home-tab"
+      }
+    },
+    [
+      _c("div", { staticClass: "card" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body table-responsive p-0" }, [
+          _c("table", { staticClass: "table table-hover text-nowrap" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("tbody", [
+              _c("tr", [
+                _c("td", [_vm._v("Example data 1")]),
+                _vm._v(" "),
+                _c("td", [_vm._v("Produsen")]),
+                _vm._v(" "),
+                _c("td", [_vm._v("Bogor")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-success btn-xs",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.acceptMitra()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-check white" }),
+                      _vm._v("\r\n                  Terima\r\n                ")
+                    ]
+                  ),
+                  _vm._v("\r\n                /\r\n                "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-danger btn-xs",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.rejectMitra()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-times white" }),
+                      _vm._v("\r\n                  Tolak\r\n                ")
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "tab-pane fade active show",
-        attrs: {
-          id: "custom-tabs-three-home",
-          role: "tabpanel",
-          "aria-labelledby": "custom-tabs-three-home-tab"
-        }
-      },
-      [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h3", { staticClass: "card-title" }, [
-              _vm._v("Daftar Permintaan")
-            ]),
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Daftar Permintaan")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "div",
+          {
+            staticClass: "input-group input-group-sm",
+            staticStyle: { width: "150px" }
+          },
+          [
+            _c("input", {
+              staticClass: "form-control float-right",
+              attrs: {
+                type: "text",
+                name: "table_search",
+                placeholder: "Search"
+              }
+            }),
             _vm._v(" "),
-            _c("div", { staticClass: "card-tools" }, [
+            _c("div", { staticClass: "input-group-append" }, [
               _c(
-                "div",
-                {
-                  staticClass: "input-group input-group-sm",
-                  staticStyle: { width: "150px" }
-                },
-                [
-                  _c("input", {
-                    staticClass: "form-control float-right",
-                    attrs: {
-                      type: "text",
-                      name: "table_search",
-                      placeholder: "Search"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group-append" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-default",
-                        attrs: { type: "submit" }
-                      },
-                      [_c("i", { staticClass: "fas fa-search" })]
-                    )
-                  ])
-                ]
+                "button",
+                { staticClass: "btn btn-default", attrs: { type: "submit" } },
+                [_c("i", { staticClass: "fas fa-search" })]
               )
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body table-responsive p-0" }, [
-            _c("table", { staticClass: "table table-hover text-nowrap" }, [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", [_vm._v("Nama")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Role")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Lokasi")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Status")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("td", [_vm._v("Example data 1")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Produsen")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Bogor")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Menunggu persetujuan")])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Nama")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Role")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Lokasi")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")])
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -51231,127 +51315,92 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "tab-pane fade active show",
-      attrs: {
-        id: "custom-tabs-three-home",
-        role: "tabpanel",
-        "aria-labelledby": "custom-tabs-three-home-tab"
-      }
-    },
-    [
-      _c("div", { staticClass: "card" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body table-responsive p-0" }, [
-          _c("table", { staticClass: "table table-hover text-nowrap" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c("td", [_vm._v("Example data 1")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Produsen")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Bogor")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-success btn-xs",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          return _vm.acceptMitra()
-                        }
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-check white" }),
-                      _vm._v("\n                Terima\n              ")
-                    ]
-                  ),
-                  _vm._v("\n              /\n              "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-danger btn-xs",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          return _vm.rejectMitra()
-                        }
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-times white" }),
-                      _vm._v("\n                Tolak\n              ")
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ]
-  )
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Daftar Pengajuan")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "div",
-          {
-            staticClass: "input-group input-group-sm",
-            staticStyle: { width: "150px" }
-          },
-          [
-            _c("input", {
-              staticClass: "form-control float-right",
-              attrs: {
-                type: "text",
-                name: "table_search",
-                placeholder: "Search"
-              }
-            }),
+    return _c(
+      "div",
+      {
+        staticClass: "tab-pane fade active show",
+        attrs: {
+          id: "custom-tabs-three-home",
+          role: "tabpanel",
+          "aria-labelledby": "custom-tabs-three-home-tab"
+        }
+      },
+      [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h3", { staticClass: "card-title" }, [
+              _vm._v("Daftar Pengajuan")
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
+            _c("div", { staticClass: "card-tools" }, [
               _c(
-                "button",
-                { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                [_c("i", { staticClass: "fas fa-search" })]
+                "div",
+                {
+                  staticClass: "input-group input-group-sm",
+                  staticStyle: { width: "150px" }
+                },
+                [
+                  _c("input", {
+                    staticClass: "form-control float-right",
+                    attrs: {
+                      type: "text",
+                      name: "table_search",
+                      placeholder: "Search"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-append" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-default",
+                        attrs: { type: "submit" }
+                      },
+                      [_c("i", { staticClass: "fas fa-search" })]
+                    )
+                  ])
+                ]
               )
             ])
-          ]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Nama")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Role")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Status")])
-      ])
-    ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive p-0" }, [
+            _c("table", { staticClass: "table table-hover text-nowrap" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", [_vm._v("Nama")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Role")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Lokasi")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Status")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c("td", [_vm._v("Example data 1")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Produsen")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Bogor")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Menunggu persetujuan")])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -86597,8 +86646,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
