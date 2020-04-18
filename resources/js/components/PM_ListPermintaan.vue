@@ -1,5 +1,5 @@
 <template>
-<!-- PM : Permintaanmitra -->
+  <!-- PM : Permintaanmitra -->
   <div
     class="tab-pane fade active show"
     id="custom-tabs-three-home"
@@ -40,42 +40,12 @@
           </thead>
 
           <tbody>
-            <tr >
-              <!-- <td>1</td> -->
-              <td>Example data 1</td>
-              <td>Produsen</td>
-              <td>Bogor</td>
-              <td>
-                <a href="#" class="btn btn-success btn-xs" @click="acceptMitra()">
-                  <i class="fas fa-check white"></i>
-                  Terima
-                </a>
-                /
-                <a href="#" class="btn btn-danger btn-xs" @click="rejectMitra()">
-                  <i class="fas fa-times white"></i>
-                  Tolak
-                </a>
-                </td>
+            <tr v-for="data in dataListPermintaanMitra" :key="data.id">
+              <td>{{ data.nama }}</td>
+              <td>role</td>
+              <td>lokasi</td>
+              <td>menunggu persetujuan</td>
             </tr>
-            <!-- <tr v-for="data in dataMitra" :key="data.id">
-                <td>{{ data.id }}</td>
-                <td>{{ data.name }}</td>
-                <td>{{ data.role }}</td>
-                <td>{{ data.lokasi }}</td>
-                <td>
-                <button
-                    type="button"
-                    class="btn btn-success"
-                    @click="terimaMitra(data.id)"
-                >Terima</button>
-                <button
-                    type="button"
-                    class="btn btn-danger"
-                    @click="tolakMitra(data.id)"
-                >Tolak</button>
-            </td>-->
-            <!-- end example data -->
-            <!-- </tr> -->
           </tbody>
         </table>
       </div>
@@ -85,22 +55,22 @@
 </template>
 <script>
 export default {
-  data (){
+  data() {
     return {
-      dataListPermintaanMitra: {},
-    }
+      dataListPermintaanMitra: {}
+    };
   },
-  methods:{
-    getPermintaanMitra(){
-      axios.get('/listPermintaanMitra').then(response=>{
-        this.dataListPermintaanMitra = response.data.data
-        console.log(this.dataListPermintaanMitra)
-      })
+  methods: {
+    getPermintaanMitra() {
+      axios.get("/listPermintaanMitra").then(response => {
+        this.dataListPermintaanMitra = response.data.data;
+        console.log(this.dataListPermintaanMitra);
+      });
     },
-    acceptMitra(){
+    acceptMitra() {
       console.log("Berhasil diterima");
     },
-    rejectMitra(){
+    rejectMitra() {
       console.log("Berhasil ditolak");
     }
   },

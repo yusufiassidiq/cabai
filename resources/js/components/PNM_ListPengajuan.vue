@@ -31,41 +31,31 @@
         <table class="table table-hover text-nowrap">
           <thead>
             <tr>
-              <!-- <th>Id</th> -->
               <th>Nama</th>
               <th>Role</th>
               <th>Lokasi</th>
-              <th>Status</th>
+              <th>Aksi</th>
             </tr>
           </thead>
 
           <tbody>
-            <tr>
-              <!-- <td>1</td> -->
-              <td>Example data 1</td>
-              <td>Produsen</td>
-              <td>Bogor</td>
-              <td>Menunggu persetujuan</td>
-            </tr>
-            <!-- <tr v-for="data in dataMitra" :key="data.id">
-                <td>{{ data.id }}</td>
-                <td>{{ data.name }}</td>
-                <td>{{ data.role }}</td>
-                <td>{{ data.lokasi }}</td>
-                <td>
+            <tr v-for="data in dataListPengajuanMitra" :key="data.id">
+              <td>{{ data.nama }}</td>
+              <td>role</td>
+              <td>lokasi</td>
+              <td>
                 <button
-                    type="button"
-                    class="btn btn-success"
-                    @click="terimaMitra(data.id)"
+                  type="button"
+                  class="btn btn-success btn-xs"
+                  @click="terimaMitra(data.id, data.nama)"
                 >Terima</button>
                 <button
-                    type="button"
-                    class="btn btn-danger"
-                    @click="tolakMitra(data.id)"
+                  type="button"
+                  class="btn btn-danger btn-xs"
+                  @click="tolakMitra(data.id)"
                 >Tolak</button>
-            </td>-->
-            <!-- end example data -->
-            <!-- </tr> -->
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -75,17 +65,45 @@
 </template>
 <script>
 export default {
-  data (){
+  data() {
     return {
-      dataListPengajuanMitra: {},
-    }
+      dataListPengajuanMitra: {}
+    };
   },
-  methods:{
-    getPengajuanMitra(){
-      axios.get('/listPengajuanMitra').then(response=>{
-        this.dataListPengajuanMitra = response.data.data
-        console.log(this.dataListPengajuanMitra)
-      })
+  methods: {
+    getPengajuanMitra() {
+      axios.get("/listPengajuanMitra").then(response => {
+        this.dataListPengajuanMitra = response.data.data;
+        console.log(this.dataListPengajuanMitra);
+      });
+    },
+    terimaMitra(id, nama) {
+      swal
+        .fire({
+          title: "Menerima Permintaan",
+          text: "Apakah anda yakin menerima " + nama + " sebagai mitra?",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya, terima"
+        })
+        .then(result => {
+          if (result.value) {
+            // send request to the server
+            axios
+              .put("/terimaMitra/" + id)
+              .then(function(response) {
+                swal.fire(
+                  "Menerima Permintaan",
+                  "Berhasil membentuk kemitraan",
+                  "success"
+                );
+              })
+              .catch(function(error) {
+                swal.fire("gagal!", "Gagal membentuk kemitraan", "error");
+              });
+          }
+        });
     }
   },
   created() {
