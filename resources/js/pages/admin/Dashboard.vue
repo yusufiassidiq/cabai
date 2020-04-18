@@ -34,8 +34,8 @@
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>150</h3>
-                  <p>User Terdaftar</p>
+                  <h3>{{ total_user }}</h3>
+                  <p>Total user</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
@@ -51,9 +51,7 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>
-                    53
-                  </h3>
+                  <h3>{{ validated_user }}</h3>
                   <p>User Tervalidasi</p>
                 </div>
                 <div class="icon">
@@ -70,8 +68,7 @@
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>44</h3>
-
+                  <h3>{{ not_validate_user }}</h3>
                   <p>User Belum divalidasi</p>
                 </div>
                 <div class="icon">
@@ -88,7 +85,7 @@
               <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
-                  <h3>65</h3>
+                  <h3>?</h3>
 
                   <p>User Gagal validasi</p>
                 </div>
@@ -111,3 +108,22 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      total_user: 0,
+      validated_user: 0,
+      not_validate_user: 0
+    };
+  },
+  created() {
+    axios.get("/admindashboard").then(response => {
+      // console.log(response.data.data);
+      this.total_user = response.data.data.total_user;
+      this.validated_user = response.data.data.validated_user;
+      this.not_validate_user = response.data.data.not_validated_user;
+    });
+  }
+};
+</script>
