@@ -79,7 +79,7 @@ class UserController extends Controller
         return response()->json([
                 'status' => 'success',
                 'data' => $listPengecer->toArray()
-            ], 200);
+            ], 200); 
     }
     public function requestMitra($id){
         if($id == Auth::user()->id){
@@ -102,7 +102,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => 'failed',
                 'data' => 'Pengguna ini atau Anda telah mengajukan permintaan kemitraan sebelumnya'                                    
-                ], 200);
+                ], 422);
         }
         $kemitraan = new Kemitraan;
         $kemitraan->status = 0; //pending

@@ -44,7 +44,7 @@
                 <td>{{data.name}}</td>
                 <td>{{data.lokasiKelurahan}}, {{data.lokasiKecamatan}}, {{data.lokasiKabupaten}}</td>
                 <td>
-                  <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
+                  <a href="#" class="btn btn-success btn-xs" @click="addMitra(data.id)">
                     <i class="fas fa-plus-square white"></i>
                     Tambah sebagai mitra
                   </a>
@@ -68,14 +68,25 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      console.log("data berhasil didapatkan");
       axios.get("/getMitraProdusen").then(response => {
         this.dataMitra = response.data.data;
-        console.log(this.dataMitra);
       });
     },
-    addMitra() {
-      console.log("requestt berhasil");
+    addMitra(id_produsen) {
+      axios
+        .post("/requestMitra/" + id_produsen)
+        .then(function(response) {
+          toast.fire({
+            icon: "success",
+            title: "Berhasil mengajukan kemitraan"
+          });
+        })
+        .catch(function(error) {
+          toast.fire({
+            icon: "error",
+            title: "Pengguna ini telah mendaftarkan anda sebagai mitra"
+          });
+        });
     }
   },
   created() {
