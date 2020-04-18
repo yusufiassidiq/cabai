@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use DB;
 
 class AdminController extends Controller
 {
     public function delete($id)
     {
         $user = User::find($id);
+        $praProduksis = $user->praProduksi->load('pengeluaranProduksi');
+        foreach($praProduksis as $i){
+            $i->pengeluaranProduksi()->delete();
+        }
         $user->lokasi()->delete();
-        $user->praProduksi()->pengeluaranProduksi()->delete();
         $user->praProduksi()->delete();
-        $user->kemitraan()->delete();
+        DB::table('kemitraan')->orWhere(function($query)use($id){
+            $query->orWhere('user2_id',$id)->orWhere('user1_id',$id);
+        })->delete();
         $user->delete();
         return 204;
     }
