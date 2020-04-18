@@ -44,7 +44,7 @@
                 <td>{{data.name}}</td>
                 <td>{{data.lokasiKelurahan}}, {{data.lokasiKecamatan}}, {{data.lokasiKabupaten}}</td>
                 <td>
-                  <a href="#" class="btn btn-success btn-xs" @click="addMitra(data.id)">
+                  <a href="#" class="btn btn-success btn-xs" @click="addMitra(data.id, data.name)">
                     <i class="fas fa-plus-square white"></i>
                     Tambah sebagai mitra
                   </a>
@@ -72,20 +72,36 @@ export default {
         this.dataMitra = response.data.data;
       });
     },
-    addMitra(id_produsen) {
-      axios
-        .post("/requestMitra/" + id_produsen)
-        .then(function(response) {
-          toast.fire({
-            icon: "success",
-            title: "Berhasil mengajukan kemitraan"
-          });
+    addMitra(id_produsen, nama) {
+      swal
+        .fire({
+          title: "Mengajukan Permintaan",
+          text: "Apakah anda yakin menambahkan " + nama + " sebagai mitra?",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya, tambahkan"
         })
-        .catch(function(error) {
-          toast.fire({
-            icon: "error",
-            title: "Pengguna ini telah mendaftarkan anda sebagai mitra"
-          });
+        .then(result => {
+          if (result.value) {
+            // send request to the server
+            axios
+              .post("/requestMitra/" + id_produsen)
+              .then(function(response) {
+                swal.fire(
+                  "Mengajukan Permintaan",
+                  "Berhasil mengajukan kemitraan",
+                  "success"
+                );
+              })
+              .catch(function(error) {
+                swal.fire(
+                  "gagal!",
+                  "Pengguna ini telah mendaftarkan anda sebagai mitra",
+                  "error"
+                );
+              });
+          }
         });
     }
   },
