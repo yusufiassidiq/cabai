@@ -3186,16 +3186,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3205,25 +3195,36 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // Mendapatkan data Mitra
     getMitra: function getMitra() {
-      console.log("data berhasil didapatkan"); // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
-      // axios.get("/getMitraPengepul").then(response => {
-      //   this.dataMitra = response.data.data;
-      //   console.log(this.dataMitra);
-      // });
+      var _this = this;
+
+      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
+      axios.get("/getMitraGrosir").then(function (response) {
+        _this.dataMitra = response.data.data;
+      });
     },
-    addMitra: function addMitra() {
-      console.log("requestt berhasil");
+    addMitra: function addMitra(id_grosir) {
+      axios.post("/requestMitra/" + id_grosir).then(function (response) {
+        toast.fire({
+          icon: "success",
+          title: "Berhasil mengajukan kemitraan"
+        });
+      })["catch"](function (error) {
+        toast.fire({
+          icon: "error",
+          title: "Pengguna ini telah mendaftarkan anda sebagai mitra"
+        });
+      });
     }
   },
   created: function created() {
     this.getMitra();
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     // Custom event on Vue js
     UpdateData.$on("update", function () {
-      _this.getMitra();
+      _this2.getMitra();
     });
   }
 });
@@ -3299,16 +3300,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3322,13 +3313,23 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log("data berhasil didapatkan"); // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
 
-      axios.get("/getMitraPengepul").then(function (response) {
+      axios.get("/getMitraPengecer").then(function (response) {
         _this.dataMitra = response.data.data;
         console.log(_this.dataMitra);
       });
     },
-    addMitra: function addMitra() {
-      console.log("requestt berhasil");
+    addMitra: function addMitra(id_pengecer) {
+      axios.post("/requestMitra/" + id_pengecer).then(function (response) {
+        toast.fire({
+          icon: "success",
+          title: "Berhasil mengajukan kemitraan"
+        });
+      })["catch"](function (error) {
+        toast.fire({
+          icon: "error",
+          title: "Pengguna ini telah mendaftarkan anda sebagai mitra"
+        });
+      });
     }
   },
   created: function created() {
@@ -3445,8 +3446,18 @@ __webpack_require__.r(__webpack_exports__);
         console.log(_this.dataMitra);
       });
     },
-    addMitra: function addMitra() {
-      console.log("requestt berhasil");
+    addMitra: function addMitra(id_pengepul) {
+      axios.post("/requestMitra/" + id_pengepul).then(function (response) {
+        toast.fire({
+          icon: "success",
+          title: "Berhasil mengajukan kemitraan"
+        });
+      })["catch"](function (error) {
+        toast.fire({
+          icon: "error",
+          title: "Pengguna ini telah mendaftarkan anda sebagai mitra"
+        });
+      });
     }
   },
   created: function created() {
@@ -3533,16 +3544,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3552,25 +3553,35 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // Mendapatkan data Mitra
     getMitra: function getMitra() {
-      console.log("data berhasil didapatkan"); // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
-      // axios.get("/getMitraPengepul").then(response => {
-      //   this.dataMitra = response.data.data;
-      //   console.log(this.dataMitra);
-      // });
+      var _this = this;
+
+      axios.get("/getMitraProdusen").then(function (response) {
+        _this.dataMitra = response.data.data;
+      });
     },
-    addMitra: function addMitra() {
-      console.log("requestt berhasil");
+    addMitra: function addMitra(id_produsen) {
+      axios.post("/requestMitra/" + id_produsen).then(function (response) {
+        toast.fire({
+          icon: "success",
+          title: "Berhasil mengajukan kemitraan"
+        });
+      })["catch"](function (error) {
+        toast.fire({
+          icon: "error",
+          title: "Pengguna ini telah mendaftarkan anda sebagai mitra"
+        });
+      });
     }
   },
   created: function created() {
     this.getMitra();
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     // Custom event on Vue js
     UpdateData.$on("update", function () {
-      _this.getMitra();
+      _this2.getMitra();
     });
   }
 });
@@ -49699,34 +49710,46 @@ var render = function() {
             _c("table", { staticClass: "table table-hover text-nowrap" }, [
               _vm._m(1),
               _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("td", [_vm._v("Example1 HAHA")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Bogor")]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-success btn-xs",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            return _vm.addMitra()
+              _c(
+                "tbody",
+                _vm._l(_vm.dataMitra, function(data) {
+                  return _c("tr", { key: data.id }, [
+                    _c("td", [_vm._v(_vm._s(data.name))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(data.lokasiKelurahan) +
+                          ", " +
+                          _vm._s(data.lokasiKecamatan) +
+                          ", " +
+                          _vm._s(data.lokasiKabupaten)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-success btn-xs",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.addMitra(data.id)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _c("i", { staticClass: "fas fa-plus-square white" }),
-                        _vm._v(
-                          "\n                  Tambah sebagai mitra\n                "
-                        )
-                      ]
-                    )
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-plus-square white" }),
+                          _vm._v(
+                            "\n                  Tambah sebagai mitra\n                "
+                          )
+                        ]
+                      )
+                    ])
                   ])
-                ])
-              ])
+                }),
+                0
+              )
             ])
           ])
         ])
@@ -49826,34 +49849,46 @@ var render = function() {
             _c("table", { staticClass: "table table-hover text-nowrap" }, [
               _vm._m(1),
               _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("td", [_vm._v("Example")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("ogor")]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-success btn-xs",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            return _vm.addMitra()
+              _c(
+                "tbody",
+                _vm._l(_vm.dataMitra, function(data) {
+                  return _c("tr", { key: data.id }, [
+                    _c("td", [_vm._v(_vm._s(data.name))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(data.lokasiKelurahan) +
+                          ", " +
+                          _vm._s(data.lokasiKecamatan) +
+                          ", " +
+                          _vm._s(data.lokasiKabupaten)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-success btn-xs",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.addMitra(data.id)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _c("i", { staticClass: "fas fa-plus-square white" }),
-                        _vm._v(
-                          "\n                  Tambah sebagai mitra\n                "
-                        )
-                      ]
-                    )
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-plus-square white" }),
+                          _vm._v(
+                            "\n                  Tambah sebagai mitra\n                "
+                          )
+                        ]
+                      )
+                    ])
                   ])
-                ])
-              ])
+                }),
+                0
+              )
             ])
           ])
         ])
@@ -49977,7 +50012,7 @@ var render = function() {
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
-                              return _vm.addMitra()
+                              return _vm.addMitra(data.id)
                             }
                           }
                         },
@@ -50092,34 +50127,46 @@ var render = function() {
             _c("table", { staticClass: "table table-hover text-nowrap" }, [
               _vm._m(1),
               _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("td", [_vm._v("Example1")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Bogor")]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-success btn-xs",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            return _vm.addMitra()
+              _c(
+                "tbody",
+                _vm._l(_vm.dataMitra, function(data) {
+                  return _c("tr", { key: data.id }, [
+                    _c("td", [_vm._v(_vm._s(data.name))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(data.lokasiKelurahan) +
+                          ", " +
+                          _vm._s(data.lokasiKecamatan) +
+                          ", " +
+                          _vm._s(data.lokasiKabupaten)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-success btn-xs",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.addMitra(data.id)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _c("i", { staticClass: "fas fa-plus-square white" }),
-                        _vm._v(
-                          "\n                  Tambah sebagai mitra\n                "
-                        )
-                      ]
-                    )
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-plus-square white" }),
+                          _vm._v(
+                            "\n                  Tambah sebagai mitra\n                "
+                          )
+                        ]
+                      )
+                    ])
                   ])
-                ])
-              ])
+                }),
+                0
+              )
             ])
           ])
         ])

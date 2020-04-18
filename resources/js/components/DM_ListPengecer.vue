@@ -40,21 +40,11 @@
             </thead>
 
             <tbody>
-              <!-- <tr v-for="data in dataMitra" :key="data.id">
+              <tr v-for="data in dataMitra" :key="data.id">
                 <td>{{data.name}}</td>
                 <td>{{data.lokasiKelurahan}}, {{data.lokasiKecamatan}}, {{data.lokasiKabupaten}}</td>
                 <td>
-                  <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
-                    <i class="fas fa-plus-square white"></i>
-                    Tambah sebagai mitra
-                  </a>
-                </td>
-              </tr>-->
-              <tr>
-                <td>Example</td>
-                <td>ogor</td>
-                <td>
-                  <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
+                  <a href="#" class="btn btn-success btn-xs" @click="addMitra(data.id)">
                     <i class="fas fa-plus-square white"></i>
                     Tambah sebagai mitra
                   </a>
@@ -80,13 +70,26 @@ export default {
     getMitra() {
       console.log("data berhasil didapatkan");
       // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
-      axios.get("/getMitraPengepul").then(response => {
+      axios.get("/getMitraPengecer").then(response => {
         this.dataMitra = response.data.data;
         console.log(this.dataMitra);
       });
     },
-    addMitra() {
-      console.log("requestt berhasil");
+    addMitra(id_pengecer) {
+      axios
+        .post("/requestMitra/" + id_pengecer)
+        .then(function(response) {
+          toast.fire({
+            icon: "success",
+            title: "Berhasil mengajukan kemitraan"
+          });
+        })
+        .catch(function(error) {
+          toast.fire({
+            icon: "error",
+            title: "Pengguna ini telah mendaftarkan anda sebagai mitra"
+          });
+        });
     }
   },
   created() {
