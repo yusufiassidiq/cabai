@@ -18,7 +18,8 @@ class CreateKemitraansTable extends Migration
             $table->timestamps();
             $table->integer('status');
             $table->unsignedBigInteger('action_user');
-            
+            $table->integer('flag')->default(0); //check id terbesar
+
             $table->unsignedBigInteger('user1_id');
             $table->foreign('user1_id')->references('id')->on('users');
 

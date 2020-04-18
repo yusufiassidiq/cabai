@@ -40,12 +40,22 @@
           </thead>
 
           <tbody>
-            <tr>
+            <tr >
               <!-- <td>1</td> -->
               <td>Example data 1</td>
               <td>Produsen</td>
               <td>Bogor</td>
-              <td>Menunggu persetujuan</td>
+              <td>
+                <a href="#" class="btn btn-success btn-xs" @click="acceptMitra()">
+                  <i class="fas fa-check white"></i>
+                  Terima
+                </a>
+                /
+                <a href="#" class="btn btn-danger btn-xs" @click="rejectMitra()">
+                  <i class="fas fa-times white"></i>
+                  Tolak
+                </a>
+                </td>
             </tr>
             <!-- <tr v-for="data in dataMitra" :key="data.id">
                 <td>{{ data.id }}</td>
@@ -74,5 +84,33 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data (){
+    return {
+      dataListPermintaanMitra: {},
+    }
+  },
+  methods:{
+    getPermintaanMitra(){
+      axios.get('/listPermintaanMitra').then(response=>{
+        this.dataListPermintaanMitra = response.data.data
+        console.log(this.dataListPermintaanMitra)
+      })
+    },
+    acceptMitra(){
+      console.log("Berhasil diterima");
+    },
+    rejectMitra(){
+      console.log("Berhasil ditolak");
+    }
+  },
+  created() {
+    this.getPermintaanMitra();
+  },
+  mounted() {
+    UpdateData.$on("update", () => {
+      this.getPermintaanMitra();
+    });
+  }
+};
 </script>
