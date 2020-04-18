@@ -32,4 +32,14 @@ class AdminController extends Controller
         $user->save();
         return response()->json(['status' => 'success'], 200);
     }
+    public function dashboardAdmin()
+    {
+        $jml_user = User::count();
+        $user_tervalidasi = User::where('status', 1)->count();
+        $user_blm_divalidasi = $jml_user - $user_tervalidasi;
+
+        $data = ["total_user" => $jml_user, "validated_user" => $user_tervalidasi, "not_validated_user" => $user_blm_divalidasi];
+        return response()->json(['data' => $data],200);
+    }
+
 }

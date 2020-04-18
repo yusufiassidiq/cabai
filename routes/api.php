@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('/user/{id}','AdminController@delete')->middleware('isAdmin');
     Route::post('/terima/{id}','AdminController@terima')->middleware('isAdmin');
     Route::post('/tolak/{id}','AdminController@tolak')->middleware('isAdmin');
+    Route::get('/admindashboard','AdminController@dashboardAdmin')->middleware('isAdmin');
     //Get Custom Payload
     // Route::get('user/getcustompayloads','UserController@seeToken');
 
@@ -73,6 +74,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('/updateTarget/{id}','AnalysisController@updateTarget');
     Route::delete('/deleteTarget/{id}','AnalysisController@deleteTarget');
 });
+
+
 
 // Route::resources([
 //     'user' => 'API\DummyController',
