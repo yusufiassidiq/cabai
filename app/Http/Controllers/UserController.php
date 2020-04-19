@@ -44,7 +44,7 @@ class UserController extends Controller
     }
 
     public function validateduser(){
-        $users = DB::table('users')->where('status', '=', '1')->get();
+        $users = DB::table('users')->where('status', '=', '1')->where('role', '!=', '1')->get();
         return response()->json(
             [
                 'status' => 'success',
@@ -96,7 +96,7 @@ class UserController extends Controller
         $idUser1 = Auth::user()->id;
         $idUser2 = $id;
         $action_user = Auth::user()->id;
-        
+        $flag = 0;
         //cek id user 1 harus lebih kecil
         if($idUser2 < $idUser1) {
             $temp = $idUser2;
@@ -163,9 +163,9 @@ class UserController extends Controller
         $j=0;
         foreach ($listPengajuanMitra as $i){
             if($listPengajuanMitra[$j]->flag == 0){
-                $i->nama = $i->user1()->first()->name;
-            }else{
                 $i->nama = $i->user2()->first()->name;
+            }else{
+                $i->nama = $i->user1()->first()->name;
             }
             $j++;
         }

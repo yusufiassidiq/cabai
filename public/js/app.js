@@ -4200,36 +4200,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4240,7 +4210,7 @@ __webpack_require__.r(__webpack_exports__);
     getPermintaanMitra: function getPermintaanMitra() {
       var _this = this;
 
-      axios.get('/listPermintaanMitra').then(function (response) {
+      axios.get("/listPermintaanMitra").then(function (response) {
         _this.dataListPermintaanMitra = response.data.data;
         console.log(_this.dataListPermintaanMitra);
       });
@@ -4428,16 +4398,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4448,9 +4408,28 @@ __webpack_require__.r(__webpack_exports__);
     getPengajuanMitra: function getPengajuanMitra() {
       var _this = this;
 
-      axios.get('/listPengajuanMitra').then(function (response) {
+      axios.get("/listPengajuanMitra").then(function (response) {
         _this.dataListPengajuanMitra = response.data.data;
         console.log(_this.dataListPengajuanMitra);
+      });
+    },
+    terimaMitra: function terimaMitra(id, nama) {
+      swal.fire({
+        title: "Menerima Permintaan",
+        text: "Apakah anda yakin menerima " + nama + " sebagai mitra?",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, terima"
+      }).then(function (result) {
+        if (result.value) {
+          // send request to the server
+          axios.put("/terimaMitra/" + id).then(function (response) {
+            swal.fire("Menerima Permintaan", "Berhasil membentuk kemitraan", "success");
+          })["catch"](function (error) {
+            swal.fire("gagal!", "Gagal membentuk kemitraan", "error");
+          });
+        }
       });
     }
   },
@@ -4651,6 +4630,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     login: function login() {
+      this.$Progress.start();
       document.getElementById("btnmasuk").disabled = true;
       this.errors = []; // get the redirect object
 
@@ -4678,8 +4658,9 @@ __webpack_require__.r(__webpack_exports__);
             if (this.$auth.user().status === 0) redirectTo = "unverifiedDashboard";else redirectTo = "DashboardGrosir";
           } else {
             if (this.$auth.user().status === 0) redirectTo = "unverifiedDashboard";else redirectTo = "DashboardPengecer";
-          } // var sts = this.$auth.user()
+          }
 
+          this.$Progress.finish(); // var sts = this.$auth.user()
 
           window.localStorage.setItem("isLoggedUser", true);
           this.$router.push({
@@ -4692,6 +4673,7 @@ __webpack_require__.r(__webpack_exports__);
         error: function error() {
           this.errors.push("Maaf, Email atau kata sandi Anda salah.");
           document.getElementById("btnmasuk").disabled = false;
+          this.$Progress.fail();
         },
         rememberMe: true,
         fetchUser: true
@@ -51080,51 +51062,21 @@ var render = function() {
           _c("table", { staticClass: "table table-hover text-nowrap" }, [
             _vm._m(1),
             _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c("td", [_vm._v("Example data 1")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Produsen")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Bogor")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-success btn-xs",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          return _vm.acceptMitra()
-                        }
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-check white" }),
-                      _vm._v("\r\n                  Terima\r\n                ")
-                    ]
-                  ),
-                  _vm._v("\r\n                /\r\n                "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-danger btn-xs",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          return _vm.rejectMitra()
-                        }
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-times white" }),
-                      _vm._v("\r\n                  Tolak\r\n                ")
-                    ]
-                  )
+            _c(
+              "tbody",
+              _vm._l(_vm.dataListPermintaanMitra, function(data) {
+                return _c("tr", { key: data.id }, [
+                  _c("td", [_vm._v(_vm._s(data.nama))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("role")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("lokasi")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("menunggu persetujuan")])
                 ])
-              ])
-            ])
+              }),
+              0
+            )
           ])
         ])
       ])
@@ -51315,92 +51267,125 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass: "tab-pane fade active show",
+      attrs: {
+        id: "custom-tabs-three-home",
+        role: "tabpanel",
+        "aria-labelledby": "custom-tabs-three-home-tab"
+      }
+    },
+    [
+      _c("div", { staticClass: "card" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body table-responsive p-0" }, [
+          _c("table", { staticClass: "table table-hover text-nowrap" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.dataListPengajuanMitra, function(data) {
+                return _c("tr", { key: data.id }, [
+                  _c("td", [_vm._v(_vm._s(data.nama))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("role")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("lokasi")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success btn-xs",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.terimaMitra(data.id, data.nama)
+                          }
+                        }
+                      },
+                      [_vm._v("Terima")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-xs",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.tolakMitra(data.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Tolak")]
+                    )
+                  ])
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "tab-pane fade active show",
-        attrs: {
-          id: "custom-tabs-three-home",
-          role: "tabpanel",
-          "aria-labelledby": "custom-tabs-three-home-tab"
-        }
-      },
-      [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h3", { staticClass: "card-title" }, [
-              _vm._v("Daftar Pengajuan")
-            ]),
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Daftar Pengajuan")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "div",
+          {
+            staticClass: "input-group input-group-sm",
+            staticStyle: { width: "150px" }
+          },
+          [
+            _c("input", {
+              staticClass: "form-control float-right",
+              attrs: {
+                type: "text",
+                name: "table_search",
+                placeholder: "Search"
+              }
+            }),
             _vm._v(" "),
-            _c("div", { staticClass: "card-tools" }, [
+            _c("div", { staticClass: "input-group-append" }, [
               _c(
-                "div",
-                {
-                  staticClass: "input-group input-group-sm",
-                  staticStyle: { width: "150px" }
-                },
-                [
-                  _c("input", {
-                    staticClass: "form-control float-right",
-                    attrs: {
-                      type: "text",
-                      name: "table_search",
-                      placeholder: "Search"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group-append" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-default",
-                        attrs: { type: "submit" }
-                      },
-                      [_c("i", { staticClass: "fas fa-search" })]
-                    )
-                  ])
-                ]
+                "button",
+                { staticClass: "btn btn-default", attrs: { type: "submit" } },
+                [_c("i", { staticClass: "fas fa-search" })]
               )
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body table-responsive p-0" }, [
-            _c("table", { staticClass: "table table-hover text-nowrap" }, [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", [_vm._v("Nama")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Role")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Lokasi")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Status")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("td", [_vm._v("Example data 1")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Produsen")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Bogor")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Menunggu persetujuan")])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Nama")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Role")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Lokasi")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Aksi")])
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -53219,110 +53204,119 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body login-card-body" }, [
-        _c("p", { staticClass: "login-box-msg" }, [
-          _vm._v("Sign in to start your session")
-        ]),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            attrs: { autocomplete: "on", method: "post" },
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.login($event)
+      _c(
+        "div",
+        { staticClass: "card-body login-card-body" },
+        [
+          _c("p", { staticClass: "login-box-msg" }, [
+            _vm._v("Sign in to start your session")
+          ]),
+          _vm._v(" "),
+          _c("vue-progress-bar"),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              attrs: { autocomplete: "on", method: "post" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.login($event)
+                }
               }
-            }
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "input-group mb-3",
-                class: { "has-error": _vm.has_error && _vm.errors.email }
-              },
-              [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.email,
-                      expression: "email"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "email",
-                    id: "email",
-                    placeholder: "Email",
-                    required: ""
-                  },
-                  domProps: { value: _vm.email },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "input-group mb-3",
+                  class: { "has-error": _vm.has_error && _vm.errors.email }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.email,
+                        expression: "email"
                       }
-                      _vm.email = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(1)
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "input-group mb-3",
-                class: { "has-error": _vm.has_error && _vm.errors.password }
-              },
-              [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.password,
-                      expression: "password"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "password",
-                    placeholder: "Password",
-                    autocomplete: "on",
-                    required: ""
-                  },
-                  domProps: { value: _vm.password },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "email",
+                      id: "email",
+                      placeholder: "Email",
+                      required: ""
+                    },
+                    domProps: { value: _vm.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.email = $event.target.value
                       }
-                      _vm.password = $event.target.value
                     }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(2)
-              ]
-            ),
-            _vm._v(" "),
-            _vm._l(_vm.errors, function(error) {
-              return _c("center", { key: error.message, staticClass: "red" }, [
-                _vm._v(_vm._s(error))
-              ])
-            }),
-            _vm._v(" "),
-            _vm._m(3)
-          ],
-          2
-        )
-      ])
+                  }),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "input-group mb-3",
+                  class: { "has-error": _vm.has_error && _vm.errors.password }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.password,
+                        expression: "password"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "password",
+                      placeholder: "Password",
+                      autocomplete: "on",
+                      required: ""
+                    },
+                    domProps: { value: _vm.password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.password = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(2)
+                ]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.errors, function(error) {
+                return _c(
+                  "center",
+                  { key: error.message, staticClass: "red" },
+                  [_vm._v(_vm._s(error))]
+                )
+              }),
+              _vm._v(" "),
+              _vm._m(3)
+            ],
+            2
+          )
+        ],
+        1
+      )
     ])
   ])
 }
@@ -86646,8 +86640,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

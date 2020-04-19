@@ -40,8 +40,8 @@ class AdminController extends Controller
     }
     public function dashboardAdmin()
     {
-        $jml_user = User::count();
-        $user_tervalidasi = User::where('status', 1)->count();
+        $jml_user = User::count() - 1; //-1 admin
+        $user_tervalidasi = User::where('status', 1)->count() - 1;// -1 admin
         $user_blm_divalidasi = $jml_user - $user_tervalidasi;
 
         $data = ["total_user" => $jml_user, "validated_user" => $user_tervalidasi, "not_validated_user" => $user_blm_divalidasi];

@@ -11,7 +11,7 @@
     <div class="card">
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
-
+        <vue-progress-bar></vue-progress-bar>
         <form autocomplete="on" @submit.prevent="login" method="post">
           <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.email }">
             <input
@@ -88,6 +88,7 @@ export default {
 
   methods: {
     login() {
+      this.$Progress.start();
       document.getElementById("btnmasuk").disabled = true;
       this.errors = [];
       // get the redirect object
@@ -124,7 +125,7 @@ export default {
               redirectTo = "unverifiedDashboard";
             else redirectTo = "DashboardPengecer";
           }
-
+          this.$Progress.finish();
           // var sts = this.$auth.user()
           window.localStorage.setItem("isLoggedUser", true);
           this.$router
@@ -134,6 +135,7 @@ export default {
         error: function() {
           this.errors.push("Maaf, Email atau kata sandi Anda salah.");
           document.getElementById("btnmasuk").disabled = false;
+          this.$Progress.fail()
         },
         rememberMe: true,
         fetchUser: true
