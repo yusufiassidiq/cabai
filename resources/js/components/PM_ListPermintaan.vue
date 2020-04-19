@@ -2,9 +2,9 @@
   <!-- PM : Permintaanmitra -->
   <div
     class="tab-pane fade active show"
-    id="custom-tabs-three-home"
+    id="custom-tabs-three-permintaan"
     role="tabpanel"
-    aria-labelledby="custom-tabs-three-home-tab"
+    aria-labelledby="custom-tabs-three-permintaan-tab"
   >
     <div class="card">
       <div class="card-header">

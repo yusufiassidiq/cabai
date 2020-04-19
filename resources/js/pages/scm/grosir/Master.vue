@@ -80,12 +80,12 @@
                 <p>Permintaan Mitra</p>
               </router-link>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link to="/grosir/pengajuanmitra" class="nav-link">
                 <i class="fas fa-user-clock nav-icon"></i>
                 <p>Pengajuan Mitra</p>
               </router-link>
-            </li>
+            </li> -->
             <li class="nav-header">Inventaris</li>
             <li class="nav-item">
               <router-link to="/grosir/inventaris" class="nav-link">

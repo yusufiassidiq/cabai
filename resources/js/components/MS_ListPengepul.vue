@@ -34,30 +34,25 @@
               <tr>
                 <!-- <th>Id</th> -->
                 <th>Nama</th>
+                <th>Role</th>
                 <th>Lokasi</th>
                 <th>Aksi</th>
               </tr>
             </thead>
 
             <tbody>
-              <!-- <tr v-for="data in dataMitra" :key="data.id">
-                  <td>{{ data.name }}</td>
-                  <td>{{ data.lokasi }}</td>
+              <tr v-for="data in dataMitra" :key="data.id">
+                  <td>{{ data.id }}</td>
+                  <td>Role</td>
+                  <td>Lokasi</td>
                   <td>
-                    <a href="#" class="btn btn-success btn-xs" @click="pengeluaranModal(data.id)">
+                    <a href="#" class="btn btn-danger btn-xs" @click="pengeluaranModal(data.id)">
                     <i class="fas fa-plus-square white"></i>
                     Hapus Mitra
                   </a>
                   </td>
-              </tr>-->
-              <td>Example Mitra Saya 1</td>
-              <td>Bogor</td>
-              <td>
-                <a href="#" class="btn btn-danger btn-xs" @click="deleteMitra()">
-                  <i class="fas fa-trash white"></i>
-                  Hapus Mitra
-                </a>
-              </td>
+              </tr>
+              
             </tbody>
           </table>
         </div>
@@ -76,7 +71,10 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      console.log("test berhasil");
+      axios.get("/listMitraSaya").then(response => {
+        this.dataMitra = response.data.data;
+        console.log(this.dataMitra);
+      });
     },
     deleteMitra() {
       console.log("berhasil dihapus");
