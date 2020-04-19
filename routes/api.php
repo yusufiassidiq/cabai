@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/requestMitra/{id}','UserController@requestMitra');
     Route::put('/terimaMitra/{id}','UserController@terimaMitra');
     Route::put('/tolakMitra/{id}','UserController@tolakMitra');
+    Route::delete('/hapusmitra/{id}','UserController@hapusMitra');
 
     Route::get('/listPengajuanMitra','UserController@listPengajuanMitra');
     Route::get('/listPermintaanMitra','UserController@listPermintaanMitra');

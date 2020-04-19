@@ -44,10 +44,14 @@
             </tr>
             <tr v-for="data in dataListPengajuanMitra" :key="data.id">
               <td>{{ data.nama }}</td>
-              <td>{{ data.role }}</td>
-              <td>{{ data.lokasi.kelurahan }} , {{ data.lokasi.kecamatan }} , {{ data.lokasi.kabupaten }}</td>
-              <td>Menunggu Persetujuan
+              <td>
+                <div v-if="data.role===2">Produsen</div>
+                <div v-else-if="data.role===3">Pengepul</div>
+                <div v-else-if="data.role===4">Grosir</div>
+                <div v-else-if="data.role===5">Pengecer</div>
               </td>
+              <td>{{ data.lokasi.kelurahan }} , {{ data.lokasi.kecamatan }} , {{ data.lokasi.kabupaten }}</td>
+              <td>Menunggu Persetujuan</td>
             </tr>
           </tbody>
         </table>
@@ -70,34 +74,6 @@ export default {
         // console.log(this.dataListPengajuanMitra[0].lokasi);
       });
     },
-    terimaMitra(id, nama) {
-      swal
-        .fire({
-          title: "Menerima Permintaan",
-          text: "Apakah anda yakin menerima " + nama + " sebagai mitra?",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Ya, terima"
-        })
-        .then(result => {
-          if (result.value) {
-            // send request to the server
-            axios
-              .put("/terimaMitra/" + id)
-              .then(function(response) {
-                swal.fire(
-                  "Menerima Permintaan",
-                  "Berhasil membentuk kemitraan",
-                  "success"
-                );
-              })
-              .catch(function(error) {
-                swal.fire("gagal!", "Gagal membentuk kemitraan", "error");
-              });
-          }
-        });
-    }
   },
   created() {
     this.getPengajuanMitra();

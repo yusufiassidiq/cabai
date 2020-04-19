@@ -45,7 +45,12 @@
             </tr>
             <tr v-for="data in dataListPermintaanMitra" :key="data.id">
               <td>{{ data.nama }}</td>
-              <td>{{ data.role }}</td>
+              <td>
+                <div v-if="data.role===2">Produsen</div>
+                <div v-else-if="data.role===3">Pengepul</div>
+                <div v-else-if="data.role===4">Grosir</div>
+                <div v-else-if="data.role===5">Pengecer</div>
+              </td>
               <td>{{ data.lokasi.kelurahan }} , {{ data.lokasi.kecamatan }} , {{ data.lokasi.kabupaten }}</td>
               <td>
                 <button
@@ -105,6 +110,7 @@ export default {
                   "Berhasil mengajukan kemitraan",
                   "success"
                 );
+                UpdateData.$emit("update");
               })
               .catch(function(error) {
                 swal.fire(
@@ -117,7 +123,36 @@ export default {
         });
     },
     rejectMitra(id_mitra, mitra_yg_mengajukan) {
-      console.log("Berhasil ditolak");
+      swal
+        .fire({
+          title: "Menolak Permintaan",
+          text:
+            "Apakah anda yakin menolak " +
+            mitra_yg_mengajukan +
+            " sebagai mitra?",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya"
+        })
+        .then(result => {
+          if (result.value) {
+            // send request to the server
+            axios
+              .put("/tolakMitra/" + id_mitra)
+              .then(function(response) {
+                swal.fire(
+                  "Menolak Permintaan",
+                  "Berhasil menolak kemitraan",
+                  "success"
+                );
+                UpdateData.$emit("update");
+              })
+              .catch(function(error) {
+                swal.fire("gagal!", "Gagal menolak mitra", "error");
+              });
+          }
+        });
     }
   },
   created() {
