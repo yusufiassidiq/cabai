@@ -51071,9 +51071,17 @@ var render = function() {
                 return _c("tr", { key: data.id }, [
                   _c("td", [_vm._v(_vm._s(data.nama))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("role")]),
+                  _c("td", [_vm._v(_vm._s(data.role))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("lokasi")]),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(data.lokasi.kelurahan) +
+                        " , " +
+                        _vm._s(data.lokasi.kecamatan) +
+                        " , " +
+                        _vm._s(data.lokasi.kabupaten)
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [
                     _c(

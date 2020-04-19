@@ -54,6 +54,11 @@ class UserController extends Controller
 
     public function getMitraProdusen(){
         $listProdusen = User::where('role',2)->where('status',1)->get();
+        foreach ($listProdusen as $i){
+            $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
+            $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
+            $i->lokasiKelurahan = $i->lokasi()->first()->kelurahan;
+        }
         return response()->json([
                 'status' => 'success',
                 'data' => $listProdusen->toArray()
@@ -62,11 +67,11 @@ class UserController extends Controller
 
     public function getMitraPengepul(){
         $listPengepul = User::where('role',3)->where('status',1)->get();
-        // foreach ($listPengepul as $i){
-        //     $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
-        //     $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
-        //     $i->lokasiKelurahan = $i->lokasi()->first()->kelurahan;
-        // }
+        foreach ($listPengepul as $i){
+            $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
+            $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
+            $i->lokasiKelurahan = $i->lokasi()->first()->kelurahan;
+        }
         return response()->json([
                 'status' => 'success',
                 'data' => $listPengepul->toArray()
@@ -75,6 +80,11 @@ class UserController extends Controller
 
     public function getMitraGrosir(){
         $listGrosir = User::where('role',4)->where('status',1)->get();
+        foreach ($listGrosir as $i){
+            $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
+            $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
+            $i->lokasiKelurahan = $i->lokasi()->first()->kelurahan;
+        }
         return response()->json([
                 'status' => 'success',
                 'data' => $listGrosir->toArray()
@@ -83,6 +93,11 @@ class UserController extends Controller
 
     public function getMitraPengecer(){
         $listPengecer = User::where('role',5)->where('status',1)->get();
+        foreach ($listPengecer as $i){
+            $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
+            $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
+            $i->lokasiKelurahan = $i->lokasi()->first()->kelurahan;
+        }
         return response()->json([
                 'status' => 'success',
                 'data' => $listPengecer->toArray()
@@ -166,16 +181,11 @@ class UserController extends Controller
             if($listPengajuanMitra[$j]->flag == 0){
                 $i->nama = $i->user2()->first()->name;
                 $i->role = $i->user2()->first()->role;
-                $i->lokasi = $i->user2()->first()->lokasi()->first();
-                // $i->lokasiKecamatan = $i->user2()->first()->lokasi()->first()->kecamatan;
-                // $i->lokasiKelurahan = $i->user2()->first()->lokasi()->first()->kelurahan;
-                
+                $i->lokasi = $i->user2()->first()->lokasi()->first();                
             }else{
                 $i->nama = $i->user1()->first()->name;
                 $i->role = $i->user1()->first()->role;
-                // $i->lokasiKabupaten = $i->user1()->first()->lokasi()->first()->kabupaten;
-                // $i->lokasiKecamatan = $i->user1()->first()->lokasi()->first()->kecamatan;
-                // $i->lokasiKelurahan = $i->user1()->first()->lokasi()->first()->kelurahan;
+                $i->lokasi = $i->user2()->first()->lokasi()->first();
             }
             $j++;
         }
@@ -195,8 +205,12 @@ class UserController extends Controller
         foreach ($listPermintaanMitra as $i){
             if($listPermintaanMitra[$j]->flag == 0){
                 $i->nama = $i->user1()->first()->name;
+                $i->role = $i->user2()->first()->role;
+                $i->lokasi = $i->user2()->first()->lokasi()->first(); 
             }else{
                 $i->nama = $i->user2()->first()->name;
+                $i->role = $i->user2()->first()->role;
+                $i->lokasi = $i->user2()->first()->lokasi()->first(); 
             }
             $j++;
         }

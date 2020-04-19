@@ -42,8 +42,8 @@
           <tbody>
             <tr v-for="data in dataListPermintaanMitra" :key="data.id">
               <td>{{ data.nama }}</td>
-              <td>role</td>
-              <td>lokasi</td>
+              <td>{{ data.role }}</td>
+              <td>{{ data.lokasi.kelurahan }} , {{ data.lokasi.kecamatan }} , {{ data.lokasi.kabupaten }}</td>
               <td><button
                   type="button"
                   class="btn btn-success btn-xs"
