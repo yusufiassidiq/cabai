@@ -1,5 +1,5 @@
 <template>
-  <!-- PM : Permintaanmitra -->
+  <!-- PM : Permintaanmitra dari Pengguna Lain-->
   <div
     class="tab-pane fade active show"
     id="custom-tabs-three-permintaan"
@@ -40,21 +40,25 @@
           </thead>
 
           <tbody>
+            <tr v-if="!dataListPermintaanMitra.length">
+              <td colspan="4" align="center">Tidak ada yang mengajukan kemitraan</td>
+            </tr>
             <tr v-for="data in dataListPermintaanMitra" :key="data.id">
               <td>{{ data.nama }}</td>
               <td>{{ data.role }}</td>
               <td>{{ data.lokasi.kelurahan }} , {{ data.lokasi.kecamatan }} , {{ data.lokasi.kabupaten }}</td>
-              <td><button
+              <td>
+                <button
                   type="button"
                   class="btn btn-success btn-xs"
-                  @click="terimaMitra(data.id, data.nama)"
+                  @click="acceptMitra(data.id, data.nama)"
                 >Terima</button>
                 <button
                   type="button"
                   class="btn btn-danger btn-xs"
-                  @click="tolakMitra(data.id)"
+                  @click="rejectMitra(data.id, data.nama)"
                 >Tolak</button>
-                </td>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -77,10 +81,42 @@ export default {
         console.log(this.dataListPermintaanMitra);
       });
     },
-    acceptMitra() {
-      console.log("Berhasil diterima");
+    acceptMitra(id_mitra, mitra_yg_mengajukan) {
+      swal
+        .fire({
+          title: "Menerima Permintaan",
+          text:
+            "Apakah anda yakin menerima " +
+            mitra_yg_mengajukan +
+            " sebagai mitra?",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya, terima"
+        })
+        .then(result => {
+          if (result.value) {
+            // send request to the server
+            axios
+              .put("/terimaMitra/" + id_mitra)
+              .then(function(response) {
+                swal.fire(
+                  "Mengajukan Permintaan",
+                  "Berhasil mengajukan kemitraan",
+                  "success"
+                );
+              })
+              .catch(function(error) {
+                swal.fire(
+                  "gagal!",
+                  "Pengguna ini telah mendaftarkan anda sebagai mitra",
+                  "error"
+                );
+              });
+          }
+        });
     },
-    rejectMitra() {
+    rejectMitra(id_mitra, mitra_yg_mengajukan) {
       console.log("Berhasil ditolak");
     }
   },

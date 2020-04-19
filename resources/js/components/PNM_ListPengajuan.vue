@@ -39,6 +39,9 @@
           </thead>
 
           <tbody>
+            <tr v-if="!dataListPengajuanMitra.length">
+              <td colspan="4" align="center">Tidak ada mitra yang diajukan</td>
+            </tr>
             <tr v-for="data in dataListPengajuanMitra" :key="data.id">
               <td>{{ data.nama }}</td>
               <td>{{ data.role }}</td>

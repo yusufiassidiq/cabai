@@ -49,6 +49,9 @@
 
                   <tbody>
                     <!-- example data -->
+                    <tr v-if="!datalahan.length">
+                      <td colspan="7" align="center">Tidak ada data lahan</td>
+                    </tr>
                     <tr v-for="data in datalahan" :key="data.id">
                       <td>{{ data.kode_lahan }}</td>
                       <td>{{ data.jenis_cabai }}</td>
@@ -65,7 +68,11 @@
                         </a>
                       </td>
                       <td>
-                        <a href="#" class="btn btn-success btn-xs" @click="pengeluaranModal(data.id)">
+                        <a
+                          href="#"
+                          class="btn btn-success btn-xs"
+                          @click="pengeluaranModal(data.id)"
+                        >
                           <i class="fas fa-plus-square white"></i>
                           Tambah
                         </a>
@@ -112,7 +119,7 @@
                    :class="{ 'is-invalid': form.errors.has('id_form') }"
                 />
                 <has-error :form="form" field="id_form"></has-error>
-              </div> -->
+              </div>-->
               <div class="form-group col-md">
                 <input
                   v-model="form.kode_lahan"
@@ -154,7 +161,6 @@
                   class="col-sm-10"
                   placeholder="Tanggal tanam"
                   v-model="form.tanggal_tanam"
-                  
                   :format="customFormatter"
                   id="tanggal_tanam"
                   :class="{ 'is-invalid': form.errors.has('tanggal_tanam') }"
@@ -165,7 +171,12 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-              <button id="btnupdate" v-show="editmode" type="submit" class="btn btn-success">Perbarui</button>
+              <button
+                id="btnupdate"
+                v-show="editmode"
+                type="submit"
+                class="btn btn-success"
+              >Perbarui</button>
               <button id="btnadd" v-show="!editmode" type="submit" class="btn btn-primary">Tambahkan</button>
             </div>
           </form>
@@ -203,7 +214,7 @@
                   class="form-control"
                   
                 />
-              </div> -->
+              </div>-->
               <div class="form-group col-md">
                 <select
                   v-model="formriwayat.nama_pengeluaran"
@@ -261,12 +272,12 @@
 <script>
 // datetimepicker doc : https://github.com/charliekassel/vuejs-datepicker#demo
 import datepicker from "vuejs-datepicker";
-import HeaderProdusen from '../../../components/produsen/HeaderManajemenLahan'
+import HeaderProdusen from "../../../components/produsen/HeaderManajemenLahan";
 
 export default {
   components: {
     datepicker,
-    'headerProdusen' : HeaderProdusen
+    headerProdusen: HeaderProdusen
   },
   data() {
     return {
@@ -281,16 +292,16 @@ export default {
         tanggal_tanam: ""
       }),
       formriwayat: new Form({
-        pra_produksi_id:"",
-        nama_pengeluaran:"",
-        jumlah_pengeluaran:"",
-        rincian:""
+        pra_produksi_id: "",
+        nama_pengeluaran: "",
+        jumlah_pengeluaran: "",
+        rincian: ""
       })
     };
   },
   methods: {
     customFormatter(date) {
-      return moment(date).format('DD MMMM YYYY');
+      return moment(date).format("DD MMMM YYYY");
     },
     // CRUD
     // Menambahkan data lahan Produsen
@@ -299,7 +310,7 @@ export default {
       // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       document.getElementById("btnadd").disabled = true;
       this.form
-        .post('/addLahan')
+        .post("/addLahan")
         .then(() => {
           // custom event
           UpdateData.$emit("update");
@@ -320,7 +331,7 @@ export default {
     // Mendapatkan data lahan produsen
     getLahan() {
       // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
-      axios.get('/readLahan').then(response => {
+      axios.get("/readLahan").then(response => {
         this.datalahan = response.data.data;
         // console.log(response.data.data)
       });
@@ -352,7 +363,8 @@ export default {
       swal
         .fire({
           title: "Apakah kamu yakin?",
-          text: "Menghapus lahan akan menghapus semua data pengeluaran lahan ini",
+          text:
+            "Menghapus lahan akan menghapus semua data pengeluaran lahan ini",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -378,13 +390,13 @@ export default {
           }
         });
     },
-    addPengeluaran(){
-      console.log("Tambah pengeluaran")
+    addPengeluaran() {
+      console.log("Tambah pengeluaran");
       document.getElementById("btnaddpengeluaran").disabled = true;
       // Tinggal sesuain apinya aja
       // tinggal uncomment
       this.formriwayat
-        .post('addPengeluaran')
+        .post("addPengeluaran")
         .then(() => {
           // hide modal
           $("#modalPengeluaran").trigger("click");
@@ -416,13 +428,13 @@ export default {
       this.form.fill(data);
       // console.log(this.form)
     },
-    pengeluaranModal(id){
+    pengeluaranModal(id) {
       $("#modalPengeluaran").modal("show");
       // console.log(data);
-      this.formriwayat.pra_produksi_id = id
+      this.formriwayat.pra_produksi_id = id;
       // console.log(this.formriwayat)
       // document.getElementById("pra_produksi_id").value = data.id;
-    },
+    }
   },
   created() {
     this.getLahan();

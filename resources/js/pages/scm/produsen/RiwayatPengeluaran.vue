@@ -48,7 +48,9 @@
                   </thead>
 
                   <tbody>
-                    <tr></tr>
+                    <tr v-if="!dataPengeluaran.length">
+                      <td colspan="6" align="center">Tidak ada data pengeluaran</td>
+                    </tr>
                     <tr v-for="data in dataPengeluaran" :key="data.id" >
                       <!-- <td>{{ data.id }}</td> -->
                       <td>{{ data.kodeLahan }}</td>

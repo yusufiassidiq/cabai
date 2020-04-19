@@ -144,8 +144,10 @@ class UserController extends Controller
         $user1 = $kemitraan->user1_id;
         $user2 = $kemitraan->user2_id;
 
-        if($userId != $user1 || $userId != $user2){
-            return response()->json(['status' => 'error'], 422);
+        if($userId != $user1){
+            if($userId != $user2){
+                return response()->json(['status' => 'error'], 422);
+            }
         }
 
         $kemitraan->update([

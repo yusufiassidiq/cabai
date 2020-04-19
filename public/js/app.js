@@ -4196,6 +4196,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4211,10 +4215,26 @@ __webpack_require__.r(__webpack_exports__);
         console.log(_this.dataListPermintaanMitra);
       });
     },
-    acceptMitra: function acceptMitra() {
-      console.log("Berhasil diterima");
+    acceptMitra: function acceptMitra(id_mitra, mitra_yg_mengajukan) {
+      swal.fire({
+        title: "Menerima Permintaan",
+        text: "Apakah anda yakin menerima " + mitra_yg_mengajukan + " sebagai mitra?",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, terima"
+      }).then(function (result) {
+        if (result.value) {
+          // send request to the server
+          axios.put("/terimaMitra/" + id_mitra).then(function (response) {
+            swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
+          })["catch"](function (error) {
+            swal.fire("gagal!", "Pengguna ini telah mendaftarkan anda sebagai mitra", "error");
+          });
+        }
+      });
     },
-    rejectMitra: function rejectMitra() {
+    rejectMitra: function rejectMitra(id_mitra, mitra_yg_mengajukan) {
       console.log("Berhasil ditolak");
     }
   },
@@ -4329,6 +4349,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -7879,13 +7902,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // datetimepicker doc : https://github.com/charliekassel/vuejs-datepicker#demo
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"],
-    'headerProdusen': _components_produsen_HeaderManajemenLahan__WEBPACK_IMPORTED_MODULE_1__["default"]
+    headerProdusen: _components_produsen_HeaderManajemenLahan__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -7910,7 +7944,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     customFormatter: function customFormatter(date) {
-      return moment(date).format('DD MMMM YYYY');
+      return moment(date).format("DD MMMM YYYY");
     },
     // CRUD
     // Menambahkan data lahan Produsen
@@ -7918,7 +7952,7 @@ __webpack_require__.r(__webpack_exports__);
       // Http Request axios dgn menggunakan vform
       // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       document.getElementById("btnadd").disabled = true;
-      this.form.post('/addLahan').then(function () {
+      this.form.post("/addLahan").then(function () {
         // custom event
         UpdateData.$emit("update"); // hide modal
 
@@ -7939,7 +7973,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
-      axios.get('/readLahan').then(function (response) {
+      axios.get("/readLahan").then(function (response) {
         _this.datalahan = response.data.data; // console.log(response.data.data)
       });
     },
@@ -7989,7 +8023,7 @@ __webpack_require__.r(__webpack_exports__);
       document.getElementById("btnaddpengeluaran").disabled = true; // Tinggal sesuain apinya aja
       // tinggal uncomment
 
-      this.formriwayat.post('addPengeluaran').then(function () {
+      this.formriwayat.post("addPengeluaran").then(function () {
         // hide modal
         $("#modalPengeluaran").trigger("click"); // show Toast if success
 
@@ -8386,6 +8420,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_produsen_HeaderRiwayatPengeluaran__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/produsen/HeaderRiwayatPengeluaran */ "./resources/js/components/produsen/HeaderRiwayatPengeluaran.vue");
+//
+//
 //
 //
 //
@@ -51443,54 +51479,64 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.dataListPermintaanMitra, function(data) {
-                return _c("tr", { key: data.id }, [
-                  _c("td", [_vm._v(_vm._s(data.nama))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(data.role))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(
-                      _vm._s(data.lokasi.kelurahan) +
-                        " , " +
-                        _vm._s(data.lokasi.kecamatan) +
-                        " , " +
-                        _vm._s(data.lokasi.kabupaten)
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success btn-xs",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.terimaMitra(data.id, data.nama)
-                          }
-                        }
-                      },
-                      [_vm._v("Terima")]
-                    ),
+              [
+                !_vm.dataListPermintaanMitra.length
+                  ? _c("tr", [
+                      _c("td", { attrs: { colspan: "4", align: "center" } }, [
+                        _vm._v("Tidak ada yang mengajukan kemitraan")
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.dataListPermintaanMitra, function(data) {
+                  return _c("tr", { key: data.id }, [
+                    _c("td", [_vm._v(_vm._s(data.nama))]),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-xs",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.tolakMitra(data.id)
+                    _c("td", [_vm._v(_vm._s(data.role))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(data.lokasi.kelurahan) +
+                          " , " +
+                          _vm._s(data.lokasi.kecamatan) +
+                          " , " +
+                          _vm._s(data.lokasi.kabupaten)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-xs",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.acceptMitra(data.id, data.nama)
+                            }
                           }
-                        }
-                      },
-                      [_vm._v("Tolak")]
-                    )
+                        },
+                        [_vm._v("Terima")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger btn-xs",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.rejectMitra(data.id, data.nama)
+                            }
+                          }
+                        },
+                        [_vm._v("Tolak")]
+                      )
+                    ])
                   ])
-                ])
-              }),
-              0
+                })
+              ],
+              2
             )
           ])
         ])
@@ -51702,26 +51748,36 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.dataListPengajuanMitra, function(data) {
-                return _c("tr", { key: data.id }, [
-                  _c("td", [_vm._v(_vm._s(data.nama))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(data.role))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(
-                      _vm._s(data.lokasi.kelurahan) +
-                        " , " +
-                        _vm._s(data.lokasi.kecamatan) +
-                        " , " +
-                        _vm._s(data.lokasi.kabupaten)
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Menunggu Persetujuan\n            ")])
-                ])
-              }),
-              0
+              [
+                !_vm.dataListPengajuanMitra.length
+                  ? _c("tr", [
+                      _c("td", { attrs: { colspan: "4", align: "center" } }, [
+                        _vm._v("Tidak ada mitra yang diajukan")
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.dataListPengajuanMitra, function(data) {
+                  return _c("tr", { key: data.id }, [
+                    _c("td", [_vm._v(_vm._s(data.nama))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(data.role))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(data.lokasi.kelurahan) +
+                          " , " +
+                          _vm._s(data.lokasi.kecamatan) +
+                          " , " +
+                          _vm._s(data.lokasi.kabupaten)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Menunggu Persetujuan\n            ")])
+                  ])
+                })
+              ],
+              2
             )
           ])
         ])
@@ -60144,73 +60200,85 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "tbody",
-                        _vm._l(_vm.datalahan, function(data) {
-                          return _c("tr", { key: data.id }, [
-                            _c("td", [_vm._v(_vm._s(data.kode_lahan))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(data.jenis_cabai))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(data.luas_lahan))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(data.tanggal_tanam))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v("ini total")]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "a",
-                                {
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.editModal(data)
+                        [
+                          !_vm.datalahan.length
+                            ? _c("tr", [
+                                _c(
+                                  "td",
+                                  { attrs: { colspan: "7", align: "center" } },
+                                  [_vm._v("Tidak ada data lahan")]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm._l(_vm.datalahan, function(data) {
+                            return _c("tr", { key: data.id }, [
+                              _c("td", [_vm._v(_vm._s(data.kode_lahan))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(data.jenis_cabai))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(data.luas_lahan))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(data.tanggal_tanam))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("ini total")]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editModal(data)
+                                      }
                                     }
-                                  }
-                                },
-                                [_c("i", { staticClass: "fas fa-edit blue" })]
-                              ),
-                              _vm._v(
-                                "\n                      /\n                      "
-                              ),
-                              _c(
-                                "a",
-                                {
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.deleteLahan(data.id)
+                                  },
+                                  [_c("i", { staticClass: "fas fa-edit blue" })]
+                                ),
+                                _vm._v(
+                                  "\n                      /\n                      "
+                                ),
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteLahan(data.id)
+                                      }
                                     }
-                                  }
-                                },
-                                [_c("i", { staticClass: "fas fa-trash red" })]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-success btn-xs",
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.pengeluaranModal(data.id)
+                                  },
+                                  [_c("i", { staticClass: "fas fa-trash red" })]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-success btn-xs",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.pengeluaranModal(data.id)
+                                      }
                                     }
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-plus-square white"
-                                  }),
-                                  _vm._v(
-                                    "\n                        Tambah\n                      "
-                                  )
-                                ]
-                              )
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-plus-square white"
+                                    }),
+                                    _vm._v(
+                                      "\n                        Tambah\n                      "
+                                    )
+                                  ]
+                                )
+                              ])
                             ])
-                          ])
-                        }),
-                        0
+                          })
+                        ],
+                        2
                       )
                     ]
                   )
@@ -61492,7 +61560,15 @@ var render = function() {
                       _c(
                         "tbody",
                         [
-                          _c("tr"),
+                          !_vm.dataPengeluaran.length
+                            ? _c("tr", [
+                                _c(
+                                  "td",
+                                  { attrs: { colspan: "6", align: "center" } },
+                                  [_vm._v("Tidak ada data pengeluaran")]
+                                )
+                              ])
+                            : _vm._e(),
                           _vm._v(" "),
                           _vm._l(_vm.dataPengeluaran, function(data) {
                             return _c("tr", { key: data.id }, [
