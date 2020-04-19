@@ -4545,7 +4545,7 @@ __webpack_require__.r(__webpack_exports__);
           success: function success(json) {
             if (json.code == 200) {
               for (var i = 0; i < Object.keys(json.data).length; i++) {
-                $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+                $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name).attr('idnya', json.data[i].id));
               }
             } else {
               $('#kecamatan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
@@ -4553,7 +4553,8 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
         $("#kabupaten").change(function () {
-          var kabupaten = $("#kabupaten").val();
+          // var kabupaten = $("#kabupaten").val();
+          var kabupaten = $("#kabupaten option:selected").attr('idnya');
           $.ajax({
             url: 'https://x.rajaapi.com/MeP7c5ne' + return_first + '/m/wilayah/kecamatan',
             data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi,
@@ -4567,7 +4568,7 @@ __webpack_require__.r(__webpack_exports__);
                 $('#kecamatan').append($('<option>').text('Pilih Kecamatan').attr('value', ''));
 
                 for (var i = 0; i < Object.keys(json.data).length; i++) {
-                  $('#kecamatan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+                  $('#kecamatan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name).attr('idnya', json.data[i].id));
                 }
 
                 $('#kelurahan').html($('<option>').text('Pilih Kelurahan').attr('value', ''));
@@ -4578,7 +4579,8 @@ __webpack_require__.r(__webpack_exports__);
           });
         });
         $("#kecamatan").change(function () {
-          var kecamatan = $("#kecamatan").val();
+          // var kecamatan = $("#kecamatan").val();
+          var kecamatan = $("#kecamatan option:selected").attr('idnya');
           $.ajax({
             url: 'https://x.rajaapi.com/MeP7c5ne' + return_first + '/m/wilayah/kelurahan',
             data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi + "&idkecamatan=" + kecamatan,
@@ -4592,7 +4594,7 @@ __webpack_require__.r(__webpack_exports__);
                 $('#kelurahan').html($('<option>').text('Pilih Kelurahan').attr('value', ''));
 
                 for (var i = 0; i < Object.keys(json.data).length; i++) {
-                  $('#kelurahan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+                  $('#kelurahan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name));
                 }
               } else {
                 $('#kelurahan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
@@ -84555,8 +84557,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
