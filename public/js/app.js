@@ -4924,6 +4924,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5058,6 +5059,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     register: function register() {
+      this.$Progress.start();
       var app = this;
       this.$auth.register({
         data: {
@@ -5078,12 +5080,14 @@ __webpack_require__.r(__webpack_exports__);
               successRegistrationRedirect: true
             }
           });
+          this.$Progress.finish();
         },
         error: function error(res) {
           console.log(res.response.data.errors);
           app.has_error = true;
           app.error = res.response.data.error;
           app.errors = res.response.data.errors || {};
+          this.$Progress.fail();
         }
       });
     }
@@ -53602,121 +53606,195 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "hold-transition login-page" }, [
-    _c("div", { staticClass: "login-box" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body login-card-body" }, [
-          _c("p", { staticClass: "login-box-msg" }, [
-            _vm._v("Pendaftaran anggota baru")
-          ]),
-          _vm._v(" "),
-          !_vm.success
-            ? _c(
-                "form",
-                {
-                  attrs: { autocomplete: "off", method: "post" },
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.register($event)
+    _c(
+      "div",
+      { staticClass: "login-box" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("vue-progress-bar"),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body login-card-body" }, [
+            _c("p", { staticClass: "login-box-msg" }, [
+              _vm._v("Pendaftaran anggota baru")
+            ]),
+            _vm._v(" "),
+            !_vm.success
+              ? _c(
+                  "form",
+                  {
+                    attrs: { autocomplete: "off", method: "post" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.register($event)
+                      }
                     }
-                  }
-                },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-group mb-3",
-                      class: { "has-error": _vm.has_error && _vm.errors.name }
-                    },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.name,
-                            expression: "name"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          id: "name",
-                          placeholder: "Nama"
-                        },
-                        domProps: { value: _vm.name },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-group mb-3",
+                        class: { "has-error": _vm.has_error && _vm.errors.name }
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.name,
+                              expression: "name"
                             }
-                            _vm.name = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.has_error && _vm.errors.name
-                    ? _c("span", { staticClass: "help-block" }, [
-                        _vm._v(_vm._s(_vm.errors.name))
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-group mb-3",
-                      class: { "has-error": _vm.has_error && _vm.errors.email }
-                    },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.email,
-                            expression: "email"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "email",
-                          id: "email",
-                          placeholder: "Email"
-                        },
-                        domProps: { value: _vm.email },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "name",
+                            placeholder: "Nama",
+                            required: ""
+                          },
+                          domProps: { value: _vm.name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.name = $event.target.value
                             }
-                            _vm.email = $event.target.value
                           }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(1)
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.has_error && _vm.errors.name
+                      ? _c("span", { staticClass: "help-block" }, [
+                          _vm._v(_vm._s(_vm.errors.name))
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-group mb-3",
+                        class: {
+                          "has-error": _vm.has_error && _vm.errors.email
                         }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(2)
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.has_error && _vm.errors.email
-                    ? _c("span", { staticClass: "help-block" }, [
-                        _vm._v(_vm._s(_vm.errors.email))
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-group mb-3",
-                      class: { "has-error": _vm.has_error && _vm.errors.role }
-                    },
-                    [
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.email,
+                              expression: "email"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "email",
+                            id: "email",
+                            placeholder: "Email",
+                            required: ""
+                          },
+                          domProps: { value: _vm.email },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.email = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(2)
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.has_error && _vm.errors.email
+                      ? _c("span", { staticClass: "help-block" }, [
+                          _vm._v(_vm._s(_vm.errors.email))
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-group mb-3",
+                        class: { "has-error": _vm.has_error && _vm.errors.role }
+                      },
+                      [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.role,
+                                expression: "role"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "role", required: "" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.role = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "", selected: "", disabled: "" }
+                              },
+                              [_vm._v("Pilih Peran Keanggotaan")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("Produsen")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "3" } }, [
+                              _vm._v("Pengepul")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "4" } }, [
+                              _vm._v("Grosir")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "5" } }, [
+                              _vm._v("Pengecer")
+                            ])
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.has_error && _vm.errors.role
+                      ? _c("span", { staticClass: "help-block" }, [
+                          _vm._v(_vm._s(_vm.errors.role))
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group mb-3" }, [
                       _c(
                         "select",
                         {
@@ -53724,12 +53802,12 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.role,
-                              expression: "role"
+                              value: _vm.kabupaten,
+                              expression: "kabupaten"
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { id: "role" },
+                          attrs: { id: "kabupaten", required: "" },
                           on: {
                             change: function($event) {
                               var $$selectedVal = Array.prototype.filter
@@ -53740,254 +53818,196 @@ var render = function() {
                                   var val = "_value" in o ? o._value : o.value
                                   return val
                                 })
-                              _vm.role = $event.target.multiple
+                              _vm.kabupaten = $event.target.multiple
                                 ? $$selectedVal
                                 : $$selectedVal[0]
                             }
                           }
                         },
                         [
-                          _c(
-                            "option",
-                            {
-                              attrs: { value: "", selected: "", disabled: "" }
-                            },
-                            [_vm._v("Pilih Peran Keanggotaan")]
-                          ),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "2" } }, [
-                            _vm._v("Produsen")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "3" } }, [
-                            _vm._v("Pengepul")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "4" } }, [
-                            _vm._v("Grosir")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "5" } }, [
-                            _vm._v("Pengecer")
+                          _c("option", { attrs: { selected: "", value: "" } }, [
+                            _vm._v("Pilih Kabupaten")
                           ])
                         ]
                       )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.has_error && _vm.errors.role
-                    ? _c("span", { staticClass: "help-block" }, [
-                        _vm._v(_vm._s(_vm.errors.role))
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group mb-3" }, [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.kabupaten,
-                            expression: "kabupaten"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { id: "kabupaten" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.kabupaten = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { selected: "", value: "" } }, [
-                          _vm._v("Pilih Kabupaten")
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group mb-3" }, [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.kecamatan,
-                            expression: "kecamatan"
-                          }
-                        ],
-                        staticClass: "form-control m-b",
-                        attrs: { id: "kecamatan" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.kecamatan = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { selected: "", value: "" } }, [
-                          _vm._v("Pilih Kecamatan")
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group mb-3" }, [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.kelurahan,
-                            expression: "kelurahan"
-                          }
-                        ],
-                        staticClass: "form-control m-b",
-                        attrs: { id: "kelurahan" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.kelurahan = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { selected: "", value: "" } }, [
-                          _vm._v("Pilih Kelurahan")
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-group mb-3",
-                      class: {
-                        "has-error": _vm.has_error && _vm.errors.password
-                      }
-                    },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.password,
-                            expression: "password"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "password", placeholder: "Password" },
-                        domProps: { value: _vm.password },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group mb-3" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.kecamatan,
+                              expression: "kecamatan"
                             }
-                            _vm.password = $event.target.value
+                          ],
+                          staticClass: "form-control m-b",
+                          attrs: { id: "kecamatan", required: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.kecamatan = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
                           }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(3)
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.has_error && _vm.errors.password
-                    ? _c("span", { staticClass: "help-block" }, [
-                        _vm._v(_vm._s(_vm.errors.password))
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-group mb-3",
-                      class: {
-                        "has-error": _vm.has_error && _vm.errors.password
-                      }
-                    },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.password_confirmation,
-                            expression: "password_confirmation"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "password",
-                          id: "password_confirmation",
-                          placeholder: "Masukan ulang Password"
                         },
-                        domProps: { value: _vm.password_confirmation },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                        [
+                          _c("option", { attrs: { selected: "", value: "" } }, [
+                            _vm._v("Pilih Kecamatan")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group mb-3" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.kelurahan,
+                              expression: "kelurahan"
                             }
-                            _vm.password_confirmation = $event.target.value
+                          ],
+                          staticClass: "form-control m-b",
+                          attrs: { id: "kelurahan", required: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.kelurahan = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
                           }
+                        },
+                        [
+                          _c("option", { attrs: { selected: "", value: "" } }, [
+                            _vm._v("Pilih Kelurahan")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-group mb-3",
+                        class: {
+                          "has-error": _vm.has_error && _vm.errors.password
                         }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(4)
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.has_error && _vm.errors.password
-                    ? _c("span", { staticClass: "help-block" }, [
-                        _vm._v(_vm._s(_vm.errors.password))
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm._m(5)
-                ]
-              )
-            : _vm._e()
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.password,
+                              expression: "password"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "password",
+                            placeholder: "Password",
+                            required: ""
+                          },
+                          domProps: { value: _vm.password },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.password = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(3)
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.has_error && _vm.errors.password
+                      ? _c("span", { staticClass: "help-block" }, [
+                          _vm._v(_vm._s(_vm.errors.password))
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-group mb-3",
+                        class: {
+                          "has-error": _vm.has_error && _vm.errors.password
+                        }
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.password_confirmation,
+                              expression: "password_confirmation"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "password",
+                            id: "password_confirmation",
+                            placeholder: "Masukan ulang Password",
+                            required: ""
+                          },
+                          domProps: { value: _vm.password_confirmation },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.password_confirmation = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(4)
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.has_error && _vm.errors.password
+                      ? _c("span", { staticClass: "help-block" }, [
+                          _vm._v(_vm._s(_vm.errors.password))
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm._m(5)
+                  ]
+                )
+              : _vm._e()
+          ])
         ])
-      ])
-    ])
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [

@@ -6,6 +6,7 @@
           <b>SCM</b>Cabai
         </p>
       </div>
+      <vue-progress-bar></vue-progress-bar>
       <!-- /.Register-logo -->
       <div class="card">
         <div class="card-body login-card-body">
@@ -13,7 +14,7 @@
 
           <form autocomplete="off" @submit.prevent="register" v-if="!success" method="post">
             <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.name }">
-              <input type="text" id="name" class="form-control" placeholder="Nama" v-model="name" />
+              <input type="text" id="name" class="form-control" placeholder="Nama" v-model="name" required/>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-user"></span>
@@ -23,7 +24,7 @@
             <span class="help-block" v-if="has_error && errors.name">{{ errors.name }}</span>
 
             <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.email }">
-              <input type="email" id="email" class="form-control" placeholder="Email" v-model="email"/>
+              <input type="email" id="email" class="form-control" placeholder="Email" v-model="email" required/>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
@@ -33,7 +34,7 @@
             <span class="help-block" v-if="has_error && errors.email">{{ errors.email }}</span>
 
             <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.role }">
-              <select id="role" class="form-control" v-model="role">
+              <select id="role" class="form-control" v-model="role" required>
                 <option value selected disabled>Pilih Peran Keanggotaan</option>
                 <option value="2">Produsen</option>
                 <option value="3">Pengepul</option>
@@ -44,25 +45,25 @@
             <span class="help-block" v-if="has_error && errors.role">{{ errors.role }}</span>
 
             <div class="input-group mb-3">
-              <select class="form-control" v-model="kabupaten" id="kabupaten">
+              <select class="form-control" v-model="kabupaten" id="kabupaten" required>
                 <option selected value>Pilih Kabupaten</option>
               </select>
             </div>
 
             <div class="input-group mb-3">
-              <select class="form-control m-b" v-model="kecamatan" id="kecamatan">
+              <select class="form-control m-b" v-model="kecamatan" id="kecamatan" required>
                 <option selected value>Pilih Kecamatan</option>
               </select>
             </div>
 
             <div class="input-group mb-3">
-              <select class="form-control m-b" v-model="kelurahan" id="kelurahan">
+              <select class="form-control m-b" v-model="kelurahan" id="kelurahan" required>
                 <option selected value>Pilih Kelurahan</option>
               </select>
             </div>
 
             <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.password }">
-              <input type="password" class="form-control" placeholder="Password" v-model="password"/>
+              <input type="password" class="form-control" placeholder="Password" v-model="password" required/>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
@@ -72,7 +73,7 @@
             <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
 
             <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.password }">
-              <input type="password" id="password_confirmation" class="form-control" v-model="password_confirmation" placeholder="Masukan ulang Password">
+              <input type="password" id="password_confirmation" class="form-control" v-model="password_confirmation" placeholder="Masukan ulang Password" required>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
@@ -228,6 +229,7 @@ export default {
   },
   methods: {
     register() {
+      this.$Progress.start();
       var app = this;
       this.$auth.register({
         data: {
@@ -246,12 +248,14 @@ export default {
             name: "login",
             params: { successRegistrationRedirect: true }
           });
+          this.$Progress.finish();
         },
         error: function(res) {
           console.log(res.response.data.errors);
           app.has_error = true;
           app.error = res.response.data.error;
           app.errors = res.response.data.errors || {};
+          this.$Progress.fail()
         }
       });
     }
