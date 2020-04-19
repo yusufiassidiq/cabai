@@ -41,19 +41,9 @@
           <tbody>
             <tr v-for="data in dataListPengajuanMitra" :key="data.id">
               <td>{{ data.nama }}</td>
-              <td>role</td>
-              <td>lokasi</td>
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-success btn-xs"
-                  @click="terimaMitra(data.id, data.nama)"
-                >Terima</button>
-                <button
-                  type="button"
-                  class="btn btn-danger btn-xs"
-                  @click="tolakMitra(data.id)"
-                >Tolak</button>
+              <td>{{ data.role }}</td>
+              <td>{{ data.lokasi.kelurahan }} , {{ data.lokasi.kecamatan }} , {{ data.lokasi.kabupaten }}</td>
+              <td>Menunggu Persetujuan
               </td>
             </tr>
           </tbody>
@@ -74,7 +64,7 @@ export default {
     getPengajuanMitra() {
       axios.get("/listPengajuanMitra").then(response => {
         this.dataListPengajuanMitra = response.data.data;
-        console.log(this.dataListPengajuanMitra);
+        // console.log(this.dataListPengajuanMitra[0].lokasi);
       });
     },
     terimaMitra(id, nama) {

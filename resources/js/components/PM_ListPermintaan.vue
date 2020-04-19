@@ -44,7 +44,17 @@
               <td>{{ data.nama }}</td>
               <td>role</td>
               <td>lokasi</td>
-              <td>menunggu persetujuan</td>
+              <td><button
+                  type="button"
+                  class="btn btn-success btn-xs"
+                  @click="terimaMitra(data.id, data.nama)"
+                >Terima</button>
+                <button
+                  type="button"
+                  class="btn btn-danger btn-xs"
+                  @click="tolakMitra(data.id)"
+                >Tolak</button>
+                </td>
             </tr>
           </tbody>
         </table>

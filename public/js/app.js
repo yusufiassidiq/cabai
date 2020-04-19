@@ -4200,6 +4200,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4388,16 +4398,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4409,8 +4409,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/listPengajuanMitra").then(function (response) {
-        _this.dataListPengajuanMitra = response.data.data;
-        console.log(_this.dataListPengajuanMitra);
+        _this.dataListPengajuanMitra = response.data.data; // console.log(this.dataListPengajuanMitra[0].lokasi);
       });
     },
     terimaMitra: function terimaMitra(id, nama) {
@@ -51076,7 +51075,35 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v("lokasi")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("menunggu persetujuan")])
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success btn-xs",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.terimaMitra(data.id, data.nama)
+                          }
+                        }
+                      },
+                      [_vm._v("Terima")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-xs",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.tolakMitra(data.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Tolak")]
+                    )
+                  ])
                 ])
               }),
               0
@@ -51295,39 +51322,19 @@ var render = function() {
                 return _c("tr", { key: data.id }, [
                   _c("td", [_vm._v(_vm._s(data.nama))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("role")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("lokasi")]),
+                  _c("td", [_vm._v(_vm._s(data.role))]),
                   _vm._v(" "),
                   _c("td", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success btn-xs",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.terimaMitra(data.id, data.nama)
-                          }
-                        }
-                      },
-                      [_vm._v("Terima")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-xs",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.tolakMitra(data.id)
-                          }
-                        }
-                      },
-                      [_vm._v("Tolak")]
+                    _vm._v(
+                      _vm._s(data.lokasi.kelurahan) +
+                        " , " +
+                        _vm._s(data.lokasi.kecamatan) +
+                        " , " +
+                        _vm._s(data.lokasi.kabupaten)
                     )
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Menunggu Persetujuan\n            ")])
                 ])
               }),
               0
@@ -86660,8 +86667,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

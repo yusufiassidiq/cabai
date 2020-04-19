@@ -161,15 +161,25 @@ class UserController extends Controller
             $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
         })->where('status',0)->where('action_user',$userId)->get();
         $j=0;
+        
         foreach ($listPengajuanMitra as $i){
             if($listPengajuanMitra[$j]->flag == 0){
                 $i->nama = $i->user2()->first()->name;
+                $i->role = $i->user2()->first()->role;
+                $i->lokasi = $i->user2()->first()->lokasi()->first();
+                // $i->lokasiKecamatan = $i->user2()->first()->lokasi()->first()->kecamatan;
+                // $i->lokasiKelurahan = $i->user2()->first()->lokasi()->first()->kelurahan;
+                
             }else{
                 $i->nama = $i->user1()->first()->name;
+                $i->role = $i->user1()->first()->role;
+                // $i->lokasiKabupaten = $i->user1()->first()->lokasi()->first()->kabupaten;
+                // $i->lokasiKecamatan = $i->user1()->first()->lokasi()->first()->kecamatan;
+                // $i->lokasiKelurahan = $i->user1()->first()->lokasi()->first()->kelurahan;
             }
             $j++;
         }
-        
+        // dd($listPengajuanMitra);
         return response()->json([
             'status' => 'success',
             'data' => $listPengajuanMitra->toArray()
@@ -197,7 +207,7 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function ListMitraSaya(){
+    public function listMitraSaya(){
         $userId = Auth::user()->id;
         $listMitraSaya = Kemitraan::orWhere(function($query)use($userId){
             $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
@@ -207,6 +217,15 @@ class UserController extends Controller
             'status' => 'success',
             'data' => $listMitraSaya->toArray()
         ], 200);
+    }
+
+    public function hapusMitra($id)
+    {
+        $kemitraan = Kemitraan::find($id);
+        $kemitraan->delete();
+        return response()->json([
+            'status' => 204
+        ]);
     }
 
 }
