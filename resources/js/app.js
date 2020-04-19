@@ -1,6 +1,4 @@
 import './bootstrap'
-
-import Index from './Index'
 import auth from './auth'
 import router from './router'
 
@@ -69,7 +67,7 @@ axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api`
 Vue.use(VueAuth, auth)
 
 // Load Index
-Vue.component('index', Index)
+
 
 // Create new vue instance with name Update data, for custom event
 let UpdateData = new Vue();

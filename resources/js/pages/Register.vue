@@ -2,7 +2,7 @@
   <div class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <p>
+        <p class="font-putih">
           <b>SCM</b>Cabai
         </p>
       </div>
