@@ -15,24 +15,24 @@
                   <li class="nav-item">
                     <a
                       class="nav-link active"
-                      id="custom-tabs-three-home-tab"
+                      id="custom-tabs-three-permintaan-tab"
                       data-toggle="pill"
-                      href="#custom-tabs-three-home"
+                      href="#custom-tabs-three-permintaan"
                       role="tab"
-                      aria-controls="custom-tabs-three-home"
+                      aria-controls="custom-tabs-three-permintaan"
                       aria-selected="true"
-                    >Permintaan</a>
+                    >	Permintaan dari Pengguna Lain</a>
                   </li>
                   <li class="nav-item">
                     <a
                       class="nav-link"
-                      id="custom-tabs-three-profile-tab"
+                      id="custom-tabs-three-pengajuan-tab"
                       data-toggle="pill"
-                      href="#custom-tabs-three-profile"
+                      href="#custom-tabs-three-pengajuan "
                       role="tab"
-                      aria-controls="custom-tabs-three-profile"
+                      aria-controls="custom-tabs-three-pengajuan "
                       aria-selected="false"
-                    >Riwayat</a>
+                    >Permintaan dari Saya</a>
                   </li>
                 </ul>
               </div>
@@ -41,7 +41,7 @@
                   <!-- content permintaan -->
                   <permintaan></permintaan>
                   <!-- content riwayat -->
-                  <riwayat></riwayat>
+                  <pengajuan></pengajuan>
                 </div>
               </div>
             </div>
@@ -54,7 +54,7 @@
 <script>
 import headerProdusen from "../../../components/produsen/HeaderPermintaanMitra";
 import listPermintaan from "../../../components/PM_ListPermintaan";
-import listRiwayat from "../../../components/PM_ListRiwayat";
+import listPengajuan from "../../../components/PNM_ListPengajuan";
 
 export default {
   data() {
@@ -63,7 +63,7 @@ export default {
   components: {
     headerProdusen: headerProdusen,
     permintaan: listPermintaan,
-    riwayat: listRiwayat,
+    pengajuan: listPengajuan,
   },
   methods: {},
   created() {},

@@ -19,7 +19,6 @@ import DashboardProd from './pages/scm/produsen/Dashboard'
 import ManajemenLahan from './pages/scm/produsen/ManajemenLahan'
 import RiwayatPengeluaran from './pages/scm/produsen/RiwayatPengeluaran'
 import DaftarMitraProd from './pages/scm/produsen/DaftarMitra'
-import PengajuanMitraProd from './pages/scm/produsen/PengajuanMitra'
 import PermintaanMitraProd from './pages/scm/produsen/PermintaanMitra'
 import TransaksiPelangganProd from './pages/scm/produsen/TransaksiPelanggan'
 import MitraSayaProd from './pages/scm/produsen/MitraSaya'
@@ -27,7 +26,6 @@ import MitraSayaProd from './pages/scm/produsen/MitraSaya'
 import MasterPengepul from './pages/scm/pengepul/Master' // pengepul
 import DashboardPengepul from './pages/scm/pengepul/Dashboard'
 import DaftarMitraPengepul from './pages/scm/pengepul/DaftarMitra'
-import PengajuanMitraPengepul from './pages/scm/pengepul/PengajuanMitra'
 import PermintaanMitraPengepul from './pages/scm/pengepul/PermintaanMitra'
 import TransaksiPelangganPengepul from './pages/scm/pengepul/TransaksiPelanggan'
 import TransaksiPemasokPengepul from './pages/scm/pengepul/TransaksiPemasok'
@@ -37,7 +35,6 @@ import MitraSayaPengepul from './pages/scm/pengepul/MitraSaya'
 import MasterGrosir from './pages/scm/grosir/Master' // grosir
 import DashboardGrosir from './pages/scm/grosir/Dashboard'
 import DaftarMitraGrosir from './pages/scm/grosir/DaftarMitra'
-import PengajuanMitraGrosir from './pages/scm/grosir/PengajuanMitra'
 import PermintaanMitraGrosir from './pages/scm/grosir/PermintaanMitra'
 import TransaksiPelangganGrosir from './pages/scm/grosir/TransaksiPelanggan'
 import TransaksiPemasokGrosir from './pages/scm/grosir/TransaksiPemasok'
@@ -48,7 +45,6 @@ import MitraSayaGrosir from './pages/scm/grosir/MitraSaya'
 import MasterPengecer from './pages/scm/pengecer/Master' // pengecer
 import DashboardPengecer from './pages/scm/pengecer/Dashboard'
 import DaftarMitraPengecer from './pages/scm/pengecer/DaftarMitra'
-import PengajuanMitraPengecer from './pages/scm/pengecer/PengajuanMitra'
 import PermintaanMitraPengecer from './pages/scm/pengecer/PermintaanMitra'
 import TransaksiPelangganPengecer from './pages/scm/pengecer/TransaksiPelanggan'
 import TransaksiPemasokPengecer from './pages/scm/pengecer/TransaksiPemasok'
@@ -142,11 +138,6 @@ const routes = [
 
             },
             {
-                path: 'pengajuanmitra',
-                component: PengajuanMitraProd,
-                name: "PengajuanMitraProd"
-            },
-            {
                 path: 'transaksipelanggan',
                 component: TransaksiPelangganProd,
                 name: "TransaksiPelangganProd"
@@ -198,11 +189,6 @@ const routes = [
                 component: PermintaanMitraGrosir,
                 name: "PermintaanMitraGrosir"
 
-            },
-            {
-                path: 'pengajuanmitra',
-                component: PengajuanMitraGrosir,
-                name: "PengajuanMitraGrosir"
             },
             {
                 path: 'transaksipelanggan',
@@ -263,11 +249,6 @@ const routes = [
 
             },
             {
-                path: 'pengajuanmitra',
-                component: PengajuanMitraPengecer,
-                name: "PengajuanMitraPengecer"
-            },
-            {
                 path: 'transaksipelanggan',
                 component: TransaksiPelangganPengecer,
                 name: "TransaksiPelangganPengecer"
@@ -323,11 +304,6 @@ const routes = [
                 component: PermintaanMitraPengepul,
                 name: "PermintaanMitraPengepul"
 
-            },
-            {
-                path: 'pengajuanmitra',
-                component: PengajuanMitraPengepul,
-                name: "PengajuanMitraPengepul"
             },
             {
                 path: 'transaksipelanggan',

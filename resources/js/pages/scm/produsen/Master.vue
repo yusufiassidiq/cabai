@@ -94,12 +94,12 @@
                 <p>Permintaan Mitra</p>
               </router-link>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link to="/produsen/pengajuanmitra" class="nav-link">
                 <i class="fas fa-user-clock nav-icon"></i>
                 <p>Pengajuan Mitra</p>
               </router-link>
-            </li>
+            </li> -->
             <li class="nav-header">Transaksi</li>
             <li class="nav-item">
               <router-link to="/produsen/transaksipelanggan" class="nav-link">

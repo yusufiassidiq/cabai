@@ -1,10 +1,10 @@
 <template>
   <!-- PM : Permintaanmitra -->
   <div
-    class="tab-pane fade active show"
-    id="custom-tabs-three-home"
+    class="tab-pane fade"
+    id="custom-tabs-three-pengajuan"
     role="tabpanel"
-    aria-labelledby="custom-tabs-three-home-tab"
+    aria-labelledby="custom-tabs-three-pengajuan-tab"
   >
     <div class="card">
       <div class="card-header">
