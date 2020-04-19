@@ -2,7 +2,7 @@
   <div class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <p>
+        <p class="font-putih">
           <b>SCM</b>Cabai
         </p>
       </div>
@@ -70,7 +70,15 @@
     </div>
   </div>
 </template>
-
+<style>
+.login-page {
+  background-image: url("/dist/img/cabai.jpg");
+  background-size:cover
+}
+.font-putih{
+  color: white;
+}
+</style>
 <script>
 export default {
   data() {
