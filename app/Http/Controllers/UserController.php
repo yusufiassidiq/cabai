@@ -119,13 +119,19 @@ class UserController extends Controller
             $idUser1 = $temp;
             $flag = 1;
         }
-
+        $checkMitra = Kemitraan::where('user1_id',$idUser1)->where('user2_id',$idUser2)->where('status',1)->get();
+        if($checkMitra->isNotEmpty()){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Pengguna ini telah bermitra dengan anda'                                    
+                ], 422);
+        }
         $checkIsEmpty = Kemitraan::where('user1_id',$idUser1)->where('user2_id',$idUser2)->where('status',0)->get();
         // return $checkIsEmpty;
         if ($checkIsEmpty->isNotEmpty()){
             return response()->json([
                 'status' => 'failed',
-                'data' => 'Pengguna ini atau Anda telah mengajukan permintaan kemitraan sebelumnya'                                    
+                'message' => 'Pengguna ini atau Anda telah mengajukan permintaan kemitraan sebelumnya'                                    
                 ], 422);
         }
         $kemitraan = new Kemitraan;
@@ -228,7 +234,28 @@ class UserController extends Controller
         $listMitraSaya = Kemitraan::orWhere(function($query)use($userId){
             $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
         })->where('status',1)->get();
-
+        
+        $j=0;
+        foreach($listMitraSaya as $i){
+            $user1 = $i->user1_id;
+            $user2 = $i->user2_id;
+            // dd($user1);
+            if($userId == $user1){
+                $mitra = $user2;
+                $i->nama = $i->user2()->first()->name;
+                $i->role = $i->user2()->first()->role;
+                $i->lokasi = $i->user2()->first()->lokasi()->first();
+                $i->haha = "true" ;
+            }else if ($userId == $user2){
+                $mitra = $user1;
+                $i->nama = $i->user1()->first()->name;
+                $i->role = $i->user1()->first()->role;
+                $i->lokasi = $i->user1()->first()->lokasi()->first(); 
+                $i->haha = "false" ;
+            }
+            $j++;
+        }
+        // dd($listMitraSaya);
         return response()->json([
             'status' => 'success',
             'data' => $listMitraSaya->toArray()
