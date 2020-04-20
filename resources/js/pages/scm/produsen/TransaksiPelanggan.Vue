@@ -2,7 +2,27 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <headerProdusen></headerProdusen>
+    <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Transaksi Pelanggan</h1>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="#">Produsen</a>
+            </li>
+            <li class="breadcrumb-item active">Transaksi Pelanggan</li>
+          </ol>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -83,7 +103,7 @@
                     v-for="data in dataMitra"
                     :key="data.id"
                     v-bind:value="data.id"
-                  >{{ data.id }}</option>
+                  >{{ data.nama }}</option>
                 </select>
                 <has-error :form="form" field="pembeli_id"></has-error>
               </div>
@@ -143,12 +163,10 @@
   <!-- /.content-wrapper -->
 </template>
 <script>
-import headerProdusen from "../../../components/produsen/HeaderTransaksiPelanggan";
-
 export default {
   data() {
     return {
-      dataMitra: null,
+      dataMitra: {},
       editmode: false,
       form: new Form({
         id: "",
@@ -158,9 +176,6 @@ export default {
         pembeli_id: ""
       })
     };
-  },
-  components: {
-    headerProdusen: headerProdusen
   },
   methods: {
     getMitra() {

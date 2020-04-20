@@ -2,7 +2,27 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <headerPengecer></headerPengecer>
+    <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Permintaan Mitra</h1>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="#">Pengecer</a>
+            </li>
+            <li class="breadcrumb-item active">Permintaan Mitra</li>
+          </ol>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -51,12 +71,10 @@
   </div>
 </template>
 <script>
-import headerPengecer from "../../../components/pengecer/HeaderPermintaanMitra";
 import listPermintaan from "../../../components/PM_ListPermintaan";
 import listPengajuan from "../../../components/PNM_ListPengajuan";
 export default {
   components: {
-    headerPengecer: headerPengecer,
     permintaan: listPermintaan,
     pengajuan: listPengajuan,
   }

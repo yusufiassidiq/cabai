@@ -40,6 +40,9 @@
             </thead>
 
             <tbody>
+              <tr v-if="!dataMitra.length">
+                <td colspan="3" align="center">Tidak ada pelaku rantai pasok Pengepul</td>
+              </tr>
               <tr v-for="data in dataMitra" :key="data.id">
                 <td>{{data.name}}</td>
                 <td>{{data.lokasiKelurahan}}, {{data.lokasiKecamatan}}, {{data.lokasiKabupaten}}</td>
@@ -74,7 +77,7 @@
 export default {
   data() {
     return {
-      dataMitra: null
+      dataMitra: {}
     };
   },
   methods: {

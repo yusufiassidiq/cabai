@@ -38,9 +38,9 @@
                 </thead>
 
                 <tbody>
-                  <!-- <tr v-if="!dataMitra.length">
+                  <tr v-if="!dataMitra.length">
                     <td colspan="4" align="center">Tidak ada data lahan</td>
-                  </tr> -->
+                  </tr>
                   <tr v-for="data in dataMitra" :key="data.id">
                     <td>{{ data.nama }}</td>
                     <td>
@@ -75,7 +75,7 @@
 export default {
   data() {
     return {
-      dataMitra: null
+      dataMitra: {}
     };
   },
   methods: {

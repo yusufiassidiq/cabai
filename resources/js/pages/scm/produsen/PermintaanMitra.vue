@@ -2,7 +2,27 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <headerProdusen></headerProdusen>
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Permintaan Mitra</h1>
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+                <a href="#">Produsen</a>
+              </li>
+              <li class="breadcrumb-item active">Permintaan Mitra</li>
+            </ol>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </div>
 
     <!-- Main content -->
     <section class="content">
@@ -21,7 +41,7 @@
                       role="tab"
                       aria-controls="custom-tabs-three-permintaan"
                       aria-selected="true"
-                    >	Permintaan dari Pengguna Lain</a>
+                    >Permintaan dari Pengguna Lain</a>
                   </li>
                   <li class="nav-item">
                     <a
@@ -30,7 +50,7 @@
                       data-toggle="pill"
                       href="#custom-tabs-three-pengajuan "
                       role="tab"
-                      aria-controls="custom-tabs-three-pengajuan "
+                      aria-controls="custom-tabs-three-pengajuan"
                       aria-selected="false"
                     >Permintaan dari Saya</a>
                   </li>
@@ -52,7 +72,6 @@
   </div>
 </template>
 <script>
-import headerProdusen from "../../../components/produsen/HeaderPermintaanMitra";
 import listPermintaan from "../../../components/PM_ListPermintaan";
 import listPengajuan from "../../../components/PNM_ListPengajuan";
 
@@ -61,9 +80,8 @@ export default {
     return {};
   },
   components: {
-    headerProdusen: headerProdusen,
     permintaan: listPermintaan,
-    pengajuan: listPengajuan,
+    pengajuan: listPengajuan
   },
   methods: {},
   created() {},

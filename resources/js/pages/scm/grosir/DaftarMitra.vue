@@ -2,7 +2,27 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <headerGrosir></headerGrosir>
+    <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Daftar Mitra</h1>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="#">Grosir</a>
+            </li>
+            <li class="breadcrumb-item active">Daftar Mitra</li>
+          </ol>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
     
     <!-- Main content -->
     <section class="content">
@@ -52,21 +72,13 @@
   
 </template>
 <script>
-import headerGrosir from "../../../components/grosir/HeaderDaftarMitra";
 import listpengepul from "../../../components/DM_ListPengepul";
 import listPengecer from "../../../components/DM_ListPengecer";
 
 export default {
-  data() {
-    return {};
-  },
   components: {
-    headerGrosir: headerGrosir,
     pengepul: listpengepul,
     pengecer: listPengecer,
-  },
-  methods: {},
-  created() {},
-  mounted() {}
+  }
 };
 </script>

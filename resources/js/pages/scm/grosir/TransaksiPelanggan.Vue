@@ -2,7 +2,27 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <headerGrosir></headerGrosir>
+    <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Transaksi Pelanggan</h1>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="#">Grosir</a>
+            </li>
+            <li class="breadcrumb-item active">Transaksi Pelanggan</li>
+          </ol>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -12,18 +32,10 @@
   <!-- /.content-wrapper -->
 </template>
 <script>
-import headerGrosir from "../../../components/grosir/HeaderTransaksiPelanggan";
 import transaksiPelanggan from "../../../components/TransaksiPelanggan";
 export default {
-  data() {
-    return {};
-  },
   components: {
-    headerGrosir: headerGrosir,
     transaksiPelanggan: transaksiPelanggan
-  },
-  methods: {},
-  created() {},
-  mounted() {}
+  }
 };
 </script>

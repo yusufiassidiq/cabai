@@ -2,7 +2,27 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <headerGrosir></headerGrosir>
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Permintaan Mitra</h1>
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+                <a href="#">Grosir</a>
+              </li>
+              <li class="breadcrumb-item active">Permintaan Mitra</li>
+            </ol>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </div>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -20,7 +40,7 @@
                       role="tab"
                       aria-controls="custom-tabs-three-permintaan"
                       aria-selected="true"
-                    >	Permintaan dari Pengguna Lain</a>
+                    >Permintaan dari Pengguna Lain</a>
                   </li>
                   <li class="nav-item">
                     <a
@@ -51,18 +71,13 @@
   </div>
 </template>
 <script>
-import headerGrosir from "../../../components/grosir/HeaderPermintaanMitra";
 import listPermintaan from "../../../components/PM_ListPermintaan";
 import listPengajuan from "../../../components/PNM_ListPengajuan";
 
 export default {
-  data() {
-    return {};
-  },
   components: {
-    headerGrosir: headerGrosir,
     permintaan: listPermintaan,
-    pengajuan: listPengajuan,
+    pengajuan: listPengajuan
   }
 };
 </script>
