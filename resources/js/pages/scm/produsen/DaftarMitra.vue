@@ -8,7 +8,6 @@
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Daftar Mitra</h1>
           </div>
-          <!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
@@ -17,14 +16,9 @@
               <li class="breadcrumb-item active">Daftar Mitra</li>
             </ol>
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -44,30 +38,85 @@
                       aria-selected="true"
                     >Pengepul</a>
                   </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      id="custom-tabs-three-grosir-tab"
+                      data-toggle="pill"
+                      href="#custom-tabs-three-grosir"
+                      role="tab"
+                      aria-controls="custom-tabs-three-grosir"
+                      aria-selected="false"
+                    >Grosir</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      id="custom-tabs-three-pengecer-tab"
+                      data-toggle="pill"
+                      href="#custom-tabs-three-pengecer"
+                      role="tab"
+                      aria-controls="custom-tabs-three-pengecer"
+                      aria-selected="false"
+                    >Pengecer</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      id="custom-tabs-three-konsumen-tab"
+                      data-toggle="pill"
+                      href="#custom-tabs-three-konsumen"
+                      role="tab"
+                      aria-controls="custom-tabs-three-konsumen"
+                      aria-selected="false"
+                    >Konsumen</a>
+                  </li>
                 </ul>
               </div>
               <div class="card-body">
                 <div class="tab-content" id="custom-tabs-three-tabContent">
-                  <listpengepul></listpengepul>
+                  <div
+                    class="tab-pane fade active show"
+                    id="custom-tabs-three-pengepul"
+                    role="tabpanel"
+                    aria-labelledby="custom-tabs-three-pengepul-tab"
+                  >
+                    <pengepul></pengepul>
+                  </div>
+                  <div
+                    class="tab-pane fade"
+                    id="custom-tabs-three-grosir"
+                    role="tabpanel"
+                    aria-labelledby="custom-tabs-three-grosir-tab"
+                  >
+                    <grosir></grosir>
+                  </div>
+                  <div
+                    class="tab-pane fade"
+                    id="custom-tabs-three-pengecer"
+                    role="tabpanel"
+                    aria-labelledby="custom-tabs-three-pengecer-tab"
+                  >
+                    <pengecer></pengecer>
+                  </div>
                 </div>
               </div>
-              <!-- /.card -->
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
 </template>
 <script>
 import listPengepul from "../../../components/DM_ListPengepul";
-
+import listGrosir from "../../../components/DM_ListGrosir";
+import listPengecer from "../../../components/DM_ListPengecer";
 export default {
   components: {
-    // component : source
-    listpengepul: listPengepul
+    pengepul: listPengepul,
+    grosir: listGrosir,
+    pengecer: listPengecer,
   }
 };
 </script>

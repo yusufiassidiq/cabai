@@ -35,12 +35,23 @@
                   <li class="nav-item">
                     <a
                       class="nav-link active"
+                      id="custom-tabs-three-produsen-tab"
+                      data-toggle="pill"
+                      href="#custom-tabs-three-produsen"
+                      role="tab"
+                      aria-controls="custom-tabs-three-produsen"
+                      aria-selected="true"
+                    >Produsen</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
                       id="custom-tabs-three-pengepul-tab"
                       data-toggle="pill"
                       href="#custom-tabs-three-pengepul"
                       role="tab"
                       aria-controls="custom-tabs-three-pengepul"
-                      aria-selected="true"
+                      aria-selected="false"
                     >Pengepul</a>
                   </li>
                   <li class="nav-item">
@@ -54,12 +65,45 @@
                       aria-selected="false"
                     >Pengecer</a>
                   </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      id="custom-tabs-three-konsumen-tab"
+                      data-toggle="pill"
+                      href="#custom-tabs-three-konsumen"
+                      role="tab"
+                      aria-controls="custom-tabs-three-konsumen"
+                      aria-selected="false"
+                    >Konsumen</a>
+                  </li>
                 </ul>
               </div>
               <div class="card-body">
                 <div class="tab-content" id="custom-tabs-three-tabContent">
-                  <pengepul></pengepul>
-                  <pengecer></pengecer>
+                  <div
+                    class="tab-pane fade active show"
+                    id="custom-tabs-three-produsen"
+                    role="tabpanel"
+                    aria-labelledby="custom-tabs-three-produsen-tab"
+                  >
+                    <produsen></produsen>
+                  </div>
+                  <div
+                    class="tab-pane fade"
+                    id="custom-tabs-three-pengepul"
+                    role="tabpanel"
+                    aria-labelledby="custom-tabs-three-pengepul-tab"
+                  >
+                    <pengepul></pengepul>
+                  </div>
+                  <div
+                    class="tab-pane fade"
+                    id="custom-tabs-three-pengecer"
+                    role="tabpanel"
+                    aria-labelledby="custom-tabs-three-pengecer-tab"
+                  >
+                    <pengecer></pengecer>
+                  </div>
                 </div>
               </div>
               <!-- /.card -->
@@ -74,11 +118,13 @@
 <script>
 import listpengepul from "../../../components/DM_ListPengepul";
 import listPengecer from "../../../components/DM_ListPengecer";
+import listProdusen from "../../../components/DM_ListProdusen";
 
 export default {
   components: {
     pengepul: listpengepul,
     pengecer: listPengecer,
+    produsen: listProdusen,
   }
 };
 </script>

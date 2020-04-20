@@ -3167,13 +3167,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3234,13 +3227,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3427,13 +3413,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3496,13 +3475,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5704,6 +5676,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_DM_ListPengepul__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/DM_ListPengepul */ "./resources/js/components/DM_ListPengepul.vue");
 /* harmony import */ var _components_DM_ListPengecer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/DM_ListPengecer */ "./resources/js/components/DM_ListPengecer.vue");
+/* harmony import */ var _components_DM_ListProdusen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/DM_ListProdusen */ "./resources/js/components/DM_ListProdusen.vue");
 //
 //
 //
@@ -5777,12 +5750,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     pengepul: _components_DM_ListPengepul__WEBPACK_IMPORTED_MODULE_0__["default"],
-    pengecer: _components_DM_ListPengecer__WEBPACK_IMPORTED_MODULE_1__["default"]
+    pengecer: _components_DM_ListPengecer__WEBPACK_IMPORTED_MODULE_1__["default"],
+    produsen: _components_DM_ListProdusen__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -6251,7 +6270,65 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_DM_ListGrosir__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/DM_ListGrosir */ "./resources/js/components/DM_ListGrosir.vue");
+/* harmony import */ var _components_DM_ListProdusen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/DM_ListProdusen */ "./resources/js/components/DM_ListProdusen.vue");
+/* harmony import */ var _components_DM_ListPengepul__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/DM_ListPengepul */ "./resources/js/components/DM_ListPengepul.vue");
+/* harmony import */ var _components_DM_ListGrosir__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/DM_ListGrosir */ "./resources/js/components/DM_ListGrosir.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6312,9 +6389,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    grosir: _components_DM_ListGrosir__WEBPACK_IMPORTED_MODULE_0__["default"]
+    produsen: _components_DM_ListProdusen__WEBPACK_IMPORTED_MODULE_0__["default"],
+    pengepul: _components_DM_ListPengepul__WEBPACK_IMPORTED_MODULE_1__["default"],
+    grosir: _components_DM_ListGrosir__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -6786,6 +6867,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_DM_ListProdusen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/DM_ListProdusen */ "./resources/js/components/DM_ListProdusen.vue");
 /* harmony import */ var _components_DM_ListGrosir__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/DM_ListGrosir */ "./resources/js/components/DM_ListGrosir.vue");
+/* harmony import */ var _components_DM_ListPengecer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/DM_ListPengecer */ "./resources/js/components/DM_ListPengecer.vue");
 //
 //
 //
@@ -6859,12 +6941,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     produsen: _components_DM_ListProdusen__WEBPACK_IMPORTED_MODULE_0__["default"],
-    grosir: _components_DM_ListGrosir__WEBPACK_IMPORTED_MODULE_1__["default"]
+    grosir: _components_DM_ListGrosir__WEBPACK_IMPORTED_MODULE_1__["default"],
+    pengecer: _components_DM_ListPengecer__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -7337,6 +7464,55 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_DM_ListPengepul__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/DM_ListPengepul */ "./resources/js/components/DM_ListPengepul.vue");
+/* harmony import */ var _components_DM_ListGrosir__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/DM_ListGrosir */ "./resources/js/components/DM_ListGrosir.vue");
+/* harmony import */ var _components_DM_ListPengecer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/DM_ListPengecer */ "./resources/js/components/DM_ListPengecer.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7401,10 +7577,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    // component : source
-    listpengepul: _components_DM_ListPengepul__WEBPACK_IMPORTED_MODULE_0__["default"]
+    pengepul: _components_DM_ListPengepul__WEBPACK_IMPORTED_MODULE_0__["default"],
+    grosir: _components_DM_ListGrosir__WEBPACK_IMPORTED_MODULE_1__["default"],
+    pengecer: _components_DM_ListPengecer__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -50115,83 +50294,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "tab-pane fade active show",
-      attrs: {
-        id: "custom-tabs-three-grosir",
-        role: "tabpanel",
-        "aria-labelledby": "custom-tabs-three-grosir-tab"
-      }
-    },
-    [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _vm._m(0),
+  return _c("div", { staticClass: "col-md-12" }, [
+    _c("div", { staticClass: "card" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body table-responsive p-0" }, [
+        _c("table", { staticClass: "table table-hover text-nowrap" }, [
+          _vm._m(1),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body table-responsive p-0" }, [
-            _c("table", { staticClass: "table table-hover text-nowrap" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                [
-                  !_vm.dataMitra.length
-                    ? _c("tr", [
-                        _c("td", { attrs: { colspan: "3", align: "center" } }, [
-                          _vm._v("Tidak ada pelaku rantai pasok Grosir")
-                        ])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm._l(_vm.dataMitra, function(data) {
-                    return _c("tr", { key: data.id }, [
-                      _c("td", [_vm._v(_vm._s(data.name))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(data.lokasiKelurahan) +
-                            ", " +
-                            _vm._s(data.lokasiKecamatan) +
-                            ", " +
-                            _vm._s(data.lokasiKabupaten)
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-success btn-xs",
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                return _vm.addMitra(data.id, data.name)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fas fa-plus-square white"
-                            }),
-                            _vm._v(
-                              "\n                  Tambah sebagai mitra\n                "
-                            )
-                          ]
-                        )
-                      ])
+          _c(
+            "tbody",
+            [
+              !_vm.dataMitra.length
+                ? _c("tr", [
+                    _c("td", { attrs: { colspan: "3", align: "center" } }, [
+                      _vm._v("Tidak ada pelaku rantai pasok Grosir")
                     ])
-                  })
-                ],
-                2
-              )
-            ])
-          ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.dataMitra, function(data) {
+                return _c("tr", { key: data.id }, [
+                  _c("td", [_vm._v(_vm._s(data.name))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(data.lokasiKelurahan) +
+                        ", " +
+                        _vm._s(data.lokasiKecamatan) +
+                        ", " +
+                        _vm._s(data.lokasiKabupaten)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success btn-xs",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.addMitra(data.id, data.name)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-plus-square white" }),
+                        _vm._v(
+                          "\n                Tambah sebagai mitra\n              "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              })
+            ],
+            2
+          )
         ])
       ])
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -50266,83 +50430,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "tab-pane fade",
-      attrs: {
-        id: "custom-tabs-three-pengecer",
-        role: "tabpanel",
-        "aria-labelledby": "custom-tabs-three-pengecer-tab"
-      }
-    },
-    [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _vm._m(0),
+  return _c("div", { staticClass: "col-md-12" }, [
+    _c("div", { staticClass: "card" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body table-responsive p-0" }, [
+        _c("table", { staticClass: "table table-hover text-nowrap" }, [
+          _vm._m(1),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body table-responsive p-0" }, [
-            _c("table", { staticClass: "table table-hover text-nowrap" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                [
-                  !_vm.dataMitra.length
-                    ? _c("tr", [
-                        _c("td", { attrs: { colspan: "3", align: "center" } }, [
-                          _vm._v("Tidak ada pelaku rantai pasok Pengecer")
-                        ])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm._l(_vm.dataMitra, function(data) {
-                    return _c("tr", { key: data.id }, [
-                      _c("td", [_vm._v(_vm._s(data.name))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(data.lokasiKelurahan) +
-                            ", " +
-                            _vm._s(data.lokasiKecamatan) +
-                            ", " +
-                            _vm._s(data.lokasiKabupaten)
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-success btn-xs",
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                return _vm.addMitra(data.id, data.name)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fas fa-plus-square white"
-                            }),
-                            _vm._v(
-                              "\n                  Tambah sebagai mitra\n                "
-                            )
-                          ]
-                        )
-                      ])
+          _c(
+            "tbody",
+            [
+              !_vm.dataMitra.length
+                ? _c("tr", [
+                    _c("td", { attrs: { colspan: "3", align: "center" } }, [
+                      _vm._v("Tidak ada pelaku rantai pasok Pengecer")
                     ])
-                  })
-                ],
-                2
-              )
-            ])
-          ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.dataMitra, function(data) {
+                return _c("tr", { key: data.id }, [
+                  _c("td", [_vm._v(_vm._s(data.name))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(data.lokasiKelurahan) +
+                        ", " +
+                        _vm._s(data.lokasiKecamatan) +
+                        ", " +
+                        _vm._s(data.lokasiKabupaten)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success btn-xs",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.addMitra(data.id, data.name)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-plus-square white" }),
+                        _vm._v(
+                          "\n                Tambah sebagai mitra\n              "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              })
+            ],
+            2
+          )
         ])
       ])
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -50417,83 +50566,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "tab-pane fade active show",
-      attrs: {
-        id: "custom-tabs-three-pengepul",
-        role: "tabpanel",
-        "aria-labelledby": "custom-tabs-three-pengepul-tab"
-      }
-    },
-    [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _vm._m(0),
+  return _c("div", { staticClass: "col-md-12" }, [
+    _c("div", { staticClass: "card" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body table-responsive p-0" }, [
+        _c("table", { staticClass: "table table-hover text-nowrap" }, [
+          _vm._m(1),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body table-responsive p-0" }, [
-            _c("table", { staticClass: "table table-hover text-nowrap" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                [
-                  !_vm.dataMitra.length
-                    ? _c("tr", [
-                        _c("td", { attrs: { colspan: "3", align: "center" } }, [
-                          _vm._v("Tidak ada pelaku rantai pasok Pengepul")
-                        ])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm._l(_vm.dataMitra, function(data) {
-                    return _c("tr", { key: data.id }, [
-                      _c("td", [_vm._v(_vm._s(data.name))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(data.lokasiKelurahan) +
-                            ", " +
-                            _vm._s(data.lokasiKecamatan) +
-                            ", " +
-                            _vm._s(data.lokasiKabupaten)
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-success btn-xs",
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                return _vm.addMitra(data.id, data.name)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fas fa-plus-square white"
-                            }),
-                            _vm._v(
-                              "\n                  Tambah sebagai mitra\n                "
-                            )
-                          ]
-                        )
-                      ])
+          _c(
+            "tbody",
+            [
+              !_vm.dataMitra.length
+                ? _c("tr", [
+                    _c("td", { attrs: { colspan: "3", align: "center" } }, [
+                      _vm._v("Tidak ada pelaku rantai pasok Pengepul")
                     ])
-                  })
-                ],
-                2
-              )
-            ])
-          ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.dataMitra, function(data) {
+                return _c("tr", { key: data.id }, [
+                  _c("td", [_vm._v(_vm._s(data.name))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(data.lokasiKelurahan) +
+                        ", " +
+                        _vm._s(data.lokasiKecamatan) +
+                        ", " +
+                        _vm._s(data.lokasiKabupaten)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success btn-xs",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.addMitra(data.id, data.name)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-plus-square white" }),
+                        _vm._v(
+                          "\n                Tambah sebagai mitra\n              "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              })
+            ],
+            2
+          )
         ])
       ])
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -50568,83 +50702,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "tab-pane fade",
-      attrs: {
-        id: "custom-tabs-three-produsen",
-        role: "tabpanel",
-        "aria-labelledby": "custom-tabs-three-produsen-tab"
-      }
-    },
-    [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _vm._m(0),
+  return _c("div", { staticClass: "col-md-12" }, [
+    _c("div", { staticClass: "card" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body table-responsive p-0" }, [
+        _c("table", { staticClass: "table table-hover text-nowrap" }, [
+          _vm._m(1),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body table-responsive p-0" }, [
-            _c("table", { staticClass: "table table-hover text-nowrap" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                [
-                  !_vm.dataMitra.length
-                    ? _c("tr", [
-                        _c("td", { attrs: { colspan: "3", align: "center" } }, [
-                          _vm._v("Tidak ada pelaku rantai pasok Produsen")
-                        ])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm._l(_vm.dataMitra, function(data) {
-                    return _c("tr", { key: data.id }, [
-                      _c("td", [_vm._v(_vm._s(data.name))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(data.lokasiKelurahan) +
-                            ", " +
-                            _vm._s(data.lokasiKecamatan) +
-                            ", " +
-                            _vm._s(data.lokasiKabupaten)
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-success btn-xs",
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                return _vm.addMitra(data.id, data.name)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fas fa-plus-square white"
-                            }),
-                            _vm._v(
-                              "\n                  Tambah sebagai mitra\n                "
-                            )
-                          ]
-                        )
-                      ])
+          _c(
+            "tbody",
+            [
+              !_vm.dataMitra.length
+                ? _c("tr", [
+                    _c("td", { attrs: { colspan: "3", align: "center" } }, [
+                      _vm._v("Tidak ada pelaku rantai pasok Produsen")
                     ])
-                  })
-                ],
-                2
-              )
-            ])
-          ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.dataMitra, function(data) {
+                return _c("tr", { key: data.id }, [
+                  _c("td", [_vm._v(_vm._s(data.name))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(data.lokasiKelurahan) +
+                        ", " +
+                        _vm._s(data.lokasiKecamatan) +
+                        ", " +
+                        _vm._s(data.lokasiKabupaten)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success btn-xs",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.addMitra(data.id, data.name)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-plus-square white" }),
+                        _vm._v(
+                          "\n                Tambah sebagai mitra\n              "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              })
+            ],
+            2
+          )
         ])
       ])
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -54200,8 +54319,49 @@ var render = function() {
                       staticClass: "tab-content",
                       attrs: { id: "custom-tabs-three-tabContent" }
                     },
-                    [_c("pengepul"), _vm._v(" "), _c("pengecer")],
-                    1
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade active show",
+                          attrs: {
+                            id: "custom-tabs-three-produsen",
+                            role: "tabpanel",
+                            "aria-labelledby": "custom-tabs-three-produsen-tab"
+                          }
+                        },
+                        [_c("produsen")],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade",
+                          attrs: {
+                            id: "custom-tabs-three-pengepul",
+                            role: "tabpanel",
+                            "aria-labelledby": "custom-tabs-three-pengepul-tab"
+                          }
+                        },
+                        [_c("pengepul")],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade",
+                          attrs: {
+                            id: "custom-tabs-three-pengecer",
+                            role: "tabpanel",
+                            "aria-labelledby": "custom-tabs-three-pengecer-tab"
+                          }
+                        },
+                        [_c("pengecer")],
+                        1
+                      )
+                    ]
                   )
                 ])
               ]
@@ -54257,12 +54417,30 @@ var staticRenderFns = [
               {
                 staticClass: "nav-link active",
                 attrs: {
+                  id: "custom-tabs-three-produsen-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-produsen",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-produsen",
+                  "aria-selected": "true"
+                }
+              },
+              [_vm._v("Produsen")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
                   id: "custom-tabs-three-pengepul-tab",
                   "data-toggle": "pill",
                   href: "#custom-tabs-three-pengepul",
                   role: "tab",
                   "aria-controls": "custom-tabs-three-pengepul",
-                  "aria-selected": "true"
+                  "aria-selected": "false"
                 }
               },
               [_vm._v("Pengepul")]
@@ -54284,6 +54462,24 @@ var staticRenderFns = [
                 }
               },
               [_vm._v("Pengecer")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "custom-tabs-three-konsumen-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-konsumen",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-konsumen",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Konsumen")]
             )
           ])
         ]
@@ -55220,8 +55416,49 @@ var render = function() {
                       staticClass: "tab-content",
                       attrs: { id: "custom-tabs-three-tabContent" }
                     },
-                    [_c("grosir")],
-                    1
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade active show",
+                          attrs: {
+                            id: "custom-tabs-three-produsen",
+                            role: "tabpanel",
+                            "aria-labelledby": "custom-tabs-three-produsen-tab"
+                          }
+                        },
+                        [_c("produsen")],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade",
+                          attrs: {
+                            id: "custom-tabs-three-pengepul",
+                            role: "tabpanel",
+                            "aria-labelledby": "custom-tabs-three-pengepul-tab"
+                          }
+                        },
+                        [_c("pengepul")],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade",
+                          attrs: {
+                            id: "custom-tabs-three-grosir",
+                            role: "tabpanel",
+                            "aria-labelledby": "custom-tabs-three-grosir-tab"
+                          }
+                        },
+                        [_c("grosir")],
+                        1
+                      )
+                    ]
                   )
                 ])
               ]
@@ -55277,15 +55514,69 @@ var staticRenderFns = [
               {
                 staticClass: "nav-link active",
                 attrs: {
+                  id: "custom-tabs-three-produsen-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-produsen",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-produsen",
+                  "aria-selected": "true"
+                }
+              },
+              [_vm._v("Produsen")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "custom-tabs-three-pengepul-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-pengepul",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-pengepul",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Pengepul")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
                   id: "custom-tabs-three-grosir-tab",
                   "data-toggle": "pill",
                   href: "#custom-tabs-three-grosir",
                   role: "tab",
                   "aria-controls": "custom-tabs-three-grosir",
-                  "aria-selected": "true"
+                  "aria-selected": "false"
                 }
               },
               [_vm._v("Grosir")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "custom-tabs-three-konsumen-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-konsumen",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-konsumen",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Konsumen")]
             )
           ])
         ]
@@ -56225,8 +56516,49 @@ var render = function() {
                       staticClass: "tab-content",
                       attrs: { id: "custom-tabs-three-tabContent" }
                     },
-                    [_c("produsen"), _vm._v(" "), _c("grosir")],
-                    1
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade active show",
+                          attrs: {
+                            id: "custom-tabs-three-produsen",
+                            role: "tabpanel",
+                            "aria-labelledby": "custom-tabs-three-produsen-tab"
+                          }
+                        },
+                        [_c("produsen")],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade",
+                          attrs: {
+                            id: "custom-tabs-three-grosir",
+                            role: "tabpanel",
+                            "aria-labelledby": "custom-tabs-three-grosir-tab"
+                          }
+                        },
+                        [_c("grosir")],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade",
+                          attrs: {
+                            id: "custom-tabs-three-pengecer",
+                            role: "tabpanel",
+                            "aria-labelledby": "custom-tabs-three-pengecer-tab"
+                          }
+                        },
+                        [_c("pengecer")],
+                        1
+                      )
+                    ]
                   )
                 ])
               ]
@@ -56280,14 +56612,14 @@ var staticRenderFns = [
             _c(
               "a",
               {
-                staticClass: "nav-link",
+                staticClass: "nav-link active",
                 attrs: {
                   id: "custom-tabs-three-produsen-tab",
                   "data-toggle": "pill",
                   href: "#custom-tabs-three-produsen",
                   role: "tab",
                   "aria-controls": "custom-tabs-three-produsen",
-                  "aria-selected": "false"
+                  "aria-selected": "true"
                 }
               },
               [_vm._v("Produsen")]
@@ -56298,17 +56630,53 @@ var staticRenderFns = [
             _c(
               "a",
               {
-                staticClass: "nav-link active",
+                staticClass: "nav-link",
                 attrs: {
                   id: "custom-tabs-three-grosir-tab",
                   "data-toggle": "pill",
                   href: "#custom-tabs-three-grosir",
                   role: "tab",
                   "aria-controls": "custom-tabs-three-grosir",
-                  "aria-selected": "true"
+                  "aria-selected": "false"
                 }
               },
               [_vm._v("Grosir")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "custom-tabs-three-pengecer-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-pengecer",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-pengecer",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Pengecer")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "custom-tabs-three-konsumen-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-konsumen",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-konsumen",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Konsumen")]
             )
           ])
         ]
@@ -57248,8 +57616,49 @@ var render = function() {
                       staticClass: "tab-content",
                       attrs: { id: "custom-tabs-three-tabContent" }
                     },
-                    [_c("listpengepul")],
-                    1
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade active show",
+                          attrs: {
+                            id: "custom-tabs-three-pengepul",
+                            role: "tabpanel",
+                            "aria-labelledby": "custom-tabs-three-pengepul-tab"
+                          }
+                        },
+                        [_c("pengepul")],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade",
+                          attrs: {
+                            id: "custom-tabs-three-grosir",
+                            role: "tabpanel",
+                            "aria-labelledby": "custom-tabs-three-grosir-tab"
+                          }
+                        },
+                        [_c("grosir")],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade",
+                          attrs: {
+                            id: "custom-tabs-three-pengecer",
+                            role: "tabpanel",
+                            "aria-labelledby": "custom-tabs-three-pengecer-tab"
+                          }
+                        },
+                        [_c("pengecer")],
+                        1
+                      )
+                    ]
                   )
                 ])
               ]
@@ -57314,6 +57723,60 @@ var staticRenderFns = [
                 }
               },
               [_vm._v("Pengepul")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "custom-tabs-three-grosir-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-grosir",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-grosir",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Grosir")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "custom-tabs-three-pengecer-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-pengecer",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-pengecer",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Pengecer")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "custom-tabs-three-konsumen-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-konsumen",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-konsumen",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Konsumen")]
             )
           ])
         ]
@@ -82985,8 +83448,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
