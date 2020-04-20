@@ -40,6 +40,7 @@
                 <option value="3">Pengepul</option>
                 <option value="4">Grosir</option>
                 <option value="5">Pengecer</option>
+                <option value="6">Konsumen</option>
               </select>
             </div>
             <span class="help-block" v-if="has_error && errors.role">{{ errors.role }}</span>

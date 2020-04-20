@@ -91,7 +91,7 @@ export default {
   },
 
   mounted() {
-    //
+   
   },
 
   methods: {
@@ -128,14 +128,19 @@ export default {
             if (this.$auth.user().status === 0)
               redirectTo = "unverifiedDashboard";
             else redirectTo = "DashboardGrosir";
-          } else {
+          } else if (this.$auth.user().role === 5) {
             if (this.$auth.user().status === 0)
               redirectTo = "unverifiedDashboard";
             else redirectTo = "DashboardPengecer";
+          } else {
+            if (this.$auth.user().status === 0)
+            redirectTo = "unverifiedDashboard";
+            else redirectTo = "DashboardKonsumen";
           }
           this.$Progress.finish();
           // var sts = this.$auth.user()
           window.localStorage.setItem("isLoggedUser", true);
+          // window.localStorage.setItem("role", this.$auth.user().role);
           this.$router
             .push({ name: redirectTo, params: { usrId: this.$auth.user().id } })
             .catch(err => {});
