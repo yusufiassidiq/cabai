@@ -48,6 +48,15 @@ import PermintaanCabaiPengecer from './pages/scm/pengecer/PermintaanCabai'
 import InventarisPengecer from './pages/scm/pengecer/Inventaris'
 import MitraSayaPengecer from './pages/scm/pengecer/MitraSaya'
 
+import MasterKonsumen from './pages/scm/konsumen/Master' // Konsumen
+import DashboardKonsumen from './pages/scm/konsumen/Dashboard'
+import DaftarMitraKonsumen from './pages/scm/konsumen/DaftarMitra'
+import PermintaanMitraKonsumen from './pages/scm/konsumen/PermintaanMitra'
+// import TransaksiPelangganKonsumen from './pages/scm/konsumen/TransaksiPelanggan'
+// import TransaksiPemasokKonsumen from './pages/scm/konsumen/TransaksiPemasok'
+// import InventarisKonsumen from './pages/scm/konsumen/Inventaris'
+import MitraSayaKonsumen from './pages/scm/konsumen/MitraSaya'
+
 // Pages - Bisnis Analitik
 import BAMaster from './pages/ba/Master'
 import TargetProd from './pages/ba/produsen/Target'
@@ -309,6 +318,45 @@ const routes = [
             },
         ]
     },
+    {
+        path: '/konsumen',
+        component: MasterKonsumen,
+        meta: {
+            checkStatus: true,
+            auth: {
+                roles: 6,
+                redirect: {
+                    name: 'login'
+                },
+                forbiddenRedirect: '/403'
+            }
+        },
+        children: [
+            {
+                path: '',
+                component: DashboardKonsumen,
+                name: "DashboardKonsumen"
+            },
+            {
+                path: 'daftarmitra',
+                component: DaftarMitraKonsumen,
+                name: "DaftarMitraKonsumen"
+            },
+            {
+                path: 'mitrasaya',
+                component: MitraSayaKonsumen,
+                name: "MitraSayaKonsumen"
+            },
+            {
+                path: 'permintaanmitra',
+                component: PermintaanMitraKonsumen,
+                name: "PermintaanMitraKonsumen"
+
+            },
+            
+            
+        ]
+    },
     { path: '*', component: NotFoundNonLoggedUser },
     {
         path: '/',
@@ -320,7 +368,7 @@ const routes = [
         name: 'register',
         component: Register,
         meta: {
-            auth: false
+            auth: undefined
         }
     },
     {
@@ -328,7 +376,7 @@ const routes = [
         name: 'login',
         component: Login,
         meta: {
-            auth: false
+            auth: undefined
         }
     },
     // USER ROUTES
