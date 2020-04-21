@@ -53,7 +53,22 @@ class UserController extends Controller
     }
 
     public function getMitraProdusen(){
-        $listProdusen = User::where('role',2)->where('status',1)->get();
+        $userId = Auth::user()->id;
+        $mitra = Kemitraan::whereHas('user1')->get();
+        $j=0;
+        foreach($mitra as $i){
+            $user1 = $i->user1_id;
+            $user2 = $i->user2_id;
+            if($user1 == $userId) {
+                $listuser[$j] = $user2;
+            }
+            else if ($user2 == $userId){
+                $listuser[$j] = $user1;
+            }
+            $j++;
+        }
+        
+        $listProdusen = User::where('role',2)->where('status',1)->whereNotIn('id',$listuser)->get();
         foreach ($listProdusen as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -66,7 +81,21 @@ class UserController extends Controller
     }
 
     public function getMitraPengepul(){
-        $listPengepul = User::where('role',3)->where('status',1)->get();
+        $userId = Auth::user()->id;
+        $mitra = Kemitraan::whereHas('user1')->get();
+        $j=0;
+        foreach($mitra as $i){
+            $user1 = $i->user1_id;
+            $user2 = $i->user2_id;
+            if($user1 == $userId) {
+                $listuser[$j] = $user2;
+            }
+            else if ($user2 == $userId){
+                $listuser[$j] = $user1;
+            }
+            $j++;
+        }
+        $listPengepul = User::where('role',3)->where('status',1)->whereNotIn('id',$listuser)->get();
         foreach ($listPengepul as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -79,7 +108,21 @@ class UserController extends Controller
     }
 
     public function getMitraGrosir(){
-        $listGrosir = User::where('role',4)->where('status',1)->get();
+        $userId = Auth::user()->id;
+        $mitra = Kemitraan::whereHas('user1')->get();
+        $j=0;
+        foreach($mitra as $i){
+            $user1 = $i->user1_id;
+            $user2 = $i->user2_id;
+            if($user1 == $userId) {
+                $listuser[$j] = $user2;
+            }
+            else if ($user2 == $userId){
+                $listuser[$j] = $user1;
+            }
+            $j++;
+        }
+        $listGrosir = User::where('role',4)->where('status',1)->whereNotIn('id',$listuser)->get();
         foreach ($listGrosir as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -92,7 +135,21 @@ class UserController extends Controller
     }
 
     public function getMitraPengecer(){
-        $listPengecer = User::where('role',5)->where('status',1)->get();
+        $userId = Auth::user()->id;
+        $mitra = Kemitraan::whereHas('user1')->get();
+        $j=0;
+        foreach($mitra as $i){
+            $user1 = $i->user1_id;
+            $user2 = $i->user2_id;
+            if($user1 == $userId) {
+                $listuser[$j] = $user2;
+            }
+            else if ($user2 == $userId){
+                $listuser[$j] = $user1;
+            }
+            $j++;
+        }
+        $listPengecer = User::where('role',5)->where('status',1)->whereNotIn('id',$listuser)->get();
         foreach ($listPengecer as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -101,6 +158,33 @@ class UserController extends Controller
         return response()->json([
                 'status' => 'success',
                 'data' => $listPengecer->toArray()
+            ], 200); 
+    }
+
+    public function getMitraKonsumen(){
+        $userId = Auth::user()->id;
+        $mitra = Kemitraan::whereHas('user1')->get();
+        $j=0;
+        foreach($mitra as $i){
+            $user1 = $i->user1_id;
+            $user2 = $i->user2_id;
+            if($user1 == $userId) {
+                $listuser[$j] = $user2;
+            }
+            else if ($user2 == $userId){
+                $listuser[$j] = $user1;
+            }
+            $j++;
+        }
+        $listKonsumen = User::where('role',6)->where('status',1)->whereNotIn('id',$listuser)->get();
+        foreach ($listKonsumen as $i){
+            $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
+            $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
+            $i->lokasiKelurahan = $i->lokasi()->first()->kelurahan;
+        }
+        return response()->json([
+                'status' => 'success',
+                'data' => $listKonsumen->toArray()
             ], 200); 
     }
 
