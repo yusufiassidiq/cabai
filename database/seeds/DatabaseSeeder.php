@@ -123,5 +123,22 @@ class DatabaseSeeder extends Seeder
         ]);
         $lokasi->user()->associate($user);
         $lokasi->save();
+
+        $user = new User;
+        $user->name = "Konsumen";
+        $user->email = "konsumen@test.com";
+        $user->password = Hash::make('asd');
+        $user->role = 6;
+        $user->status = 1;
+        $user->fotosk = Str::random(5);
+        $user->save();
+        $lokasi = new Lokasi([
+            'kabupaten' => 'Bogor',
+            'kecamatan' => 'Bogor Barat',
+            'kelurahan' => 'Balumbang Jaya',
+            'user_id'=>$user->id
+        ]);
+        $lokasi->user()->associate($user);
+        $lokasi->save();
     }
 }
