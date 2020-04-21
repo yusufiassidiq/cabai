@@ -60,6 +60,8 @@ import MitraSayaKonsumen from './pages/scm/konsumen/MitraSaya'
 // Pages - Bisnis Analitik
 import BAMaster from './pages/ba/Master'
 import TargetProd from './pages/ba/produsen/Target'
+import PenjualanProd from './pages/ba/produsen/Penjualan'
+import PengeluaranProd from './pages/ba/produsen/Pengeluaran'
 import BisnisAnalitikProd from './pages/ba/produsen/bisnisAnalitik'
 import BisnisAnalitikPengepul from './pages/ba/pengepul/BisnisAnalitik'
 import BisnisAnalitikGrosir from './pages/ba/grosir/BisnisAnalitik'
@@ -158,6 +160,16 @@ const routes = [
                 path: 'target',
                 component: TargetProd,
                 name: "TargetProd"
+            },
+            {
+                path: 'penjualan',
+                component: PenjualanProd,
+                name: "PenjualanProd"
+            },
+            {
+                path: 'pengeluaran',
+                component: PengeluaranProd,
+                name: "PengeluaranProd"
             },
         ]
     },

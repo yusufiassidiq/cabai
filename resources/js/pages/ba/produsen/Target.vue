@@ -28,11 +28,51 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Grafik Target Penjualan Cabai</h5>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <p class="text-center">
+                      <strong>Target Januari - Desember Tahun {{ year }}</strong>
+                    </p>
+
+                    <div class="chart">
+                      <!-- Sales Chart Canvas -->
+                      <canvas ref="chart" height="100" style="height: 100px;"></canvas>
+                      <!-- <canvas id="salesChart" height="180" style="height: 180px;"></canvas> -->
+                    </div>
+                    <!-- /.chart-responsive -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- ./card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
         <div class="row justify-content-center">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Rekap Target Tahun 2020</h3>
+                <h3 class="card-title">Rekap Target Tahun {{ year }}</h3>
 
                 <div class="card-tools">
                   <button class="btn btn-success" @click="newModal">Tambah Target 
@@ -75,7 +115,7 @@
                       <td>{{ data.tahun }}</td>
                       <td>{{ data.bulan }}</td>
                       <td>{{ data.jenis_cabai }}</td>
-                      <td>{{ data.jumlah_cabai }}</td>
+                      <td>Rp{{ data.jumlah_cabai }}</td>
                       <td>
                         <a href="#" @click="editModal(data)">
                           <i class="fa fa-edit blue"></i>
@@ -175,7 +215,7 @@
                   type="text"
                   name="jumlah_cabai"
                   class="form-control"
-                  placeholder="Jumlah Cabai"
+                  placeholder="Total Penjualan (dalam Rupiah)"
                   :class="{ 'is-invalid': form.errors.has('jumlah_cabai') }"
                 />
                 <has-error :form="form" field="jumlah_cabai"></has-error>
@@ -198,6 +238,8 @@
 </template>
 
 <script>
+  import { Line } from 'vue-chartjs'
+
   export default{
     data(){
       return {
@@ -237,6 +279,7 @@
       loadTarget(){
         axios.get('/readTarget').then(response =>{
           this.datatarget = response.data.data;
+          this.year = response.data.tahun;
         });
         console.log(response.data.data)
       },
@@ -300,6 +343,74 @@
           }
         });
       },
+      fillData () {
+        axios.get('/getTarget').then(response=>{
+          var chart = this.$refs.chart;
+          var ctx = chart.getContext("2d");
+          var myChart = new Chart(ctx, {
+            type : 'line',
+            data:{
+              labels:response.data.month,
+              datasets:[{
+                label : 'Cabai Rawit',
+                backgroundColor     : 'rgba(60,141,188,0.9)',
+                borderColor         : 'rgba(60,141,188,0.8)',
+                pointRadius         : true,
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(60,141,188,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(60,141,188,1)',
+                data: response.data.rawit,
+                fill                : false,
+              },
+              {
+                label : 'Cabai Keriting',
+                backgroundColor     : 'rgba(255, 0, 0, 0.6)',
+                borderColor         : 'rgba(255, 0, 0, 0.8)',
+                pointRadius         : true,
+                pointColor          : 'rgba(255, 0, 0, 0.8)',
+                pointStrokeColor    : '#c1c7d1',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255, 0, 0, 0.8)',
+                data                : response.data.keriting,
+                fill                : false,
+              },
+              {
+                label : 'Cabai Besar',
+                backgroundColor     : 'rgba(11, 156, 49, 0.8)',
+                borderColor         : 'rgba(11, 156, 49, 1)',
+                pointRadius         : true,
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(11, 156, 49, 1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(11, 156, 49, 1)',
+                data                : response.data.besar,
+                fill                : false,
+              }]
+            },
+            options:{
+              scales:{
+                xAxes: [{
+                  gridLines : {
+                    display : false,
+                  }
+                }],
+                yAxes:[{
+                  gridLines : {
+                    display : false,
+                  },
+                  ticks:{
+                    beginAtZero:true
+                  }
+                }]
+              }
+            }
+          }); 
+        }).catch(error => {
+          console.log(error)
+          this.errored= true
+        });
+      }
     },
     created(){
       this.loadTarget();
@@ -307,7 +418,9 @@
     },
     mounted() {
     // Custom event on Vue js
+    this.fillData();
     UpdateData.$on("update", () => {
+      this.fillData();
       this.loadTarget();
     });
   }

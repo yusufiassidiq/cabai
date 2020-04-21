@@ -114,28 +114,18 @@
                 <p>Rekap Target</p>
               </router-link>
             </li>
-            <li class="nav-item has-treeview menu-open">
-              <a href="#" class="nav-link disable">
-                <i class="nav-icon fas fa-address-book"></i>
-                <p>
-                  Rekap Laporan
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <router-link to="/produsen/analitik" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Penjualan</p>
-                  </router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link to="/produsen/analitik" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Pengeluaran</p>
-                  </router-link>
-                </li>
-              </ul>
+            <!-- <li class="nav-header">Rekap Laporan</li> -->
+            <li class="nav-item">
+              <router-link to="/produsen/penjualan" class="nav-link">
+                <i class="fas fa-user-friends nav-icon"></i>
+                <p>Penjualan</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/produsen/pengeluaran" class="nav-link">
+                <i class="fas fa-user-friends nav-icon"></i>
+                <p>Pengeluaran</p>
+              </router-link>
             </li>
             <li class="nav-item">
               <router-link to="/produsen/analitik" class="nav-link">

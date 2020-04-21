@@ -25,12 +25,14 @@
     },
     "dependencies": {
         "@websanova/vue-auth": "^2.22.0-beta",
+        "chart.js": "^2.9.3",
         "es6-promise": "^4.2.8",
         "sweetalert2": "^9.10.7",
         "vform": "^1.0.1",
         "vue": "^2.6.11",
         "vue-axios": "^2.1.5",
         "vue-button-spinner": "^2.2.1",
+        "vue-chartjs": "^3.5.0",
         "vue-progressbar": "^0.7.5",
         "vue-router": "^3.1.6",
         "vuejs-datepicker": "^1.6.2"
