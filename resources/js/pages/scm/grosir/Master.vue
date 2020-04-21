@@ -61,7 +61,7 @@
                 <p>Dashboard</p>
               </router-link>
             </li>
-            <li class="nav-header">Mitra</li>
+            <li class="nav-header">MANAJEMEN KEMITRAAN</li>
             <li class="nav-item">
               <router-link to="/grosir/daftarmitra" class="nav-link">
                 <i class="fas fa-users nav-icon"></i>
@@ -86,24 +86,18 @@
                 <p>Pengajuan Mitra</p>
               </router-link>
             </li> -->
-            <li class="nav-header">Inventaris</li>
+            <li class="nav-header">MANAJEMEN PERSEDIAAN</li>
             <li class="nav-item">
               <router-link to="/grosir/inventaris" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>Inventaris</p>
               </router-link>
             </li>
-            <li class="nav-header">Transaksi</li>
+            <li class="nav-header">MANAJEMEN PEMESANAN</li>
             <li class="nav-item">
-              <router-link to="/grosir/transaksipemasok" class="nav-link">
+              <router-link to="/grosir/permintaancabai" class="nav-link">
                 <i class="fas fa-file-invoice nav-icon"></i>
-                <p>Pemasok</p>
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/grosir/transaksipelanggan" class="nav-link">
-                <i class="fas fa-receipt nav-icon"></i>
-                <p>Pelanggan</p>
+                <p>Permintaan cabai</p>
               </router-link>
             </li>
             <li class="nav-header">Bisnis Analitik</li>

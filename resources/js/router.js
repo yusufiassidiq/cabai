@@ -20,15 +20,14 @@ import ManajemenLahan from './pages/scm/produsen/ManajemenLahan'
 import RiwayatPengeluaran from './pages/scm/produsen/RiwayatPengeluaran'
 import DaftarMitraProd from './pages/scm/produsen/DaftarMitra'
 import PermintaanMitraProd from './pages/scm/produsen/PermintaanMitra'
-import TransaksiPelangganProd from './pages/scm/produsen/TransaksiPelanggan'
+import PermintaanCabai from './pages/scm/produsen/PermintaanCabai'
 import MitraSayaProd from './pages/scm/produsen/MitraSaya'
 
 import MasterPengepul from './pages/scm/pengepul/Master' // pengepul
 import DashboardPengepul from './pages/scm/pengepul/Dashboard'
 import DaftarMitraPengepul from './pages/scm/pengepul/DaftarMitra'
 import PermintaanMitraPengepul from './pages/scm/pengepul/PermintaanMitra'
-import TransaksiPelangganPengepul from './pages/scm/pengepul/TransaksiPelanggan'
-import TransaksiPemasokPengepul from './pages/scm/pengepul/TransaksiPemasok'
+import PermintaanCabaiPengepul from './pages/scm/pengepul/PermintaanCabai'
 import InventarisPengepul from './pages/scm/pengepul/Inventaris'
 import MitraSayaPengepul from './pages/scm/pengepul/MitraSaya'
 
@@ -36,8 +35,7 @@ import MasterGrosir from './pages/scm/grosir/Master' // grosir
 import DashboardGrosir from './pages/scm/grosir/Dashboard'
 import DaftarMitraGrosir from './pages/scm/grosir/DaftarMitra'
 import PermintaanMitraGrosir from './pages/scm/grosir/PermintaanMitra'
-import TransaksiPelangganGrosir from './pages/scm/grosir/TransaksiPelanggan'
-import TransaksiPemasokGrosir from './pages/scm/grosir/TransaksiPemasok'
+import PermintaanCabaiGrosir from './pages/scm/grosir/PermintaanCabai'
 import InventarisGrosir from './pages/scm/grosir/Inventaris'
 import MitraSayaGrosir from './pages/scm/grosir/MitraSaya'
 
@@ -46,8 +44,7 @@ import MasterPengecer from './pages/scm/pengecer/Master' // pengecer
 import DashboardPengecer from './pages/scm/pengecer/Dashboard'
 import DaftarMitraPengecer from './pages/scm/pengecer/DaftarMitra'
 import PermintaanMitraPengecer from './pages/scm/pengecer/PermintaanMitra'
-import TransaksiPelangganPengecer from './pages/scm/pengecer/TransaksiPelanggan'
-import TransaksiPemasokPengecer from './pages/scm/pengecer/TransaksiPemasok'
+import PermintaanCabaiPengecer from './pages/scm/pengecer/PermintaanCabai'
 import InventarisPengecer from './pages/scm/pengecer/Inventaris'
 import MitraSayaPengecer from './pages/scm/pengecer/MitraSaya'
 
@@ -147,9 +144,9 @@ const routes = [
 
             },
             {
-                path: 'transaksipelanggan',
-                component: TransaksiPelangganProd,
-                name: "TransaksiPelangganProd"
+                path: 'permintaancabai',
+                component: PermintaanCabai,
+                name: "PermintaanCabai"
             },
             //BA
             {
@@ -200,14 +197,9 @@ const routes = [
 
             },
             {
-                path: 'transaksipelanggan',
-                component: TransaksiPelangganGrosir,
-                name: "TransaksiPelangganGrosir"
-            },
-            {
-                path: 'transaksipemasok',
-                component: TransaksiPemasokGrosir,
-                name: "TransaksiPemasokGrosir"
+                path: 'permintaancabai',
+                component: PermintaanCabaiGrosir,
+                name: "PermintaanCabaiGrosir"
             },
             {
                 path: 'analitik',
@@ -258,14 +250,9 @@ const routes = [
 
             },
             {
-                path: 'transaksipelanggan',
-                component: TransaksiPelangganPengecer,
-                name: "TransaksiPelangganPengecer"
-            },
-            {
-                path: 'transaksipemasok',
-                component: TransaksiPemasokPengecer,
-                name: "TransaksiPemasokPengecer"
+                path: 'permintaancabai',
+                component: PermintaanCabaiPengecer,
+                name: "PermintaanCabaiPengecer"
             },
             {
                 path: 'analitik',
@@ -315,14 +302,9 @@ const routes = [
 
             },
             {
-                path: 'transaksipelanggan',
-                component: TransaksiPelangganPengepul,
-                name: "TransaksiPelangganPengepul"
-            },
-            {
-                path: 'transaksipemasok',
-                component: TransaksiPemasokPengepul,
-                name: "TransaksiPemasokPengepul"
+                path: 'permintaancabai',
+                component: PermintaanCabaiPengepul,
+                name: "PermintaanCabaiPengepul"
             },
             {
                 path: 'analitik',

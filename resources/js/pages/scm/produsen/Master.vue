@@ -75,7 +75,7 @@
                 <p>Riwayat Pengeluaran</p>
               </router-link>
             </li>
-            <li class="nav-header">Mitra</li>
+            <li class="nav-header">MANAJEMEN KEMITRAAN</li>
             <li class="nav-item">
               <router-link to="/produsen/daftarmitra" class="nav-link">
                 <i class="fas fa-users nav-icon"></i>
@@ -100,11 +100,11 @@
                 <p>Pengajuan Mitra</p>
               </router-link>
             </li> -->
-            <li class="nav-header">Transaksi</li>
+            <li class="nav-header">MANAJEMEN PEMESANAN</li>
             <li class="nav-item">
-              <router-link to="/produsen/transaksipelanggan" class="nav-link">
+              <router-link to="/produsen/permintaancabai" class="nav-link">
                 <i class="fas fa-receipt nav-icon"></i>
-                <p>Pembeli</p>
+                <p>Permintaan cabai</p>
               </router-link>
             </li>
             <li class="nav-header">Bisnis Analitik</li>
