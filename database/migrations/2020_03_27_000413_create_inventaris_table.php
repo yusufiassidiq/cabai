@@ -18,6 +18,7 @@ class CreateInventarisTable extends Migration
             $table->timestamps();
             $table->string('jenis_cabai');
             $table->integer('jumlah_cabai');
+            $table->integer('harga')->nullable();
             
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
