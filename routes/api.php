@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     //Transaksi Permintaan Cabai
     Route::post('/addPermintaanCabai','UserController@addPermintaanCabai');
-
+    Route::get('/getPermintaanCabai','UserController@getPermintaanCabai');
     //Manajemen lahan
     Route::post('/addLahan','ProdusenController@addLahan');
     Route::get('/readLahan','ProdusenController@readLahan');

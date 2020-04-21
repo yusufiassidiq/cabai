@@ -4017,6 +4017,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addPermintaan: function addPermintaan() {
+      var _this = this;
+
       this.form.post("/addPermintaanCabai").then(function (response) {
         UpdateData.$emit("update"); // hide modal
 
@@ -4026,10 +4028,12 @@ __webpack_require__.r(__webpack_exports__);
           icon: "success",
           title: "Permintaan berhasil ditambahkan"
         });
-        document.getElementById("btnadd").disabled = false;
+        document.getElementById("btnaddpermintaan").disabled = true;
+
+        _this.form.reset();
       })["catch"](function (error) {
         console.error(error);
-        document.getElementById("btnadd").disabled = false;
+        document.getElementById("btnaddpermintaan").disabled = false;
       });
     },
     // fungsi untuk mendapatkan role dari mitra
@@ -4059,11 +4063,11 @@ __webpack_require__.r(__webpack_exports__);
       return moment(date).format("DD MMMM YYYY");
     },
     getMitra: function getMitra() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("/listMitraSaya").then(function (response) {
-        _this.dataMitra = response.data.data;
-        console.log(_this.dataMitra);
+        _this2.dataMitra = response.data.data;
+        console.log(_this2.dataMitra);
       });
     },
     getPermintaanCabai: function getPermintaanCabai() {},
@@ -4072,6 +4076,7 @@ __webpack_require__.r(__webpack_exports__);
       // this.form.reset();
 
       $("#modalPermintaan").modal("show"); // this.form.pembeli_id = id;
+      // document.getElementById("btnaddpermintaan").disabled = true;
     }
   },
   created: function created() {
@@ -4079,10 +4084,10 @@ __webpack_require__.r(__webpack_exports__);
     this.getMitra();
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     UpdateData.$on("update", function () {
-      _this2.getPermintaanCabai();
+      _this3.getPermintaanCabai();
     });
   }
 });
@@ -52200,7 +52205,7 @@ var render = function() {
                                   "option",
                                   {
                                     key: data.id,
-                                    domProps: { value: data.id }
+                                    domProps: { value: data.mitra }
                                   },
                                   [
                                     _vm._v(
@@ -52418,7 +52423,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "btn btn-primary",
-                          attrs: { id: "btnadd", type: "submit" }
+                          attrs: { id: "btnaddpermintaan", type: "submit" }
                         },
                         [_vm._v("Tambahkan")]
                       )
@@ -86002,8 +86007,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

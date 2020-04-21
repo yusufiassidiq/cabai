@@ -333,17 +333,17 @@ class UserController extends Controller
             $user2 = $i->user2_id;
             // dd($user1);
             if($userId == $user1){
-                $mitra = $user2;
+                $i->mitra = $user2;
                 $i->nama = $i->user2()->first()->name;
                 $i->role = $i->user2()->first()->role;
                 $i->lokasi = $i->user2()->first()->lokasi()->first();
-                $i->haha = "true" ;
+               
             }else if ($userId == $user2){
-                $mitra = $user1;
+                $i->mitra = $user1;
                 $i->nama = $i->user1()->first()->name;
                 $i->role = $i->user1()->first()->role;
                 $i->lokasi = $i->user1()->first()->lokasi()->first(); 
-                $i->haha = "false" ;
+               
             }
             $j++;
         }
@@ -388,6 +388,14 @@ class UserController extends Controller
         $transaksi->user()->associate($user);
         $transaksi->save();
         return response()->json(['status' => 'success'], 200);
+    }
+    public function getPermintaanCabai(){
+        $userId = Auth::user()->id;
+        $transaksi = Transaksi::where('pembeli_id',$userId)->get();
+        return response()->json([
+            'status' => 'success', 
+            'data' => $transaksi->toArray()
+        ], 200);
     }
 
 }

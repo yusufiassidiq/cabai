@@ -111,7 +111,7 @@
                   <option
                     v-for="data in dataMitra"
                     :key="data.id"
-                    v-bind:value="data.id"
+                    v-bind:value="data.mitra"
                   >{{ data.nama }} - {{ getRole(data.role) }}</option>
                 </select>
                 <has-error :form="form" field="pembeli_id"></has-error>
@@ -161,7 +161,7 @@
                 type="submit"
                 class="btn btn-success"
               >Perbarui</button>
-              <button id="btnadd" v-show="!editmode" type="submit" class="btn btn-primary">Tambahkan</button>
+              <button id="btnaddpermintaan" v-show="!editmode" type="submit" class="btn btn-primary">Tambahkan</button>
             </div>
           </form>
           <!-- </form> -->
@@ -200,11 +200,12 @@ export default {
             icon: "success",
             title: "Permintaan berhasil ditambahkan"
           });
-          document.getElementById("btnadd").disabled = false;
+          document.getElementById("btnaddpermintaan").disabled = true;
+          this.form.reset();
       })
       .catch(error => {
           console.error(error);
-          document.getElementById("btnadd").disabled = false;
+          document.getElementById("btnaddpermintaan").disabled = false;
         });
     },
     // fungsi untuk mendapatkan role dari mitra
@@ -242,6 +243,7 @@ export default {
       // this.form.reset();
       $("#modalPermintaan").modal("show");
       // this.form.pembeli_id = id;
+      // document.getElementById("btnaddpermintaan").disabled = true;
     }
   },
   created() {
