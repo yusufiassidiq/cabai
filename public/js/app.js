@@ -3686,6 +3686,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 //
 //
 //
@@ -3762,23 +3763,167 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
-      listPermintaanCabai: {}
+      form: new Form({
+        jenis_cabai: "",
+        jumlah_cabai: "",
+        pembeli_id: "",
+        tanggal_diterima: ""
+      }),
+      editmode: false,
+      listPermintaanCabai: {},
+      dataMitra: {}
     };
   },
   methods: {
-    getPermintaanCabai: function getPermintaanCabai() {}
+    // fungsi untuk mendapatkan role dari mitra
+    getRole: function getRole(id_role) {
+      switch (id_role) {
+        case 2:
+          return "Produsen";
+          break;
+
+        case 3:
+          return "Pengepul";
+          break;
+
+        case 4:
+          return "Grosir";
+          break;
+
+        default:
+          return "Konsumen";
+      }
+    },
+    customFormatter: function customFormatter(date) {
+      return moment(date).format("DD MMMM YYYY");
+    },
+    getMitra: function getMitra() {
+      var _this = this;
+
+      axios.get("/listMitraSaya").then(function (response) {
+        _this.dataMitra = response.data.data;
+        console.log(_this.dataMitra);
+      });
+    },
+    getPermintaanCabai: function getPermintaanCabai() {},
+    newModal: function newModal() {
+      console.log("modal created"); // this.editmode = false;
+      // this.form.reset();
+
+      $("#modalPermintaan").modal("show");
+    }
   },
   created: function created() {
     this.getPermintaanCabai();
+    this.getMitra();
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     UpdateData.$on("update", function () {
-      _this.getPermintaanCabai();
+      _this2.getPermintaanCabai();
     });
   }
 });
@@ -3794,6 +3939,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 //
 //
 //
@@ -3870,14 +4016,97 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
+      form: new Form({
+        tanggal_pengiriman: ""
+      }),
       listPermintaanCabai: {}
     };
   },
   methods: {
-    getPermintaanCabai: function getPermintaanCabai() {}
+    getPermintaanCabai: function getPermintaanCabai() {},
+    acceptPermintaan: function acceptPermintaan(id_permintaan) {},
+    rejectPermintaan: function rejectPermintaan(id_permintaan, mitra_yg_mengajukan) {
+      swal.fire({
+        title: "Menolak Permintaan",
+        text: "Apakah anda yakin menolak permintaan pasokan cabai dari " + mitra_yg_mengajukan + " ?",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya"
+      }).then(function (result) {
+        if (result.value) {
+          // send request to the server
+          console.log("berhasil");
+        }
+      });
+    },
+    modalAccPermintaan: function modalAccPermintaan() {
+      $("#modalaccPermintaan").modal("show");
+    },
+    customFormatter: function customFormatter(date) {
+      return moment(date).format("DD MMMM YYYY");
+    }
   },
   created: function created() {
     this.getPermintaanCabai();
@@ -51414,11 +51643,26 @@ var render = function() {
     },
     [
       _c("div", { staticClass: "card" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "card-header" }, [
+          _c("h3", { staticClass: "card-title" }, [
+            _vm._v("Daftar Permintaan Cabai")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-tools" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-sm",
+                on: { click: _vm.newModal }
+              },
+              [_vm._v("Tambah Permintaan pasokan")]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body table-responsive p-0" }, [
           _c("table", { staticClass: "table table-hover text-nowrap" }, [
-            _vm._m(1),
+            _vm._m(0),
             _vm._v(" "),
             _c("tbody", [
               !_vm.listPermintaanCabai.length
@@ -51431,49 +51675,371 @@ var render = function() {
             ])
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modalPermintaan",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "modalPermintaanLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h5",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.editmode,
+                          expression: "!editmode"
+                        }
+                      ],
+                      staticClass: "modal-title",
+                      attrs: { id: "modalPermintaanLabel" }
+                    },
+                    [_vm._v("Permintaan Pasokan Cabai")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "h5",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.editmode,
+                          expression: "editmode"
+                        }
+                      ],
+                      staticClass: "modal-title",
+                      attrs: { id: "modalPermintaanLabel" }
+                    },
+                    [_vm._v("Edit Permintaan Pasokan Cabai")]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.editmode ? _vm.updateLahan() : _vm.addLahan()
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group col-md" },
+                        [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.pembeli_id,
+                                  expression: "form.pembeli_id"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("pembeli_id")
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "pembeli_id",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "option",
+                                {
+                                  attrs: {
+                                    value: "",
+                                    disabled: "",
+                                    selected: ""
+                                  }
+                                },
+                                [_vm._v("Pilih pemasok")]
+                              ),
+                              _vm._v(" "),
+                              _vm._l(_vm.dataMitra, function(data) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: data.id,
+                                    domProps: { value: data.id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(data.nama) +
+                                        " - " +
+                                        _vm._s(_vm.getRole(data.role))
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "pembeli_id" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group col-md" },
+                        [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.jenis_cabai,
+                                  expression: "form.jenis_cabai"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("jenis_cabai")
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "jenis_cabai",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "option",
+                                {
+                                  attrs: {
+                                    value: "",
+                                    disabled: "",
+                                    selected: ""
+                                  }
+                                },
+                                [_vm._v("Jenis cabai")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Cabai rawit" } },
+                                [_vm._v("Cabai rawit")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Cabai keriting" } },
+                                [_vm._v("Cabai keriting")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Cabai besar" } },
+                                [_vm._v("Cabai besar")]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "jenis_cabai" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group col-md" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.jumlah_cabai,
+                                expression: "form.jumlah_cabai"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("jumlah_cabai")
+                            },
+                            attrs: {
+                              type: "number",
+                              name: "jumlah_cabai",
+                              placeholder: "Jumlah Cabai /kg"
+                            },
+                            domProps: { value: _vm.form.jumlah_cabai },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "jumlah_cabai",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "jumlah_cabai" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("datepicker", {
+                            staticClass: "col-sm-10",
+                            class: {
+                              "is-invalid": _vm.form.errors.has(
+                                "tanggal_diterima"
+                              )
+                            },
+                            attrs: {
+                              placeholder: "Tanggal cabai diterima",
+                              format: _vm.customFormatter,
+                              id: "tanggal_diterima"
+                            },
+                            model: {
+                              value: _vm.form.tanggal_diterima,
+                              callback: function($$v) {
+                                _vm.$set(_vm.form, "tanggal_diterima", $$v)
+                              },
+                              expression: "form.tanggal_diterima"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "tanggal_diterima" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { type: "button", "data-dismiss": "modal" }
+                        },
+                        [_vm._v("Tutup")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.editmode,
+                              expression: "editmode"
+                            }
+                          ],
+                          staticClass: "btn btn-success",
+                          attrs: { id: "btnupdate", type: "submit" }
+                        },
+                        [_vm._v("Perbarui")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.editmode,
+                              expression: "!editmode"
+                            }
+                          ],
+                          staticClass: "btn btn-primary",
+                          attrs: { id: "btnadd", type: "submit" }
+                        },
+                        [_vm._v("Tambahkan")]
+                      )
+                    ])
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      )
     ]
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [
-        _vm._v("Daftar Permintaan Cabai")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "div",
-          {
-            staticClass: "input-group input-group-sm",
-            staticStyle: { width: "150px" }
-          },
-          [
-            _c("input", {
-              staticClass: "form-control float-right",
-              attrs: {
-                type: "text",
-                name: "table_search",
-                placeholder: "Search"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                [_c("i", { staticClass: "fas fa-search" })]
-              )
-            ])
-          ]
-        )
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -51495,6 +52061,23 @@ var staticRenderFns = [
         _c("th", [_vm._v("Aksi")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
@@ -51537,17 +52120,131 @@ var render = function() {
             _vm._m(1),
             _vm._v(" "),
             _c("tbody", [
-              !_vm.listPermintaanCabai.length
-                ? _c("tr", [
-                    _c("td", { attrs: { colspan: "7", align: "center" } }, [
-                      _vm._v("Tidak ada daftar permintaan cabai")
-                    ])
-                  ])
-                : _vm._e()
+              _c("td", [_vm._v("Example Data")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Cabai keriting")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("250")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("30000")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("22-12-2020")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("belum dikirim")]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success btn-xs",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.modalAccPermintaan()
+                      }
+                    }
+                  },
+                  [_vm._v("Terima")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger btn-xs",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.rejectPermintaan()
+                      }
+                    }
+                  },
+                  [_vm._v("Tolak")]
+                )
+              ])
             ])
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modalaccPermintaan",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "modalaccPermintaanLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.acceptPermintaan(1)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("datepicker", {
+                            staticClass: "col-sm-10",
+                            class: {
+                              "is-invalid": _vm.form.errors.has(
+                                "tanggal_perngiriman"
+                              )
+                            },
+                            attrs: {
+                              placeholder: "Tanggal Pengiriman",
+                              format: _vm.customFormatter,
+                              id: "tanggal_perngiriman"
+                            },
+                            model: {
+                              value: _vm.form.tanggal_perngiriman,
+                              callback: function($$v) {
+                                _vm.$set(_vm.form, "tanggal_perngiriman", $$v)
+                              },
+                              expression: "form.tanggal_perngiriman"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: {
+                              form: _vm.form,
+                              field: "tanggal_perngiriman"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(3)
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      )
     ]
   )
 }
@@ -51610,6 +52307,55 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        {
+          staticClass: "modal-title",
+          attrs: { id: "modalaccPermintaanLabel" }
+        },
+        [_vm._v("Permintaan Pasokan Cabai")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Tutup")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Terima")]
+      )
     ])
   }
 ]
