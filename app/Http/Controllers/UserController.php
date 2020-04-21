@@ -59,6 +59,7 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $mitra = Kemitraan::whereHas('user1')->get();
         $j=0;
+        $listuser[]=0;
         foreach($mitra as $i){
             $user1 = $i->user1_id;
             $user2 = $i->user2_id;
@@ -70,7 +71,7 @@ class UserController extends Controller
             }
             $j++;
         }
-        
+        // return $listuser;
         $listProdusen = User::where('role',2)->where('status',1)->whereNotIn('id',$listuser)->get();
         foreach ($listProdusen as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
@@ -87,6 +88,7 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $mitra = Kemitraan::whereHas('user1')->get();
         $j=0;
+        $listuser[]=0;
         foreach($mitra as $i){
             $user1 = $i->user1_id;
             $user2 = $i->user2_id;
@@ -114,6 +116,7 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $mitra = Kemitraan::whereHas('user1')->get();
         $j=0;
+        $listuser[]=0;
         foreach($mitra as $i){
             $user1 = $i->user1_id;
             $user2 = $i->user2_id;
@@ -141,6 +144,7 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $mitra = Kemitraan::whereHas('user1')->get();
         $j=0;
+        $listuser[]=0;
         foreach($mitra as $i){
             $user1 = $i->user1_id;
             $user2 = $i->user2_id;
@@ -168,6 +172,7 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $mitra = Kemitraan::whereHas('user1')->get();
         $j=0;
+        $listuser[]=0;
         foreach($mitra as $i){
             $user1 = $i->user1_id;
             $user2 = $i->user2_id;

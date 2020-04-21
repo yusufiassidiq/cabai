@@ -12,7 +12,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item">
-              <a href="#">Pengecer</a>
+              <a href="#">Konsumen</a>
             </li>
             <li class="breadcrumb-item active">Mitra Saya</li>
           </ol>

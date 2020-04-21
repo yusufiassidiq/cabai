@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">Pengecer</a>
+                <a href="#">Konsumen</a>
               </li>
               <li class="breadcrumb-item active">Daftar Mitra</li>
             </ol>
@@ -67,13 +67,13 @@
                   <li class="nav-item">
                     <a
                       class="nav-link"
-                      id="custom-tabs-three-konsumen-tab"
+                      id="custom-tabs-three-pengecer-tab"
                       data-toggle="pill"
-                      href="#custom-tabs-three-konsumen"
+                      href="#custom-tabs-three-pengecer"
                       role="tab"
-                      aria-controls="custom-tabs-three-konsumen"
+                      aria-controls="custom-tabs-three-pengecer"
                       aria-selected="false"
-                    >Konsumen</a>
+                    >Pengecer</a>
                   </li>
                 </ul>
               </div>
@@ -103,6 +103,14 @@
                   >
                     <grosir></grosir>
                   </div>
+                  <div
+                    class="tab-pane fade"
+                    id="custom-tabs-three-pengecer"
+                    role="tabpanel"
+                    aria-labelledby="custom-tabs-three-pengecer-tab"
+                  >
+                    <pengecer></pengecer>
+                  </div>
                 </div>
               </div>
               <!-- /.card -->
@@ -117,11 +125,13 @@
 import listProdusen from "../../../components/DM_ListProdusen";
 import listPengepul from "../../../components/DM_ListPengepul";
 import listGrosir from "../../../components/DM_ListGrosir";
+import listPengecer from "../../../components/DM_ListPengecer"
 export default {
   components: {
     produsen: listProdusen,
     pengepul: listPengepul,
     grosir: listGrosir,
+    pengecer: listPengecer,
   }
 };
 </script>

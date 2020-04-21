@@ -3,7 +3,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Daftar Produsen</h3>
+        <h3 class="card-title">Daftar Konsumen</h3>
         <div class="card-tools">
           <div class="input-group input-group-sm" style="width: 150px;">
             <input
@@ -64,12 +64,9 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      axios
-        .get("/getMitraProdusen")
-        .then(response => {
-          this.dataMitra = response.data.data;
-        })
-        .catch(() => {});
+      axios.get("/getMitrakonsumen").then(response => {
+        this.dataMitra = response.data.data;
+      });
     },
     addMitra(id_produsen, nama) {
       swal
@@ -79,10 +76,11 @@ export default {
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
-          confirmButtonText: "Ya, tambahkan"
+          confirmButtonText: "Ya"
         })
         .then(result => {
           if (result.value) {
+            // send request to the server
             this.$Progress.start();
             axios
               .post("/requestMitra/" + id_produsen)

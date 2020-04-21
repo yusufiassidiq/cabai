@@ -99,6 +99,22 @@
                   >
                     <pengecer></pengecer>
                   </div>
+                  <div
+                    class="tab-pane fade"
+                    id="custom-tabs-three-grosir"
+                    role="tabpanel"
+                    aria-labelledby="custom-tabs-three-grosir-tab"
+                  >
+                    <grosir></grosir>
+                  </div>
+                  <div
+                    class="tab-pane fade"
+                    id="custom-tabs-three-konsumen"
+                    role="tabpanel"
+                    aria-labelledby="custom-tabs-three-konsumen-tab"
+                  >
+                    <konsumen></konsumen>
+                  </div>
                 </div>
               </div>
             </div>
@@ -112,11 +128,13 @@
 import listPengepul from "../../../components/DM_ListPengepul";
 import listGrosir from "../../../components/DM_ListGrosir";
 import listPengecer from "../../../components/DM_ListPengecer";
+import listKonsumen from "../../../components/DM_ListKonsumen";
 export default {
   components: {
     pengepul: listPengepul,
     grosir: listGrosir,
     pengecer: listPengecer,
+    konsumen: listKonsumen,
   }
 };
 </script>

@@ -12,7 +12,7 @@
               class="form-control float-right"
               placeholder="Search"
             />
-
+            <vue-progress-bar></vue-progress-bar>
             <div class="input-group-append">
               <button type="submit" class="btn btn-default">
                 <i class="fas fa-search"></i>
@@ -35,7 +35,7 @@
 
           <tbody>
             <tr v-if="!dataMitra.length">
-              <td colspan="3" align="center">Tidak ada pelaku rantai pasok Pengecer</td>
+              <td colspan="3" align="center">Tidak ada mitra yang dapat ditambahkan</td>
             </tr>
             <tr v-for="data in dataMitra" :key="data.id">
               <td>{{data.name}}</td>
@@ -64,11 +64,8 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      console.log("data berhasil didapatkan");
-      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
       axios.get("/getMitraPengecer").then(response => {
         this.dataMitra = response.data.data;
-        console.log(this.dataMitra);
       });
     },
     addMitra(id_pengecer, nama) {
@@ -79,24 +76,27 @@ export default {
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
-          confirmButtonText: "Ya, tambahkan"
+          confirmButtonText: "Ya"
         })
         .then(result => {
           if (result.value) {
-            // send request to the server
+            this.$Progress.start();
             axios
               .post("/requestMitra/" + id_pengecer)
-              .then(function(response) {
+              .then(() => {
+                UpdateData.$emit("update");
                 swal.fire(
                   "Mengajukan Permintaan",
                   "Berhasil mengajukan kemitraan",
                   "success"
                 );
+                this.$Progress.finish();
               })
-              .catch(function(error) {
+              .catch(() => {
+                this.$Progress.fail();
                 swal.fire(
-                  "gagal!",
-                  "Pengguna ini telah mendaftarkan anda sebagai mitra",
+                  "Gagal!",
+                  "Terdapat permasalahan saat menyimpan",
                   "error"
                 );
               });

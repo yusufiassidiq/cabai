@@ -219,6 +219,9 @@ export default {
         case 4:
           return "Grosir";
           break;
+        case 4:
+          return "Pengecer";
+          break;
         default:
           return "Konsumen";
       }
