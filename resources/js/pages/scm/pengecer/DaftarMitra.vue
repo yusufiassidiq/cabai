@@ -103,6 +103,14 @@
                   >
                     <grosir></grosir>
                   </div>
+                  <div
+                    class="tab-pane fade"
+                    id="custom-tabs-three-konsumen"
+                    role="tabpanel"
+                    aria-labelledby="custom-tabs-three-konsumen-tab"
+                  >
+                    <konsumen></konsumen>
+                  </div>
                 </div>
               </div>
               <!-- /.card -->
@@ -117,11 +125,13 @@
 import listProdusen from "../../../components/DM_ListProdusen";
 import listPengepul from "../../../components/DM_ListPengepul";
 import listGrosir from "../../../components/DM_ListGrosir";
+import listKonsumen from "../../../components/DM_ListKonsumen";
 export default {
   components: {
     produsen: listProdusen,
     pengepul: listPengepul,
     grosir: listGrosir,
+    konsumen: listKonsumen,
   }
 };
 </script>

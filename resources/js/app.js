@@ -24,7 +24,7 @@ window.Form = Form;
 // Doc = https://github.com/hilongjw/vue-progressbar
 import VueProgressBar from 'vue-progressbar'
 const options = {
-  color: '#bffaf3',
+  color: '#8BC44A',
   failedColor: '#874b4b',
   thickness: '5px',
   transition: {

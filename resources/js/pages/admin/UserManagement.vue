@@ -8,6 +8,7 @@
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Manajemen User</h1>
           </div>
+          <vue-progress-bar></vue-progress-bar>
           <!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -48,7 +49,7 @@
                         <i class="fas fa-search"></i>
                       </button>
                     </div>
-                  </div> -->
+                  </div>-->
                 </div>
               </div>
               <!-- /.card-header -->
@@ -56,7 +57,6 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <!-- <th>ID</th> -->
                       <th>Nama</th>
                       <th>Email</th>
                       <th>Role</th>
@@ -65,17 +65,13 @@
                   </thead>
 
                   <tbody>
+                    <tr v-if="!users.length">
+                      <td colspan="5" align="center">Tidak ada user yang belum divalidasi</td>
+                    </tr>
                     <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
-                      <!-- <th scope="row">{{ user.id }}</th> -->
                       <td>{{ user.name }}</td>
                       <td>{{ user.email }}</td>
-                      <td>
-                        <div v-if="user.role===1">Admin</div>
-                        <div v-else-if="user.role===2">Produsen</div>
-                        <div v-else-if="user.role===3">Pengepul</div>
-                        <div v-else-if="user.role===4">Grosir</div>
-                        <div v-else-if="user.role===5">Pengecer</div>
-                      </td>
+                      <td>{{ getRole(user.role) }}</td>
                       <td>
                         <a href="#">
                           <i class="fas fa-edit blue" v-on:click="edituser(user.id)"></i>
@@ -141,16 +137,18 @@ export default {
     return {
       userDetail: "",
       has_error: false,
-      users: null,
+      users: {},
       selectedUser: undefined
     };
   },
   methods: {
     getUsers() {
-      axios.get("validateduser").then(response => {
-        // console.log(response);
-        this.users = response.data.users;
-      });
+      axios
+        .get("validateduser")
+        .then(response => {
+          this.users = response.data.users;
+        })
+        .catch(() => {});
     },
     deleteUser(id) {
       swal
@@ -166,14 +164,21 @@ export default {
         .then(result => {
           if (result.value) {
             // send request to the server
+            this.$Progress.start();
             axios
               .delete("/user/" + id)
               .then(() => {
                 swal.fire("Terhapus!", "Data user berhasil dihapus", "success");
                 UpdateData.$emit("RefreshData");
+                this.$Progress.finish();
               })
               .catch(() => {
-                swal.fire("Gagal!", "Terdapat masalah ketika menghapus", "waning");
+                swal.fire(
+                  "Gagal!",
+                  "Terdapat masalah ketika menghapus",
+                  "waning"
+                );
+                this.$Progress.fail();
               });
           }
         });
@@ -183,6 +188,21 @@ export default {
     },
     updateUser() {
       console.log("update user");
+    },
+    getRole(id_role) {
+      switch (id_role) {
+        case 2:
+          return "Produsen";
+          break;
+        case 3:
+          return "Pengepul";
+          break;
+        case 4:
+          return "Grosir";
+          break;
+        default:
+          return "Konsumen";
+      }
     }
   },
   created() {

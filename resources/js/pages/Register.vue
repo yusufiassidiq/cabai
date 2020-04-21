@@ -84,21 +84,18 @@
             <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
            
             <div class="row">
-              <div class="col-8">
-                <!-- <div class="icheck-primary">
-                  <input type="checkbox" id="remember" />
-                  <label for="remember">Remember Me</label>
-                </div> -->
-              </div>
-              <!-- /.col -->
-              <div class="col-4">
+              <div class="col-12">
                 <button type="submit" class="btn btn-primary btn-block">Daftar</button>
               </div>
-              <!-- /.col -->
             </div>
           </form>
         </div>
-        <!-- /.login-card-body -->
+        <div class="card-footer">
+        <small class="text-muted">Sudah punya akun?</small>
+        <router-link to="/login">
+          <small>Masuk</small>
+        </router-link>
+      </div>
       </div>
     </div>
   </div>

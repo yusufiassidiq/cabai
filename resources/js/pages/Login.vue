@@ -10,7 +10,7 @@
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Masuk dengan akun SCM Cabai</p>
         <vue-progress-bar></vue-progress-bar>
         <form autocomplete="on" @submit.prevent="login" method="post">
           <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.email }">
@@ -49,33 +49,27 @@
           </div>
           <center class="red" v-for="error in errors" :key="error.message">{{ error }}</center>
           <div class="row">
-            <div class="col-4">
-              <!-- <div class="icheck-primary">
-                  <input type="checkbox" id="remember" />
-                  <label for="remember">Remember Me</label>
-              </div>-->
+            <div class="col-12">
+              <button id="btnmasuk" type="submit" class="btn btn-primary btn-block">Masuk</button>
             </div>
-            <!-- /.col -->
-            <div class="col-8">
-              <button  id="btnmasuk" type="submit" class="btn btn-primary btn-block">
-                Masuk
-              </button>
-              
-            </div>
-            <!-- /.col -->
           </div>
         </form>
       </div>
-      <!-- /.login-card-body -->
+      <div class="card-footer">
+        <small class="text-muted">belum punya akun?</small>
+        <router-link to="/register">
+          <small>Daftar</small>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
 <style>
 .login-page {
   background-image: url("/dist/img/cabai.jpg");
-  background-size:cover
+  background-size: cover;
 }
-.font-putih{
+.font-putih {
   color: white;
 }
 </style>
@@ -90,9 +84,7 @@ export default {
     };
   },
 
-  mounted() {
-   
-  },
+  mounted() {},
 
   methods: {
     login() {
@@ -134,7 +126,7 @@ export default {
             else redirectTo = "DashboardPengecer";
           } else {
             if (this.$auth.user().status === 0)
-            redirectTo = "unverifiedDashboard";
+              redirectTo = "unverifiedDashboard";
             else redirectTo = "DashboardKonsumen";
           }
           this.$Progress.finish();
@@ -148,7 +140,7 @@ export default {
         error: function() {
           this.errors.push("Maaf, Email atau kata sandi Anda salah.");
           document.getElementById("btnmasuk").disabled = false;
-          this.$Progress.fail()
+          this.$Progress.fail();
         },
         rememberMe: true,
         fetchUser: true
