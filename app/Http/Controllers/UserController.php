@@ -362,7 +362,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function addPermintaanCabai(Request $request){
+    public function addPermintaanSaya(Request $request){
         $v = Validator::make($request->all(), [
             'jenis_cabai'     => 'required|string|max:255',
             'jumlah_cabai'      => 'required|integer',
@@ -384,18 +384,97 @@ class UserController extends Controller
         $transaksi->jumlah_cabai = $request->jumlah_cabai;
         $transaksi->tanggal_diterima = $parsed_date_tglditerima;
         $transaksi->status_permintaan = 0;
-        $transaksi->pembeli_id = $request->pembeli_id;
+        $transaksi->pemasok_id = $request->pemasok_id;
         $transaksi->user()->associate($user);
         $transaksi->save();
         return response()->json(['status' => 'success'], 200);
     }
-    public function getPermintaanCabai(){
+    public function getPermintaanMasuk(){
         $userId = Auth::user()->id;
-        $transaksi = Transaksi::where('pembeli_id',$userId)->get();
+        $transaksi = Transaksi::where('pemasok_id',$userId)->get();
+        foreach($transaksi as $i){
+            $i->nama = $i->user()->first()->name;
+        }
+        // return $transaksi;
         return response()->json([
             'status' => 'success', 
             'data' => $transaksi->toArray()
         ], 200);
     }
-
+    public function getPermintaanSaya(){
+        $userId = Auth::user()->id;
+        $transaksi = Transaksi::where('user_id',$userId)->get();
+        $j=0;
+        foreach($transaksi as $i){
+            $id_pemasok = $transaksi[$j]->pemasok_id;
+            $user = User::find($id_pemasok);
+            $lokasi = $user->lokasi()->first();
+            $i->lokasi = $lokasi;
+            $nama_pemasok = $user->name;
+            $role_pemasok = $user->role;
+            $i->nama = $nama_pemasok;
+            $i->role = $role_pemasok;
+            // $
+            $j++;
+        }
+        return response()->json([
+            'status' => 'success', 
+            'data' => $transaksi->toArray()
+        ], 200);
+    }
+    public function tolakPermintaanPembeli(Request $request, $id){
+        $transaksi = Transaksi::find($id);
+        // dd($transaksi);
+        $transaksi->update([
+            'status_permintaan' => 2,
+            'keterangan' => $request->keterangan,
+        ]);
+        return response()->json(['status' => 'success'], 200);
+    }
+    public function hapusPermintaanPesanan($id){
+        $transaksi = Transaksi::find($id);
+        $transaksi->delete();
+        return response()->json([
+            'status'=>'success'
+        ],204);
+    }
+    public function requestUlangPermintaanSaya(Request $request, $id){
+        $transaksi = Transaksi::find($id);
+        $tgl_diterima = $request->tanggal_diterima;
+        $parsed_date = Carbon::parse($tgl_diterima)->toDateTimeString();
+        $transaksi->update([
+            'status_permintaan' => 0,
+            'tanggal_diterima' => $parsed_date,
+            'jumlah_cabai' => $request->jumlah_cabai,
+            'keterangan' => $request->keterangan,
+        ]);
+        return response()->json(['status' => 'success'], 200);
+    }
+    public function terimaPermintaanMasuk(Request $request, $id){
+        $transaksi = Transaksi::find($id);
+        $tgl_pengiriman = $request->tanggal_pengiriman;
+        $parsed_date = Carbon::parse($tgl_pengiriman)->toDateTimeString();
+        $transaksi->update([
+            'status_permintaan' => 1,
+            'tanggal_pengiriman' => $parsed_date,
+            'harga' => $request->harga,
+        ]);
+        return response()->json(['status' => 'success'], 200);
+    }
+    public function tolakPenawaranPemasok(Request $request, $id){
+        $transaksi = Transaksi::find($id);
+        $transaksi->update([
+            'status_permintaan' =>4,
+            'keterangan' => $request->keterangan,
+        ]);
+        return response()->json(['status' => 'success'], 200);
+    }
+    public function terimaPenawaranPemasok($id){
+        $transaksi = Transaksi::find($id);
+        $transaksi->update([
+            'status_permintaan' => 3,
+            'status_pengiriman' => 0,
+        ]);
+        return response()->json(['status' => 'success'], 200);
+    }
 }

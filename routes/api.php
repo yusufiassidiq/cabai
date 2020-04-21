@@ -63,8 +63,16 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/getMitrakonsumen','UserController@getMitraKonsumen');
 
     //Transaksi Permintaan Cabai
-    Route::post('/addPermintaanCabai','UserController@addPermintaanCabai');
-    Route::get('/getPermintaanCabai','UserController@getPermintaanCabai');
+    Route::post('/addPermintaanSaya','UserController@addPermintaanSaya');
+    Route::get('/getPermintaanMasuk','UserController@getPermintaanMasuk');
+    Route::get('/getPermintaanSaya','UserController@getPermintaanSaya');
+    Route::put('/tolakPermintaanPembeli/{id}','UserController@tolakPermintaanPembeli');
+    Route::delete('/hapusPermintaanPesanan/{id}','UserController@hapusPermintaanPesanan');
+    Route::put('/requestUlangPermintaanSaya/{id}','UserController@requestUlangPermintaanSaya');
+    Route::put('/terimaPermintaanMasuk/{id}','UserController@terimaPermintaanMasuk');
+    Route::put('/tolakPenawaranPemasok/{id}','UserController@tolakPenawaranPemasok');
+    Route::put('/terimaPenawaranPemasok/{id}','UserController@terimaPenawaranPemasok');
+
     //Manajemen lahan
     Route::post('/addLahan','ProdusenController@addLahan');
     Route::get('/readLahan','ProdusenController@readLahan');

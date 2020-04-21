@@ -3997,6 +3997,178 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -4004,14 +4176,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      temp_nama: "",
+      temp_jeniscabai: "",
+      temp_jumlahcabai: "",
+      temp_tanggalditerima: "",
+      temp_tanggalpengiriman: "",
+      temp_harga: "",
       form: new Form({
+        id: "",
         jenis_cabai: "",
         jumlah_cabai: "",
-        pembeli_id: "",
-        tanggal_diterima: ""
+        pemasok_id: "",
+        tanggal_diterima: "",
+        keterangan: ""
       }),
-      editmode: false,
-      listPermintaanCabai: {},
+      requestUlang: false,
+      modalTerima: true,
+      listPermintaanSaya: {},
       dataMitra: {}
     };
   },
@@ -4019,8 +4200,10 @@ __webpack_require__.r(__webpack_exports__);
     addPermintaan: function addPermintaan() {
       var _this = this;
 
-      this.form.post("/addPermintaanCabai").then(function (response) {
-        UpdateData.$emit("update"); // hide modal
+      document.getElementById("btnaddpermintaan").disabled = true;
+      this.$Progress.start();
+      this.form.post("/addPermintaanSaya").then(function (response) {
+        UpdateData.$emit("updateListPengajuanCabai"); // hide modal
 
         $("#modalPermintaan").trigger("click"); // show Toast if success
 
@@ -4028,11 +4211,16 @@ __webpack_require__.r(__webpack_exports__);
           icon: "success",
           title: "Permintaan berhasil ditambahkan"
         });
-        document.getElementById("btnaddpermintaan").disabled = true;
+        document.getElementById("btnaddpermintaan").disabled = false;
 
         _this.form.reset();
+
+        _this.$Progress.finish();
       })["catch"](function (error) {
         console.error(error);
+
+        _this.$Progress.fail();
+
         document.getElementById("btnaddpermintaan").disabled = false;
       });
     },
@@ -4051,7 +4239,7 @@ __webpack_require__.r(__webpack_exports__);
           return "Grosir";
           break;
 
-        case 4:
+        case 5:
           return "Pengecer";
           break;
 
@@ -4062,32 +4250,199 @@ __webpack_require__.r(__webpack_exports__);
     customFormatter: function customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     },
+    convertToRupiah: function convertToRupiah(angka) {
+      var rupiah = "";
+      var angkarev = angka.toString().split("").reverse().join("");
+
+      for (var i = 0; i < angkarev.length; i++) {
+        if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + ".";
+      }
+
+      return "Rp. " + rupiah.split("", rupiah.length - 1).reverse().join("");
+    },
     getMitra: function getMitra() {
       var _this2 = this;
 
       axios.get("/listMitraSaya").then(function (response) {
-        _this2.dataMitra = response.data.data;
-        console.log(_this2.dataMitra);
+        _this2.dataMitra = response.data.data; // console.log(this.dataMitra);
       });
     },
-    getPermintaanCabai: function getPermintaanCabai() {},
-    newModal: function newModal() {
-      console.log("modal created"); // this.editmode = false;
-      // this.form.reset();
+    getPermintaanSaya: function getPermintaanSaya() {
+      var _this3 = this;
 
-      $("#modalPermintaan").modal("show"); // this.form.pembeli_id = id;
-      // document.getElementById("btnaddpermintaan").disabled = true;
+      axios.get("/getPermintaanSaya").then(function (response) {
+        _this3.listPermintaanSaya = response.data.data; // console.log(this.listPermintaanSaya);
+      });
+    },
+    requestUlangPermintaan: function requestUlangPermintaan() {
+      var _this4 = this;
+
+      document.getElementById("btnReqUlang").disabled = true;
+      this.$Progress.start();
+      this.form.put("/requestUlangPermintaanSaya/" + this.form.id).then(function () {
+        UpdateData.$emit("updateListPengajuanCabai"); // hide modal
+
+        $("#modalPermintaan").trigger("click");
+        toast.fire({
+          icon: "success",
+          title: "Permintaan ulang berhasil"
+        });
+
+        _this4.$Progress.finish();
+
+        document.getElementById("btnReqUlang").disabled = false;
+      })["catch"](function () {
+        _this4.$Progress.fail();
+
+        document.getElementById("btnReqUlang").disabled = false;
+        $("#modalPermintaan").trigger("click");
+      });
+    },
+    deletePermintaanCabai: function deletePermintaanCabai(id_permintaanSaya) {
+      var _this5 = this;
+
+      swal.fire({
+        title: "Menghapus Permintaan Pasokan",
+        text: "Apakah anda yakin menghapus pemintaan pasokan?",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya"
+      }).then(function (result) {
+        if (result.value) {
+          _this5.$Progress.start();
+
+          axios["delete"]("/hapusPermintaanPesanan/" + id_permintaanSaya).then(function (response) {
+            swal.fire("Menghapus Permintaan Pasokan", "Pemintaan pasokan berhasil dihapus", "success");
+            UpdateData.$emit("updateListPengajuanCabai");
+
+            _this5.$Progress.finish();
+          })["catch"](function (error) {
+            _this5.$Progress.fail();
+
+            swal.fire("gagal!", "Mitra gagal dihapus", "error");
+          });
+        }
+      });
+    },
+    newModal: function newModal() {
+      this.requestUlang = false;
+      document.getElementById("pemasok__id").disabled = false;
+      document.getElementById("jenis__cabai").disabled = false;
+      this.form.reset();
+      $("#modalPermintaan").modal("show"); // this.form.pemasok_id = id;
+    },
+    modalRequestUlang: function modalRequestUlang(data) {
+      this.requestUlang = true;
+      document.getElementById("pemasok__id").disabled = true;
+      document.getElementById("jenis__cabai").disabled = true;
+      $("#modalPermintaan").modal("show");
+      this.form.fill(data);
+      this.form.keterangan = "";
+    },
+    modalTerimaPenawaran: function modalTerimaPenawaran(data) {
+      this.modalTerima = true;
+      $("#modalTerimaPermintaan").modal("show");
+      this.form.id = data.id;
+      this.temp_nama = data.nama;
+      this.temp_jeniscabai = data.jenis_cabai;
+      this.temp_jumlahcabai = data.jumlah_cabai;
+      this.temp_tanggalditerima = data.tanggal_diterima;
+      this.temp_tanggalpengiriman = data.tanggal_pengiriman;
+      this.temp_harga = data.harga;
+    },
+    modalTolakPenawaran: function modalTolakPenawaran(data) {
+      this.modalTerima = false;
+      $("#modalTerimaPermintaan").modal("show");
+      this.form.id = data.id;
+      this.temp_nama = data.nama;
+      this.temp_jeniscabai = data.jenis_cabai;
+      this.temp_jumlahcabai = data.jumlah_cabai;
+      this.temp_tanggalditerima = data.tanggal_diterima;
+      this.temp_tanggalpengiriman = data.tanggal_pengiriman;
+      this.temp_harga = data.harga;
+    },
+    terimaPenawaran: function terimaPenawaran() {
+      var _this6 = this;
+
+      document.getElementById("btnAcceptPenawaran").disabled = true;
+      this.$Progress.start();
+      this.form.put("terimaPenawaranPemasok/" + this.form.id).then(function () {
+        UpdateData.$emit("updateListPengajuanCabai");
+        $("#modalTerimaPermintaan").trigger("click");
+        toast.fire({
+          icon: "success",
+          title: "Penawaran berhasil diterima"
+        });
+
+        _this6.$Progress.finish();
+
+        document.getElementById("btnAcceptPenawaran").disabled = false;
+      })["catch"](function () {
+        document.getElementById("btnAcceptPenawaran").disabled = false;
+
+        _this6.$Progress.finish();
+      });
+    },
+    tolakPenawaran: function tolakPenawaran() {
+      var _this7 = this;
+
+      document.getElementById("btnRejectPenawaran").disabled = true;
+      this.$Progress.start();
+      this.form.put("tolakPenawaranPemasok/" + this.form.id).then(function () {
+        UpdateData.$emit("updateListPengajuanCabai");
+        $("#modalTerimaPermintaan").trigger("click");
+        toast.fire({
+          icon: "success",
+          title: "Penawaran berhasil diterima"
+        });
+
+        _this7.$Progress.finish();
+
+        document.getElementById("btnRejectPenawaran").disabled = false;
+      })["catch"](function () {
+        document.getElementById("btnRejectPenawaran").disabled = false;
+
+        _this7.$Progress.finish();
+      });
+    },
+    sudahDiterima: function sudahDiterima(data) {
+      var _this8 = this;
+
+      swal.fire({
+        title: "Konfirmasi Pesanan",
+        text: "apakah cabai telah Anda terima sesuai pesanan?",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya"
+      }).then(function (result) {
+        if (result.value) {
+          _this8.$Progress.start();
+
+          axios.put("/" + id_permintaanSaya).then(function (response) {
+            swal.fire("Konfirmasi Pesanan", data.jumlah_cabai + " Kg" + data.jenis_cabai + " telah diterima", "success");
+            UpdateData.$emit("updateListPengajuanCabai");
+
+            _this8.$Progress.finish();
+          })["catch"](function (error) {
+            _this8.$Progress.fail();
+
+            swal.fire("gagal!", "Terjadi kesalahan", "error");
+          });
+        }
+      });
     }
   },
   created: function created() {
-    this.getPermintaanCabai();
+    this.getPermintaanSaya();
     this.getMitra();
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this9 = this;
 
-    UpdateData.$on("update", function () {
-      _this3.getPermintaanCabai();
+    UpdateData.$on("updateListPengajuanCabai", function () {
+      _this9.getPermintaanSaya();
     });
   }
 });
@@ -4234,6 +4589,132 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -4241,45 +4722,140 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      temp_nama: "",
+      temp_jeniscabai: "",
+      temp_jumlahcabai: "",
+      temp_tanggalditerima: "",
       form: new Form({
-        tanggal_pengiriman: ""
+        id: "",
+        tanggal_pengiriman: "",
+        harga: ""
       }),
+      formReject: new Form({
+        id: "",
+        keterangan: ""
+      }),
+      keterangan: "",
       listPermintaanCabai: {}
     };
   },
   methods: {
-    getPermintaanCabai: function getPermintaanCabai() {},
-    acceptPermintaan: function acceptPermintaan(id_permintaan) {},
-    rejectPermintaan: function rejectPermintaan(id_permintaan, mitra_yg_mengajukan) {
+    getPermintaanMasuk: function getPermintaanMasuk() {
+      var _this = this;
+
+      axios.get("getPermintaanMasuk").then(function (response) {
+        _this.listPermintaanCabai = response.data.data;
+      });
+    },
+    acceptPermintaan: function acceptPermintaan() {
+      var _this2 = this;
+
+      document.getElementById("btnAccPermintaan").disabled = true;
+      this.$Progress.start();
+      this.form.put("terimaPermintaanMasuk/" + this.form.id).then(function () {
+        UpdateData.$emit("updateListPermintaanCabai");
+        $("#modalAccPermintaan").trigger("click");
+        toast.fire({
+          icon: "success",
+          title: "Permintaan berhasil diterima"
+        });
+
+        _this2.$Progress.finish();
+
+        document.getElementById("btnAccPermintaan").disabled = false;
+      })["catch"](function () {
+        document.getElementById("btnAccPermintaan").disabled = false;
+
+        _this2.$Progress.finish();
+      });
+    },
+    rejectPermintaan: function rejectPermintaan() {
+      var _this3 = this;
+
+      document.getElementById("btnTolakPermintaan").disabled = true;
+      this.$Progress.start();
+      this.formReject.put("tolakPermintaanPembeli/" + this.formReject.id).then(function () {
+        UpdateData.$emit("updateListPermintaanCabai"); // hide modal
+
+        $("#modalTolakPermintaan").trigger("click");
+        toast.fire({
+          icon: "success",
+          title: "Permintaan berhasil ditolak"
+        });
+
+        _this3.$Progress.finish();
+
+        document.getElementById("btnTolakPermintaan").disabled = false;
+      })["catch"](function () {
+        document.getElementById("btnTolakPermintaan").disabled = false;
+
+        _this3.$Progress.fail();
+      });
+    },
+    modalAccPermintaan: function modalAccPermintaan(data) {
+      $("#modalAccPermintaan").modal("show");
+      this.form.id = data.id;
+      this.temp_nama = data.nama;
+      this.temp_jeniscabai = data.jenis_cabai;
+      this.temp_jumlahcabai = data.jumlah_cabai;
+      this.temp_tanggalditerima = data.tanggal_diterima;
+    },
+    modalTolakPermintaan: function modalTolakPermintaan(data) {
+      $("#modalTolakPermintaan").modal("show");
+      this.formReject.id = data.id;
+      this.temp_nama = data.nama;
+      this.temp_jeniscabai = data.jenis_cabai;
+      this.temp_jumlahcabai = data.jumlah_cabai;
+    },
+    customFormatter: function customFormatter(date) {
+      return moment(date).format("DD MMMM YYYY");
+    },
+    convertToRupiah: function convertToRupiah(angka) {
+      var rupiah = "";
+      var angkarev = angka.toString().split("").reverse().join("");
+
+      for (var i = 0; i < angkarev.length; i++) {
+        if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + ".";
+      }
+
+      return "Rp. " + rupiah.split("", rupiah.length - 1).reverse().join("");
+    },
+    kirimPesanan: function kirimPesanan(data) {
+      var _this4 = this;
+
       swal.fire({
-        title: "Menolak Permintaan",
-        text: "Apakah anda yakin menolak permintaan pasokan cabai dari " + mitra_yg_mengajukan + " ?",
+        title: "Kirim Pesanan",
+        text: "Apakah anda telah mengirim " + data.jumlah_cabai + " Kg " + data.jenis_cabai + " kepada " + data.nama + "?",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Ya"
       }).then(function (result) {
         if (result.value) {
-          // send request to the server
-          console.log("berhasil");
+          _this4.$Progress.start();
+
+          axios["delete"]("/" + id_permintaanSaya).then(function (response) {
+            swal.fire("Kirim Pesanan", "Pengiriman pesanan berhasil", "success");
+            UpdateData.$emit("updateListPengajuanCabai");
+
+            _this4.$Progress.finish();
+          })["catch"](function (error) {
+            _this4.$Progress.fail();
+
+            swal.fire("Gagal!", "Terjadi kesalahan", "error");
+          });
         }
       });
-    },
-    modalAccPermintaan: function modalAccPermintaan() {
-      $("#modalaccPermintaan").modal("show");
-    },
-    customFormatter: function customFormatter(date) {
-      return moment(date).format("DD MMMM YYYY");
     }
   },
   created: function created() {
-    this.getPermintaanCabai();
+    this.getPermintaanMasuk();
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this5 = this;
 
-    UpdateData.$on("update", function () {
-      _this.getPermintaanCabai();
+    UpdateData.$on("updateListPermintaanCabai", function () {
+      _this5.getPermintaanMasuk();
     });
   }
 });
@@ -52061,15 +52637,170 @@ var render = function() {
           _c("table", { staticClass: "table table-hover text-nowrap" }, [
             _vm._m(0),
             _vm._v(" "),
-            _c("tbody", [
-              !_vm.listPermintaanCabai.length
-                ? _c("tr", [
-                    _c("td", { attrs: { colspan: "7", align: "center" } }, [
-                      _vm._v("Tidak ada daftar permintaan cabai")
+            _c(
+              "tbody",
+              [
+                !_vm.listPermintaanSaya.length
+                  ? _c("tr", [
+                      _c("td", { attrs: { colspan: "7", align: "center" } }, [
+                        _vm._v("Tidak ada permintaan anda")
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.listPermintaanSaya, function(data) {
+                  return _c("tr", { key: data.id }, [
+                    _c("td", [_vm._v(_vm._s(data.nama))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      data.role === 2
+                        ? _c("div", [_vm._v("Produsen")])
+                        : data.role === 3
+                        ? _c("div", [_vm._v("Pengepul")])
+                        : data.role === 4
+                        ? _c("div", [_vm._v("Grosir")])
+                        : data.role === 5
+                        ? _c("div", [_vm._v("Pengecer")])
+                        : _c("div", [_vm._v("Konsumen")])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(data.lokasi.kelurahan) +
+                          " , " +
+                          _vm._s(data.lokasi.kecamatan) +
+                          " , " +
+                          _vm._s(data.lokasi.kabupaten)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(data.jenis_cabai))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(data.jumlah_cabai))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      data.harga !== null
+                        ? _c("div", [
+                            _vm._v(_vm._s(_vm.convertToRupiah(data.harga)))
+                          ])
+                        : _c("div", [_vm._v("Belum ditetapkan")])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(data.tanggal_diterima))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      data.tanggal_pengiriman !== null
+                        ? _c("div", [_vm._v(_vm._s(data.tanggal_pengiriman))])
+                        : _c("div", [_vm._v("Belum ditetapkan")])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      data.status_permintaan === 0
+                        ? _c("div", [_vm._v("Menunggu penawaran pemasok")])
+                        : data.status_permintaan === 2
+                        ? _c("div", { staticClass: "red" }, [
+                            _vm._v("Permintaan Anda ditolak")
+                          ])
+                        : data.status_permintaan === 4
+                        ? _c("div", [_vm._v("Anda menolak penawaran")])
+                        : data.status_permintaan === 3
+                        ? _c("div", [_vm._v("Menunggu Pengiriman")])
+                        : data.status_permintaan === 1
+                        ? _c("div", [_vm._v("Menuggu persetujuan Anda")])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      data.status_permintaan === 2
+                        ? _c("div", [_vm._v(_vm._s(data.keterangan))])
+                        : _c("div", [_vm._v("-")])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      data.status_permintaan === 2
+                        ? _c("div", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success btn-xs",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.modalRequestUlang(data)
+                                  }
+                                }
+                              },
+                              [_vm._v("Permintaan ulang")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger btn-xs",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deletePermintaanCabai(data.id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Hapus")]
+                            )
+                          ])
+                        : data.status_permintaan === 1
+                        ? _c("div", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success btn-xs",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.modalTerimaPenawaran(data)
+                                  }
+                                }
+                              },
+                              [_vm._v("Terima")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger btn-xs",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.modalTolakPenawaran(data)
+                                  }
+                                }
+                              },
+                              [_vm._v("Tolak")]
+                            )
+                          ])
+                        : data.status_permintaan === 3 &&
+                          data.status_pengiriman === 1
+                        ? _c("div", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success btn-xs",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.sudahDiterima(data)
+                                  }
+                                }
+                              },
+                              [_vm._v("Sudah diterima?")]
+                            )
+                          ])
+                        : _c("div", [_vm._v("-")])
                     ])
                   ])
-                : _vm._e()
-            ])
+                })
+              ],
+              2
+            )
           ])
         ])
       ]),
@@ -52094,6 +52825,429 @@ var render = function() {
               attrs: { role: "document" }
             },
             [
+              _c(
+                "div",
+                { staticClass: "modal-content" },
+                [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.requestUlang,
+                            expression: "!requestUlang"
+                          }
+                        ],
+                        staticClass: "modal-title",
+                        attrs: { id: "modalPermintaanLabel" }
+                      },
+                      [_vm._v("Permintaan Pasokan Cabai")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "h5",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.requestUlang,
+                            expression: "requestUlang"
+                          }
+                        ],
+                        staticClass: "modal-title",
+                        attrs: { id: "modalPermintaanLabel" }
+                      },
+                      [_vm._v("Permintaan Ulang Pasokan Cabai")]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ]),
+                  _vm._v(" "),
+                  _c("vue-progress-bar"),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          _vm.requestUlang
+                            ? _vm.requestUlangPermintaan()
+                            : _vm.addPermintaan()
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-group col-md" },
+                          [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.pemasok_id,
+                                    expression: "form.pemasok_id"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has(
+                                    "pemasok_id"
+                                  )
+                                },
+                                attrs: { id: "pemasok__id" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.form,
+                                      "pemasok_id",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  {
+                                    attrs: {
+                                      value: "",
+                                      disabled: "",
+                                      selected: ""
+                                    }
+                                  },
+                                  [_vm._v("Pilih pemasok")]
+                                ),
+                                _vm._v(" "),
+                                _vm._l(_vm.dataMitra, function(data) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: data.id,
+                                      domProps: { value: data.mitra }
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(data.nama) +
+                                          " - " +
+                                          _vm._s(_vm.getRole(data.role))
+                                      )
+                                    ]
+                                  )
+                                })
+                              ],
+                              2
+                            ),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "pemasok_id" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group col-md" },
+                          [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.jenis_cabai,
+                                    expression: "form.jenis_cabai"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has(
+                                    "jenis_cabai"
+                                  )
+                                },
+                                attrs: { id: "jenis__cabai" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.form,
+                                      "jenis_cabai",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  {
+                                    attrs: {
+                                      value: "",
+                                      disabled: "",
+                                      selected: ""
+                                    }
+                                  },
+                                  [_vm._v("Jenis cabai")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "Cabai rawit" } },
+                                  [_vm._v("Cabai rawit")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "Cabai keriting" } },
+                                  [_vm._v("Cabai keriting")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "Cabai besar" } },
+                                  [_vm._v("Cabai besar")]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "jenis_cabai" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group col-md" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.jumlah_cabai,
+                                  expression: "form.jumlah_cabai"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has(
+                                  "jumlah_cabai"
+                                )
+                              },
+                              attrs: {
+                                type: "number",
+                                name: "jumlah_cabai",
+                                placeholder: "Jumlah Cabai /kg"
+                              },
+                              domProps: { value: _vm.form.jumlah_cabai },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "jumlah_cabai",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "jumlah_cabai" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group col-md" },
+                          [
+                            _c("datepicker", {
+                              class: {
+                                "is-invalid": _vm.form.errors.has(
+                                  "tanggal_diterima"
+                                )
+                              },
+                              attrs: {
+                                "input-class": "form-control",
+                                placeholder: "Tanggal cabai diterima",
+                                format: _vm.customFormatter,
+                                id: "tanggal_diterima"
+                              },
+                              model: {
+                                value: _vm.form.tanggal_diterima,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.form, "tanggal_diterima", $$v)
+                                },
+                                expression: "form.tanggal_diterima"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: {
+                                form: _vm.form,
+                                field: "tanggal_diterima"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm.requestUlang
+                          ? _c(
+                              "div",
+                              { staticClass: "form-group col-md" },
+                              [
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.keterangan,
+                                      expression: "form.keterangan"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "keterangan"
+                                    )
+                                  },
+                                  domProps: { value: _vm.form.keterangan },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "keterangan",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "keterangan" }
+                                })
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-footer" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-secondary",
+                            attrs: { type: "button", "data-dismiss": "modal" }
+                          },
+                          [_vm._v("Tutup")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.requestUlang,
+                                expression: "requestUlang"
+                              }
+                            ],
+                            staticClass: "btn btn-success",
+                            attrs: { id: "btnReqUlang", type: "submit" }
+                          },
+                          [_vm._v("Simpan")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.requestUlang,
+                                expression: "!requestUlang"
+                              }
+                            ],
+                            staticClass: "btn btn-primary",
+                            attrs: { id: "btnaddpermintaan", type: "submit" }
+                          },
+                          [_vm._v("Tambahkan")]
+                        )
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modalTerimaPermintaan",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "modalTerimaPermintaanLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
               _c("div", { staticClass: "modal-content" }, [
                 _c("div", { staticClass: "modal-header" }, [
                   _c(
@@ -52103,14 +53257,14 @@ var render = function() {
                         {
                           name: "show",
                           rawName: "v-show",
-                          value: !_vm.editmode,
-                          expression: "!editmode"
+                          value: _vm.modalTerima,
+                          expression: "modalTerima"
                         }
                       ],
                       staticClass: "modal-title",
-                      attrs: { id: "modalPermintaanLabel" }
+                      attrs: { id: "modalTerimaPermintaanLabel" }
                     },
-                    [_vm._v("Permintaan Pasokan Cabai")]
+                    [_vm._v("Terima Penawaran Pemasok")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -52120,17 +53274,17 @@ var render = function() {
                         {
                           name: "show",
                           rawName: "v-show",
-                          value: _vm.editmode,
-                          expression: "editmode"
+                          value: !_vm.modalTerima,
+                          expression: "!modalTerima"
                         }
                       ],
                       staticClass: "modal-title",
-                      attrs: { id: "modalPermintaanLabel" }
+                      attrs: { id: "modalTerimaPermintaanLabel" }
                     },
-                    [_vm._v("Edit Permintaan Pasokan Cabai")]
+                    [_vm._v("Tolak Penawaran Pemasok")]
                   ),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _vm._m(2)
                 ]),
                 _vm._v(" "),
                 _c(
@@ -52139,197 +53293,101 @@ var render = function() {
                     on: {
                       submit: function($event) {
                         $event.preventDefault()
-                        _vm.editmode
-                          ? _vm.updatePermintaan()
-                          : _vm.addPermintaan()
+                        _vm.modalTerima
+                          ? _vm.terimaPenawaran()
+                          : _vm.tolakPenawaran()
                       }
                     }
                   },
                   [
                     _c("div", { staticClass: "modal-body" }, [
-                      _c(
-                        "div",
-                        { staticClass: "form-group col-md" },
-                        [
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.pembeli_id,
-                                  expression: "form.pembeli_id"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              class: {
-                                "is-invalid": _vm.form.errors.has("pembeli_id")
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.form,
-                                    "pembeli_id",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "option",
-                                {
-                                  attrs: {
-                                    value: "",
-                                    disabled: "",
-                                    selected: ""
-                                  }
-                                },
-                                [_vm._v("Pilih pemasok")]
-                              ),
-                              _vm._v(" "),
-                              _vm._l(_vm.dataMitra, function(data) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: data.id,
-                                    domProps: { value: data.mitra }
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(data.nama) +
-                                        " - " +
-                                        _vm._s(_vm.getRole(data.role))
-                                    )
-                                  ]
-                                )
-                              })
-                            ],
-                            2
-                          ),
-                          _vm._v(" "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "pembeli_id" }
-                          })
-                        ],
-                        1
-                      ),
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("p", [_vm._v(":  " + _vm._s(_vm.temp_nama))])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("p", [_vm._v(":  " + _vm._s(_vm.temp_jeniscabai))])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("p", [
+                            _vm._v(":  " + _vm._s(_vm.temp_jumlahcabai))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("p", [
+                            _vm._v(":  " + _vm._s(_vm.temp_tanggalditerima))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(7),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("p", [
+                            _vm._v(":  " + _vm._s(_vm.temp_tanggalpengiriman))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(8),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("p", [
+                            _vm._v(
+                              ":  " +
+                                _vm._s(_vm.convertToRupiah(_vm.temp_harga))
+                            )
+                          ])
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "form-group col-md" },
-                        [
-                          _c(
-                            "select",
+                        {
+                          directives: [
                             {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.jenis_cabai,
-                                  expression: "form.jenis_cabai"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              class: {
-                                "is-invalid": _vm.form.errors.has("jenis_cabai")
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.form,
-                                    "jenis_cabai",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "option",
-                                {
-                                  attrs: {
-                                    value: "",
-                                    disabled: "",
-                                    selected: ""
-                                  }
-                                },
-                                [_vm._v("Jenis cabai")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "option",
-                                { attrs: { value: "Cabai rawit" } },
-                                [_vm._v("Cabai rawit")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "option",
-                                { attrs: { value: "Cabai keriting" } },
-                                [_vm._v("Cabai keriting")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "option",
-                                { attrs: { value: "Cabai besar" } },
-                                [_vm._v("Cabai besar")]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "jenis_cabai" }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "form-group col-md" },
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.modalTerima,
+                              expression: "!modalTerima"
+                            }
+                          ]
+                        },
                         [
-                          _c("input", {
+                          _c("textarea", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.jumlah_cabai,
-                                expression: "form.jumlah_cabai"
+                                value: _vm.form.keterangan,
+                                expression: "form.keterangan"
                               }
                             ],
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.form.errors.has("jumlah_cabai")
+                              "is-invalid": _vm.form.errors.has("keterangan")
                             },
-                            attrs: {
-                              type: "number",
-                              name: "jumlah_cabai",
-                              placeholder: "Jumlah Cabai /kg"
-                            },
-                            domProps: { value: _vm.form.jumlah_cabai },
+                            attrs: { placeholder: "Alasan menolak" },
+                            domProps: { value: _vm.form.keterangan },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
@@ -52337,7 +53395,7 @@ var render = function() {
                                 }
                                 _vm.$set(
                                   _vm.form,
-                                  "jumlah_cabai",
+                                  "keterangan",
                                   $event.target.value
                                 )
                               }
@@ -52345,39 +53403,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("has-error", {
-                            attrs: { form: _vm.form, field: "jumlah_cabai" }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "form-group col-md" },
-                        [
-                          _c("datepicker", {
-                            class: {
-                              "is-invalid": _vm.form.errors.has(
-                                "tanggal_diterima"
-                              )
-                            },
-                            attrs: {
-                              "input-class": "form-control",
-                              placeholder: "Tanggal cabai diterima",
-                              format: _vm.customFormatter,
-                              id: "tanggal_diterima"
-                            },
-                            model: {
-                              value: _vm.form.tanggal_diterima,
-                              callback: function($$v) {
-                                _vm.$set(_vm.form, "tanggal_diterima", $$v)
-                              },
-                              expression: "form.tanggal_diterima"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "tanggal_diterima" }
+                            attrs: { form: _vm.form, field: "keterangan" }
                           })
                         ],
                         1
@@ -52401,14 +53427,14 @@ var render = function() {
                             {
                               name: "show",
                               rawName: "v-show",
-                              value: _vm.editmode,
-                              expression: "editmode"
+                              value: _vm.modalTerima,
+                              expression: "modalTerima"
                             }
                           ],
-                          staticClass: "btn btn-success",
-                          attrs: { id: "btnupdate", type: "submit" }
+                          staticClass: "btn btn-primary",
+                          attrs: { id: "btnAcceptPenawaran", type: "submit" }
                         },
-                        [_vm._v("Perbarui")]
+                        [_vm._v("Terima")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -52418,14 +53444,14 @@ var render = function() {
                             {
                               name: "show",
                               rawName: "v-show",
-                              value: !_vm.editmode,
-                              expression: "!editmode"
+                              value: !_vm.modalTerima,
+                              expression: "!modalTerima"
                             }
                           ],
-                          staticClass: "btn btn-primary",
-                          attrs: { id: "btnaddpermintaan", type: "submit" }
+                          staticClass: "btn btn-danger",
+                          attrs: { id: "btnRejectPenawaran", type: "submit" }
                         },
-                        [_vm._v("Tambahkan")]
+                        [_vm._v("Tolak")]
                       )
                     ])
                   ]
@@ -52434,8 +53460,11 @@ var render = function() {
             ]
           )
         ]
-      )
-    ]
+      ),
+      _vm._v(" "),
+      _c("vue-progress-bar")
+    ],
+    1
   )
 }
 var staticRenderFns = [
@@ -52445,17 +53474,25 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Nama")]),
+        _c("th", [_vm._v("Pemasok")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Jenis cabai")]),
+        _c("th", [_vm._v("Role")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Jumlah cabai")]),
+        _c("th", [_vm._v("Lokasi")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Harga cabai")]),
+        _c("th", [_vm._v("Jenis Cabai")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Tanggal diterima")]),
+        _c("th", [_vm._v("Jumlah Cabai")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Harga Cabai")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tanggal Diterima")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tanggal Pengiriman")]),
         _vm._v(" "),
         _c("th", [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Keterangan")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -52477,6 +53514,75 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Pemasok")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Jenis Cabai")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Jumlah cabai")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [
+        _vm._v("Tanggal diterima")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [
+        _vm._v("Tanggal Pengiriman")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Harga")])
+    ])
   }
 ]
 render._withStripped = true
@@ -52518,49 +53624,127 @@ var render = function() {
           _c("table", { staticClass: "table table-hover text-nowrap" }, [
             _vm._m(1),
             _vm._v(" "),
-            _c("tbody", [
-              _c("td", [_vm._v("Example Data")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Cabai keriting")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("250")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("30000")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("22-12-2020")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("belum dikirim")]),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-success btn-xs",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.modalAccPermintaan()
-                      }
-                    }
-                  },
-                  [_vm._v("Terima")]
-                ),
+            _c(
+              "tbody",
+              [
+                !_vm.listPermintaanCabai.length
+                  ? _c("tr", [
+                      _c("td", { attrs: { colspan: "8", align: "center" } }, [
+                        _vm._v("Tidak ada permintaan cabai")
+                      ])
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger btn-xs",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.rejectPermintaan()
-                      }
-                    }
-                  },
-                  [_vm._v("Tolak")]
-                )
-              ])
-            ])
+                _vm._l(_vm.listPermintaanCabai, function(data) {
+                  return _c("tr", { key: data.id }, [
+                    _c("td", [_vm._v(_vm._s(data.nama))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(data.jenis_cabai))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(data.jumlah_cabai))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(data.tanggal_diterima))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      data.harga !== null
+                        ? _c("div", [
+                            _vm._v(
+                              _vm._s(_vm.convertToRupiah(data.harga)) + "/Kg"
+                            )
+                          ])
+                        : _c("div", [_vm._v("Belum ditetapkan")])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      data.tanggal_pengiriman !== null
+                        ? _c("div", [_vm._v(_vm._s(data.tanggal_pengiriman))])
+                        : _c("div", [_vm._v("Belum ditetapkan")])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      data.status_permintaan === 0
+                        ? _c("div", { staticClass: "orange" }, [
+                            _vm._v("Belum ditanggapi")
+                          ])
+                        : data.status_permintaan === 1
+                        ? _c("div", [_vm._v("Menunggu persetujuan pembeli")])
+                        : data.status_permintaan === 4
+                        ? _c("div", { staticClass: "red" }, [
+                            _vm._v("Penawaran anda ditolak")
+                          ])
+                        : data.status_permintaan === 3
+                        ? _c("div", { staticClass: "green" }, [
+                            _vm._v("Penawaran anda diterima")
+                          ])
+                        : data.status_permintaan === 2
+                        ? _c("div", { staticClass: "red" }, [
+                            _vm._v("Permintaan ditolak")
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      data.status_permintaan === 2
+                        ? _c("div", [_vm._v(_vm._s(data.keterangan))])
+                        : _c("div", [_vm._v("-")])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      data.status_permintaan === 0
+                        ? _c("div", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success btn-xs",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.modalAccPermintaan(data)
+                                  }
+                                }
+                              },
+                              [_vm._v("Terima")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger btn-xs",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.modalTolakPermintaan(data)
+                                  }
+                                }
+                              },
+                              [_vm._v("Tolak")]
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      data.status_permintaan === 3
+                        ? _c("div", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success btn-xs",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.kirimPesanan(data)
+                                  }
+                                }
+                              },
+                              [_vm._v("Kirim Pesanan")]
+                            )
+                          ])
+                        : _c("div", [_vm._v("-")])
+                    ])
+                  ])
+                })
+              ],
+              2
+            )
           ])
         ])
       ]),
@@ -52570,10 +53754,10 @@ var render = function() {
         {
           staticClass: "modal fade",
           attrs: {
-            id: "modalaccPermintaan",
+            id: "modalAccPermintaan",
             tabindex: "-1",
             role: "dialog",
-            "aria-labelledby": "modalaccPermintaanLabel",
+            "aria-labelledby": "modalAccPermintaanLabel",
             "aria-hidden": "true"
           }
         },
@@ -52594,41 +53778,243 @@ var render = function() {
                     on: {
                       submit: function($event) {
                         $event.preventDefault()
-                        return _vm.acceptPermintaan(1)
+                        return _vm.acceptPermintaan()
                       }
                     }
                   },
                   [
                     _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("p", [_vm._v(":  " + _vm._s(_vm.temp_nama))])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("p", [_vm._v(":  " + _vm._s(_vm.temp_jeniscabai))])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("p", [
+                            _vm._v(":  " + _vm._s(_vm.temp_jumlahcabai))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("p", [
+                            _vm._v(":  " + _vm._s(_vm.temp_tanggalditerima))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "form-group" },
+                        {},
                         [
                           _c("datepicker", {
-                            staticClass: "col-sm-10",
                             class: {
                               "is-invalid": _vm.form.errors.has(
-                                "tanggal_perngiriman"
+                                "tanggal_pengiriman"
                               )
                             },
                             attrs: {
+                              "input-class": "form-control",
                               placeholder: "Tanggal Pengiriman",
                               format: _vm.customFormatter,
-                              id: "tanggal_perngiriman"
+                              id: "tanggal_pengiriman"
                             },
                             model: {
-                              value: _vm.form.tanggal_perngiriman,
+                              value: _vm.form.tanggal_pengiriman,
                               callback: function($$v) {
-                                _vm.$set(_vm.form, "tanggal_perngiriman", $$v)
+                                _vm.$set(_vm.form, "tanggal_pengiriman", $$v)
                               },
-                              expression: "form.tanggal_perngiriman"
+                              expression: "form.tanggal_pengiriman"
                             }
                           }),
                           _vm._v(" "),
                           _c("has-error", {
                             attrs: {
                               form: _vm.form,
-                              field: "tanggal_perngiriman"
+                              field: "tanggal_pengiriman"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {},
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.harga,
+                                expression: "form.harga"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("harga")
+                            },
+                            attrs: {
+                              type: "number",
+                              name: "harga",
+                              placeholder: "Harga",
+                              required: ""
+                            },
+                            domProps: { value: _vm.form.harga },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "harga", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "Penawaran harga" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(7)
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("vue-progress-bar"),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modalTolakPermintaan",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "modalTolakPermintaanLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(8),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.rejectPermintaan()
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(9),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-9" }, [
+                          _c("p", [_vm._v(":  " + _vm._s(_vm.temp_nama))])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(10),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-9" }, [
+                          _c("p", [_vm._v(":  " + _vm._s(_vm.temp_jeniscabai))])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(11),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-9" }, [
+                          _c("p", [
+                            _vm._v(":  " + _vm._s(_vm.temp_jumlahcabai))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {},
+                        [
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.formReject.keterangan,
+                                expression: "formReject.keterangan"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.formReject.errors.has(
+                                "keterangan"
+                              )
+                            },
+                            attrs: {
+                              type: "textarea",
+                              name: "keterangan",
+                              placeholder: "Alasan Menolak",
+                              required: ""
+                            },
+                            domProps: { value: _vm.formReject.keterangan },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.formReject,
+                                  "keterangan",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: {
+                              form: _vm.formReject,
+                              field: "Penawaran harga"
                             }
                           })
                         ],
@@ -52636,7 +54022,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(3)
+                    _vm._m(12)
                   ]
                 )
               ])
@@ -52644,7 +54030,8 @@ var render = function() {
           )
         ]
       )
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = [
@@ -52692,17 +54079,21 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Nama")]),
+        _c("th", [_vm._v("Pembeli")]),
         _vm._v(" "),
         _c("th", [_vm._v("Jenis cabai")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Jumlah cabai")]),
+        _c("th", [_vm._v("Jumlah cabai(Kg)")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Permintaan Cabai diterima")]),
         _vm._v(" "),
         _c("th", [_vm._v("Harga cabai")]),
         _vm._v(" "),
         _c("th", [_vm._v("Tanggal pengiriman")]),
         _vm._v(" "),
         _c("th", [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Keterangan")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -52717,9 +54108,9 @@ var staticRenderFns = [
         "h5",
         {
           staticClass: "modal-title",
-          attrs: { id: "modalaccPermintaanLabel" }
+          attrs: { id: "modalAccPermintaanLabel" }
         },
-        [_vm._v("Permintaan Pasokan Cabai")]
+        [_vm._v("Penerimaan Permintaan Pasokan Cabai")]
       ),
       _vm._v(" "),
       _c(
@@ -52740,6 +54131,40 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Pembeli")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Jenis Cabai")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Jumlah cabai")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [
+        _vm._v("Tanggal diterima")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-footer" }, [
       _c(
         "button",
@@ -52752,8 +54177,87 @@ var staticRenderFns = [
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        {
+          staticClass: "btn btn-primary",
+          attrs: { id: "btnAccPermintaan", type: "submit" }
+        },
         [_vm._v("Terima")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        {
+          staticClass: "modal-title",
+          attrs: { id: "modalTolakPermintaanLabel" }
+        },
+        [_vm._v("Penolakan Permintaan Pasokan")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Pembeli")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Jenis Cabai")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Jumlah cabai")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Tutup")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { id: "btnTolakPermintaan", type: "submit" }
+        },
+        [_vm._v("Tolak")]
       )
     ])
   }
