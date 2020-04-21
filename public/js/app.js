@@ -3178,26 +3178,33 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
       axios.get("/getMitraGrosir").then(function (response) {
         _this.dataMitra = response.data.data;
       });
     },
     addMitra: function addMitra(id_grosir, nama) {
+      var _this2 = this;
+
       swal.fire({
         title: "Mengajukan Permintaan",
         text: "Apakah anda yakin menambahkan " + nama + " sebagai mitra?",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, tambahkan"
+        confirmButtonText: "Ya"
       }).then(function (result) {
         if (result.value) {
-          // send request to the server
-          axios.post("/requestMitra/" + id_grosir).then(function (response) {
+          _this2.$Progress.start();
+
+          axios.post("/requestMitra/" + id_grosir).then(function () {
+            UpdateData.$emit("update");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
-          })["catch"](function (error) {
-            swal.fire("gagal!", "Pengguna ini telah mendaftarkan anda sebagai mitra", "error");
+
+            _this2.$Progress.finish();
+          })["catch"](function () {
+            _this2.$Progress.fail();
+
+            swal.fire("Gagal!", "Terdapat permasalahan saat menyimpan", "error");
           });
         }
       });
@@ -3207,11 +3214,11 @@ __webpack_require__.r(__webpack_exports__);
     this.getMitra();
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     // Custom event on Vue js
     UpdateData.$on("update", function () {
-      _this2.getMitra();
+      _this3.getMitra();
     });
   }
 });
@@ -3291,25 +3298,37 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     // Mendapatkan data Mitra
-    getMitra: function getMitra() {// axios.get("/getMitraProdusen").then(response => {
-      //   this.dataMitra = response.data.data;
-      // });
+    getMitra: function getMitra() {
+      var _this = this;
+
+      axios.get("/getMitrakonsumen").then(function (response) {
+        _this.dataMitra = response.data.data;
+      });
     },
     addMitra: function addMitra(id_produsen, nama) {
+      var _this2 = this;
+
       swal.fire({
         title: "Mengajukan Permintaan",
         text: "Apakah anda yakin menambahkan " + nama + " sebagai mitra?",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, tambahkan"
+        confirmButtonText: "Ya"
       }).then(function (result) {
         if (result.value) {
           // send request to the server
-          axios.post("/requestMitra/" + id_produsen).then(function (response) {
+          _this2.$Progress.start();
+
+          axios.post("/requestMitra/" + id_produsen).then(function () {
+            UpdateData.$emit("update");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
-          })["catch"](function (error) {
-            swal.fire("gagal!", "Pengguna ini telah mendaftarkan anda sebagai mitra", "error");
+
+            _this2.$Progress.finish();
+          })["catch"](function () {
+            _this2.$Progress.fail();
+
+            swal.fire("Gagal!", "Terdapat permasalahan saat menyimpan", "error");
           });
         }
       });
@@ -3319,11 +3338,11 @@ __webpack_require__.r(__webpack_exports__);
     this.getMitra();
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this3 = this;
 
     // Custom event on Vue js
     UpdateData.$on("update", function () {
-      _this.getMitra();
+      _this3.getMitra();
     });
   }
 });
@@ -3406,28 +3425,33 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      console.log("data berhasil didapatkan"); // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
-
       axios.get("/getMitraPengecer").then(function (response) {
         _this.dataMitra = response.data.data;
-        console.log(_this.dataMitra);
       });
     },
     addMitra: function addMitra(id_pengecer, nama) {
+      var _this2 = this;
+
       swal.fire({
         title: "Mengajukan Permintaan",
         text: "Apakah anda yakin menambahkan " + nama + " sebagai mitra?",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, tambahkan"
+        confirmButtonText: "Ya"
       }).then(function (result) {
         if (result.value) {
-          // send request to the server
-          axios.post("/requestMitra/" + id_pengecer).then(function (response) {
+          _this2.$Progress.start();
+
+          axios.post("/requestMitra/" + id_pengecer).then(function () {
+            UpdateData.$emit("update");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
-          })["catch"](function (error) {
-            swal.fire("gagal!", "Pengguna ini telah mendaftarkan anda sebagai mitra", "error");
+
+            _this2.$Progress.finish();
+          })["catch"](function () {
+            _this2.$Progress.fail();
+
+            swal.fire("Gagal!", "Terdapat permasalahan saat menyimpan", "error");
           });
         }
       });
@@ -3437,11 +3461,11 @@ __webpack_require__.r(__webpack_exports__);
     this.getMitra();
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     // Custom event on Vue js
     UpdateData.$on("update", function () {
-      _this2.getMitra();
+      _this3.getMitra();
     });
   }
 });
@@ -3513,18 +3537,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3536,42 +3548,48 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      console.log("data berhasil didapatkan"); // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
-
       axios.get("/getMitraPengepul").then(function (response) {
         _this.dataMitra = response.data.data;
-        console.log(_this.dataMitra);
-      });
+      })["catch"](function () {});
     },
     addMitra: function addMitra(id_pengepul, nama) {
+      var _this2 = this;
+
       swal.fire({
         title: "Mengajukan Permintaan",
         text: "Apakah anda yakin menambahkan " + nama + " sebagai mitra?",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, tambahkan"
+        confirmButtonText: "Ya"
       }).then(function (result) {
         if (result.value) {
-          // send request to the server
-          axios.post("/requestMitra/" + id_pengepul).then(function (response) {
+          _this2.$Progress.start();
+
+          axios.post("/requestMitra/" + id_pengepul).then(function () {
+            UpdateData.$emit("update");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
-          })["catch"](function (error) {
-            swal.fire("gagal!", "Pengguna ini telah mendaftarkan anda sebagai mitra", "error");
+
+            _this2.$Progress.finish();
+          })["catch"](function () {
+            _this2.$Progress.fail();
+
+            swal.fire("Gagal!", "Terdapat permasalahan saat menyimpan", "error");
           });
         }
       });
+      this.$Progress.finish();
     }
   },
   created: function created() {
     this.getMitra();
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     // Custom event on Vue js
     UpdateData.$on("update", function () {
-      _this2.getMitra();
+      _this3.getMitra();
     });
   }
 });
@@ -3656,9 +3674,11 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/getMitraProdusen").then(function (response) {
         _this.dataMitra = response.data.data;
-      });
+      })["catch"](function () {});
     },
     addMitra: function addMitra(id_produsen, nama) {
+      var _this2 = this;
+
       swal.fire({
         title: "Mengajukan Permintaan",
         text: "Apakah anda yakin menambahkan " + nama + " sebagai mitra?",
@@ -3668,11 +3688,17 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: "Ya, tambahkan"
       }).then(function (result) {
         if (result.value) {
-          // send request to the server
-          axios.post("/requestMitra/" + id_produsen).then(function (response) {
+          _this2.$Progress.start();
+
+          axios.post("/requestMitra/" + id_produsen).then(function () {
+            UpdateData.$emit("update");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
-          })["catch"](function (error) {
-            swal.fire("gagal!", "Pengguna ini telah mendaftarkan anda sebagai mitra", "error");
+
+            _this2.$Progress.finish();
+          })["catch"](function () {
+            _this2.$Progress.fail();
+
+            swal.fire("Gagal!", "Terdapat permasalahan saat menyimpan", "error");
           });
         }
       });
@@ -3682,11 +3708,11 @@ __webpack_require__.r(__webpack_exports__);
     this.getMitra();
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     // Custom event on Vue js
     UpdateData.$on("update", function () {
-      _this2.getMitra();
+      _this3.getMitra();
     });
   }
 });
@@ -4004,6 +4030,10 @@ __webpack_require__.r(__webpack_exports__);
           return "Grosir";
           break;
 
+        case 4:
+          return "Pengecer";
+          break;
+
         default:
           return "Konsumen";
       }
@@ -4316,6 +4346,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4329,10 +4360,11 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/listMitraSaya").then(function (response) {
         _this.dataMitra = response.data.data;
-        console.log(_this.dataMitra);
       });
     },
     deleteMitra: function deleteMitra(id_mitra, mitra) {
+      var _this2 = this;
+
       swal.fire({
         title: "Menghapus Permintaan",
         text: "Apakah anda yakin menghapus " + mitra + " sebagai mitra?",
@@ -4342,11 +4374,16 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: "Ya"
       }).then(function (result) {
         if (result.value) {
-          // send request to the server
+          _this2.$Progress.start();
+
           axios["delete"]("/hapusmitra/" + id_mitra).then(function (response) {
             swal.fire("Menghapus Kemitraan", "Mitra berhasil dihapus", "success");
             UpdateData.$emit("update");
+
+            _this2.$Progress.finish();
           })["catch"](function (error) {
+            _this2.$Progress.fail();
+
             swal.fire("gagal!", "Mitra gagal dihapus", "error");
           });
         }
@@ -4357,11 +4394,11 @@ __webpack_require__.r(__webpack_exports__);
     this.getMitra();
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     // Custom event on Vue js
     UpdateData.$on("update", function () {
-      _this2.getMitra();
+      _this3.getMitra();
     });
   }
 });
@@ -4377,6 +4414,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -4530,6 +4568,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -5685,6 +5724,10 @@ __webpack_require__.r(__webpack_exports__);
 
         case 4:
           return "Grosir";
+          break;
+
+        case 5:
+          return "Pengecer";
           break;
 
         default:
@@ -6980,12 +7023,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -51163,7 +51200,34 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-md-12" }, [
     _c("div", { staticClass: "card" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "card-header" }, [
+        _c("h3", { staticClass: "card-title" }, [_vm._v("Daftar Grosir")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-tools" }, [
+          _c(
+            "div",
+            {
+              staticClass: "input-group input-group-sm",
+              staticStyle: { width: "150px" }
+            },
+            [
+              _c("input", {
+                staticClass: "form-control float-right",
+                attrs: {
+                  type: "text",
+                  name: "table_search",
+                  placeholder: "Search"
+                }
+              }),
+              _vm._v(" "),
+              _c("vue-progress-bar"),
+              _vm._v(" "),
+              _vm._m(0)
+            ],
+            1
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body table-responsive p-0" }, [
         _c("table", { staticClass: "table table-hover text-nowrap" }, [
@@ -51175,7 +51239,7 @@ var render = function() {
               !_vm.dataMitra.length
                 ? _c("tr", [
                     _c("td", { attrs: { colspan: "3", align: "center" } }, [
-                      _vm._v("Tidak ada pelaku rantai pasok Grosir")
+                      _vm._v("Tidak ada mitra yang dapat ditambahkan")
                     ])
                   ])
                 : _vm._e(),
@@ -51229,36 +51293,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Daftar Grosir")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "div",
-          {
-            staticClass: "input-group input-group-sm",
-            staticStyle: { width: "150px" }
-          },
-          [
-            _c("input", {
-              staticClass: "form-control float-right",
-              attrs: {
-                type: "text",
-                name: "table_search",
-                placeholder: "Search"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                [_c("i", { staticClass: "fas fa-search" })]
-              )
-            ])
-          ]
-        )
-      ])
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-default", attrs: { type: "submit" } },
+        [_c("i", { staticClass: "fas fa-search" })]
+      )
     ])
   },
   function() {
@@ -51299,7 +51339,34 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-md-12" }, [
     _c("div", { staticClass: "card" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "card-header" }, [
+        _c("h3", { staticClass: "card-title" }, [_vm._v("Daftar Konsumen")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-tools" }, [
+          _c(
+            "div",
+            {
+              staticClass: "input-group input-group-sm",
+              staticStyle: { width: "150px" }
+            },
+            [
+              _c("input", {
+                staticClass: "form-control float-right",
+                attrs: {
+                  type: "text",
+                  name: "table_search",
+                  placeholder: "Search"
+                }
+              }),
+              _vm._v(" "),
+              _c("vue-progress-bar"),
+              _vm._v(" "),
+              _vm._m(0)
+            ],
+            1
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body table-responsive p-0" }, [
         _c("table", { staticClass: "table table-hover text-nowrap" }, [
@@ -51311,7 +51378,7 @@ var render = function() {
               !_vm.dataMitra.length
                 ? _c("tr", [
                     _c("td", { attrs: { colspan: "3", align: "center" } }, [
-                      _vm._v("Tidak ada pelaku rantai pasok Produsen")
+                      _vm._v("Tidak ada mitra yang dapat ditambahkan")
                     ])
                   ])
                 : _vm._e(),
@@ -51365,36 +51432,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Daftar Konsumen")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "div",
-          {
-            staticClass: "input-group input-group-sm",
-            staticStyle: { width: "150px" }
-          },
-          [
-            _c("input", {
-              staticClass: "form-control float-right",
-              attrs: {
-                type: "text",
-                name: "table_search",
-                placeholder: "Search"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                [_c("i", { staticClass: "fas fa-search" })]
-              )
-            ])
-          ]
-        )
-      ])
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-default", attrs: { type: "submit" } },
+        [_c("i", { staticClass: "fas fa-search" })]
+      )
     ])
   },
   function() {
@@ -51435,7 +51478,34 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-md-12" }, [
     _c("div", { staticClass: "card" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "card-header" }, [
+        _c("h3", { staticClass: "card-title" }, [_vm._v("Daftar Pengecer")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-tools" }, [
+          _c(
+            "div",
+            {
+              staticClass: "input-group input-group-sm",
+              staticStyle: { width: "150px" }
+            },
+            [
+              _c("input", {
+                staticClass: "form-control float-right",
+                attrs: {
+                  type: "text",
+                  name: "table_search",
+                  placeholder: "Search"
+                }
+              }),
+              _vm._v(" "),
+              _c("vue-progress-bar"),
+              _vm._v(" "),
+              _vm._m(0)
+            ],
+            1
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body table-responsive p-0" }, [
         _c("table", { staticClass: "table table-hover text-nowrap" }, [
@@ -51447,7 +51517,7 @@ var render = function() {
               !_vm.dataMitra.length
                 ? _c("tr", [
                     _c("td", { attrs: { colspan: "3", align: "center" } }, [
-                      _vm._v("Tidak ada pelaku rantai pasok Pengecer")
+                      _vm._v("Tidak ada mitra yang dapat ditambahkan")
                     ])
                   ])
                 : _vm._e(),
@@ -51501,36 +51571,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Daftar Pengecer")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "div",
-          {
-            staticClass: "input-group input-group-sm",
-            staticStyle: { width: "150px" }
-          },
-          [
-            _c("input", {
-              staticClass: "form-control float-right",
-              attrs: {
-                type: "text",
-                name: "table_search",
-                placeholder: "Search"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                [_c("i", { staticClass: "fas fa-search" })]
-              )
-            ])
-          ]
-        )
-      ])
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-default", attrs: { type: "submit" } },
+        [_c("i", { staticClass: "fas fa-search" })]
+      )
     ])
   },
   function() {
@@ -51569,68 +51615,75 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-12" }, [
-    _c("div", { staticClass: "card" }, [
-      _vm._m(0),
+  return _c(
+    "div",
+    { staticClass: "col-md-12" },
+    [
+      _c("vue-progress-bar"),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body table-responsive p-0" }, [
-        _c("table", { staticClass: "table table-hover text-nowrap" }, [
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            [
-              !_vm.dataMitra.length
-                ? _c("tr", [
-                    _c("td", { attrs: { colspan: "3", align: "center" } }, [
-                      _vm._v("Tidak ada pelaku rantai pasok Pengepul")
+      _c("div", { staticClass: "card" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body table-responsive p-0" }, [
+          _c("table", { staticClass: "table table-hover text-nowrap" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              [
+                !_vm.dataMitra.length
+                  ? _c("tr", [
+                      _c("td", { attrs: { colspan: "3", align: "center" } }, [
+                        _vm._v("Tidak ada mitra yang dapat ditambahkan")
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.dataMitra, function(data) {
+                  return _c("tr", { key: data.id }, [
+                    _c("td", [_vm._v(_vm._s(data.name))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(data.lokasiKelurahan) +
+                          ", " +
+                          _vm._s(data.lokasiKecamatan) +
+                          ", " +
+                          _vm._s(data.lokasiKabupaten)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-success btn-xs",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.addMitra(data.id, data.name)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-plus-square white" }),
+                          _vm._v(
+                            "\n                Tambah sebagai mitra\n              "
+                          )
+                        ]
+                      )
                     ])
                   ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._l(_vm.dataMitra, function(data) {
-                return _c("tr", { key: data.id }, [
-                  _c("td", [_vm._v(_vm._s(data.name))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(
-                      _vm._s(data.lokasiKelurahan) +
-                        ", " +
-                        _vm._s(data.lokasiKecamatan) +
-                        ", " +
-                        _vm._s(data.lokasiKabupaten)
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-success btn-xs",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            return _vm.addMitra(data.id, data.name)
-                          }
-                        }
-                      },
-                      [
-                        _c("i", { staticClass: "fas fa-plus-square white" }),
-                        _vm._v(
-                          "\n                Tambah sebagai mitra\n              "
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              })
-            ],
-            2
-          )
+                })
+              ],
+              2
+            )
+          ])
         ])
       ])
-    ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -51707,7 +51760,34 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-md-12" }, [
     _c("div", { staticClass: "card" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "card-header" }, [
+        _c("h3", { staticClass: "card-title" }, [_vm._v("Daftar Produsen")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-tools" }, [
+          _c(
+            "div",
+            {
+              staticClass: "input-group input-group-sm",
+              staticStyle: { width: "150px" }
+            },
+            [
+              _c("input", {
+                staticClass: "form-control float-right",
+                attrs: {
+                  type: "text",
+                  name: "table_search",
+                  placeholder: "Search"
+                }
+              }),
+              _vm._v(" "),
+              _c("vue-progress-bar"),
+              _vm._v(" "),
+              _vm._m(0)
+            ],
+            1
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body table-responsive p-0" }, [
         _c("table", { staticClass: "table table-hover text-nowrap" }, [
@@ -51719,7 +51799,7 @@ var render = function() {
               !_vm.dataMitra.length
                 ? _c("tr", [
                     _c("td", { attrs: { colspan: "3", align: "center" } }, [
-                      _vm._v("Tidak ada pelaku rantai pasok Produsen")
+                      _vm._v("Tidak ada mitra yang dapat ditambahkan")
                     ])
                   ])
                 : _vm._e(),
@@ -51773,36 +51853,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Daftar Produsen")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "div",
-          {
-            staticClass: "input-group input-group-sm",
-            staticStyle: { width: "150px" }
-          },
-          [
-            _c("input", {
-              staticClass: "form-control float-right",
-              attrs: {
-                type: "text",
-                name: "table_search",
-                placeholder: "Search"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                [_c("i", { staticClass: "fas fa-search" })]
-              )
-            ])
-          ]
-        )
-      ])
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-default", attrs: { type: "submit" } },
+        [_c("i", { staticClass: "fas fa-search" })]
+      )
     ])
   },
   function() {
@@ -52704,7 +52760,18 @@ var render = function() {
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "card" }, [
-            _vm._m(0),
+            _c(
+              "div",
+              { staticClass: "card-header" },
+              [
+                _c("h3", { staticClass: "card-title" }, [_vm._v("Mitra Saya")]),
+                _vm._v(" "),
+                _c("vue-progress-bar"),
+                _vm._v(" "),
+                _vm._m(0)
+              ],
+              1
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "card-body table-responsive p-0" }, [
               _c("table", { staticClass: "table table-hover text-nowrap" }, [
@@ -52718,7 +52785,7 @@ var render = function() {
                           _c(
                             "td",
                             { attrs: { colspan: "4", align: "center" } },
-                            [_vm._v("Tidak ada data lahan")]
+                            [_vm._v("Tidak memiliki mitra")]
                           )
                         ])
                       : _vm._e(),
@@ -52736,7 +52803,7 @@ var render = function() {
                             ? _c("div", [_vm._v("Grosir")])
                             : data.role === 5
                             ? _c("div", [_vm._v("Pengecer")])
-                            : _vm._e()
+                            : _c("div", [_vm._v("Konsumen")])
                         ]),
                         _vm._v(" "),
                         _c("td", [
@@ -52789,36 +52856,28 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Mitra Saya")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "div",
-          {
-            staticClass: "input-group input-group-sm",
-            staticStyle: { width: "150px" }
-          },
-          [
-            _c("input", {
-              staticClass: "form-control float-right",
-              attrs: {
-                type: "text",
-                name: "table_search",
-                placeholder: "Search"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                [_c("i", { staticClass: "fas fa-search" })]
-              )
-            ])
-          ]
-        )
-      ])
+    return _c("div", { staticClass: "card-tools" }, [
+      _c(
+        "div",
+        {
+          staticClass: "input-group input-group-sm",
+          staticStyle: { width: "150px" }
+        },
+        [
+          _c("input", {
+            staticClass: "form-control float-right",
+            attrs: { type: "text", name: "table_search", placeholder: "Search" }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              { staticClass: "btn btn-default", attrs: { type: "submit" } },
+              [_c("i", { staticClass: "fas fa-search" })]
+            )
+          ])
+        ]
+      )
     ])
   },
   function() {
@@ -52901,7 +52960,7 @@ var render = function() {
                         ? _c("div", [_vm._v("Grosir")])
                         : data.role === 5
                         ? _c("div", [_vm._v("Pengecer")])
-                        : _vm._e()
+                        : _c("div", [_vm._v("Konsumen")])
                     ]),
                     _vm._v(" "),
                     _c("td", [
@@ -53071,7 +53130,7 @@ var render = function() {
                         ? _c("div", [_vm._v("Grosir")])
                         : data.role === 5
                         ? _c("div", [_vm._v("Pengecer")])
-                        : _vm._e()
+                        : _c("div", [_vm._v("Konsumen")])
                     ]),
                     _vm._v(" "),
                     _c("td", [
@@ -57468,7 +57527,7 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "nav-link",
-                          attrs: { to: "/pengecer/" }
+                          attrs: { to: "/konsumen/" }
                         },
                         [
                           _c("i", {
@@ -57482,7 +57541,9 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("li", { staticClass: "nav-header" }, [_vm._v("Mitra")]),
+                  _c("li", { staticClass: "nav-header" }, [
+                    _vm._v("MANAJEMEN KEMITRAAN")
+                  ]),
                   _vm._v(" "),
                   _c(
                     "li",
@@ -57492,7 +57553,7 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "nav-link",
-                          attrs: { to: "/pengecer/daftarmitra" }
+                          attrs: { to: "/konsumen/daftarmitra" }
                         },
                         [
                           _c("i", { staticClass: "fas fa-users nav-icon" }),
@@ -57512,7 +57573,7 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "nav-link",
-                          attrs: { to: "/pengecer/mitrasaya" }
+                          attrs: { to: "/konsumen/mitrasaya" }
                         },
                         [
                           _c("i", {
@@ -57534,7 +57595,7 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "nav-link",
-                          attrs: { to: "/pengecer/permintaanmitra" }
+                          attrs: { to: "/konsumen/permintaanmitra" }
                         },
                         [
                           _c("i", { staticClass: "fas fa-user-plus nav-icon" }),
@@ -57547,7 +57608,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("li", { staticClass: "nav-header" }, [
-                    _vm._v("Inventaris")
+                    _vm._v("MANAJEMEN PERSEDIAAN")
                   ]),
                   _vm._v(" "),
                   _c(
@@ -57558,7 +57619,7 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "nav-link",
-                          attrs: { to: "/pengecer/inventaris" }
+                          attrs: { to: "/konsumen/inventaris" }
                         },
                         [
                           _c("i", { staticClass: "nav-icon fas fa-tasks" }),
@@ -57571,7 +57632,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("li", { staticClass: "nav-header" }, [
-                    _vm._v("Transaksi")
+                    _vm._v("MANAJEMEN PEMESANAN")
                   ]),
                   _vm._v(" "),
                   _c(
@@ -57582,34 +57643,14 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "nav-link",
-                          attrs: { to: "/pengecer/transaksipemasok" }
+                          attrs: { to: "/konsumen/permintaancabai" }
                         },
                         [
                           _c("i", {
                             staticClass: "fas fa-file-invoice nav-icon"
                           }),
                           _vm._v(" "),
-                          _c("p", [_vm._v("Pemasok")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: "/pengecer/transaksipelanggan" }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-receipt nav-icon" }),
-                          _vm._v(" "),
-                          _c("p", [_vm._v("Pelanggan")])
+                          _c("p", [_vm._v("Permintaan cabai")])
                         ]
                       )
                     ],
@@ -57628,7 +57669,7 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "nav-link",
-                          attrs: { to: "/pengecer/analitik" }
+                          attrs: { to: "/konsumen/analitik" }
                         },
                         [
                           _c("i", { staticClass: "nav-icon fas fa-chart-bar" }),
@@ -61663,7 +61704,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-success",
+                      staticClass: "btn btn-success btn-sm",
                       on: { click: _vm.newModal }
                     },
                     [_vm._v("Tambah Lahan")]
@@ -61961,14 +62002,14 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "form-group" },
+                      { staticClass: "form-group col-md" },
                       [
                         _c("datepicker", {
-                          staticClass: "col-sm-10",
                           class: {
                             "is-invalid": _vm.form.errors.has("tanggal_tanam")
                           },
                           attrs: {
+                            "input-class": "form-control",
                             placeholder: "Tanggal tanam",
                             format: _vm.customFormatter,
                             id: "tanggal_tanam"
@@ -85942,8 +85983,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -30,7 +30,7 @@
                 <h3 class="card-title">Manajemen Lahan</h3>
 
                 <div class="card-tools">
-                  <button class="btn btn-success" @click="newModal">Tambah Lahan</button>
+                  <button class="btn btn-success btn-sm" @click="newModal">Tambah Lahan</button>
                   <!-- <div class="input-group input-group-sm" style="width: 150px;"> -->
                   <!-- <input
                       type="text"
@@ -171,9 +171,9 @@
                 />
                 <has-error :form="form" field="luas_lahan"></has-error>
               </div>
-              <div class="form-group">
+              <div class="form-group col-md">
                 <datepicker
-                  class="col-sm-10"
+                  input-class="form-control"
                   placeholder="Tanggal tanam"
                   v-model="form.tanggal_tanam"
                   :format="customFormatter"

@@ -56,59 +56,53 @@
             data-accordion="false"
           >
             <li class="nav-item">
-              <router-link to="/pengecer/" class="nav-link">
+              <router-link to="/konsumen/" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
               </router-link>
             </li>
-            <li class="nav-header">Mitra</li>
+            <li class="nav-header">MANAJEMEN KEMITRAAN</li>
             <li class="nav-item">
-              <router-link to="/pengecer/daftarmitra" class="nav-link">
+              <router-link to="/konsumen/daftarmitra" class="nav-link">
                 <i class="fas fa-users nav-icon"></i>
                 <p>Daftar Mitra</p>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/pengecer/mitrasaya" class="nav-link">
+              <router-link to="/konsumen/mitrasaya" class="nav-link">
                 <i class="fas fa-user-friends nav-icon"></i>
                 <p>Mitra Saya</p>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/pengecer/permintaanmitra" class="nav-link">
+              <router-link to="/konsumen/permintaanmitra" class="nav-link">
                 <i class="fas fa-user-plus nav-icon"></i>
                 <p>Permintaan Mitra</p>
               </router-link>
             </li>
             <!-- <li class="nav-item">
-              <router-link to="/pengecer/pengajuanmitra" class="nav-link">
+              <router-link to="/konsumen/pengajuanmitra" class="nav-link">
                 <i class="fas fa-user-clock nav-icon"></i>
                 <p>Pengajuan Mitra</p>
               </router-link>
             </li> -->
-            <li class="nav-header">Inventaris</li>
+            <li class="nav-header">MANAJEMEN PERSEDIAAN</li>
             <li class="nav-item">
-              <router-link to="/pengecer/inventaris" class="nav-link">
+              <router-link to="/konsumen/inventaris" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>Inventaris</p>
               </router-link>
             </li>
-            <li class="nav-header">Transaksi</li>
+            <li class="nav-header">MANAJEMEN PEMESANAN</li>
             <li class="nav-item">
-              <router-link to="/pengecer/transaksipemasok" class="nav-link">
+              <router-link to="/konsumen/permintaancabai" class="nav-link">
                 <i class="fas fa-file-invoice nav-icon"></i>
-                <p>Pemasok</p>
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/pengecer/transaksipelanggan" class="nav-link">
-                <i class="fas fa-receipt nav-icon"></i>
-                <p>Pelanggan</p>
+                <p>Permintaan cabai</p>
               </router-link>
             </li>
             <li class="nav-header">Bisnis Analitik</li>
             <li class="nav-item">
-              <router-link to="/pengecer/analitik" class="nav-link">
+              <router-link to="/konsumen/analitik" class="nav-link">
                 <i class="nav-icon fas fa-chart-bar"></i>
                 <p>Bisnis Analitik</p>
               </router-link>

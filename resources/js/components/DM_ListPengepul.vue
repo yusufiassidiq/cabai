@@ -1,6 +1,7 @@
 <template>
   <!-- DM : Ini merupakan komponen bagian pada Daftar Mitra -->
   <div class="col-md-12">
+    <vue-progress-bar></vue-progress-bar>
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Daftar Pengepul</h3>
@@ -12,7 +13,6 @@
               class="form-control float-right"
               placeholder="Search"
             />
-
             <div class="input-group-append">
               <button type="submit" class="btn btn-default">
                 <i class="fas fa-search"></i>
@@ -35,7 +35,7 @@
 
           <tbody>
             <tr v-if="!dataMitra.length">
-              <td colspan="3" align="center">Tidak ada pelaku rantai pasok Pengepul</td>
+              <td colspan="3" align="center">Tidak ada mitra yang dapat ditambahkan</td>
             </tr>
             <tr v-for="data in dataMitra" :key="data.id">
               <td>{{data.name}}</td>
@@ -47,18 +47,6 @@
                 </a>
               </td>
             </tr>
-            <!-- <tr v-for="data in dataMitra" :key="data.id"> -->
-            <!-- <td>{{ data.id }}</td> -->
-            <!-- <td>{{ data.name }}</td>
-                  <td>{{ data.lokasi }}</td>
-                  <td>
-                    <a href="#" class="btn btn-success btn-xs" @click="addMitra()">
-                      <i class="fas fa-plus-square white"></i>
-                      Tambah sebagai mitra
-                    </a>
-            </td>-->
-            <!-- end example data -->
-            <!-- </tr> -->
           </tbody>
         </table>
       </div>
@@ -76,12 +64,12 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      console.log("data berhasil didapatkan");
-      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/daftarmitra";
-      axios.get("/getMitraPengepul").then(response => {
-        this.dataMitra = response.data.data;
-        console.log(this.dataMitra);
-      });
+      axios
+        .get("/getMitraPengepul")
+        .then(response => {
+          this.dataMitra = response.data.data;
+        })
+        .catch(() => {});
     },
     addMitra(id_pengepul, nama) {
       swal
@@ -91,29 +79,33 @@ export default {
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
-          confirmButtonText: "Ya, tambahkan"
+          confirmButtonText: "Ya"
         })
         .then(result => {
           if (result.value) {
-            // send request to the server
+            this.$Progress.start();
             axios
               .post("/requestMitra/" + id_pengepul)
-              .then(function(response) {
+              .then(() => {
+                UpdateData.$emit("update");
                 swal.fire(
                   "Mengajukan Permintaan",
                   "Berhasil mengajukan kemitraan",
                   "success"
                 );
+                this.$Progress.finish();
               })
-              .catch(function(error) {
+              .catch(() => {
+                this.$Progress.fail();
                 swal.fire(
-                  "gagal!",
-                  "Pengguna ini telah mendaftarkan anda sebagai mitra",
+                  "Gagal!",
+                  "Terdapat permasalahan saat menyimpan",
                   "error"
                 );
               });
           }
         });
+      this.$Progress.finish();
     }
   },
   created() {

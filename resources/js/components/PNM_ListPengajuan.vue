@@ -49,6 +49,7 @@
                 <div v-else-if="data.role===3">Pengepul</div>
                 <div v-else-if="data.role===4">Grosir</div>
                 <div v-else-if="data.role===5">Pengecer</div>
+                <div v-else>Konsumen</div>
               </td>
               <td>{{ data.lokasi.kelurahan }} , {{ data.lokasi.kecamatan }} , {{ data.lokasi.kabupaten }}</td>
               <td>Menunggu Persetujuan</td>

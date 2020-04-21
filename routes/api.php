@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/getMitraPengepul','UserController@getMitraPengepul');
     Route::get('/getMitraGrosir','UserController@getMitraGrosir');
     Route::get('/getMitraPengecer','UserController@getMitraPengecer');
+    Route::get('/getMitrakonsumen','UserController@getMitraKonsumen');
 
     //Manajemen lahan
     Route::post('/addLahan','ProdusenController@addLahan');

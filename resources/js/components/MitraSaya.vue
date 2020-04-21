@@ -7,7 +7,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Mitra Saya</h3>
-
+              <vue-progress-bar></vue-progress-bar>
               <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input
@@ -39,7 +39,7 @@
 
                 <tbody>
                   <tr v-if="!dataMitra.length">
-                    <td colspan="4" align="center">Tidak ada data lahan</td>
+                    <td colspan="4" align="center">Tidak memiliki mitra</td>
                   </tr>
                   <tr v-for="data in dataMitra" :key="data.id">
                     <td>{{ data.nama }}</td>
@@ -48,6 +48,7 @@
                       <div v-else-if="data.role===3">Pengepul</div>
                       <div v-else-if="data.role===4">Grosir</div>
                       <div v-else-if="data.role===5">Pengecer</div>
+                      <div v-else>Konsumen</div>
                     </td>
                     <td>{{ data.lokasi.kelurahan }}, {{ data.lokasi.kecamatan }}, {{ data.lokasi.kabupaten }}</td>
                     <td>
@@ -83,7 +84,6 @@ export default {
     getMitra() {
       axios.get("/listMitraSaya").then(response => {
         this.dataMitra = response.data.data;
-        console.log(this.dataMitra);
       });
     },
     deleteMitra(id_mitra, mitra) {
@@ -98,18 +98,20 @@ export default {
         })
         .then(result => {
           if (result.value) {
-            // send request to the server
+            this.$Progress.start();
             axios
               .delete("/hapusmitra/" + id_mitra)
-              .then(function(response) {
+              .then(response => {
                 swal.fire(
                   "Menghapus Kemitraan",
                   "Mitra berhasil dihapus",
                   "success"
                 );
                 UpdateData.$emit("update");
+                this.$Progress.finish();
               })
-              .catch(function(error) {
+              .catch(error => {
+                this.$Progress.fail();
                 swal.fire("gagal!", "Mitra gagal dihapus", "error");
               });
           }

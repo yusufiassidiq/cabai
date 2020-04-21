@@ -12,7 +12,7 @@
               class="form-control float-right"
               placeholder="Search"
             />
-
+            <vue-progress-bar></vue-progress-bar>
             <div class="input-group-append">
               <button type="submit" class="btn btn-default">
                 <i class="fas fa-search"></i>
@@ -35,7 +35,7 @@
 
           <tbody>
             <tr v-if="!dataMitra.length">
-              <td colspan="3" align="center">Tidak ada pelaku rantai pasok Produsen</td>
+              <td colspan="3" align="center">Tidak ada mitra yang dapat ditambahkan</td>
             </tr>
             <tr v-for="data in dataMitra" :key="data.id">
               <td>{{data.name}}</td>
@@ -64,9 +64,12 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      axios.get("/getMitraProdusen").then(response => {
-        this.dataMitra = response.data.data;
-      });
+      axios
+        .get("/getMitraProdusen")
+        .then(response => {
+          this.dataMitra = response.data.data;
+        })
+        .catch(() => {});
     },
     addMitra(id_produsen, nama) {
       swal
@@ -80,20 +83,23 @@ export default {
         })
         .then(result => {
           if (result.value) {
-            // send request to the server
+            this.$Progress.start();
             axios
               .post("/requestMitra/" + id_produsen)
-              .then(function(response) {
+              .then(() => {
+                UpdateData.$emit("update");
                 swal.fire(
                   "Mengajukan Permintaan",
                   "Berhasil mengajukan kemitraan",
                   "success"
                 );
+                this.$Progress.finish();
               })
-              .catch(function(error) {
+              .catch(() => {
+                this.$Progress.fail();
                 swal.fire(
-                  "gagal!",
-                  "Pengguna ini telah mendaftarkan anda sebagai mitra",
+                  "Gagal!",
+                  "Terdapat permasalahan saat menyimpan",
                   "error"
                 );
               });
