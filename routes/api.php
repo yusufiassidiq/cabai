@@ -61,6 +61,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/getMitraGrosir','UserController@getMitraGrosir');
     Route::get('/getMitraPengecer','UserController@getMitraPengecer');
 
+    //Transaksi Permintaan Cabai
+    Route::post('/addPermintaanCabai','UserController@addPermintaanCabai');
+
     //Manajemen lahan
     Route::post('/addLahan','ProdusenController@addLahan');
     Route::get('/readLahan','ProdusenController@readLahan');

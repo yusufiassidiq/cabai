@@ -99,7 +99,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form @submit.prevent="editmode? updateLahan() : addLahan()">
+          <form @submit.prevent="editmode? updatePermintaan() : addPermintaan()">
             <div class="modal-body">
               <div class="form-group col-md">
                 <select
@@ -140,9 +140,10 @@
                 />
                 <has-error :form="form" field="jumlah_cabai"></has-error>
               </div>
-              <div class="form-group">
+              <div class="form-group col-md">
                 <datepicker
-                  class="col-sm-10"
+                  
+                  input-class="form-control"
                   placeholder="Tanggal cabai diterima"
                   v-model="form.tanggal_diterima"
                   :format="customFormatter"
@@ -185,10 +186,27 @@ export default {
       }),
       editmode: false,
       listPermintaanCabai: {},
-      dataMitra: {}
+      dataMitra: {},
     };
   },
   methods: {
+    addPermintaan(){
+      this.form.post("/addPermintaanCabai").then((response)=>{
+        UpdateData.$emit("update");
+          // hide modal
+          $("#modalPermintaan").trigger("click");
+          // show Toast if success
+          toast.fire({
+            icon: "success",
+            title: "Permintaan berhasil ditambahkan"
+          });
+          document.getElementById("btnadd").disabled = false;
+      })
+      .catch(error => {
+          console.error(error);
+          document.getElementById("btnadd").disabled = false;
+        });
+    },
     // fungsi untuk mendapatkan role dari mitra
     getRole(id_role) {
       switch (id_role) {
@@ -220,6 +238,7 @@ export default {
       // this.editmode = false;
       // this.form.reset();
       $("#modalPermintaan").modal("show");
+      // this.form.pembeli_id = id;
     }
   },
   created() {
@@ -230,6 +249,9 @@ export default {
     UpdateData.$on("update", () => {
       this.getPermintaanCabai();
     });
-  }
+    
+  
+  },
+ 
 };
 </script>

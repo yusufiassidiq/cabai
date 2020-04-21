@@ -3858,6 +3858,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3877,6 +3878,22 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    addPermintaan: function addPermintaan() {
+      this.form.post("/addPermintaanCabai").then(function (response) {
+        UpdateData.$emit("update"); // hide modal
+
+        $("#modalPermintaan").trigger("click"); // show Toast if success
+
+        toast.fire({
+          icon: "success",
+          title: "Permintaan berhasil ditambahkan"
+        });
+        document.getElementById("btnadd").disabled = false;
+      })["catch"](function (error) {
+        console.error(error);
+        document.getElementById("btnadd").disabled = false;
+      });
+    },
     // fungsi untuk mendapatkan role dari mitra
     getRole: function getRole(id_role) {
       switch (id_role) {
@@ -3912,7 +3929,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log("modal created"); // this.editmode = false;
       // this.form.reset();
 
-      $("#modalPermintaan").modal("show");
+      $("#modalPermintaan").modal("show"); // this.form.pembeli_id = id;
     }
   },
   created: function created() {
@@ -51742,7 +51759,9 @@ var render = function() {
                     on: {
                       submit: function($event) {
                         $event.preventDefault()
-                        _vm.editmode ? _vm.updateLahan() : _vm.addLahan()
+                        _vm.editmode
+                          ? _vm.updatePermintaan()
+                          : _vm.addPermintaan()
                       }
                     }
                   },
@@ -51954,16 +51973,16 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "form-group" },
+                        { staticClass: "form-group col-md" },
                         [
                           _c("datepicker", {
-                            staticClass: "col-sm-10",
                             class: {
                               "is-invalid": _vm.form.errors.has(
                                 "tanggal_diterima"
                               )
                             },
                             attrs: {
+                              "input-class": "form-control",
                               placeholder: "Tanggal cabai diterima",
                               format: _vm.customFormatter,
                               id: "tanggal_diterima"

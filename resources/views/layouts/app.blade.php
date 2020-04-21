@@ -25,6 +25,11 @@
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
+    
+    
+    
     <!-- Daterange picker -->
     <!-- <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css')}}"> -->
     <!-- summernote -->
@@ -62,7 +67,9 @@
     </script>
     <!-- overlayScrollbars -->
     <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-
+    <!-- datepicker -->
+    <script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+    
     <!-- daterangepicker -->
     <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
     <!-- Bootstrap 4 -->

@@ -8,6 +8,9 @@ use Auth;
 use App\Kemitraan;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use App\Transaksi;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -346,13 +349,40 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function hapusMitra($id)
-    {
+    public function hapusMitra($id){
         $kemitraan = Kemitraan::find($id);
         $kemitraan->delete();
         return response()->json([
             'status' => 204
         ]);
+    }
+
+    public function addPermintaanCabai(Request $request){
+        $v = Validator::make($request->all(), [
+            'jenis_cabai'     => 'required|string|max:255',
+            'jumlah_cabai'      => 'required|integer',
+            'tanggal_diterima'    => 'required|date',
+        ]);
+        
+        if ($v->fails())
+        {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $v->errors()
+            ], 422);
+        }
+        $user = Auth::user();
+        $tglditerima = $request->tanggal_diterima;
+        $parsed_date_tglditerima = Carbon::parse($tglditerima)->toDateTimeString();
+        $transaksi = new Transaksi;
+        $transaksi->jenis_cabai = $request->jenis_cabai;
+        $transaksi->jumlah_cabai = $request->jumlah_cabai;
+        $transaksi->tanggal_diterima = $parsed_date_tglditerima;
+        $transaksi->status_permintaan = 0;
+        $transaksi->pembeli_id = $request->pembeli_id;
+        $transaksi->user()->associate($user);
+        $transaksi->save();
+        return response()->json(['status' => 'success'], 200);
     }
 
 }

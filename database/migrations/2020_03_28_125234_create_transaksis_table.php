@@ -21,7 +21,7 @@ class CreateTransaksisTable extends Migration
             $table->integer('jumlah_cabai');
             $table->date('tanggal_diterima');
             $table->integer('status_permintaan');
-            $table->date('tanggal_pengiriman');
+            $table->date('tanggal_pengiriman')->nullable();
             $table->integer('status_pengiriman')->nullable();
             $table->integer('status_pemesanan')->nullable();
             $table->integer('harga')->nullable();
