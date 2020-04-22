@@ -78,7 +78,7 @@
     <!-- ChartJS -->
     <script src="{{ asset('plugins/chart.js/Chart.min.js')}}"></script>
     <!-- Chart -->
-    <script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>
+    <!-- <script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script> -->
     <!-- Sparkline -->
     <!-- <script src="{{ asset('plugins/sparklines/sparkline.js')}}"></script> -->
     <!-- JQVMap -->

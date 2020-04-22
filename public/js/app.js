@@ -4715,6 +4715,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -4722,10 +4794,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      temp_nama: "",
-      temp_jeniscabai: "",
-      temp_jumlahcabai: "",
-      temp_tanggalditerima: "",
       form: new Form({
         id: "",
         tanggal_pengiriman: "",
@@ -4735,6 +4803,16 @@ __webpack_require__.r(__webpack_exports__);
         id: "",
         keterangan: ""
       }),
+      // Temporary variable
+      temp_nama: "",
+      temp_jeniscabai: "",
+      temp_jumlahcabai: "",
+      temp_hargacabai: "",
+      temp_tanggalditerima: "",
+      temp_inv_jeniscabai: "",
+      temp_inv_jumlahcabai: "100",
+      temp_inv_hargacabai: "10000",
+      // for update keterangan
       keterangan: "",
       listPermintaanCabai: {}
     };
@@ -4820,31 +4898,35 @@ __webpack_require__.r(__webpack_exports__);
 
       return "Rp. " + rupiah.split("", rupiah.length - 1).reverse().join("");
     },
-    kirimPesanan: function kirimPesanan(data) {
+    modalKirimPesanan: function modalKirimPesanan(data) {
+      $("#modalKirimPermintaan").modal("show");
+      this.formReject.id = data.id;
+      this.temp_nama = data.nama;
+      this.temp_jeniscabai = data.jenis_cabai;
+      this.temp_jumlahcabai = data.jumlah_cabai;
+      this.temp_hargacabai = data.harga;
+      this.temp_tanggalditerima = data.tanggal_diterima;
+    },
+    kirimPesanan: function kirimPesanan() {
       var _this4 = this;
 
-      swal.fire({
-        title: "Kirim Pesanan",
-        text: "Apakah anda telah mengirim " + data.jumlah_cabai + " Kg " + data.jenis_cabai + " kepada " + data.nama + "?",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Ya"
-      }).then(function (result) {
-        if (result.value) {
-          _this4.$Progress.start();
+      document.getElementById("btnKirimPesanan").disabled = true;
+      this.$Progress.start();
+      this.form.put("/" + this.form.id).then(function () {
+        UpdateData.$emit("ListPermintaanCabai");
+        $("#modalKirimPermintaan").trigger("click");
+        toast.fire({
+          icon: "success",
+          title: "Pesanan berhasil dikirim"
+        });
 
-          axios["delete"]("/" + id_permintaanSaya).then(function (response) {
-            swal.fire("Kirim Pesanan", "Pengiriman pesanan berhasil", "success");
-            UpdateData.$emit("updateListPengajuanCabai");
+        _this4.$Progress.finish();
 
-            _this4.$Progress.finish();
-          })["catch"](function (error) {
-            _this4.$Progress.fail();
+        document.getElementById("btnKirimPesanan").disabled = false;
+      })["catch"](function () {
+        document.getElementById("btnKirimPesanan").disabled = false;
 
-            swal.fire("Gagal!", "Terjadi kesalahan", "error");
-          });
-        }
+        _this4.$Progress.finish();
       });
     }
   },
@@ -88049,7 +88131,7 @@ var render = function() {
                                 attrs: { type: "button" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.kirimPesanan(data)
+                                    return _vm.modalKirimPesanan(data)
                                   }
                                 }
                               },
@@ -88347,6 +88429,99 @@ var render = function() {
             ]
           )
         ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modalKirimPermintaan",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "modalKirimPermintaanLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(13),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.kirimPesanan()
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(14),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-9" }, [
+                          _c("p", [_vm._v(":  " + _vm._s(_vm.temp_nama))])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(15),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-9" }, [
+                          _c("p", [_vm._v(":  " + _vm._s(_vm.temp_jeniscabai))])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("table", { staticClass: "table" }, [
+                        _vm._m(16),
+                        _vm._v(" "),
+                        _c("tbody", [
+                          _c("tr", [
+                            _c("td", [
+                              _vm._v(_vm._s(_vm.temp_jumlahcabai) + " Kg")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(_vm.temp_inv_jumlahcabai) + " Kg")
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("table", { staticClass: "table" }, [
+                        _vm._m(17),
+                        _vm._v(" "),
+                        _c("tbody", [
+                          _c("tr", [
+                            _c("td", [
+                              _vm._v(_vm._s(_vm.temp_hargacabai) + " /Kg")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(_vm.temp_inv_hargacabai) + " /Kg")
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(18)
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
       )
     ],
     1
@@ -88576,6 +88751,98 @@ var staticRenderFns = [
           attrs: { id: "btnTolakPermintaan", type: "submit" }
         },
         [_vm._v("Tolak")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        {
+          staticClass: "modal-title",
+          attrs: { id: "modalKirimPermintaanLabel" }
+        },
+        [_vm._v("Penolakan Permintaan Pasokan")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Pembeli")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Jenis Cabai")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Jumlah Permintaan")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Jumlah dimiliki")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Harga permintaan")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Rata-rata harga jual")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Tutup")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { id: "btnKirimPesanan", type: "submit" }
+        },
+        [_vm._v("Kirim")]
       )
     ])
   }

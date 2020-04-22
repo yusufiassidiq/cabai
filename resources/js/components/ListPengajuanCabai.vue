@@ -339,7 +339,7 @@
       </div>
     </div>
     <vue-progress-bar></vue-progress-bar>
-    <!-- Modal Tolak Penawaran -->
+    
   </div>
 </template>
 <script>

@@ -88,7 +88,7 @@
                   <button
                     type="button"
                     class="btn btn-success btn-xs"
-                    @click="kirimPesanan(data)"
+                    @click="modalKirimPesanan(data)"
                   >Kirim Pesanan</button>
                 </div>
                 <div v-else>-</div>
@@ -252,6 +252,78 @@
         </div>
       </div>
     </div>
+    <div
+      class="modal fade"
+      id="modalKirimPermintaan"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalKirimPermintaanLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalKirimPermintaanLabel">Penolakan Permintaan Pasokan</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form @submit.prevent="kirimPesanan()">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <p class="normal text-md-left">Pembeli</p>
+                </div>
+                <div class="col-md-9">
+                  <p>:&ensp; {{temp_nama}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <p class="normal text-md-left">Jenis Cabai</p>
+                </div>
+                <div class="col-md-9">
+                  <p>:&ensp; {{temp_jeniscabai}}</p>
+                </div>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Jumlah Permintaan</th>
+                    <th>Jumlah dimiliki</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{temp_jumlahcabai}} Kg</td>
+                    <td>{{temp_inv_jumlahcabai}} Kg</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Harga permintaan</th>
+                    <th>Rata-rata harga jual</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{temp_hargacabai}} /Kg</td>
+                    <td>{{temp_inv_hargacabai}} /Kg</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+              <button id="btnKirimPesanan" type="submit" class="btn btn-primary">Kirim</button>
+            </div>
+          </form>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -262,10 +334,6 @@ export default {
   },
   data() {
     return {
-      temp_nama: "",
-      temp_jeniscabai: "",
-      temp_jumlahcabai: "",
-      temp_tanggalditerima: "",
       form: new Form({
         id: "",
         tanggal_pengiriman: "",
@@ -275,7 +343,18 @@ export default {
         id: "",
         keterangan: ""
       }),
+      // Temporary variable
+      temp_nama: "",
+      temp_jeniscabai: "",
+      temp_jumlahcabai: "",
+      temp_hargacabai: "",
+      temp_tanggalditerima: "",
+      temp_inv_jeniscabai: "",
+      temp_inv_jumlahcabai: "100",
+      temp_inv_hargacabai: "10000",
+      // for update keterangan
       keterangan: "",
+
       listPermintaanCabai: {}
     };
   },
@@ -361,35 +440,33 @@ export default {
           .join("")
       );
     },
-    kirimPesanan(data){
-      swal
-        .fire({
-          title: "Kirim Pesanan",
-          text: "Apakah anda telah mengirim " + data.jumlah_cabai + " Kg " + data.jenis_cabai + " kepada " + data.nama +"?",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Ya"
+    modalKirimPesanan(data) {
+      $("#modalKirimPermintaan").modal("show");
+      this.formReject.id = data.id;
+      this.temp_nama = data.nama;
+      this.temp_jeniscabai = data.jenis_cabai;
+      this.temp_jumlahcabai = data.jumlah_cabai;
+      this.temp_hargacabai = data.harga;
+      this.temp_tanggalditerima = data.tanggal_diterima;
+    },
+    kirimPesanan() {
+      document.getElementById("btnKirimPesanan").disabled = true;
+      this.$Progress.start();
+      this.form
+        .put("/" + this.form.id)
+        .then(() => {
+          UpdateData.$emit("ListPermintaanCabai");
+          $("#modalKirimPermintaan").trigger("click");
+          toast.fire({
+            icon: "success",
+            title: "Pesanan berhasil dikirim"
+          });
+          this.$Progress.finish();
+          document.getElementById("btnKirimPesanan").disabled = false;
         })
-        .then(result => {
-          if (result.value) {
-            this.$Progress.start();
-            axios
-              .delete("/" + id_permintaanSaya)
-              .then(response => {
-                swal.fire(
-                  "Kirim Pesanan",
-                  "Pengiriman pesanan berhasil",
-                  "success"
-                );
-                UpdateData.$emit("updateListPengajuanCabai");
-                this.$Progress.finish();
-              })
-              .catch(error => {
-                this.$Progress.fail();
-                swal.fire("Gagal!", "Terjadi kesalahan", "error");
-              });
-          }
+        .catch(() => {
+          document.getElementById("btnKirimPesanan").disabled = false;
+          this.$Progress.finish();
         });
     }
   },
