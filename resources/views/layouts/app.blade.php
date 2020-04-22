@@ -27,7 +27,8 @@
     <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
     <!-- Date Picker -->
     <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
-    
+    <!-- Muli Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:400" rel="stylesheet">
     
     
     <!-- Daterange picker -->
@@ -75,7 +76,9 @@
     <!-- Bootstrap 4 -->
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- ChartJS -->
-    <!-- <script src="{{ asset('plugins/chart.js/Chart.min.js')}}"></script> -->
+    <script src="{{ asset('plugins/chart.js/Chart.min.js')}}"></script>
+    <!-- Chart -->
+    <script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>
     <!-- Sparkline -->
     <!-- <script src="{{ asset('plugins/sparklines/sparkline.js')}}"></script> -->
     <!-- JQVMap -->
