@@ -389,6 +389,14 @@
               }]
             },
             options:{
+              tooltips:{
+                mode:'index',
+                intersect: false,
+              },
+              hover:{
+                mode: 'nearest',
+                intersect: true,
+              },
               scales:{
                 xAxes: [{
                   gridLines : {
@@ -417,8 +425,8 @@
       // setInterval(()=> this.loadTarget(), 3000);
     },
     mounted() {
-    // Custom event on Vue js
     this.fillData();
+    // Custom event on Vue js
     UpdateData.$on("update", () => {
       this.fillData();
       this.loadTarget();

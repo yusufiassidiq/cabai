@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Auth;
 use App\Target;
+use App\PraProduksi;
+use App\PengeluaranProduksi;
 use Carbon\Carbon;
+use DB;
 
 class AnalysisController extends Controller
 {
@@ -200,6 +203,45 @@ class AnalysisController extends Controller
             'rawit' => $data_targetRawit,
             'keriting' => $data_targetKeriting,
             'besar' => $data_targetBesar,
+        ]);
+    }
+    public function getPengeluaran(){
+        $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
+        //mengambil id dari PraProduksi yang dimiliki oleh user
+        $year = Carbon::now()->format('Y'); //tahun saat ini
+        $lahan = PraProduksi::Where('user_id',$idUser)->pluck('id');
+        for ($i=0;$i<count($lahan);$i++){
+            $pengeluaran[$i]= PengeluaranProduksi::where('pra_produksi_id',$lahan[$i])
+                    ->select('nama_pengeluaran',DB::raw('count(*) as vol'), DB::raw("SUM(jumlah_pengeluaran) as total"))
+                    ->groupBy('nama_pengeluaran')
+                    ->get();
+            $pengeluaranByLahanPupuk[$i]=0;
+            $pengeluaranByLahanAlatTani[$i]=0;  
+            $pengeluaranByLahanPestisida[$i]=0; 
+            $pengeluaranByLahanLainnya[$i]=0; 
+            $kodeLahan[$i]=PraProduksi::Where('id',$lahan[$i])->pluck('kode_lahan');  
+            for($j=0;$j<count($pengeluaran[$i]);$j++){
+                if($pengeluaran[$i][$j]->nama_pengeluaran=='Pupuk'){
+                    $pengeluaranByLahanPupuk[$i]=$pengeluaran[$i][$j]->total;
+                }
+                elseif($pengeluaran[$i][$j]->nama_pengeluaran=='Pestisida'){
+                    $pengeluaranByLahanPestisida[$i]=$pengeluaran[$i][$j]->total;
+                }
+                elseif($pengeluaran[$i][$j]->nama_pengeluaran=='Alat Tani'){
+                    $pengeluaranByLahanAlatTani[$i]=$pengeluaran[$i][$j]->total;
+                }
+                else{
+                    $pengeluaranByLahanLainnya[$i]=$pengeluaran[$i][$j]->total;
+                }
+            }
+        }
+        return response()->json([
+            'month' => $kodeLahan,
+            'pupuk' => $pengeluaranByLahanPupuk,
+            'alatTani' => $pengeluaranByLahanAlatTani,  
+            'pestisida' => $pengeluaranByLahanPestisida, 
+            'lainnya' => $pengeluaranByLahanLainnya, 
+            'tahun' => $year,
         ]);
     }
 }

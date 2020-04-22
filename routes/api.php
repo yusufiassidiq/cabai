@@ -97,6 +97,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('/updateTarget/{id}','AnalysisController@updateTarget');
     Route::delete('/deleteTarget/{id}','AnalysisController@deleteTarget');
     Route::get('/getTarget','AnalysisController@getTarget');
+    Route::get('/getPengeluaran','AnalysisController@getPengeluaran');
 });
 
 
