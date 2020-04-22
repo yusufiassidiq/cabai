@@ -6107,7 +6107,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       total_user: 0,
       validated_user: 0,
-      not_validate_user: 0
+      not_validate_user: 0,
+      ditolak_user: 0
     };
   },
   created: function created() {
@@ -6118,6 +6119,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.total_user = response.data.data.total_user;
       _this.validated_user = response.data.data.validated_user;
       _this.not_validate_user = response.data.data.not_validated_user;
+      _this.ditolak_user = response.data.data.rejected_user;
     });
   }
 });
@@ -6610,14 +6612,14 @@ __webpack_require__.r(__webpack_exports__);
         _this.users = response.data.users;
       })["catch"](function () {});
     },
-    deleteUser: function deleteUser(id) {
+    tolak: function tolak(id) {
       var _this2 = this;
 
       this.$Progress.start();
 
       if (confirm("Are you sure?")) {
         this.loading = !this.loading;
-        axios["delete"]("/user/" + id).then(function (response) {
+        axios.put("/tolak/" + id).then(function (response) {
           UpdateData.$emit("UserValidation");
           $("#detailUser").modal("hide");
 
@@ -6633,7 +6635,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.$Progress.start();
-      axios.post("/terima/" + id).then(function (response) {
+      axios.put("/terima/" + id).then(function (response) {
         UpdateData.$emit("UserValidation");
         $("#detailUser").modal("hide");
 
@@ -6694,7 +6696,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
 //
 //
 //
@@ -90129,7 +90131,19 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(7)
+            _c("div", { staticClass: "col-lg-3 col-6" }, [
+              _c("div", { staticClass: "small-box bg-danger" }, [
+                _c("div", { staticClass: "inner" }, [
+                  _c("h3", [_vm._v(_vm._s(_vm.ditolak_user))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("User Gagal validasi")])
+                ]),
+                _vm._v(" "),
+                _vm._m(7),
+                _vm._v(" "),
+                _vm._m(8)
+              ])
+            ])
           ])
         ])
       ])
@@ -90218,23 +90232,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-6" }, [
-      _c("div", { staticClass: "small-box bg-danger" }, [
-        _c("div", { staticClass: "inner" }, [
-          _c("h3", [_vm._v("?")]),
-          _vm._v(" "),
-          _c("p", [_vm._v("User Gagal validasi")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "icon" }, [
-          _c("i", { staticClass: "ion ion-pie-graph" })
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-          _vm._v("\n                Selengkapnya\n                "),
-          _c("i", { staticClass: "fas fa-arrow-circle-right" })
-        ])
-      ])
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-pie-graph" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+      _vm._v("\n                Selengkapnya\n                "),
+      _c("i", { staticClass: "fas fa-arrow-circle-right" })
     ])
   }
 ]
@@ -90887,7 +90895,7 @@ var render = function() {
                     staticClass: "btn btn-danger",
                     on: {
                       click: function($event) {
-                        return _vm.deleteUser(_vm.userDetail.id)
+                        return _vm.tolak(_vm.userDetail.id)
                       }
                     }
                   },
@@ -122661,8 +122669,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

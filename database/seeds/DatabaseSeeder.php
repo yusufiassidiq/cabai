@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Lokasi;
+use App\Inventaris;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -72,6 +73,16 @@ class DatabaseSeeder extends Seeder
         ]);
         $lokasi->user()->associate($user);
         $lokasi->save();
+        $jenis_cabai=array("Cabai besar","Cabai rawit","Cabai keriting");
+        foreach ($jenis_cabai as $i){
+            $inventori = new Inventaris([
+                'jenis_cabai'=>$i,
+                'jumlah_cabai'=>0,
+                'harga'=>0
+            ]);
+            $inventori->user()->associate($user);
+            $inventori->save();
+        }
 
         $user = new User;
         $user->name = "Pengepul";
@@ -89,6 +100,16 @@ class DatabaseSeeder extends Seeder
         ]);
         $lokasi->user()->associate($user);
         $lokasi->save();
+        $jenis_cabai=array("Cabai besar","Cabai rawit","Cabai keriting");
+        foreach ($jenis_cabai as $i){
+            $inventori = new Inventaris([
+                'jenis_cabai'=>$i,
+                'jumlah_cabai'=>0,
+                'harga'=>0
+            ]);
+            $inventori->user()->associate($user);
+            $inventori->save();
+        }
 
         $user = new User;
         $user->name = "Grosir";
@@ -106,6 +127,16 @@ class DatabaseSeeder extends Seeder
         ]);
         $lokasi->user()->associate($user);
         $lokasi->save();
+        $jenis_cabai=array("Cabai besar","Cabai rawit","Cabai keriting");
+        foreach ($jenis_cabai as $i){
+            $inventori = new Inventaris([
+                'jenis_cabai'=>$i,
+                'jumlah_cabai'=>0,
+                'harga'=>0
+            ]);
+            $inventori->user()->associate($user);
+            $inventori->save();
+        }
 
         $user = new User;
         $user->name = "Pengecer";
@@ -123,6 +154,16 @@ class DatabaseSeeder extends Seeder
         ]);
         $lokasi->user()->associate($user);
         $lokasi->save();
+        $jenis_cabai=array("Cabai besar","Cabai rawit","Cabai keriting");
+        foreach ($jenis_cabai as $i){
+            $inventori = new Inventaris([
+                'jenis_cabai'=>$i,
+                'jumlah_cabai'=>0,
+                'harga'=>0
+            ]);
+            $inventori->user()->associate($user);
+            $inventori->save();
+        }
 
         $user = new User;
         $user->name = "Konsumen";
@@ -140,5 +181,15 @@ class DatabaseSeeder extends Seeder
         ]);
         $lokasi->user()->associate($user);
         $lokasi->save();
+        $jenis_cabai=array("Cabai besar","Cabai rawit","Cabai keriting");
+        foreach ($jenis_cabai as $i){
+            $inventori = new Inventaris([
+                'jenis_cabai'=>$i,
+                'jumlah_cabai'=>0,
+                'harga'=>0
+            ]);
+            $inventori->user()->associate($user);
+            $inventori->save();
+        }
     }
 }

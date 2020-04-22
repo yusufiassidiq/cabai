@@ -10,6 +10,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Transaksi;
+use App\Inventaris;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -476,5 +477,11 @@ class UserController extends Controller
             'status_pengiriman' => 0,
         ]);
         return response()->json(['status' => 'success'], 200);
+    }
+    public function getInventaris(){
+        $userId = Auth::user()->id;
+        $inventaris = Inventaris::find($id);
+        return $inventaris;
+        
     }
 }

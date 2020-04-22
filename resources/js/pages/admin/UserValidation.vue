@@ -95,7 +95,7 @@
           </div>
           <div class="modal-footer">
             <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-            <button class="btn btn-danger" v-on:click="deleteUser(userDetail.id)">Tolak</button>
+            <button class="btn btn-danger" v-on:click="tolak(userDetail.id)">Tolak</button>
             <button class="btn btn-success" v-on:click="terima(userDetail.id)">Terima</button>
           </div>
           <!-- </form> -->
@@ -128,12 +128,12 @@ export default {
         })
         .catch(() => {});
     },
-    deleteUser(id) {
+    tolak(id) {
       this.$Progress.start();
       if (confirm("Are you sure?")) {
         this.loading = !this.loading;
         axios
-          .delete("/user/" + id)
+          .put("/tolak/" + id)
           .then(response => {
             UpdateData.$emit("UserValidation");
             $("#detailUser").modal("hide");
@@ -148,7 +148,7 @@ export default {
     terima(id) {
       this.$Progress.start();
       axios
-        .post("/terima/" + id)
+        .put("/terima/" + id)
         .then(response => {
           UpdateData.$emit("UserValidation");
           $("#detailUser").modal("hide");

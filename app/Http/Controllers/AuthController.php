@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Lokasi;
+use App\Inventaris;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -46,6 +47,16 @@ class AuthController extends Controller
         $lokasi->kecamatan = $request->kecamatan;
         $lokasi->kelurahan = $request->kelurahan;
         $lokasi->save();
+        $jenis_cabai=array("Cabai besar","Cabai rawit","Cabai keriting");
+        foreach ($jenis_cabai as $i){
+            $inventori = new Inventaris([
+                'jenis_cabai'=>$i,
+                'jumlah_cabai'=>0,
+                'harga'=>0
+            ]);
+            $inventori->user()->associate($user);
+            $inventori->save();
+        }
         return response()->json(['status' => 'success'], 200);
     }    
     
