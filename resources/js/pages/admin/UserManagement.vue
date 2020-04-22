@@ -6,15 +6,16 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">User Managemennt</h1>
+            <h1 class="m-0 text-dark">Manajemen User</h1>
           </div>
+          <vue-progress-bar></vue-progress-bar>
           <!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
                 <a href="#">Admin</a>
               </li>
-              <li class="breadcrumb-item active">User Management</li>
+              <li class="breadcrumb-item active">Manajemen User</li>
             </ol>
           </div>
           <!-- /.col -->
@@ -35,7 +36,7 @@
                 <h3 class="card-title">Management User</h3>
 
                 <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
+                  <!-- <div class="input-group input-group-sm" style="width: 150px;">
                     <input
                       type="text"
                       name="table_search"
@@ -48,7 +49,7 @@
                         <i class="fas fa-search"></i>
                       </button>
                     </div>
-                  </div>
+                  </div>-->
                 </div>
               </div>
               <!-- /.card-header -->
@@ -56,7 +57,6 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>ID</th>
                       <th>Nama</th>
                       <th>Email</th>
                       <th>Role</th>
@@ -65,17 +65,13 @@
                   </thead>
 
                   <tbody>
+                    <tr v-if="!users.length">
+                      <td colspan="5" align="center">Tidak ada user yang belum divalidasi</td>
+                    </tr>
                     <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
-                      <th scope="row">{{ user.id }}</th>
                       <td>{{ user.name }}</td>
                       <td>{{ user.email }}</td>
-                      <td>
-                        <div v-if="user.role===1">Admin</div>
-                        <div v-else-if="user.role===2">Produsen</div>
-                        <div v-else-if="user.role===3">Pengepul</div>
-                        <div v-else-if="user.role===4">Grosir</div>
-                        <div v-else-if="user.role===5">Pengecer</div>
-                      </td>
+                      <td>{{ getRole(user.role) }}</td>
                       <td>
                         <a href="#">
                           <i class="fas fa-edit blue" v-on:click="edituser(user.id)"></i>
@@ -116,31 +112,11 @@
           <form @submit.prevent="updateUser()">
             <div class="modal-body">
               <div class="form-group">
-                <input type="email" name="email" class="form-control" placeholder="email" />
-              </div>
-              <div class="form-group">
-                <select class="form-control">
-                  <option value disabled selected>Select role</option>
-                  <option value="2">Produsen</option>
-                  <option value="3">Pengepul</option>
-                  <option value="4">Grosir</option>
-                  <option value="5">Pengecer</option>
-                </select>
-              </div>
-              <div class="form-group">
                 <select class="form-control" placeholder="status">
                   <option value disabled selected>Select status</option>
                   <option value="1">Aktif</option>
                   <option value="0">Non-aktif</option>
                 </select>
-              </div>
-              <div class="form-group">
-                <input
-                  type="password"
-                  name="password"
-                  class="form-control"
-                  placeholder="kata sandi baru (kosongkan jika tidak diperbarui)"
-                />
               </div>
             </div>
             <div class="modal-footer">
@@ -161,39 +137,48 @@ export default {
     return {
       userDetail: "",
       has_error: false,
-      users: null,
+      users: {},
       selectedUser: undefined
     };
   },
   methods: {
     getUsers() {
-      axios.get("validateduser").then(response => {
-        // console.log(response);
-        this.users = response.data.users;
-      });
+      axios
+        .get("validateduser")
+        .then(response => {
+          this.users = response.data.users;
+        })
+        .catch(() => {});
     },
     deleteUser(id) {
       swal
         .fire({
-          title: "Are you sure?",
-          text: "You won't be able to revert this!",
+          title: "Apakah kamu yakin?",
+          text: "Data yang dihapus tidak dapat dikembalikan!",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, delete it!"
+          confirmButtonText: "Yes, hapus!"
         })
         .then(result => {
           if (result.value) {
             // send request to the server
+            this.$Progress.start();
             axios
               .delete("/user/" + id)
               .then(() => {
-                swal.fire("Deleted!", "Your file has been deleted.", "success");
+                swal.fire("Terhapus!", "Data user berhasil dihapus", "success");
                 UpdateData.$emit("RefreshData");
+                this.$Progress.finish();
               })
               .catch(() => {
-                swal.fire("Failed!", "There was something wrong.", "waning");
+                swal.fire(
+                  "Gagal!",
+                  "Terdapat masalah ketika menghapus",
+                  "waning"
+                );
+                this.$Progress.fail();
               });
           }
         });
@@ -203,6 +188,24 @@ export default {
     },
     updateUser() {
       console.log("update user");
+    },
+    getRole(id_role) {
+      switch (id_role) {
+        case 2:
+          return "Produsen";
+          break;
+        case 3:
+          return "Pengepul";
+          break;
+        case 4:
+          return "Grosir";
+          break;
+        case 5:
+          return "Pengecer";
+          break;
+        default:
+          return "Konsumen";
+      }
     }
   },
   created() {

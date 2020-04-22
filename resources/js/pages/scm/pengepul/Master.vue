@@ -37,16 +37,13 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="#" class="brand-link">
-        <!-- <img
-            src="dist/img/AdminLTELogo.png"
-            alt="AdminLTE Logo"
+      <a href="#" class="brand-link"> 
+        <img
+            src="/dist/img/icon_cabai.png"
             class="brand-image img-circle elevation-3"
-            style="opacity: .8"
-        />-->
+        />
         <span class="brand-text font-weight-light">SCM Cabai</span>
       </a>
-
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar Menu -->
@@ -63,64 +60,46 @@
                 <p>Dashboard</p>
               </router-link>
             </li>
-            <li class="nav-item has-treeview menu-closed">
-              <a href="#" class="nav-link disable">
-                <i class="nav-icon fas fa-address-book"></i>
-                <p>
-                  Mitra
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <router-link to="/pengepul/daftarmitra" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Daftar Mitra</p>
-                  </router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link to="/pengepul/permintaanmitra" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Permintaan Mitra</p>
-                  </router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link to="/pengepul/pengajuanmitra" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Pengajuan Mitra</p>
-                  </router-link>
-                </li>
-              </ul>
+            <li class="nav-header">MANAJEMEN KEMITRAAN</li>
+            <li class="nav-item">
+              <router-link to="/pengepul/daftarmitra" class="nav-link">
+                <i class="fas fa-users nav-icon"></i>
+                <p>Daftar Mitra</p>
+              </router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/pengepul/mitrasaya" class="nav-link">
+                <i class="fas fa-user-friends nav-icon"></i>
+                <p>Mitra Saya</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/pengepul/permintaanmitra" class="nav-link">
+                <i class="fas fa-user-plus nav-icon"></i>
+                <p>Permintaan Mitra</p>
+              </router-link>
+            </li>
+            <!-- <li class="nav-item">
+              <router-link to="/pengepul/pengajuanmitra" class="nav-link">
+                <i class="fas fa-user-clock nav-icon"></i>
+                <p>Pengajuan Mitra</p>
+              </router-link>
+            </li> -->
+            <li class="nav-header">MANAJEMEN PERSEDIAAN</li>
             <li class="nav-item">
               <router-link to="/pengepul/inventaris" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>Inventaris</p>
               </router-link>
             </li>
-            <li class="nav-item has-treeview menu-closed">
-              <a href="#" class="nav-link disable">
-                <i class="nav-icon fas fa-shopping-cart"></i>
-                <p>
-                  Transaksi
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <router-link to="/pengepul/transaksipemasok" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Pemasok</p>
-                  </router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link to="/pengepul/transaksipelanggan" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Pelanggan</p>
-                  </router-link>
-                </li>
-              </ul>
+            <li class="nav-header">MANAJEMEN PEMESANAN</li>
+            <li class="nav-item">
+              <router-link to="/pengepul/permintaancabai" class="nav-link">
+                <i class="fas fa-file-invoice nav-icon"></i>
+                <p>Permintaan cabai</p>
+              </router-link>
             </li>
+            <li class="nav-header">Bisnis Analitik</li>
             <li class="nav-item">
               <router-link to="/pengepul/analitik" class="nav-link">
                 <i class="nav-icon fas fa-chart-bar"></i>

@@ -15,9 +15,10 @@ class CreatePengeluaranProduksisTable extends Migration
     {
         Schema::create('pengeluaran_produksi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
             $table->string('nama_pengeluaran');
-            $table->integer('biaya');
+            $table->integer('jumlah_pengeluaran');
+            $table->string('rincian')->nullable();
+            $table->timestamps();
 
             $table->unsignedBigInteger('pra_produksi_id');
             $table->foreign('pra_produksi_id')->references('id')->on('pra_produksi');

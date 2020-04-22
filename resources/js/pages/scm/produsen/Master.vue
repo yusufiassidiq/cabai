@@ -39,12 +39,10 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="#" class="brand-link">
-        <!-- <img
-            src="dist/img/AdminLTELogo.png"
-            alt="AdminLTE Logo"
+        <img
+            src="/dist/img/icon_cabai.png"
             class="brand-image img-circle elevation-3"
-            style="opacity: .8"
-        />-->
+        />
         <span class="brand-text font-weight-light">SCM Cabai</span>
       </a>
 
@@ -77,11 +75,17 @@
                 <p>Riwayat Pengeluaran</p>
               </router-link>
             </li>
-            <li class="nav-header">Mitra</li>
+            <li class="nav-header">MANAJEMEN KEMITRAAN</li>
             <li class="nav-item">
               <router-link to="/produsen/daftarmitra" class="nav-link">
-                <i class="fas fa-user-friends nav-icon"></i>
+                <i class="fas fa-users nav-icon"></i>
                 <p>Daftar Mitra</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/produsen/mitrasaya" class="nav-link">
+                <i class="fas fa-user-friends nav-icon"></i>
+                <p>Mitra Saya</p>
               </router-link>
             </li>
             <li class="nav-item">
@@ -90,17 +94,17 @@
                 <p>Permintaan Mitra</p>
               </router-link>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link to="/produsen/pengajuanmitra" class="nav-link">
                 <i class="fas fa-user-clock nav-icon"></i>
                 <p>Pengajuan Mitra</p>
               </router-link>
-            </li>
-            <li class="nav-header">Transaksi</li>
+            </li> -->
+            <li class="nav-header">MANAJEMEN PEMESANAN</li>
             <li class="nav-item">
-              <router-link to="/produsen/transaksipelanggan" class="nav-link">
+              <router-link to="/produsen/permintaancabai" class="nav-link">
                 <i class="fas fa-receipt nav-icon"></i>
-                <p>Pembeli</p>
+                <p>Permintaan cabai</p>
               </router-link>
             </li>
             <li class="nav-header">Bisnis Analitik</li>
@@ -110,28 +114,18 @@
                 <p>Rekap Target</p>
               </router-link>
             </li>
-            <li class="nav-item has-treeview menu-open">
-              <a href="#" class="nav-link disable">
-                <i class="nav-icon fas fa-address-book"></i>
-                <p>
-                  Rekap Laporan
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <router-link to="/produsen/analitik" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Penjualan</p>
-                  </router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link to="/produsen/analitik" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Pengeluaran</p>
-                  </router-link>
-                </li>
-              </ul>
+            <!-- <li class="nav-header">Rekap Laporan</li> -->
+            <li class="nav-item">
+              <router-link to="/produsen/penjualan" class="nav-link">
+                <i class="fas fa-user-friends nav-icon"></i>
+                <p>Penjualan</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/produsen/pengeluaran" class="nav-link">
+                <i class="fas fa-user-friends nav-icon"></i>
+                <p>Pengeluaran</p>
+              </router-link>
             </li>
             <li class="nav-item">
               <router-link to="/produsen/analitik" class="nav-link">
@@ -146,6 +140,7 @@
       <!-- /.sidebar -->
     </aside>
     <router-view></router-view>
+    <vue-progress-bar></vue-progress-bar>
     <footer class="main-footer">
       <strong>
         Copyright &copy; 2014-2019

@@ -9,7 +9,6 @@
             <div class="col-sm-6">
               <h1 class="m-0 text-dark">Validasi User</h1>
             </div>
-            <!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item">
@@ -18,14 +17,9 @@
                 <li class="breadcrumb-item active">User Validation</li>
               </ol>
             </div>
-            <!-- /.col -->
           </div>
-          <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
       </div>
-      <!-- /.content-header -->
-
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
@@ -34,30 +28,13 @@
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">Validasi User</h3>
-
-                  <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                      <input
-                        type="text"
-                        name="table_search"
-                        class="form-control float-right"
-                        placeholder="Search"
-                      />
-
-                      <div class="input-group-append">
-                        <button type="submit" class="btn btn-default">
-                          <i class="fas fa-search"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
+                <vue-progress-bar></vue-progress-bar>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
                   <table class="table table-hover text-nowrap">
                     <thead>
                       <tr>
-                        <th>ID</th>
                         <th>Nama</th>
                         <th>Email</th>
                         <th>Status</th>
@@ -65,26 +42,20 @@
                         <th>Aksi</th>
                       </tr>
                     </thead>
-
                     <tbody>
+                      <tr v-if="!users.length">
+                        <td colspan="5" align="center">Tidak ada user yang belum divalidasi</td>
+                      </tr>
                       <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
-                        <th scope="row">{{ user.id }}</th>
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
                         <td>
                           <div v-if="user.status===1">Verified</div>
                           <div v-else>Unverified</div>
                         </td>
+                        <td>{{ getRole(user.role) }}</td>
                         <td>
-                          <div v-if="user.role===1">Admin</div>
-                          <div v-else-if="user.role===2">Produsen</div>
-                          <div v-else-if="user.role===3">Pedagang Pengepul</div>
-                          <div v-else-if="user.role===4">Pedagang Grosir</div>
-                          <div v-else-if="user.role===5">Pedagang Eceran</div>
-                        </td>
-                        <td>
-                          <button class="btn btn-success" @click="selectUser(user)">Detail</button>
-                          <!-- <router-link :to="{ name: 'userDetails', params: { userId: user.id, userObj: user }}" class="btn btn-primary"> Detail </router-link>        -->
+                          <button class="btn btn-success btn-xs" @click="selectUser(user)">Detail</button>
                         </td>
                       </tr>
                     </tbody>
@@ -115,24 +86,15 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <!-- <form @submit.prevent="createuser"> -->
           <div class="modal-body">
-            <!-- <form class="form-horizontal" method="post" name="" action=""> -->
             <div class="form-group">
               <tr>Nama : {{ userDetail.name }}</tr>
-              <tr>
-                <div v-if="userDetail.role===1">Role : Admin</div>
-                <div v-else-if="userDetail.role===2">Role : Produsen</div>
-                <div v-else-if="userDetail.role===3">Role : Pedagang Pengepul</div>
-                <div v-else-if="userDetail.role===4">Role : Pedagang Grosir</div>
-                <div v-else-if="userDetail.role===5">Role : Pedagang Eceran</div>
-              </tr>
-              <tr>Tanggal Registrasi : {{ userDetail.created_at }}</tr>
+              <tr>Role : {{ getRole(userDetail.role) }}</tr>
+              <tr>Tanggal Registrasi : {{ customFormatter(userDetail.created_at) }}</tr>
             </div>
-            <!-- </form> -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
             <button class="btn btn-danger" v-on:click="deleteUser(userDetail.id)">Tolak</button>
             <button class="btn btn-success" v-on:click="terima(userDetail.id)">Terima</button>
           </div>
@@ -149,7 +111,7 @@ export default {
     return {
       userDetail: "",
       has_error: false,
-      users: null,
+      users: {},
       selectedUser: undefined
     };
   },
@@ -159,20 +121,15 @@ export default {
       $("#detailUser").modal("show");
     },
     getUsers() {
-      this.$http({
-        url: `requesteduser`,
-        method: "GET"
-      }).then(
-        res => {
-          this.users = res.data.users;
-        },
-        () => {
-          this.has_error = true;
-        }
-      );
+      axios
+        .get("requesteduser")
+        .then(response => {
+          this.users = response.data.users;
+        })
+        .catch(() => {});
     },
     deleteUser(id) {
-      // delete data
+      this.$Progress.start();
       if (confirm("Are you sure?")) {
         this.loading = !this.loading;
         axios
@@ -180,28 +137,51 @@ export default {
           .then(response => {
             UpdateData.$emit("RefreshData");
             $("#detailUser").modal("hide");
+            this.$Progress.finish();
           })
           .catch(error => {
             console.log(error);
+            this.$Progress.fail();
           });
       }
     },
     terima(id) {
+      this.$Progress.start();
       axios
         .post("/terima/" + id)
         .then(response => {
           UpdateData.$emit("RefreshData");
           $("#detailUser").modal("hide");
+          this.$Progress.finish();
         })
         .catch(error => {
           console.log(error);
+          this.$Progress.fail();
         });
+    },
+    getRole(id_role) {
+      switch (id_role) {
+        case 2:
+          return "Produsen";
+          break;
+        case 3:
+          return "Pengepul";
+          break;
+        case 4:
+          return "Grosir";
+          break;
+        default:
+          return "Konsumen";
+      }
+    },
+    customFormatter(date) {
+      return moment(date).format("DD MMMM YYYY");
     }
   },
   mounted() {
     this.getUsers();
   },
-  created(){
+  created() {
     // custom event vue to update data changes
     UpdateData.$on("RefreshData", () => {
       this.getUsers();

@@ -23,7 +23,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('js/app.js') }}" defer></script>  
 
 <div id="app">
-  <!-- <index></index> -->
   <router-view></router-view>
 </div>
 

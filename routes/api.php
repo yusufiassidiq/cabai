@@ -32,23 +32,68 @@ Route::group(['middleware' => 'auth:api'], function(){
     // Users
     Route::get('users', 'UserController@index')->middleware('isAdmin');
     Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
-    //Test
+
     Route::delete('/user/{id}','AdminController@delete')->middleware('isAdmin');
     Route::post('/terima/{id}','AdminController@terima')->middleware('isAdmin');
+    Route::post('/tolak/{id}','AdminController@tolak')->middleware('isAdmin');
+    Route::get('/admindashboard','AdminController@dashboardAdmin')->middleware('isAdmin');
     //Get Custom Payload
     // Route::get('user/getcustompayloads','UserController@seeToken');
+
     // get user yang belum divalidasi
-    Route::get('requesteduser', 'UserController@requesteduser')->middleware('isAdmin');
+    Route::get('/requesteduser', 'UserController@requesteduser')->middleware('isAdmin');
+
     // get user yang sudah divalidasi
-    Route::get('validateduser', 'UserController@validateduser')->middleware('isAdmin');
+    Route::get('/validateduser', 'UserController@validateduser')->middleware('isAdmin');
+
+    //Kemitraan
+    Route::post('/requestMitra/{id}','UserController@requestMitra');
+    Route::put('/terimaMitra/{id}','UserController@terimaMitra');
+    Route::put('/tolakMitra/{id}','UserController@tolakMitra');
+    Route::delete('/hapusmitra/{id}','UserController@hapusMitra');
+
+    Route::get('/listPengajuanMitra','UserController@listPengajuanMitra');
+    Route::get('/listPermintaanMitra','UserController@listPermintaanMitra');
+    Route::get('/listMitraSaya','UserController@listMitraSaya');
+    
+    Route::get('/getMitraProdusen','UserController@getMitraProdusen');
+    Route::get('/getMitraPengepul','UserController@getMitraPengepul');
+    Route::get('/getMitraGrosir','UserController@getMitraGrosir');
+    Route::get('/getMitraPengecer','UserController@getMitraPengecer');
+    Route::get('/getMitrakonsumen','UserController@getMitraKonsumen');
+
+    //Transaksi Permintaan Cabai
+    Route::post('/addPermintaanSaya','UserController@addPermintaanSaya');
+    Route::get('/getPermintaanMasuk','UserController@getPermintaanMasuk');
+    Route::get('/getPermintaanSaya','UserController@getPermintaanSaya');
+    Route::put('/tolakPermintaanPembeli/{id}','UserController@tolakPermintaanPembeli');
+    Route::delete('/hapusPermintaanPesanan/{id}','UserController@hapusPermintaanPesanan');
+    Route::put('/requestUlangPermintaanSaya/{id}','UserController@requestUlangPermintaanSaya');
+    Route::put('/terimaPermintaanMasuk/{id}','UserController@terimaPermintaanMasuk');
+    Route::put('/tolakPenawaranPemasok/{id}','UserController@tolakPenawaranPemasok');
+    Route::put('/terimaPenawaranPemasok/{id}','UserController@terimaPenawaranPemasok');
+
     //Manajemen lahan
     Route::post('/addLahan','ProdusenController@addLahan');
     Route::get('/readLahan','ProdusenController@readLahan');
     Route::put('/updateLahan/{id}','ProdusenController@updateLahan');
     Route::delete('/deleteLahan/{id}','ProdusenController@deleteLahan');
+
+    //Pengeluaran Produksi
+    Route::post('/addPengeluaran','ProdusenController@addPengeluaran');
+    Route::get('/readPengeluaran','ProdusenController@readPengeluaran');
+    Route::put('/updatePengeluaran/{id}','ProdusenController@updatePengeluaran');
+    Route::delete('/deletePengeluaran/{id}','ProdusenController@deletePengeluaran');
+    
+    //Business Analytic
     Route::post('/addTarget','AnalysisController@addTarget');
     Route::get('/readTarget','AnalysisController@readTarget');
+    Route::put('/updateTarget/{id}','AnalysisController@updateTarget');
+    Route::delete('/deleteTarget/{id}','AnalysisController@deleteTarget');
+    Route::get('/getTarget','AnalysisController@getTarget');
 });
+
+
 
 // Route::resources([
 //     'user' => 'API\DummyController',

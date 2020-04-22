@@ -2,7 +2,7 @@
   <div class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <p>
+        <p class="font-putih">
           <b>SCM</b>Cabai
         </p>
       </div>
@@ -10,8 +10,8 @@
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
-
+        <p class="login-box-msg">Masuk dengan akun SCM Cabai</p>
+        <vue-progress-bar></vue-progress-bar>
         <form autocomplete="on" @submit.prevent="login" method="post">
           <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.email }">
             <input
@@ -49,28 +49,30 @@
           </div>
           <center class="red" v-for="error in errors" :key="error.message">{{ error }}</center>
           <div class="row">
-            <div class="col-4">
-              <!-- <div class="icheck-primary">
-                  <input type="checkbox" id="remember" />
-                  <label for="remember">Remember Me</label>
-              </div>-->
+            <div class="col-12">
+              <button id="btnmasuk" type="submit" class="btn btn-primary btn-block">Masuk</button>
             </div>
-            <!-- /.col -->
-            <div class="col-8">
-              <button  id="btnmasuk" type="submit" class="btn btn-primary btn-block">
-                Masuk
-              </button>
-              
-            </div>
-            <!-- /.col -->
           </div>
         </form>
       </div>
-      <!-- /.login-card-body -->
+      <div class="card-footer">
+        <small class="text-muted">belum punya akun?</small>
+        <router-link to="/register">
+          <small>Daftar</small>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
-
+<style>
+.login-page {
+  background-image: url("/dist/img/cabai.jpg");
+  background-size: cover;
+}
+.font-putih {
+  color: white;
+}
+</style>
 <script>
 export default {
   data() {
@@ -82,12 +84,11 @@ export default {
     };
   },
 
-  mounted() {
-    //
-  },
+  mounted() {},
 
   methods: {
     login() {
+      this.$Progress.start();
       document.getElementById("btnmasuk").disabled = true;
       this.errors = [];
       // get the redirect object
@@ -119,14 +120,19 @@ export default {
             if (this.$auth.user().status === 0)
               redirectTo = "unverifiedDashboard";
             else redirectTo = "DashboardGrosir";
-          } else {
+          } else if (this.$auth.user().role === 5) {
             if (this.$auth.user().status === 0)
               redirectTo = "unverifiedDashboard";
             else redirectTo = "DashboardPengecer";
+          } else {
+            if (this.$auth.user().status === 0)
+              redirectTo = "unverifiedDashboard";
+            else redirectTo = "DashboardKonsumen";
           }
-
+          this.$Progress.finish();
           // var sts = this.$auth.user()
           window.localStorage.setItem("isLoggedUser", true);
+          // window.localStorage.setItem("role", this.$auth.user().role);
           this.$router
             .push({ name: redirectTo, params: { usrId: this.$auth.user().id } })
             .catch(err => {});
@@ -134,6 +140,7 @@ export default {
         error: function() {
           this.errors.push("Maaf, Email atau kata sandi Anda salah.");
           document.getElementById("btnmasuk").disabled = false;
+          this.$Progress.fail();
         },
         rememberMe: true,
         fetchUser: true
