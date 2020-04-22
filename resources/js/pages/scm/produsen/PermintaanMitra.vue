@@ -76,15 +76,9 @@ import listPermintaan from "../../../components/PM_ListPermintaan";
 import listPengajuan from "../../../components/PNM_ListPengajuan";
 
 export default {
-  data() {
-    return {};
-  },
   components: {
     permintaan: listPermintaan,
     pengajuan: listPengajuan
-  },
-  methods: {},
-  created() {},
-  mounted() {}
+  }
 };
 </script>

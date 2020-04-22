@@ -135,7 +135,7 @@ export default {
         axios
           .delete("/user/" + id)
           .then(response => {
-            UpdateData.$emit("RefreshData");
+            UpdateData.$emit("UserValidation");
             $("#detailUser").modal("hide");
             this.$Progress.finish();
           })
@@ -150,7 +150,7 @@ export default {
       axios
         .post("/terima/" + id)
         .then(response => {
-          UpdateData.$emit("RefreshData");
+          UpdateData.$emit("UserValidation");
           $("#detailUser").modal("hide");
           this.$Progress.finish();
         })
@@ -170,6 +170,9 @@ export default {
         case 4:
           return "Grosir";
           break;
+        case 5:
+          return "Pengecer";
+          break;
         default:
           return "Konsumen";
       }
@@ -183,7 +186,7 @@ export default {
   },
   created() {
     // custom event vue to update data changes
-    UpdateData.$on("RefreshData", () => {
+    UpdateData.$on("UserValidation", () => {
       this.getUsers();
     });
   }

@@ -87,7 +87,7 @@ export default {
             axios
               .post("/requestMitra/" + id_pengepul)
               .then(() => {
-                UpdateData.$emit("update");
+                UpdateData.$emit("ListPengepul");
                 swal.fire(
                   "Mengajukan Permintaan",
                   "Berhasil mengajukan kemitraan",
@@ -113,7 +113,7 @@ export default {
   },
   mounted() {
     // Custom event on Vue js
-    UpdateData.$on("update", () => {
+    UpdateData.$on("ListPengepul", () => {
       this.getMitra();
     });
   }

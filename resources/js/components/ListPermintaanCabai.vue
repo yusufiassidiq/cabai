@@ -291,7 +291,7 @@ export default {
       this.form
         .put("terimaPermintaanMasuk/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("updateListPermintaanCabai");
+          UpdateData.$emit("ListPermintaanCabai");
           $("#modalAccPermintaan").trigger("click");
           toast.fire({
             icon: "success",
@@ -311,7 +311,7 @@ export default {
       this.formReject
         .put("tolakPermintaanPembeli/" + this.formReject.id)
         .then(() => {
-          UpdateData.$emit("updateListPermintaanCabai");
+          UpdateData.$emit("ListPermintaanCabai");
           // hide modal
           $("#modalTolakPermintaan").trigger("click");
           toast.fire({
@@ -397,7 +397,7 @@ export default {
     this.getPermintaanMasuk();
   },
   mounted() {
-    UpdateData.$on("updateListPermintaanCabai", () => {
+    UpdateData.$on("ListPermintaanCabai", () => {
       this.getPermintaanMasuk();
     });
   }

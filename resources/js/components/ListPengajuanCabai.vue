@@ -377,7 +377,7 @@ export default {
       this.form
         .post("/addPermintaanSaya")
         .then(response => {
-          UpdateData.$emit("updateListPengajuanCabai");
+          UpdateData.$emit("ListPengajuanCabai");
           // hide modal
           $("#modalPermintaan").trigger("click");
           // show Toast if success
@@ -452,7 +452,7 @@ export default {
       this.form
         .put("/requestUlangPermintaanSaya/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("updateListPengajuanCabai");
+          UpdateData.$emit("ListPengajuanCabai");
           // hide modal
           $("#modalPermintaan").trigger("click");
           toast.fire({
@@ -489,7 +489,7 @@ export default {
                   "Pemintaan pasokan berhasil dihapus",
                   "success"
                 );
-                UpdateData.$emit("updateListPengajuanCabai");
+                UpdateData.$emit("ListPengajuanCabai");
                 this.$Progress.finish();
               })
               .catch(error => {
@@ -543,7 +543,7 @@ export default {
       this.form
         .put("terimaPenawaranPemasok/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("updateListPengajuanCabai");
+          UpdateData.$emit("ListPengajuanCabai");
           $("#modalTerimaPermintaan").trigger("click");
           toast.fire({
             icon: "success",
@@ -563,7 +563,7 @@ export default {
       this.form
         .put("tolakPenawaranPemasok/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("updateListPengajuanCabai");
+          UpdateData.$emit("ListPengajuanCabai");
           $("#modalTerimaPermintaan").trigger("click");
           toast.fire({
             icon: "success",
@@ -601,7 +601,7 @@ export default {
                     " telah diterima",
                   "success"
                 );
-                UpdateData.$emit("updateListPengajuanCabai");
+                UpdateData.$emit("ListPengajuanCabai");
                 this.$Progress.finish();
               })
               .catch(error => {
@@ -617,7 +617,7 @@ export default {
     this.getMitra();
   },
   mounted() {
-    UpdateData.$on("updateListPengajuanCabai", () => {
+    UpdateData.$on("ListPengajuanCabai", () => {
       this.getPermintaanSaya();
     });
   }

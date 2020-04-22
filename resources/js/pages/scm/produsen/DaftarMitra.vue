@@ -101,14 +101,6 @@
                   </div>
                   <div
                     class="tab-pane fade"
-                    id="custom-tabs-three-grosir"
-                    role="tabpanel"
-                    aria-labelledby="custom-tabs-three-grosir-tab"
-                  >
-                    <grosir></grosir>
-                  </div>
-                  <div
-                    class="tab-pane fade"
                     id="custom-tabs-three-konsumen"
                     role="tabpanel"
                     aria-labelledby="custom-tabs-three-konsumen-tab"
