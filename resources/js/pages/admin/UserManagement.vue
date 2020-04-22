@@ -148,13 +148,15 @@ export default {
         .then(response => {
           this.users = response.data.users;
         })
-        .catch(() => {});
+        .catch((error) => {
+          
+        });
     },
     deleteUser(id) {
       swal
         .fire({
           title: "Apakah kamu yakin?",
-          text: "Data yang dihapus tidak dapat dikembalikan!",
+          text: "User dihapus tidak dapat dikembalikan!",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -163,13 +165,12 @@ export default {
         })
         .then(result => {
           if (result.value) {
-            // send request to the server
             this.$Progress.start();
             axios
               .delete("/user/" + id)
               .then(() => {
-                swal.fire("Terhapus!", "Data user berhasil dihapus", "success");
-                UpdateData.$emit("RefreshData");
+                swal.fire("Terhapus!", "User berhasil dihapus", "success");
+                UpdateData.$emit("UserManagement");
                 this.$Progress.finish();
               })
               .catch(() => {
@@ -210,7 +211,7 @@ export default {
   },
   created() {
     // custom event vue to update data changes
-    UpdateData.$on("RefreshData", () => {
+    UpdateData.$on("UserManagement", () => {
       this.getUsers();
     });
   },

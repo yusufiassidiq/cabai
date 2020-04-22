@@ -1,5 +1,5 @@
 <template>
-  <!-- PM : Permintaanmitra dari Pengguna Lain-->
+  <!-- PM : Permintaanmitra-->
   <div
     class="tab-pane fade active show"
     id="custom-tabs-three-permintaan"
@@ -84,7 +84,6 @@ export default {
     getPermintaanMitra() {
       axios.get("/listPermintaanMitra").then(response => {
         this.dataListPermintaanMitra = response.data.data;
-        console.log(this.dataListPermintaanMitra);
       });
     },
     acceptMitra(id_mitra, mitra_yg_mengajukan) {
@@ -111,7 +110,7 @@ export default {
                   "Berhasil mengajukan kemitraan",
                   "success"
                 );
-                UpdateData.$emit("update");
+                UpdateData.$emit("ListPermintaan");
               })
               .catch(function(error) {
                 swal.fire(
@@ -147,7 +146,7 @@ export default {
                   "Berhasil menolak kemitraan",
                   "success"
                 );
-                UpdateData.$emit("update");
+                UpdateData.$emit("ListPermintaan");
               })
               .catch(function(error) {
                 swal.fire("gagal!", "Gagal menolak mitra", "error");
@@ -160,7 +159,7 @@ export default {
     this.getPermintaanMitra();
   },
   mounted() {
-    UpdateData.$on("update", () => {
+    UpdateData.$on("ListPermintaan", () => {
       this.getPermintaanMitra();
     });
   }

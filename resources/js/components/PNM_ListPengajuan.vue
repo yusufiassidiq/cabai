@@ -72,17 +72,11 @@ export default {
     getPengajuanMitra() {
       axios.get("/listPengajuanMitra").then(response => {
         this.dataListPengajuanMitra = response.data.data;
-        // console.log(this.dataListPengajuanMitra[0].lokasi);
       });
     },
   },
   created() {
     this.getPengajuanMitra();
-  },
-  mounted() {
-    UpdateData.$on("update", () => {
-      this.getPengajuanMitra();
-    });
   }
 };
 </script>

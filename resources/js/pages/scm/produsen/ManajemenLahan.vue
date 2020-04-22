@@ -63,7 +63,6 @@
                   </thead>
 
                   <tbody>
-                    <!-- example data -->
                     <tr v-if="!datalahan.length">
                       <td colspan="7" align="center">Tidak ada data lahan</td>
                     </tr>
@@ -92,7 +91,6 @@
                           Tambah
                         </a>
                       </td>
-                      <!-- end example data -->
                     </tr>
                   </tbody>
                 </table>
@@ -104,7 +102,7 @@
       </div>
     </section>
     <!-- /.content -->
-
+    <vue-progress-bar></vue-progress-bar>
     <!-- Modal Manajemen Lahan-->
     <div
       class="modal fade"
@@ -142,6 +140,7 @@
                   name="kode_lahan"
                   class="form-control"
                   placeholder="Kode lahan"
+                  required
                   :class="{ 'is-invalid': form.errors.has('kode_lahan') }"
                 />
                 <has-error :form="form" field="kode_lahan"></has-error>
@@ -150,6 +149,7 @@
                 <select
                   v-model="form.jenis_cabai"
                   class="form-control"
+                  required
                   :class="{ 'is-invalid': form.errors.has('jenis_cabai') }"
                 >
                   <option value disabled selected>Jenis cabai</option>
@@ -167,6 +167,7 @@
                   name="luas_lahan"
                   class="form-control"
                   placeholder="Luas lahan (ha)"
+                  required
                   :class="{ 'is-invalid': form.errors.has('luas_lahan') }"
                 />
                 <has-error :form="form" field="luas_lahan"></has-error>
@@ -174,6 +175,7 @@
               <div class="form-group col-md">
                 <datepicker
                   input-class="form-control"
+                  required
                   placeholder="Tanggal tanam"
                   v-model="form.tanggal_tanam"
                   :format="customFormatter"
@@ -220,19 +222,10 @@
           </div>
           <form @submit.prevent="addPengeluaran()">
             <div class="modal-body">
-              <!-- <div class="form-group col-md">
-                <input
-                  v-model="formriwayat.pra_produksi_id"
-                  type="number"
-                  id="pra_produksi_id"
-                  name="pra_produksi_id"
-                  class="form-control"
-                  
-                />
-              </div>-->
               <div class="form-group col-md">
                 <select
                   v-model="formriwayat.nama_pengeluaran"
+                  required
                   class="form-control"
                   :class="{ 'is-invalid': formriwayat.errors.has('nama_pengeluaran') }"
                 >
@@ -246,7 +239,7 @@
               </div>
 
               <div class="form-group col-md">
-                <input
+                <input required
                   v-model="formriwayat.jumlah_pengeluaran"
                   type="number"
                   name="jumlah_pengeluaran"
@@ -290,13 +283,12 @@ import datepicker from "vuejs-datepicker";
 
 export default {
   components: {
-    datepicker,
+    datepicker
   },
   data() {
     return {
       datalahan: {},
-      editmode: false, // buat ngebedain modal yg di klik modal tambah lahan /edit lahan
-      // form buat simpan data
+      editmode: false,
       form: new Form({
         id: "",
         kode_lahan: "",
@@ -319,109 +311,102 @@ export default {
     // CRUD
     // Menambahkan data lahan Produsen
     addLahan() {
-      // Http Request axios dgn menggunakan vform
-      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       document.getElementById("btnadd").disabled = true;
+      this.$Progress.start();
       this.form
         .post("/addLahan")
         .then(() => {
-          // custom event
-          UpdateData.$emit("update");
-          // hide modal
+          UpdateData.$emit("ManajemenLahan");
           $("#modalLahan").trigger("click");
-          // show Toast if success
           toast.fire({
             icon: "success",
             title: "Lahan berhasil ditambahkan"
           });
+          this.$Progress.finish();
           document.getElementById("btnadd").disabled = false;
         })
         .catch(error => {
-          console.error(error);
+          this.$Progress.fail();
           document.getElementById("btnadd").disabled = false;
         });
     },
     // Mendapatkan data lahan produsen
     getLahan() {
-      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       axios.get("/readLahan").then(response => {
         this.datalahan = response.data.data;
-        // console.log(response.data.data)
       });
     },
     // Memperbarui data lahan produsen
     updateLahan() {
       document.getElementById("btnupdate").disabled = true;
-      // console.log(this.form.id);
-      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
+      this.$Progress.start();
       this.form
         .put("updateLahan/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("update");
-          // hide modal
+          UpdateData.$emit("ManajemenLahan");
           $("#modalLahan").trigger("click");
           toast.fire({
             icon: "success",
             title: "Lahan berhasil diperbarui"
           });
+          this.$Progress.finish();
           document.getElementById("btnupdate").disabled = false;
         })
         .catch(() => {
+          this.$Progress.fail();
           document.getElementById("btnupdate").disabled = false;
         });
     },
     // menghapus data lahan produsen
     deleteLahan(id) {
-      // var url = "https://5e844114a8fdea00164ac49e.mockapi.io/api/cabai";
       swal
         .fire({
           title: "Apakah kamu yakin?",
           text:
-            "Menghapus lahan akan menghapus semua data pengeluaran lahan ini",
+            "Menghapus lahan dapat menghapus seluruh riwayat pengeluaran lahan ini",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
-          confirmButtonText: "Ya, hapus data!"
+          confirmButtonText: "Ya"
         })
         .then(result => {
           if (result.value) {
-            // send request to the server
+            this.$Progress.start();
             axios
               .delete("deleteLahan/" + id)
               .then(() => {
-                UpdateData.$emit("update");
-                swal.fire("Tehapus!", "Data lahan berhasil dihapus", "success");
+                UpdateData.$emit("ManajemenLahan");
+                swal.fire("Tehapus!", "Lahan berhasil dihapus", "success");
+                this.$Progress.finish();
               })
               .catch(() => {
+                this.$Progress.fail();
                 swal.fire(
                   "Gagal!",
                   "Terdapat masalah ketika menghapus",
-                  "waning"
+                  "warning"
                 );
               });
           }
         });
     },
     addPengeluaran() {
-      console.log("Tambah pengeluaran");
       document.getElementById("btnaddpengeluaran").disabled = true;
-      // Tinggal sesuain apinya aja
-      // tinggal uncomment
+      this.$Progress.start();
       this.formriwayat
         .post("addPengeluaran")
         .then(() => {
-          // hide modal
           $("#modalPengeluaran").trigger("click");
-          // show Toast if success
           toast.fire({
             icon: "success",
             title: "Pengeluaran berhasil ditambahkan"
           });
+          this.$Progress.finish();
           document.getElementById("btnaddpengeluaran").disabled = false;
         })
         .catch(error => {
-          console.error(error);
+          this.$Progress.fail();
           document.getElementById("btnaddpengeluaran").disabled = false;
         });
     },
@@ -434,19 +419,14 @@ export default {
     },
     // Menampilkan Modal utk Mengedit lahan baru
     editModal(data) {
-      // console.log(data)
       this.editmode = true;
       this.form.reset();
       $("#modalLahan").modal("show");
       this.form.fill(data);
-      // console.log(this.form)
     },
     pengeluaranModal(id) {
       $("#modalPengeluaran").modal("show");
-      // console.log(data);
       this.formriwayat.pra_produksi_id = id;
-      // console.log(this.formriwayat)
-      // document.getElementById("pra_produksi_id").value = data.id;
     }
   },
   created() {
@@ -454,7 +434,7 @@ export default {
   },
   mounted() {
     // Custom event on Vue js
-    UpdateData.$on("update", () => {
+    UpdateData.$on("ManajemenLahan", () => {
       this.getLahan();
     });
   }

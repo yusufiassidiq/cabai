@@ -107,7 +107,7 @@ export default {
                   "Mitra berhasil dihapus",
                   "success"
                 );
-                UpdateData.$emit("update");
+                UpdateData.$emit("MitraSaya");
                 this.$Progress.finish();
               })
               .catch(error => {
@@ -123,7 +123,7 @@ export default {
   },
   mounted() {
     // Custom event on Vue js
-    UpdateData.$on("update", () => {
+    UpdateData.$on("MitraSaya", () => {
       this.getMitra();
     });
   }

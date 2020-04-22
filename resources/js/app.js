@@ -41,9 +41,9 @@ Vue.use(VueProgressBar, options)
 // Import Sweet Alert Library
 // Doc = https://sweetalert2.github.io/
 // import Swal from 'sweetalert2'
-import swal from 'sweetalert2'
-window.swal = swal
-const toast = swal.mixin({
+import Swal from 'sweetalert2'
+window.swal = Swal
+const toast = Swal.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
@@ -65,9 +65,6 @@ Vue.use(VueAxios, axios)
 axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api`
 // console.log(process.env.MIX_APP_URL)
 Vue.use(VueAuth, auth)
-
-// Load Index
-
 
 // Create new vue instance with name Update data, for custom event
 let UpdateData = new Vue();
