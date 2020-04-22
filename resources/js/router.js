@@ -59,6 +59,9 @@ import BisnisAnalitikPengepul from './pages/ba/pengepul/BisnisAnalitik'
 import BisnisAnalitikGrosir from './pages/ba/grosir/BisnisAnalitik'
 import BisnisAnalitikPengecer from './pages/ba/pengecer/BisnisAnalitik'
 
+//test
+import BAMaster2 from './pages/ba/Master2'
+
 // Routes
 const routes = [
     // SCM
@@ -332,6 +335,11 @@ const routes = [
         path: '/',
         name: 'bisnisanalitik',
         component: BAMaster
+    },
+    {
+        path: '/detail',
+        name: 'badetail',
+        component: BAMaster2
     },
     {
         path: '/register',
