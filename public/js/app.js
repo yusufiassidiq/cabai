@@ -3783,20 +3783,97 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      form: new Form({
+        jenis_cabai: "",
+        jumlah_cabai: ""
+      }),
+      editmode: false,
       inventaris: {}
     };
   },
   methods: {
-    // Mendapatkan data Pengajuan Mitra
     getInventaris: function getInventaris() {
       var _this = this;
 
-      var url = "https://5e8730b2781e48001676b86c.mockapi.io/inventaris";
-      axios.get(url).then(function (response) {
-        _this.inventaris = response.data;
+      axios.get("/getInventaris").then(function (response) {
+        _this.inventaris = response.data.data;
+      });
+    },
+    convertToRupiah: function convertToRupiah(angka) {
+      var rupiah = "";
+      var angkarev = angka.toString().split("").reverse().join("");
+
+      for (var i = 0; i < angkarev.length; i++) {
+        if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + ".";
+      }
+
+      return "Rp. " + rupiah.split("", rupiah.length - 1).reverse().join("");
+    },
+    newModal: function newModal() {
+      this.form.reset();
+      $("#modalInventaris").modal("show");
+    },
+    addInventaris: function addInventaris() {
+      var _this2 = this;
+
+      this.$Progress.start();
+      this.form.put("/addInventaris").then(function () {
+        UpdateData.$emit("Inventaris");
+        $("#modalInventaris").trigger("click");
+        toast.fire({
+          icon: "success",
+          title: "Inventaris berhasil ditambahkan"
+        });
+
+        _this2.$Progress.finish();
+
+        document.getElementById("btnadd").disabled = false;
+      })["catch"](function () {
+        _this2.$Progress.fail();
       });
     }
   },
@@ -3804,11 +3881,11 @@ __webpack_require__.r(__webpack_exports__);
     this.getInventaris();
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     // Custom event on Vue js
-    UpdateData.$on("update", function () {
-      _this2.getInventaris();
+    UpdateData.$on("Inventaris", function () {
+      _this3.getInventaris();
     });
   }
 });
@@ -4190,6 +4267,11 @@ __webpack_require__.r(__webpack_exports__);
         tanggal_diterima: "",
         keterangan: ""
       }),
+      formReceived: new Form({
+        id: "",
+        jenis_cabai: "",
+        jumlah_cabai: ""
+      }),
       requestUlang: false,
       modalTerima: true,
       listPermintaanSaya: {},
@@ -4409,9 +4491,13 @@ __webpack_require__.r(__webpack_exports__);
     sudahDiterima: function sudahDiterima(data) {
       var _this8 = this;
 
+      this.formReceived.jumlah_cabai = data.jumlah_cabai;
+      this.formReceived.jenis_cabai = data.jenis_cabai;
+      this.formReceived.id = data.id; // console.log(this.formReceived.jumlah_cabai)
+
       swal.fire({
         title: "Konfirmasi Pesanan",
-        text: "apakah cabai telah Anda terima sesuai pesanan?",
+        text: "Apakah cabai telah Anda terima sesuai pesanan?",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
@@ -4420,8 +4506,8 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this8.$Progress.start();
 
-          axios.put("/" + id_permintaanSaya).then(function (response) {
-            swal.fire("Konfirmasi Pesanan", data.jumlah_cabai + " Kg" + data.jenis_cabai + " telah diterima", "success");
+          _this8.formReceived.put("/stokMasuk/" + data.id).then(function (response) {
+            swal.fire("Konfirmasi Pesanan", data.jumlah_cabai + " Kg " + data.jenis_cabai + " telah diterima", "success");
             UpdateData.$emit("ListPengajuanCabai");
 
             _this8.$Progress.finish();
@@ -4787,6 +4873,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -4803,15 +4890,20 @@ __webpack_require__.r(__webpack_exports__);
         id: "",
         keterangan: ""
       }),
+      formSend: new Form({
+        jenis_cabai: "",
+        jumlah_cabai: "",
+        harga: "",
+        id: ""
+      }),
       // Temporary variable
       temp_nama: "",
       temp_jeniscabai: "",
       temp_jumlahcabai: "",
       temp_hargacabai: "",
       temp_tanggalditerima: "",
-      temp_inv_jeniscabai: "",
-      temp_inv_jumlahcabai: "100",
-      temp_inv_hargacabai: "10000",
+      temp_inv_jumlahcabai: "",
+      temp_inv_hargacabai: "",
       // for update keterangan
       keterangan: "",
       listPermintaanCabai: {}
@@ -4899,20 +4991,45 @@ __webpack_require__.r(__webpack_exports__);
       return "Rp. " + rupiah.split("", rupiah.length - 1).reverse().join("");
     },
     modalKirimPesanan: function modalKirimPesanan(data) {
+      var _this4 = this;
+
       $("#modalKirimPermintaan").modal("show");
-      this.formReject.id = data.id;
+      this.formSend.id = data.id;
+      this.formSend.jenis_cabai = data.jenis_cabai;
+      this.formSend.harga = data.harga;
+      this.formSend.jumlah_cabai = data.jumlah_cabai;
       this.temp_nama = data.nama;
       this.temp_jeniscabai = data.jenis_cabai;
       this.temp_jumlahcabai = data.jumlah_cabai;
       this.temp_hargacabai = data.harga;
       this.temp_tanggalditerima = data.tanggal_diterima;
+      axios.get('/getInventaris').then(function (response) {
+        console.log(response.data.data[0].jenis_cabai);
+
+        if (data.jenis_cabai == "Cabai besar") {
+          _this4.temp_inv_jumlahcabai = response.data.data[0].jumlah_cabai;
+          _this4.temp_inv_hargacabai = response.data.data[0].harga;
+        } else if (data.jenis_cabai == "Cabai rawit") {
+          _this4.temp_inv_jumlahcabai = response.data.data[1].jumlah_cabai;
+          _this4.temp_inv_hargacabai = response.data.data[1].harga;
+        } else {
+          _this4.temp_inv_jumlahcabai = response.data.data[2].jumlah_cabai;
+          _this4.temp_inv_hargacabai = response.data.data[2].harga;
+        }
+
+        if (_this4.temp_jumlahcabai < _this4.temp_inv_jumlahcabai) {
+          document.getElementById("btnKirimPesanan").disabled = false;
+        } else {
+          document.getElementById("btnKirimPesanan").disabled = true;
+        }
+      });
     },
     kirimPesanan: function kirimPesanan() {
-      var _this4 = this;
+      var _this5 = this;
 
       document.getElementById("btnKirimPesanan").disabled = true;
       this.$Progress.start();
-      this.form.put("/" + this.form.id).then(function () {
+      this.formSend.put("/stokKeluar/" + this.formSend.id).then(function () {
         UpdateData.$emit("ListPermintaanCabai");
         $("#modalKirimPermintaan").trigger("click");
         toast.fire({
@@ -4920,13 +5037,22 @@ __webpack_require__.r(__webpack_exports__);
           title: "Pesanan berhasil dikirim"
         });
 
-        _this4.$Progress.finish();
+        _this5.$Progress.finish();
 
         document.getElementById("btnKirimPesanan").disabled = false;
       })["catch"](function () {
         document.getElementById("btnKirimPesanan").disabled = false;
 
-        _this4.$Progress.finish();
+        _this5.$Progress.finish();
+      });
+    },
+    getInventaris: function getInventaris() {
+      var _this6 = this;
+
+      axios.get('/getInventaris').then(function (response) {
+        // console.log(response.data)
+        _this6.temp_inv_jumlahcabai = response.data.jumlah_cabai;
+        _this6.temp_inv_hargacabai = response.data.harga;
       });
     }
   },
@@ -4934,11 +5060,12 @@ __webpack_require__.r(__webpack_exports__);
     this.getPermintaanMasuk();
   },
   mounted: function mounted() {
-    var _this5 = this;
+    var _this7 = this;
 
     UpdateData.$on("ListPermintaanCabai", function () {
-      _this5.getPermintaanMasuk();
+      _this7.getPermintaanMasuk();
     });
+    this.getInventaris();
   }
 });
 
@@ -9551,6 +9678,58 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_Inventaris__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Inventaris */ "./resources/js/components/Inventaris.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    inventaris: _components_Inventaris__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/ManajemenLahan.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/ManajemenLahan.vue?vue&type=script&lang=js& ***!
@@ -10017,6 +10196,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -86900,23 +87085,43 @@ var render = function() {
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "card" }, [
-            _vm._m(0),
+            _c(
+              "div",
+              { staticClass: "card-header" },
+              [
+                _c("h3", { staticClass: "card-title" }, [_vm._v("Inventaris")]),
+                _vm._v(" "),
+                _c("vue-progress-bar"),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-tools" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success btn-sm",
+                      on: { click: _vm.newModal }
+                    },
+                    [_vm._v("Tambah Inventory")]
+                  )
+                ])
+              ],
+              1
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "card-body table-responsive p-0" }, [
               _c("table", { staticClass: "table table-hover text-nowrap" }, [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c(
                   "tbody",
                   _vm._l(_vm.inventaris, function(data) {
                     return _c("tr", { key: data.id }, [
-                      _c("td", [_vm._v(_vm._s(data.id))]),
+                      _c("td", [_vm._v(_vm._s(data.jenis_cabai))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(data.jenis))]),
+                      _c("td", [_vm._v(_vm._s(data.jumlah_cabai) + " Kg")]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(data.jumlah))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(data.ketersediaan))])
+                      _c("td", [
+                        _vm._v(_vm._s(_vm.convertToRupiah(data.harga)))
+                      ])
                     ])
                   }),
                   0
@@ -86926,7 +87131,169 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modalInventaris",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "modalInventarisLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      _vm.editmode ? _vm.updateLahan() : _vm.addInventaris()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md" },
+                      [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.jenis_cabai,
+                                expression: "form.jenis_cabai"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("jenis_cabai")
+                            },
+                            attrs: { required: "" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "jenis_cabai",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "", disabled: "", selected: "" }
+                              },
+                              [_vm._v("Jenis cabai")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Cabai rawit" } }, [
+                              _vm._v("Cabai rawit")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "option",
+                              { attrs: { value: "Cabai keriting" } },
+                              [_vm._v("Cabai keriting")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Cabai besar" } }, [
+                              _vm._v("Cabai besar")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "jenis_cabai" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.jumlah_cabai,
+                              expression: "form.jumlah_cabai"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("jumlah_cabai")
+                          },
+                          attrs: {
+                            type: "number",
+                            name: "jumlah_cabai",
+                            placeholder: "Jumlah cabai",
+                            required: ""
+                          },
+                          domProps: { value: _vm.form.jumlah_cabai },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "jumlah_cabai",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "luas_lahan" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2)
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -86934,35 +87301,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Inventaris")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "div",
-          {
-            staticClass: "input-group input-group-sm",
-            staticStyle: { width: "150px" }
-          },
-          [
-            _c("input", {
-              staticClass: "form-control float-right",
-              attrs: {
-                type: "text",
-                name: "table_search",
-                placeholder: "Search"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                [_c("i", { staticClass: "fas fa-search" })]
-              )
-            ])
-          ]
-        )
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Jenis Cabai")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Stok")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Rataan Harga Jual")])
       ])
     ])
   },
@@ -86970,16 +87315,49 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Id")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Jenis")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Jumlah/kg")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Ketersediaan")])
-      ])
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "modalInventarisLabel" } },
+        [_vm._v("Informasi Lahan")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Tutup")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { id: "btnadd", type: "submit" }
+        },
+        [_vm._v("Tambahkan")]
+      )
     ])
   }
 ]
@@ -88072,10 +88450,14 @@ var render = function() {
                         ? _c("div", { staticClass: "red" }, [
                             _vm._v("Penawaran anda ditolak")
                           ])
-                        : data.status_permintaan === 3
+                        : data.status_permintaan === 3 &&
+                          data.status_pengiriman === 0
                         ? _c("div", { staticClass: "green" }, [
                             _vm._v("Penawaran anda diterima")
                           ])
+                        : data.status_permintaan === 3 &&
+                          data.status_pengiriman === 1
+                        ? _c("div", [_vm._v("Dalam Pengiriman")])
                         : data.status_permintaan === 2
                         ? _c("div", { staticClass: "red" }, [
                             _vm._v("Permintaan ditolak")
@@ -88120,9 +88502,8 @@ var render = function() {
                               [_vm._v("Tolak")]
                             )
                           ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      data.status_permintaan === 3
+                        : data.status_permintaan === 3 &&
+                          data.status_pengiriman === 0
                         ? _c("div", [
                             _c(
                               "button",
@@ -88603,7 +88984,7 @@ var staticRenderFns = [
           staticClass: "modal-title",
           attrs: { id: "modalAccPermintaanLabel" }
         },
-        [_vm._v("Penerimaan Permintaan Pasokan Cabai")]
+        [_vm._v("Penerimaan Permintaan Cabai")]
       ),
       _vm._v(" "),
       _c(
@@ -88689,7 +89070,7 @@ var staticRenderFns = [
           staticClass: "modal-title",
           attrs: { id: "modalTolakPermintaanLabel" }
         },
-        [_vm._v("Penolakan Permintaan Pasokan")]
+        [_vm._v("Penolakan Permintaan Cabai")]
       ),
       _vm._v(" "),
       _c(
@@ -88765,7 +89146,7 @@ var staticRenderFns = [
           staticClass: "modal-title",
           attrs: { id: "modalKirimPermintaanLabel" }
         },
-        [_vm._v("Penolakan Permintaan Pasokan")]
+        [_vm._v("Pengiriman Permintaan Cabai")]
       ),
       _vm._v(" "),
       _c(
@@ -98436,6 +98817,62 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=template&id=398a334a&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=template&id=398a334a& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "content-wrapper" },
+    [_vm._m(0), _vm._v(" "), _c("inventaris")],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [_vm._v("Inventaris")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Inventaris")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/ManajemenLahan.vue?vue&type=template&id=1052a8f2&":
 /*!*************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/ManajemenLahan.vue?vue&type=template&id=1052a8f2& ***!
@@ -99361,6 +99798,26 @@ var render = function() {
                           _c("i", { staticClass: "fas fa-history nav-icon" }),
                           _vm._v(" "),
                           _c("p", [_vm._v("Riwayat Pengeluaran")])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: "/produsen/inventaris" }
+                        },
+                        [
+                          _c("i", { staticClass: "nav-icon fas fa-tasks" }),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Inventaris")])
                         ]
                       )
                     ],
@@ -121936,6 +122393,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/scm/produsen/Inventaris.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/pages/scm/produsen/Inventaris.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Inventaris_vue_vue_type_template_id_398a334a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Inventaris.vue?vue&type=template&id=398a334a& */ "./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=template&id=398a334a&");
+/* harmony import */ var _Inventaris_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Inventaris.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Inventaris_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Inventaris_vue_vue_type_template_id_398a334a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Inventaris_vue_vue_type_template_id_398a334a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/scm/produsen/Inventaris.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Inventaris_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Inventaris.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Inventaris_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=template&id=398a334a&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=template&id=398a334a& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Inventaris_vue_vue_type_template_id_398a334a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Inventaris.vue?vue&type=template&id=398a334a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=template&id=398a334a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Inventaris_vue_vue_type_template_id_398a334a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Inventaris_vue_vue_type_template_id_398a334a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/pages/scm/produsen/ManajemenLahan.vue":
 /*!************************************************************!*\
   !*** ./resources/js/pages/scm/produsen/ManajemenLahan.vue ***!
@@ -122377,41 +122903,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_scm_produsen_PermintaanMitra__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/scm/produsen/PermintaanMitra */ "./resources/js/pages/scm/produsen/PermintaanMitra.vue");
 /* harmony import */ var _pages_scm_produsen_PermintaanCabai__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/scm/produsen/PermintaanCabai */ "./resources/js/pages/scm/produsen/PermintaanCabai.vue");
 /* harmony import */ var _pages_scm_produsen_MitraSaya__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/scm/produsen/MitraSaya */ "./resources/js/pages/scm/produsen/MitraSaya.vue");
-/* harmony import */ var _pages_scm_pengepul_Master__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/scm/pengepul/Master */ "./resources/js/pages/scm/pengepul/Master.vue");
-/* harmony import */ var _pages_scm_pengepul_Dashboard__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/scm/pengepul/Dashboard */ "./resources/js/pages/scm/pengepul/Dashboard.vue");
-/* harmony import */ var _pages_scm_pengepul_DaftarMitra__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/scm/pengepul/DaftarMitra */ "./resources/js/pages/scm/pengepul/DaftarMitra.vue");
-/* harmony import */ var _pages_scm_pengepul_PermintaanMitra__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pages/scm/pengepul/PermintaanMitra */ "./resources/js/pages/scm/pengepul/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_pengepul_PermintaanCabai__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./pages/scm/pengepul/PermintaanCabai */ "./resources/js/pages/scm/pengepul/PermintaanCabai.vue");
-/* harmony import */ var _pages_scm_pengepul_Inventaris__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./pages/scm/pengepul/Inventaris */ "./resources/js/pages/scm/pengepul/Inventaris.vue");
-/* harmony import */ var _pages_scm_pengepul_MitraSaya__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./pages/scm/pengepul/MitraSaya */ "./resources/js/pages/scm/pengepul/MitraSaya.vue");
-/* harmony import */ var _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./pages/scm/grosir/Master */ "./resources/js/pages/scm/grosir/Master.vue");
-/* harmony import */ var _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/scm/grosir/Dashboard */ "./resources/js/pages/scm/grosir/Dashboard.vue");
-/* harmony import */ var _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./pages/scm/grosir/DaftarMitra */ "./resources/js/pages/scm/grosir/DaftarMitra.vue");
-/* harmony import */ var _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./pages/scm/grosir/PermintaanMitra */ "./resources/js/pages/scm/grosir/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_grosir_PermintaanCabai__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./pages/scm/grosir/PermintaanCabai */ "./resources/js/pages/scm/grosir/PermintaanCabai.vue");
-/* harmony import */ var _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./pages/scm/grosir/Inventaris */ "./resources/js/pages/scm/grosir/Inventaris.vue");
-/* harmony import */ var _pages_scm_grosir_MitraSaya__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./pages/scm/grosir/MitraSaya */ "./resources/js/pages/scm/grosir/MitraSaya.vue");
-/* harmony import */ var _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./pages/scm/pengecer/Master */ "./resources/js/pages/scm/pengecer/Master.vue");
-/* harmony import */ var _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./pages/scm/pengecer/Dashboard */ "./resources/js/pages/scm/pengecer/Dashboard.vue");
-/* harmony import */ var _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./pages/scm/pengecer/DaftarMitra */ "./resources/js/pages/scm/pengecer/DaftarMitra.vue");
-/* harmony import */ var _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanMitra */ "./resources/js/pages/scm/pengecer/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_pengecer_PermintaanCabai__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanCabai */ "./resources/js/pages/scm/pengecer/PermintaanCabai.vue");
-/* harmony import */ var _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./pages/scm/pengecer/Inventaris */ "./resources/js/pages/scm/pengecer/Inventaris.vue");
-/* harmony import */ var _pages_scm_pengecer_MitraSaya__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./pages/scm/pengecer/MitraSaya */ "./resources/js/pages/scm/pengecer/MitraSaya.vue");
-/* harmony import */ var _pages_scm_konsumen_Master__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./pages/scm/konsumen/Master */ "./resources/js/pages/scm/konsumen/Master.vue");
-/* harmony import */ var _pages_scm_konsumen_Dashboard__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./pages/scm/konsumen/Dashboard */ "./resources/js/pages/scm/konsumen/Dashboard.vue");
-/* harmony import */ var _pages_scm_konsumen_DaftarMitra__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./pages/scm/konsumen/DaftarMitra */ "./resources/js/pages/scm/konsumen/DaftarMitra.vue");
-/* harmony import */ var _pages_scm_konsumen_PermintaanMitra__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./pages/scm/konsumen/PermintaanMitra */ "./resources/js/pages/scm/konsumen/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_konsumen_MitraSaya__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./pages/scm/konsumen/MitraSaya */ "./resources/js/pages/scm/konsumen/MitraSaya.vue");
-/* harmony import */ var _pages_ba_Master__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./pages/ba/Master */ "./resources/js/pages/ba/Master.vue");
-/* harmony import */ var _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./pages/ba/produsen/Target */ "./resources/js/pages/ba/produsen/Target.vue");
-/* harmony import */ var _pages_ba_produsen_Penjualan__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./pages/ba/produsen/Penjualan */ "./resources/js/pages/ba/produsen/Penjualan.vue");
-/* harmony import */ var _pages_ba_produsen_Pengeluaran__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./pages/ba/produsen/Pengeluaran */ "./resources/js/pages/ba/produsen/Pengeluaran.vue");
-/* harmony import */ var _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./pages/ba/produsen/bisnisAnalitik */ "./resources/js/pages/ba/produsen/bisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./pages/ba/pengepul/BisnisAnalitik */ "./resources/js/pages/ba/pengepul/BisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./pages/ba/grosir/BisnisAnalitik */ "./resources/js/pages/ba/grosir/BisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./pages/ba/pengecer/BisnisAnalitik */ "./resources/js/pages/ba/pengecer/BisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_Master2__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./pages/ba/Master2 */ "./resources/js/pages/ba/Master2.vue");
+/* harmony import */ var _pages_scm_produsen_Inventaris__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/scm/produsen/Inventaris */ "./resources/js/pages/scm/produsen/Inventaris.vue");
+/* harmony import */ var _pages_scm_pengepul_Master__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/scm/pengepul/Master */ "./resources/js/pages/scm/pengepul/Master.vue");
+/* harmony import */ var _pages_scm_pengepul_Dashboard__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/scm/pengepul/Dashboard */ "./resources/js/pages/scm/pengepul/Dashboard.vue");
+/* harmony import */ var _pages_scm_pengepul_DaftarMitra__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pages/scm/pengepul/DaftarMitra */ "./resources/js/pages/scm/pengepul/DaftarMitra.vue");
+/* harmony import */ var _pages_scm_pengepul_PermintaanMitra__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./pages/scm/pengepul/PermintaanMitra */ "./resources/js/pages/scm/pengepul/PermintaanMitra.vue");
+/* harmony import */ var _pages_scm_pengepul_PermintaanCabai__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./pages/scm/pengepul/PermintaanCabai */ "./resources/js/pages/scm/pengepul/PermintaanCabai.vue");
+/* harmony import */ var _pages_scm_pengepul_Inventaris__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./pages/scm/pengepul/Inventaris */ "./resources/js/pages/scm/pengepul/Inventaris.vue");
+/* harmony import */ var _pages_scm_pengepul_MitraSaya__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./pages/scm/pengepul/MitraSaya */ "./resources/js/pages/scm/pengepul/MitraSaya.vue");
+/* harmony import */ var _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/scm/grosir/Master */ "./resources/js/pages/scm/grosir/Master.vue");
+/* harmony import */ var _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./pages/scm/grosir/Dashboard */ "./resources/js/pages/scm/grosir/Dashboard.vue");
+/* harmony import */ var _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./pages/scm/grosir/DaftarMitra */ "./resources/js/pages/scm/grosir/DaftarMitra.vue");
+/* harmony import */ var _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./pages/scm/grosir/PermintaanMitra */ "./resources/js/pages/scm/grosir/PermintaanMitra.vue");
+/* harmony import */ var _pages_scm_grosir_PermintaanCabai__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./pages/scm/grosir/PermintaanCabai */ "./resources/js/pages/scm/grosir/PermintaanCabai.vue");
+/* harmony import */ var _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./pages/scm/grosir/Inventaris */ "./resources/js/pages/scm/grosir/Inventaris.vue");
+/* harmony import */ var _pages_scm_grosir_MitraSaya__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./pages/scm/grosir/MitraSaya */ "./resources/js/pages/scm/grosir/MitraSaya.vue");
+/* harmony import */ var _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./pages/scm/pengecer/Master */ "./resources/js/pages/scm/pengecer/Master.vue");
+/* harmony import */ var _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./pages/scm/pengecer/Dashboard */ "./resources/js/pages/scm/pengecer/Dashboard.vue");
+/* harmony import */ var _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./pages/scm/pengecer/DaftarMitra */ "./resources/js/pages/scm/pengecer/DaftarMitra.vue");
+/* harmony import */ var _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanMitra */ "./resources/js/pages/scm/pengecer/PermintaanMitra.vue");
+/* harmony import */ var _pages_scm_pengecer_PermintaanCabai__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanCabai */ "./resources/js/pages/scm/pengecer/PermintaanCabai.vue");
+/* harmony import */ var _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./pages/scm/pengecer/Inventaris */ "./resources/js/pages/scm/pengecer/Inventaris.vue");
+/* harmony import */ var _pages_scm_pengecer_MitraSaya__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./pages/scm/pengecer/MitraSaya */ "./resources/js/pages/scm/pengecer/MitraSaya.vue");
+/* harmony import */ var _pages_scm_konsumen_Master__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./pages/scm/konsumen/Master */ "./resources/js/pages/scm/konsumen/Master.vue");
+/* harmony import */ var _pages_scm_konsumen_Dashboard__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./pages/scm/konsumen/Dashboard */ "./resources/js/pages/scm/konsumen/Dashboard.vue");
+/* harmony import */ var _pages_scm_konsumen_DaftarMitra__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./pages/scm/konsumen/DaftarMitra */ "./resources/js/pages/scm/konsumen/DaftarMitra.vue");
+/* harmony import */ var _pages_scm_konsumen_PermintaanMitra__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./pages/scm/konsumen/PermintaanMitra */ "./resources/js/pages/scm/konsumen/PermintaanMitra.vue");
+/* harmony import */ var _pages_scm_konsumen_MitraSaya__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./pages/scm/konsumen/MitraSaya */ "./resources/js/pages/scm/konsumen/MitraSaya.vue");
+/* harmony import */ var _pages_ba_Master__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./pages/ba/Master */ "./resources/js/pages/ba/Master.vue");
+/* harmony import */ var _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./pages/ba/produsen/Target */ "./resources/js/pages/ba/produsen/Target.vue");
+/* harmony import */ var _pages_ba_produsen_Penjualan__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./pages/ba/produsen/Penjualan */ "./resources/js/pages/ba/produsen/Penjualan.vue");
+/* harmony import */ var _pages_ba_produsen_Pengeluaran__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./pages/ba/produsen/Pengeluaran */ "./resources/js/pages/ba/produsen/Pengeluaran.vue");
+/* harmony import */ var _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./pages/ba/produsen/bisnisAnalitik */ "./resources/js/pages/ba/produsen/bisnisAnalitik.vue");
+/* harmony import */ var _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./pages/ba/pengepul/BisnisAnalitik */ "./resources/js/pages/ba/pengepul/BisnisAnalitik.vue");
+/* harmony import */ var _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./pages/ba/grosir/BisnisAnalitik */ "./resources/js/pages/ba/grosir/BisnisAnalitik.vue");
+/* harmony import */ var _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./pages/ba/pengecer/BisnisAnalitik */ "./resources/js/pages/ba/pengecer/BisnisAnalitik.vue");
+/* harmony import */ var _pages_ba_Master2__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./pages/ba/Master2 */ "./resources/js/pages/ba/Master2.vue");
  // Pages
 
 
@@ -122425,6 +122952,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // prod == produsen
+
 
 
 
@@ -122525,6 +123053,10 @@ var routes = [// SCM
     component: _pages_scm_produsen_Dashboard__WEBPACK_IMPORTED_MODULE_11__["default"],
     name: "DashboardProd"
   }, {
+    path: 'inventaris',
+    component: _pages_scm_produsen_Inventaris__WEBPACK_IMPORTED_MODULE_18__["default"],
+    name: "InventarisProdusen"
+  }, {
     path: 'manajemenlahan',
     component: _pages_scm_produsen_ManajemenLahan__WEBPACK_IMPORTED_MODULE_12__["default"],
     name: "ManajemenLahanProd"
@@ -122551,24 +123083,24 @@ var routes = [// SCM
   }, //BA
   {
     path: 'analitik',
-    component: _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_48__["default"],
+    component: _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_49__["default"],
     name: "BisnisAnalitikProd"
   }, {
     path: 'target',
-    component: _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_45__["default"],
+    component: _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_46__["default"],
     name: "TargetProd"
   }, {
     path: 'penjualan',
-    component: _pages_ba_produsen_Penjualan__WEBPACK_IMPORTED_MODULE_46__["default"],
+    component: _pages_ba_produsen_Penjualan__WEBPACK_IMPORTED_MODULE_47__["default"],
     name: "PenjualanProd"
   }, {
     path: 'pengeluaran',
-    component: _pages_ba_produsen_Pengeluaran__WEBPACK_IMPORTED_MODULE_47__["default"],
+    component: _pages_ba_produsen_Pengeluaran__WEBPACK_IMPORTED_MODULE_48__["default"],
     name: "PengeluaranProd"
   }]
 }, {
   path: '/grosir',
-  component: _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_25__["default"],
+  component: _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_26__["default"],
   meta: {
     checkStatus: true,
     auth: {
@@ -122581,36 +123113,36 @@ var routes = [// SCM
   },
   children: [{
     path: '',
-    component: _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_26__["default"],
+    component: _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_27__["default"],
     name: "DashboardGrosir"
   }, {
     path: 'daftarmitra',
-    component: _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_27__["default"],
+    component: _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_28__["default"],
     name: "DaftarMitraGrosir"
   }, {
     path: 'mitrasaya',
-    component: _pages_scm_grosir_MitraSaya__WEBPACK_IMPORTED_MODULE_31__["default"],
+    component: _pages_scm_grosir_MitraSaya__WEBPACK_IMPORTED_MODULE_32__["default"],
     name: "MitraSayaGrosir"
   }, {
     path: 'permintaanmitra',
-    component: _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_28__["default"],
+    component: _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_29__["default"],
     name: "PermintaanMitraGrosir"
   }, {
     path: 'permintaancabai',
-    component: _pages_scm_grosir_PermintaanCabai__WEBPACK_IMPORTED_MODULE_29__["default"],
+    component: _pages_scm_grosir_PermintaanCabai__WEBPACK_IMPORTED_MODULE_30__["default"],
     name: "PermintaanCabaiGrosir"
   }, {
     path: 'analitik',
-    component: _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_50__["default"],
+    component: _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_51__["default"],
     name: "BisnisAnalitikGrosir"
   }, {
     path: 'inventaris',
-    component: _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_30__["default"],
+    component: _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_31__["default"],
     name: "InventarisGrosir"
   }]
 }, {
   path: '/pengecer',
-  component: _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_32__["default"],
+  component: _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_33__["default"],
   meta: {
     checkStatus: true,
     auth: {
@@ -122623,36 +123155,36 @@ var routes = [// SCM
   },
   children: [{
     path: '',
-    component: _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_33__["default"],
+    component: _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_34__["default"],
     name: "DashboardPengecer"
   }, {
     path: 'daftarmitra',
-    component: _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_34__["default"],
+    component: _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_35__["default"],
     name: "DaftarMitraPengecer"
   }, {
     path: 'mitrasaya',
-    component: _pages_scm_pengecer_MitraSaya__WEBPACK_IMPORTED_MODULE_38__["default"],
+    component: _pages_scm_pengecer_MitraSaya__WEBPACK_IMPORTED_MODULE_39__["default"],
     name: "MitraSayaPengecer"
   }, {
     path: 'permintaanmitra',
-    component: _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_35__["default"],
+    component: _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_36__["default"],
     name: "PermintaanMitraPengecer"
   }, {
     path: 'permintaancabai',
-    component: _pages_scm_pengecer_PermintaanCabai__WEBPACK_IMPORTED_MODULE_36__["default"],
+    component: _pages_scm_pengecer_PermintaanCabai__WEBPACK_IMPORTED_MODULE_37__["default"],
     name: "PermintaanCabaiPengecer"
   }, {
     path: 'analitik',
-    component: _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_51__["default"],
+    component: _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_52__["default"],
     name: "BisnisAnalitikPengecer"
   }, {
     path: 'inventaris',
-    component: _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_37__["default"],
+    component: _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_38__["default"],
     name: "InventarisPengecer"
   }]
 }, {
   path: '/pengepul',
-  component: _pages_scm_pengepul_Master__WEBPACK_IMPORTED_MODULE_18__["default"],
+  component: _pages_scm_pengepul_Master__WEBPACK_IMPORTED_MODULE_19__["default"],
   meta: {
     checkStatus: true,
     auth: {
@@ -122665,36 +123197,36 @@ var routes = [// SCM
   },
   children: [{
     path: '',
-    component: _pages_scm_pengepul_Dashboard__WEBPACK_IMPORTED_MODULE_19__["default"],
+    component: _pages_scm_pengepul_Dashboard__WEBPACK_IMPORTED_MODULE_20__["default"],
     name: "DashboardPengepul"
   }, {
     path: 'daftarmitra',
-    component: _pages_scm_pengepul_DaftarMitra__WEBPACK_IMPORTED_MODULE_20__["default"],
+    component: _pages_scm_pengepul_DaftarMitra__WEBPACK_IMPORTED_MODULE_21__["default"],
     name: "DaftarMitraPengepul"
   }, {
     path: 'mitrasaya',
-    component: _pages_scm_pengepul_MitraSaya__WEBPACK_IMPORTED_MODULE_24__["default"],
+    component: _pages_scm_pengepul_MitraSaya__WEBPACK_IMPORTED_MODULE_25__["default"],
     name: "MitraSayaPengepul"
   }, {
     path: 'permintaanmitra',
-    component: _pages_scm_pengepul_PermintaanMitra__WEBPACK_IMPORTED_MODULE_21__["default"],
+    component: _pages_scm_pengepul_PermintaanMitra__WEBPACK_IMPORTED_MODULE_22__["default"],
     name: "PermintaanMitraPengepul"
   }, {
     path: 'permintaancabai',
-    component: _pages_scm_pengepul_PermintaanCabai__WEBPACK_IMPORTED_MODULE_22__["default"],
+    component: _pages_scm_pengepul_PermintaanCabai__WEBPACK_IMPORTED_MODULE_23__["default"],
     name: "PermintaanCabaiPengepul"
   }, {
     path: 'analitik',
-    component: _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_49__["default"],
+    component: _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_50__["default"],
     name: "BisnisAnalitikPengepul"
   }, {
     path: 'inventaris',
-    component: _pages_scm_pengepul_Inventaris__WEBPACK_IMPORTED_MODULE_23__["default"],
+    component: _pages_scm_pengepul_Inventaris__WEBPACK_IMPORTED_MODULE_24__["default"],
     name: "InventarisPengepul"
   }]
 }, {
   path: '/konsumen',
-  component: _pages_scm_konsumen_Master__WEBPACK_IMPORTED_MODULE_39__["default"],
+  component: _pages_scm_konsumen_Master__WEBPACK_IMPORTED_MODULE_40__["default"],
   meta: {
     checkStatus: true,
     auth: {
@@ -122707,19 +123239,19 @@ var routes = [// SCM
   },
   children: [{
     path: '',
-    component: _pages_scm_konsumen_Dashboard__WEBPACK_IMPORTED_MODULE_40__["default"],
+    component: _pages_scm_konsumen_Dashboard__WEBPACK_IMPORTED_MODULE_41__["default"],
     name: "DashboardKonsumen"
   }, {
     path: 'daftarmitra',
-    component: _pages_scm_konsumen_DaftarMitra__WEBPACK_IMPORTED_MODULE_41__["default"],
+    component: _pages_scm_konsumen_DaftarMitra__WEBPACK_IMPORTED_MODULE_42__["default"],
     name: "DaftarMitraKonsumen"
   }, {
     path: 'mitrasaya',
-    component: _pages_scm_konsumen_MitraSaya__WEBPACK_IMPORTED_MODULE_43__["default"],
+    component: _pages_scm_konsumen_MitraSaya__WEBPACK_IMPORTED_MODULE_44__["default"],
     name: "MitraSayaKonsumen"
   }, {
     path: 'permintaanmitra',
-    component: _pages_scm_konsumen_PermintaanMitra__WEBPACK_IMPORTED_MODULE_42__["default"],
+    component: _pages_scm_konsumen_PermintaanMitra__WEBPACK_IMPORTED_MODULE_43__["default"],
     name: "PermintaanMitraKonsumen"
   }]
 }, {
@@ -122728,11 +123260,11 @@ var routes = [// SCM
 }, {
   path: '/',
   name: 'bisnisanalitik',
-  component: _pages_ba_Master__WEBPACK_IMPORTED_MODULE_44__["default"]
+  component: _pages_ba_Master__WEBPACK_IMPORTED_MODULE_45__["default"]
 }, {
   path: '/detail',
   name: 'badetail',
-  component: _pages_ba_Master2__WEBPACK_IMPORTED_MODULE_52__["default"]
+  component: _pages_ba_Master2__WEBPACK_IMPORTED_MODULE_53__["default"]
 }, {
   path: '/register',
   name: 'register',

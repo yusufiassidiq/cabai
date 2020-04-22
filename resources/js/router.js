@@ -22,6 +22,7 @@ import DaftarMitraProd from './pages/scm/produsen/DaftarMitra'
 import PermintaanMitraProd from './pages/scm/produsen/PermintaanMitra'
 import PermintaanCabai from './pages/scm/produsen/PermintaanCabai'
 import MitraSayaProd from './pages/scm/produsen/MitraSaya'
+import InventarisProdusen from "./pages/scm/produsen/Inventaris"
 
 import MasterPengepul from './pages/scm/pengepul/Master' // pengepul
 import DashboardPengepul from './pages/scm/pengepul/Dashboard'
@@ -121,6 +122,11 @@ const routes = [
                 path: '',
                 component: DashboardProd,
                 name: "DashboardProd"
+            },
+            {
+                path: 'inventaris',
+                component: InventarisProdusen,
+                name: "InventarisProdusen"
             },
             {
                 path: 'manajemenlahan',

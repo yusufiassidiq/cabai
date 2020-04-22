@@ -75,7 +75,10 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     //Inventaris
     Route::get('/getInventaris','UserController@getInventaris');
-
+    Route::put('/addInventaris','UserController@addInventaris');
+    Route::put('/stokKeluar/{id}','UserController@stokKeluar');
+    Route::put('/stokMasuk/{id}','UserController@stokMasuk');
+    
     //Manajemen lahan
     Route::post('/addLahan','ProdusenController@addLahan');
     Route::get('/readLahan','ProdusenController@readLahan');

@@ -64,7 +64,8 @@
                 <div class="orange" v-if="data.status_permintaan === 0">Belum ditanggapi</div>
                 <div v-else-if="data.status_permintaan === 1">Menunggu persetujuan pembeli</div>
                 <div class="red" v-else-if="data.status_permintaan === 4">Penawaran anda ditolak</div>
-                <div class="green" v-else-if="data.status_permintaan === 3">Penawaran anda diterima</div>
+                <div class="green" v-else-if="data.status_permintaan === 3 && data.status_pengiriman===0">Penawaran anda diterima</div>
+                <div v-else-if="data.status_permintaan === 3 && data.status_pengiriman===1">Dalam Pengiriman</div>
                 <div class="red" v-else-if="data.status_permintaan === 2">Permintaan ditolak</div>
               </td>
               <td>
@@ -84,7 +85,7 @@
                     @click="modalTolakPermintaan(data)"
                   >Tolak</button>
                 </div>
-                <div v-if="data.status_permintaan === 3">
+                <div v-else-if="data.status_permintaan === 3 && data.status_pengiriman===0">
                   <button
                     type="button"
                     class="btn btn-success btn-xs"
@@ -111,7 +112,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalAccPermintaanLabel">Penerimaan Permintaan Pasokan Cabai</h5>
+            <h5 class="modal-title" id="modalAccPermintaanLabel">Penerimaan Permintaan Cabai</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -198,7 +199,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalTolakPermintaanLabel">Penolakan Permintaan Pasokan</h5>
+            <h5 class="modal-title" id="modalTolakPermintaanLabel">Penolakan Permintaan Cabai</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -263,7 +264,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalKirimPermintaanLabel">Penolakan Permintaan Pasokan</h5>
+            <h5 class="modal-title" id="modalKirimPermintaanLabel">Pengiriman Permintaan Cabai</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -343,19 +344,24 @@ export default {
         id: "",
         keterangan: ""
       }),
+      formSend: new Form({
+        jenis_cabai:"",
+        jumlah_cabai:"",
+        harga:"",
+        id:"",
+      }),
       // Temporary variable
       temp_nama: "",
       temp_jeniscabai: "",
       temp_jumlahcabai: "",
       temp_hargacabai: "",
       temp_tanggalditerima: "",
-      temp_inv_jeniscabai: "",
-      temp_inv_jumlahcabai: "100",
-      temp_inv_hargacabai: "10000",
+      temp_inv_jumlahcabai: "",
+      temp_inv_hargacabai: "",
       // for update keterangan
       keterangan: "",
 
-      listPermintaanCabai: {}
+      listPermintaanCabai: {},
     };
   },
   methods: {
@@ -442,18 +448,44 @@ export default {
     },
     modalKirimPesanan(data) {
       $("#modalKirimPermintaan").modal("show");
-      this.formReject.id = data.id;
-      this.temp_nama = data.nama;
-      this.temp_jeniscabai = data.jenis_cabai;
-      this.temp_jumlahcabai = data.jumlah_cabai;
-      this.temp_hargacabai = data.harga;
-      this.temp_tanggalditerima = data.tanggal_diterima;
+      this.formSend.id = data.id
+      this.formSend.jenis_cabai = data.jenis_cabai
+      this.formSend.harga = data.harga
+      this.formSend.jumlah_cabai = data.jumlah_cabai
+      
+      this.temp_nama = data.nama
+      this.temp_jeniscabai = data.jenis_cabai
+      this.temp_jumlahcabai = data.jumlah_cabai
+      this.temp_hargacabai = data.harga
+      this.temp_tanggalditerima = data.tanggal_diterima
+
+      axios.get('/getInventaris').then(response => {
+        console.log(response.data.data[0].jenis_cabai)
+        if(data.jenis_cabai == "Cabai besar"){
+          this.temp_inv_jumlahcabai = response.data.data[0].jumlah_cabai
+          this.temp_inv_hargacabai = response.data.data[0].harga
+        }
+        else if(data.jenis_cabai == "Cabai rawit"){
+          this.temp_inv_jumlahcabai = response.data.data[1].jumlah_cabai
+          this.temp_inv_hargacabai = response.data.data[1].harga
+        }
+        else{
+          this.temp_inv_jumlahcabai = response.data.data[2].jumlah_cabai
+          this.temp_inv_hargacabai = response.data.data[2].harga
+        }
+        if(this.temp_jumlahcabai < this.temp_inv_jumlahcabai){
+          document.getElementById("btnKirimPesanan").disabled = false;
+        }
+        else{
+          document.getElementById("btnKirimPesanan").disabled = true;
+        }
+      })
     },
     kirimPesanan() {
       document.getElementById("btnKirimPesanan").disabled = true;
       this.$Progress.start();
-      this.form
-        .put("/" + this.form.id)
+      this.formSend
+        .put("/stokKeluar/" + this.formSend.id)
         .then(() => {
           UpdateData.$emit("ListPermintaanCabai");
           $("#modalKirimPermintaan").trigger("click");
@@ -468,7 +500,14 @@ export default {
           document.getElementById("btnKirimPesanan").disabled = false;
           this.$Progress.finish();
         });
-    }
+    },
+    getInventaris() {
+      axios.get('/getInventaris').then(response => {
+        // console.log(response.data)
+        this.temp_inv_jumlahcabai = response.data.jumlah_cabai
+        this.temp_inv_hargacabai = response.data.harga
+      });
+    },
   },
   created() {
     this.getPermintaanMasuk();
@@ -477,6 +516,7 @@ export default {
     UpdateData.$on("ListPermintaanCabai", () => {
       this.getPermintaanMasuk();
     });
+    this.getInventaris();
   }
 };
 </script>
