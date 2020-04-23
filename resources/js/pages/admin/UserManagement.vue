@@ -59,6 +59,8 @@
                     <tr>
                       <th>Nama</th>
                       <th>Email</th>
+                      <th>Tanggal divalidasi</th>
+                      <th>Surat Izin(SIUP)</th>
                       <th>Role</th>
                       <th>Aksi</th>
                     </tr>
@@ -71,6 +73,16 @@
                     <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
                       <td>{{ user.name }}</td>
                       <td>{{ user.email }}</td>
+                      <td>{{ customFormatter(user.updated_at) }}</td>
+                      <td>
+                        <button class="btn btn-info btn-xs" @click="previewImage()">
+                            <i class="fas fa-eye"></i>&nbsp; Lihat
+                          </button>
+                          &nbsp;/&nbsp;
+                          <button class="btn btn-secondary btn-xs" @click="downloadSIUP()">
+                            <i class="fas fa-file-download">&nbsp; Download</i>
+                          </button>
+                      </td>
                       <td>{{ getRole(user.role) }}</td>
                       <td>
                         <a href="#">
@@ -148,9 +160,7 @@ export default {
         .then(response => {
           this.users = response.data.users;
         })
-        .catch((error) => {
-          
-        });
+        .catch(error => {});
     },
     deleteUser(id) {
       swal
@@ -187,9 +197,11 @@ export default {
     edituser(id) {
       $("#editUser").modal("show");
     },
+    // fungsi untuk mengubah status user menjadi inaktif
     updateUser() {
       console.log("update user");
     },
+    // fungsi untuk mendapat role dari role id
     getRole(id_role) {
       switch (id_role) {
         case 2:
@@ -207,7 +219,15 @@ export default {
         default:
           return "Konsumen";
       }
-    }
+    },
+    customFormatter(date) {
+      return moment(date).format("DD MMMM YYYY");
+    },
+    // fungsi untuk melihat gambar SIUP User
+    previewImage() {},
+
+    // fungsi mendownload SIUP User
+    downloadSIUP() {},
   },
   created() {
     // custom event vue to update data changes

@@ -6595,6 +6595,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6643,9 +6655,11 @@ __webpack_require__.r(__webpack_exports__);
     edituser: function edituser(id) {
       $("#editUser").modal("show");
     },
+    // fungsi untuk mengubah status user menjadi inaktif
     updateUser: function updateUser() {
       console.log("update user");
     },
+    // fungsi untuk mendapat role dari role id
     getRole: function getRole(id_role) {
       switch (id_role) {
         case 2:
@@ -6667,7 +6681,14 @@ __webpack_require__.r(__webpack_exports__);
         default:
           return "Konsumen";
       }
-    }
+    },
+    customFormatter: function customFormatter(date) {
+      return moment(date).format("DD MMMM YYYY");
+    },
+    // fungsi untuk melihat gambar SIUP User
+    previewImage: function previewImage() {},
+    // fungsi mendownload SIUP User
+    downloadSIUP: function downloadSIUP() {}
   },
   created: function created() {
     var _this3 = this;
@@ -6800,6 +6821,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6810,10 +6841,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    selectUser: function selectUser(user) {
-      this.userDetail = user;
-      $("#detailUser").modal("show");
-    },
+    // fungsi untuk mendapatkan objek user dari API
     getUsers: function getUsers() {
       var _this = this;
 
@@ -6821,25 +6849,46 @@ __webpack_require__.r(__webpack_exports__);
         _this.users = response.data.users;
       })["catch"](function () {});
     },
+    // fungsi untuk melihat gambar SIUP User
+    previewImage: function previewImage() {},
+    // fungsi mendownload SIUP User
+    downloadSIUP: function downloadSIUP() {},
+    // fungsi untuk melihat detail User yang belum divalidasi
+    selectUser: function selectUser(user) {
+      this.userDetail = user;
+      $("#detailUser").modal("show");
+    },
+    // funsi untuk menolak validasi user
     tolak: function tolak(id) {
       var _this2 = this;
 
-      this.$Progress.start();
+      swal.fire({
+        title: "Apakah kamu yakin?",
+        text: "User akan ditolak",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+      }).then(function (result) {
+        if (result.value) {
+          _this2.$Progress.start();
 
-      if (confirm("Are you sure?")) {
-        this.loading = !this.loading;
-        axios.put("/tolak/" + id).then(function (response) {
-          UpdateData.$emit("UserValidation");
-          $("#detailUser").modal("hide");
+          axios.put("/tolak/" + id).then(function () {
+            swal.fire("Terhapus!", "User berhasil dihapus", "success");
+            UpdateData.$emit("UserValidation");
+            $("#detailUser").modal("hide");
 
-          _this2.$Progress.finish();
-        })["catch"](function (error) {
-          console.log(error);
+            _this2.$Progress.finish();
+          })["catch"](function () {
+            swal.fire("Gagal!", "Terdapat masalah ketika menghapus", "waning");
 
-          _this2.$Progress.fail();
-        });
-      }
+            _this2.$Progress.fail();
+          });
+        }
+      });
     },
+    // fungsi untuk menerima validasi User
     terima: function terima(id) {
       var _this3 = this;
 
@@ -6855,6 +6904,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.$Progress.fail();
       });
     },
+    // fungsi untuk mendapatkan Role user berdasarkan role id
     getRole: function getRole(id_role) {
       switch (id_role) {
         case 2:
@@ -6877,6 +6927,7 @@ __webpack_require__.r(__webpack_exports__);
           return "Konsumen";
       }
     },
+    // fungsi untuk mengubah format tanggal dengan moment js
     customFormatter: function customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     }
@@ -6896,6 +6947,197 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      year: {}
+    };
+  },
+  mounted: function mounted() {
+    this.fillData();
+  },
+  methods: {
+    fillData: function fillData() {
+      var _this = this;
+
+      axios.get('/getPengeluaran').then(function (response) {
+        _this.year = response.data.tahun;
+        var chart = _this.$refs.chart;
+        var ctx = chart.getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: response.data.month,
+            datasets: [{
+              label: 'Pupuk',
+              backgroundColor: 'rgba(60,141,188,0.9)',
+              borderColor: 'rgba(60,141,188,0.8)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(60,141,188,1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(60,141,188,1)',
+              data: response.data.pupuk,
+              fill: false
+            }, {
+              label: 'Alat Tani',
+              backgroundColor: 'rgba(255, 0, 0, 0.6)',
+              borderColor: 'rgba(255, 0, 0, 0.8)',
+              pointRadius: true,
+              pointColor: 'rgba(255, 0, 0, 0.8)',
+              pointStrokeColor: '#c1c7d1',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(255, 0, 0, 0.8)',
+              data: response.data.alatTani,
+              fill: false
+            }, {
+              label: 'Pestisida',
+              backgroundColor: 'rgba(11, 156, 49, 0.8)',
+              borderColor: 'rgba(11, 156, 49, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(11, 156, 49, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(11, 156, 49, 1)',
+              data: response.data.pestisida,
+              fill: false
+            }, {
+              label: 'Lainnya',
+              backgroundColor: 'rgba(255, 255, 0, 0.8)',
+              borderColor: 'rgba(255, 255, 0, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(255, 255, 0, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(255, 255, 0, 1)',
+              data: response.data.lainnya,
+              fill: false
+            }]
+          },
+          options: {
+            responsive: true,
+            tooltips: {
+              mode: 'index',
+              intersect: false
+            },
+            hover: {
+              mode: 'nearest',
+              intersect: true
+            },
+            scales: {
+              xAxes: [{
+                gridLines: {
+                  display: false
+                }
+              }],
+              yAxes: [{
+                gridLines: {
+                  display: false
+                },
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+      })["catch"](function (error) {
+        console.log(error);
+        _this.errored = true;
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Target.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/produsen/Target.vue?vue&type=script&lang=js& ***!
@@ -6905,7 +7147,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
 //
 //
 //
@@ -7287,6 +7529,14 @@ __webpack_require__.r(__webpack_exports__);
             }]
           },
           options: {
+            tooltips: {
+              mode: 'index',
+              intersect: false
+            },
+            hover: {
+              mode: 'nearest',
+              intersect: true
+            },
             scales: {
               xAxes: [{
                 gridLines: {
@@ -7316,8 +7566,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this5 = this;
 
-    // Custom event on Vue js
-    this.fillData();
+    this.fillData(); // Custom event on Vue js
+
     UpdateData.$on("update", function () {
       _this5.fillData();
 
@@ -86433,11 +86683,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      _vm._s(data.lokasiKelurahan) +
+                      _vm._s(_vm._f("customFilter")(data.lokasiKelurahan)) +
                         ", " +
-                        _vm._s(data.lokasiKecamatan) +
+                        _vm._s(_vm._f("customFilter")(data.lokasiKecamatan)) +
                         ", " +
-                        _vm._s(data.lokasiKabupaten)
+                        _vm._s(_vm._f("customFilter")(data.lokasiKabupaten))
                     )
                   ]),
                   _vm._v(" "),
@@ -86492,7 +86742,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
+        _c("th", [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -86572,11 +86822,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      _vm._s(data.lokasiKelurahan) +
+                      _vm._s(_vm._f("customFilter")(data.lokasiKelurahan)) +
                         ", " +
-                        _vm._s(data.lokasiKecamatan) +
+                        _vm._s(_vm._f("customFilter")(data.lokasiKecamatan)) +
                         ", " +
-                        _vm._s(data.lokasiKabupaten)
+                        _vm._s(_vm._f("customFilter")(data.lokasiKabupaten))
                     )
                   ]),
                   _vm._v(" "),
@@ -86631,7 +86881,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
+        _c("th", [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -86711,11 +86961,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      _vm._s(data.lokasiKelurahan) +
+                      _vm._s(_vm._f("customFilter")(data.lokasiKelurahan)) +
                         ", " +
-                        _vm._s(data.lokasiKecamatan) +
+                        _vm._s(_vm._f("customFilter")(data.lokasiKecamatan)) +
                         ", " +
-                        _vm._s(data.lokasiKabupaten)
+                        _vm._s(_vm._f("customFilter")(data.lokasiKabupaten))
                     )
                   ]),
                   _vm._v(" "),
@@ -86770,7 +87020,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
+        _c("th", [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -86828,11 +87078,11 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        _vm._s(data.lokasiKelurahan) +
+                        _vm._s(_vm._f("customFilter")(data.lokasiKelurahan)) +
                           ", " +
-                          _vm._s(data.lokasiKecamatan) +
+                          _vm._s(_vm._f("customFilter")(data.lokasiKecamatan)) +
                           ", " +
-                          _vm._s(data.lokasiKabupaten)
+                          _vm._s(_vm._f("customFilter")(data.lokasiKabupaten))
                       )
                     ]),
                     _vm._v(" "),
@@ -86913,7 +87163,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
+        _c("th", [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -86993,11 +87243,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      _vm._s(data.lokasiKelurahan) +
+                      _vm._s(_vm._f("customFilter")(data.lokasiKelurahan)) +
                         ", " +
-                        _vm._s(data.lokasiKecamatan) +
+                        _vm._s(_vm._f("customFilter")(data.lokasiKecamatan)) +
                         ", " +
-                        _vm._s(data.lokasiKabupaten)
+                        _vm._s(_vm._f("customFilter")(data.lokasiKabupaten))
                     )
                   ]),
                   _vm._v(" "),
@@ -87052,7 +87302,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
+        _c("th", [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -89384,7 +89634,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Role")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
+        _c("th", [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -90747,7 +90997,10 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(1),
                 _vm._v(" "),
-                _vm._m(2)
+                _c("a", {
+                  staticClass: "small-box-footer",
+                  attrs: { href: "#" }
+                })
               ])
             ]),
             _vm._v(" "),
@@ -90759,9 +91012,12 @@ var render = function() {
                   _c("p", [_vm._v("User Tervalidasi")])
                 ]),
                 _vm._v(" "),
-                _vm._m(3),
+                _vm._m(2),
                 _vm._v(" "),
-                _vm._m(4)
+                _c("a", {
+                  staticClass: "small-box-footer",
+                  attrs: { href: "#" }
+                })
               ])
             ]),
             _vm._v(" "),
@@ -90773,9 +91029,12 @@ var render = function() {
                   _c("p", [_vm._v("User Belum divalidasi")])
                 ]),
                 _vm._v(" "),
-                _vm._m(5),
+                _vm._m(3),
                 _vm._v(" "),
-                _vm._m(6)
+                _c("a", {
+                  staticClass: "small-box-footer",
+                  attrs: { href: "#" }
+                })
               ])
             ]),
             _vm._v(" "),
@@ -90787,9 +91046,12 @@ var render = function() {
                   _c("p", [_vm._v("User Gagal validasi")])
                 ]),
                 _vm._v(" "),
-                _vm._m(7),
+                _vm._m(4),
                 _vm._v(" "),
-                _vm._m(8)
+                _c("a", {
+                  staticClass: "small-box-footer",
+                  attrs: { href: "#" }
+                })
               ])
             ])
           ])
@@ -90830,16 +91092,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "ion ion-bag" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-      _vm._v("\n                Selengkapnya\n                "),
-      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+      _c("i", { staticClass: "fas fa-users" })
     ])
   },
   function() {
@@ -90847,16 +91100,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "ion ion-stats-bars" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-      _vm._v("\n                Selengkapnya\n                "),
-      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+      _c("i", { staticClass: "fas fa-user-check" })
     ])
   },
   function() {
@@ -90864,16 +91108,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "ion ion-person-add" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-      _vm._v("\n                Selengkapnya\n                "),
-      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+      _c("i", { staticClass: "fas fa-user-tie" })
     ])
   },
   function() {
@@ -90881,16 +91116,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "ion ion-pie-graph" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-      _vm._v("\n                Selengkapnya\n                "),
-      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+      _c("i", { staticClass: "fas fa-user-times" })
     ])
   }
 ]
@@ -91174,6 +91400,51 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.email))]),
                             _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                _vm._s(_vm.customFormatter(user.updated_at))
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-info btn-xs",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.previewImage()
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fas fa-eye" }),
+                                  _vm._v("  Lihat\n                        ")
+                                ]
+                              ),
+                              _vm._v(
+                                "\n                         / \n                        "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-secondary btn-xs",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.downloadSIUP()
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "i",
+                                    { staticClass: "fas fa-file-download" },
+                                    [_vm._v("  Download")]
+                                  )
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(_vm.getRole(user.role)))]),
                             _vm._v(" "),
                             _c("td", [
@@ -91303,6 +91574,10 @@ var staticRenderFns = [
         _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
         _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tanggal divalidasi")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Surat Izin(SIUP)")]),
         _vm._v(" "),
         _c("th", [_vm._v("Role")]),
         _vm._v(" "),
@@ -91455,13 +91730,58 @@ var render = function() {
                                   _c("td", [_vm._v(_vm._s(user.email))]),
                                   _vm._v(" "),
                                   _c("td", [
-                                    user.status === 1
-                                      ? _c("div", [_vm._v("Verified")])
-                                      : _c("div", [_vm._v("Unverified")])
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.customFormatter(user.created_at)
+                                      )
+                                    )
                                   ]),
                                   _vm._v(" "),
                                   _c("td", [
                                     _vm._v(_vm._s(_vm.getRole(user.role)))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-info btn-xs",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.previewImage()
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", { staticClass: "fas fa-eye" }),
+                                        _vm._v(
+                                          "  Lihat\n                        "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(
+                                      "\n                         / \n                        "
+                                    ),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-secondary btn-xs",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.downloadSIUP()
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "i",
+                                          {
+                                            staticClass: "fas fa-file-download"
+                                          },
+                                          [_vm._v("  Download")]
+                                        )
+                                      ]
+                                    )
                                   ]),
                                   _vm._v(" "),
                                   _c("td", [
@@ -91475,7 +91795,7 @@ var render = function() {
                                           }
                                         }
                                       },
-                                      [_vm._v("Detail")]
+                                      [_vm._v("Validasi")]
                                     )
                                   ])
                                 ]
@@ -91591,7 +91911,7 @@ var staticRenderFns = [
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "breadcrumb-item active" }, [
-                _vm._v("User Validation")
+                _vm._v("Validasi User")
               ])
             ])
           ])
@@ -91617,9 +91937,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Email")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Status")]),
+        _c("th", [_vm._v("Tgl Pengajuan")]),
         _vm._v(" "),
         _c("th", [_vm._v("Role")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Surat Izin Usaha Perdagangan (SIUP)")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -92423,6 +92745,123 @@ var render = function() {
   return _c("div")
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=template&id=4d81ea84&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=template&id=4d81ea84& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row justify-content-center" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("p", { staticClass: "text-center" }, [
+                      _c("strong", [
+                        _vm._v("Pengeluaran Tahun " + _vm._s(_vm.year))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "chart" }, [
+                      _c("canvas", {
+                        ref: "chart",
+                        staticStyle: { height: "100px" },
+                        attrs: { height: "100" }
+                      })
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [
+              _vm._v("Pengeluaran Poduksi Cabai")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Rekap Pengeluaran")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-title" }, [
+        _vm._v("Grafik Pengeluaran Produksi Cabai")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-card-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fas fa-minus" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-card-widget": "remove" }
+          },
+          [_c("i", { staticClass: "fas fa-times" })]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -118529,7 +118968,14 @@ var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_11___default.a.mixin({
 window.toast = toast; // Set Vue router
 
 vue__WEBPACK_IMPORTED_MODULE_6___default.a.router = _router__WEBPACK_IMPORTED_MODULE_2__["default"];
-vue__WEBPACK_IMPORTED_MODULE_6___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]); // Set Vue authentication
+vue__WEBPACK_IMPORTED_MODULE_6___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]); // filter string supaya char selain firstchar lowercase
+
+vue__WEBPACK_IMPORTED_MODULE_6___default.a.filter('customFilter', function (value) {
+  if (!value) return '';
+  var firstChar = value.charAt(0);
+  value = value.toString().toLowerCase();
+  return firstChar + value.substring(1, value.length);
+}); // Set Vue authentication
 
 vue__WEBPACK_IMPORTED_MODULE_6___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_4___default.a, axios__WEBPACK_IMPORTED_MODULE_5___default.a);
 axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.baseURL = "".concat("http://127.0.0.1:8000", "/api"); // console.log(process.env.MIX_APP_URL)
@@ -120364,17 +120810,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-var script = {}
+/* harmony import */ var _Pengeluaran_vue_vue_type_template_id_4d81ea84___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Pengeluaran.vue?vue&type=template&id=4d81ea84& */ "./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=template&id=4d81ea84&");
+/* harmony import */ var _Pengeluaran_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pengeluaran.vue?vue&type=script&lang=js& */ "./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
-  script,
-  render,
-  staticRenderFns,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Pengeluaran_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Pengeluaran_vue_vue_type_template_id_4d81ea84___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Pengeluaran_vue_vue_type_template_id_4d81ea84___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -120382,8 +120831,42 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+/* hot reload */
+if (false) { var api; }
 component.options.__file = "resources/js/pages/ba/produsen/Pengeluaran.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pengeluaran_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Pengeluaran.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pengeluaran_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=template&id=4d81ea84&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=template&id=4d81ea84& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pengeluaran_vue_vue_type_template_id_4d81ea84___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Pengeluaran.vue?vue&type=template&id=4d81ea84& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=template&id=4d81ea84&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pengeluaran_vue_vue_type_template_id_4d81ea84___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pengeluaran_vue_vue_type_template_id_4d81ea84___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -123468,8 +123951,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
