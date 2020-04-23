@@ -364,6 +364,11 @@ export default {
         tanggal_diterima: "",
         keterangan: ""
       }),
+      formReceived: new Form({
+        id:"",
+        jenis_cabai:"",
+        jumlah_cabai:"",
+      }),
       requestUlang: false,
       modalTerima: true,
       listPermintaanSaya: {},
@@ -578,10 +583,14 @@ export default {
         });
     },
     sudahDiterima(data) {
+      this.formReceived.jumlah_cabai = data.jumlah_cabai
+      this.formReceived.jenis_cabai = data.jenis_cabai
+      this.formReceived.id = data.id
+      // console.log(this.formReceived.jumlah_cabai)
       swal
         .fire({
           title: "Konfirmasi Pesanan",
-          text: "apakah cabai telah Anda terima sesuai pesanan?",
+          text: "Apakah cabai telah Anda terima sesuai pesanan?",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
@@ -590,13 +599,13 @@ export default {
         .then(result => {
           if (result.value) {
             this.$Progress.start();
-            axios
-              .put("/" + id_permintaanSaya)
+            this.formReceived
+              .put("/stokMasuk/" + data.id)
               .then(response => {
                 swal.fire(
                   "Konfirmasi Pesanan",
                   data.jumlah_cabai +
-                    " Kg" +
+                    " Kg " +
                     data.jenis_cabai +
                     " telah diterima",
                   "success"

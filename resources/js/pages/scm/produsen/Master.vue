@@ -75,6 +75,12 @@
                 <p>Riwayat Pengeluaran</p>
               </router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/produsen/inventaris" class="nav-link">
+                <i class="nav-icon fas fa-tasks"></i>
+                <p>Inventaris</p>
+              </router-link>
+            </li>
             <li class="nav-header">MANAJEMEN KEMITRAAN</li>
             <li class="nav-item">
               <router-link to="/produsen/daftarmitra" class="nav-link">

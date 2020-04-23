@@ -85,7 +85,7 @@
               <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
-                  <h3>?</h3>
+                  <h3>{{ditolak_user}}</h3>
 
                   <p>User Gagal validasi</p>
                 </div>
@@ -114,7 +114,8 @@ export default {
     return {
       total_user: 0,
       validated_user: 0,
-      not_validate_user: 0
+      not_validate_user: 0,
+      ditolak_user: 0
     };
   },
   created() {
@@ -123,6 +124,7 @@ export default {
       this.total_user = response.data.data.total_user;
       this.validated_user = response.data.data.validated_user;
       this.not_validate_user = response.data.data.not_validated_user;
+      this.ditolak_user = response.data.data.rejected_user;
     });
   }
 };

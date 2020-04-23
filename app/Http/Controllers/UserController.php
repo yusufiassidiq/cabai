@@ -10,6 +10,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Transaksi;
+use App\Inventaris;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -474,6 +475,64 @@ class UserController extends Controller
         $transaksi->update([
             'status_permintaan' => 3,
             'status_pengiriman' => 0,
+        ]);
+        return response()->json(['status' => 'success'], 200);
+    }
+    public function getInventaris(){
+        $userId = Auth::user()->id;
+        $inventaris = Inventaris::where('user_id',$userId)->get();
+        return response()->json([
+            'status' => 'success', 
+            'data' => $inventaris->toArray(),
+            'role' =>$userId
+        ], 200);
+    }
+    public function addInventaris(Request $request){
+        $userId = Auth::user()->id;
+        $jumlah_cabai = $request->jumlah_cabai;
+        $jenis_cabai = $request->jenis_cabai;
+        $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
+        foreach ($inventaris as $i ) {
+            $jumlah_cabai_sementara = $i->jumlah_cabai;
+            $i->update([
+                'jumlah_cabai' => $jumlah_cabai_sementara + $jumlah_cabai
+            ]);
+        }
+        return response()->json(['status' => 'success'], 200);
+    }
+    public function stokKeluar(Request $request, $idTransaksi){
+        $userId = Auth::user()->id;
+        $jumlah_cabai = $request->jumlah_cabai;
+        $jenis_cabai = $request->jenis_cabai;
+        $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
+        foreach ($inventaris as $i ) {
+            $jumlah_cabai_sementara = $i->jumlah_cabai;
+            $i->update([
+                'jumlah_cabai' => $jumlah_cabai_sementara - $jumlah_cabai,
+                'harga' => $request->harga,
+            ]);
+        }
+        $transaksi = Transaksi::find($idTransaksi);
+        $transaksi->update([
+            'status_pengiriman' => 1,
+            'status_pemesanan' => 0,
+        ]);
+        return response()->json(['status' => 'success'], 200);
+    }
+    public function stokMasuk(Request $request, $idTransaksi){
+        $userId = Auth::user()->id;
+        $jumlah_cabai = $request->jumlah_cabai;
+        $jenis_cabai = $request->jenis_cabai;
+        $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
+        foreach ($inventaris as $i ) {
+            $jumlah_cabai_sementara = $i->jumlah_cabai;
+            $i->update([
+                'jumlah_cabai' => $jumlah_cabai_sementara + $jumlah_cabai,
+            ]);
+        }
+        $transaksi = Transaksi::find($idTransaksi);
+        $transaksi->update([
+            'status_pemesanan' => 1,
         ]);
         return response()->json(['status' => 'success'], 200);
     }

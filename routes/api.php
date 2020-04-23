@@ -34,8 +34,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
 
     Route::delete('/user/{id}','AdminController@delete')->middleware('isAdmin');
-    Route::post('/terima/{id}','AdminController@terima')->middleware('isAdmin');
-    Route::post('/tolak/{id}','AdminController@tolak')->middleware('isAdmin');
+    Route::put('/terima/{id}','AdminController@terima')->middleware('isAdmin');
+    Route::put('/tolak/{id}','AdminController@tolak')->middleware('isAdmin');
     Route::get('/admindashboard','AdminController@dashboardAdmin')->middleware('isAdmin');
     //Get Custom Payload
     // Route::get('user/getcustompayloads','UserController@seeToken');
@@ -73,6 +73,12 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('/tolakPenawaranPemasok/{id}','UserController@tolakPenawaranPemasok');
     Route::put('/terimaPenawaranPemasok/{id}','UserController@terimaPenawaranPemasok');
 
+    //Inventaris
+    Route::get('/getInventaris','UserController@getInventaris');
+    Route::put('/addInventaris','UserController@addInventaris');
+    Route::put('/stokKeluar/{id}','UserController@stokKeluar');
+    Route::put('/stokMasuk/{id}','UserController@stokMasuk');
+    
     //Manajemen lahan
     Route::post('/addLahan','ProdusenController@addLahan');
     Route::get('/readLahan','ProdusenController@readLahan');
