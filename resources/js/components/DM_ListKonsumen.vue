@@ -28,7 +28,7 @@
             <tr>
               <!-- <th>Id</th> -->
               <th>Nama</th>
-              <th>Lokasi</th>
+              <th>Alamat</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -39,7 +39,7 @@
             </tr>
             <tr v-for="data in dataMitra" :key="data.id">
               <td>{{data.name}}</td>
-              <td>{{data.lokasiKelurahan}}, {{data.lokasiKecamatan}}, {{data.lokasiKabupaten}}</td>
+              <td>{{data.lokasiKelurahan | customFilter}}, {{data.lokasiKecamatan | customFilter}}, {{data.lokasiKabupaten | customFilter}}</td>
               <td>
                 <a href="#" class="btn btn-success btn-xs" @click="addMitra(data.id, data.name)">
                   <i class="fas fa-plus-square white"></i>

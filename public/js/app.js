@@ -6595,6 +6595,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6643,9 +6655,11 @@ __webpack_require__.r(__webpack_exports__);
     edituser: function edituser(id) {
       $("#editUser").modal("show");
     },
+    // fungsi untuk mengubah status user menjadi inaktif
     updateUser: function updateUser() {
       console.log("update user");
     },
+    // fungsi untuk mendapat role dari role id
     getRole: function getRole(id_role) {
       switch (id_role) {
         case 2:
@@ -6667,7 +6681,14 @@ __webpack_require__.r(__webpack_exports__);
         default:
           return "Konsumen";
       }
-    }
+    },
+    customFormatter: function customFormatter(date) {
+      return moment(date).format("DD MMMM YYYY");
+    },
+    // fungsi untuk melihat gambar SIUP User
+    previewImage: function previewImage() {},
+    // fungsi mendownload SIUP User
+    downloadSIUP: function downloadSIUP() {}
   },
   created: function created() {
     var _this3 = this;
@@ -6800,6 +6821,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6810,10 +6841,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    selectUser: function selectUser(user) {
-      this.userDetail = user;
-      $("#detailUser").modal("show");
-    },
+    // fungsi untuk mendapatkan objek user dari API
     getUsers: function getUsers() {
       var _this = this;
 
@@ -6821,25 +6849,46 @@ __webpack_require__.r(__webpack_exports__);
         _this.users = response.data.users;
       })["catch"](function () {});
     },
+    // fungsi untuk melihat gambar SIUP User
+    previewImage: function previewImage() {},
+    // fungsi mendownload SIUP User
+    downloadSIUP: function downloadSIUP() {},
+    // fungsi untuk melihat detail User yang belum divalidasi
+    selectUser: function selectUser(user) {
+      this.userDetail = user;
+      $("#detailUser").modal("show");
+    },
+    // funsi untuk menolak validasi user
     tolak: function tolak(id) {
       var _this2 = this;
 
-      this.$Progress.start();
+      swal.fire({
+        title: "Apakah kamu yakin?",
+        text: "User akan ditolak",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+      }).then(function (result) {
+        if (result.value) {
+          _this2.$Progress.start();
 
-      if (confirm("Are you sure?")) {
-        this.loading = !this.loading;
-        axios.put("/tolak/" + id).then(function (response) {
-          UpdateData.$emit("UserValidation");
-          $("#detailUser").modal("hide");
+          axios.put("/tolak/" + id).then(function () {
+            swal.fire("Terhapus!", "User berhasil dihapus", "success");
+            UpdateData.$emit("UserValidation");
+            $("#detailUser").modal("hide");
 
-          _this2.$Progress.finish();
-        })["catch"](function (error) {
-          console.log(error);
+            _this2.$Progress.finish();
+          })["catch"](function () {
+            swal.fire("Gagal!", "Terdapat masalah ketika menghapus", "waning");
 
-          _this2.$Progress.fail();
-        });
-      }
+            _this2.$Progress.fail();
+          });
+        }
+      });
     },
+    // fungsi untuk menerima validasi User
     terima: function terima(id) {
       var _this3 = this;
 
@@ -6855,6 +6904,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.$Progress.fail();
       });
     },
+    // fungsi untuk mendapatkan Role user berdasarkan role id
     getRole: function getRole(id_role) {
       switch (id_role) {
         case 2:
@@ -6877,6 +6927,7 @@ __webpack_require__.r(__webpack_exports__);
           return "Konsumen";
       }
     },
+    // fungsi untuk mengubah format tanggal dengan moment js
     customFormatter: function customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     }
@@ -87147,11 +87198,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      _vm._s(data.lokasiKelurahan) +
+                      _vm._s(_vm._f("customFilter")(data.lokasiKelurahan)) +
                         ", " +
-                        _vm._s(data.lokasiKecamatan) +
+                        _vm._s(_vm._f("customFilter")(data.lokasiKecamatan)) +
                         ", " +
-                        _vm._s(data.lokasiKabupaten)
+                        _vm._s(_vm._f("customFilter")(data.lokasiKabupaten))
                     )
                   ]),
                   _vm._v(" "),
@@ -87206,7 +87257,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
+        _c("th", [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -87286,11 +87337,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      _vm._s(data.lokasiKelurahan) +
+                      _vm._s(_vm._f("customFilter")(data.lokasiKelurahan)) +
                         ", " +
-                        _vm._s(data.lokasiKecamatan) +
+                        _vm._s(_vm._f("customFilter")(data.lokasiKecamatan)) +
                         ", " +
-                        _vm._s(data.lokasiKabupaten)
+                        _vm._s(_vm._f("customFilter")(data.lokasiKabupaten))
                     )
                   ]),
                   _vm._v(" "),
@@ -87345,7 +87396,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
+        _c("th", [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -87425,11 +87476,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      _vm._s(data.lokasiKelurahan) +
+                      _vm._s(_vm._f("customFilter")(data.lokasiKelurahan)) +
                         ", " +
-                        _vm._s(data.lokasiKecamatan) +
+                        _vm._s(_vm._f("customFilter")(data.lokasiKecamatan)) +
                         ", " +
-                        _vm._s(data.lokasiKabupaten)
+                        _vm._s(_vm._f("customFilter")(data.lokasiKabupaten))
                     )
                   ]),
                   _vm._v(" "),
@@ -87484,7 +87535,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
+        _c("th", [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -87542,11 +87593,11 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        _vm._s(data.lokasiKelurahan) +
+                        _vm._s(_vm._f("customFilter")(data.lokasiKelurahan)) +
                           ", " +
-                          _vm._s(data.lokasiKecamatan) +
+                          _vm._s(_vm._f("customFilter")(data.lokasiKecamatan)) +
                           ", " +
-                          _vm._s(data.lokasiKabupaten)
+                          _vm._s(_vm._f("customFilter")(data.lokasiKabupaten))
                       )
                     ]),
                     _vm._v(" "),
@@ -87627,7 +87678,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
+        _c("th", [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -87707,11 +87758,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      _vm._s(data.lokasiKelurahan) +
+                      _vm._s(_vm._f("customFilter")(data.lokasiKelurahan)) +
                         ", " +
-                        _vm._s(data.lokasiKecamatan) +
+                        _vm._s(_vm._f("customFilter")(data.lokasiKecamatan)) +
                         ", " +
-                        _vm._s(data.lokasiKabupaten)
+                        _vm._s(_vm._f("customFilter")(data.lokasiKabupaten))
                     )
                   ]),
                   _vm._v(" "),
@@ -87766,7 +87817,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
+        _c("th", [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -90098,7 +90149,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Role")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Lokasi")]),
+        _c("th", [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -91461,7 +91512,10 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(1),
                 _vm._v(" "),
-                _vm._m(2)
+                _c("a", {
+                  staticClass: "small-box-footer",
+                  attrs: { href: "#" }
+                })
               ])
             ]),
             _vm._v(" "),
@@ -91473,9 +91527,12 @@ var render = function() {
                   _c("p", [_vm._v("User Tervalidasi")])
                 ]),
                 _vm._v(" "),
-                _vm._m(3),
+                _vm._m(2),
                 _vm._v(" "),
-                _vm._m(4)
+                _c("a", {
+                  staticClass: "small-box-footer",
+                  attrs: { href: "#" }
+                })
               ])
             ]),
             _vm._v(" "),
@@ -91487,9 +91544,12 @@ var render = function() {
                   _c("p", [_vm._v("User Belum divalidasi")])
                 ]),
                 _vm._v(" "),
-                _vm._m(5),
+                _vm._m(3),
                 _vm._v(" "),
-                _vm._m(6)
+                _c("a", {
+                  staticClass: "small-box-footer",
+                  attrs: { href: "#" }
+                })
               ])
             ]),
             _vm._v(" "),
@@ -91501,9 +91561,12 @@ var render = function() {
                   _c("p", [_vm._v("User Gagal validasi")])
                 ]),
                 _vm._v(" "),
-                _vm._m(7),
+                _vm._m(4),
                 _vm._v(" "),
-                _vm._m(8)
+                _c("a", {
+                  staticClass: "small-box-footer",
+                  attrs: { href: "#" }
+                })
               ])
             ])
           ])
@@ -91544,16 +91607,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "ion ion-bag" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-      _vm._v("\n                Selengkapnya\n                "),
-      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+      _c("i", { staticClass: "fas fa-users" })
     ])
   },
   function() {
@@ -91561,16 +91615,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "ion ion-stats-bars" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-      _vm._v("\n                Selengkapnya\n                "),
-      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+      _c("i", { staticClass: "fas fa-user-check" })
     ])
   },
   function() {
@@ -91578,16 +91623,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "ion ion-person-add" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-      _vm._v("\n                Selengkapnya\n                "),
-      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+      _c("i", { staticClass: "fas fa-user-tie" })
     ])
   },
   function() {
@@ -91595,16 +91631,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "ion ion-pie-graph" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-      _vm._v("\n                Selengkapnya\n                "),
-      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+      _c("i", { staticClass: "fas fa-user-times" })
     ])
   }
 ]
@@ -91888,6 +91915,51 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.email))]),
                             _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                _vm._s(_vm.customFormatter(user.updated_at))
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-info btn-xs",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.previewImage()
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fas fa-eye" }),
+                                  _vm._v("  Lihat\n                        ")
+                                ]
+                              ),
+                              _vm._v(
+                                "\n                         / \n                        "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-secondary btn-xs",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.downloadSIUP()
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "i",
+                                    { staticClass: "fas fa-file-download" },
+                                    [_vm._v("  Download")]
+                                  )
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(_vm.getRole(user.role)))]),
                             _vm._v(" "),
                             _c("td", [
@@ -92017,6 +92089,10 @@ var staticRenderFns = [
         _c("th", [_vm._v("Nama")]),
         _vm._v(" "),
         _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tanggal divalidasi")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Surat Izin(SIUP)")]),
         _vm._v(" "),
         _c("th", [_vm._v("Role")]),
         _vm._v(" "),
@@ -92169,13 +92245,58 @@ var render = function() {
                                   _c("td", [_vm._v(_vm._s(user.email))]),
                                   _vm._v(" "),
                                   _c("td", [
-                                    user.status === 1
-                                      ? _c("div", [_vm._v("Verified")])
-                                      : _c("div", [_vm._v("Unverified")])
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.customFormatter(user.created_at)
+                                      )
+                                    )
                                   ]),
                                   _vm._v(" "),
                                   _c("td", [
                                     _vm._v(_vm._s(_vm.getRole(user.role)))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-info btn-xs",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.previewImage()
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", { staticClass: "fas fa-eye" }),
+                                        _vm._v(
+                                          "  Lihat\n                        "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(
+                                      "\n                         / \n                        "
+                                    ),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-secondary btn-xs",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.downloadSIUP()
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "i",
+                                          {
+                                            staticClass: "fas fa-file-download"
+                                          },
+                                          [_vm._v("  Download")]
+                                        )
+                                      ]
+                                    )
                                   ]),
                                   _vm._v(" "),
                                   _c("td", [
@@ -92189,7 +92310,7 @@ var render = function() {
                                           }
                                         }
                                       },
-                                      [_vm._v("Detail")]
+                                      [_vm._v("Validasi")]
                                     )
                                   ])
                                 ]
@@ -92305,7 +92426,7 @@ var staticRenderFns = [
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "breadcrumb-item active" }, [
-                _vm._v("User Validation")
+                _vm._v("Validasi User")
               ])
             ])
           ])
@@ -92331,9 +92452,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Email")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Status")]),
+        _c("th", [_vm._v("Tgl Pengajuan")]),
         _vm._v(" "),
         _c("th", [_vm._v("Role")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Surat Izin Usaha Perdagangan (SIUP)")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -119451,7 +119574,14 @@ var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_11___default.a.mixin({
 window.toast = toast; // Set Vue router
 
 vue__WEBPACK_IMPORTED_MODULE_6___default.a.router = _router__WEBPACK_IMPORTED_MODULE_2__["default"];
-vue__WEBPACK_IMPORTED_MODULE_6___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]); // Set Vue authentication
+vue__WEBPACK_IMPORTED_MODULE_6___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]); // filter string supaya char selain firstchar lowercase
+
+vue__WEBPACK_IMPORTED_MODULE_6___default.a.filter('customFilter', function (value) {
+  if (!value) return '';
+  var firstChar = value.charAt(0);
+  value = value.toString().toLowerCase();
+  return firstChar + value.substring(1, value.length);
+}); // Set Vue authentication
 
 vue__WEBPACK_IMPORTED_MODULE_6___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_4___default.a, axios__WEBPACK_IMPORTED_MODULE_5___default.a);
 axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.baseURL = "".concat("http://127.0.0.1:8000", "/api"); // console.log(process.env.MIX_APP_URL)
