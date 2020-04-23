@@ -8,6 +8,7 @@ use Auth;
 use App\Target;
 use App\PraProduksi;
 use App\PengeluaranProduksi;
+use App\Transaksi;
 use Carbon\Carbon;
 use DB;
 
@@ -242,6 +243,65 @@ class AnalysisController extends Controller
             'pestisida' => $pengeluaranByLahanPestisida, 
             'lainnya' => $pengeluaranByLahanLainnya, 
             'tahun' => $year,
+        ]);
+    }
+    public function getPenjualan()
+    {
+        // $lastweek = Carbon::now()->subweek();
+        // $tomorrow = Carbon::now()->addDay();
+        $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
+        $start = Carbon::now()->subweek()->addDay()->format('Y-m-d');
+        $end = Carbon::now()->format('Y-m-d');
+        $startTitle = Carbon::now()->subweek()->addDay()->isoFormat('Do MMMM YYYY');
+        $endTitle = Carbon::now()->isoFormat('Do MMMM YYYY');
+        $totalTransaksi = Transaksi::Where('user_id',$idUser)
+                    ->whereBetween('tanggal_diterima', [$start, $end])
+                    ->select('tanggal_diterima',DB::raw('count(*) as vol'), DB::raw("SUM(jumlah_cabai) as totalTransaksi"))
+                    ->groupBy('tanggal_diterima')
+                    ->get()
+                    ->pluck('totalTransaksi','tanggal_diterima')
+                    ->all();
+        $x=0;
+        for($i=Carbon::now()->subweek()->addDay();$i<=Carbon::now();$i->addDay()){
+            $tanggal[$x]=$i->format('Y-m-d');
+            $cabaiByDay[$x]=Transaksi::Where([
+                            ['user_id',$idUser],
+                            ['tanggal_diterima',$tanggal[$x]]
+                            ])->select('jenis_cabai',DB::raw('count(*) as vol'), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+                            ->groupBy('jenis_cabai')
+                            ->get();
+            $cabaiByDayRawit[$x]=0;
+            $cabaiByDayKeriting[$x]=0;
+            $cabaiByDayBesar[$x]=0;
+            for($j=0;$j<count($cabaiByDay[$x]);$j++){
+                if($cabaiByDay[$x][$j]->jenis_cabai == 'Cabai rawit'){
+                    $cabaiByDayRawit[$x]=$cabaiByDay[$x][$j]->totalCabai;
+                }
+                elseif($cabaiByDay[$x][$j]->jenis_cabai == 'Cabai keriting'){
+                    $cabaiByDayKeriting[$x]=$cabaiByDay[$x][$j]->totalCabai;
+                }
+                else{
+                    $cabaiByDayBesar[$x]=$cabaiByDay[$x][$j]->totalCabai;
+                }
+            }
+            if(array_key_exists($i->format('Y-m-d'), $totalTransaksi)){
+                $totalByTanggal[$x]=$totalTransaksi[$i->format('Y-m-d')];
+            }
+            else{
+                $totalByTanggal[$x]=0;
+            }
+            $x++;
+        }
+        return response()->json([
+            'totalTransaksi' => $totalTransaksi,
+            'tanggal' => $tanggal,
+            'totalByTanggal' => $totalByTanggal,
+            'start' => $startTitle,
+            'end' => $endTitle,
+            'cabai' => $cabaiByDay,
+            'rawit' => $cabaiByDayRawit,
+            'keriting' => $cabaiByDayKeriting,
+            'besar' => $cabaiByDayBesar,
         ]);
     }
 }

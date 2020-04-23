@@ -107,7 +107,7 @@
                 <p>Permintaan cabai</p>
               </router-link>
             </li>
-            <li class="nav-header">Bisnis Analitik</li>
+            <li class="nav-header">MANAJEMEN BISNIS</li>
             <li class="nav-item">
               <router-link to="/produsen/target" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
@@ -118,13 +118,13 @@
             <li class="nav-item">
               <router-link to="/produsen/penjualan" class="nav-link">
                 <i class="fas fa-user-friends nav-icon"></i>
-                <p>Penjualan</p>
+                <p>Laporan Penjualan</p>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link to="/produsen/pengeluaran" class="nav-link">
                 <i class="fas fa-user-friends nav-icon"></i>
-                <p>Pengeluaran</p>
+                <p>Laporan Pengeluaran</p>
               </router-link>
             </li>
             <li class="nav-item">
