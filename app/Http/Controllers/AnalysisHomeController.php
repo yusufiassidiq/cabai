@@ -95,15 +95,7 @@ class AnalysisHomeController extends Controller
         $year = Carbon::now()->format('Y'); //tahun saat ini
         $role_user = array('Admin','Produsen','Pengepul','Grosir','Pengecer','Konsumen');
         $jml_user = User::count() - 1; //-1 admin
-
-
-        $user[0] = User::where('role', 1) -> where('status',1) -> count();
-        $user[1] = User::where('role', 2) -> where('status',1) -> count();        
-        $user[2] = User::where('role', 3) -> where('status',1) -> count();
-        $user[3] = User::where('role', 4) -> where('status',1) -> count();
-        $user[4] = User::where('role', 5) -> where('status',1) -> count();
-        $user[5] = User::where('role', 6) -> where('status',1) -> count();
-
+        
         for($i=0; $i<count($role_user); $i++){
             $data_user[$i]= User::where('role', $i+1) -> where('status',1) -> count();;
         }
