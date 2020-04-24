@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Lokasi;
 use Carbon\Carbon;
 use DB;
 
@@ -112,5 +113,21 @@ class AnalysisHomeController extends Controller
             'total_user' => $jml_user, 
             'user' => $data_user,
         ]);
+    }
+
+    public function getAllUserLocation()
+    {
+        
+        $listUser = User::where('status',1)->where('id','<>',1)->get();
+        foreach ($listUser as $i){
+            $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
+            $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
+            $i->lokasiKelurahan = $i->lokasi()->first()->kelurahan;
+        }
+        return response()->json(
+            [
+                'status' => 'success',
+                'lokasi' => $listUser->toArray()
+            ], 200);
     }
 }

@@ -158,14 +158,14 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h5 class="card-title">Monthly Recap Report</h5>
+                  <h4 class="card-title">Mitra Aplikasi</h4>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-8">
                       <p class="text-center">
-                        <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                        <strong>Jumlah Pengguna Berdasarkan Stakeholder</strong>
                       </p>
 
                       <div class="chart">
@@ -182,31 +182,33 @@
                       </p>
 
                       <div class="progress-group">
-                        Add Products to Cart
+                        Kemitraan Pengguna
                         <span class="float-right">
-                          <b>160</b>/200
+                          <b>4</b>/10
                         </span>
                         <div class="progress progress-sm">
-                          <div class="progress-bar bg-primary" style="width: 80%"></div>
+                          <div class="progress-bar bg-primary" style="width: 40%"></div>
                         </div>
                       </div>
                       <!-- /.progress-group -->
 
                       <div class="progress-group">
-                        Complete Purchase
+                        Transaksi Berhasil
                         <span class="float-right">
-                          <b>310</b>/400
+                          <b>12</b>/24
                         </span>
                         <div class="progress progress-sm">
-                          <div class="progress-bar bg-danger" style="width: 75%"></div>
+                          <div class="progress-bar bg-danger" style="width: 50%"></div>
                         </div>
                       </div>
 
                       <!-- /.progress-group -->
                       <div class="progress-group">
-                        <span class="progress-text">Visit Premium Page</span>
+                        <span class="progress-text">
+                          Mitra di Kab/Kota
+                        </span>
                         <span class="float-right">
-                          <b>480</b>/800
+                          <b>20</b>/27
                         </span>
                         <div class="progress progress-sm">
                           <div class="progress-bar bg-success" style="width: 60%"></div>
@@ -215,9 +217,9 @@
 
                       <!-- /.progress-group -->
                       <div class="progress-group">
-                        Send Inquiries
+                        Pencapaian Target
                         <span class="float-right">
-                          <b>250</b>/500
+                          <b>50%</b>
                         </span>
                         <div class="progress progress-sm">
                           <div class="progress-bar bg-warning" style="width: 50%"></div>
@@ -358,23 +360,23 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h5 class="card-title">Grafik Target Penjualan Cabai</h5>
+                  <h4 class="card-title">Harga Cabai Prov Jawa Barat berdasarkan Stakeholder</h4>
 
-                  <div class="card-tools">
+                  <!-- <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus"></i>
                     </button>
                     <button type="button" class="btn btn-tool" data-card-widget="remove">
                       <i class="fas fa-times"></i>
                     </button>
-                  </div>
+                  </div> -->
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                   <div class="row">
-                    <div class="col">
+                    <div class="col-md-8">
                       <p class="text-center">
-                        <strong>Target Januari - Desember Tahun {{ year }}</strong>
+                        <strong>Perbandingan Harga per-Stakeholder Tahun 2020</strong>
                       </p>
 
                       <div class="chart">
@@ -383,10 +385,139 @@
                       </div>
                       <!-- /.chart-responsive -->
                     </div>
+                    <div class="col-md-4">
+                      <p class="text-center">
+                        <strong>Rataan Kenaikan Harga Setiap Stakeholder</strong>
+                      </p>
+                        <table class="table ">
+                          <thead>
+                          <tr>
+                            <th>Transaksi</th>
+                            <th>Kenaikan</th>
+                            <th>%</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>
+                              <div class="row">
+                                <div class="col-sm-2 bg-primary color-palette disabled"><span>&ensp;</span></div>
+                                <span> - </span>
+                                <div class="col-sm-2 bg-purple color-palette disabled"><span>&ensp;</span></div>
+                              </div>
+                            </td>
+                            <td>$13 USD</td>
+                            <td>
+                              <small class="text-success mr-1">
+                                <i class="fas fa-arrow-up"></i>
+                                12%
+                              </small>
+                              12,000 Sold
+                            </td>
+                            
+                          </tr>
+                          <tr>
+                            <td>
+                              Pengepul - Grosir
+                            </td>
+                            <td>$29 USD</td>
+                            <td>
+                              <small class="text-warning mr-1">
+                                <i class="fas fa-arrow-down"></i>
+                                0.5%
+                              </small>
+                              123,234 Sold
+                            </td>
+                            
+                          </tr>
+                          <tr>
+                            <td>
+                              Grosir - Pengecer
+                            </td>
+                            <td>$1,230 USD</td>
+                            <td>
+                              <small class="text-danger mr-1">
+                                <i class="fas fa-arrow-down"></i>
+                                3%
+                              </small>
+                              198 Sold
+                            </td>
+                            
+                          </tr>
+                          <tr>
+                            <td>
+                              Pengecer - Konsumen
+                            </td>
+                            <td>$199 USD</td>
+                            <td>
+                              <small class="text-success mr-1">
+                                <i class="fas fa-arrow-up"></i>
+                                63%
+                              </small>
+                              87 Sold
+                            </td>
+                            
+                          </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card -->
+                    <div class="col-md-4">
+                      <p class="text-center">
+                        <strong>Rataan Kenaikan Harga Setiap Stakeholder</strong>
+                      </p>
+
+                      <div class="progress-group">
+                        Kemitraan Pengguna
+                        <span class="float-right">
+                          <b>4</b>/10
+                        </span>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-primary" style="width: 40%"></div>
+                        </div>
+                      </div>
+                      <!-- /.progress-group -->
+
+                      <div class="progress-group">
+                        Transaksi Berhasil
+                        <span class="float-right">
+                          <b>12</b>/24
+                        </span>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-danger" style="width: 50%"></div>
+                        </div>
+                      </div>
+
+                      <!-- /.progress-group -->
+                      <div class="progress-group">
+                        <span class="progress-text">
+                          Mitra di Kab/Kota
+                        </span>
+                        <span class="float-right">
+                          <b>20</b>/27
+                        </span>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-success" style="width: 60%"></div>
+                        </div>
+                      </div>
+
+                      <!-- /.progress-group -->
+                      <div class="progress-group">
+                        Pencapaian Target
+                        <span class="float-right">
+                          <b>50%</b>
+                        </span>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-warning" style="width: 50%"></div>
+                        </div>
+                      </div>
+                      <!-- /.progress-group -->
+                    </div>
                     <!-- /.col -->
                   </div>
                   <!-- /.row -->
                 </div>
+                
                 <!-- ./card-body -->
               </div>
               <!-- /.card -->
@@ -463,41 +594,69 @@
         new Chart(document.getElementById("chart2"), {
           type: 'line',
           data: {
-            labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+            labels: [ 'Jan','Feb','Mar','Apr','May','Jun',
+                      'Jul','Aug','Sep','Oct',
+                      'Nov','Dec'],
             datasets: [{ 
-                data: [86,114,106,106,107,111,133,221,783,2478],
-                label: "Africa",
+                data: [86,75,54,40],
+                label: "Produsen - Pengepul",
                 borderColor: "#3e95cd",
                 fill: false
               }, { 
-                data: [282,350,411,502,635,809,947,1402,3700,5267],
-                label: "Asia",
+                data: [90,80,60,45],
+                label: "Pengepul - Grosir",
                 borderColor: "#8e5ea2",
                 fill: false
               }, { 
-                data: [168,170,178,190,203,276,408,547,675,734],
-                label: "Europe",
+                data: [93,82,65,48],
+                label: "Grosir - Pengecer",
                 borderColor: "#3cba9f",
                 fill: false
               }, { 
-                data: [40,20,10,16,24,38,74,167,508,784],
-                label: "Latin America",
+                data: [95,85,68,50],
+                label: "Pengecer - Konsumen",
                 borderColor: "#e8c3b9",
-                fill: false
-              }, { 
-                data: [6,3,2,2,7,26,82,172,312,433],
-                label: "North America",
-                borderColor: "#c45850",
                 fill: false
               }
             ]
           },
           options: {
-            title: {
-              display: true,
-              text: 'World population per region (in millions)'
+            responsive: true,
+            tooltips: {
+              mode: 'index',
+              intersect: false,
+            },
+            hover: {
+              mode: 'nearest',
+              intersect: true
+            },
+            scales: {
+              xAxes: [{
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Bulan'
+                }
+              }],
+              yAxes: [{
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Harga (Rp 000)'
+                },
+                ticks: {
+                    stepSize: 20,
+                    beginAtZero: true,
+                }
+              }]
             }
           }
+        });
+
+        axios.get('/getAllUserLocation').then((response) => {
+          var lokasi = response.data.lokasi;
+          console.log(lokasi);
+          console.log(response.data.status);
         })
       }
     }
