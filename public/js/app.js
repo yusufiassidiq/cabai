@@ -7723,51 +7723,51 @@ __webpack_require__.r(__webpack_exports__);
         var chart = _this.$refs.chart;
         var ctx = chart.getContext("2d");
         var myChart = new Chart(ctx, {
-          type: 'line',
+          type: 'bar',
           data: {
             labels: response.data.month,
             datasets: [{
               label: 'Pupuk',
-              backgroundColor: 'rgba(60,141,188,0.9)',
-              borderColor: 'rgba(60,141,188,0.8)',
+              backgroundColor: 'rgba(54, 162, 235, 1)',
+              borderColor: 'rgba(54, 162, 235, 1)',
               pointRadius: true,
               pointColor: '#3b8bba',
-              pointStrokeColor: 'rgba(60,141,188,1)',
+              pointStrokeColor: 'rgba(54, 162, 235, 1)',
               pointHighlightFill: '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data: response.data.pupuk,
-              fill: false
+              pointHighlightStroke: 'rgba(54, 162, 235, 1)',
+              data: response.data.pupuk // fill                : false,
+
             }, {
               label: 'Alat Tani',
-              backgroundColor: 'rgba(255, 0, 0, 0.6)',
-              borderColor: 'rgba(255, 0, 0, 0.8)',
+              backgroundColor: 'rgba(254, 99, 131, 1)',
+              borderColor: 'rgba(254, 99, 131, 1)',
               pointRadius: true,
-              pointColor: 'rgba(255, 0, 0, 0.8)',
+              pointColor: 'rgba(254, 99, 131, 1)',
               pointStrokeColor: '#c1c7d1',
               pointHighlightFill: '#fff',
-              pointHighlightStroke: 'rgba(255, 0, 0, 0.8)',
-              data: response.data.alatTani,
-              fill: false
+              pointHighlightStroke: 'rgba(254, 99, 131, 1)',
+              data: response.data.alatTani // fill                : false,
+
             }, {
               label: 'Pestisida',
-              backgroundColor: 'rgba(11, 156, 49, 0.8)',
-              borderColor: 'rgba(11, 156, 49, 1)',
+              backgroundColor: 'rgba(74, 192, 192, 1)',
+              borderColor: 'rgba(74, 192, 192, 1)',
               pointRadius: true,
               pointColor: '#3b8bba',
-              pointStrokeColor: 'rgba(11, 156, 49, 1)',
+              pointStrokeColor: 'rgba(74, 192, 192, 1)',
               pointHighlightFill: '#fff',
-              pointHighlightStroke: 'rgba(11, 156, 49, 1)',
-              data: response.data.pestisida,
-              fill: false
+              pointHighlightStroke: 'rgba(74, 192, 192, 1)',
+              data: response.data.pestisida // fill                : false,
+
             }, {
               label: 'Lainnya',
-              backgroundColor: 'rgba(255, 255, 0, 0.8)',
-              borderColor: 'rgba(255, 255, 0, 1)',
+              backgroundColor: 'rgba(247, 249, 127, 1)',
+              borderColor: 'rgba(247, 249, 127, 1)',
               pointRadius: true,
               pointColor: '#3b8bba',
-              pointStrokeColor: 'rgba(255, 255, 0, 1)',
+              pointStrokeColor: 'rgba(247, 249, 127, 1)',
               pointHighlightFill: '#fff',
-              pointHighlightStroke: 'rgba(255, 255, 0, 1)',
+              pointHighlightStroke: 'rgba(247, 249, 127, 1)',
               data: response.data.lainnya,
               fill: false
             }]
@@ -7784,11 +7784,296 @@ __webpack_require__.r(__webpack_exports__);
             },
             scales: {
               xAxes: [{
+                // stacked: true,
                 gridLines: {
                   display: false
                 }
               }],
               yAxes: [{
+                // stacked: true,
+                gridLines: {
+                  display: false
+                },
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+      })["catch"](function (error) {
+        console.log(error);
+        _this.errored = true;
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Penjualan.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/produsen/Penjualan.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      monthYearNow: {},
+      start: {},
+      end: {},
+      data: {}
+    };
+  },
+  mounted: function mounted() {
+    this.fillData();
+  },
+  methods: {
+    fillData: function fillData() {
+      var _this = this;
+
+      axios.get('/getPenjualan').then(function (response) {
+        _this.monthYearNow = response.data.monthYearNow;
+        _this.data = response.data.data;
+        _this.start = response.data.start;
+        _this.end = response.data.end;
+        var chart = _this.$refs.chart;
+        var ctx = chart.getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: response.data.tanggal,
+            datasets: [{
+              // type                : 'bar',
+              label: 'Rawit',
+              backgroundColor: 'rgba(54, 162, 235, 1)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              pointRadius: true,
+              pointColor: 'rgba(54, 162, 235, 1)',
+              pointStrokeColor: '#c1c7d1',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(54, 162, 235, 1)',
+              data: response.data.rawit,
+              fill: false
+            }, {
+              // type                : 'bar',
+              label: 'Keriting',
+              backgroundColor: 'rgba(254, 99, 131, 1)',
+              borderColor: 'rgba(254, 99, 131, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(254, 99, 131, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(254, 99, 131, 1)',
+              data: response.data.keriting,
+              fill: false
+            }, {
+              // type                : 'bar',
+              label: 'Besar',
+              backgroundColor: 'rgba(74, 192, 192, 1)',
+              borderColor: 'rgba(74, 192, 192, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(74, 192, 192, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(74, 192, 192, 1)',
+              data: response.data.besar,
+              fill: false
+            }]
+          },
+          options: {
+            responsive: true,
+            tooltips: {
+              mode: 'index',
+              intersect: false
+            },
+            //   hover:{
+            //     mode: 'nearest',
+            //     intersect: true,
+            //   },
+            //   snapGaps: false,
+            // elements:{
+            //   line:{
+            //     tension: 0.000001
+            //   }
+            // },
+            scales: {
+              xAxes: [{
+                stacked: true,
+                gridLines: {
+                  display: false
+                }
+              }],
+              yAxes: [{
+                stacked: true,
                 gridLines: {
                   display: false
                 },
@@ -11117,7 +11402,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -93617,78 +93901,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/grosir/BisnisAnalitik.vue?vue&type=template&id=c23bd2fe&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/grosir/BisnisAnalitik.vue?vue&type=template&id=c23bd2fe& ***!
-  \**********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div")
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/pengecer/BisnisAnalitik.vue?vue&type=template&id=773cb4e0&":
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/pengecer/BisnisAnalitik.vue?vue&type=template&id=773cb4e0& ***!
-  \************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div")
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/pengepul/BisnisAnalitik.vue?vue&type=template&id=b068fe6e&":
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/pengepul/BisnisAnalitik.vue?vue&type=template&id=b068fe6e& ***!
-  \************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div")
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=template&id=4d81ea84&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/produsen/Pengeluaran.vue?vue&type=template&id=4d81ea84& ***!
@@ -93750,7 +93962,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "row mb-2" }, [
           _c("div", { staticClass: "col-sm-6" }, [
             _c("h1", { staticClass: "m-0 text-dark" }, [
-              _vm._v("Pengeluaran Poduksi Cabai")
+              _vm._v("Rekap Pengeluaran Poduksi Cabai")
             ])
           ]),
           _vm._v(" "),
@@ -93796,6 +94008,176 @@ var staticRenderFns = [
           },
           [_c("i", { staticClass: "fas fa-times" })]
         )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Penjualan.vue?vue&type=template&id=767f2322&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/produsen/Penjualan.vue?vue&type=template&id=767f2322& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row justify-content-center" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("p", { staticClass: "text-center" }, [
+                      _c("strong", [
+                        _vm._v(
+                          "Penjualan: " +
+                            _vm._s(_vm.start) +
+                            " - " +
+                            _vm._s(_vm.end)
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "chart" }, [
+                      _c("canvas", {
+                        ref: "chart",
+                        staticStyle: { height: "100px" },
+                        attrs: { height: "100" }
+                      })
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _c("h3", { staticClass: "card-title" }, [
+                  _vm._v("Penjualan Cabai Bulan " + _vm._s(_vm.monthYearNow))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-tools" })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body table-responsive p-0" }, [
+                _c("table", { staticClass: "table table-hover text-nowrap" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.data, function(transaksi) {
+                      return _c("tr", { key: transaksi.tanggal_diterima }, [
+                        _c("td", [_vm._v(_vm._s(transaksi.tanggal_diterima))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(transaksi.jumlah_cabai))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(transaksi.total_transaksi))])
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [
+              _vm._v("Rekap Penjualan Cabai")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Laporan Penjualan")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-title" }, [
+        _vm._v("Grafik Penjualan Cabai")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-card-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fas fa-minus" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-card-widget": "remove" }
+          },
+          [_c("i", { staticClass: "fas fa-times" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Tanggal Transaksi")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Jumlah Cabai (Kg)")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Total Penjualan (Rp)")])
       ])
     ])
   }
@@ -94414,30 +94796,6 @@ var staticRenderFns = [
     )
   }
 ]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/bisnisAnalitik.vue?vue&type=template&id=1e9bb63b&":
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/produsen/bisnisAnalitik.vue?vue&type=template&id=1e9bb63b& ***!
-  \************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div")
-}
-var staticRenderFns = []
 render._withStripped = true
 
 
@@ -101292,7 +101650,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("li", { staticClass: "nav-header" }, [
-                    _vm._v("Bisnis Analitik")
+                    _vm._v("MANAJEMEN BISNIS")
                   ]),
                   _vm._v(" "),
                   _c(
@@ -101330,7 +101688,7 @@ var render = function() {
                             staticClass: "fas fa-user-friends nav-icon"
                           }),
                           _vm._v(" "),
-                          _c("p", [_vm._v("Penjualan")])
+                          _c("p", [_vm._v("Rekap Penjualan")])
                         ]
                       )
                     ],
@@ -101352,7 +101710,7 @@ var render = function() {
                             staticClass: "fas fa-user-friends nav-icon"
                           }),
                           _vm._v(" "),
-                          _c("p", [_vm._v("Pengeluaran")])
+                          _c("p", [_vm._v("Rekap Pengeluaran")])
                         ]
                       )
                     ],
@@ -101367,7 +101725,7 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "nav-link",
-                          attrs: { to: "/produsen/analitik" }
+                          attrs: { to: "/produsen/harga" }
                         },
                         [
                           _c("i", { staticClass: "nav-icon fas fa-tasks" }),
@@ -121596,27 +121954,26 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/ba/grosir/BisnisAnalitik.vue":
-/*!*********************************************************!*\
-  !*** ./resources/js/pages/ba/grosir/BisnisAnalitik.vue ***!
-  \*********************************************************/
+/***/ "./resources/js/pages/ba/produsen/Harga.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/pages/ba/produsen/Harga.vue ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BisnisAnalitik_vue_vue_type_template_id_c23bd2fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BisnisAnalitik.vue?vue&type=template&id=c23bd2fe& */ "./resources/js/pages/ba/grosir/BisnisAnalitik.vue?vue&type=template&id=c23bd2fe&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
 var script = {}
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
   script,
-  _BisnisAnalitik_vue_vue_type_template_id_c23bd2fe___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BisnisAnalitik_vue_vue_type_template_id_c23bd2fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  render,
+  staticRenderFns,
   false,
   null,
   null,
@@ -121624,134 +121981,8 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/pages/ba/grosir/BisnisAnalitik.vue"
+component.options.__file = "resources/js/pages/ba/produsen/Harga.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/pages/ba/grosir/BisnisAnalitik.vue?vue&type=template&id=c23bd2fe&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/pages/ba/grosir/BisnisAnalitik.vue?vue&type=template&id=c23bd2fe& ***!
-  \****************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BisnisAnalitik_vue_vue_type_template_id_c23bd2fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BisnisAnalitik.vue?vue&type=template&id=c23bd2fe& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/grosir/BisnisAnalitik.vue?vue&type=template&id=c23bd2fe&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BisnisAnalitik_vue_vue_type_template_id_c23bd2fe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BisnisAnalitik_vue_vue_type_template_id_c23bd2fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/pages/ba/pengecer/BisnisAnalitik.vue":
-/*!***********************************************************!*\
-  !*** ./resources/js/pages/ba/pengecer/BisnisAnalitik.vue ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BisnisAnalitik_vue_vue_type_template_id_773cb4e0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BisnisAnalitik.vue?vue&type=template&id=773cb4e0& */ "./resources/js/pages/ba/pengecer/BisnisAnalitik.vue?vue&type=template&id=773cb4e0&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _BisnisAnalitik_vue_vue_type_template_id_773cb4e0___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BisnisAnalitik_vue_vue_type_template_id_773cb4e0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/pages/ba/pengecer/BisnisAnalitik.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/pages/ba/pengecer/BisnisAnalitik.vue?vue&type=template&id=773cb4e0&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/pages/ba/pengecer/BisnisAnalitik.vue?vue&type=template&id=773cb4e0& ***!
-  \******************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BisnisAnalitik_vue_vue_type_template_id_773cb4e0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BisnisAnalitik.vue?vue&type=template&id=773cb4e0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/pengecer/BisnisAnalitik.vue?vue&type=template&id=773cb4e0&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BisnisAnalitik_vue_vue_type_template_id_773cb4e0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BisnisAnalitik_vue_vue_type_template_id_773cb4e0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/pages/ba/pengepul/BisnisAnalitik.vue":
-/*!***********************************************************!*\
-  !*** ./resources/js/pages/ba/pengepul/BisnisAnalitik.vue ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BisnisAnalitik_vue_vue_type_template_id_b068fe6e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BisnisAnalitik.vue?vue&type=template&id=b068fe6e& */ "./resources/js/pages/ba/pengepul/BisnisAnalitik.vue?vue&type=template&id=b068fe6e&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _BisnisAnalitik_vue_vue_type_template_id_b068fe6e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BisnisAnalitik_vue_vue_type_template_id_b068fe6e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/pages/ba/pengepul/BisnisAnalitik.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/pages/ba/pengepul/BisnisAnalitik.vue?vue&type=template&id=b068fe6e&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/pages/ba/pengepul/BisnisAnalitik.vue?vue&type=template&id=b068fe6e& ***!
-  \******************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BisnisAnalitik_vue_vue_type_template_id_b068fe6e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BisnisAnalitik.vue?vue&type=template&id=b068fe6e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/pengepul/BisnisAnalitik.vue?vue&type=template&id=b068fe6e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BisnisAnalitik_vue_vue_type_template_id_b068fe6e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BisnisAnalitik_vue_vue_type_template_id_b068fe6e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
 
 /***/ }),
 
@@ -121833,17 +122064,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-var script = {}
+/* harmony import */ var _Penjualan_vue_vue_type_template_id_767f2322___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Penjualan.vue?vue&type=template&id=767f2322& */ "./resources/js/pages/ba/produsen/Penjualan.vue?vue&type=template&id=767f2322&");
+/* harmony import */ var _Penjualan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Penjualan.vue?vue&type=script&lang=js& */ "./resources/js/pages/ba/produsen/Penjualan.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
-  script,
-  render,
-  staticRenderFns,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Penjualan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Penjualan_vue_vue_type_template_id_767f2322___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Penjualan_vue_vue_type_template_id_767f2322___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -121851,8 +122085,42 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+/* hot reload */
+if (false) { var api; }
 component.options.__file = "resources/js/pages/ba/produsen/Penjualan.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/ba/produsen/Penjualan.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/pages/ba/produsen/Penjualan.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Penjualan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Penjualan.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Penjualan.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Penjualan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/ba/produsen/Penjualan.vue?vue&type=template&id=767f2322&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/pages/ba/produsen/Penjualan.vue?vue&type=template&id=767f2322& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Penjualan_vue_vue_type_template_id_767f2322___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Penjualan.vue?vue&type=template&id=767f2322& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Penjualan.vue?vue&type=template&id=767f2322&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Penjualan_vue_vue_type_template_id_767f2322___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Penjualan_vue_vue_type_template_id_767f2322___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -121920,59 +122188,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Target_vue_vue_type_template_id_6656cb9b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Target_vue_vue_type_template_id_6656cb9b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/pages/ba/produsen/bisnisAnalitik.vue":
-/*!***********************************************************!*\
-  !*** ./resources/js/pages/ba/produsen/bisnisAnalitik.vue ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _bisnisAnalitik_vue_vue_type_template_id_1e9bb63b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bisnisAnalitik.vue?vue&type=template&id=1e9bb63b& */ "./resources/js/pages/ba/produsen/bisnisAnalitik.vue?vue&type=template&id=1e9bb63b&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _bisnisAnalitik_vue_vue_type_template_id_1e9bb63b___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _bisnisAnalitik_vue_vue_type_template_id_1e9bb63b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/pages/ba/produsen/bisnisAnalitik.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/pages/ba/produsen/bisnisAnalitik.vue?vue&type=template&id=1e9bb63b&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/pages/ba/produsen/bisnisAnalitik.vue?vue&type=template&id=1e9bb63b& ***!
-  \******************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_bisnisAnalitik_vue_vue_type_template_id_1e9bb63b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./bisnisAnalitik.vue?vue&type=template&id=1e9bb63b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/bisnisAnalitik.vue?vue&type=template&id=1e9bb63b&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_bisnisAnalitik_vue_vue_type_template_id_1e9bb63b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_bisnisAnalitik_vue_vue_type_template_id_1e9bb63b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -124371,11 +124586,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./pages/ba/produsen/Target */ "./resources/js/pages/ba/produsen/Target.vue");
 /* harmony import */ var _pages_ba_produsen_Penjualan__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./pages/ba/produsen/Penjualan */ "./resources/js/pages/ba/produsen/Penjualan.vue");
 /* harmony import */ var _pages_ba_produsen_Pengeluaran__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./pages/ba/produsen/Pengeluaran */ "./resources/js/pages/ba/produsen/Pengeluaran.vue");
-/* harmony import */ var _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./pages/ba/produsen/bisnisAnalitik */ "./resources/js/pages/ba/produsen/bisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./pages/ba/pengepul/BisnisAnalitik */ "./resources/js/pages/ba/pengepul/BisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./pages/ba/grosir/BisnisAnalitik */ "./resources/js/pages/ba/grosir/BisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./pages/ba/pengecer/BisnisAnalitik */ "./resources/js/pages/ba/pengecer/BisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_Master2__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./pages/ba/Master2 */ "./resources/js/pages/ba/Master2.vue");
+/* harmony import */ var _pages_ba_produsen_Harga__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./pages/ba/produsen/Harga */ "./resources/js/pages/ba/produsen/Harga.vue");
+/* harmony import */ var _pages_ba_Master2__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./pages/ba/Master2 */ "./resources/js/pages/ba/Master2.vue");
  // Pages
 
 
@@ -124431,9 +124643,6 @@ __webpack_require__.r(__webpack_exports__);
 // import InventarisKonsumen from './pages/scm/konsumen/Inventaris'
 
  // Pages - Bisnis Analitik
-
-
-
 
 
 
@@ -124519,10 +124728,6 @@ var routes = [// SCM
     name: "PermintaanCabai"
   }, //BA
   {
-    path: 'analitik',
-    component: _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_49__["default"],
-    name: "BisnisAnalitikProd"
-  }, {
     path: 'target',
     component: _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_46__["default"],
     name: "TargetProd"
@@ -124534,6 +124739,10 @@ var routes = [// SCM
     path: 'pengeluaran',
     component: _pages_ba_produsen_Pengeluaran__WEBPACK_IMPORTED_MODULE_48__["default"],
     name: "PengeluaranProd"
+  }, {
+    path: 'harga',
+    component: _pages_ba_produsen_Harga__WEBPACK_IMPORTED_MODULE_49__["default"],
+    name: "HargaProd"
   }]
 }, {
   path: '/grosir',
@@ -124568,10 +124777,6 @@ var routes = [// SCM
     path: 'permintaancabai',
     component: _pages_scm_grosir_PermintaanCabai__WEBPACK_IMPORTED_MODULE_30__["default"],
     name: "PermintaanCabaiGrosir"
-  }, {
-    path: 'analitik',
-    component: _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_51__["default"],
-    name: "BisnisAnalitikGrosir"
   }, {
     path: 'inventaris',
     component: _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_31__["default"],
@@ -124611,10 +124816,6 @@ var routes = [// SCM
     component: _pages_scm_pengecer_PermintaanCabai__WEBPACK_IMPORTED_MODULE_37__["default"],
     name: "PermintaanCabaiPengecer"
   }, {
-    path: 'analitik',
-    component: _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_52__["default"],
-    name: "BisnisAnalitikPengecer"
-  }, {
     path: 'inventaris',
     component: _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_38__["default"],
     name: "InventarisPengecer"
@@ -124652,10 +124853,6 @@ var routes = [// SCM
     path: 'permintaancabai',
     component: _pages_scm_pengepul_PermintaanCabai__WEBPACK_IMPORTED_MODULE_23__["default"],
     name: "PermintaanCabaiPengepul"
-  }, {
-    path: 'analitik',
-    component: _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_50__["default"],
-    name: "BisnisAnalitikPengepul"
   }, {
     path: 'inventaris',
     component: _pages_scm_pengepul_Inventaris__WEBPACK_IMPORTED_MODULE_24__["default"],
@@ -124701,7 +124898,7 @@ var routes = [// SCM
 }, {
   path: '/detail',
   name: 'badetail',
-  component: _pages_ba_Master2__WEBPACK_IMPORTED_MODULE_53__["default"]
+  component: _pages_ba_Master2__WEBPACK_IMPORTED_MODULE_50__["default"]
 }, {
   path: '/register',
   name: 'register',
@@ -124905,8 +125102,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
