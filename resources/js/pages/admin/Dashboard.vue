@@ -38,11 +38,11 @@
                   <p>Total user</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <i class="fas fa-users"></i>
                 </div>
                 <a href="#" class="small-box-footer">
-                  Selengkapnya
-                  <i class="fas fa-arrow-circle-right"></i>
+                  <!-- Selengkapnya -->
+                  <!-- <i class="fas fa-arrow-circle-right"></i> -->
                 </a>
               </div>
             </div>
@@ -55,11 +55,11 @@
                   <p>User Tervalidasi</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
+                  <i class="fas fa-user-check"></i>
                 </div>
                 <a href="#" class="small-box-footer">
-                  Selengkapnya
-                  <i class="fas fa-arrow-circle-right"></i>
+                  <!-- Selengkapnya -->
+                  <!-- <i class="fas fa-arrow-circle-right"></i> -->
                 </a>
               </div>
             </div>
@@ -72,11 +72,11 @@
                   <p>User Belum divalidasi</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <i class="fas fa-user-tie"></i>
                 </div>
                 <a href="#" class="small-box-footer">
-                  Selengkapnya
-                  <i class="fas fa-arrow-circle-right"></i>
+                  <!-- Selengkapnya
+                  <i class="fas fa-arrow-circle-right"></i> -->
                 </a>
               </div>
             </div>
@@ -90,11 +90,11 @@
                   <p>User Gagal validasi</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
+                  <i class="fas fa-user-times"></i>
                 </div>
                 <a href="#" class="small-box-footer">
-                  Selengkapnya
-                  <i class="fas fa-arrow-circle-right"></i>
+                  <!-- Selengkapnya
+                  <i class="fas fa-arrow-circle-right"></i> -->
                 </a>
               </div>
             </div>

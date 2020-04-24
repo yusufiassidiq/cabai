@@ -120,21 +120,20 @@
                 <p>Rekap Target</p>
               </router-link>
             </li>
-            <!-- <li class="nav-header">Rekap Laporan</li> -->
             <li class="nav-item">
               <router-link to="/produsen/penjualan" class="nav-link">
                 <i class="fas fa-user-friends nav-icon"></i>
-                <p>Laporan Penjualan</p>
+                <p>Rekap Penjualan</p>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link to="/produsen/pengeluaran" class="nav-link">
                 <i class="fas fa-user-friends nav-icon"></i>
-                <p>Laporan Pengeluaran</p>
+                <p>Rekap Pengeluaran</p>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/produsen/analitik" class="nav-link">
+              <router-link to="/produsen/harga" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>Rekap Harga Cabai</p>
               </router-link>

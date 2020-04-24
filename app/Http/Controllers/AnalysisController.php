@@ -249,23 +249,57 @@ class AnalysisController extends Controller
     {
         // $lastweek = Carbon::now()->subweek();
         // $tomorrow = Carbon::now()->addDay();
+        $year= "2020";
+        $month="04";
+        $monthYearNow = Carbon::now()->isoFormat('MMMM YYYY');
+        $filter = $year . '-' . $month; //GET DATA BULAN & TAHUN YANG DIKIRIMKAN SEBAGAI PARAMETER
+        $parse = Carbon::parse($filter); 
+        //BUAT RANGE TANGGAL PADA BULAN TERKAIT
+        $array_date = range($parse->startOfMonth()->format('d'), $parse->endOfMonth()->format('d'));
+        //GET DATA TRANSAKSI BERDASARKAN BULAN & TANGGAL YANG DIMINTA.
+        //GROUP / KELOMPOKKAN BERDASARKAN TANGGALNYA
+        //SUM DATA AMOUNT DAN SIMPAN KE NAMA BARU YAKNI TOTAL
+        $transaksi = Transaksi::where('tanggal_diterima', 'LIKE',  $filter . '%')
+            ->select('tanggal_diterima',DB::raw('sum(jumlah_cabai) as jumlah'),DB::raw('sum(jumlah_cabai*harga) as total'))
+            ->groupBy('tanggal_diterima')
+            ->get();
+        foreach($array_date as $i){
+            $n_date=strlen($i) == 1 ? 0 . $i:$i;
+            $date = $filter . '-' . $n_date;
+            $total_transaksi=$transaksi->firstWhere('tanggal_diterima',$date);
+            $data[]=[
+                'tanggal_diterima' => $date,
+                //if $total_transaksi true maka nilainya $total_transaksi->total selainnya 0
+                'total_transaksi' => $total_transaksi ? $total_transaksi->total:0,
+                'jumlah_cabai' => $total_transaksi ? $total_transaksi->jumlah:0
+            ];
+        }
+        $lastmonth = Carbon::now()->subMonth()->addDay()->format('Y-m-d');
+        $startMonth = Carbon::now()->startOfMonth()->format('Y-m-d');
         $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
         $start = Carbon::now()->subweek()->addDay()->format('Y-m-d');
         $end = Carbon::now()->format('Y-m-d');
         $startTitle = Carbon::now()->subweek()->addDay()->isoFormat('Do MMMM YYYY');
         $endTitle = Carbon::now()->isoFormat('Do MMMM YYYY');
-        $totalTransaksi = Transaksi::Where('user_id',$idUser)
-                    ->whereBetween('tanggal_diterima', [$start, $end])
-                    ->select('tanggal_diterima',DB::raw('count(*) as vol'), DB::raw("SUM(jumlah_cabai) as totalTransaksi"))
-                    ->groupBy('tanggal_diterima')
-                    ->get()
-                    ->pluck('totalTransaksi','tanggal_diterima')
-                    ->all();
+        $totalTransaksi = Transaksi::Where([
+                        ['pemasok_id',$idUser],
+                        ['status_permintaan','3'],
+                        ['status_pengiriman','1'],
+                        ['status_pemesanan','1'],
+                        ])->whereBetween('tanggal_diterima', [$start, $end])
+                        ->select('tanggal_diterima',DB::raw('count(*) as vol'), DB::raw("SUM(jumlah_cabai) as totalTransaksi"))
+                        ->groupBy('tanggal_diterima')
+                        ->get()
+                        ->pluck('totalTransaksi','tanggal_diterima')
+                        ->all();
         $x=0;
         for($i=Carbon::now()->subweek()->addDay();$i<=Carbon::now();$i->addDay()){
             $tanggal[$x]=$i->format('Y-m-d');
             $cabaiByDay[$x]=Transaksi::Where([
-                            ['user_id',$idUser],
+                            ['pemasok_id',$idUser],
+                            ['status_permintaan','3'],
+                            ['status_pengiriman','1'],
+                            ['status_pemesanan','1'],
                             ['tanggal_diterima',$tanggal[$x]]
                             ])->select('jenis_cabai',DB::raw('count(*) as vol'), DB::raw("SUM(jumlah_cabai) as totalCabai"))
                             ->groupBy('jenis_cabai')
@@ -293,9 +327,13 @@ class AnalysisController extends Controller
             $x++;
         }
         return response()->json([
-            'totalTransaksi' => $totalTransaksi,
+            'transaksi' => $transaksi,
+            'data' => $data,
+            'monthYearNow' => $monthYearNow,
+            // 'lastmonth' => $lastmonth,
+            // 'totalTransaksi' => $totalTransaksi,
             'tanggal' => $tanggal,
-            'totalByTanggal' => $totalByTanggal,
+            // 'totalByTanggal' => $totalByTanggal,
             'start' => $startTitle,
             'end' => $endTitle,
             'cabai' => $cabaiByDay,

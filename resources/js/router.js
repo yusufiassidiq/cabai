@@ -63,10 +63,8 @@ import BAMaster from './pages/ba/Master'
 import TargetProd from './pages/ba/produsen/Target'
 import PenjualanProd from './pages/ba/produsen/Penjualan'
 import PengeluaranProd from './pages/ba/produsen/Pengeluaran'
-import BisnisAnalitikProd from './pages/ba/produsen/bisnisAnalitik'
-import BisnisAnalitikPengepul from './pages/ba/pengepul/BisnisAnalitik'
-import BisnisAnalitikGrosir from './pages/ba/grosir/BisnisAnalitik'
-import BisnisAnalitikPengecer from './pages/ba/pengecer/BisnisAnalitik'
+import HargaProd from './pages/ba/produsen/Harga'
+
 
 //test
 import BAMaster2 from './pages/ba/Master2'
@@ -161,11 +159,6 @@ const routes = [
             },
             //BA
             {
-                path: 'analitik',
-                component: BisnisAnalitikProd,
-                name: "BisnisAnalitikProd"
-            },
-            {
                 path: 'target',
                 component: TargetProd,
                 name: "TargetProd"
@@ -179,6 +172,11 @@ const routes = [
                 path: 'pengeluaran',
                 component: PengeluaranProd,
                 name: "PengeluaranProd"
+            },
+            {
+                path: 'harga',
+                component: HargaProd,
+                name: "HargaProd"
             },
         ]
     },
@@ -221,11 +219,6 @@ const routes = [
                 path: 'permintaancabai',
                 component: PermintaanCabaiGrosir,
                 name: "PermintaanCabaiGrosir"
-            },
-            {
-                path: 'analitik',
-                component: BisnisAnalitikGrosir,
-                name: "BisnisAnalitikGrosir"
             },
             {
                 path: 'inventaris',
@@ -276,11 +269,6 @@ const routes = [
                 name: "PermintaanCabaiPengecer"
             },
             {
-                path: 'analitik',
-                component: BisnisAnalitikPengecer,
-                name: "BisnisAnalitikPengecer"
-            },
-            {
                 path: 'inventaris',
                 component: InventarisPengecer,
                 name: "InventarisPengecer"
@@ -326,11 +314,6 @@ const routes = [
                 path: 'permintaancabai',
                 component: PermintaanCabaiPengepul,
                 name: "PermintaanCabaiPengepul"
-            },
-            {
-                path: 'analitik',
-                component: BisnisAnalitikPengepul,
-                name: "BisnisAnalitikPengepul"
             },
             {
                 path: 'inventaris',

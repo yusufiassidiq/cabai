@@ -3,28 +3,15 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class ="custom-container">
-        <!-- <button
-          class="navbar-toggler order-1"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarCollapse"
-          aria-controls="navbarCollapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>-->
 
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-          <a href="#" class="navbar-brand">
-            <!-- <img
-                        src="../../dist/img/AdminLTELogo.png"
-                        alt="AdminLTE Logo"
-                        class="brand-image img-circle elevation-3"
-                        style="opacity: .8"
-            />-->
+          <a href="/" class="navbar-brand">
+            <img
+                src="/dist/img/icon_cabai.png"
+                class="brand-image"
+            />
             <span class="brand-text font-weight-light">
-              <b>cabai.id</b>
+              <b>CABAI</b>.id
             </span>
           </a>
           <!-- Left navbar links -->
@@ -46,80 +33,6 @@
             <li class="nav-item">
               <router-link to="/detail" class="nav-link">Detail</router-link>
             </li>
-
-            <!-- <li class="nav-item dropdown">
-                            <a
-                                id="dropdownSubMenu1"
-                                href="#"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                                class="nav-link dropdown-toggle"
-                            >Dropdown</a>
-                            <ul
-                                aria-labelledby="dropdownSubMenu1"
-                                class="dropdown-menu border-0 shadow"
-                            >
-                                <li>
-                                    <a href="#" class="dropdown-item">Some action</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="dropdown-item">Some other action</a>
-                                </li>
-
-                                <li class="dropdown-divider"></li>
-
-                                <li class="dropdown-submenu dropdown-hover">
-                                    <a
-                                        id="dropdownSubMenu2"
-                                        href="#"
-                                        role="button"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                        class="dropdown-item dropdown-toggle"
-                                    >Hover for action</a>
-                                    <ul
-                                        aria-labelledby="dropdownSubMenu2"
-                                        class="dropdown-menu border-0 shadow"
-                                    >
-                                        <li>
-                                            <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                                        </li>
-
-                                        <li class="dropdown-submenu">
-                                            <a
-                                                id="dropdownSubMenu3"
-                                                href="#"
-                                                role="button"
-                                                data-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
-                                                class="dropdown-item dropdown-toggle"
-                                            >level 2</a>
-                                            <ul
-                                                aria-labelledby="dropdownSubMenu3"
-                                                class="dropdown-menu border-0 shadow"
-                                            >
-                                                <li>
-                                                    <a href="#" class="dropdown-item">3rd level</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="dropdown-item">3rd level</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="dropdown-item">level 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="dropdown-item">level 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-            </li>-->
           </ul>
 
           <!-- SEARCH FORM -->
@@ -161,10 +74,7 @@
                 <li class="breadcrumb-item">
                   <a href="#">Home</a>
                 </li>
-                <li class="breadcrumb-item">
-                  <a href="#">Layout</a>
-                </li>
-                <li class="breadcrumb-item active">Top Navigation</li>
+                <li class="breadcrumb-item active">Dashboard Jawa Barat</li>
               </ol>
             </div>
             <!-- /.col -->
@@ -179,28 +89,8 @@
       <div class="content">
         <div class="custom-container">
           <div class="row">
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-info">
-                <div class="inner">
-                  <h4>
-                    <b>Cabai Merah</b>
-                  </h4>
-                  <h4>Rp20000/kg</h4>
-
-                  <p align="right">Harga stabil</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag fas fa-equals"></i>
-                </div>
-                <router-link to="/detail" class="nav-link small-box-footer">
-                  More Info
-                  <i class="fas fa-arrow-circle-right"></i>
-                </router-link>
-              </div>
-            </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4 col-6">
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
@@ -214,14 +104,14 @@
                 <div class="icon">
                   <i class="ion ion-bag fas fa-angle-double-down"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <router-link to="/detail" class="small-box-footer">
                   More info
                   <i class="fas fa-arrow-circle-right"></i>
-                </a>
+                </router-link>
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4 col-6">
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
@@ -235,14 +125,14 @@
                 <div class="icon">
                   <i class="ion ion-bag fas fa-times"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <router-link to="/detail" class="small-box-footer">
                   More info
                   <i class="fas fa-arrow-circle-right"></i>
-                </a>
+                </router-link>
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4 col-6">
               <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
@@ -256,10 +146,10 @@
                 <div class="icon">
                   <i class="ion ion-bag fas fa-angle-double-up"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <router-link to="/detail" class="small-box-footer">
                   More info
                   <i class="fas fa-arrow-circle-right"></i>
-                </a>
+                </router-link>
               </div>
             </div>
             <!-- ./col -->
@@ -280,7 +170,8 @@
 
                       <div class="chart">
                         <!-- Sales Chart Canvas -->
-                        <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
+                        <canvas ref="chart" height="180" style="height: 180px;"></canvas>
+                        <!-- <canvas id="salesChart" height="180" style="height: 180px;"></canvas> -->
                       </div>
                       <!-- /.chart-responsive -->
                     </div>
@@ -338,6 +229,7 @@
                   </div>
                   <!-- /.row -->
                 </div>
+                
                 <!-- ./card-body -->
                 <div class="card-footer">
                   <div class="row">
@@ -387,10 +279,16 @@
                   </div>
                   <!-- /.row -->
                 </div>
+                <router-link to="/detail" class="card-footer">
+                  <span class="description-text">MORE INFO</span>
+                  <i class="fas fa-arrow-circle-right"></i>
+                </router-link>
                 <!-- /.card-footer -->
               </div>
               <!-- /.card -->
+              
             </div>
+            
             <!-- /.col -->
           </div>
           <div class="row">
@@ -456,6 +354,45 @@
             <!-- /.col-md-6 -->
           </div>
           <!-- /.row -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title">Grafik Target Penjualan Cabai</h5>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <p class="text-center">
+                        <strong>Target Januari - Desember Tahun {{ year }}</strong>
+                      </p>
+
+                      <div class="chart">
+                        <!-- Sales Chart Canvas -->
+                        <canvas id="chart2" height="100" style="height: 100px;"></canvas>
+                      </div>
+                      <!-- /.chart-responsive -->
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+                </div>
+                <!-- ./card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
         </div>
         <!-- /.container-fluid -->
       </div>
@@ -474,3 +411,94 @@
   margin-left: auto;
 }
 </style>
+
+<script>
+    import { Bar, Line } from 'vue-chartjs'
+    
+    export default{
+      mounted() {
+        axios.get('/getUserCount').then((response) => {
+          var chart = this.$refs.chart;
+          var ctx = chart.getContext("2d");
+          var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: response.data.role_user,
+                  datasets: [{
+                      label               : '# of User',
+                      data                : response.data.user,
+                      borderWidth         : 1,
+                      backgroundColor     : 'rgba(210, 100, 222, 1)',
+                      borderColor         : 'rgba(210, 214, 222, 1)',
+                  }]
+              },
+              options: {
+                  maintainAspectRatio : false,
+                  responsive : true,
+                  legend: {
+                    display: false
+                  },
+                  scales: {
+                      xAxes: [{
+                        gridLines : {
+                          display : false,
+                        }
+                      }],
+                      yAxes: [{
+                          gridLines : {
+                            display : false,
+                          },
+                          ticks: {
+                              stepSize: 1,
+                              beginAtZero: true,
+                          }
+                      }]
+                  }
+              }
+          });
+        }).catch(error => {
+          console.log(error)
+          this.errored = true
+        });
+        new Chart(document.getElementById("chart2"), {
+          type: 'line',
+          data: {
+            labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+            datasets: [{ 
+                data: [86,114,106,106,107,111,133,221,783,2478],
+                label: "Africa",
+                borderColor: "#3e95cd",
+                fill: false
+              }, { 
+                data: [282,350,411,502,635,809,947,1402,3700,5267],
+                label: "Asia",
+                borderColor: "#8e5ea2",
+                fill: false
+              }, { 
+                data: [168,170,178,190,203,276,408,547,675,734],
+                label: "Europe",
+                borderColor: "#3cba9f",
+                fill: false
+              }, { 
+                data: [40,20,10,16,24,38,74,167,508,784],
+                label: "Latin America",
+                borderColor: "#e8c3b9",
+                fill: false
+              }, { 
+                data: [6,3,2,2,7,26,82,172,312,433],
+                label: "North America",
+                borderColor: "#c45850",
+                fill: false
+              }
+            ]
+          },
+          options: {
+            title: {
+              display: true,
+              text: 'World population per region (in millions)'
+            }
+          }
+        })
+      }
+    }
+</script>
