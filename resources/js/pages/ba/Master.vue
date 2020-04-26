@@ -3,28 +3,15 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class ="custom-container">
-        <!-- <button
-          class="navbar-toggler order-1"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarCollapse"
-          aria-controls="navbarCollapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>-->
 
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-          <a href="#" class="navbar-brand">
-            <!-- <img
-                        src="../../dist/img/AdminLTELogo.png"
-                        alt="AdminLTE Logo"
-                        class="brand-image img-circle elevation-3"
-                        style="opacity: .8"
-            />-->
+          <a href="/" class="navbar-brand">
+            <img
+                src="/dist/img/icon_cabai.png"
+                class="brand-image"
+            />
             <span class="brand-text font-weight-light">
-              <b>cabai.id</b>
+              <b>CABAI</b>.id
             </span>
           </a>
           <!-- Left navbar links -->
@@ -46,80 +33,6 @@
             <li class="nav-item">
               <router-link to="/detail" class="nav-link">Detail</router-link>
             </li>
-
-            <!-- <li class="nav-item dropdown">
-                            <a
-                                id="dropdownSubMenu1"
-                                href="#"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                                class="nav-link dropdown-toggle"
-                            >Dropdown</a>
-                            <ul
-                                aria-labelledby="dropdownSubMenu1"
-                                class="dropdown-menu border-0 shadow"
-                            >
-                                <li>
-                                    <a href="#" class="dropdown-item">Some action</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="dropdown-item">Some other action</a>
-                                </li>
-
-                                <li class="dropdown-divider"></li>
-
-                                <li class="dropdown-submenu dropdown-hover">
-                                    <a
-                                        id="dropdownSubMenu2"
-                                        href="#"
-                                        role="button"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                        class="dropdown-item dropdown-toggle"
-                                    >Hover for action</a>
-                                    <ul
-                                        aria-labelledby="dropdownSubMenu2"
-                                        class="dropdown-menu border-0 shadow"
-                                    >
-                                        <li>
-                                            <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                                        </li>
-
-                                        <li class="dropdown-submenu">
-                                            <a
-                                                id="dropdownSubMenu3"
-                                                href="#"
-                                                role="button"
-                                                data-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
-                                                class="dropdown-item dropdown-toggle"
-                                            >level 2</a>
-                                            <ul
-                                                aria-labelledby="dropdownSubMenu3"
-                                                class="dropdown-menu border-0 shadow"
-                                            >
-                                                <li>
-                                                    <a href="#" class="dropdown-item">3rd level</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="dropdown-item">3rd level</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="dropdown-item">level 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="dropdown-item">level 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-            </li>-->
           </ul>
 
           <!-- SEARCH FORM -->
@@ -161,10 +74,7 @@
                 <li class="breadcrumb-item">
                   <a href="#">Home</a>
                 </li>
-                <li class="breadcrumb-item">
-                  <a href="#">Layout</a>
-                </li>
-                <li class="breadcrumb-item active">Top Navigation</li>
+                <li class="breadcrumb-item active">Dashboard Jawa Barat</li>
               </ol>
             </div>
             <!-- /.col -->
@@ -179,28 +89,8 @@
       <div class="content">
         <div class="custom-container">
           <div class="row">
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-info">
-                <div class="inner">
-                  <h4>
-                    <b>Cabai Merah</b>
-                  </h4>
-                  <h4>Rp20000/kg</h4>
-
-                  <p align="right">Harga stabil</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag fas fa-equals"></i>
-                </div>
-                <router-link to="/detail" class="nav-link small-box-footer">
-                  More Info
-                  <i class="fas fa-arrow-circle-right"></i>
-                </router-link>
-              </div>
-            </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4 col-6">
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
@@ -214,14 +104,14 @@
                 <div class="icon">
                   <i class="ion ion-bag fas fa-angle-double-down"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <router-link to="/detail" class="small-box-footer">
                   More info
                   <i class="fas fa-arrow-circle-right"></i>
-                </a>
+                </router-link>
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4 col-6">
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
@@ -235,14 +125,14 @@
                 <div class="icon">
                   <i class="ion ion-bag fas fa-times"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <router-link to="/detail" class="small-box-footer">
                   More info
                   <i class="fas fa-arrow-circle-right"></i>
-                </a>
+                </router-link>
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4 col-6">
               <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
@@ -256,10 +146,10 @@
                 <div class="icon">
                   <i class="ion ion-bag fas fa-angle-double-up"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <router-link to="/detail" class="small-box-footer">
                   More info
                   <i class="fas fa-arrow-circle-right"></i>
-                </a>
+                </router-link>
               </div>
             </div>
             <!-- ./col -->
@@ -268,19 +158,20 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h5 class="card-title">Monthly Recap Report</h5>
+                  <h4 class="card-title">Mitra Aplikasi</h4>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-8">
                       <p class="text-center">
-                        <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                        <strong>Jumlah Pengguna Berdasarkan Stakeholder</strong>
                       </p>
 
                       <div class="chart">
                         <!-- Sales Chart Canvas -->
-                        <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
+                        <canvas ref="chart" height="180" style="height: 180px;"></canvas>
+                        <!-- <canvas id="salesChart" height="180" style="height: 180px;"></canvas> -->
                       </div>
                       <!-- /.chart-responsive -->
                     </div>
@@ -291,31 +182,33 @@
                       </p>
 
                       <div class="progress-group">
-                        Add Products to Cart
+                        Kemitraan Pengguna
                         <span class="float-right">
-                          <b>160</b>/200
+                          <b>4</b>/10
                         </span>
                         <div class="progress progress-sm">
-                          <div class="progress-bar bg-primary" style="width: 80%"></div>
+                          <div class="progress-bar bg-primary" style="width: 40%"></div>
                         </div>
                       </div>
                       <!-- /.progress-group -->
 
                       <div class="progress-group">
-                        Complete Purchase
+                        Transaksi Berhasil
                         <span class="float-right">
-                          <b>310</b>/400
+                          <b>12</b>/24
                         </span>
                         <div class="progress progress-sm">
-                          <div class="progress-bar bg-danger" style="width: 75%"></div>
+                          <div class="progress-bar bg-danger" style="width: 50%"></div>
                         </div>
                       </div>
 
                       <!-- /.progress-group -->
                       <div class="progress-group">
-                        <span class="progress-text">Visit Premium Page</span>
+                        <span class="progress-text">
+                          Mitra di Kab/Kota
+                        </span>
                         <span class="float-right">
-                          <b>480</b>/800
+                          <b>20</b>/27
                         </span>
                         <div class="progress progress-sm">
                           <div class="progress-bar bg-success" style="width: 60%"></div>
@@ -324,9 +217,9 @@
 
                       <!-- /.progress-group -->
                       <div class="progress-group">
-                        Send Inquiries
+                        Pencapaian Target
                         <span class="float-right">
-                          <b>250</b>/500
+                          <b>50%</b>
                         </span>
                         <div class="progress progress-sm">
                           <div class="progress-bar bg-warning" style="width: 50%"></div>
@@ -338,6 +231,7 @@
                   </div>
                   <!-- /.row -->
                 </div>
+                
                 <!-- ./card-body -->
                 <div class="card-footer">
                   <div class="row">
@@ -387,10 +281,16 @@
                   </div>
                   <!-- /.row -->
                 </div>
+                <router-link to="/detail" class="card-footer">
+                  <span class="description-text">MORE INFO</span>
+                  <i class="fas fa-arrow-circle-right"></i>
+                </router-link>
                 <!-- /.card-footer -->
               </div>
               <!-- /.card -->
+              
             </div>
+            
             <!-- /.col -->
           </div>
           <div class="row">
@@ -456,6 +356,174 @@
             <!-- /.col-md-6 -->
           </div>
           <!-- /.row -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Harga Cabai Prov Jawa Barat berdasarkan Stakeholder</h4>
+
+                  <!-- <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div> -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <p class="text-center">
+                        <strong>Perbandingan Harga per-Stakeholder Tahun 2020</strong>
+                      </p>
+
+                      <div class="chart">
+                        <!-- Sales Chart Canvas -->
+                        <canvas id="chart2" height="100" style="height: 100px;"></canvas>
+                      </div>
+                      <!-- /.chart-responsive -->
+                    </div>
+                    <div class="col-md-4">
+                      <p class="text-center">
+                        <strong>Rataan Kenaikan Harga Setiap Stakeholder</strong>
+                      </p>
+                        <table class="table ">
+                          <thead>
+                          <tr>
+                            <th>Transaksi</th>
+                            <th>Kenaikan</th>
+                            <th>%</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>
+                              <div class="row">
+                                <div class="col-sm-2 bg-primary color-palette disabled"><span>&ensp;</span></div>
+                                <span> - </span>
+                                <div class="col-sm-2 bg-purple color-palette disabled"><span>&ensp;</span></div>
+                              </div>
+                            </td>
+                            <td>$13 USD</td>
+                            <td>
+                              <small class="text-success mr-1">
+                                <i class="fas fa-arrow-up"></i>
+                                12%
+                              </small>
+                              12,000 Sold
+                            </td>
+                            
+                          </tr>
+                          <tr>
+                            <td>
+                              Pengepul - Grosir
+                            </td>
+                            <td>$29 USD</td>
+                            <td>
+                              <small class="text-warning mr-1">
+                                <i class="fas fa-arrow-down"></i>
+                                0.5%
+                              </small>
+                              123,234 Sold
+                            </td>
+                            
+                          </tr>
+                          <tr>
+                            <td>
+                              Grosir - Pengecer
+                            </td>
+                            <td>$1,230 USD</td>
+                            <td>
+                              <small class="text-danger mr-1">
+                                <i class="fas fa-arrow-down"></i>
+                                3%
+                              </small>
+                              198 Sold
+                            </td>
+                            
+                          </tr>
+                          <tr>
+                            <td>
+                              Pengecer - Konsumen
+                            </td>
+                            <td>$199 USD</td>
+                            <td>
+                              <small class="text-success mr-1">
+                                <i class="fas fa-arrow-up"></i>
+                                63%
+                              </small>
+                              87 Sold
+                            </td>
+                            
+                          </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card -->
+                    <div class="col-md-4">
+                      <p class="text-center">
+                        <strong>Rataan Kenaikan Harga Setiap Stakeholder</strong>
+                      </p>
+
+                      <div class="progress-group">
+                        Kemitraan Pengguna
+                        <span class="float-right">
+                          <b>4</b>/10
+                        </span>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-primary" style="width: 40%"></div>
+                        </div>
+                      </div>
+                      <!-- /.progress-group -->
+
+                      <div class="progress-group">
+                        Transaksi Berhasil
+                        <span class="float-right">
+                          <b>12</b>/24
+                        </span>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-danger" style="width: 50%"></div>
+                        </div>
+                      </div>
+
+                      <!-- /.progress-group -->
+                      <div class="progress-group">
+                        <span class="progress-text">
+                          Mitra di Kab/Kota
+                        </span>
+                        <span class="float-right">
+                          <b>20</b>/27
+                        </span>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-success" style="width: 60%"></div>
+                        </div>
+                      </div>
+
+                      <!-- /.progress-group -->
+                      <div class="progress-group">
+                        Pencapaian Target
+                        <span class="float-right">
+                          <b>50%</b>
+                        </span>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-warning" style="width: 50%"></div>
+                        </div>
+                      </div>
+                      <!-- /.progress-group -->
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+                </div>
+                
+                <!-- ./card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
         </div>
         <!-- /.container-fluid -->
       </div>
@@ -474,3 +542,122 @@
   margin-left: auto;
 }
 </style>
+
+<script>
+    import { Bar, Line } from 'vue-chartjs'
+    
+    export default{
+      mounted() {
+        axios.get('/getUserCount').then((response) => {
+          var chart = this.$refs.chart;
+          var ctx = chart.getContext("2d");
+          var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: response.data.role_user,
+                  datasets: [{
+                      label               : '# of User',
+                      data                : response.data.user,
+                      borderWidth         : 1,
+                      backgroundColor     : 'rgba(210, 100, 222, 1)',
+                      borderColor         : 'rgba(210, 214, 222, 1)',
+                  }]
+              },
+              options: {
+                  maintainAspectRatio : false,
+                  responsive : true,
+                  legend: {
+                    display: false
+                  },
+                  scales: {
+                      xAxes: [{
+                        gridLines : {
+                          display : false,
+                        }
+                      }],
+                      yAxes: [{
+                          gridLines : {
+                            display : false,
+                          },
+                          ticks: {
+                              stepSize: 1,
+                              beginAtZero: true,
+                          }
+                      }]
+                  }
+              }
+          });
+        }).catch(error => {
+          console.log(error)
+          this.errored = true
+        });
+        new Chart(document.getElementById("chart2"), {
+          type: 'line',
+          data: {
+            labels: [ 'Jan','Feb','Mar','Apr','May','Jun',
+                      'Jul','Aug','Sep','Oct',
+                      'Nov','Dec'],
+            datasets: [{ 
+                data: [86,75,54,40],
+                label: "Produsen - Pengepul",
+                borderColor: "#3e95cd",
+                fill: false
+              }, { 
+                data: [90,80,60,45],
+                label: "Pengepul - Grosir",
+                borderColor: "#8e5ea2",
+                fill: false
+              }, { 
+                data: [93,82,65,48],
+                label: "Grosir - Pengecer",
+                borderColor: "#3cba9f",
+                fill: false
+              }, { 
+                data: [95,85,68,50],
+                label: "Pengecer - Konsumen",
+                borderColor: "#e8c3b9",
+                fill: false
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            tooltips: {
+              mode: 'index',
+              intersect: false,
+            },
+            hover: {
+              mode: 'nearest',
+              intersect: true
+            },
+            scales: {
+              xAxes: [{
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Bulan'
+                }
+              }],
+              yAxes: [{
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Harga (Rp 000)'
+                },
+                ticks: {
+                    stepSize: 20,
+                    beginAtZero: true,
+                }
+              }]
+            }
+          }
+        });
+
+        axios.get('/getAllUserLocation').then((response) => {
+          var lokasi = response.data.lokasi;
+          console.log(lokasi);
+          console.log(response.data.status);
+        })
+      }
+    }
+</script>

@@ -14,7 +14,7 @@
                 <li class="breadcrumb-item">
                   <a href="#">Admin</a>
                 </li>
-                <li class="breadcrumb-item active">User Validation</li>
+                <li class="breadcrumb-item active">Validasi User</li>
               </ol>
             </div>
           </div>
@@ -37,8 +37,9 @@
                       <tr>
                         <th>Nama</th>
                         <th>Email</th>
-                        <th>Status</th>
+                        <th>Tgl Pengajuan</th>
                         <th>Role</th>
+                        <th>Surat Izin Usaha Perdagangan (SIUP)</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
@@ -49,13 +50,22 @@
                       <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
-                        <td>
-                          <div v-if="user.status===1">Verified</div>
-                          <div v-else>Unverified</div>
-                        </td>
+                        <td>{{customFormatter(user.created_at)}}</td>
                         <td>{{ getRole(user.role) }}</td>
                         <td>
-                          <button class="btn btn-success btn-xs" @click="selectUser(user)">Detail</button>
+                          <button class="btn btn-info btn-xs" @click="previewImage()">
+                            <i class="fas fa-eye"></i>&nbsp; Lihat
+                          </button>
+                          &nbsp;/&nbsp;
+                          <button
+                            class="btn btn-secondary btn-xs"
+                            @click="downloadSIUP()"
+                          >
+                            <i class="fas fa-file-download">&nbsp; Download</i>
+                          </button>
+                        </td>
+                        <td>
+                          <button class="btn btn-success btn-xs" @click="selectUser(user)">Validasi</button>
                         </td>
                       </tr>
                     </tbody>
@@ -116,10 +126,7 @@ export default {
     };
   },
   methods: {
-    selectUser(user) {
-      this.userDetail = user;
-      $("#detailUser").modal("show");
-    },
+    // fungsi untuk mendapatkan objek user dari API
     getUsers() {
       axios
         .get("requesteduser")
@@ -128,23 +135,55 @@ export default {
         })
         .catch(() => {});
     },
-    tolak(id) {
-      this.$Progress.start();
-      if (confirm("Are you sure?")) {
-        this.loading = !this.loading;
-        axios
-          .put("/tolak/" + id)
-          .then(response => {
-            UpdateData.$emit("UserValidation");
-            $("#detailUser").modal("hide");
-            this.$Progress.finish();
-          })
-          .catch(error => {
-            console.log(error);
-            this.$Progress.fail();
-          });
-      }
+
+    // fungsi untuk melihat gambar SIUP User
+    previewImage() {},
+
+    // fungsi mendownload SIUP User
+    downloadSIUP() {},
+
+    // fungsi untuk melihat detail User yang belum divalidasi
+    selectUser(user) {
+      this.userDetail = user;
+      $("#detailUser").modal("show");
     },
+
+    // funsi untuk menolak validasi user
+    tolak(id) {
+      swal
+        .fire({
+          title: "Apakah kamu yakin?",
+          text: "User akan ditolak",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes"
+        })
+        .then(result => {
+          if (result.value) {
+            this.$Progress.start();
+            axios
+              .put("/tolak/" + id)
+              .then(() => {
+                swal.fire("Terhapus!", "User berhasil dihapus", "success");
+                UpdateData.$emit("UserValidation");
+                $("#detailUser").modal("hide");
+                this.$Progress.finish();
+              })
+              .catch(() => {
+                swal.fire(
+                  "Gagal!",
+                  "Terdapat masalah ketika menghapus",
+                  "waning"
+                );
+                this.$Progress.fail();
+              });
+          }
+        });
+    },
+
+    // fungsi untuk menerima validasi User
     terima(id) {
       this.$Progress.start();
       axios
@@ -159,6 +198,8 @@ export default {
           this.$Progress.fail();
         });
     },
+
+    // fungsi untuk mendapatkan Role user berdasarkan role id
     getRole(id_role) {
       switch (id_role) {
         case 2:
@@ -177,6 +218,8 @@ export default {
           return "Konsumen";
       }
     },
+
+    // fungsi untuk mengubah format tanggal dengan moment js
     customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     }

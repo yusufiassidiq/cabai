@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Pengeluaran Poduksi Cabai</h1>
+            <h1 class="m-0 text-dark">Rekap Pengeluaran Poduksi Cabai</h1>
           </div>
           <!-- /.col -->
           <div class="col-sm-6">
@@ -75,7 +75,7 @@
 </template>
 
 <script>
-  import { Line } from 'vue-chartjs'
+  import { Bar } from 'vue-chartjs'
 
   export default {
     data(){
@@ -93,54 +93,54 @@
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
           var myChart = new Chart(ctx, {
-            type : 'line',
+            type : 'bar',
             data:{
               labels:response.data.month,
               datasets:[{
                 label               : 'Pupuk',
-                backgroundColor     : 'rgba(60,141,188,0.9)',
-                borderColor         : 'rgba(60,141,188,0.8)',
+                backgroundColor     : 'rgba(54, 162, 235, 1)',
+                borderColor         : 'rgba(54, 162, 235, 1)',
                 pointRadius         : true,
                 pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(60,141,188,1)',
+                pointStrokeColor    : 'rgba(54, 162, 235, 1)',
                 pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(60,141,188,1)',
+                pointHighlightStroke: 'rgba(54, 162, 235, 1)',
                 data                : response.data.pupuk,
-                fill                : false,
+                // fill                : false,
               },
               {
                 label               : 'Alat Tani',
-                backgroundColor     : 'rgba(255, 0, 0, 0.6)',
-                borderColor         : 'rgba(255, 0, 0, 0.8)',
+                backgroundColor     : 'rgba(254, 99, 131, 1)',
+                borderColor         : 'rgba(254, 99, 131, 1)',
                 pointRadius         : true,
-                pointColor          : 'rgba(255, 0, 0, 0.8)',
+                pointColor          : 'rgba(254, 99, 131, 1)',
                 pointStrokeColor    : '#c1c7d1',
                 pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(255, 0, 0, 0.8)',
+                pointHighlightStroke: 'rgba(254, 99, 131, 1)',
                 data                : response.data.alatTani,
-                fill                : false,
+                // fill                : false,
               },
               {
                 label               : 'Pestisida',
-                backgroundColor     : 'rgba(11, 156, 49, 0.8)',
-                borderColor         : 'rgba(11, 156, 49, 1)',
+                backgroundColor     : 'rgba(74, 192, 192, 1)',
+                borderColor         : 'rgba(74, 192, 192, 1)',
                 pointRadius         : true,
                 pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(11, 156, 49, 1)',
+                pointStrokeColor    : 'rgba(74, 192, 192, 1)',
                 pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(11, 156, 49, 1)',
+                pointHighlightStroke: 'rgba(74, 192, 192, 1)',
                 data                : response.data.pestisida,
-                fill                : false,
+                // fill                : false,
               },
               {
                 label               : 'Lainnya',
-                backgroundColor     : 'rgba(255, 255, 0, 0.8)',
-                borderColor         : 'rgba(255, 255, 0, 1)',
+                backgroundColor     : 'rgba(247, 249, 127, 1)',
+                borderColor         : 'rgba(247, 249, 127, 1)',
                 pointRadius         : true,
                 pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(255, 255, 0, 1)',
+                pointStrokeColor    : 'rgba(247, 249, 127, 1)',
                 pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(255, 255, 0, 1)',
+                pointHighlightStroke: 'rgba(247, 249, 127, 1)',
                 data                : response.data.lainnya,
                 fill                : false,
               }]
@@ -157,11 +157,13 @@
               },
               scales:{
                 xAxes: [{
+                  // stacked: true,
                   gridLines : {
                     display : false,
                   }
                 }],
                 yAxes:[{
+                  // stacked: true,
                   gridLines : {
                     display : false,
                   },

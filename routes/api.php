@@ -98,9 +98,13 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('/deleteTarget/{id}','AnalysisController@deleteTarget');
     Route::get('/getTarget','AnalysisController@getTarget');
     Route::get('/getPengeluaran','AnalysisController@getPengeluaran');
+    Route::get('/getPenjualan','AnalysisController@getPenjualan');
+    Route::get('/getHarga','AnalysisController@getHarga');
 });
 
-
+// TANPA LOGIN
+Route::get('/getUserCount','AnalysisHomeController@getUserCount'); //test
+Route::get('/getAllUserLocation','AnalysisHomeController@getAllUserLocation');
 
 // Route::resources([
 //     'user' => 'API\DummyController',

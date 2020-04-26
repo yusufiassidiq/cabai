@@ -32,7 +32,7 @@
                   <tr>
                     <th>Nama</th>
                     <th>Role</th>
-                    <th>Lokasi</th>
+                    <th>Alamat</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
