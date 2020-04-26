@@ -286,7 +286,7 @@ class UserController extends Controller
             }else{
                 $i->nama = $i->user1()->first()->name;
                 $i->role = $i->user1()->first()->role;
-                $i->lokasi = $i->user2()->first()->lokasi()->first();
+                $i->lokasi = $i->user1()->first()->lokasi()->first();
             }
             $j++;
         }
@@ -306,8 +306,8 @@ class UserController extends Controller
         foreach ($listPermintaanMitra as $i){
             if($listPermintaanMitra[$j]->flag == 0){
                 $i->nama = $i->user1()->first()->name;
-                $i->role = $i->user2()->first()->role;
-                $i->lokasi = $i->user2()->first()->lokasi()->first(); 
+                $i->role = $i->user1()->first()->role;
+                $i->lokasi = $i->user1()->first()->lokasi()->first(); 
             }else{
                 $i->nama = $i->user2()->first()->name;
                 $i->role = $i->user2()->first()->role;
