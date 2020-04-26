@@ -102,10 +102,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/getHarga','AnalysisController@getHarga');
 });
 
+// TANPA LOGIN
 Route::get('/getUserCount','AnalysisHomeController@getUserCount'); //test
-
-
-
+Route::get('/getAllUserLocation','AnalysisHomeController@getAllUserLocation');
 
 // Route::resources([
 //     'user' => 'API\DummyController',

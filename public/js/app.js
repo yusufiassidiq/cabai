@@ -7371,6 +7371,137 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -7422,40 +7553,65 @@ __webpack_require__.r(__webpack_exports__);
     new Chart(document.getElementById("chart2"), {
       type: 'line',
       data: {
-        labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
-          data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-          label: "Africa",
+          data: [86, 75, 54, 40],
+          label: "Produsen - Pengepul",
           borderColor: "#3e95cd",
           fill: false
         }, {
-          data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
-          label: "Asia",
+          data: [90, 80, 60, 45],
+          label: "Pengepul - Grosir",
           borderColor: "#8e5ea2",
           fill: false
         }, {
-          data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
-          label: "Europe",
+          data: [93, 82, 65, 48],
+          label: "Grosir - Pengecer",
           borderColor: "#3cba9f",
           fill: false
         }, {
-          data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
-          label: "Latin America",
+          data: [95, 85, 68, 50],
+          label: "Pengecer - Konsumen",
           borderColor: "#e8c3b9",
-          fill: false
-        }, {
-          data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
-          label: "North America",
-          borderColor: "#c45850",
           fill: false
         }]
       },
       options: {
-        title: {
-          display: true,
-          text: 'World population per region (in millions)'
+        responsive: true,
+        tooltips: {
+          mode: 'index',
+          intersect: false
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        scales: {
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Bulan'
+            }
+          }],
+          yAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Harga (Rp 000)'
+            },
+            ticks: {
+              stepSize: 20,
+              beginAtZero: true
+            }
+          }]
         }
       }
+    });
+    axios.get('/getAllUserLocation').then(function (response) {
+      var lokasi = response.data.lokasi;
+      console.log(lokasi);
+      console.log(response.data.status);
     });
   }
 });
@@ -92985,30 +93141,7 @@ var render = function() {
           _vm._v(" "),
           _vm._m(13),
           _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("div", { staticClass: "card" }, [
-                _vm._m(14),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col" }, [
-                      _c("p", { staticClass: "text-center" }, [
-                        _c("strong", [
-                          _vm._v(
-                            "Target Januari - Desember Tahun " +
-                              _vm._s(_vm.year)
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(15)
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
+          _vm._m(14)
         ])
       ])
     ])
@@ -93136,7 +93269,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("h5", { staticClass: "card-title" }, [_vm._v("Monthly Recap Report")])
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Mitra Aplikasi")])
     ])
   },
   function() {
@@ -93144,7 +93277,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "text-center" }, [
-      _c("strong", [_vm._v("Sales: 1 Jan, 2014 - 30 Jul, 2014")])
+      _c("strong", [_vm._v("Jumlah Pengguna Berdasarkan Stakeholder")])
     ])
   },
   function() {
@@ -93158,46 +93291,48 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "progress-group" }, [
         _vm._v(
-          "\n                      Add Products to Cart\n                      "
+          "\n                      Kemitraan Pengguna\n                      "
         ),
         _c("span", { staticClass: "float-right" }, [
-          _c("b", [_vm._v("160")]),
-          _vm._v("/200\n                      ")
+          _c("b", [_vm._v("4")]),
+          _vm._v("/10\n                      ")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "progress progress-sm" }, [
           _c("div", {
             staticClass: "progress-bar bg-primary",
-            staticStyle: { width: "80%" }
+            staticStyle: { width: "40%" }
           })
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "progress-group" }, [
         _vm._v(
-          "\n                      Complete Purchase\n                      "
+          "\n                      Transaksi Berhasil\n                      "
         ),
         _c("span", { staticClass: "float-right" }, [
-          _c("b", [_vm._v("310")]),
-          _vm._v("/400\n                      ")
+          _c("b", [_vm._v("12")]),
+          _vm._v("/24\n                      ")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "progress progress-sm" }, [
           _c("div", {
             staticClass: "progress-bar bg-danger",
-            staticStyle: { width: "75%" }
+            staticStyle: { width: "50%" }
           })
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "progress-group" }, [
         _c("span", { staticClass: "progress-text" }, [
-          _vm._v("Visit Premium Page")
+          _vm._v(
+            "\n                        Mitra di Kab/Kota\n                      "
+          )
         ]),
         _vm._v(" "),
         _c("span", { staticClass: "float-right" }, [
-          _c("b", [_vm._v("480")]),
-          _vm._v("/800\n                      ")
+          _c("b", [_vm._v("20")]),
+          _vm._v("/27\n                      ")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "progress progress-sm" }, [
@@ -93210,12 +93345,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "progress-group" }, [
         _vm._v(
-          "\n                      Send Inquiries\n                      "
+          "\n                      Pencapaian Target\n                      "
         ),
-        _c("span", { staticClass: "float-right" }, [
-          _c("b", [_vm._v("250")]),
-          _vm._v("/500\n                      ")
-        ]),
+        _c("span", { staticClass: "float-right" }, [_c("b", [_vm._v("50%")])]),
         _vm._v(" "),
         _c("div", { staticClass: "progress progress-sm" }, [
           _c("div", {
@@ -93398,41 +93530,241 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h5", { staticClass: "card-title" }, [
-        _vm._v("Grafik Target Penjualan Cabai")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-tool",
-            attrs: { type: "button", "data-card-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fas fa-minus" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-tool",
-            attrs: { type: "button", "data-card-widget": "remove" }
-          },
-          [_c("i", { staticClass: "fas fa-times" })]
-        )
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Harga Cabai Prov Jawa Barat berdasarkan Stakeholder")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-8" }, [
+                _c("p", { staticClass: "text-center" }, [
+                  _c("strong", [
+                    _vm._v("Perbandingan Harga per-Stakeholder Tahun 2020")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "chart" }, [
+                  _c("canvas", {
+                    staticStyle: { height: "100px" },
+                    attrs: { id: "chart2", height: "100" }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("p", { staticClass: "text-center" }, [
+                  _c("strong", [
+                    _vm._v("Rataan Kenaikan Harga Setiap Stakeholder")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("table", { staticClass: "table " }, [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", [_vm._v("Transaksi")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Kenaikan")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("%")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tbody", [
+                    _c("tr", [
+                      _c("td", [
+                        _c("div", { staticClass: "row" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-sm-2 bg-primary color-palette disabled"
+                            },
+                            [_c("span", [_vm._v(" ")])]
+                          ),
+                          _vm._v(" "),
+                          _c("span", [_vm._v(" - ")]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-sm-2 bg-purple color-palette disabled"
+                            },
+                            [_c("span", [_vm._v(" ")])]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("$13 USD")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("small", { staticClass: "text-success mr-1" }, [
+                          _c("i", { staticClass: "fas fa-arrow-up" }),
+                          _vm._v(
+                            "\n                              12%\n                            "
+                          )
+                        ]),
+                        _vm._v(
+                          "\n                            12,000 Sold\n                          "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [
+                        _vm._v(
+                          "\n                            Pengepul - Grosir\n                          "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("$29 USD")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("small", { staticClass: "text-warning mr-1" }, [
+                          _c("i", { staticClass: "fas fa-arrow-down" }),
+                          _vm._v(
+                            "\n                              0.5%\n                            "
+                          )
+                        ]),
+                        _vm._v(
+                          "\n                            123,234 Sold\n                          "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [
+                        _vm._v(
+                          "\n                            Grosir - Pengecer\n                          "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("$1,230 USD")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("small", { staticClass: "text-danger mr-1" }, [
+                          _c("i", { staticClass: "fas fa-arrow-down" }),
+                          _vm._v(
+                            "\n                              3%\n                            "
+                          )
+                        ]),
+                        _vm._v(
+                          "\n                            198 Sold\n                          "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [
+                        _vm._v(
+                          "\n                            Pengecer - Konsumen\n                          "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("$199 USD")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("small", { staticClass: "text-success mr-1" }, [
+                          _c("i", { staticClass: "fas fa-arrow-up" }),
+                          _vm._v(
+                            "\n                              63%\n                            "
+                          )
+                        ]),
+                        _vm._v(
+                          "\n                            87 Sold\n                          "
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("p", { staticClass: "text-center" }, [
+                  _c("strong", [
+                    _vm._v("Rataan Kenaikan Harga Setiap Stakeholder")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "progress-group" }, [
+                  _vm._v(
+                    "\n                      Kemitraan Pengguna\n                      "
+                  ),
+                  _c("span", { staticClass: "float-right" }, [
+                    _c("b", [_vm._v("4")]),
+                    _vm._v("/10\n                      ")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "progress progress-sm" }, [
+                    _c("div", {
+                      staticClass: "progress-bar bg-primary",
+                      staticStyle: { width: "40%" }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "progress-group" }, [
+                  _vm._v(
+                    "\n                      Transaksi Berhasil\n                      "
+                  ),
+                  _c("span", { staticClass: "float-right" }, [
+                    _c("b", [_vm._v("12")]),
+                    _vm._v("/24\n                      ")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "progress progress-sm" }, [
+                    _c("div", {
+                      staticClass: "progress-bar bg-danger",
+                      staticStyle: { width: "50%" }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "progress-group" }, [
+                  _c("span", { staticClass: "progress-text" }, [
+                    _vm._v(
+                      "\n                        Mitra di Kab/Kota\n                      "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "float-right" }, [
+                    _c("b", [_vm._v("20")]),
+                    _vm._v("/27\n                      ")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "progress progress-sm" }, [
+                    _c("div", {
+                      staticClass: "progress-bar bg-success",
+                      staticStyle: { width: "60%" }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "progress-group" }, [
+                  _vm._v(
+                    "\n                      Pencapaian Target\n                      "
+                  ),
+                  _c("span", { staticClass: "float-right" }, [
+                    _c("b", [_vm._v("50%")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "progress progress-sm" }, [
+                    _c("div", {
+                      staticClass: "progress-bar bg-warning",
+                      staticStyle: { width: "50%" }
+                    })
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "chart" }, [
-      _c("canvas", {
-        staticStyle: { height: "100px" },
-        attrs: { id: "chart2", height: "100" }
-      })
     ])
   }
 ]
