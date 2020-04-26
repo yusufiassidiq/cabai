@@ -9,6 +9,7 @@ use App\Target;
 use App\PraProduksi;
 use App\PengeluaranProduksi;
 use App\Transaksi;
+use App\User;
 use Carbon\Carbon;
 use DB;
 
@@ -249,8 +250,8 @@ class AnalysisController extends Controller
     {
         // $lastweek = Carbon::now()->subweek();
         // $tomorrow = Carbon::now()->addDay();
-        $year= "2020";
-        $month="04";
+        $year= Carbon::now()->format('Y');
+        $month=Carbon::now()->format('m');
         $monthYearNow = Carbon::now()->isoFormat('MMMM YYYY');
         $filter = $year . '-' . $month; //GET DATA BULAN & TAHUN YANG DIKIRIMKAN SEBAGAI PARAMETER
         $parse = Carbon::parse($filter); 
@@ -340,6 +341,175 @@ class AnalysisController extends Controller
             'rawit' => $cabaiByDayRawit,
             'keriting' => $cabaiByDayKeriting,
             'besar' => $cabaiByDayBesar,
+        ]);
+    }
+    public function getHarga(){
+        $dateNow=Carbon::now()->isoFormat('dddd, Do MMMM YYYY');
+        $now=Carbon::now()->format('Y-m-d');
+        $start = Carbon::now()->subweek()->subweek()->format('Y-m-d');
+        $end = Carbon::now()->format('Y-m-d');
+        $idProdusen= User::Where('role','2')->pluck('id');
+        $idPengepul= User::Where('role','3')->pluck('id');
+        $idGrosir= User::Where('role','4')->pluck('id');
+        $idPengecer= User::Where('role','5')->pluck('id');
+
+        //Harga 30 Hari Terakhir
+        
+        $transaksiProdusenRawit=Transaksi::whereIn('pemasok_id',$idProdusen)
+            -> Where([['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['jenis_cabai','Cabai rawit'],
+            ])->whereBetween('tanggal_diterima', [$start, $end])
+            ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+            ->groupBy('tanggal_diterima')
+            ->get();
+        $transaksiProdusenKeriting=Transaksi::whereIn('pemasok_id',$idProdusen)
+            -> Where([['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['jenis_cabai','Cabai keriting'],
+            ])->whereBetween('tanggal_diterima', [$start, $end])
+            ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+            ->groupBy('tanggal_diterima')
+            ->get();
+        $transaksiProdusenBesar=Transaksi::whereIn('pemasok_id',$idProdusen)
+            -> Where([['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['jenis_cabai','Cabai besar'],
+            ])->whereBetween('tanggal_diterima', [$start, $end])
+            ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+            ->groupBy('tanggal_diterima')
+            ->get();
+            $transaksiPengepulRawit=Transaksi::whereIn('pemasok_id',$idPengepul)
+            -> Where([['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['jenis_cabai','Cabai rawit'],
+            ])->whereBetween('tanggal_diterima', [$start, $end])
+            ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+            ->groupBy('tanggal_diterima')
+            ->get();
+        $transaksiPengepulKeriting=Transaksi::whereIn('pemasok_id',$idPengepul)
+            -> Where([['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['jenis_cabai','Cabai keriting'],
+            ])->whereBetween('tanggal_diterima', [$start, $end])
+            ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+            ->groupBy('tanggal_diterima')
+            ->get();
+        $transaksiPengepulBesar=Transaksi::whereIn('pemasok_id',$idPengepul)
+            -> Where([['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['jenis_cabai','Cabai besar'],
+            ])->whereBetween('tanggal_diterima', [$start, $end])
+            ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+            ->groupBy('tanggal_diterima')
+            ->get();
+        $transaksiGrosirRawit=Transaksi::whereIn('pemasok_id',$idGrosir)
+            -> Where([['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['jenis_cabai','Cabai rawit'],
+            ])->whereBetween('tanggal_diterima', [$start, $end])
+            ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+            ->groupBy('tanggal_diterima')
+            ->get();
+        $transaksiGrosirKeriting=Transaksi::whereIn('pemasok_id',$idGrosir)
+            -> Where([['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['jenis_cabai','Cabai keriting'],
+            ])->whereBetween('tanggal_diterima', [$start, $end])
+            ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+            ->groupBy('tanggal_diterima')
+            ->get();
+        $transaksiGrosirBesar=Transaksi::whereIn('pemasok_id',$idGrosir)
+            -> Where([['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['jenis_cabai','Cabai besar'],
+            ])->whereBetween('tanggal_diterima', [$start, $end])
+            ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+            ->groupBy('tanggal_diterima')
+            ->get();
+        $transaksiPengecerRawit=Transaksi::whereIn('pemasok_id',$idPengecer)
+            -> Where([['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['jenis_cabai','Cabai rawit'],
+            ])->whereBetween('tanggal_diterima', [$start, $end])
+            ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+            ->groupBy('tanggal_diterima')
+            ->get();
+        $transaksiPengecerKeriting=Transaksi::whereIn('pemasok_id',$idPengecer)
+            -> Where([['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['jenis_cabai','Cabai keriting'],
+            ])->whereBetween('tanggal_diterima', [$start, $end])
+            ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+            ->groupBy('tanggal_diterima')
+            ->get();
+        $transaksiPengecerBesar=Transaksi::whereIn('pemasok_id',$idPengecer)
+            -> Where([['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['jenis_cabai','Cabai besar'],
+            ])->whereBetween('tanggal_diterima', [$start, $end])
+            ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+            ->groupBy('tanggal_diterima')
+            ->get();
+;
+        $awal = Carbon::now()->subweek()->subweek();
+        for($i=0;$i<15;$i++){
+            $array_date[$i]= $awal->format('Y-m-d');
+            $awal=$awal->addDay();
+            $rawitByDayProdusen[$i]=$transaksiProdusenRawit->firstWhere('tanggal_diterima',$array_date[$i]) ?
+                $transaksiProdusenRawit->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+            $keritingByDayProdusen[$i]=$transaksiProdusenKeriting->firstWhere('tanggal_diterima',$array_date[$i]) ?
+                $transaksiProdusenKeriting->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+            $besarByDayProdusen[$i]=$transaksiProdusenBesar->firstWhere('tanggal_diterima',$array_date[$i]) ?
+                $transaksiProdusenBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+            $rawitByDayPengepul[$i]=$transaksiPengepulRawit->firstWhere('tanggal_diterima',$array_date[$i]) ?
+                $transaksiPengepulRawit->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+            $keritingByDayPengepul[$i]=$transaksiPengepulKeriting->firstWhere('tanggal_diterima',$array_date[$i]) ?
+                $transaksiPengepulKeriting->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+            $besarByDayPengepul[$i]=$transaksiPengepulBesar->firstWhere('tanggal_diterima',$array_date[$i]) ?
+                $transaksiPengepulBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+            $rawitByDayGrosir[$i]=$transaksiGrosirRawit->firstWhere('tanggal_diterima',$array_date[$i]) ?
+                $transaksiGrosirRawit->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+            $keritingByDayGrosir[$i]=$transaksiGrosirKeriting->firstWhere('tanggal_diterima',$array_date[$i]) ?
+                $transaksiGrosirKeriting->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+            $besarByDayGrosir[$i]=$transaksiGrosirBesar->firstWhere('tanggal_diterima',$array_date[$i]) ?
+                $transaksiGrosirBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+            $rawitByDayPengecer[$i]=$transaksiPengecerRawit->firstWhere('tanggal_diterima',$array_date[$i]) ?
+                $transaksiPengecerRawit->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+            $keritingByDayPengecer[$i]=$transaksiPengecerKeriting->firstWhere('tanggal_diterima',$array_date[$i]) ?
+                $transaksiPengecerKeriting->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+            $besarByDayPengecer[$i]=$transaksiPengecerBesar->firstWhere('tanggal_diterima',$array_date[$i]) ?
+                $transaksiPengecerBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+        }
+
+        
+        return response()->json([
+            'rawitProdusen' => $rawitByDayProdusen,
+            'keritingProdusen' => $keritingByDayProdusen,
+            'besarProdusen' => $besarByDayProdusen,
+            'rawitPengepul' => $rawitByDayPengepul,
+            'keritingPengepul' => $keritingByDayPengepul,
+            'besarPengepul' => $besarByDayPengepul,
+            'rawitGrosir' => $rawitByDayGrosir,
+            'keritingGrosir' => $keritingByDayGrosir,
+            'besarGrosir' => $besarByDayGrosir,
+            'rawitPengecer' => $rawitByDayPengecer,
+            'keritingPengecer' => $keritingByDayPengecer,
+            'besarPengecer' => $besarByDayPengecer,
+            'date' => $array_date,
+            'dateNow' => $dateNow, 
         ]);
     }
 }
