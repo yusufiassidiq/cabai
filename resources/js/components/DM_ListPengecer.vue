@@ -64,7 +64,7 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      axios.get("/getMitraPengecer").then(response => {
+      axios.get("/kemitraan/pengecer/list").then(response => {
         this.dataMitra = response.data.data;
       });
     },
@@ -82,7 +82,7 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .post("/requestMitra/" + id_pengecer)
+              .post("/kemitraan/request/" + id_pengecer)
               .then(() => {
                 UpdateData.$emit("ListPengecer");
                 swal.fire(

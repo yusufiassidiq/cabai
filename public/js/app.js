@@ -3178,7 +3178,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      axios.get("/getMitraGrosir").then(function (response) {
+      axios.get("/kemitraan/grosir/list").then(function (response) {
         _this.dataMitra = response.data.data;
       });
     },
@@ -3196,7 +3196,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios.post("/requestMitra/" + id_grosir).then(function () {
+          axios.post("/kemitraan/request/" + id_grosir).then(function () {
             UpdateData.$emit("ListGrosir");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
 
@@ -3301,7 +3301,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      axios.get("/getMitrakonsumen").then(function (response) {
+      axios.get("/kemitraan/konsumen/list").then(function (response) {
         _this.dataMitra = response.data.data;
       });
     },
@@ -3320,7 +3320,7 @@ __webpack_require__.r(__webpack_exports__);
           // send request to the server
           _this2.$Progress.start();
 
-          axios.post("/requestMitra/" + id_produsen).then(function () {
+          axios.post("/kemitraan/request/" + id_produsen).then(function () {
             UpdateData.$emit("ListKonsumen");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
 
@@ -3425,7 +3425,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      axios.get("/getMitraPengecer").then(function (response) {
+      axios.get("/kemitraan/pengecer/list").then(function (response) {
         _this.dataMitra = response.data.data;
       });
     },
@@ -3443,7 +3443,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios.post("/requestMitra/" + id_pengecer).then(function () {
+          axios.post("/kemitraan/request/" + id_pengecer).then(function () {
             UpdateData.$emit("ListPengecer");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
 
@@ -3548,7 +3548,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      axios.get("/getMitraPengepul").then(function (response) {
+      axios.get("/kemitraan/pengepul/list").then(function (response) {
         _this.dataMitra = response.data.data;
       })["catch"](function () {});
     },
@@ -3566,7 +3566,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios.post("/requestMitra/" + id_pengepul).then(function () {
+          axios.post("/kemitraan/request/" + id_pengepul).then(function () {
             UpdateData.$emit("ListPengepul");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
 
@@ -3672,7 +3672,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      axios.get("/getMitraProdusen").then(function (response) {
+      axios.get("/kemitraan/produsen/list").then(function (response) {
         _this.dataMitra = response.data.data;
       })["catch"](function () {});
     },
@@ -3690,7 +3690,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios.post("/requestMitra/" + id_produsen).then(function () {
+          axios.post("/kemitraan/request/" + id_produsen).then(function () {
             UpdateData.$emit("ListProdusen");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
 
@@ -3839,7 +3839,7 @@ __webpack_require__.r(__webpack_exports__);
     getInventaris: function getInventaris() {
       var _this = this;
 
-      axios.get("/getInventaris").then(function (response) {
+      axios.get("/inventaris/list").then(function (response) {
         _this.inventaris = response.data.data;
       });
     },
@@ -3861,7 +3861,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$Progress.start();
-      this.form.put("/addInventaris").then(function () {
+      this.form.put("/inventaris/tambah").then(function () {
         UpdateData.$emit("Inventaris");
         $("#modalInventaris").trigger("click");
         toast.fire({
@@ -4284,7 +4284,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnaddpermintaan").disabled = true;
       this.$Progress.start();
-      this.form.post("/addPermintaanSaya").then(function (response) {
+      this.form.post("/transaksi/permintaanSaya/tambah").then(function (response) {
         UpdateData.$emit("ListPengajuanCabai"); // hide modal
 
         $("#modalPermintaan").trigger("click"); // show Toast if success
@@ -4345,14 +4345,14 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this2 = this;
 
-      axios.get("/listMitraSaya").then(function (response) {
+      axios.get("/kemitraan/mitra/list").then(function (response) {
         _this2.dataMitra = response.data.data; // console.log(this.dataMitra);
       });
     },
     getPermintaanSaya: function getPermintaanSaya() {
       var _this3 = this;
 
-      axios.get("/getPermintaanSaya").then(function (response) {
+      axios.get("/transaksi/permintaanSaya/list").then(function (response) {
         _this3.listPermintaanSaya = response.data.data; // console.log(this.listPermintaanSaya);
       });
     },
@@ -4361,7 +4361,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnReqUlang").disabled = true;
       this.$Progress.start();
-      this.form.put("/requestUlangPermintaanSaya/" + this.form.id).then(function () {
+      this.form.put("/transaksi/permintaanSaya/update/" + this.form.id).then(function () {
         UpdateData.$emit("ListPengajuanCabai"); // hide modal
 
         $("#modalPermintaan").trigger("click");
@@ -4394,7 +4394,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this5.$Progress.start();
 
-          axios["delete"]("/hapusPermintaanPesanan/" + id_permintaanSaya).then(function (response) {
+          axios["delete"]("/transaksi/permintaanPesanan/delete/" + id_permintaanSaya).then(function (response) {
             swal.fire("Menghapus Permintaan Pasokan", "Pemintaan pasokan berhasil dihapus", "success");
             UpdateData.$emit("ListPengajuanCabai");
 
@@ -4449,7 +4449,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnAcceptPenawaran").disabled = true;
       this.$Progress.start();
-      this.form.put("terimaPenawaranPemasok/" + this.form.id).then(function () {
+      this.form.put("/transaksi/penawaranPemasok/terima/" + this.form.id).then(function () {
         UpdateData.$emit("ListPengajuanCabai");
         $("#modalTerimaPermintaan").trigger("click");
         toast.fire({
@@ -4471,7 +4471,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnRejectPenawaran").disabled = true;
       this.$Progress.start();
-      this.form.put("tolakPenawaranPemasok/" + this.form.id).then(function () {
+      this.form.put("/transaksi/penawaranPemasok/tolak/" + this.form.id).then(function () {
         UpdateData.$emit("ListPengajuanCabai");
         $("#modalTerimaPermintaan").trigger("click");
         toast.fire({
@@ -4506,7 +4506,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this8.$Progress.start();
 
-          _this8.formReceived.put("/stokMasuk/" + data.id).then(function (response) {
+          _this8.formReceived.put("/inventaris/stokMasuk/" + data.id).then(function (response) {
             swal.fire("Konfirmasi Pesanan", data.jumlah_cabai + " Kg " + data.jenis_cabai + " telah diterima", "success");
             UpdateData.$emit("ListPengajuanCabai");
 
@@ -4913,7 +4913,7 @@ __webpack_require__.r(__webpack_exports__);
     getPermintaanMasuk: function getPermintaanMasuk() {
       var _this = this;
 
-      axios.get("getPermintaanMasuk").then(function (response) {
+      axios.get("/transaksi/permintaanMasuk/list").then(function (response) {
         _this.listPermintaanCabai = response.data.data;
       });
     },
@@ -4922,7 +4922,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnAccPermintaan").disabled = true;
       this.$Progress.start();
-      this.form.put("terimaPermintaanMasuk/" + this.form.id).then(function () {
+      this.form.put("/transaksi/permintaanMasuk/terima/" + this.form.id).then(function () {
         UpdateData.$emit("ListPermintaanCabai");
         $("#modalAccPermintaan").trigger("click");
         toast.fire({
@@ -4944,7 +4944,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnTolakPermintaan").disabled = true;
       this.$Progress.start();
-      this.formReject.put("tolakPermintaanPembeli/" + this.formReject.id).then(function () {
+      this.formReject.put("/transaksi/permintaanPembeli/tolak/" + this.formReject.id).then(function () {
         UpdateData.$emit("ListPermintaanCabai"); // hide modal
 
         $("#modalTolakPermintaan").trigger("click");
@@ -5003,7 +5003,7 @@ __webpack_require__.r(__webpack_exports__);
       this.temp_jumlahcabai = data.jumlah_cabai;
       this.temp_hargacabai = data.harga;
       this.temp_tanggalditerima = data.tanggal_diterima;
-      axios.get('/getInventaris').then(function (response) {
+      axios.get('/inventaris/list').then(function (response) {
         console.log(response.data.data[0].jenis_cabai);
 
         if (data.jenis_cabai == "Cabai besar") {
@@ -5029,7 +5029,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnKirimPesanan").disabled = true;
       this.$Progress.start();
-      this.formSend.put("/stokKeluar/" + this.formSend.id).then(function () {
+      this.formSend.put("/inventaris/stokKeluar/" + this.formSend.id).then(function () {
         UpdateData.$emit("ListPermintaanCabai");
         $("#modalKirimPermintaan").trigger("click");
         toast.fire({
@@ -5049,7 +5049,7 @@ __webpack_require__.r(__webpack_exports__);
     getInventaris: function getInventaris() {
       var _this6 = this;
 
-      axios.get('/getInventaris').then(function (response) {
+      axios.get('/inventaris/list').then(function (response) {
         // console.log(response.data)
         _this6.temp_inv_jumlahcabai = response.data.jumlah_cabai;
         _this6.temp_inv_hargacabai = response.data.harga;
@@ -5165,7 +5165,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      axios.get("/listMitraSaya").then(function (response) {
+      axios.get("/kemitraan/mitra/list").then(function (response) {
         _this.dataMitra = response.data.data;
       });
     },
@@ -5183,7 +5183,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios["delete"]("/hapusmitra/" + id_mitra).then(function (response) {
+          axios["delete"]("/kemitraan/delete/" + id_mitra).then(function (response) {
             swal.fire("Menghapus Kemitraan", "Mitra berhasil dihapus", "success");
             UpdateData.$emit("MitraSaya");
 
@@ -5306,7 +5306,7 @@ __webpack_require__.r(__webpack_exports__);
     getPermintaanMitra: function getPermintaanMitra() {
       var _this = this;
 
-      axios.get("/listPermintaanMitra").then(function (response) {
+      axios.get("/kemitraan/permintaan/list").then(function (response) {
         _this.dataListPermintaanMitra = response.data.data;
       });
     },
@@ -5321,7 +5321,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           // send request to the server
-          axios.put("/terimaMitra/" + id_mitra).then(function (response) {
+          axios.put("/kemitraan/terima/" + id_mitra).then(function (response) {
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
             UpdateData.$emit("ListPermintaan");
           })["catch"](function (error) {
@@ -5341,7 +5341,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           // send request to the server
-          axios.put("/tolakMitra/" + id_mitra).then(function (response) {
+          axios.put("/kemitraan/tolak/" + id_mitra).then(function (response) {
             swal.fire("Menolak Permintaan", "Berhasil menolak kemitraan", "success");
             UpdateData.$emit("ListPermintaan");
           })["catch"](function (error) {
@@ -5447,7 +5447,7 @@ __webpack_require__.r(__webpack_exports__);
     getPengajuanMitra: function getPengajuanMitra() {
       var _this = this;
 
-      axios.get("/listPengajuanMitra").then(function (response) {
+      axios.get("/kemitraan/pengajuan/list").then(function (response) {
         _this.dataListPengajuanMitra = response.data.data;
       });
     }
@@ -6323,7 +6323,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get("/admindashboard").then(function (response) {
+    axios.get("/admin/dashboard").then(function (response) {
       // console.log(response.data.data);
       _this.total_user = response.data.data.total_user;
       _this.validated_user = response.data.data.validated_user;
@@ -6620,7 +6620,7 @@ __webpack_require__.r(__webpack_exports__);
     getUsers: function getUsers() {
       var _this = this;
 
-      axios.get("validateduser").then(function (response) {
+      axios.get("/user/validated").then(function (response) {
         _this.users = response.data.users;
       })["catch"](function (error) {});
     },
@@ -6639,7 +6639,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios["delete"]("/user/" + id).then(function () {
+          axios["delete"]("/user/delete" + id).then(function () {
             swal.fire("Terhapus!", "User berhasil dihapus", "success");
             UpdateData.$emit("UserManagement");
 
@@ -6845,7 +6845,7 @@ __webpack_require__.r(__webpack_exports__);
     getUsers: function getUsers() {
       var _this = this;
 
-      axios.get("requesteduser").then(function (response) {
+      axios.get("/user/requested").then(function (response) {
         _this.users = response.data.users;
       })["catch"](function () {});
     },
@@ -6874,7 +6874,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios.put("/tolak/" + id).then(function () {
+          axios.put("/user/tolak/" + id).then(function () {
             swal.fire("Terhapus!", "User berhasil dihapus", "success");
             UpdateData.$emit("UserValidation");
             $("#detailUser").modal("hide");
@@ -6893,7 +6893,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.$Progress.start();
-      axios.put("/terima/" + id).then(function (response) {
+      axios.put("/user/terima/" + id).then(function (response) {
         UpdateData.$emit("UserValidation");
         $("#detailUser").modal("hide");
 
@@ -11552,7 +11552,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnadd").disabled = true;
       this.$Progress.start();
-      this.form.post("/addLahan").then(function () {
+      this.form.post("/praProduksi/tambah").then(function () {
         UpdateData.$emit("ManajemenLahan");
         $("#modalLahan").trigger("click");
         toast.fire({
@@ -11573,7 +11573,7 @@ __webpack_require__.r(__webpack_exports__);
     getLahan: function getLahan() {
       var _this2 = this;
 
-      axios.get("/readLahan").then(function (response) {
+      axios.get("/praProduksi/list").then(function (response) {
         _this2.datalahan = response.data.data;
       });
     },
@@ -11583,7 +11583,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnupdate").disabled = true;
       this.$Progress.start();
-      this.form.put("updateLahan/" + this.form.id).then(function () {
+      this.form.put("/praProduksi/update/" + this.form.id).then(function () {
         UpdateData.$emit("ManajemenLahan");
         $("#modalLahan").trigger("click");
         toast.fire({
@@ -11616,7 +11616,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this4.$Progress.start();
 
-          axios["delete"]("deleteLahan/" + id).then(function () {
+          axios["delete"]("/praProduksi/delete/" + id).then(function () {
             UpdateData.$emit("ManajemenLahan");
             swal.fire("Tehapus!", "Lahan berhasil dihapus", "success");
 
@@ -11634,7 +11634,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnaddpengeluaran").disabled = true;
       this.$Progress.start();
-      this.formriwayat.post("addPengeluaran").then(function () {
+      this.formriwayat.post("/pengeluaran/tambah").then(function () {
         $("#modalPengeluaran").trigger("click");
         toast.fire({
           icon: "success",
@@ -12325,7 +12325,7 @@ __webpack_require__.r(__webpack_exports__);
     getPengeluaran: function getPengeluaran() {
       var _this = this;
 
-      axios.get("/readPengeluaran").then(function (response) {
+      axios.get("/pengeluaran/list").then(function (response) {
         _this.dataPengeluaran = response.data.data;
       });
     },
@@ -12334,7 +12334,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$Progress.start();
-      this.form.put("/updatePengeluaran/" + this.form.id).then(function () {
+      this.form.put("/pengeluaran/update/" + this.form.id).then(function () {
         UpdateData.$emit("RiwayatPengeluaran");
         $("#modalPengeluaran").trigger("click");
         toast.fire({
@@ -12362,7 +12362,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this3.$Progress.start();
 
-          axios["delete"]("/deletePengeluaran/" + id).then(function () {
+          axios["delete"]("/pengeluaran/delete/" + id).then(function () {
             UpdateData.$emit("RiwayatPengeluaran");
             swal.fire("Tehapus!", "Pengeluaran berhasil dihapus", "success");
 

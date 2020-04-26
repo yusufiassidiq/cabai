@@ -129,7 +129,7 @@ export default {
     // fungsi untuk mendapatkan objek user dari API
     getUsers() {
       axios
-        .get("requesteduser")
+        .get("/user/requested")
         .then(response => {
           this.users = response.data.users;
         })
@@ -164,7 +164,7 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .put("/tolak/" + id)
+              .put("/user/tolak/" + id)
               .then(() => {
                 swal.fire("Terhapus!", "User berhasil dihapus", "success");
                 UpdateData.$emit("UserValidation");
@@ -187,7 +187,7 @@ export default {
     terima(id) {
       this.$Progress.start();
       axios
-        .put("/terima/" + id)
+        .put("/user/terima/" + id)
         .then(response => {
           UpdateData.$emit("UserValidation");
           $("#detailUser").modal("hide");
