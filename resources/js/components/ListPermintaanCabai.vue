@@ -366,7 +366,7 @@ export default {
   },
   methods: {
     getPermintaanMasuk() {
-      axios.get("getPermintaanMasuk").then(response => {
+      axios.get("/transaksi/permintaanMasuk/list").then(response => {
         this.listPermintaanCabai = response.data.data;
       });
     },
@@ -374,7 +374,7 @@ export default {
       document.getElementById("btnAccPermintaan").disabled = true;
       this.$Progress.start();
       this.form
-        .put("terimaPermintaanMasuk/" + this.form.id)
+        .put("/transaksi/permintaanMasuk/terima/" + this.form.id)
         .then(() => {
           UpdateData.$emit("ListPermintaanCabai");
           $("#modalAccPermintaan").trigger("click");
@@ -394,7 +394,7 @@ export default {
       document.getElementById("btnTolakPermintaan").disabled = true;
       this.$Progress.start();
       this.formReject
-        .put("tolakPermintaanPembeli/" + this.formReject.id)
+        .put("/transaksi/permintaanPembeli/tolak/" + this.formReject.id)
         .then(() => {
           UpdateData.$emit("ListPermintaanCabai");
           // hide modal
@@ -459,7 +459,7 @@ export default {
       this.temp_hargacabai = data.harga
       this.temp_tanggalditerima = data.tanggal_diterima
 
-      axios.get('/getInventaris').then(response => {
+      axios.get('/inventaris/list').then(response => {
         console.log(response.data.data[0].jenis_cabai)
         if(data.jenis_cabai == "Cabai besar"){
           this.temp_inv_jumlahcabai = response.data.data[0].jumlah_cabai
@@ -485,7 +485,7 @@ export default {
       document.getElementById("btnKirimPesanan").disabled = true;
       this.$Progress.start();
       this.formSend
-        .put("/stokKeluar/" + this.formSend.id)
+        .put("/inventaris/stokKeluar/" + this.formSend.id)
         .then(() => {
           UpdateData.$emit("ListPermintaanCabai");
           $("#modalKirimPermintaan").trigger("click");
@@ -502,7 +502,7 @@ export default {
         });
     },
     getInventaris() {
-      axios.get('/getInventaris').then(response => {
+      axios.get('/inventaris/list').then(response => {
         // console.log(response.data)
         this.temp_inv_jumlahcabai = response.data.jumlah_cabai
         this.temp_inv_hargacabai = response.data.harga

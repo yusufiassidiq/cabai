@@ -209,7 +209,7 @@ export default {
   methods: {
     // Menghapus Riwayat Pengeluaran
     getPengeluaran() {
-      axios.get("/readPengeluaran").then(response => {
+      axios.get("/pengeluaran/list").then(response => {
         this.dataPengeluaran = response.data.data;
       });
     },
@@ -217,7 +217,7 @@ export default {
     updatePengeluaran() {
       this.$Progress.start();
       this.form
-        .put("/updatePengeluaran/" + this.form.id)
+        .put("/pengeluaran/update/" + this.form.id)
         .then(() => {
           UpdateData.$emit("RiwayatPengeluaran");
           $("#modalPengeluaran").trigger("click");
@@ -246,7 +246,7 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .delete("/deletePengeluaran/" + id)
+              .delete("/pengeluaran/delete/" + id)
               .then(() => {
                 UpdateData.$emit("RiwayatPengeluaran");
                 swal.fire("Tehapus!", "Pengeluaran berhasil dihapus", "success");

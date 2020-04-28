@@ -156,7 +156,7 @@ export default {
   methods: {
     getUsers() {
       axios
-        .get("validateduser")
+        .get("/user/validated")
         .then(response => {
           this.users = response.data.users;
         })
@@ -177,7 +177,7 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .delete("/user/" + id)
+              .delete("/user/delete" + id)
               .then(() => {
                 swal.fire("Terhapus!", "User berhasil dihapus", "success");
                 UpdateData.$emit("UserManagement");

@@ -64,7 +64,7 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      axios.get("/getMitrakonsumen").then(response => {
+      axios.get("/kemitraan/konsumen/list").then(response => {
         this.dataMitra = response.data.data;
       });
     },
@@ -83,7 +83,7 @@ export default {
             // send request to the server
             this.$Progress.start();
             axios
-              .post("/requestMitra/" + id_produsen)
+              .post("/kemitraan/request/" + id_produsen)
               .then(() => {
                 UpdateData.$emit("ListKonsumen");
                 swal.fire(

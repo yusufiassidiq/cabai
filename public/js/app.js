@@ -3178,7 +3178,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      axios.get("/getMitraGrosir").then(function (response) {
+      axios.get("/kemitraan/grosir/list").then(function (response) {
         _this.dataMitra = response.data.data;
       });
     },
@@ -3196,7 +3196,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios.post("/requestMitra/" + id_grosir).then(function () {
+          axios.post("/kemitraan/request/" + id_grosir).then(function () {
             UpdateData.$emit("ListGrosir");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
 
@@ -3301,7 +3301,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      axios.get("/getMitrakonsumen").then(function (response) {
+      axios.get("/kemitraan/konsumen/list").then(function (response) {
         _this.dataMitra = response.data.data;
       });
     },
@@ -3320,7 +3320,7 @@ __webpack_require__.r(__webpack_exports__);
           // send request to the server
           _this2.$Progress.start();
 
-          axios.post("/requestMitra/" + id_produsen).then(function () {
+          axios.post("/kemitraan/request/" + id_produsen).then(function () {
             UpdateData.$emit("ListKonsumen");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
 
@@ -3425,7 +3425,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      axios.get("/getMitraPengecer").then(function (response) {
+      axios.get("/kemitraan/pengecer/list").then(function (response) {
         _this.dataMitra = response.data.data;
       });
     },
@@ -3443,7 +3443,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios.post("/requestMitra/" + id_pengecer).then(function () {
+          axios.post("/kemitraan/request/" + id_pengecer).then(function () {
             UpdateData.$emit("ListPengecer");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
 
@@ -3548,7 +3548,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      axios.get("/getMitraPengepul").then(function (response) {
+      axios.get("/kemitraan/pengepul/list").then(function (response) {
         _this.dataMitra = response.data.data;
       })["catch"](function () {});
     },
@@ -3566,7 +3566,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios.post("/requestMitra/" + id_pengepul).then(function () {
+          axios.post("/kemitraan/request/" + id_pengepul).then(function () {
             UpdateData.$emit("ListPengepul");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
 
@@ -3672,7 +3672,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      axios.get("/getMitraProdusen").then(function (response) {
+      axios.get("/kemitraan/produsen/list").then(function (response) {
         _this.dataMitra = response.data.data;
       })["catch"](function () {});
     },
@@ -3690,7 +3690,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios.post("/requestMitra/" + id_produsen).then(function () {
+          axios.post("/kemitraan/request/" + id_produsen).then(function () {
             UpdateData.$emit("ListProdusen");
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
 
@@ -3839,7 +3839,7 @@ __webpack_require__.r(__webpack_exports__);
     getInventaris: function getInventaris() {
       var _this = this;
 
-      axios.get("/getInventaris").then(function (response) {
+      axios.get("/inventaris/list").then(function (response) {
         _this.inventaris = response.data.data;
       });
     },
@@ -3861,7 +3861,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$Progress.start();
-      this.form.put("/addInventaris").then(function () {
+      this.form.put("/inventaris/tambah").then(function () {
         UpdateData.$emit("Inventaris");
         $("#modalInventaris").trigger("click");
         toast.fire({
@@ -4284,7 +4284,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnaddpermintaan").disabled = true;
       this.$Progress.start();
-      this.form.post("/addPermintaanSaya").then(function (response) {
+      this.form.post("/transaksi/permintaanSaya/tambah").then(function (response) {
         UpdateData.$emit("ListPengajuanCabai"); // hide modal
 
         $("#modalPermintaan").trigger("click"); // show Toast if success
@@ -4345,14 +4345,14 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this2 = this;
 
-      axios.get("/listMitraSaya").then(function (response) {
+      axios.get("/kemitraan/mitra/list").then(function (response) {
         _this2.dataMitra = response.data.data; // console.log(this.dataMitra);
       });
     },
     getPermintaanSaya: function getPermintaanSaya() {
       var _this3 = this;
 
-      axios.get("/getPermintaanSaya").then(function (response) {
+      axios.get("/transaksi/permintaanSaya/list").then(function (response) {
         _this3.listPermintaanSaya = response.data.data; // console.log(this.listPermintaanSaya);
       });
     },
@@ -4361,7 +4361,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnReqUlang").disabled = true;
       this.$Progress.start();
-      this.form.put("/requestUlangPermintaanSaya/" + this.form.id).then(function () {
+      this.form.put("/transaksi/permintaanSaya/update/" + this.form.id).then(function () {
         UpdateData.$emit("ListPengajuanCabai"); // hide modal
 
         $("#modalPermintaan").trigger("click");
@@ -4394,7 +4394,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this5.$Progress.start();
 
-          axios["delete"]("/hapusPermintaanPesanan/" + id_permintaanSaya).then(function (response) {
+          axios["delete"]("/transaksi/permintaanPesanan/delete/" + id_permintaanSaya).then(function (response) {
             swal.fire("Menghapus Permintaan Pasokan", "Pemintaan pasokan berhasil dihapus", "success");
             UpdateData.$emit("ListPengajuanCabai");
 
@@ -4449,7 +4449,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnAcceptPenawaran").disabled = true;
       this.$Progress.start();
-      this.form.put("terimaPenawaranPemasok/" + this.form.id).then(function () {
+      this.form.put("/transaksi/penawaranPemasok/terima/" + this.form.id).then(function () {
         UpdateData.$emit("ListPengajuanCabai");
         $("#modalTerimaPermintaan").trigger("click");
         toast.fire({
@@ -4471,7 +4471,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnRejectPenawaran").disabled = true;
       this.$Progress.start();
-      this.form.put("tolakPenawaranPemasok/" + this.form.id).then(function () {
+      this.form.put("/transaksi/penawaranPemasok/tolak/" + this.form.id).then(function () {
         UpdateData.$emit("ListPengajuanCabai");
         $("#modalTerimaPermintaan").trigger("click");
         toast.fire({
@@ -4506,7 +4506,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this8.$Progress.start();
 
-          _this8.formReceived.put("/stokMasuk/" + data.id).then(function (response) {
+          _this8.formReceived.put("/inventaris/stokMasuk/" + data.id).then(function (response) {
             swal.fire("Konfirmasi Pesanan", data.jumlah_cabai + " Kg " + data.jenis_cabai + " telah diterima", "success");
             UpdateData.$emit("ListPengajuanCabai");
 
@@ -4913,7 +4913,7 @@ __webpack_require__.r(__webpack_exports__);
     getPermintaanMasuk: function getPermintaanMasuk() {
       var _this = this;
 
-      axios.get("getPermintaanMasuk").then(function (response) {
+      axios.get("/transaksi/permintaanMasuk/list").then(function (response) {
         _this.listPermintaanCabai = response.data.data;
       });
     },
@@ -4922,7 +4922,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnAccPermintaan").disabled = true;
       this.$Progress.start();
-      this.form.put("terimaPermintaanMasuk/" + this.form.id).then(function () {
+      this.form.put("/transaksi/permintaanMasuk/terima/" + this.form.id).then(function () {
         UpdateData.$emit("ListPermintaanCabai");
         $("#modalAccPermintaan").trigger("click");
         toast.fire({
@@ -4944,7 +4944,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnTolakPermintaan").disabled = true;
       this.$Progress.start();
-      this.formReject.put("tolakPermintaanPembeli/" + this.formReject.id).then(function () {
+      this.formReject.put("/transaksi/permintaanPembeli/tolak/" + this.formReject.id).then(function () {
         UpdateData.$emit("ListPermintaanCabai"); // hide modal
 
         $("#modalTolakPermintaan").trigger("click");
@@ -5003,7 +5003,7 @@ __webpack_require__.r(__webpack_exports__);
       this.temp_jumlahcabai = data.jumlah_cabai;
       this.temp_hargacabai = data.harga;
       this.temp_tanggalditerima = data.tanggal_diterima;
-      axios.get('/getInventaris').then(function (response) {
+      axios.get('/inventaris/list').then(function (response) {
         console.log(response.data.data[0].jenis_cabai);
 
         if (data.jenis_cabai == "Cabai besar") {
@@ -5029,7 +5029,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnKirimPesanan").disabled = true;
       this.$Progress.start();
-      this.formSend.put("/stokKeluar/" + this.formSend.id).then(function () {
+      this.formSend.put("/inventaris/stokKeluar/" + this.formSend.id).then(function () {
         UpdateData.$emit("ListPermintaanCabai");
         $("#modalKirimPermintaan").trigger("click");
         toast.fire({
@@ -5049,7 +5049,7 @@ __webpack_require__.r(__webpack_exports__);
     getInventaris: function getInventaris() {
       var _this6 = this;
 
-      axios.get('/getInventaris').then(function (response) {
+      axios.get('/inventaris/list').then(function (response) {
         // console.log(response.data)
         _this6.temp_inv_jumlahcabai = response.data.jumlah_cabai;
         _this6.temp_inv_hargacabai = response.data.harga;
@@ -5165,7 +5165,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this = this;
 
-      axios.get("/listMitraSaya").then(function (response) {
+      axios.get("/kemitraan/mitra/list").then(function (response) {
         _this.dataMitra = response.data.data;
       });
     },
@@ -5183,7 +5183,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios["delete"]("/hapusmitra/" + id_mitra).then(function (response) {
+          axios["delete"]("/kemitraan/delete/" + id_mitra).then(function (response) {
             swal.fire("Menghapus Kemitraan", "Mitra berhasil dihapus", "success");
             UpdateData.$emit("MitraSaya");
 
@@ -5306,7 +5306,7 @@ __webpack_require__.r(__webpack_exports__);
     getPermintaanMitra: function getPermintaanMitra() {
       var _this = this;
 
-      axios.get("/listPermintaanMitra").then(function (response) {
+      axios.get("/kemitraan/permintaan/list").then(function (response) {
         _this.dataListPermintaanMitra = response.data.data;
       });
     },
@@ -5321,7 +5321,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           // send request to the server
-          axios.put("/terimaMitra/" + id_mitra).then(function (response) {
+          axios.put("/kemitraan/terima/" + id_mitra).then(function (response) {
             swal.fire("Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success");
             UpdateData.$emit("ListPermintaan");
           })["catch"](function (error) {
@@ -5341,7 +5341,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           // send request to the server
-          axios.put("/tolakMitra/" + id_mitra).then(function (response) {
+          axios.put("/kemitraan/tolak/" + id_mitra).then(function (response) {
             swal.fire("Menolak Permintaan", "Berhasil menolak kemitraan", "success");
             UpdateData.$emit("ListPermintaan");
           })["catch"](function (error) {
@@ -5447,7 +5447,7 @@ __webpack_require__.r(__webpack_exports__);
     getPengajuanMitra: function getPengajuanMitra() {
       var _this = this;
 
-      axios.get("/listPengajuanMitra").then(function (response) {
+      axios.get("/kemitraan/pengajuan/list").then(function (response) {
         _this.dataListPengajuanMitra = response.data.data;
       });
     }
@@ -6323,7 +6323,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get("/admindashboard").then(function (response) {
+    axios.get("/admin/dashboard").then(function (response) {
       // console.log(response.data.data);
       _this.total_user = response.data.data.total_user;
       _this.validated_user = response.data.data.validated_user;
@@ -7066,7 +7066,7 @@ __webpack_require__.r(__webpack_exports__);
     getUsers: function getUsers() {
       var _this = this;
 
-      axios.get("validateduser").then(function (response) {
+      axios.get("/user/validated").then(function (response) {
         _this.users = response.data.users;
       })["catch"](function (error) {});
     },
@@ -7085,7 +7085,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios["delete"]("/user/" + id).then(function () {
+          axios["delete"]("/user/delete" + id).then(function () {
             swal.fire("Terhapus!", "User berhasil dihapus", "success");
             UpdateData.$emit("UserManagement");
 
@@ -7291,7 +7291,7 @@ __webpack_require__.r(__webpack_exports__);
     getUsers: function getUsers() {
       var _this = this;
 
-      axios.get("requesteduser").then(function (response) {
+      axios.get("/user/requested").then(function (response) {
         _this.users = response.data.users;
       })["catch"](function () {});
     },
@@ -7320,7 +7320,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios.put("/tolak/" + id).then(function () {
+          axios.put("/user/tolak/" + id).then(function () {
             swal.fire("Terhapus!", "User berhasil dihapus", "success");
             UpdateData.$emit("UserValidation");
             $("#detailUser").modal("hide");
@@ -7339,7 +7339,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.$Progress.start();
-      axios.put("/terima/" + id).then(function (response) {
+      axios.put("/user/terima/" + id).then(function (response) {
         UpdateData.$emit("UserValidation");
         $("#detailUser").modal("hide");
 
@@ -7846,6 +7846,297 @@ __webpack_require__.r(__webpack_exports__);
       console.log(lokasi);
       console.log(response.data.status);
     });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Harga.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/produsen/Harga.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dateNow: {},
+      start: {},
+      end: {},
+      data: {},
+      date: {}
+    };
+  },
+  mounted: function mounted() {
+    this.fillData();
+  },
+  methods: {
+    fillData: function fillData() {
+      var _this = this;
+
+      axios.get('/getHarga').then(function (response) {
+        var _ref, _ref2, _ref3, _ref4;
+
+        _this.dateNow = response.data.dateNow;
+        _this.date = response.data.date;
+        _this.data = response.data.data;
+        _this.start = response.data.start;
+        _this.end = response.data.end;
+        var chart = _this.$refs.chart;
+        var ctx = chart.getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: response.data.date,
+            datasets: [(_ref = {
+              // type                : 'bar',
+              label: 'Produsen',
+              backgroundColor: 'rgba(54, 162, 235, 1)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              pointRadius: true,
+              pointColor: 'rgba(54, 162, 235, 1)',
+              pointStrokeColor: '#c1c7d1',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(54, 162, 235, 1)',
+              data: response.data.rawitProdusen,
+              pointStyle: 'rect'
+            }, _defineProperty(_ref, "pointRadius", 7), _defineProperty(_ref, "pointHoverRadius", 10), _defineProperty(_ref, "fill", false), _ref), (_ref2 = {
+              // type                : 'bar',
+              label: 'Pengepul',
+              backgroundColor: 'rgba(254, 99, 131, 1)',
+              borderColor: 'rgba(254, 99, 131, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(254, 99, 131, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(254, 99, 131, 1)',
+              data: response.data.rawitPengepul,
+              pointStyle: 'triangle'
+            }, _defineProperty(_ref2, "pointRadius", 7), _defineProperty(_ref2, "pointHoverRadius", 10), _defineProperty(_ref2, "fill", false), _ref2), (_ref3 = {
+              // type                : 'bar',
+              label: 'Grosir',
+              backgroundColor: 'rgba(74, 192, 192, 1)',
+              borderColor: 'rgba(74, 192, 192, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(74, 192, 192, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(74, 192, 192, 1)',
+              data: response.data.rawitGrosir,
+              pointStyle: 'circle'
+            }, _defineProperty(_ref3, "pointRadius", 7), _defineProperty(_ref3, "pointHoverRadius", 10), _defineProperty(_ref3, "fill", false), _ref3), (_ref4 = {
+              label: 'Pengecer',
+              backgroundColor: 'rgba(255,129,0, 1)',
+              borderColor: 'rgba(255,129,0, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(255,129,0, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(255,129,0, 1)',
+              data: response.data.rawitPengecer,
+              pointStyle: 'rectRot'
+            }, _defineProperty(_ref4, "pointRadius", 7), _defineProperty(_ref4, "pointHoverRadius", 10), _defineProperty(_ref4, "fill", false), _ref4)]
+          },
+          options: {
+            responsive: true,
+            tooltips: {
+              mode: 'index',
+              intersect: false
+            },
+            //   hover:{
+            //     mode: 'nearest',
+            //     intersect: true,
+            //   },
+            //   snapGaps: false,
+            // elements:{
+            //   line:{
+            //     tension: 0.000001
+            //   }
+            // },
+            scales: {
+              xAxes: [{
+                // stacked: true,
+                gridLines: {
+                  display: false
+                }
+              }],
+              yAxes: [{
+                // stacked: true,
+                gridLines: {
+                  display: false
+                },
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+      })["catch"](function (error) {
+        console.log(error);
+        _this.errored = true;
+      });
+    }
   }
 });
 
@@ -11494,7 +11785,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnadd").disabled = true;
       this.$Progress.start();
-      this.form.post("/addLahan").then(function () {
+      this.form.post("/praProduksi/tambah").then(function () {
         UpdateData.$emit("ManajemenLahan");
         $("#modalLahan").trigger("click");
         toast.fire({
@@ -11515,7 +11806,7 @@ __webpack_require__.r(__webpack_exports__);
     getLahan: function getLahan() {
       var _this2 = this;
 
-      axios.get("/readLahan").then(function (response) {
+      axios.get("/praProduksi/list").then(function (response) {
         _this2.datalahan = response.data.data;
       });
     },
@@ -11525,7 +11816,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnupdate").disabled = true;
       this.$Progress.start();
-      this.form.put("updateLahan/" + this.form.id).then(function () {
+      this.form.put("/praProduksi/update/" + this.form.id).then(function () {
         UpdateData.$emit("ManajemenLahan");
         $("#modalLahan").trigger("click");
         toast.fire({
@@ -11558,7 +11849,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this4.$Progress.start();
 
-          axios["delete"]("deleteLahan/" + id).then(function () {
+          axios["delete"]("/praProduksi/delete/" + id).then(function () {
             UpdateData.$emit("ManajemenLahan");
             swal.fire("Tehapus!", "Lahan berhasil dihapus", "success");
 
@@ -11576,7 +11867,7 @@ __webpack_require__.r(__webpack_exports__);
 
       document.getElementById("btnaddpengeluaran").disabled = true;
       this.$Progress.start();
-      this.formriwayat.post("addPengeluaran").then(function () {
+      this.formriwayat.post("/pengeluaran/tambah").then(function () {
         $("#modalPengeluaran").trigger("click");
         toast.fire({
           icon: "success",
@@ -12267,7 +12558,7 @@ __webpack_require__.r(__webpack_exports__);
     getPengeluaran: function getPengeluaran() {
       var _this = this;
 
-      axios.get("/readPengeluaran").then(function (response) {
+      axios.get("/pengeluaran/list").then(function (response) {
         _this.dataPengeluaran = response.data.data;
       });
     },
@@ -12276,7 +12567,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$Progress.start();
-      this.form.put("/updatePengeluaran/" + this.form.id).then(function () {
+      this.form.put("/pengeluaran/update/" + this.form.id).then(function () {
         UpdateData.$emit("RiwayatPengeluaran");
         $("#modalPengeluaran").trigger("click");
         toast.fire({
@@ -12304,7 +12595,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this3.$Progress.start();
 
-          axios["delete"]("/deletePengeluaran/" + id).then(function () {
+          axios["delete"]("/pengeluaran/delete/" + id).then(function () {
             UpdateData.$emit("RiwayatPengeluaran");
             swal.fire("Tehapus!", "Pengeluaran berhasil dihapus", "success");
 
@@ -94515,10 +94806,17 @@ render._withStripped = true
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/detail/Harga.vue?vue&type=template&id=4b823668&":
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/detail/Harga.vue?vue&type=template&id=4b823668& ***!
   \*************************************************************************************************************************************************************************************************************/
+=======
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Harga.vue?vue&type=template&id=7b1ba019&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/produsen/Harga.vue?vue&type=template&id=7b1ba019& ***!
+  \***************************************************************************************************************************************************************************************************************/
+>>>>>>> 4c0eb4e67f3b5d8b799df53d5ec8cfa934a773b6
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -94530,6 +94828,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   return _c("div")
 }
 var staticRenderFns = []
@@ -94605,6 +94904,210 @@ var render = function() {
   return _c("div")
 }
 var staticRenderFns = []
+=======
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row justify-content-center" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "chart" }, [
+                      _c("canvas", {
+                        ref: "chart",
+                        staticStyle: { height: "100px" },
+                        attrs: { height: "100" }
+                      })
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(3),
+        _vm._v(" "),
+        _vm._m(4)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [
+              _vm._v("Rekap Harga Cabai")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Rekap Harga")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-title" }, [
+        _vm._v("Grafik Harga Cabai Rawit")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-card-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fas fa-minus" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-card-widget": "remove" }
+          },
+          [_c("i", { staticClass: "fas fa-times" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-center" }, [
+      _c("strong", [_vm._v("Harga Cabai Rawit 15 Hari Terakhir")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v("Grafik Harga Cabai Keriting")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-tools" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-tool",
+                  attrs: { type: "button", "data-card-widget": "collapse" }
+                },
+                [_c("i", { staticClass: "fas fa-minus" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-tool",
+                  attrs: { type: "button", "data-card-widget": "remove" }
+                },
+                [_c("i", { staticClass: "fas fa-times" })]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("p", { staticClass: "text-center" }, [
+                  _c("strong", [
+                    _vm._v("Harga Cabai Keriting 15 Hari Terakhir")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "chart" })
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v("Grafik Harga Cabai Besar")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-tools" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-tool",
+                  attrs: { type: "button", "data-card-widget": "collapse" }
+                },
+                [_c("i", { staticClass: "fas fa-minus" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-tool",
+                  attrs: { type: "button", "data-card-widget": "remove" }
+                },
+                [_c("i", { staticClass: "fas fa-times" })]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("p", { staticClass: "text-center" }, [
+                  _c("strong", [_vm._v("Harga Cabai Besar 15 Hari Terakhir")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "chart" })
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+>>>>>>> 4c0eb4e67f3b5d8b799df53d5ec8cfa934a773b6
 render._withStripped = true
 
 
@@ -122954,17 +123457,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-var script = {}
+/* harmony import */ var _Harga_vue_vue_type_template_id_7b1ba019___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Harga.vue?vue&type=template&id=7b1ba019& */ "./resources/js/pages/ba/produsen/Harga.vue?vue&type=template&id=7b1ba019&");
+/* harmony import */ var _Harga_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Harga.vue?vue&type=script&lang=js& */ "./resources/js/pages/ba/produsen/Harga.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
-  script,
-  render,
-  staticRenderFns,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Harga_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Harga_vue_vue_type_template_id_7b1ba019___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Harga_vue_vue_type_template_id_7b1ba019___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -122972,8 +123478,42 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+/* hot reload */
+if (false) { var api; }
 component.options.__file = "resources/js/pages/ba/produsen/Harga.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/ba/produsen/Harga.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/pages/ba/produsen/Harga.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Harga_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Harga.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Harga.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Harga_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/ba/produsen/Harga.vue?vue&type=template&id=7b1ba019&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/pages/ba/produsen/Harga.vue?vue&type=template&id=7b1ba019& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Harga_vue_vue_type_template_id_7b1ba019___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Harga.vue?vue&type=template&id=7b1ba019& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Harga.vue?vue&type=template&id=7b1ba019&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Harga_vue_vue_type_template_id_7b1ba019___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Harga_vue_vue_type_template_id_7b1ba019___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -126121,8 +126661,13 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! E:\cabai\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! E:\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> 4c0eb4e67f3b5d8b799df53d5ec8cfa934a773b6
 
 
 /***/ })
