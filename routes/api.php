@@ -37,6 +37,14 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('/terima/{id}','AdminController@terima')->middleware('isAdmin');
     Route::put('/tolak/{id}','AdminController@tolak')->middleware('isAdmin');
     Route::get('/admindashboard','AdminController@dashboardAdmin')->middleware('isAdmin');
+
+    //BA Admin
+    Route::post('/addTargetAdmin','AdminController@addTarget');
+    Route::get('/readTargetAdmin','AdminController@readTarget');
+    Route::put('/updateTargetAdmin/{id}','AdminController@updateTarget');
+    Route::delete('/deleteTargetAdmin/{id}','AdminController@deleteTarget');
+    Route::get('/getTargetAdmin','AdminController@getTarget');
+    
     //Get Custom Payload
     // Route::get('user/getcustompayloads','UserController@seeToken');
 
@@ -98,11 +106,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('/deleteTarget/{id}','AnalysisController@deleteTarget');
     Route::get('/getTarget','AnalysisController@getTarget');
     Route::get('/getPengeluaran','AnalysisController@getPengeluaran');
-<<<<<<< HEAD
     Route::get('/getPenjualan','AnalysisController@getPenjualan');
-=======
+
     
->>>>>>> fd240078208053c2e92bb70cce8c07809ffc4be3
+
 });
 
 // TANPA LOGIN
