@@ -13,6 +13,7 @@ import AdminMaster from './pages/admin/Master'
 import DashboardAdmin from './pages/admin/Dashboard'
 import UserValidation from './pages/admin/UserValidation'
 import UserManagement from './pages/admin/UserManagement'
+import TargetRecap from './pages/admin/TargetRecap'
 
 import MasterProd from './pages/scm/produsen/Master' // prod == produsen
 import DashboardProd from './pages/scm/produsen/Dashboard' 
@@ -59,7 +60,13 @@ import PermintaanMitraKonsumen from './pages/scm/konsumen/PermintaanMitra'
 import MitraSayaKonsumen from './pages/scm/konsumen/MitraSaya'
 
 // Pages - Bisnis Analitik
+// Home
 import BAMaster from './pages/ba/Master'
+import BADetailHarga from './pages/ba/detail/Harga'
+import BADetailProduksi from './pages/ba/detail/Produksi'
+import BADetailProduktivitas from './pages/ba/detail/Produktivitas'
+import BADetailStok from './pages/ba/detail/Stok'
+// Auth
 import TargetProd from './pages/ba/produsen/Target'
 import PenjualanProd from './pages/ba/produsen/Penjualan'
 import PengeluaranProd from './pages/ba/produsen/Pengeluaran'
@@ -98,6 +105,11 @@ const routes = [
                 path: 'uservalidation',
                 component: UserValidation,
                 name: "UserValidation"
+            },
+            {
+                path: 'target',
+                component: TargetRecap,
+                name: "TargetRecap"
             },
             { path: '*', component: NotfoundLoggedUser },
         ]
@@ -368,9 +380,25 @@ const routes = [
         component: BAMaster
     },
     {
-        path: '/detail',
-        name: 'badetail',
-        component: BAMaster2
+        path: '/harga',
+        name: 'detailharga',
+        component: BADetailHarga
+    },
+    {
+        path: '/produksi',
+        name: 'detailproduksi',
+        component: BADetailProduksi
+    },
+    {
+        path: '/produktivitas',
+        name: 'detailproduktivitas',
+        component: BADetailProduktivitas
+    },
+    
+    {
+        path: '/stok',
+        name: 'detailstok',
+        component: BADetailStok
     },
     {
         path: '/register',

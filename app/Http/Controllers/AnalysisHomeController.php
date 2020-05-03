@@ -94,18 +94,12 @@ class AnalysisHomeController extends Controller
     public function getUserCount()
     {
         $year = Carbon::now()->format('Y'); //tahun saat ini
-        $role_user = array('Admin','Produsen','Pengepul','Grosir','Pengecer','Konsumen');
+        $role_user = array('Produsen','Pengepul','Grosir','Pengecer','Konsumen');
         $jml_user = User::count() - 1; //-1 admin
         
         for($i=0; $i<count($role_user); $i++){
-            $data_user[$i]= User::where('role', $i+1) -> where('status',1) -> count();;
+            $data_user[$i]= User::where('role', $i+2) -> where('status',1) -> count();;
         }
-        // $user_tervalidasi = User::where('status', 1)->count() - 1;// -1 admin
-        // $user_blm_divalidasi = User::where('status',0)->count();
-        // $user_ditolak = User::where('status',2)->count();
-
-        // $data = ["total_user" => $jml_user, "user_1" => $user_1, "user_2" => $user_2, "user_3" => $user_3, "user_4" => $user_4, "user_5" => $user_5, "user_6" => $user_6];
-        // return response()->json(['data' => $data],200);
 
         return response()->json([
             'role_user' => $role_user,
