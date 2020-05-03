@@ -71,7 +71,7 @@
                       <td>{{ data.jenis_cabai }}</td>
                       <td>{{ data.luas_lahan }}</td>
                       <td>{{ data.tanggal_tanam }}</td>
-                      <td>ini total</td>
+                      <td>{{ data.pengeluaran }}</td>
                       <td>
                         <a href="#" @click="editModal(data)">
                           <i class="fas fa-edit blue"></i>
@@ -397,6 +397,7 @@ export default {
       this.formriwayat
         .post("/pengeluaran/tambah")
         .then(() => {
+          UpdateData.$emit("ManajemenLahan");
           $("#modalPengeluaran").trigger("click");
           toast.fire({
             icon: "success",
