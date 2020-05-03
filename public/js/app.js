@@ -11868,6 +11868,7 @@ __webpack_require__.r(__webpack_exports__);
       document.getElementById("btnaddpengeluaran").disabled = true;
       this.$Progress.start();
       this.formriwayat.post("/pengeluaran/tambah").then(function () {
+        UpdateData.$emit("ManajemenLahan");
         $("#modalPengeluaran").trigger("click");
         toast.fire({
           icon: "success",
@@ -94806,17 +94807,10 @@ render._withStripped = true
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/detail/Harga.vue?vue&type=template&id=4b823668&":
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/detail/Harga.vue?vue&type=template&id=4b823668& ***!
   \*************************************************************************************************************************************************************************************************************/
-=======
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Harga.vue?vue&type=template&id=7b1ba019&":
-/*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/produsen/Harga.vue?vue&type=template&id=7b1ba019& ***!
-  \***************************************************************************************************************************************************************************************************************/
->>>>>>> 4c0eb4e67f3b5d8b799df53d5ec8cfa934a773b6
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -94828,7 +94822,6 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-<<<<<<< HEAD
   return _c("div")
 }
 var staticRenderFns = []
@@ -94904,7 +94897,27 @@ var render = function() {
   return _c("div")
 }
 var staticRenderFns = []
-=======
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ba/produsen/Harga.vue?vue&type=template&id=7b1ba019&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ba/produsen/Harga.vue?vue&type=template&id=7b1ba019& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
   return _c("div", { staticClass: "content-wrapper" }, [
     _vm._m(0),
     _vm._v(" "),
@@ -95107,7 +95120,6 @@ var staticRenderFns = [
     ])
   }
 ]
->>>>>>> 4c0eb4e67f3b5d8b799df53d5ec8cfa934a773b6
 render._withStripped = true
 
 
@@ -101894,7 +101906,7 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(data.tanggal_tanam))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v("ini total")]),
+                              _c("td", [_vm._v(_vm._s(data.pengeluaran))]),
                               _vm._v(" "),
                               _c("td", [
                                 _c(
@@ -126661,13 +126673,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-__webpack_require__(/*! E:\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
 __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> 4c0eb4e67f3b5d8b799df53d5ec8cfa934a773b6
 
 
 /***/ })
