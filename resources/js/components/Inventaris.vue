@@ -8,7 +8,7 @@
               <h3 class="card-title">Inventaris</h3>
               <vue-progress-bar></vue-progress-bar>
               <div class="card-tools">
-                <button class="btn btn-success btn-sm" @click="newModal">Tambah Inventory</button>
+                <!-- <button class="btn btn-success btn-sm" @click="newModal">Tambah Inventory</button> -->
               </div>
             </div>
             <!-- /.card-header -->
