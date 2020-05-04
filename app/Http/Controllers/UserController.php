@@ -541,12 +541,23 @@ class UserController extends Controller
         $jumlah_cabai = $request->jumlah_cabai;
         $jenis_cabai = $request->jenis_cabai;
         $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
+        
         foreach ($inventaris as $i ) {
             $jumlah_cabai_sementara = $i->jumlah_cabai;
-            $i->update([
-                'jumlah_cabai' => $jumlah_cabai_sementara - $jumlah_cabai,
-                'harga' => $request->harga,
-            ]);
+            $hargaTemp = $i->harga;
+            if ($hargaTemp == 0){
+                $i->update([
+                    'jumlah_cabai' => $jumlah_cabai_sementara - $jumlah_cabai,
+                    'harga' =>  $request->harga,
+                ]);
+            }
+            else {
+                $i->update([
+                    'jumlah_cabai' => $jumlah_cabai_sementara - $jumlah_cabai,
+                    'harga' => ($hargaTemp + $request->harga)/2,
+                ]);
+                $hargaTemp = 0;  
+            }
         }
         $transaksi = Transaksi::find($idTransaksi);
         $transaksi->update([

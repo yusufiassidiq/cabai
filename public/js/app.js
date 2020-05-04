@@ -89214,7 +89214,7 @@ var render = function() {
                         : data.status_permintaan === 3
                         ? _c("div", [_vm._v("Menunggu Pengiriman")])
                         : data.status_permintaan === 1
-                        ? _c("div", [_vm._v("Menuggu persetujuan Anda")])
+                        ? _c("div", [_vm._v("Menunggu persetujuan Anda")])
                         : _vm._e()
                     ]),
                     _vm._v(" "),

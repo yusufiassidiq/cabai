@@ -76,7 +76,7 @@
                 <div class="red" v-else-if="data.status_permintaan === 2">Permintaan Anda ditolak</div>
                 <div v-else-if="data.status_permintaan === 4">Anda menolak penawaran</div>
                 <div v-else-if="data.status_permintaan === 3">Menunggu Pengiriman</div>
-                <div v-else-if="data.status_permintaan === 1">Menuggu persetujuan Anda</div>
+                <div v-else-if="data.status_permintaan === 1">Menunggu persetujuan Anda</div>
               </td>
               <td>
                 <div v-if="data.status_permintaan === 2">{{data.keterangan}}</div>
