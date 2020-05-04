@@ -74,6 +74,12 @@
                   <p>Validasi User</p>
                 </router-link>
               </li>
+              <li class="nav-item">
+                <router-link to="/admin/target" class="nav-link">
+                  <i class="nav-icon fas fa-tasks"></i>
+                  <p>Rekap Target</p>
+                </router-link>
+              </li>
             </ul>
           </nav>
           <!-- /.sidebar-menu -->

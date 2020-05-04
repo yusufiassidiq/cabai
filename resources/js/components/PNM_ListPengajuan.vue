@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     getPengajuanMitra() {
-      axios.get("/listPengajuanMitra").then(response => {
+      axios.get("/kemitraan/pengajuan/list").then(response => {
         this.dataListPengajuanMitra = response.data.data;
       });
     },

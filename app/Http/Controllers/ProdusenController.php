@@ -45,9 +45,9 @@ class ProdusenController extends Controller
     }
     public function readLahan(){
         $praProduksi = PraProduksi::get();
-        // $praProduksi = PraProduksi::where('id',1)->get();
-        // $asd = $praProduksi[0]->pengeluaranProduksi->first();
-        // dd($asd);
+        foreach($praProduksi as $i){
+            $i->pengeluaran = $i->pengeluaranProduksi()->sum('jumlah_pengeluaran');
+        }
         return response()->json([
             'status' => 'success',
             'data' => $praProduksi->toArray(),
@@ -75,7 +75,7 @@ class ProdusenController extends Controller
         $v = Validator::make($request->all(), [
             'nama_pengeluaran'      => 'required|string|max:255',
             'jumlah_pengeluaran'    => 'required|integer',
-            'rincian'               => 'required|string|max:255',
+            // 'rincian'               => 'required|string|max:255',
         ]);
         
         if ($v->fails())
@@ -96,6 +96,7 @@ class ProdusenController extends Controller
     public function readPengeluaran(){
         $pengeluaran= PengeluaranProduksi::all();
         foreach($pengeluaran as $i){
+
             $i->kodeLahan = $i->praProduksi()->first()->kode_lahan;
         }
         return response()->json([

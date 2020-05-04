@@ -119,7 +119,7 @@ export default {
     };
   },
   created() {
-    axios.get("/admindashboard").then(response => {
+    axios.get("/admin/dashboard").then(response => {
       // console.log(response.data.data);
       this.total_user = response.data.data.total_user;
       this.validated_user = response.data.data.validated_user;

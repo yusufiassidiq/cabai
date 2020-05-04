@@ -286,7 +286,7 @@ class UserController extends Controller
             }else{
                 $i->nama = $i->user1()->first()->name;
                 $i->role = $i->user1()->first()->role;
-                $i->lokasi = $i->user2()->first()->lokasi()->first();
+                $i->lokasi = $i->user1()->first()->lokasi()->first();
             }
             $j++;
         }
@@ -306,8 +306,8 @@ class UserController extends Controller
         foreach ($listPermintaanMitra as $i){
             if($listPermintaanMitra[$j]->flag == 0){
                 $i->nama = $i->user1()->first()->name;
-                $i->role = $i->user2()->first()->role;
-                $i->lokasi = $i->user2()->first()->lokasi()->first(); 
+                $i->role = $i->user1()->first()->role;
+                $i->lokasi = $i->user1()->first()->lokasi()->first(); 
             }else{
                 $i->nama = $i->user2()->first()->name;
                 $i->role = $i->user2()->first()->role;
@@ -352,6 +352,42 @@ class UserController extends Controller
         return response()->json([
             'status' => 'success', 
             'data' => $listMitraSaya->toArray()
+        ], 200);
+    }
+
+    public function listMitraPemasok(){
+        $userId = Auth::user()->id;
+        $roleUser = Auth::user()->role;
+        $listMitraSaya = Kemitraan::orWhere(function($query)use($userId){
+            $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
+        })->where('status',1)->get();
+        $daftarMitraId[] = null;
+        $j = 0;
+        foreach($listMitraSaya as $i){
+            $user1 = $i->user1_id;
+            $user2 = $i->user2_id;
+            // dd($user1);
+            if($userId == $user1){
+                $daftarMitraId[$j] = $user2;
+                $j++;
+            }else if ($userId == $user2){
+                $daftarMitraId[$j] = $user1;
+                $j++;          
+            }
+        }
+        // dd($daftarMitraId);
+        
+        $daftarMitra = collect([]);
+        foreach($daftarMitraId as $k){
+            $akun = User::find($k);
+            if($akun->role < $roleUser){
+               $daftarMitra->push($akun); 
+            }
+        }
+        // dd($daftarMitra);
+        return response()->json([
+            'status' => 'success', 
+            'data' => $daftarMitra->toArray()
         ], 200);
     }
 
@@ -505,12 +541,23 @@ class UserController extends Controller
         $jumlah_cabai = $request->jumlah_cabai;
         $jenis_cabai = $request->jenis_cabai;
         $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
+        
         foreach ($inventaris as $i ) {
             $jumlah_cabai_sementara = $i->jumlah_cabai;
-            $i->update([
-                'jumlah_cabai' => $jumlah_cabai_sementara - $jumlah_cabai,
-                'harga' => $request->harga,
-            ]);
+            $hargaTemp = $i->harga;
+            if ($hargaTemp == 0){
+                $i->update([
+                    'jumlah_cabai' => $jumlah_cabai_sementara - $jumlah_cabai,
+                    'harga' =>  $request->harga,
+                ]);
+            }
+            else {
+                $i->update([
+                    'jumlah_cabai' => $jumlah_cabai_sementara - $jumlah_cabai,
+                    'harga' => ($hargaTemp + $request->harga)/2,
+                ]);
+                $hargaTemp = 0;  
+            }
         }
         $transaksi = Transaksi::find($idTransaksi);
         $transaksi->update([

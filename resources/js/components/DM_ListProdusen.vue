@@ -65,7 +65,7 @@ export default {
     // Mendapatkan data Mitra
     getMitra() {
       axios
-        .get("/getMitraProdusen")
+        .get("/kemitraan/produsen/list")
         .then(response => {
           this.dataMitra = response.data.data;
         })
@@ -85,7 +85,7 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .post("/requestMitra/" + id_produsen)
+              .post("/kemitraan/request/" + id_produsen)
               .then(() => {
                 UpdateData.$emit("ListProdusen");
                 swal.fire(

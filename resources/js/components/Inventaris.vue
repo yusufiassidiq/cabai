@@ -108,7 +108,7 @@ export default {
   },
   methods: {
     getInventaris() {
-      axios.get("/getInventaris").then(response => {
+      axios.get("/inventaris/list").then(response => {
         this.inventaris = response.data.data;
       });
     },
@@ -136,7 +136,7 @@ export default {
     addInventaris() {
       this.$Progress.start();
       this.form
-        .put("/addInventaris")
+        .put("/inventaris/tambah")
         .then(() => {
           UpdateData.$emit("Inventaris");
           $("#modalInventaris").trigger("click");

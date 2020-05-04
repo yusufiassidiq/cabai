@@ -82,7 +82,7 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      axios.get("/listMitraSaya").then(response => {
+      axios.get("/kemitraan/mitra/list").then(response => {
         this.dataMitra = response.data.data;
       });
     },
@@ -100,7 +100,7 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .delete("/hapusmitra/" + id_mitra)
+              .delete("/kemitraan/delete/" + id_mitra)
               .then(response => {
                 swal.fire(
                   "Menghapus Kemitraan",

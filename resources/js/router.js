@@ -13,6 +13,7 @@ import AdminMaster from './pages/admin/Master'
 import DashboardAdmin from './pages/admin/Dashboard'
 import UserValidation from './pages/admin/UserValidation'
 import UserManagement from './pages/admin/UserManagement'
+import TargetRecap from './pages/admin/TargetRecap'
 
 import MasterProd from './pages/scm/produsen/Master' // prod == produsen
 import DashboardProd from './pages/scm/produsen/Dashboard' 
@@ -61,14 +62,18 @@ import PermintaanCabaiKonsumen from './pages/scm/konsumen/permintaancabai'
 import MitraSayaKonsumen from './pages/scm/konsumen/MitraSaya'
 
 // Pages - Bisnis Analitik
+// Home
 import BAMaster from './pages/ba/Master'
+import BADetailHarga from './pages/ba/detail/Harga'
+import BADetailProduksi from './pages/ba/detail/Produksi'
+import BADetailProduktivitas from './pages/ba/detail/Produktivitas'
+import BADetailStok from './pages/ba/detail/Stok'
+// Auth
 import TargetProd from './pages/ba/produsen/Target'
 import PenjualanProd from './pages/ba/produsen/Penjualan'
 import PengeluaranProd from './pages/ba/produsen/Pengeluaran'
-import BisnisAnalitikProd from './pages/ba/produsen/bisnisAnalitik'
-import BisnisAnalitikPengepul from './pages/ba/pengepul/BisnisAnalitik'
-import BisnisAnalitikGrosir from './pages/ba/grosir/BisnisAnalitik'
-import BisnisAnalitikPengecer from './pages/ba/pengecer/BisnisAnalitik'
+import HargaProd from './pages/ba/produsen/Harga'
+
 
 //test
 import BAMaster2 from './pages/ba/Master2'
@@ -102,6 +107,11 @@ const routes = [
                 path: 'uservalidation',
                 component: UserValidation,
                 name: "UserValidation"
+            },
+            {
+                path: 'target',
+                component: TargetRecap,
+                name: "TargetRecap"
             },
             { path: '*', component: NotfoundLoggedUser },
         ]
@@ -168,11 +178,6 @@ const routes = [
             },
             //BA
             {
-                path: 'analitik',
-                component: BisnisAnalitikProd,
-                name: "BisnisAnalitikProd"
-            },
-            {
                 path: 'target',
                 component: TargetProd,
                 name: "TargetProd"
@@ -186,6 +191,11 @@ const routes = [
                 path: 'pengeluaran',
                 component: PengeluaranProd,
                 name: "PengeluaranProd"
+            },
+            {
+                path: 'harga',
+                component: HargaProd,
+                name: "HargaProd"
             },
         ]
     },
@@ -228,11 +238,6 @@ const routes = [
                 path: 'permintaancabai',
                 component: PermintaanCabaiGrosir,
                 name: "PermintaanCabaiGrosir"
-            },
-            {
-                path: 'analitik',
-                component: BisnisAnalitikGrosir,
-                name: "BisnisAnalitikGrosir"
             },
             {
                 path: 'inventaris',
@@ -283,11 +288,6 @@ const routes = [
                 name: "PermintaanCabaiPengecer"
             },
             {
-                path: 'analitik',
-                component: BisnisAnalitikPengecer,
-                name: "BisnisAnalitikPengecer"
-            },
-            {
                 path: 'inventaris',
                 component: InventarisPengecer,
                 name: "InventarisPengecer"
@@ -333,11 +333,6 @@ const routes = [
                 path: 'permintaancabai',
                 component: PermintaanCabaiPengepul,
                 name: "PermintaanCabaiPengepul"
-            },
-            {
-                path: 'analitik',
-                component: BisnisAnalitikPengepul,
-                name: "BisnisAnalitikPengepul"
             },
             {
                 path: 'inventaris',
@@ -397,9 +392,25 @@ const routes = [
         component: BAMaster
     },
     {
-        path: '/detail',
-        name: 'badetail',
-        component: BAMaster2
+        path: '/harga',
+        name: 'detailharga',
+        component: BADetailHarga
+    },
+    {
+        path: '/produksi',
+        name: 'detailproduksi',
+        component: BADetailProduksi
+    },
+    {
+        path: '/produktivitas',
+        name: 'detailproduktivitas',
+        component: BADetailProduktivitas
+    },
+    
+    {
+        path: '/stok',
+        name: 'detailstok',
+        component: BADetailStok
     },
     {
         path: '/register',

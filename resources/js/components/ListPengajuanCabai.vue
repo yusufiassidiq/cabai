@@ -76,7 +76,7 @@
                 <div class="red" v-else-if="data.status_permintaan === 2">Permintaan Anda ditolak</div>
                 <div v-else-if="data.status_permintaan === 4">Anda menolak penawaran</div>
                 <div v-else-if="data.status_permintaan === 3">Menunggu Pengiriman</div>
-                <div v-else-if="data.status_permintaan === 1">Menuggu persetujuan Anda</div>
+                <div v-else-if="data.status_permintaan === 1">Menunggu persetujuan Anda</div>
               </td>
               <td>
                 <div v-if="data.status_permintaan === 2">{{data.keterangan}}</div>
@@ -162,8 +162,8 @@
                   <option
                     v-for="data in dataMitra"
                     :key="data.id"
-                    v-bind:value="data.mitra"
-                  >{{ data.nama }} - {{ getRole(data.role) }}</option>
+                    v-bind:value="data.id"
+                  >{{ data.name }} - {{ getRole(data.role) }}</option>
                 </select>
                 <has-error :form="form" field="pemasok_id"></has-error>
               </div>
@@ -380,7 +380,7 @@ export default {
       document.getElementById("btnaddpermintaan").disabled = true;
       this.$Progress.start();
       this.form
-        .post("/addPermintaanSaya")
+        .post("/transaksi/permintaanSaya/tambah")
         .then(response => {
           UpdateData.$emit("ListPengajuanCabai");
           // hide modal
@@ -440,13 +440,13 @@ export default {
       );
     },
     getMitra() {
-      axios.get("/listMitraSaya").then(response => {
+      axios.get("/kemitraan/mitraPemasok/list").then(response => {
         this.dataMitra = response.data.data;
         // console.log(this.dataMitra);
       });
     },
     getPermintaanSaya() {
-      axios.get("/getPermintaanSaya").then(response => {
+      axios.get("/transaksi/permintaanSaya/list").then(response => {
         this.listPermintaanSaya = response.data.data;
         // console.log(this.listPermintaanSaya);
       });
@@ -455,7 +455,7 @@ export default {
       document.getElementById("btnReqUlang").disabled = true;
       this.$Progress.start();
       this.form
-        .put("/requestUlangPermintaanSaya/" + this.form.id)
+        .put("/transaksi/permintaanSaya/update/" + this.form.id)
         .then(() => {
           UpdateData.$emit("ListPengajuanCabai");
           // hide modal
@@ -487,7 +487,7 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .delete("/hapusPermintaanPesanan/" + id_permintaanSaya)
+              .delete("/transaksi/permintaanPesanan/delete/" + id_permintaanSaya)
               .then(response => {
                 swal.fire(
                   "Menghapus Permintaan Pasokan",
@@ -546,7 +546,7 @@ export default {
       document.getElementById("btnAcceptPenawaran").disabled = true;
       this.$Progress.start();
       this.form
-        .put("terimaPenawaranPemasok/" + this.form.id)
+        .put("/transaksi/penawaranPemasok/terima/" + this.form.id)
         .then(() => {
           UpdateData.$emit("ListPengajuanCabai");
           $("#modalTerimaPermintaan").trigger("click");
@@ -566,7 +566,7 @@ export default {
       document.getElementById("btnRejectPenawaran").disabled = true;
       this.$Progress.start();
       this.form
-        .put("tolakPenawaranPemasok/" + this.form.id)
+        .put("/transaksi/penawaranPemasok/tolak/" + this.form.id)
         .then(() => {
           UpdateData.$emit("ListPengajuanCabai");
           $("#modalTerimaPermintaan").trigger("click");
@@ -600,7 +600,7 @@ export default {
           if (result.value) {
             this.$Progress.start();
             this.formReceived
-              .put("/stokMasuk/" + data.id)
+              .put("/inventaris/stokMasuk/" + data.id)
               .then(response => {
                 swal.fire(
                   "Konfirmasi Pesanan",

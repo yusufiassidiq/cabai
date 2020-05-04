@@ -37,59 +37,70 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('/terima/{id}','AdminController@terima')->middleware('isAdmin');
     Route::put('/tolak/{id}','AdminController@tolak')->middleware('isAdmin');
     Route::get('/admindashboard','AdminController@dashboardAdmin')->middleware('isAdmin');
+
+    //BA Admin
+    Route::post('/addTargetAdmin','AdminController@addTarget');
+    Route::get('/readTargetAdmin','AdminController@readTarget');
+    Route::put('/updateTargetAdmin/{id}','AdminController@updateTarget');
+    Route::delete('/deleteTargetAdmin/{id}','AdminController@deleteTarget');
+    Route::get('/getTargetAdmin','AdminController@getTarget');
+    
     //Get Custom Payload
     // Route::get('user/getcustompayloads','UserController@seeToken');
-
-    // get user yang belum divalidasi
-    Route::get('/requesteduser', 'UserController@requesteduser')->middleware('isAdmin');
-
-    // get user yang sudah divalidasi
-    Route::get('/validateduser', 'UserController@validateduser')->middleware('isAdmin');
+    //Admin
+    Route::get('/user/requested', 'UserController@requesteduser')->middleware('isAdmin');
+    Route::get('/user/validated', 'UserController@validateduser')->middleware('isAdmin');
+    Route::put('/user/terima/{id}','AdminController@terima')->middleware('isAdmin');
+    Route::put('/user/tolak/{id}','AdminController@tolak')->middleware('isAdmin');
+    Route::delete('/user/delete/{id}','AdminController@delete')->middleware('isAdmin');
+    Route::get('/admin/dashboard','AdminController@dashboardAdmin')->middleware('isAdmin');
 
     //Kemitraan
-    Route::post('/requestMitra/{id}','UserController@requestMitra');
-    Route::put('/terimaMitra/{id}','UserController@terimaMitra');
-    Route::put('/tolakMitra/{id}','UserController@tolakMitra');
-    Route::delete('/hapusmitra/{id}','UserController@hapusMitra');
+    Route::post('/kemitraan/request/{id}','UserController@requestMitra');
+    Route::put('/kemitraan/terima/{id}','UserController@terimaMitra');
+    Route::put('/kemitraan/tolak/{id}','UserController@tolakMitra');
+    Route::delete('/kemitraan/delete/{id}','UserController@hapusMitra');
 
-    Route::get('/listPengajuanMitra','UserController@listPengajuanMitra');
-    Route::get('/listPermintaanMitra','UserController@listPermintaanMitra');
-    Route::get('/listMitraSaya','UserController@listMitraSaya');
-    
-    Route::get('/getMitraProdusen','UserController@getMitraProdusen');
-    Route::get('/getMitraPengepul','UserController@getMitraPengepul');
-    Route::get('/getMitraGrosir','UserController@getMitraGrosir');
-    Route::get('/getMitraPengecer','UserController@getMitraPengecer');
-    Route::get('/getMitrakonsumen','UserController@getMitraKonsumen');
+    Route::get('/kemitraan/pengajuan/list','UserController@listPengajuanMitra');
+    Route::get('/kemitraan/permintaan/list','UserController@listPermintaanMitra');
+    Route::get('/kemitraan/mitra/list','UserController@listMitraSaya');
+    //--------------------------------------------//
+    Route::get('/kemitraan/mitraPemasok/list','UserController@listMitraPemasok');
+    //--------------------------------------------//
+    Route::get('/kemitraan/produsen/list','UserController@getMitraProdusen');
+    Route::get('/kemitraan/pengepul/list','UserController@getMitraPengepul');
+    Route::get('/kemitraan/grosir/list','UserController@getMitraGrosir');
+    Route::get('/kemitraan/pengecer/list','UserController@getMitraPengecer');
+    Route::get('/kemitraan/konsumen/list','UserController@getMitraKonsumen');
 
     //Transaksi Permintaan Cabai
-    Route::post('/addPermintaanSaya','UserController@addPermintaanSaya');
-    Route::get('/getPermintaanMasuk','UserController@getPermintaanMasuk');
-    Route::get('/getPermintaanSaya','UserController@getPermintaanSaya');
-    Route::put('/tolakPermintaanPembeli/{id}','UserController@tolakPermintaanPembeli');
-    Route::delete('/hapusPermintaanPesanan/{id}','UserController@hapusPermintaanPesanan');
-    Route::put('/requestUlangPermintaanSaya/{id}','UserController@requestUlangPermintaanSaya');
-    Route::put('/terimaPermintaanMasuk/{id}','UserController@terimaPermintaanMasuk');
-    Route::put('/tolakPenawaranPemasok/{id}','UserController@tolakPenawaranPemasok');
-    Route::put('/terimaPenawaranPemasok/{id}','UserController@terimaPenawaranPemasok');
+    Route::post('/transaksi/permintaanSaya/tambah','UserController@addPermintaanSaya');
+    Route::get('/transaksi/permintaanSaya/list','UserController@getPermintaanSaya');
+    Route::put('/transaksi/permintaanSaya/update/{id}','UserController@requestUlangPermintaanSaya');
+    Route::get('/transaksi/permintaanMasuk/list','UserController@getPermintaanMasuk');
+    Route::put('/transaksi/permintaanMasuk/terima/{id}','UserController@terimaPermintaanMasuk');
+    Route::put('/transaksi/permintaanPembeli/tolak/{id}','UserController@tolakPermintaanPembeli');
+    Route::put('/transaksi/penawaranPemasok/tolak/{id}','UserController@tolakPenawaranPemasok');
+    Route::put('/transaksi/penawaranPemasok/terima/{id}','UserController@terimaPenawaranPemasok');
+    Route::delete('/transaksi/permintaanPesanan/delete/{id}','UserController@hapusPermintaanPesanan');
 
     //Inventaris
-    Route::get('/getInventaris','UserController@getInventaris');
-    Route::put('/addInventaris','UserController@addInventaris');
-    Route::put('/stokKeluar/{id}','UserController@stokKeluar');
-    Route::put('/stokMasuk/{id}','UserController@stokMasuk');
+    Route::get('/inventaris/list','UserController@getInventaris');
+    Route::put('/inventaris/tambah','UserController@addInventaris');
+    Route::put('/inventaris/stokKeluar/{id}','UserController@stokKeluar');
+    Route::put('/inventaris/stokMasuk/{id}','UserController@stokMasuk');
     
     //Manajemen lahan
-    Route::post('/addLahan','ProdusenController@addLahan');
-    Route::get('/readLahan','ProdusenController@readLahan');
-    Route::put('/updateLahan/{id}','ProdusenController@updateLahan');
-    Route::delete('/deleteLahan/{id}','ProdusenController@deleteLahan');
+    Route::post('/praProduksi/tambah','ProdusenController@addLahan');
+    Route::get('/praProduksi/list','ProdusenController@readLahan');
+    Route::put('/praProduksi/update/{id}','ProdusenController@updateLahan');
+    Route::delete('/praProduksi/delete/{id}','ProdusenController@deleteLahan');
 
     //Pengeluaran Produksi
-    Route::post('/addPengeluaran','ProdusenController@addPengeluaran');
-    Route::get('/readPengeluaran','ProdusenController@readPengeluaran');
-    Route::put('/updatePengeluaran/{id}','ProdusenController@updatePengeluaran');
-    Route::delete('/deletePengeluaran/{id}','ProdusenController@deletePengeluaran');
+    Route::post('/pengeluaran/tambah','ProdusenController@addPengeluaran');
+    Route::get('/pengeluaran/list','ProdusenController@readPengeluaran');
+    Route::put('/pengeluaran/update/{id}','ProdusenController@updatePengeluaran');
+    Route::delete('/pengeluaran/delete/{id}','ProdusenController@deletePengeluaran');
     
     //Business Analytic
     Route::post('/addTarget','AnalysisController@addTarget');
@@ -98,9 +109,13 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('/deleteTarget/{id}','AnalysisController@deleteTarget');
     Route::get('/getTarget','AnalysisController@getTarget');
     Route::get('/getPengeluaran','AnalysisController@getPengeluaran');
+    Route::get('/getPenjualan','AnalysisController@getPenjualan');
+    Route::get('/getHarga','AnalysisController@getHarga');
 });
 
-
+// TANPA LOGIN
+Route::get('/getUserCount','AnalysisHomeController@getUserCount'); //test
+Route::get('/getAllUserLocation','AnalysisHomeController@getAllUserLocation');
 
 // Route::resources([
 //     'user' => 'API\DummyController',

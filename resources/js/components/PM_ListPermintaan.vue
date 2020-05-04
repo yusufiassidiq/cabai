@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     getPermintaanMitra() {
-      axios.get("/listPermintaanMitra").then(response => {
+      axios.get("/kemitraan/permintaan/list").then(response => {
         this.dataListPermintaanMitra = response.data.data;
       });
     },
@@ -103,7 +103,7 @@ export default {
           if (result.value) {
             // send request to the server
             axios
-              .put("/terimaMitra/" + id_mitra)
+              .put("/kemitraan/terima/" + id_mitra)
               .then(function(response) {
                 swal.fire(
                   "Mengajukan Permintaan",
@@ -139,7 +139,7 @@ export default {
           if (result.value) {
             // send request to the server
             axios
-              .put("/tolakMitra/" + id_mitra)
+              .put("/kemitraan/tolak/" + id_mitra)
               .then(function(response) {
                 swal.fire(
                   "Menolak Permintaan",

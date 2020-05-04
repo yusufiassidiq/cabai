@@ -71,7 +71,7 @@
                       <td>{{ data.jenis_cabai }}</td>
                       <td>{{ data.luas_lahan }}</td>
                       <td>{{ data.tanggal_tanam }}</td>
-                      <td>ini total</td>
+                      <td>{{ data.pengeluaran }}</td>
                       <td>
                         <a href="#" @click="editModal(data)">
                           <i class="fas fa-edit blue"></i>
@@ -314,7 +314,7 @@ export default {
       document.getElementById("btnadd").disabled = true;
       this.$Progress.start();
       this.form
-        .post("/addLahan")
+        .post("/praProduksi/tambah")
         .then(() => {
           UpdateData.$emit("ManajemenLahan");
           $("#modalLahan").trigger("click");
@@ -332,7 +332,7 @@ export default {
     },
     // Mendapatkan data lahan produsen
     getLahan() {
-      axios.get("/readLahan").then(response => {
+      axios.get("/praProduksi/list").then(response => {
         this.datalahan = response.data.data;
       });
     },
@@ -341,7 +341,7 @@ export default {
       document.getElementById("btnupdate").disabled = true;
       this.$Progress.start();
       this.form
-        .put("updateLahan/" + this.form.id)
+        .put("/praProduksi/update/" + this.form.id)
         .then(() => {
           UpdateData.$emit("ManajemenLahan");
           $("#modalLahan").trigger("click");
@@ -374,7 +374,7 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .delete("deleteLahan/" + id)
+              .delete("/praProduksi/delete/" + id)
               .then(() => {
                 UpdateData.$emit("ManajemenLahan");
                 swal.fire("Tehapus!", "Lahan berhasil dihapus", "success");
@@ -395,8 +395,9 @@ export default {
       document.getElementById("btnaddpengeluaran").disabled = true;
       this.$Progress.start();
       this.formriwayat
-        .post("addPengeluaran")
+        .post("/pengeluaran/tambah")
         .then(() => {
+          UpdateData.$emit("ManajemenLahan");
           $("#modalPengeluaran").trigger("click");
           toast.fire({
             icon: "success",
