@@ -4345,7 +4345,7 @@ __webpack_require__.r(__webpack_exports__);
     getMitra: function getMitra() {
       var _this2 = this;
 
-      axios.get("/kemitraan/mitra/list").then(function (response) {
+      axios.get("/kemitraan/mitraPemasok/list").then(function (response) {
         _this2.dataMitra = response.data.data; // console.log(this.dataMitra);
       });
     },
@@ -33343,7 +33343,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.login-page {\r\n  background-image: url(\"/dist/img/cabai.jpg\");\r\n  background-size: cover;\n}\n.font-putih {\r\n  color: white;\n}\r\n", ""]);
+exports.push([module.i, "\n.login-page {\r\n  background-image: url(\"/dist/img/cabai2.png\");\r\n  background-size: cover;\n}\n.font-putih {\r\n  color: white;\n}\r\n", ""]);
 
 // exports
 
@@ -89452,11 +89452,11 @@ var render = function() {
                                     "option",
                                     {
                                       key: data.id,
-                                      domProps: { value: data.mitra }
+                                      domProps: { value: data.id }
                                     },
                                     [
                                       _vm._v(
-                                        _vm._s(data.nama) +
+                                        _vm._s(data.name) +
                                           " - " +
                                           _vm._s(_vm.getRole(data.role))
                                       )

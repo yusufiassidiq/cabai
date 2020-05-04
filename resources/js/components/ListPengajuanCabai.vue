@@ -162,8 +162,8 @@
                   <option
                     v-for="data in dataMitra"
                     :key="data.id"
-                    v-bind:value="data.mitra"
-                  >{{ data.nama }} - {{ getRole(data.role) }}</option>
+                    v-bind:value="data.id"
+                  >{{ data.name }} - {{ getRole(data.role) }}</option>
                 </select>
                 <has-error :form="form" field="pemasok_id"></has-error>
               </div>
@@ -440,7 +440,7 @@ export default {
       );
     },
     getMitra() {
-      axios.get("/kemitraan/mitra/list").then(response => {
+      axios.get("/kemitraan/mitraPemasok/list").then(response => {
         this.dataMitra = response.data.data;
         // console.log(this.dataMitra);
       });

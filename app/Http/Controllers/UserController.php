@@ -355,6 +355,42 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function listMitraPemasok(){
+        $userId = Auth::user()->id;
+        $roleUser = Auth::user()->role;
+        $listMitraSaya = Kemitraan::orWhere(function($query)use($userId){
+            $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
+        })->where('status',1)->get();
+        $daftarMitraId[] = null;
+        $j = 0;
+        foreach($listMitraSaya as $i){
+            $user1 = $i->user1_id;
+            $user2 = $i->user2_id;
+            // dd($user1);
+            if($userId == $user1){
+                $daftarMitraId[$j] = $user2;
+                $j++;
+            }else if ($userId == $user2){
+                $daftarMitraId[$j] = $user1;
+                $j++;          
+            }
+        }
+        // dd($daftarMitraId);
+        
+        $daftarMitra = collect([]);
+        foreach($daftarMitraId as $k){
+            $akun = User::find($k);
+            if($akun->role < $roleUser){
+               $daftarMitra->push($akun); 
+            }
+        }
+        // dd($daftarMitra);
+        return response()->json([
+            'status' => 'success', 
+            'data' => $daftarMitra->toArray()
+        ], 200);
+    }
+
     public function hapusMitra($id){
         $kemitraan = Kemitraan::find($id);
         $kemitraan->delete();

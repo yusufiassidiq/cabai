@@ -64,7 +64,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/kemitraan/pengajuan/list','UserController@listPengajuanMitra');
     Route::get('/kemitraan/permintaan/list','UserController@listPermintaanMitra');
     Route::get('/kemitraan/mitra/list','UserController@listMitraSaya');
-    
+    //--------------------------------------------//
+    Route::get('/kemitraan/mitraPemasok/list','UserController@listMitraPemasok');
+    //--------------------------------------------//
     Route::get('/kemitraan/produsen/list','UserController@getMitraProdusen');
     Route::get('/kemitraan/pengepul/list','UserController@getMitraPengepul');
     Route::get('/kemitraan/grosir/list','UserController@getMitraGrosir');
