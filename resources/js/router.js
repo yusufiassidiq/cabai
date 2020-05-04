@@ -23,6 +23,7 @@ import PermintaanMitraProd from './pages/scm/produsen/PermintaanMitra'
 import PermintaanCabai from './pages/scm/produsen/PermintaanCabai'
 import MitraSayaProd from './pages/scm/produsen/MitraSaya'
 import InventarisProdusen from "./pages/scm/produsen/Inventaris"
+import HasilPanenProd from './pages/scm/produsen/HasilPanen'
 
 import MasterPengepul from './pages/scm/pengepul/Master' // pengepul
 import DashboardPengepul from './pages/scm/pengepul/Dashboard'
@@ -56,6 +57,7 @@ import PermintaanMitraKonsumen from './pages/scm/konsumen/PermintaanMitra'
 // import TransaksiPelangganKonsumen from './pages/scm/konsumen/TransaksiPelanggan'
 // import TransaksiPemasokKonsumen from './pages/scm/konsumen/TransaksiPemasok'
 // import InventarisKonsumen from './pages/scm/konsumen/Inventaris'
+import PermintaanCabaiKonsumen from './pages/scm/konsumen/permintaancabai'
 import MitraSayaKonsumen from './pages/scm/konsumen/MitraSaya'
 
 // Pages - Bisnis Analitik
@@ -137,6 +139,11 @@ const routes = [
                 path: 'riwayatpengeluaran',
                 component: RiwayatPengeluaran,
                 name: "RiwayatPengeluaran"
+            },
+            {
+                path: 'hasilpanen',
+                component: HasilPanenProd,
+                name:"HasilPanenProd"
             },
             {
                 path: 'daftarmitra',
@@ -374,6 +381,11 @@ const routes = [
                 name: "PermintaanMitraKonsumen"
 
             },
+            {
+                path: 'permintaancabai',
+                component: PermintaanCabaiKonsumen,
+                name: "PermintaanCabaiKonsumen"
+            }
             
             
         ]

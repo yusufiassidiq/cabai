@@ -86,13 +86,13 @@
                 <p>Pengajuan Mitra</p>
               </router-link>
             </li> -->
-            <li class="nav-header">MANAJEMEN PERSEDIAAN</li>
+            <!-- <li class="nav-header">MANAJEMEN PERSEDIAAN</li>
             <li class="nav-item">
               <router-link to="/konsumen/inventaris" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>Inventaris</p>
               </router-link>
-            </li>
+            </li> -->
             <li class="nav-header">MANAJEMEN PEMESANAN</li>
             <li class="nav-item">
               <router-link to="/konsumen/permintaancabai" class="nav-link">

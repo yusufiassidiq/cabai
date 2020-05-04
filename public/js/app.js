@@ -8607,6 +8607,96 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_ListPermintaanCabai__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/ListPermintaanCabai */ "./resources/js/components/ListPermintaanCabai.vue");
+/* harmony import */ var _components_ListPengajuanCabai__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/ListPengajuanCabai */ "./resources/js/components/ListPengajuanCabai.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    permintaan: _components_ListPermintaanCabai__WEBPACK_IMPORTED_MODULE_0__["default"],
+    pengajuan: _components_ListPengajuanCabai__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/DaftarMitra.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengecer/DaftarMitra.vue?vue&type=script&lang=js& ***!
@@ -9928,6 +10018,316 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/HasilPanen.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/HasilPanen.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// datetimepicker doc : https://github.com/charliekassel/vuejs-datepicker#demo
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      datalahan: {},
+      dataPanen: {},
+      editmode: false,
+      // buat ngebedain modal yg di klik modal tambah lahan /edit lahan
+      form: new Form({
+        id: "",
+        lahan_id: "",
+        jumlah_cabai: "",
+        tanggal_panen: ""
+      })
+    };
+  },
+  methods: {
+    // menampilkan daftar panen cabai
+    getPanen: function getPanen() {},
+    addPanen: function addPanen() {
+      console.log("berhasil ditambahkan");
+    },
+    // Memperbarui Hasil Panen
+    updatePanen: function updatePanen() {
+      var _this = this;
+
+      console.log("berhasil diedit");
+      this.$Progress.start();
+      this.form.put("/updatePanen/" + this.form.id).then(function () {
+        UpdateData.$emit("HasilPanen");
+        $("#modalHasilPanen").trigger("click");
+        toast.fire({
+          icon: "success",
+          title: "Data panen berhasil diperbarui"
+        });
+
+        _this.$Progress.finish();
+      })["catch"](function () {
+        _this.$Progress.fail();
+      });
+    },
+    deletePanen: function deletePanen(id) {
+      var _this2 = this;
+
+      swal.fire({
+        title: "Apakah kamu yakin?",
+        text: "Panen yang dihapus tidak dapat dikembalikan",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya"
+      }).then(function (result) {
+        if (result.value) {
+          _this2.$Progress.start();
+
+          axios["delete"]("/deleteHasilPanen/" + id).then(function () {
+            UpdateData.$emit("HasilPanen");
+            swal.fire("Tehapus!", "Hasil Panen berhasil dihapus", "success");
+
+            _this2.$Progress.finish();
+          })["catch"](function () {
+            _this2.$Progress.fail();
+
+            swal.fire("Gagal!", "Terdapat masalah ketika menghapus", "waning");
+          });
+        }
+      });
+    },
+    getLahan: function getLahan() {
+      var _this3 = this;
+
+      axios.get("/readLahan").then(function (response) {
+        _this3.datalahan = response.data.data;
+      });
+    },
+    customFormatter: function customFormatter(date) {
+      return moment(date).format("DD MMMM YYYY");
+    },
+    // Modal
+    // Menampilkan modal utk menambahkan pengeluaran baru
+    newModal: function newModal() {
+      this.editmode = false;
+      this.form.reset();
+      $("#modalHasilPanen").modal("show");
+    },
+    // Menampilkan modal utk mengedit pengeluaran
+    editModal: function editModal(data) {
+      this.editmode = true;
+      this.form.reset();
+      $("#modalHasilPanen").modal("show"); //   this.form.fill(data);
+    }
+  },
+  created: function created() {
+    this.getLahan();
+  },
+  mounted: function mounted() {
+    var _this4 = this;
+
+    // Custom event on Vue js
+    UpdateData.$on("HasilPanen", function () {
+      _this4.getPengeluaran();
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=script&lang=js& ***!
@@ -10446,6 +10846,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -87343,16 +87749,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("vue-progress-bar"),
                 _vm._v(" "),
-                _c("div", { staticClass: "card-tools" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success btn-sm",
-                      on: { click: _vm.newModal }
-                    },
-                    [_vm._v("Tambah Inventory")]
-                  )
-                ])
+                _c("div", { staticClass: "card-tools" })
               ],
               1
             ),
@@ -95206,30 +95603,6 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("li", { staticClass: "nav-header" }, [
-                    _vm._v("MANAJEMEN PERSEDIAAN")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: "/konsumen/inventaris" }
-                        },
-                        [
-                          _c("i", { staticClass: "nav-icon fas fa-tasks" }),
-                          _vm._v(" "),
-                          _c("p", [_vm._v("Inventaris")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "nav-header" }, [
                     _vm._v("MANAJEMEN PEMESANAN")
                   ]),
                   _vm._v(" "),
@@ -95512,6 +95885,142 @@ var staticRenderFns = [
                 }
               },
               [_vm._v("\tPermintaan dari Pengguna Lain")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "custom-tabs-three-pengajuan-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-pengajuan",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-pengajuan",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Permintaan dari Saya")]
+            )
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=template&id=1a13725a&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=template&id=1a13725a& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c(
+              "div",
+              {
+                staticClass: "card card-primary card-outline card-outline-tabs"
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tab-content",
+                      attrs: { id: "custom-tabs-three-tabContent" }
+                    },
+                    [_c("permintaan"), _vm._v(" "), _c("pengajuan")],
+                    1
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [
+              _vm._v("Permintaan Cabai")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Permintaan Transaksi Cabai")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
+      _c(
+        "ul",
+        {
+          staticClass: "nav nav-tabs",
+          attrs: { id: "custom-tabs-three-tab", role: "tablist" }
+        },
+        [
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link active",
+                attrs: {
+                  id: "custom-tabs-three-permintaan-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-permintaan",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-permintaan",
+                  "aria-selected": "true"
+                }
+              },
+              [_vm._v("Permintaan dari Pengguna Lain")]
             )
           ]),
           _vm._v(" "),
@@ -99256,6 +99765,415 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/HasilPanen.vue?vue&type=template&id=f76340a2&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/HasilPanen.vue?vue&type=template&id=f76340a2& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                { staticClass: "card-header" },
+                [
+                  _c("h3", { staticClass: "card-title" }, [
+                    _vm._v("Hasil Panen")
+                  ]),
+                  _vm._v(" "),
+                  _c("vue-progress-bar"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-tools" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success btn-sm",
+                        on: { click: _vm.newModal }
+                      },
+                      [_vm._v("Tambah Panen")]
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body table-responsive p-0" }, [
+                _c("table", { staticClass: "table table-hover text-nowrap" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("tbody", [
+                    _c("td", [_vm._v("kode 12")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Cabai keriting")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("1200 kg")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("12 12 2002")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _c("i", {
+                          staticClass: "fas fa-edit blue",
+                          on: {
+                            click: function($event) {
+                              return _vm.editModal(_vm.data)
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(
+                        "\n                      /\n                      "
+                      ),
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.deletePanen(1)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-trash red" })]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modalHasilPanen",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "modalHasilPanenLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      _vm.editmode ? _vm.updatePanen() : _vm.addPanen()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md" },
+                      [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.lahan_id,
+                                expression: "form.lahan_id"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("lahan_id")
+                            },
+                            attrs: { id: "pemasok__id" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "lahan_id",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "", disabled: "", selected: "" }
+                              },
+                              [_vm._v("Pilih Lahan")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.datalahan, function(data) {
+                              return _c(
+                                "option",
+                                { key: data.id, domProps: { value: data.id } },
+                                [
+                                  _vm._v(
+                                    _vm._s(data.kode_lahan) +
+                                      " - " +
+                                      _vm._s(data.jenis_cabai)
+                                  )
+                                ]
+                              )
+                            })
+                          ],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "lahan_id" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.jumlah_cabai,
+                              expression: "form.jumlah_cabai"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("jumlah_cabai")
+                          },
+                          attrs: {
+                            type: "number",
+                            placeholder: "Jumlah Panen"
+                          },
+                          domProps: { value: _vm.form.jumlah_cabai },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "jumlah_cabai",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "jumlah_cabai" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md" },
+                      [
+                        _c("datepicker", {
+                          class: {
+                            "is-invalid": _vm.form.errors.has("tanggal_panen")
+                          },
+                          attrs: {
+                            "input-class": "form-control",
+                            required: "",
+                            placeholder: "Tanggal Panen",
+                            format: _vm.customFormatter,
+                            id: "tanggal_panen"
+                          },
+                          model: {
+                            value: _vm.form.tanggal_panen,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "tanggal_panen", $$v)
+                            },
+                            expression: "form.tanggal_panen"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "tanggal_panen" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Tutup")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editmode,
+                            expression: "editmode"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Update")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editmode,
+                            expression: "!editmode"
+                          }
+                        ],
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Create")]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [_vm._v("Hasil Panen")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Hasil Panen")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Kode Lahan")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Jenis Cabai")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Jumlah Panen")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tanggal Panen")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Aksi")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "modalHasilPanenLabel" } },
+        [_vm._v("Tambahkan Hasil Panen")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=template&id=398a334a&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/Inventaris.vue?vue&type=template&id=398a334a& ***!
@@ -100237,6 +101155,26 @@ var render = function() {
                           _c("i", { staticClass: "fas fa-history nav-icon" }),
                           _vm._v(" "),
                           _c("p", [_vm._v("Riwayat Pengeluaran")])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: "/produsen/hasilpanen" }
+                        },
+                        [
+                          _c("i", { staticClass: "nav-icon fas fa-tasks" }),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Hasil Panen")])
                         ]
                       )
                     ],
@@ -121820,6 +122758,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/scm/konsumen/permintaancabai.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/pages/scm/konsumen/permintaancabai.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _permintaancabai_vue_vue_type_template_id_1a13725a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./permintaancabai.vue?vue&type=template&id=1a13725a& */ "./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=template&id=1a13725a&");
+/* harmony import */ var _permintaancabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./permintaancabai.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _permintaancabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _permintaancabai_vue_vue_type_template_id_1a13725a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _permintaancabai_vue_vue_type_template_id_1a13725a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/scm/konsumen/permintaancabai.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_permintaancabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./permintaancabai.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_permintaancabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=template&id=1a13725a&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=template&id=1a13725a& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_permintaancabai_vue_vue_type_template_id_1a13725a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./permintaancabai.vue?vue&type=template&id=1a13725a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=template&id=1a13725a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_permintaancabai_vue_vue_type_template_id_1a13725a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_permintaancabai_vue_vue_type_template_id_1a13725a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/pages/scm/pengecer/DaftarMitra.vue":
 /*!*********************************************************!*\
   !*** ./resources/js/pages/scm/pengecer/DaftarMitra.vue ***!
@@ -122876,6 +123883,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/scm/produsen/HasilPanen.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/pages/scm/produsen/HasilPanen.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HasilPanen_vue_vue_type_template_id_f76340a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HasilPanen.vue?vue&type=template&id=f76340a2& */ "./resources/js/pages/scm/produsen/HasilPanen.vue?vue&type=template&id=f76340a2&");
+/* harmony import */ var _HasilPanen_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HasilPanen.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/produsen/HasilPanen.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _HasilPanen_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _HasilPanen_vue_vue_type_template_id_f76340a2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _HasilPanen_vue_vue_type_template_id_f76340a2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/scm/produsen/HasilPanen.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/produsen/HasilPanen.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/pages/scm/produsen/HasilPanen.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HasilPanen_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./HasilPanen.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/HasilPanen.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HasilPanen_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/produsen/HasilPanen.vue?vue&type=template&id=f76340a2&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/pages/scm/produsen/HasilPanen.vue?vue&type=template&id=f76340a2& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HasilPanen_vue_vue_type_template_id_f76340a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./HasilPanen.vue?vue&type=template&id=f76340a2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/HasilPanen.vue?vue&type=template&id=f76340a2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HasilPanen_vue_vue_type_template_id_f76340a2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HasilPanen_vue_vue_type_template_id_f76340a2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/pages/scm/produsen/Inventaris.vue":
 /*!********************************************************!*\
   !*** ./resources/js/pages/scm/produsen/Inventaris.vue ***!
@@ -123387,41 +124463,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_scm_produsen_PermintaanCabai__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/scm/produsen/PermintaanCabai */ "./resources/js/pages/scm/produsen/PermintaanCabai.vue");
 /* harmony import */ var _pages_scm_produsen_MitraSaya__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/scm/produsen/MitraSaya */ "./resources/js/pages/scm/produsen/MitraSaya.vue");
 /* harmony import */ var _pages_scm_produsen_Inventaris__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/scm/produsen/Inventaris */ "./resources/js/pages/scm/produsen/Inventaris.vue");
-/* harmony import */ var _pages_scm_pengepul_Master__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/scm/pengepul/Master */ "./resources/js/pages/scm/pengepul/Master.vue");
-/* harmony import */ var _pages_scm_pengepul_Dashboard__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/scm/pengepul/Dashboard */ "./resources/js/pages/scm/pengepul/Dashboard.vue");
-/* harmony import */ var _pages_scm_pengepul_DaftarMitra__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pages/scm/pengepul/DaftarMitra */ "./resources/js/pages/scm/pengepul/DaftarMitra.vue");
-/* harmony import */ var _pages_scm_pengepul_PermintaanMitra__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./pages/scm/pengepul/PermintaanMitra */ "./resources/js/pages/scm/pengepul/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_pengepul_PermintaanCabai__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./pages/scm/pengepul/PermintaanCabai */ "./resources/js/pages/scm/pengepul/PermintaanCabai.vue");
-/* harmony import */ var _pages_scm_pengepul_Inventaris__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./pages/scm/pengepul/Inventaris */ "./resources/js/pages/scm/pengepul/Inventaris.vue");
-/* harmony import */ var _pages_scm_pengepul_MitraSaya__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./pages/scm/pengepul/MitraSaya */ "./resources/js/pages/scm/pengepul/MitraSaya.vue");
-/* harmony import */ var _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/scm/grosir/Master */ "./resources/js/pages/scm/grosir/Master.vue");
-/* harmony import */ var _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./pages/scm/grosir/Dashboard */ "./resources/js/pages/scm/grosir/Dashboard.vue");
-/* harmony import */ var _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./pages/scm/grosir/DaftarMitra */ "./resources/js/pages/scm/grosir/DaftarMitra.vue");
-/* harmony import */ var _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./pages/scm/grosir/PermintaanMitra */ "./resources/js/pages/scm/grosir/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_grosir_PermintaanCabai__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./pages/scm/grosir/PermintaanCabai */ "./resources/js/pages/scm/grosir/PermintaanCabai.vue");
-/* harmony import */ var _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./pages/scm/grosir/Inventaris */ "./resources/js/pages/scm/grosir/Inventaris.vue");
-/* harmony import */ var _pages_scm_grosir_MitraSaya__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./pages/scm/grosir/MitraSaya */ "./resources/js/pages/scm/grosir/MitraSaya.vue");
-/* harmony import */ var _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./pages/scm/pengecer/Master */ "./resources/js/pages/scm/pengecer/Master.vue");
-/* harmony import */ var _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./pages/scm/pengecer/Dashboard */ "./resources/js/pages/scm/pengecer/Dashboard.vue");
-/* harmony import */ var _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./pages/scm/pengecer/DaftarMitra */ "./resources/js/pages/scm/pengecer/DaftarMitra.vue");
-/* harmony import */ var _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanMitra */ "./resources/js/pages/scm/pengecer/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_pengecer_PermintaanCabai__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanCabai */ "./resources/js/pages/scm/pengecer/PermintaanCabai.vue");
-/* harmony import */ var _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./pages/scm/pengecer/Inventaris */ "./resources/js/pages/scm/pengecer/Inventaris.vue");
-/* harmony import */ var _pages_scm_pengecer_MitraSaya__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./pages/scm/pengecer/MitraSaya */ "./resources/js/pages/scm/pengecer/MitraSaya.vue");
-/* harmony import */ var _pages_scm_konsumen_Master__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./pages/scm/konsumen/Master */ "./resources/js/pages/scm/konsumen/Master.vue");
-/* harmony import */ var _pages_scm_konsumen_Dashboard__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./pages/scm/konsumen/Dashboard */ "./resources/js/pages/scm/konsumen/Dashboard.vue");
-/* harmony import */ var _pages_scm_konsumen_DaftarMitra__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./pages/scm/konsumen/DaftarMitra */ "./resources/js/pages/scm/konsumen/DaftarMitra.vue");
-/* harmony import */ var _pages_scm_konsumen_PermintaanMitra__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./pages/scm/konsumen/PermintaanMitra */ "./resources/js/pages/scm/konsumen/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_konsumen_MitraSaya__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./pages/scm/konsumen/MitraSaya */ "./resources/js/pages/scm/konsumen/MitraSaya.vue");
-/* harmony import */ var _pages_ba_Master__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./pages/ba/Master */ "./resources/js/pages/ba/Master.vue");
-/* harmony import */ var _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./pages/ba/produsen/Target */ "./resources/js/pages/ba/produsen/Target.vue");
-/* harmony import */ var _pages_ba_produsen_Penjualan__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./pages/ba/produsen/Penjualan */ "./resources/js/pages/ba/produsen/Penjualan.vue");
-/* harmony import */ var _pages_ba_produsen_Pengeluaran__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./pages/ba/produsen/Pengeluaran */ "./resources/js/pages/ba/produsen/Pengeluaran.vue");
-/* harmony import */ var _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./pages/ba/produsen/bisnisAnalitik */ "./resources/js/pages/ba/produsen/bisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./pages/ba/pengepul/BisnisAnalitik */ "./resources/js/pages/ba/pengepul/BisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./pages/ba/grosir/BisnisAnalitik */ "./resources/js/pages/ba/grosir/BisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./pages/ba/pengecer/BisnisAnalitik */ "./resources/js/pages/ba/pengecer/BisnisAnalitik.vue");
-/* harmony import */ var _pages_ba_Master2__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./pages/ba/Master2 */ "./resources/js/pages/ba/Master2.vue");
+/* harmony import */ var _pages_scm_produsen_HasilPanen__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/scm/produsen/HasilPanen */ "./resources/js/pages/scm/produsen/HasilPanen.vue");
+/* harmony import */ var _pages_scm_pengepul_Master__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/scm/pengepul/Master */ "./resources/js/pages/scm/pengepul/Master.vue");
+/* harmony import */ var _pages_scm_pengepul_Dashboard__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pages/scm/pengepul/Dashboard */ "./resources/js/pages/scm/pengepul/Dashboard.vue");
+/* harmony import */ var _pages_scm_pengepul_DaftarMitra__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./pages/scm/pengepul/DaftarMitra */ "./resources/js/pages/scm/pengepul/DaftarMitra.vue");
+/* harmony import */ var _pages_scm_pengepul_PermintaanMitra__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./pages/scm/pengepul/PermintaanMitra */ "./resources/js/pages/scm/pengepul/PermintaanMitra.vue");
+/* harmony import */ var _pages_scm_pengepul_PermintaanCabai__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./pages/scm/pengepul/PermintaanCabai */ "./resources/js/pages/scm/pengepul/PermintaanCabai.vue");
+/* harmony import */ var _pages_scm_pengepul_Inventaris__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./pages/scm/pengepul/Inventaris */ "./resources/js/pages/scm/pengepul/Inventaris.vue");
+/* harmony import */ var _pages_scm_pengepul_MitraSaya__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/scm/pengepul/MitraSaya */ "./resources/js/pages/scm/pengepul/MitraSaya.vue");
+/* harmony import */ var _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./pages/scm/grosir/Master */ "./resources/js/pages/scm/grosir/Master.vue");
+/* harmony import */ var _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./pages/scm/grosir/Dashboard */ "./resources/js/pages/scm/grosir/Dashboard.vue");
+/* harmony import */ var _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./pages/scm/grosir/DaftarMitra */ "./resources/js/pages/scm/grosir/DaftarMitra.vue");
+/* harmony import */ var _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./pages/scm/grosir/PermintaanMitra */ "./resources/js/pages/scm/grosir/PermintaanMitra.vue");
+/* harmony import */ var _pages_scm_grosir_PermintaanCabai__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./pages/scm/grosir/PermintaanCabai */ "./resources/js/pages/scm/grosir/PermintaanCabai.vue");
+/* harmony import */ var _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./pages/scm/grosir/Inventaris */ "./resources/js/pages/scm/grosir/Inventaris.vue");
+/* harmony import */ var _pages_scm_grosir_MitraSaya__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./pages/scm/grosir/MitraSaya */ "./resources/js/pages/scm/grosir/MitraSaya.vue");
+/* harmony import */ var _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./pages/scm/pengecer/Master */ "./resources/js/pages/scm/pengecer/Master.vue");
+/* harmony import */ var _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./pages/scm/pengecer/Dashboard */ "./resources/js/pages/scm/pengecer/Dashboard.vue");
+/* harmony import */ var _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./pages/scm/pengecer/DaftarMitra */ "./resources/js/pages/scm/pengecer/DaftarMitra.vue");
+/* harmony import */ var _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanMitra */ "./resources/js/pages/scm/pengecer/PermintaanMitra.vue");
+/* harmony import */ var _pages_scm_pengecer_PermintaanCabai__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanCabai */ "./resources/js/pages/scm/pengecer/PermintaanCabai.vue");
+/* harmony import */ var _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./pages/scm/pengecer/Inventaris */ "./resources/js/pages/scm/pengecer/Inventaris.vue");
+/* harmony import */ var _pages_scm_pengecer_MitraSaya__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./pages/scm/pengecer/MitraSaya */ "./resources/js/pages/scm/pengecer/MitraSaya.vue");
+/* harmony import */ var _pages_scm_konsumen_Master__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./pages/scm/konsumen/Master */ "./resources/js/pages/scm/konsumen/Master.vue");
+/* harmony import */ var _pages_scm_konsumen_Dashboard__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./pages/scm/konsumen/Dashboard */ "./resources/js/pages/scm/konsumen/Dashboard.vue");
+/* harmony import */ var _pages_scm_konsumen_DaftarMitra__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./pages/scm/konsumen/DaftarMitra */ "./resources/js/pages/scm/konsumen/DaftarMitra.vue");
+/* harmony import */ var _pages_scm_konsumen_PermintaanMitra__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./pages/scm/konsumen/PermintaanMitra */ "./resources/js/pages/scm/konsumen/PermintaanMitra.vue");
+/* harmony import */ var _pages_scm_konsumen_permintaancabai__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./pages/scm/konsumen/permintaancabai */ "./resources/js/pages/scm/konsumen/permintaancabai.vue");
+/* harmony import */ var _pages_scm_konsumen_MitraSaya__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./pages/scm/konsumen/MitraSaya */ "./resources/js/pages/scm/konsumen/MitraSaya.vue");
+/* harmony import */ var _pages_ba_Master__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./pages/ba/Master */ "./resources/js/pages/ba/Master.vue");
+/* harmony import */ var _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./pages/ba/produsen/Target */ "./resources/js/pages/ba/produsen/Target.vue");
+/* harmony import */ var _pages_ba_produsen_Penjualan__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./pages/ba/produsen/Penjualan */ "./resources/js/pages/ba/produsen/Penjualan.vue");
+/* harmony import */ var _pages_ba_produsen_Pengeluaran__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./pages/ba/produsen/Pengeluaran */ "./resources/js/pages/ba/produsen/Pengeluaran.vue");
+/* harmony import */ var _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./pages/ba/produsen/bisnisAnalitik */ "./resources/js/pages/ba/produsen/bisnisAnalitik.vue");
+/* harmony import */ var _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./pages/ba/pengepul/BisnisAnalitik */ "./resources/js/pages/ba/pengepul/BisnisAnalitik.vue");
+/* harmony import */ var _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./pages/ba/grosir/BisnisAnalitik */ "./resources/js/pages/ba/grosir/BisnisAnalitik.vue");
+/* harmony import */ var _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./pages/ba/pengecer/BisnisAnalitik */ "./resources/js/pages/ba/pengecer/BisnisAnalitik.vue");
+/* harmony import */ var _pages_ba_Master2__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./pages/ba/Master2 */ "./resources/js/pages/ba/Master2.vue");
  // Pages
 
 
@@ -123435,6 +124513,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // prod == produsen
+
 
 
 
@@ -123475,6 +124554,7 @@ __webpack_require__.r(__webpack_exports__);
  // import TransaksiPelangganKonsumen from './pages/scm/konsumen/TransaksiPelanggan'
 // import TransaksiPemasokKonsumen from './pages/scm/konsumen/TransaksiPemasok'
 // import InventarisKonsumen from './pages/scm/konsumen/Inventaris'
+
 
  // Pages - Bisnis Analitik
 
@@ -123548,6 +124628,10 @@ var routes = [// SCM
     component: _pages_scm_produsen_RiwayatPengeluaran__WEBPACK_IMPORTED_MODULE_13__["default"],
     name: "RiwayatPengeluaran"
   }, {
+    path: 'hasilpanen',
+    component: _pages_scm_produsen_HasilPanen__WEBPACK_IMPORTED_MODULE_19__["default"],
+    name: "HasilPanenProd"
+  }, {
     path: 'daftarmitra',
     component: _pages_scm_produsen_DaftarMitra__WEBPACK_IMPORTED_MODULE_14__["default"],
     name: "DaftarMitraProd"
@@ -123566,24 +124650,24 @@ var routes = [// SCM
   }, //BA
   {
     path: 'analitik',
-    component: _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_49__["default"],
+    component: _pages_ba_produsen_bisnisAnalitik__WEBPACK_IMPORTED_MODULE_51__["default"],
     name: "BisnisAnalitikProd"
   }, {
     path: 'target',
-    component: _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_46__["default"],
+    component: _pages_ba_produsen_Target__WEBPACK_IMPORTED_MODULE_48__["default"],
     name: "TargetProd"
   }, {
     path: 'penjualan',
-    component: _pages_ba_produsen_Penjualan__WEBPACK_IMPORTED_MODULE_47__["default"],
+    component: _pages_ba_produsen_Penjualan__WEBPACK_IMPORTED_MODULE_49__["default"],
     name: "PenjualanProd"
   }, {
     path: 'pengeluaran',
-    component: _pages_ba_produsen_Pengeluaran__WEBPACK_IMPORTED_MODULE_48__["default"],
+    component: _pages_ba_produsen_Pengeluaran__WEBPACK_IMPORTED_MODULE_50__["default"],
     name: "PengeluaranProd"
   }]
 }, {
   path: '/grosir',
-  component: _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_26__["default"],
+  component: _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_27__["default"],
   meta: {
     checkStatus: true,
     auth: {
@@ -123596,36 +124680,36 @@ var routes = [// SCM
   },
   children: [{
     path: '',
-    component: _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_27__["default"],
+    component: _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_28__["default"],
     name: "DashboardGrosir"
   }, {
     path: 'daftarmitra',
-    component: _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_28__["default"],
+    component: _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_29__["default"],
     name: "DaftarMitraGrosir"
   }, {
     path: 'mitrasaya',
-    component: _pages_scm_grosir_MitraSaya__WEBPACK_IMPORTED_MODULE_32__["default"],
+    component: _pages_scm_grosir_MitraSaya__WEBPACK_IMPORTED_MODULE_33__["default"],
     name: "MitraSayaGrosir"
   }, {
     path: 'permintaanmitra',
-    component: _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_29__["default"],
+    component: _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_30__["default"],
     name: "PermintaanMitraGrosir"
   }, {
     path: 'permintaancabai',
-    component: _pages_scm_grosir_PermintaanCabai__WEBPACK_IMPORTED_MODULE_30__["default"],
+    component: _pages_scm_grosir_PermintaanCabai__WEBPACK_IMPORTED_MODULE_31__["default"],
     name: "PermintaanCabaiGrosir"
   }, {
     path: 'analitik',
-    component: _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_51__["default"],
+    component: _pages_ba_grosir_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_53__["default"],
     name: "BisnisAnalitikGrosir"
   }, {
     path: 'inventaris',
-    component: _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_31__["default"],
+    component: _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_32__["default"],
     name: "InventarisGrosir"
   }]
 }, {
   path: '/pengecer',
-  component: _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_33__["default"],
+  component: _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_34__["default"],
   meta: {
     checkStatus: true,
     auth: {
@@ -123638,36 +124722,36 @@ var routes = [// SCM
   },
   children: [{
     path: '',
-    component: _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_34__["default"],
+    component: _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_35__["default"],
     name: "DashboardPengecer"
   }, {
     path: 'daftarmitra',
-    component: _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_35__["default"],
+    component: _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_36__["default"],
     name: "DaftarMitraPengecer"
   }, {
     path: 'mitrasaya',
-    component: _pages_scm_pengecer_MitraSaya__WEBPACK_IMPORTED_MODULE_39__["default"],
+    component: _pages_scm_pengecer_MitraSaya__WEBPACK_IMPORTED_MODULE_40__["default"],
     name: "MitraSayaPengecer"
   }, {
     path: 'permintaanmitra',
-    component: _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_36__["default"],
+    component: _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_37__["default"],
     name: "PermintaanMitraPengecer"
   }, {
     path: 'permintaancabai',
-    component: _pages_scm_pengecer_PermintaanCabai__WEBPACK_IMPORTED_MODULE_37__["default"],
+    component: _pages_scm_pengecer_PermintaanCabai__WEBPACK_IMPORTED_MODULE_38__["default"],
     name: "PermintaanCabaiPengecer"
   }, {
     path: 'analitik',
-    component: _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_52__["default"],
+    component: _pages_ba_pengecer_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_54__["default"],
     name: "BisnisAnalitikPengecer"
   }, {
     path: 'inventaris',
-    component: _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_38__["default"],
+    component: _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_39__["default"],
     name: "InventarisPengecer"
   }]
 }, {
   path: '/pengepul',
-  component: _pages_scm_pengepul_Master__WEBPACK_IMPORTED_MODULE_19__["default"],
+  component: _pages_scm_pengepul_Master__WEBPACK_IMPORTED_MODULE_20__["default"],
   meta: {
     checkStatus: true,
     auth: {
@@ -123680,36 +124764,36 @@ var routes = [// SCM
   },
   children: [{
     path: '',
-    component: _pages_scm_pengepul_Dashboard__WEBPACK_IMPORTED_MODULE_20__["default"],
+    component: _pages_scm_pengepul_Dashboard__WEBPACK_IMPORTED_MODULE_21__["default"],
     name: "DashboardPengepul"
   }, {
     path: 'daftarmitra',
-    component: _pages_scm_pengepul_DaftarMitra__WEBPACK_IMPORTED_MODULE_21__["default"],
+    component: _pages_scm_pengepul_DaftarMitra__WEBPACK_IMPORTED_MODULE_22__["default"],
     name: "DaftarMitraPengepul"
   }, {
     path: 'mitrasaya',
-    component: _pages_scm_pengepul_MitraSaya__WEBPACK_IMPORTED_MODULE_25__["default"],
+    component: _pages_scm_pengepul_MitraSaya__WEBPACK_IMPORTED_MODULE_26__["default"],
     name: "MitraSayaPengepul"
   }, {
     path: 'permintaanmitra',
-    component: _pages_scm_pengepul_PermintaanMitra__WEBPACK_IMPORTED_MODULE_22__["default"],
+    component: _pages_scm_pengepul_PermintaanMitra__WEBPACK_IMPORTED_MODULE_23__["default"],
     name: "PermintaanMitraPengepul"
   }, {
     path: 'permintaancabai',
-    component: _pages_scm_pengepul_PermintaanCabai__WEBPACK_IMPORTED_MODULE_23__["default"],
+    component: _pages_scm_pengepul_PermintaanCabai__WEBPACK_IMPORTED_MODULE_24__["default"],
     name: "PermintaanCabaiPengepul"
   }, {
     path: 'analitik',
-    component: _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_50__["default"],
+    component: _pages_ba_pengepul_BisnisAnalitik__WEBPACK_IMPORTED_MODULE_52__["default"],
     name: "BisnisAnalitikPengepul"
   }, {
     path: 'inventaris',
-    component: _pages_scm_pengepul_Inventaris__WEBPACK_IMPORTED_MODULE_24__["default"],
+    component: _pages_scm_pengepul_Inventaris__WEBPACK_IMPORTED_MODULE_25__["default"],
     name: "InventarisPengepul"
   }]
 }, {
   path: '/konsumen',
-  component: _pages_scm_konsumen_Master__WEBPACK_IMPORTED_MODULE_40__["default"],
+  component: _pages_scm_konsumen_Master__WEBPACK_IMPORTED_MODULE_41__["default"],
   meta: {
     checkStatus: true,
     auth: {
@@ -123722,20 +124806,24 @@ var routes = [// SCM
   },
   children: [{
     path: '',
-    component: _pages_scm_konsumen_Dashboard__WEBPACK_IMPORTED_MODULE_41__["default"],
+    component: _pages_scm_konsumen_Dashboard__WEBPACK_IMPORTED_MODULE_42__["default"],
     name: "DashboardKonsumen"
   }, {
     path: 'daftarmitra',
-    component: _pages_scm_konsumen_DaftarMitra__WEBPACK_IMPORTED_MODULE_42__["default"],
+    component: _pages_scm_konsumen_DaftarMitra__WEBPACK_IMPORTED_MODULE_43__["default"],
     name: "DaftarMitraKonsumen"
   }, {
     path: 'mitrasaya',
-    component: _pages_scm_konsumen_MitraSaya__WEBPACK_IMPORTED_MODULE_44__["default"],
+    component: _pages_scm_konsumen_MitraSaya__WEBPACK_IMPORTED_MODULE_46__["default"],
     name: "MitraSayaKonsumen"
   }, {
     path: 'permintaanmitra',
-    component: _pages_scm_konsumen_PermintaanMitra__WEBPACK_IMPORTED_MODULE_43__["default"],
+    component: _pages_scm_konsumen_PermintaanMitra__WEBPACK_IMPORTED_MODULE_44__["default"],
     name: "PermintaanMitraKonsumen"
+  }, {
+    path: 'permintaancabai',
+    component: _pages_scm_konsumen_permintaancabai__WEBPACK_IMPORTED_MODULE_45__["default"],
+    name: "PermintaanCabaiKonsumen"
   }]
 }, {
   path: '*',
@@ -123743,11 +124831,11 @@ var routes = [// SCM
 }, {
   path: '/',
   name: 'bisnisanalitik',
-  component: _pages_ba_Master__WEBPACK_IMPORTED_MODULE_45__["default"]
+  component: _pages_ba_Master__WEBPACK_IMPORTED_MODULE_47__["default"]
 }, {
   path: '/detail',
   name: 'badetail',
-  component: _pages_ba_Master2__WEBPACK_IMPORTED_MODULE_53__["default"]
+  component: _pages_ba_Master2__WEBPACK_IMPORTED_MODULE_55__["default"]
 }, {
   path: '/register',
   name: 'register',
