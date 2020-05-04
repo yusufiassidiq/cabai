@@ -66,7 +66,7 @@
 </template>
 <style>
 .login-page {
-  background-image: url("/dist/img/cabai2.png");
+  background-image: url("/dist/img/cabai.jpg");
   background-size: cover;
 }
 .font-putih {

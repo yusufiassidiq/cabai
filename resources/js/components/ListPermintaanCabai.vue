@@ -170,7 +170,7 @@
                   type="number"
                   name="harga"
                   class="form-control"
-                  placeholder="Harga"
+                  placeholder="Harga per Kg"
                   required
                   :class="{ 'is-invalid': form.errors.has('harga') }"
                 />

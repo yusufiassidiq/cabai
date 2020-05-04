@@ -33749,7 +33749,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.login-page {\r\n  background-image: url(\"/dist/img/cabai2.png\");\r\n  background-size: cover;\n}\n.font-putih {\r\n  color: white;\n}\r\n", ""]);
+exports.push([module.i, "\n.login-page {\r\n  background-image: url(\"/dist/img/cabai.jpg\");\r\n  background-size: cover;\n}\n.font-putih {\r\n  color: white;\n}\r\n", ""]);
 
 // exports
 
@@ -90227,7 +90227,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-8" }, [
                           _c("p", [
-                            _vm._v(":  " + _vm._s(_vm.temp_jumlahcabai))
+                            _vm._v(":  " + _vm._s(_vm.temp_jumlahcabai) + " Kg")
                           ])
                         ])
                       ]),
@@ -90259,7 +90259,8 @@ var render = function() {
                           _c("p", [
                             _vm._v(
                               ":  " +
-                                _vm._s(_vm.convertToRupiah(_vm.temp_harga))
+                                _vm._s(_vm.convertToRupiah(_vm.temp_harga)) +
+                                " /Kg"
                             )
                           ])
                         ])
@@ -90785,7 +90786,7 @@ var render = function() {
                             attrs: {
                               type: "number",
                               name: "harga",
-                              placeholder: "Harga",
+                              placeholder: "Harga per Kg",
                               required: ""
                             },
                             domProps: { value: _vm.form.harga },

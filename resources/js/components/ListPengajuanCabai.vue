@@ -281,7 +281,7 @@
                   <p class="normal text-md-left">Jumlah cabai</p>
                 </div>
                 <div class="col-md-8">
-                  <p>:&ensp; {{temp_jumlahcabai}}</p>
+                  <p>:&ensp; {{temp_jumlahcabai}} Kg</p>
                 </div>
               </div>
               <div class="row">
@@ -305,7 +305,7 @@
                   <p class="normal text-md-left">Harga</p>
                 </div>
                 <div class="col-md-8">
-                  <p>:&ensp; {{convertToRupiah(temp_harga)}}</p>
+                  <p>:&ensp; {{convertToRupiah(temp_harga)}} /Kg</p>
                 </div>
               </div>
               <div class v-show="!modalTerima">
