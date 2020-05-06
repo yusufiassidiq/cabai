@@ -72,8 +72,8 @@
   </div>
 </template>
 <script>
-import listPermintaan from "../../../components/PM_ListPermintaan";
-import listPengajuan from "../../../components/PNM_ListPengajuan";
+import listPermintaan from "../../../components/ListPermintaanMitraDariPenggunaLain";
+import listPengajuan from "../../../components/ListPermintaanMitraDariSaya";
 
 export default {
   components: {

@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Daftar Mitra</h1>
+            <h1 class="m-0 text-dark">Tambah Mitra</h1>
           </div>
           <!-- /.col -->
           <div class="col-sm-6">
@@ -14,7 +14,7 @@
               <li class="breadcrumb-item">
                 <a href="#">Pengecer</a>
               </li>
-              <li class="breadcrumb-item active">Daftar Mitra</li>
+              <li class="breadcrumb-item active">Tambah Mitra</li>
             </ol>
           </div>
           <!-- /.col -->
@@ -122,10 +122,10 @@
   </div>
 </template>
 <script>
-import listProdusen from "../../../components/DM_ListProdusen";
-import listPengepul from "../../../components/DM_ListPengepul";
-import listGrosir from "../../../components/DM_ListGrosir";
-import listKonsumen from "../../../components/DM_ListKonsumen";
+import listProdusen from "../../../components/ListProdusen";
+import listPengepul from "../../../components/ListPengepul";
+import listGrosir from "../../../components/ListGrosir";
+import listKonsumen from "../../../components/ListKonsumen";
 export default {
   components: {
     produsen: listProdusen,

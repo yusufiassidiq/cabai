@@ -45,14 +45,8 @@
             </tr>
             <tr v-for="data in dataListPermintaanMitra" :key="data.id">
               <td>{{ data.nama }}</td>
-              <td>
-                <div v-if="data.role===2">Produsen</div>
-                <div v-else-if="data.role===3">Pengepul</div>
-                <div v-else-if="data.role===4">Grosir</div>
-                <div v-else-if="data.role===5">Pengecer</div>
-                <div v-else>Konsumen</div>
-              </td>
-              <td>{{ data.lokasi.kelurahan }} , {{ data.lokasi.kecamatan }} , {{ data.lokasi.kabupaten }}</td>
+              <td>{{ data.role | filterRoleUser }}</td>
+              <td>{{ data.lokasi.kelurahan | filterAlamat }} , {{ data.lokasi.kecamatan | filterAlamat }} , {{ data.lokasi.kabupaten | filterAlamat }}</td>
               <td>
                 <button
                   type="button"

@@ -62,7 +62,7 @@
                 <p>Dashboard</p>
               </router-link>
             </li>
-            <li class="nav-header">Pra Produksi</li>
+            <li class="nav-header">Produksi</li>
             <li class="nav-item">
               <router-link to="/produsen/manajemenlahan" class="nav-link">
                 <i class="fas fa-seedling nav-icon"></i>
@@ -77,21 +77,22 @@
             </li>
             <li class="nav-item">
               <router-link to="/produsen/hasilpanen" class="nav-link">
-                <i class="nav-icon fas fa-tasks"></i>
+                <i class="nav-icon far fa-clipboard"></i>
                 <p>Hasil Panen</p>
               </router-link>
             </li>
+            <li class="nav-header">Inventaris</li>
             <li class="nav-item">
               <router-link to="/produsen/inventaris" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>Inventaris</p>
               </router-link>
             </li>
-            <li class="nav-header">MANAJEMEN KEMITRAAN</li>
+            <li class="nav-header">Kemitraan</li>
             <li class="nav-item">
               <router-link to="/produsen/daftarmitra" class="nav-link">
-                <i class="fas fa-users nav-icon"></i>
-                <p>Daftar Mitra</p>
+                <i class="fas fa-user-plus nav-icon"></i>
+                <p>Tambah Mitra</p>
               </router-link>
             </li>
             <li class="nav-item">
@@ -102,7 +103,7 @@
             </li>
             <li class="nav-item">
               <router-link to="/produsen/permintaanmitra" class="nav-link">
-                <i class="fas fa-user-plus nav-icon"></i>
+                <i class="fas fa-user-clock nav-icon"></i>
                 <p>Permintaan Mitra</p>
               </router-link>
             </li>

@@ -27,7 +27,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Manajemen Lahan</h3>
+                <h3 class="card-title">Daftar Lahan</h3>
 
                 <div class="card-tools">
                   <button class="btn btn-success btn-sm" @click="newModal">Tambah Lahan</button>
@@ -55,9 +55,9 @@
                       <th>Kode Lahan</th>
                       <th>Jenis Cabai</th>
                       <th>Luas Lahan (ha)</th>
-                      <th>Tanggal tanam</th>
+                      <th>Tanggal Tanam</th>
                       <th>Total Pengeluaran</th>
-                      <th>Action</th>
+                      <th>Aksi</th>
                       <th>Pengeluaran</th>
                     </tr>
                   </thead>
@@ -70,8 +70,8 @@
                       <td>{{ data.kode_lahan }}</td>
                       <td>{{ data.jenis_cabai }}</td>
                       <td>{{ data.luas_lahan }}</td>
-                      <td>{{ data.tanggal_tanam }}</td>
-                      <td>{{ data.pengeluaran }}</td>
+                      <td>{{ data.tanggal_tanam | dateFilter }}</td>
+                      <td>{{ data.pengeluaran | convertToRupiah }}</td>
                       <td>
                         <a href="#" @click="editModal(data)">
                           <i class="fas fa-edit blue"></i>
@@ -426,6 +426,7 @@ export default {
       this.form.fill(data);
     },
     pengeluaranModal(id) {
+      this.formriwayat.reset()
       $("#modalPengeluaran").modal("show");
       this.formriwayat.pra_produksi_id = id;
     }

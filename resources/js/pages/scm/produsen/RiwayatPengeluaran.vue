@@ -32,7 +32,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Riwayat Pengeluaran</h3>
+                <h3 class="card-title">Daftar Pengeluaran Lahan</h3>
                 <vue-progress-bar></vue-progress-bar>
 
                 <div class="card-tools">
@@ -58,25 +58,26 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
+                      <th>Tanggal</th>
                       <th>Kode Lahan</th>
-                      <th>Nama Pengeluaran</th>
+                      <th>Jenis Pengeluaran</th>
                       <th>Jumlah Pengeluaran</th>
                       <th>Rincian</th>
-                      <th>Tanggal</th>
-                      <th>Action</th>
+                      
+                      <th>Aksi</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     <tr v-if="!dataPengeluaran.length">
-                      <td colspan="6" align="center">Tidak ada riwayat pengeluaran</td>
+                      <td colspan="6" align="center">Tidak ada pengeluaran</td>
                     </tr>
                     <tr v-for="data in dataPengeluaran" :key="data.id">
+                      <td>{{ data.created_at | dateFilter}}</td>
                       <td>{{ data.kodeLahan }}</td>
                       <td>{{ data.nama_pengeluaran }}</td>
-                      <td>{{ data.jumlah_pengeluaran }}</td>
+                      <td>{{ data.jumlah_pengeluaran | convertToRupiah }}</td>
                       <td>{{ data.rincian }}</td>
-                      <td>{{ data.created_at }}</td>
                       <td>
                         <a href="#">
                           <i class="fas fa-edit blue" @click="editModal(data)"></i>

@@ -58,10 +58,10 @@
                   <thead>
                     <tr>
                       <th>Nama</th>
+                      <th>Role</th>
                       <th>Email</th>
                       <th>Tanggal divalidasi</th>
                       <th>Surat Izin(SIUP)</th>
-                      <th>Role</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
@@ -72,6 +72,7 @@
                     </tr>
                     <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
                       <td>{{ user.name }}</td>
+                      <td>{{ user.role | filterRoleUser }}</td>
                       <td>{{ user.email }}</td>
                       <td>{{ customFormatter(user.updated_at) }}</td>
                       <td>
@@ -83,7 +84,7 @@
                             <i class="fas fa-file-download">&nbsp; Download</i>
                           </button>
                       </td>
-                      <td>{{ getRole(user.role) }}</td>
+                      
                       <td>
                         <a href="#">
                           <i class="fas fa-edit blue" v-on:click="edituser(user.id)"></i>
@@ -200,25 +201,6 @@ export default {
     // fungsi untuk mengubah status user menjadi inaktif
     updateUser() {
       console.log("update user");
-    },
-    // fungsi untuk mendapat role dari role id
-    getRole(id_role) {
-      switch (id_role) {
-        case 2:
-          return "Produsen";
-          break;
-        case 3:
-          return "Pengepul";
-          break;
-        case 4:
-          return "Grosir";
-          break;
-        case 5:
-          return "Pengecer";
-          break;
-        default:
-          return "Konsumen";
-      }
     },
     customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");

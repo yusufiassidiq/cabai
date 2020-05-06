@@ -1,10 +1,9 @@
 <template>
-  <!-- DM : Ini merupakan komponen bagian pada Daftar Mitra -->
+  <!-- DM : Ini merupakan komponen bagian pada Tambah Mitra -->
   <div class="col-md-12">
-    <vue-progress-bar></vue-progress-bar>
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Daftar Pengepul</h3>
+        <h3 class="card-title">Daftar Produsen</h3>
         <div class="card-tools">
           <div class="input-group input-group-sm" style="width: 150px;">
             <input
@@ -13,6 +12,7 @@
               class="form-control float-right"
               placeholder="Search"
             />
+            <vue-progress-bar></vue-progress-bar>
             <div class="input-group-append">
               <button type="submit" class="btn btn-default">
                 <i class="fas fa-search"></i>
@@ -39,7 +39,7 @@
             </tr>
             <tr v-for="data in dataMitra" :key="data.id">
               <td>{{data.name}}</td>
-              <td>{{data.lokasiKelurahan | customFilter}}, {{data.lokasiKecamatan | customFilter}}, {{data.lokasiKabupaten | customFilter}}</td>
+              <td>{{data.lokasiKelurahan | filterAlamat}}, {{data.lokasiKecamatan | filterAlamat}}, {{data.lokasiKabupaten | filterAlamat}}</td>
               <td>
                 <a href="#" class="btn btn-success btn-xs" @click="addMitra(data.id, data.name)">
                   <i class="fas fa-plus-square white"></i>
@@ -65,13 +65,13 @@ export default {
     // Mendapatkan data Mitra
     getMitra() {
       axios
-        .get("/kemitraan/pengepul/list")
+        .get("/kemitraan/produsen/list")
         .then(response => {
           this.dataMitra = response.data.data;
         })
         .catch(() => {});
     },
-    addMitra(id_pengepul, nama) {
+    addMitra(id_produsen, nama) {
       swal
         .fire({
           title: "Mengajukan Permintaan",
@@ -79,15 +79,15 @@ export default {
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
-          confirmButtonText: "Ya"
+          confirmButtonText: "Ya, tambahkan"
         })
         .then(result => {
           if (result.value) {
             this.$Progress.start();
             axios
-              .post("/kemitraan/request/" + id_pengepul)
+              .post("/kemitraan/request/" + id_produsen)
               .then(() => {
-                UpdateData.$emit("ListPengepul");
+                UpdateData.$emit("ListProdusen");
                 swal.fire(
                   "Mengajukan Permintaan",
                   "Berhasil mengajukan kemitraan",
@@ -105,7 +105,6 @@ export default {
               });
           }
         });
-      this.$Progress.finish();
     }
   },
   created() {
@@ -113,7 +112,7 @@ export default {
   },
   mounted() {
     // Custom event on Vue js
-    UpdateData.$on("ListPengepul", () => {
+    UpdateData.$on("ListProdusen", () => {
       this.getMitra();
     });
   }
