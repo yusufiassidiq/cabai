@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Auth;
 use Carbon\Carbon;
 use DB;
+use App\Panen;
+use App\Inventaris;
 
 class ProdusenController extends Controller
 {
@@ -117,5 +119,42 @@ class ProdusenController extends Controller
         $pengeluaran->delete();
         return 204;
     }
-    
+    public function addPanen(Request $request){
+        $userId = Auth::user()->id;
+        $panen = new Panen;
+        $panen->pra_produksi_id = $request->pra_produksi_id;
+        $panen->jumlah_panen = $request->jumlah_cabai;
+        $panen->save();
+        $jumlah_cabai = $request->jumlah_cabai;
+        $jenis_cabai = $request->jenis_cabai;
+        $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
+        foreach ($inventaris as $i ) {
+            $jumlah_cabai_sementara = $i->jumlah_cabai;
+            $i->update([
+                'jumlah_cabai' => $jumlah_cabai_sementara + $jumlah_cabai,
+            ]);
+        }
+        return response()->json(['status' => 'success'], 200);
+    }
+    public function getPanen(){
+        $idUser = Auth::user()->id;
+        //bisa pake ini
+        $panens = Panen::whereHas("praProduksi", function($qPraProduksi) use ($idUser){
+            $qPraProduksi->whereHas("user", function($qUser) use($idUser){
+                $qUser->where("id", $idUser);
+            });
+        })->get();
+        //atau ini yg lebih sederhana
+        // $praProduksi_id = PraProduksi::where("user_id", $idUser)->pluck("id");
+        // $panens = Panen::whereIn("pra_produksi_id", $praProduksi_id)->get();
+        foreach($panens as $panen){
+            $panen->kode_lahan = $panen->praProduksi()->first()->kode_lahan;
+            $panen->jenis_cabai = $panen->praProduksi()->first()->jenis_cabai;
+        }
+        // dd($panens);
+        return response()->json([
+            'status' => 'success',
+            'data' => $panens->toArray(),
+        ]);
+    }
 }

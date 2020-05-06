@@ -282,11 +282,11 @@ class UserController extends Controller
             if($listPengajuanMitra[$j]->flag == 0){
                 $i->nama = $i->user2()->first()->name;
                 $i->role = $i->user2()->first()->role;
-                $i->lokasi = $i->user2()->first()->lokasi()->first();                
+                $i->lokasi = $i->user2()->first()->lokasi()->first(['kabupaten','kecamatan','kelurahan']);                
             }else{
                 $i->nama = $i->user1()->first()->name;
                 $i->role = $i->user1()->first()->role;
-                $i->lokasi = $i->user1()->first()->lokasi()->first();
+                $i->lokasi = $i->user1()->first()->lokasi()->first(['kabupaten','kecamatan','kelurahan']);
             }
             $j++;
         }
@@ -307,11 +307,11 @@ class UserController extends Controller
             if($listPermintaanMitra[$j]->flag == 0){
                 $i->nama = $i->user1()->first()->name;
                 $i->role = $i->user1()->first()->role;
-                $i->lokasi = $i->user1()->first()->lokasi()->first(); 
+                $i->lokasi = $i->user1()->first()->lokasi()->first(['kabupaten','kecamatan','kelurahan']); 
             }else{
                 $i->nama = $i->user2()->first()->name;
                 $i->role = $i->user2()->first()->role;
-                $i->lokasi = $i->user2()->first()->lokasi()->first(); 
+                $i->lokasi = $i->user2()->first()->lokasi()->first(['kabupaten','kecamatan','kelurahan']); 
             }
             $j++;
         }
@@ -337,13 +337,13 @@ class UserController extends Controller
                 $i->mitra = $user2;
                 $i->nama = $i->user2()->first()->name;
                 $i->role = $i->user2()->first()->role;
-                $i->lokasi = $i->user2()->first()->lokasi()->first();
+                $i->lokasi = $i->user2()->first()->lokasi()->first(['kabupaten','kecamatan','kelurahan']);
                
             }else if ($userId == $user2){
                 $i->mitra = $user1;
                 $i->nama = $i->user1()->first()->name;
                 $i->role = $i->user1()->first()->role;
-                $i->lokasi = $i->user1()->first()->lokasi()->first(); 
+                $i->lokasi = $i->user1()->first()->lokasi()->first(['kabupaten','kecamatan','kelurahan']); 
                
             }
             $j++;
@@ -378,10 +378,12 @@ class UserController extends Controller
         // dd($daftarMitraId);
         
         $daftarMitra = collect([]);
-        foreach($daftarMitraId as $k){
-            $akun = User::find($k);
-            if($akun->role < $roleUser){
-               $daftarMitra->push($akun); 
+        if(!$daftarMitraId){
+            foreach($daftarMitraId as $k){
+                $akun = User::find($k);
+                if($akun->role < $roleUser){
+                   $daftarMitra->push($akun); 
+                }
             }
         }
         // dd($daftarMitra);
@@ -428,7 +430,7 @@ class UserController extends Controller
     }
     public function getPermintaanMasuk(){
         $userId = Auth::user()->id;
-        $transaksi = Transaksi::where('pemasok_id',$userId)->get();
+        $transaksi = Transaksi::where('pemasok_id',$userId)->where('status_pemesanan',0)->orderBy('id','DESC')->get();
         foreach($transaksi as $i){
             $i->nama = $i->user()->first()->name;
         }
@@ -440,12 +442,12 @@ class UserController extends Controller
     }
     public function getPermintaanSaya(){
         $userId = Auth::user()->id;
-        $transaksi = Transaksi::where('user_id',$userId)->get();
+        $transaksi = Transaksi::where('user_id',$userId)->where('status_pemesanan',0)->orderBy('id','DESC')->get();
         $j=0;
         foreach($transaksi as $i){
             $id_pemasok = $transaksi[$j]->pemasok_id;
             $user = User::find($id_pemasok);
-            $lokasi = $user->lokasi()->first();
+            $lokasi = $user->lokasi()->first(['kabupaten','kecamatan','kelurahan']);
             $i->lokasi = $lokasi;
             $nama_pemasok = $user->name;
             $role_pemasok = $user->role;

@@ -15,12 +15,12 @@ class CreateInventarisTable extends Migration
     {
         Schema::create('inventaris', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->unsignedBigInteger('user_id');
             $table->string('jenis_cabai');
             $table->integer('jumlah_cabai');
             $table->integer('harga')->nullable();
+            $table->timestamps();
             
-            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

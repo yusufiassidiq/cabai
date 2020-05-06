@@ -16,20 +16,20 @@ class CreateTransaksisTable extends Migration
         //Permintaan Cabai
         Schema::create('transaksi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('pemasok_id');
             $table->string('jenis_cabai');
             $table->integer('jumlah_cabai');
-            $table->date('tanggal_diterima');
-            $table->integer('status_permintaan');
-            $table->date('tanggal_pengiriman')->nullable();
-            $table->integer('status_pengiriman')->nullable();
-            $table->integer('status_pemesanan')->nullable();
             $table->integer('harga')->nullable();
             $table->string('keterangan')->nullable();
+            $table->date('tanggal_diterima');
+            $table->date('tanggal_pengiriman')->nullable();
+            $table->integer('status_permintaan');
+            $table->integer('status_pengiriman')->nullable();
+            $table->integer('status_pemesanan')->nullable();
+            $table->timestamps();
             
-            $table->unsignedBigInteger('pemasok_id');
             
-            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
