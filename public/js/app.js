@@ -9348,96 +9348,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/PermintaanCabai.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/grosir/PermintaanCabai.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/TransaksiDenganPelanggan */ "./resources/js/components/TransaksiDenganPelanggan.vue");
-/* harmony import */ var _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/TransaksiDenganPemasok */ "./resources/js/components/TransaksiDenganPemasok.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    permintaan: _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__["default"],
-    pengajuan: _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/PermintaanMitra.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/grosir/PermintaanMitra.vue?vue&type=script&lang=js& ***!
@@ -9527,6 +9437,96 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     permintaan: _components_ListPermintaanMitraDariPenggunaLain__WEBPACK_IMPORTED_MODULE_0__["default"],
     pengajuan: _components_ListPermintaanMitraDariSaya__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/TransaksiCabai.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/grosir/TransaksiCabai.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/TransaksiDenganPelanggan */ "./resources/js/components/TransaksiDenganPelanggan.vue");
+/* harmony import */ var _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/TransaksiDenganPemasok */ "./resources/js/components/TransaksiDenganPemasok.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    permintaan: _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__["default"],
+    pengajuan: _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -9974,17 +9974,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/konsumen/TransaksiCabai.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/konsumen/TransaksiCabai.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/TransaksiDenganPelanggan */ "./resources/js/components/TransaksiDenganPelanggan.vue");
-/* harmony import */ var _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/TransaksiDenganPemasok */ "./resources/js/components/TransaksiDenganPemasok.vue");
+/* harmony import */ var _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/TransaksiDenganPemasok */ "./resources/js/components/TransaksiDenganPemasok.vue");
 //
 //
 //
@@ -10040,25 +10039,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    permintaan: _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__["default"],
-    pengajuan: _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__["default"]
+    pengajuan: _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  mounted: function mounted() {
+    $("#custom-tabs-three-pengajuan-tab").trigger("click");
   }
 });
 
@@ -10466,96 +10453,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/PermintaanCabai.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengecer/PermintaanCabai.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/TransaksiDenganPelanggan */ "./resources/js/components/TransaksiDenganPelanggan.vue");
-/* harmony import */ var _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/TransaksiDenganPemasok */ "./resources/js/components/TransaksiDenganPemasok.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    permintaan: _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__["default"],
-    pengajuan: _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/PermintaanMitra.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengecer/PermintaanMitra.vue?vue&type=script&lang=js& ***!
@@ -10645,6 +10542,96 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     permintaan: _components_ListPermintaanMitraDariPenggunaLain__WEBPACK_IMPORTED_MODULE_0__["default"],
     pengajuan: _components_ListPermintaanMitraDariSaya__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/TransaksiCabai.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengecer/TransaksiCabai.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/TransaksiDenganPelanggan */ "./resources/js/components/TransaksiDenganPelanggan.vue");
+/* harmony import */ var _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/TransaksiDenganPemasok */ "./resources/js/components/TransaksiDenganPemasok.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    permintaan: _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__["default"],
+    pengajuan: _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -11054,96 +11041,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/PermintaanCabai.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengepul/PermintaanCabai.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/TransaksiDenganPelanggan */ "./resources/js/components/TransaksiDenganPelanggan.vue");
-/* harmony import */ var _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/TransaksiDenganPemasok */ "./resources/js/components/TransaksiDenganPemasok.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    permintaan: _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__["default"],
-    pengajuan: _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/PermintaanMitra.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengepul/PermintaanMitra.vue?vue&type=script&lang=js& ***!
@@ -11234,6 +11131,96 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     permintaan: _components_ListPermintaanMitraDariPenggunaLain__WEBPACK_IMPORTED_MODULE_0__["default"],
     pengajuan: _components_ListPermintaanMitraDariSaya__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/TransaksiCabai.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengepul/TransaksiCabai.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/TransaksiDenganPelanggan */ "./resources/js/components/TransaksiDenganPelanggan.vue");
+/* harmony import */ var _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/TransaksiDenganPemasok */ "./resources/js/components/TransaksiDenganPemasok.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    permintaan: _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__["default"],
+    pengajuan: _components_TransaksiDenganPemasok__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -12447,80 +12434,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/PermintaanCabai.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/PermintaanCabai.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/TransaksiDenganPelanggan */ "./resources/js/components/TransaksiDenganPelanggan.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    permintaan: _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/PermintaanMitra.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/PermintaanMitra.vue?vue&type=script&lang=js& ***!
@@ -12914,6 +12827,80 @@ __webpack_require__.r(__webpack_exports__);
     UpdateData.$on("RiwayatPengeluaran", function () {
       _this4.getPengeluaran();
     });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/TransaksiCabai.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/TransaksiCabai.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/TransaksiDenganPelanggan */ "./resources/js/components/TransaksiDenganPelanggan.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    permintaan: _components_TransaksiDenganPelanggan__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -97219,142 +97206,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/PermintaanCabai.vue?vue&type=template&id=5985e6e1&":
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/grosir/PermintaanCabai.vue?vue&type=template&id=5985e6e1& ***!
-  \************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content-wrapper" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("section", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card card-primary card-outline card-outline-tabs"
-              },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "tab-content",
-                      attrs: { id: "custom-tabs-three-tabContent" }
-                    },
-                    [_c("permintaan"), _vm._v(" "), _c("pengajuan")],
-                    1
-                  )
-                ])
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-header" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row mb-2" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("h1", { staticClass: "m-0 text-dark" }, [
-              _vm._v("Transaksi Cabai")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
-              _c("li", { staticClass: "breadcrumb-item" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Grosir")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "breadcrumb-item active" }, [
-                _vm._v("Transaksi Cabai")
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
-      _c(
-        "ul",
-        {
-          staticClass: "nav nav-tabs",
-          attrs: { id: "custom-tabs-three-tab", role: "tablist" }
-        },
-        [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link active",
-                attrs: {
-                  id: "custom-tabs-three-permintaan-tab",
-                  "data-toggle": "pill",
-                  href: "#custom-tabs-three-permintaan",
-                  role: "tab",
-                  "aria-controls": "custom-tabs-three-permintaan",
-                  "aria-selected": "true"
-                }
-              },
-              [_vm._v("Transaksi dengan Pelanggan")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: {
-                  id: "custom-tabs-three-pengajuan-tab",
-                  "data-toggle": "pill",
-                  href: "#custom-tabs-three-pengajuan",
-                  role: "tab",
-                  "aria-controls": "custom-tabs-three-pengajuan",
-                  "aria-selected": "false"
-                }
-              },
-              [_vm._v("Transaksi dengan Pemasok")]
-            )
-          ])
-        ]
-      )
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/PermintaanMitra.vue?vue&type=template&id=37fd74fc&":
 /*!************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/grosir/PermintaanMitra.vue?vue&type=template&id=37fd74fc& ***!
@@ -97478,6 +97329,142 @@ var staticRenderFns = [
                 }
               },
               [_vm._v("Permintaan dari Saya")]
+            )
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/TransaksiCabai.vue?vue&type=template&id=ce6cb6a0&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/grosir/TransaksiCabai.vue?vue&type=template&id=ce6cb6a0& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c(
+              "div",
+              {
+                staticClass: "card card-primary card-outline card-outline-tabs"
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tab-content",
+                      attrs: { id: "custom-tabs-three-tabContent" }
+                    },
+                    [_c("permintaan"), _vm._v(" "), _c("pengajuan")],
+                    1
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [
+              _vm._v("Transaksi Cabai")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Grosir")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Transaksi Cabai")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
+      _c(
+        "ul",
+        {
+          staticClass: "nav nav-tabs",
+          attrs: { id: "custom-tabs-three-tab", role: "tablist" }
+        },
+        [
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link active",
+                attrs: {
+                  id: "custom-tabs-three-permintaan-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-permintaan",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-permintaan",
+                  "aria-selected": "true"
+                }
+              },
+              [_vm._v("Transaksi dengan Pelanggan")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "custom-tabs-three-pengajuan-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-pengajuan",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-pengajuan",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Transaksi dengan Pemasok")]
             )
           ])
         ]
@@ -98393,10 +98380,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=template&id=1a13725a&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=template&id=1a13725a& ***!
-  \**************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/konsumen/TransaksiCabai.vue?vue&type=template&id=235ac284&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/konsumen/TransaksiCabai.vue?vue&type=template&id=235ac284& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -98430,7 +98417,7 @@ var render = function() {
                       staticClass: "tab-content",
                       attrs: { id: "custom-tabs-three-tabContent" }
                     },
-                    [_c("permintaan"), _vm._v(" "), _c("pengajuan")],
+                    [_c("pengajuan")],
                     1
                   )
                 ])
@@ -98459,11 +98446,11 @@ var staticRenderFns = [
           _c("div", { staticClass: "col-sm-6" }, [
             _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
               _c("li", { staticClass: "breadcrumb-item" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Konsumen")])
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "breadcrumb-item active" }, [
-                _vm._v("Permintaan Transaksi Cabai")
+                _vm._v("Transaksi Cabai")
               ])
             ])
           ])
@@ -98483,24 +98470,6 @@ var staticRenderFns = [
           attrs: { id: "custom-tabs-three-tab", role: "tablist" }
         },
         [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link active",
-                attrs: {
-                  id: "custom-tabs-three-permintaan-tab",
-                  "data-toggle": "pill",
-                  href: "#custom-tabs-three-permintaan",
-                  role: "tab",
-                  "aria-controls": "custom-tabs-three-permintaan",
-                  "aria-selected": "true"
-                }
-              },
-              [_vm._v("Transaksi dengan Pelanggan")]
-            )
-          ]),
-          _vm._v(" "),
           _c("li", { staticClass: "nav-item" }, [
             _c(
               "a",
@@ -99375,142 +99344,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/PermintaanCabai.vue?vue&type=template&id=f3c4093c&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengecer/PermintaanCabai.vue?vue&type=template&id=f3c4093c& ***!
-  \**************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content-wrapper" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("section", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card card-primary card-outline card-outline-tabs"
-              },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "tab-content",
-                      attrs: { id: "custom-tabs-three-tabContent" }
-                    },
-                    [_c("permintaan"), _vm._v(" "), _c("pengajuan")],
-                    1
-                  )
-                ])
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-header" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row mb-2" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("h1", { staticClass: "m-0 text-dark" }, [
-              _vm._v("Transaksi Cabai")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
-              _c("li", { staticClass: "breadcrumb-item" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Pengecer")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "breadcrumb-item active" }, [
-                _vm._v("Transaksi Cabai")
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
-      _c(
-        "ul",
-        {
-          staticClass: "nav nav-tabs",
-          attrs: { id: "custom-tabs-three-tab", role: "tablist" }
-        },
-        [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link active",
-                attrs: {
-                  id: "custom-tabs-three-permintaan-tab",
-                  "data-toggle": "pill",
-                  href: "#custom-tabs-three-permintaan",
-                  role: "tab",
-                  "aria-controls": "custom-tabs-three-permintaan",
-                  "aria-selected": "true"
-                }
-              },
-              [_vm._v("Transaksi dengan Pelanggan")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: {
-                  id: "custom-tabs-three-pengajuan-tab",
-                  "data-toggle": "pill",
-                  href: "#custom-tabs-three-pengajuan",
-                  role: "tab",
-                  "aria-controls": "custom-tabs-three-pengajuan",
-                  "aria-selected": "false"
-                }
-              },
-              [_vm._v("Transaksi dengan Pemasok")]
-            )
-          ])
-        ]
-      )
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/PermintaanMitra.vue?vue&type=template&id=6495897d&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengecer/PermintaanMitra.vue?vue&type=template&id=6495897d& ***!
@@ -99634,6 +99467,142 @@ var staticRenderFns = [
                 }
               },
               [_vm._v("Permintaan dari Saya")]
+            )
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/TransaksiCabai.vue?vue&type=template&id=36e707e2&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengecer/TransaksiCabai.vue?vue&type=template&id=36e707e2& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c(
+              "div",
+              {
+                staticClass: "card card-primary card-outline card-outline-tabs"
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tab-content",
+                      attrs: { id: "custom-tabs-three-tabContent" }
+                    },
+                    [_c("permintaan"), _vm._v(" "), _c("pengajuan")],
+                    1
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [
+              _vm._v("Transaksi Cabai")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Pengecer")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Transaksi Cabai")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
+      _c(
+        "ul",
+        {
+          staticClass: "nav nav-tabs",
+          attrs: { id: "custom-tabs-three-tab", role: "tablist" }
+        },
+        [
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link active",
+                attrs: {
+                  id: "custom-tabs-three-permintaan-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-permintaan",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-permintaan",
+                  "aria-selected": "true"
+                }
+              },
+              [_vm._v("Transaksi dengan Pelanggan")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "custom-tabs-three-pengajuan-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-pengajuan",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-pengajuan",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Transaksi dengan Pemasok")]
             )
           ])
         ]
@@ -100493,142 +100462,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/PermintaanCabai.vue?vue&type=template&id=6768ac99&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengepul/PermintaanCabai.vue?vue&type=template&id=6768ac99& ***!
-  \**************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content-wrapper" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("section", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card card-primary card-outline card-outline-tabs"
-              },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "tab-content",
-                      attrs: { id: "custom-tabs-three-tabContent" }
-                    },
-                    [_c("permintaan"), _vm._v(" "), _c("pengajuan")],
-                    1
-                  )
-                ])
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-header" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row mb-2" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("h1", { staticClass: "m-0 text-dark" }, [
-              _vm._v("Transaksi Cabai")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
-              _c("li", { staticClass: "breadcrumb-item" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Pengepul")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "breadcrumb-item active" }, [
-                _vm._v("Transaksi Cabai")
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
-      _c(
-        "ul",
-        {
-          staticClass: "nav nav-tabs",
-          attrs: { id: "custom-tabs-three-tab", role: "tablist" }
-        },
-        [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link active",
-                attrs: {
-                  id: "custom-tabs-three-permintaan-tab",
-                  "data-toggle": "pill",
-                  href: "#custom-tabs-three-permintaan",
-                  role: "tab",
-                  "aria-controls": "custom-tabs-three-permintaan",
-                  "aria-selected": "true"
-                }
-              },
-              [_vm._v("Transaksi dengan Pelanggan")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: {
-                  id: "custom-tabs-three-pengajuan-tab",
-                  "data-toggle": "pill",
-                  href: "#custom-tabs-three-pengajuan",
-                  role: "tab",
-                  "aria-controls": "custom-tabs-three-pengajuan",
-                  "aria-selected": "false"
-                }
-              },
-              [_vm._v("Transaksi dengan Pemasok")]
-            )
-          ])
-        ]
-      )
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/PermintaanMitra.vue?vue&type=template&id=45e03ab4&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengepul/PermintaanMitra.vue?vue&type=template&id=45e03ab4& ***!
@@ -100752,6 +100585,142 @@ var staticRenderFns = [
                 }
               },
               [_vm._v("Permintaan dari Saya")]
+            )
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/TransaksiCabai.vue?vue&type=template&id=151b47f8&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/pengepul/TransaksiCabai.vue?vue&type=template&id=151b47f8& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c(
+              "div",
+              {
+                staticClass: "card card-primary card-outline card-outline-tabs"
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tab-content",
+                      attrs: { id: "custom-tabs-three-tabContent" }
+                    },
+                    [_c("permintaan"), _vm._v(" "), _c("pengajuan")],
+                    1
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [
+              _vm._v("Transaksi Cabai")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Pengepul")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Transaksi Cabai")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
+      _c(
+        "ul",
+        {
+          staticClass: "nav nav-tabs",
+          attrs: { id: "custom-tabs-three-tab", role: "tablist" }
+        },
+        [
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link active",
+                attrs: {
+                  id: "custom-tabs-three-permintaan-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-permintaan",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-permintaan",
+                  "aria-selected": "true"
+                }
+              },
+              [_vm._v("Transaksi dengan Pelanggan")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "custom-tabs-three-pengajuan-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-pengajuan",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-pengajuan",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Transaksi dengan Pemasok")]
             )
           ])
         ]
@@ -104006,124 +103975,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/PermintaanCabai.vue?vue&type=template&id=1552ed47&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/PermintaanCabai.vue?vue&type=template&id=1552ed47& ***!
-  \**************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content-wrapper" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("section", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card card-primary card-outline card-outline-tabs"
-              },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "tab-content",
-                      attrs: { id: "custom-tabs-three-tabContent" }
-                    },
-                    [_c("permintaan")],
-                    1
-                  )
-                ])
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-header" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row mb-2" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("h1", { staticClass: "m-0 text-dark" }, [
-              _vm._v("Transaksi Cabai")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
-              _c("li", { staticClass: "breadcrumb-item" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "breadcrumb-item active" }, [
-                _vm._v("Transaksi Cabai")
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
-      _c(
-        "ul",
-        {
-          staticClass: "nav nav-tabs",
-          attrs: { id: "custom-tabs-three-tab", role: "tablist" }
-        },
-        [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link active",
-                attrs: {
-                  id: "custom-tabs-three-permintaan-tab",
-                  "data-toggle": "pill",
-                  href: "#custom-tabs-three-permintaan",
-                  role: "tab",
-                  "aria-controls": "custom-tabs-three-permintaan",
-                  "aria-selected": "true"
-                }
-              },
-              [_vm._v("Transaksi dengan Pelanggan")]
-            )
-          ])
-        ]
-      )
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/PermintaanMitra.vue?vue&type=template&id=186b093c&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/PermintaanMitra.vue?vue&type=template&id=186b093c& ***!
@@ -104753,6 +104604,124 @@ var staticRenderFns = [
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/TransaksiCabai.vue?vue&type=template&id=0ca18cec&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/scm/produsen/TransaksiCabai.vue?vue&type=template&id=0ca18cec& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c(
+              "div",
+              {
+                staticClass: "card card-primary card-outline card-outline-tabs"
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tab-content",
+                      attrs: { id: "custom-tabs-three-tabContent" }
+                    },
+                    [_c("permintaan")],
+                    1
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [
+              _vm._v("Transaksi Cabai")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Transaksi Cabai")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
+      _c(
+        "ul",
+        {
+          staticClass: "nav nav-tabs",
+          attrs: { id: "custom-tabs-three-tab", role: "tablist" }
+        },
+        [
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link active",
+                attrs: {
+                  id: "custom-tabs-three-permintaan-tab",
+                  "data-toggle": "pill",
+                  href: "#custom-tabs-three-permintaan",
+                  role: "tab",
+                  "aria-controls": "custom-tabs-three-permintaan",
+                  "aria-selected": "true"
+                }
+              },
+              [_vm._v("Transaksi dengan Pelanggan")]
+            )
+          ])
+        ]
       )
     ])
   }
@@ -125024,75 +124993,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/scm/grosir/PermintaanCabai.vue":
-/*!***********************************************************!*\
-  !*** ./resources/js/pages/scm/grosir/PermintaanCabai.vue ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PermintaanCabai_vue_vue_type_template_id_5985e6e1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PermintaanCabai.vue?vue&type=template&id=5985e6e1& */ "./resources/js/pages/scm/grosir/PermintaanCabai.vue?vue&type=template&id=5985e6e1&");
-/* harmony import */ var _PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PermintaanCabai.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/grosir/PermintaanCabai.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PermintaanCabai_vue_vue_type_template_id_5985e6e1___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PermintaanCabai_vue_vue_type_template_id_5985e6e1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/pages/scm/grosir/PermintaanCabai.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/pages/scm/grosir/PermintaanCabai.vue?vue&type=script&lang=js&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/pages/scm/grosir/PermintaanCabai.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PermintaanCabai.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/PermintaanCabai.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/pages/scm/grosir/PermintaanCabai.vue?vue&type=template&id=5985e6e1&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/pages/scm/grosir/PermintaanCabai.vue?vue&type=template&id=5985e6e1& ***!
-  \******************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_template_id_5985e6e1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PermintaanCabai.vue?vue&type=template&id=5985e6e1& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/PermintaanCabai.vue?vue&type=template&id=5985e6e1&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_template_id_5985e6e1___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_template_id_5985e6e1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/pages/scm/grosir/PermintaanMitra.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/pages/scm/grosir/PermintaanMitra.vue ***!
@@ -125157,6 +125057,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanMitra_vue_vue_type_template_id_37fd74fc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanMitra_vue_vue_type_template_id_37fd74fc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/grosir/TransaksiCabai.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/pages/scm/grosir/TransaksiCabai.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TransaksiCabai_vue_vue_type_template_id_ce6cb6a0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TransaksiCabai.vue?vue&type=template&id=ce6cb6a0& */ "./resources/js/pages/scm/grosir/TransaksiCabai.vue?vue&type=template&id=ce6cb6a0&");
+/* harmony import */ var _TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TransaksiCabai.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/grosir/TransaksiCabai.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TransaksiCabai_vue_vue_type_template_id_ce6cb6a0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TransaksiCabai_vue_vue_type_template_id_ce6cb6a0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/scm/grosir/TransaksiCabai.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/grosir/TransaksiCabai.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/pages/scm/grosir/TransaksiCabai.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TransaksiCabai.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/TransaksiCabai.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/grosir/TransaksiCabai.vue?vue&type=template&id=ce6cb6a0&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/pages/scm/grosir/TransaksiCabai.vue?vue&type=template&id=ce6cb6a0& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_ce6cb6a0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TransaksiCabai.vue?vue&type=template&id=ce6cb6a0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/grosir/TransaksiCabai.vue?vue&type=template&id=ce6cb6a0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_ce6cb6a0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_ce6cb6a0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -125491,17 +125460,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/scm/konsumen/permintaancabai.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/pages/scm/konsumen/permintaancabai.vue ***!
-  \*************************************************************/
+/***/ "./resources/js/pages/scm/konsumen/TransaksiCabai.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/pages/scm/konsumen/TransaksiCabai.vue ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _permintaancabai_vue_vue_type_template_id_1a13725a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./permintaancabai.vue?vue&type=template&id=1a13725a& */ "./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=template&id=1a13725a&");
-/* harmony import */ var _permintaancabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./permintaancabai.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=script&lang=js&");
+/* harmony import */ var _TransaksiCabai_vue_vue_type_template_id_235ac284___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TransaksiCabai.vue?vue&type=template&id=235ac284& */ "./resources/js/pages/scm/konsumen/TransaksiCabai.vue?vue&type=template&id=235ac284&");
+/* harmony import */ var _TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TransaksiCabai.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/konsumen/TransaksiCabai.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -125511,9 +125480,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _permintaancabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _permintaancabai_vue_vue_type_template_id_1a13725a___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _permintaancabai_vue_vue_type_template_id_1a13725a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TransaksiCabai_vue_vue_type_template_id_235ac284___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TransaksiCabai_vue_vue_type_template_id_235ac284___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -125523,38 +125492,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/pages/scm/konsumen/permintaancabai.vue"
+component.options.__file = "resources/js/pages/scm/konsumen/TransaksiCabai.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/pages/scm/konsumen/TransaksiCabai.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/pages/scm/konsumen/TransaksiCabai.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_permintaancabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./permintaancabai.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_permintaancabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TransaksiCabai.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/konsumen/TransaksiCabai.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=template&id=1a13725a&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=template&id=1a13725a& ***!
-  \********************************************************************************************/
+/***/ "./resources/js/pages/scm/konsumen/TransaksiCabai.vue?vue&type=template&id=235ac284&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/pages/scm/konsumen/TransaksiCabai.vue?vue&type=template&id=235ac284& ***!
+  \*******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_permintaancabai_vue_vue_type_template_id_1a13725a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./permintaancabai.vue?vue&type=template&id=1a13725a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/konsumen/permintaancabai.vue?vue&type=template&id=1a13725a&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_permintaancabai_vue_vue_type_template_id_1a13725a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_235ac284___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TransaksiCabai.vue?vue&type=template&id=235ac284& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/konsumen/TransaksiCabai.vue?vue&type=template&id=235ac284&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_235ac284___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_permintaancabai_vue_vue_type_template_id_1a13725a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_235ac284___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -125889,75 +125858,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/scm/pengecer/PermintaanCabai.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/pages/scm/pengecer/PermintaanCabai.vue ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PermintaanCabai_vue_vue_type_template_id_f3c4093c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PermintaanCabai.vue?vue&type=template&id=f3c4093c& */ "./resources/js/pages/scm/pengecer/PermintaanCabai.vue?vue&type=template&id=f3c4093c&");
-/* harmony import */ var _PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PermintaanCabai.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/pengecer/PermintaanCabai.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PermintaanCabai_vue_vue_type_template_id_f3c4093c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PermintaanCabai_vue_vue_type_template_id_f3c4093c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/pages/scm/pengecer/PermintaanCabai.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/pages/scm/pengecer/PermintaanCabai.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/pages/scm/pengecer/PermintaanCabai.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PermintaanCabai.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/PermintaanCabai.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/pages/scm/pengecer/PermintaanCabai.vue?vue&type=template&id=f3c4093c&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/pages/scm/pengecer/PermintaanCabai.vue?vue&type=template&id=f3c4093c& ***!
-  \********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_template_id_f3c4093c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PermintaanCabai.vue?vue&type=template&id=f3c4093c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/PermintaanCabai.vue?vue&type=template&id=f3c4093c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_template_id_f3c4093c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_template_id_f3c4093c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/pages/scm/pengecer/PermintaanMitra.vue":
 /*!*************************************************************!*\
   !*** ./resources/js/pages/scm/pengecer/PermintaanMitra.vue ***!
@@ -126022,6 +125922,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanMitra_vue_vue_type_template_id_6495897d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanMitra_vue_vue_type_template_id_6495897d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/pengecer/TransaksiCabai.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/pages/scm/pengecer/TransaksiCabai.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TransaksiCabai_vue_vue_type_template_id_36e707e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TransaksiCabai.vue?vue&type=template&id=36e707e2& */ "./resources/js/pages/scm/pengecer/TransaksiCabai.vue?vue&type=template&id=36e707e2&");
+/* harmony import */ var _TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TransaksiCabai.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/pengecer/TransaksiCabai.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TransaksiCabai_vue_vue_type_template_id_36e707e2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TransaksiCabai_vue_vue_type_template_id_36e707e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/scm/pengecer/TransaksiCabai.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/pengecer/TransaksiCabai.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/pages/scm/pengecer/TransaksiCabai.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TransaksiCabai.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/TransaksiCabai.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/pengecer/TransaksiCabai.vue?vue&type=template&id=36e707e2&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/pages/scm/pengecer/TransaksiCabai.vue?vue&type=template&id=36e707e2& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_36e707e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TransaksiCabai.vue?vue&type=template&id=36e707e2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengecer/TransaksiCabai.vue?vue&type=template&id=36e707e2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_36e707e2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_36e707e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -126356,75 +126325,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/scm/pengepul/PermintaanCabai.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/pages/scm/pengepul/PermintaanCabai.vue ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PermintaanCabai_vue_vue_type_template_id_6768ac99___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PermintaanCabai.vue?vue&type=template&id=6768ac99& */ "./resources/js/pages/scm/pengepul/PermintaanCabai.vue?vue&type=template&id=6768ac99&");
-/* harmony import */ var _PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PermintaanCabai.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/pengepul/PermintaanCabai.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PermintaanCabai_vue_vue_type_template_id_6768ac99___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PermintaanCabai_vue_vue_type_template_id_6768ac99___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/pages/scm/pengepul/PermintaanCabai.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/pages/scm/pengepul/PermintaanCabai.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/pages/scm/pengepul/PermintaanCabai.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PermintaanCabai.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/PermintaanCabai.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/pages/scm/pengepul/PermintaanCabai.vue?vue&type=template&id=6768ac99&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/pages/scm/pengepul/PermintaanCabai.vue?vue&type=template&id=6768ac99& ***!
-  \********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_template_id_6768ac99___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PermintaanCabai.vue?vue&type=template&id=6768ac99& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/PermintaanCabai.vue?vue&type=template&id=6768ac99&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_template_id_6768ac99___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_template_id_6768ac99___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/pages/scm/pengepul/PermintaanMitra.vue":
 /*!*************************************************************!*\
   !*** ./resources/js/pages/scm/pengepul/PermintaanMitra.vue ***!
@@ -126489,6 +126389,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanMitra_vue_vue_type_template_id_45e03ab4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanMitra_vue_vue_type_template_id_45e03ab4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/pengepul/TransaksiCabai.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/pages/scm/pengepul/TransaksiCabai.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TransaksiCabai_vue_vue_type_template_id_151b47f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TransaksiCabai.vue?vue&type=template&id=151b47f8& */ "./resources/js/pages/scm/pengepul/TransaksiCabai.vue?vue&type=template&id=151b47f8&");
+/* harmony import */ var _TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TransaksiCabai.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/pengepul/TransaksiCabai.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TransaksiCabai_vue_vue_type_template_id_151b47f8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TransaksiCabai_vue_vue_type_template_id_151b47f8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/scm/pengepul/TransaksiCabai.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/pengepul/TransaksiCabai.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/pages/scm/pengepul/TransaksiCabai.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TransaksiCabai.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/TransaksiCabai.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/pengepul/TransaksiCabai.vue?vue&type=template&id=151b47f8&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/pages/scm/pengepul/TransaksiCabai.vue?vue&type=template&id=151b47f8& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_151b47f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TransaksiCabai.vue?vue&type=template&id=151b47f8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/pengepul/TransaksiCabai.vue?vue&type=template&id=151b47f8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_151b47f8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_151b47f8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -126961,75 +126930,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/scm/produsen/PermintaanCabai.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/pages/scm/produsen/PermintaanCabai.vue ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PermintaanCabai_vue_vue_type_template_id_1552ed47___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PermintaanCabai.vue?vue&type=template&id=1552ed47& */ "./resources/js/pages/scm/produsen/PermintaanCabai.vue?vue&type=template&id=1552ed47&");
-/* harmony import */ var _PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PermintaanCabai.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/produsen/PermintaanCabai.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PermintaanCabai_vue_vue_type_template_id_1552ed47___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PermintaanCabai_vue_vue_type_template_id_1552ed47___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/pages/scm/produsen/PermintaanCabai.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/pages/scm/produsen/PermintaanCabai.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/pages/scm/produsen/PermintaanCabai.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PermintaanCabai.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/PermintaanCabai.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/pages/scm/produsen/PermintaanCabai.vue?vue&type=template&id=1552ed47&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/pages/scm/produsen/PermintaanCabai.vue?vue&type=template&id=1552ed47& ***!
-  \********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_template_id_1552ed47___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PermintaanCabai.vue?vue&type=template&id=1552ed47& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/PermintaanCabai.vue?vue&type=template&id=1552ed47&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_template_id_1552ed47___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermintaanCabai_vue_vue_type_template_id_1552ed47___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/pages/scm/produsen/PermintaanMitra.vue":
 /*!*************************************************************!*\
   !*** ./resources/js/pages/scm/produsen/PermintaanMitra.vue ***!
@@ -127168,6 +127068,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/scm/produsen/TransaksiCabai.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/pages/scm/produsen/TransaksiCabai.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TransaksiCabai_vue_vue_type_template_id_0ca18cec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TransaksiCabai.vue?vue&type=template&id=0ca18cec& */ "./resources/js/pages/scm/produsen/TransaksiCabai.vue?vue&type=template&id=0ca18cec&");
+/* harmony import */ var _TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TransaksiCabai.vue?vue&type=script&lang=js& */ "./resources/js/pages/scm/produsen/TransaksiCabai.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TransaksiCabai_vue_vue_type_template_id_0ca18cec___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TransaksiCabai_vue_vue_type_template_id_0ca18cec___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/scm/produsen/TransaksiCabai.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/produsen/TransaksiCabai.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/pages/scm/produsen/TransaksiCabai.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TransaksiCabai.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/TransaksiCabai.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/scm/produsen/TransaksiCabai.vue?vue&type=template&id=0ca18cec&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/pages/scm/produsen/TransaksiCabai.vue?vue&type=template&id=0ca18cec& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_0ca18cec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TransaksiCabai.vue?vue&type=template&id=0ca18cec& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/scm/produsen/TransaksiCabai.vue?vue&type=template&id=0ca18cec&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_0ca18cec___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransaksiCabai_vue_vue_type_template_id_0ca18cec___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/router.js":
 /*!********************************!*\
   !*** ./resources/js/router.js ***!
@@ -127194,7 +127163,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_scm_produsen_RiwayatPengeluaran__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/scm/produsen/RiwayatPengeluaran */ "./resources/js/pages/scm/produsen/RiwayatPengeluaran.vue");
 /* harmony import */ var _pages_scm_produsen_DaftarMitra__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/scm/produsen/DaftarMitra */ "./resources/js/pages/scm/produsen/DaftarMitra.vue");
 /* harmony import */ var _pages_scm_produsen_PermintaanMitra__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/scm/produsen/PermintaanMitra */ "./resources/js/pages/scm/produsen/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_produsen_PermintaanCabai__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/scm/produsen/PermintaanCabai */ "./resources/js/pages/scm/produsen/PermintaanCabai.vue");
+/* harmony import */ var _pages_scm_produsen_TransaksiCabai__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/scm/produsen/TransaksiCabai */ "./resources/js/pages/scm/produsen/TransaksiCabai.vue");
 /* harmony import */ var _pages_scm_produsen_MitraSaya__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/scm/produsen/MitraSaya */ "./resources/js/pages/scm/produsen/MitraSaya.vue");
 /* harmony import */ var _pages_scm_produsen_Inventaris__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/scm/produsen/Inventaris */ "./resources/js/pages/scm/produsen/Inventaris.vue");
 /* harmony import */ var _pages_scm_produsen_HasilPanen__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/scm/produsen/HasilPanen */ "./resources/js/pages/scm/produsen/HasilPanen.vue");
@@ -127202,28 +127171,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_scm_pengepul_Dashboard__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./pages/scm/pengepul/Dashboard */ "./resources/js/pages/scm/pengepul/Dashboard.vue");
 /* harmony import */ var _pages_scm_pengepul_DaftarMitra__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./pages/scm/pengepul/DaftarMitra */ "./resources/js/pages/scm/pengepul/DaftarMitra.vue");
 /* harmony import */ var _pages_scm_pengepul_PermintaanMitra__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./pages/scm/pengepul/PermintaanMitra */ "./resources/js/pages/scm/pengepul/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_pengepul_PermintaanCabai__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./pages/scm/pengepul/PermintaanCabai */ "./resources/js/pages/scm/pengepul/PermintaanCabai.vue");
+/* harmony import */ var _pages_scm_pengepul_TransaksiCabai__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./pages/scm/pengepul/TransaksiCabai */ "./resources/js/pages/scm/pengepul/TransaksiCabai.vue");
 /* harmony import */ var _pages_scm_pengepul_Inventaris__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/scm/pengepul/Inventaris */ "./resources/js/pages/scm/pengepul/Inventaris.vue");
 /* harmony import */ var _pages_scm_pengepul_MitraSaya__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./pages/scm/pengepul/MitraSaya */ "./resources/js/pages/scm/pengepul/MitraSaya.vue");
 /* harmony import */ var _pages_scm_grosir_Master__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./pages/scm/grosir/Master */ "./resources/js/pages/scm/grosir/Master.vue");
 /* harmony import */ var _pages_scm_grosir_Dashboard__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./pages/scm/grosir/Dashboard */ "./resources/js/pages/scm/grosir/Dashboard.vue");
 /* harmony import */ var _pages_scm_grosir_DaftarMitra__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./pages/scm/grosir/DaftarMitra */ "./resources/js/pages/scm/grosir/DaftarMitra.vue");
 /* harmony import */ var _pages_scm_grosir_PermintaanMitra__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./pages/scm/grosir/PermintaanMitra */ "./resources/js/pages/scm/grosir/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_grosir_PermintaanCabai__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./pages/scm/grosir/PermintaanCabai */ "./resources/js/pages/scm/grosir/PermintaanCabai.vue");
+/* harmony import */ var _pages_scm_grosir_TransaksiCabai__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./pages/scm/grosir/TransaksiCabai */ "./resources/js/pages/scm/grosir/TransaksiCabai.vue");
 /* harmony import */ var _pages_scm_grosir_Inventaris__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./pages/scm/grosir/Inventaris */ "./resources/js/pages/scm/grosir/Inventaris.vue");
 /* harmony import */ var _pages_scm_grosir_MitraSaya__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./pages/scm/grosir/MitraSaya */ "./resources/js/pages/scm/grosir/MitraSaya.vue");
 /* harmony import */ var _pages_scm_pengecer_Master__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./pages/scm/pengecer/Master */ "./resources/js/pages/scm/pengecer/Master.vue");
 /* harmony import */ var _pages_scm_pengecer_Dashboard__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./pages/scm/pengecer/Dashboard */ "./resources/js/pages/scm/pengecer/Dashboard.vue");
 /* harmony import */ var _pages_scm_pengecer_DaftarMitra__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./pages/scm/pengecer/DaftarMitra */ "./resources/js/pages/scm/pengecer/DaftarMitra.vue");
 /* harmony import */ var _pages_scm_pengecer_PermintaanMitra__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanMitra */ "./resources/js/pages/scm/pengecer/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_pengecer_PermintaanCabai__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./pages/scm/pengecer/PermintaanCabai */ "./resources/js/pages/scm/pengecer/PermintaanCabai.vue");
+/* harmony import */ var _pages_scm_pengecer_TransaksiCabai__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./pages/scm/pengecer/TransaksiCabai */ "./resources/js/pages/scm/pengecer/TransaksiCabai.vue");
 /* harmony import */ var _pages_scm_pengecer_Inventaris__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./pages/scm/pengecer/Inventaris */ "./resources/js/pages/scm/pengecer/Inventaris.vue");
 /* harmony import */ var _pages_scm_pengecer_MitraSaya__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./pages/scm/pengecer/MitraSaya */ "./resources/js/pages/scm/pengecer/MitraSaya.vue");
 /* harmony import */ var _pages_scm_konsumen_Master__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./pages/scm/konsumen/Master */ "./resources/js/pages/scm/konsumen/Master.vue");
 /* harmony import */ var _pages_scm_konsumen_Dashboard__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./pages/scm/konsumen/Dashboard */ "./resources/js/pages/scm/konsumen/Dashboard.vue");
 /* harmony import */ var _pages_scm_konsumen_DaftarMitra__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./pages/scm/konsumen/DaftarMitra */ "./resources/js/pages/scm/konsumen/DaftarMitra.vue");
 /* harmony import */ var _pages_scm_konsumen_PermintaanMitra__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./pages/scm/konsumen/PermintaanMitra */ "./resources/js/pages/scm/konsumen/PermintaanMitra.vue");
-/* harmony import */ var _pages_scm_konsumen_permintaancabai__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./pages/scm/konsumen/permintaancabai */ "./resources/js/pages/scm/konsumen/permintaancabai.vue");
+/* harmony import */ var _pages_scm_konsumen_TransaksiCabai__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./pages/scm/konsumen/TransaksiCabai */ "./resources/js/pages/scm/konsumen/TransaksiCabai.vue");
 /* harmony import */ var _pages_scm_konsumen_MitraSaya__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./pages/scm/konsumen/MitraSaya */ "./resources/js/pages/scm/konsumen/MitraSaya.vue");
 /* harmony import */ var _pages_ba_Master__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./pages/ba/Master */ "./resources/js/pages/ba/Master.vue");
 /* harmony import */ var _pages_ba_detail_Harga__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./pages/ba/detail/Harga */ "./resources/js/pages/ba/detail/Harga.vue");
@@ -127388,7 +127357,7 @@ var routes = [// SCM
     name: "PermintaanMitraProd"
   }, {
     path: 'transaksicabai',
-    component: _pages_scm_produsen_PermintaanCabai__WEBPACK_IMPORTED_MODULE_17__["default"],
+    component: _pages_scm_produsen_TransaksiCabai__WEBPACK_IMPORTED_MODULE_17__["default"],
     name: "transaksicabai"
   }, //BA
   {
@@ -127439,7 +127408,7 @@ var routes = [// SCM
     name: "PermintaanMitraGrosir"
   }, {
     path: 'transaksicabai',
-    component: _pages_scm_grosir_PermintaanCabai__WEBPACK_IMPORTED_MODULE_32__["default"],
+    component: _pages_scm_grosir_TransaksiCabai__WEBPACK_IMPORTED_MODULE_32__["default"],
     name: "transaksicabaiGrosir"
   }, {
     path: 'inventaris',
@@ -127477,7 +127446,7 @@ var routes = [// SCM
     name: "PermintaanMitraPengecer"
   }, {
     path: 'transaksicabai',
-    component: _pages_scm_pengecer_PermintaanCabai__WEBPACK_IMPORTED_MODULE_39__["default"],
+    component: _pages_scm_pengecer_TransaksiCabai__WEBPACK_IMPORTED_MODULE_39__["default"],
     name: "transaksicabaiPengecer"
   }, {
     path: 'inventaris',
@@ -127515,7 +127484,7 @@ var routes = [// SCM
     name: "PermintaanMitraPengepul"
   }, {
     path: 'transaksicabai',
-    component: _pages_scm_pengepul_PermintaanCabai__WEBPACK_IMPORTED_MODULE_25__["default"],
+    component: _pages_scm_pengepul_TransaksiCabai__WEBPACK_IMPORTED_MODULE_25__["default"],
     name: "transaksicabaiPengepul"
   }, {
     path: 'inventaris',
@@ -127553,7 +127522,7 @@ var routes = [// SCM
     name: "PermintaanMitraKonsumen"
   }, {
     path: 'transaksicabai',
-    component: _pages_scm_konsumen_permintaancabai__WEBPACK_IMPORTED_MODULE_46__["default"],
+    component: _pages_scm_konsumen_TransaksiCabai__WEBPACK_IMPORTED_MODULE_46__["default"],
     name: "transaksicabaiKonsumen"
   }]
 }, {

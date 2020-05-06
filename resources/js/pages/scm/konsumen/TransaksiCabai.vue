@@ -11,9 +11,9 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">Produsen</a>
+                <a href="#">Konsumen</a>
               </li>
-              <li class="breadcrumb-item active">Permintaan Transaksi Cabai</li>
+              <li class="breadcrumb-item active">Transaksi Cabai</li>
             </ol>
           </div>
         </div>
@@ -29,17 +29,6 @@
                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                   <li class="nav-item">
                     <a
-                      class="nav-link active"
-                      id="custom-tabs-three-permintaan-tab"
-                      data-toggle="pill"
-                      href="#custom-tabs-three-permintaan"
-                      role="tab"
-                      aria-controls="custom-tabs-three-permintaan"
-                      aria-selected="true"
-                    >Transaksi dengan Pelanggan</a>
-                  </li>
-                  <li class="nav-item">
-                    <a
                       class="nav-link"
                       id="custom-tabs-three-pengajuan-tab"
                       data-toggle="pill"
@@ -53,8 +42,6 @@
               </div>
               <div class="card-body">
                 <div class="tab-content" id="custom-tabs-three-tabContent">
-                  <!-- content permintaan -->
-                  <permintaan></permintaan>
                   <!-- content pengajuan -->
                   <pengajuan></pengajuan>
                 </div>
@@ -67,12 +54,13 @@
   </div>
 </template>
 <script>
-import listPermintaan from "../../../components/TransaksiDenganPelanggan";
 import listPengajuan from "../../../components/TransaksiDenganPemasok";
 export default {
   components: {
-    permintaan: listPermintaan,
     pengajuan:listPengajuan
+  },
+  mounted(){
+    $("#custom-tabs-three-pengajuan-tab").trigger("click");
   }
 };
 </script>

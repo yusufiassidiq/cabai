@@ -21,7 +21,7 @@ import ManajemenLahan from './pages/scm/produsen/ManajemenLahan'
 import RiwayatPengeluaran from './pages/scm/produsen/RiwayatPengeluaran'
 import DaftarMitraProd from './pages/scm/produsen/DaftarMitra'
 import PermintaanMitraProd from './pages/scm/produsen/PermintaanMitra'
-import PermintaanCabai from './pages/scm/produsen/PermintaanCabai'
+import TransaksiCabai from './pages/scm/produsen/TransaksiCabai'
 import MitraSayaProd from './pages/scm/produsen/MitraSaya'
 import InventarisProdusen from "./pages/scm/produsen/Inventaris"
 import HasilPanenProd from './pages/scm/produsen/HasilPanen'
@@ -30,7 +30,7 @@ import MasterPengepul from './pages/scm/pengepul/Master' // pengepul
 import DashboardPengepul from './pages/scm/pengepul/Dashboard'
 import DaftarMitraPengepul from './pages/scm/pengepul/DaftarMitra'
 import PermintaanMitraPengepul from './pages/scm/pengepul/PermintaanMitra'
-import PermintaanCabaiPengepul from './pages/scm/pengepul/PermintaanCabai'
+import TransaksiCabaiPengepul from './pages/scm/pengepul/TransaksiCabai'
 import InventarisPengepul from './pages/scm/pengepul/Inventaris'
 import MitraSayaPengepul from './pages/scm/pengepul/MitraSaya'
 
@@ -38,7 +38,7 @@ import MasterGrosir from './pages/scm/grosir/Master' // grosir
 import DashboardGrosir from './pages/scm/grosir/Dashboard'
 import DaftarMitraGrosir from './pages/scm/grosir/DaftarMitra'
 import PermintaanMitraGrosir from './pages/scm/grosir/PermintaanMitra'
-import PermintaanCabaiGrosir from './pages/scm/grosir/PermintaanCabai'
+import TransaksiCabaiGrosir from './pages/scm/grosir/TransaksiCabai'
 import InventarisGrosir from './pages/scm/grosir/Inventaris'
 import MitraSayaGrosir from './pages/scm/grosir/MitraSaya'
 
@@ -47,7 +47,7 @@ import MasterPengecer from './pages/scm/pengecer/Master' // pengecer
 import DashboardPengecer from './pages/scm/pengecer/Dashboard'
 import DaftarMitraPengecer from './pages/scm/pengecer/DaftarMitra'
 import PermintaanMitraPengecer from './pages/scm/pengecer/PermintaanMitra'
-import PermintaanCabaiPengecer from './pages/scm/pengecer/PermintaanCabai'
+import TransaksiCabaiPengecer from './pages/scm/pengecer/TransaksiCabai'
 import InventarisPengecer from './pages/scm/pengecer/Inventaris'
 import MitraSayaPengecer from './pages/scm/pengecer/MitraSaya'
 
@@ -58,7 +58,7 @@ import PermintaanMitraKonsumen from './pages/scm/konsumen/PermintaanMitra'
 // import TransaksiPelangganKonsumen from './pages/scm/konsumen/TransaksiPelanggan'
 // import TransaksiPemasokKonsumen from './pages/scm/konsumen/TransaksiPemasok'
 // import InventarisKonsumen from './pages/scm/konsumen/Inventaris'
-import PermintaanCabaiKonsumen from './pages/scm/konsumen/permintaancabai'
+import TransaksiCabaiKonsumen from './pages/scm/konsumen/TransaksiCabai'
 import MitraSayaKonsumen from './pages/scm/konsumen/MitraSaya'
 
 // Pages - Bisnis Analitik
@@ -173,7 +173,7 @@ const routes = [
             },
             {
                 path: 'transaksicabai',
-                component: PermintaanCabai,
+                component: TransaksiCabai,
                 name: "transaksicabai"
             },
             //BA
@@ -236,7 +236,7 @@ const routes = [
             },
             {
                 path: 'transaksicabai',
-                component: PermintaanCabaiGrosir,
+                component: TransaksiCabaiGrosir,
                 name: "transaksicabaiGrosir"
             },
             {
@@ -284,7 +284,7 @@ const routes = [
             },
             {
                 path: 'transaksicabai',
-                component: PermintaanCabaiPengecer,
+                component: TransaksiCabaiPengecer,
                 name: "transaksicabaiPengecer"
             },
             {
@@ -331,7 +331,7 @@ const routes = [
             },
             {
                 path: 'transaksicabai',
-                component: PermintaanCabaiPengepul,
+                component: TransaksiCabaiPengepul,
                 name: "transaksicabaiPengepul"
             },
             {
@@ -378,7 +378,7 @@ const routes = [
             },
             {
                 path: 'transaksicabai',
-                component: PermintaanCabaiKonsumen,
+                component: TransaksiCabaiKonsumen,
                 name: "transaksicabaiKonsumen"
             }
             
