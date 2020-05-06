@@ -113,11 +113,11 @@
                 <p>Pengajuan Mitra</p>
               </router-link>
             </li> -->
-            <li class="nav-header">MANAJEMEN PEMESANAN</li>
+            <li class="nav-header">Distribusi</li>
             <li class="nav-item">
-              <router-link to="/produsen/permintaancabai" class="nav-link">
+              <router-link to="/produsen/transaksicabai" class="nav-link">
                 <i class="fas fa-receipt nav-icon"></i>
-                <p>Permintaan cabai</p>
+                <p>Transaksi Cabai</p>
               </router-link>
             </li>
             <li class="nav-header">MANAJEMEN BISNIS</li>

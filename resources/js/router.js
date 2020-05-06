@@ -172,9 +172,9 @@ const routes = [
 
             },
             {
-                path: 'permintaancabai',
+                path: 'transaksicabai',
                 component: PermintaanCabai,
-                name: "PermintaanCabai"
+                name: "transaksicabai"
             },
             //BA
             {
@@ -235,9 +235,9 @@ const routes = [
 
             },
             {
-                path: 'permintaancabai',
+                path: 'transaksicabai',
                 component: PermintaanCabaiGrosir,
-                name: "PermintaanCabaiGrosir"
+                name: "transaksicabaiGrosir"
             },
             {
                 path: 'inventaris',
@@ -283,9 +283,9 @@ const routes = [
 
             },
             {
-                path: 'permintaancabai',
+                path: 'transaksicabai',
                 component: PermintaanCabaiPengecer,
-                name: "PermintaanCabaiPengecer"
+                name: "transaksicabaiPengecer"
             },
             {
                 path: 'inventaris',
@@ -330,9 +330,9 @@ const routes = [
 
             },
             {
-                path: 'permintaancabai',
+                path: 'transaksicabai',
                 component: PermintaanCabaiPengepul,
-                name: "PermintaanCabaiPengepul"
+                name: "transaksicabaiPengepul"
             },
             {
                 path: 'inventaris',
@@ -377,9 +377,9 @@ const routes = [
 
             },
             {
-                path: 'permintaancabai',
+                path: 'transaksicabai',
                 component: PermintaanCabaiKonsumen,
-                name: "PermintaanCabaiKonsumen"
+                name: "transaksicabaiKonsumen"
             }
             
             

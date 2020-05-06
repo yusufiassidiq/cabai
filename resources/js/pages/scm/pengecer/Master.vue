@@ -93,11 +93,11 @@
                 <p>Inventaris</p>
               </router-link>
             </li>
-            <li class="nav-header">MANAJEMEN PEMESANAN</li>
+            <li class="nav-header">Distribusi</li>
             <li class="nav-item">
-              <router-link to="/pengecer/permintaancabai" class="nav-link">
+              <router-link to="/pengecer/transaksicabai" class="nav-link">
                 <i class="fas fa-file-invoice nav-icon"></i>
-                <p>Permintaan cabai</p>
+                <p>Transaksi Cabai</p>
               </router-link>
             </li>
             <li class="nav-header">Bisnis Analitik</li>

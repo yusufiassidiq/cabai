@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Permintaan Cabai</h1>
+            <h1 class="m-0 text-dark">Transaksi Cabai</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -36,7 +36,7 @@
                       role="tab"
                       aria-controls="custom-tabs-three-permintaan"
                       aria-selected="true"
-                    >Permintaan dari Pengguna Lain</a>
+                    >Transaksi dengan Pelanggan</a>
                   </li>
                   <li class="nav-item">
                     <a
@@ -47,7 +47,7 @@
                       role="tab"
                       aria-controls="custom-tabs-three-pengajuan"
                       aria-selected="false"
-                    >Permintaan dari Saya</a>
+                    >Transaksi dengan Pemasok</a>
                   </li>
                 </ul>
               </div>
@@ -67,8 +67,8 @@
   </div>
 </template>
 <script>
-import listPermintaan from "../../../components/ListPermintaanCabai";
-import listPengajuan from "../../../components/ListPengajuanCabai";
+import listPermintaan from "../../../components/TransaksiDenganPelanggan";
+import listPengajuan from "../../../components/TransaksiDenganPemasok";
 export default {
   components: {
     permintaan: listPermintaan,
