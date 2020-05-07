@@ -126,7 +126,8 @@ class ProdusenController extends Controller
         $panen->jumlah_panen = $request->jumlah_cabai;
         $panen->save();
         $jumlah_cabai = $request->jumlah_cabai;
-        $jenis_cabai = $request->jenis_cabai;
+        $praProduksi = PraProduksi::find($request->pra_produksi_id);
+        $jenis_cabai = $praProduksi->jenis_cabai;
         $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
         foreach ($inventaris as $i ) {
             $jumlah_cabai_sementara = $i->jumlah_cabai;

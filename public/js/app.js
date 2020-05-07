@@ -11554,6 +11554,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 // datetimepicker doc : https://github.com/charliekassel/vuejs-datepicker#demo
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -11687,7 +11691,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getPanen(); // Custom event on Vue js
 
     UpdateData.$on("HasilPanen", function () {
-      _this6.getPengeluaran();
+      _this6.getPanen();
     });
   }
 });
@@ -102293,6 +102297,12 @@ var render = function() {
                       _vm._v(" "),
                       _vm._l(_vm.dataPanen, function(data) {
                         return _c("tr", { key: data.id }, [
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(_vm._f("dateFilter")(data.created_at))
+                            )
+                          ]),
+                          _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(data.kode_lahan))]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(data.jenis_cabai))]),
@@ -102302,12 +102312,6 @@ var render = function() {
                               _vm._s(
                                 _vm._f("filterAngkaRibuan")(data.jumlah_panen)
                               )
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _vm._v(
-                              _vm._s(_vm._f("dateFilter")(data.created_at))
                             )
                           ]),
                           _vm._v(" "),
@@ -102591,13 +102595,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th", [_vm._v("Tanggal Panen")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Kode Lahan")]),
         _vm._v(" "),
         _c("th", [_vm._v("Jenis Cabai")]),
         _vm._v(" "),
         _c("th", [_vm._v("Jumlah Cabai(Kg)")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Tanggal Panen")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])

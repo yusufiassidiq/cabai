@@ -59,10 +59,10 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
+                      <th>Tanggal Panen</th>
                       <th>Kode Lahan</th>
                       <th>Jenis Cabai</th>
                       <th>Jumlah Cabai(Kg)</th>
-                      <th>Tanggal Panen</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
@@ -72,10 +72,10 @@
                       <td colspan="5" align="center">Tidak ada Hasil Panen</td>
                     </tr>
                     <tr v-for="data in dataPanen" :key="data.id">
+                      <td>{{ data.created_at | dateFilter }}</td>
                       <td>{{ data.kode_lahan }}</td>
                       <td>{{ data.jenis_cabai }}</td>
                       <td>{{ data.jumlah_panen | filterAngkaRibuan }}</td>
-                      <td>{{ data.created_at | dateFilter }}</td>
                       <td>
                         <a href="#">
                           <i class="fas fa-edit blue" @click="editModal(data)"></i>
@@ -115,7 +115,6 @@
           </div>
           <form @submit.prevent="editmode? updatePanen() : addPanen()">
             <div class="modal-body">
-
               <div class="form-group col-md">
                 <select
                   id="lahan__id"
@@ -155,13 +154,18 @@
                   :class="{ 'is-invalid': form.errors.has('tanggal_panen') }"
                 ></datepicker>
                 <has-error :form="form" field="tanggal_panen"></has-error>
-              </div> -->
+              </div>-->
             </div>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
               <button v-show="editmode" type="submit" class="btn btn-success">Simpan</button>
-              <button id="btnaddpanen" v-show="!editmode" type="submit" class="btn btn-primary">Tambah</button>
+              <button
+                id="btnaddpanen"
+                v-show="!editmode"
+                type="submit"
+                class="btn btn-primary"
+              >Tambah</button>
             </div>
           </form>
         </div>
@@ -179,26 +183,26 @@ export default {
   },
   data() {
     return {
-      datalahan:{},
+      datalahan: {},
       dataPanen: {},
       editmode: false, // buat ngebedain modal yg di klik modal tambah lahan /edit lahan
       form: new Form({
         id: "",
         lahan_id: "",
-        jumlah_cabai:"",
-        pra_produksi_id:"",
+        jumlah_cabai: "",
+        pra_produksi_id: "",
         // tanggal_panen: "",
       })
     };
   },
   methods: {
     // menampilkan daftar panen cabai
-    getPanen(){
+    getPanen() {
       axios.get("/panen/list").then(response => {
         this.dataPanen = response.data.data;
       });
     },
-    addPanen(){
+    addPanen() {
       document.getElementById("btnaddpanen").disabled = true;
       this.$Progress.start();
       this.form
@@ -220,7 +224,7 @@ export default {
     },
     // Memperbarui Hasil Panen
     updatePanen() {
-      console.log("berhasil diedit")
+      console.log("berhasil diedit");
       this.$Progress.start();
       this.form
         .put("/updatePanen/" + this.form.id)
@@ -255,7 +259,11 @@ export default {
               .delete("/deleteHasilPanen/" + id)
               .then(() => {
                 UpdateData.$emit("HasilPanen");
-                swal.fire("Tehapus!", "Hasil Panen berhasil dihapus", "success");
+                swal.fire(
+                  "Tehapus!",
+                  "Hasil Panen berhasil dihapus",
+                  "success"
+                );
                 this.$Progress.finish();
               })
               .catch(() => {
@@ -289,19 +297,18 @@ export default {
       this.editmode = true;
       this.form.reset();
       $("#modalHasilPanen").modal("show");
-      document.getElementById("lahan__id").disabled = true
-      this.form.pra_produksi_id = data.id
-      this.form.jumlah_cabai = data.jumlah_panen
+      document.getElementById("lahan__id").disabled = true;
+      this.form.pra_produksi_id = data.id;
+      this.form.jumlah_cabai = data.jumlah_panen;
     }
   },
   mounted() {
-    this.getLahan()
-    this.getPanen()
+    this.getLahan();
+    this.getPanen();
     // Custom event on Vue js
     UpdateData.$on("HasilPanen", () => {
-      this.getPengeluaran()
-    })
-
+      this.getPanen();
+    });
   }
 };
 </script>
