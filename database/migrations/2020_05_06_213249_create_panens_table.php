@@ -17,6 +17,7 @@ class CreatePanensTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('pra_produksi_id');
             $table->integer('jumlah_panen');
+            $table->date('tanggal_panen');
             $table->timestamps();
             $table->foreign('pra_produksi_id')->references('id')->on('pra_produksi');
         });

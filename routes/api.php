@@ -101,6 +101,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Panen
     Route::post('/panen/tambah','ProdusenController@addPanen');
     Route::get('/panen/list','ProdusenController@getPanen');
+    Route::put('/panen/update/{id}','ProdusenController@updatePanen');
+    Route::delete('/panen/delete/{id}','ProdusenController@deletePanen');
     //----------//
     //Pengeluaran Produksi
     Route::post('/pengeluaran/tambah','ProdusenController@addPengeluaran');

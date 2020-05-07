@@ -56,7 +56,7 @@ class ProdusenController extends Controller
         ]);
     }
     public function updateLahan(Request $request, $id){
-        $praProduksi = PraProduksi::find($id);
+        $praProduksi = PraProduksi::findOrFail($id);
         $tgltnm = $request->tanggal_tanam;
         $parsed_date = Carbon::parse($tgltnm)->toDateTimeString();
         $praProduksi->update([
@@ -68,7 +68,7 @@ class ProdusenController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
     public function deleteLahan($id){
-        $praProduksi = PraProduksi::find($id);
+        $praProduksi = PraProduksi::findOrFail($id);
         $praProduksi->pengeluaranProduksi()->delete();
         $praProduksi->delete();
         return 204;
@@ -107,7 +107,7 @@ class ProdusenController extends Controller
         ]);
     }
     public function updatePengeluaran(Request $request, $id){
-        $pengeluaran = PengeluaranProduksi::find($id);
+        $pengeluaran = PengeluaranProduksi::findOrFail($id);
         $pengeluaran->update([
             'nama_pengeluaran' => $request->nama_pengeluaran,
             'jumlah_pengeluaran' => $request->jumlah_pengeluaran,
@@ -115,7 +115,7 @@ class ProdusenController extends Controller
         ]);
     }
     public function deletePengeluaran($id){
-        $pengeluaran = PengeluaranProduksi::find($id);
+        $pengeluaran = PengeluaranProduksi::findOrFail($id);
         $pengeluaran->delete();
         return 204;
     }
@@ -124,6 +124,7 @@ class ProdusenController extends Controller
         $panen = new Panen;
         $panen->pra_produksi_id = $request->pra_produksi_id;
         $panen->jumlah_panen = $request->jumlah_cabai;
+        $panen->tanggal_panen = $request->tanggal_panen;
         $panen->save();
         $jumlah_cabai = $request->jumlah_cabai;
         $praProduksi = PraProduksi::find($request->pra_produksi_id);
@@ -157,5 +158,18 @@ class ProdusenController extends Controller
             'status' => 'success',
             'data' => $panens->toArray(),
         ]);
+    }
+    public function updatePanen($id, Request $request){
+        $panen = Panen::findOrFail($id);
+        $panen->update([
+            'jumlah_panen' => $request->jumlah_cabai,
+            'tanggal_panen' => $request->tanggal_panen,
+        ]);
+        return response()->json(['status' => 'success'], 200);
+    }
+    public function deletePanen($id){
+        $panen = findOrFail($id);
+        $panen->delete();
+        return 204;
     }
 }

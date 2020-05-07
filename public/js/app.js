@@ -11616,7 +11616,7 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log("berhasil diedit");
       this.$Progress.start();
-      this.form.put("/updatePanen/" + this.form.id).then(function () {
+      this.form.put("/panen/update/" + this.form.id).then(function () {
         UpdateData.$emit("HasilPanen");
         $("#modalHasilPanen").trigger("click");
         toast.fire({
@@ -11644,7 +11644,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this4.$Progress.start();
 
-          axios["delete"]("/deleteHasilPanen/" + id).then(function () {
+          axios["delete"]("/panen/delete" + id).then(function () {
             UpdateData.$emit("HasilPanen");
             swal.fire("Tehapus!", "Hasil Panen berhasil dihapus", "success");
 
@@ -127766,8 +127766,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

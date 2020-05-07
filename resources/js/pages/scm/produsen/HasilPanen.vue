@@ -227,7 +227,7 @@ export default {
       console.log("berhasil diedit");
       this.$Progress.start();
       this.form
-        .put("/updatePanen/" + this.form.id)
+        .put("/panen/update/" + this.form.id)
         .then(() => {
           UpdateData.$emit("HasilPanen");
           $("#modalHasilPanen").trigger("click");
@@ -256,7 +256,7 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .delete("/deleteHasilPanen/" + id)
+              .delete("/panen/delete" + id)
               .then(() => {
                 UpdateData.$emit("HasilPanen");
                 swal.fire(
