@@ -16,4 +16,8 @@ class PraProduksi extends Model
     public function pengeluaranProduksi(){
         return $this->hasMany('App\PengeluaranProduksi');
     }
+
+    public function panen(){
+        return $this->hasMany('App\Panen');
+    }
 }

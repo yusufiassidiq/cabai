@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLokasiTable extends Migration
+class CreatePanensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateLokasiTable extends Migration
      */
     public function up()
     {
-        Schema::create('lokasi', function (Blueprint $table) {
+        Schema::create('panen', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('kabupaten');
-            $table->string('kecamatan');
-            $table->string('kelurahan');
+            $table->unsignedBigInteger('pra_produksi_id');
+            $table->integer('jumlah_panen');
+            $table->date('tanggal_panen');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('pra_produksi_id')->references('id')->on('pra_produksi');
         });
     }
 
@@ -32,6 +30,6 @@ class CreateLokasiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lokasi');
+        Schema::dropIfExists('panen');
     }
 }

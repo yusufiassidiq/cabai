@@ -3,27 +3,22 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Permintaan Mitra</h1>
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Transaksi Cabai</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+                <a href="#">Konsumen</a>
+              </li>
+              <li class="breadcrumb-item active">Transaksi Cabai</li>
+            </ol>
+          </div>
         </div>
-        <!-- /.col -->
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item">
-              <a href="#">Pengepul</a>
-            </li>
-            <li class="breadcrumb-item active">Permintaan Mitra</li>
-          </ol>
-        </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
     </div>
-    <!-- /.container-fluid -->
-  </div>
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -34,17 +29,6 @@
                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                   <li class="nav-item">
                     <a
-                      class="nav-link active"
-                      id="custom-tabs-three-permintaan-tab"
-                      data-toggle="pill"
-                      href="#custom-tabs-three-permintaan"
-                      role="tab"
-                      aria-controls="custom-tabs-three-permintaan"
-                      aria-selected="true"
-                    >	Permintaan dari Pengguna Lain</a>
-                  </li>
-                  <li class="nav-item">
-                    <a
                       class="nav-link"
                       id="custom-tabs-three-pengajuan-tab"
                       data-toggle="pill"
@@ -52,14 +36,12 @@
                       role="tab"
                       aria-controls="custom-tabs-three-pengajuan"
                       aria-selected="false"
-                    >Permintaan dari Saya</a>
+                    >Transaksi dengan Pemasok</a>
                   </li>
                 </ul>
               </div>
               <div class="card-body">
                 <div class="tab-content" id="custom-tabs-three-tabContent">
-                  <!-- content permintaan -->
-                  <permintaan></permintaan>
                   <!-- content pengajuan -->
                   <pengajuan></pengajuan>
                 </div>
@@ -72,13 +54,13 @@
   </div>
 </template>
 <script>
-import listPermintaan from "../../../components/ListPermintaanMitraDariPenggunaLain";
-import listPengajuan from "../../../components/ListPermintaanMitraDariSaya";
-
+import listPengajuan from "../../../components/TransaksiDenganPemasok";
 export default {
   components: {
-    permintaan: listPermintaan,
-    pengajuan: listPengajuan,
+    pengajuan:listPengajuan
   },
+  mounted(){
+    $("#custom-tabs-three-pengajuan-tab").trigger("click");
+  }
 };
 </script>

@@ -61,22 +61,22 @@
                 <p>Dashboard</p>
               </router-link>
             </li>
-            <li class="nav-header">MANAJEMEN KEMITRAAN</li>
+            <li class="nav-header">Kemitraan</li>
             <li class="nav-item">
               <router-link to="/konsumen/daftarmitra" class="nav-link">
-                <i class="fas fa-users nav-icon"></i>
-                <p>Daftar Mitra</p>
+                <i class="fas fa-user-plus nav-icon"></i>
+                <p>Tambah Mitra</p>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link to="/konsumen/mitrasaya" class="nav-link">
-                <i class="fas fa-user-friends nav-icon"></i>
+                <i class="fas fas fa-user-friends nav-icon"></i>
                 <p>Mitra Saya</p>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link to="/konsumen/permintaanmitra" class="nav-link">
-                <i class="fas fa-user-plus nav-icon"></i>
+                <i class="fas fa-user-clock nav-icon"></i>
                 <p>Permintaan Mitra</p>
               </router-link>
             </li>
@@ -86,18 +86,18 @@
                 <p>Pengajuan Mitra</p>
               </router-link>
             </li> -->
-            <li class="nav-header">MANAJEMEN PERSEDIAAN</li>
+            <!-- <li class="nav-header">MANAJEMEN PERSEDIAAN</li>
             <li class="nav-item">
               <router-link to="/konsumen/inventaris" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>Inventaris</p>
               </router-link>
-            </li>
-            <li class="nav-header">MANAJEMEN PEMESANAN</li>
+            </li> -->
+            <li class="nav-header">Distribusi</li>
             <li class="nav-item">
-              <router-link to="/konsumen/permintaancabai" class="nav-link">
+              <router-link to="/konsumen/transaksicabai" class="nav-link">
                 <i class="fas fa-file-invoice nav-icon"></i>
-                <p>Permintaan cabai</p>
+                <p>Transaksi Cabai</p>
               </router-link>
             </li>
             <li class="nav-header">Bisnis Analitik</li>

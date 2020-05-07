@@ -2,13 +2,13 @@
   <!-- PM : Permintaanmitra -->
   <div
     class="tab-pane fade"
-    id="custom-tabs-three-profile"
+    id="custom-tabs-three-pengajuan"
     role="tabpanel"
-    aria-labelledby="custom-tabs-three-profile-tab"
+    aria-labelledby="custom-tabs-three-pengajuan-tab"
   >
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Daftar Riwayat Permintaan</h3>
+        <h3 class="card-title">Daftar Permintaan Pembentukan Kemitraan</h3>
 
         <div class="card-tools">
           <div class="input-group input-group-sm" style="width: 150px;">
@@ -31,41 +31,23 @@
         <table class="table table-hover text-nowrap">
           <thead>
             <tr>
-              <!-- <th>Id</th> -->
               <th>Nama</th>
               <th>Role</th>
               <th>Lokasi</th>
-              <th>Status</th>
+              <th>Aksi</th>
             </tr>
           </thead>
 
           <tbody>
-            <tr>
-              <!-- <td>1</td> -->
-              <td>Example data 2</td>
-              <td>Produsen</td>
-              <td>Bogor</td>
-              <td>Ditolak</td>
+            <tr v-if="!dataListPengajuanMitra.length">
+              <td colspan="4" align="center">Tidak ada mitra yang diajukan</td>
             </tr>
-            <!-- <tr v-for="data in dataMitra" :key="data.id">
-                <td>{{ data.id }}</td>
-                <td>{{ data.name }}</td>
-                <td>{{ data.role }}</td>
-                <td>{{ data.lokasi }}</td>
-                <td>
-                <button
-                    type="button"
-                    class="btn btn-success"
-                    @click="terimaMitra(data.id)"
-                >Terima</button>
-                <button
-                    type="button"
-                    class="btn btn-danger"
-                    @click="tolakMitra(data.id)"
-                >Tolak</button>
-            </td>-->
-            <!-- end example data -->
-            <!-- </tr> -->
+            <tr v-for="data in dataListPengajuanMitra" :key="data.id">
+              <td>{{ data.nama }}</td>
+              <td>{{ data.role | filterRoleUser }}</td>
+              <td>{{ data.lokasi.kelurahan | filterAlamat }} , {{ data.lokasi.kecamatan | filterAlamat }} , {{ data.lokasi.kabupaten | filterAlamat }}</td>
+              <td>Menunggu Persetujuan</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -74,5 +56,21 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      dataListPengajuanMitra: {}
+    };
+  },
+  methods: {
+    getPengajuanMitra() {
+      axios.get("/kemitraan/pengajuan/list").then(response => {
+        this.dataListPengajuanMitra = response.data.data;
+      });
+    }
+  },
+  created() {
+    this.getPengajuanMitra();
+  }
+};
 </script>

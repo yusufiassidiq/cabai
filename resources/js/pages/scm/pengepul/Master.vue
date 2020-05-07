@@ -60,11 +60,11 @@
                 <p>Dashboard</p>
               </router-link>
             </li>
-            <li class="nav-header">MANAJEMEN KEMITRAAN</li>
+            <li class="nav-header">Kemitraan</li>
             <li class="nav-item">
               <router-link to="/pengepul/daftarmitra" class="nav-link">
-                <i class="fas fa-users nav-icon"></i>
-                <p>Daftar Mitra</p>
+                <i class="fas fa-user-plus nav-icon"></i>
+                <p>Tambah Mitra</p>
               </router-link>
             </li>
             <li class="nav-item">
@@ -75,7 +75,7 @@
             </li>
             <li class="nav-item">
               <router-link to="/pengepul/permintaanmitra" class="nav-link">
-                <i class="fas fa-user-plus nav-icon"></i>
+                <i class="fas fa-user-clock nav-icon"></i>
                 <p>Permintaan Mitra</p>
               </router-link>
             </li>
@@ -92,11 +92,11 @@
                 <p>Inventaris</p>
               </router-link>
             </li>
-            <li class="nav-header">MANAJEMEN PEMESANAN</li>
+            <li class="nav-header">Distribusi</li>
             <li class="nav-item">
-              <router-link to="/pengepul/permintaancabai" class="nav-link">
+              <router-link to="/pengepul/transaksicabai" class="nav-link">
                 <i class="fas fa-file-invoice nav-icon"></i>
-                <p>Permintaan cabai</p>
+                <p>Transaksi Cabai</p>
               </router-link>
             </li>
             <li class="nav-header">Bisnis Analitik</li>

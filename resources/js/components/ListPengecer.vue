@@ -1,5 +1,5 @@
 <template>
-  <!-- DM : Ini merupakan komponen bagian pada Daftar Mitra -->
+  <!-- DM : Ini merupakan komponen bagian pada Tambah Mitra -->
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
@@ -39,7 +39,7 @@
             </tr>
             <tr v-for="data in dataMitra" :key="data.id">
               <td>{{data.name}}</td>
-              <td>{{data.lokasiKelurahan | customFilter}}, {{data.lokasiKecamatan | customFilter}}, {{data.lokasiKabupaten | customFilter}}</td>
+              <td>{{data.lokasiKelurahan | filterAlamat}}, {{data.lokasiKecamatan | filterAlamat}}, {{data.lokasiKabupaten | filterAlamat}}</td>
               <td>
                 <a href="#" class="btn btn-success btn-xs" @click="addMitra(data.id, data.name)">
                   <i class="fas fa-plus-square white"></i>

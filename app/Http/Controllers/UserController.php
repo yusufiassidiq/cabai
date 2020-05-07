@@ -282,11 +282,11 @@ class UserController extends Controller
             if($listPengajuanMitra[$j]->flag == 0){
                 $i->nama = $i->user2()->first()->name;
                 $i->role = $i->user2()->first()->role;
-                $i->lokasi = $i->user2()->first()->lokasi()->first();                
+                $i->lokasi = $i->user2()->first()->lokasi()->first(['kabupaten','kecamatan','kelurahan']);                
             }else{
                 $i->nama = $i->user1()->first()->name;
                 $i->role = $i->user1()->first()->role;
-                $i->lokasi = $i->user1()->first()->lokasi()->first();
+                $i->lokasi = $i->user1()->first()->lokasi()->first(['kabupaten','kecamatan','kelurahan']);
             }
             $j++;
         }
@@ -307,11 +307,11 @@ class UserController extends Controller
             if($listPermintaanMitra[$j]->flag == 0){
                 $i->nama = $i->user1()->first()->name;
                 $i->role = $i->user1()->first()->role;
-                $i->lokasi = $i->user1()->first()->lokasi()->first(); 
+                $i->lokasi = $i->user1()->first()->lokasi()->first(['kabupaten','kecamatan','kelurahan']); 
             }else{
                 $i->nama = $i->user2()->first()->name;
                 $i->role = $i->user2()->first()->role;
-                $i->lokasi = $i->user2()->first()->lokasi()->first(); 
+                $i->lokasi = $i->user2()->first()->lokasi()->first(['kabupaten','kecamatan','kelurahan']); 
             }
             $j++;
         }
@@ -337,13 +337,13 @@ class UserController extends Controller
                 $i->mitra = $user2;
                 $i->nama = $i->user2()->first()->name;
                 $i->role = $i->user2()->first()->role;
-                $i->lokasi = $i->user2()->first()->lokasi()->first();
+                $i->lokasi = $i->user2()->first()->lokasi()->first(['kabupaten','kecamatan','kelurahan']);
                
             }else if ($userId == $user2){
                 $i->mitra = $user1;
                 $i->nama = $i->user1()->first()->name;
                 $i->role = $i->user1()->first()->role;
-                $i->lokasi = $i->user1()->first()->lokasi()->first(); 
+                $i->lokasi = $i->user1()->first()->lokasi()->first(['kabupaten','kecamatan','kelurahan']); 
                
             }
             $j++;
@@ -352,6 +352,44 @@ class UserController extends Controller
         return response()->json([
             'status' => 'success', 
             'data' => $listMitraSaya->toArray()
+        ], 200);
+    }
+
+    public function listMitraPemasok(){
+        $userId = Auth::user()->id;
+        $roleUser = Auth::user()->role;
+        $listMitraSaya = Kemitraan::orWhere(function($query)use($userId){
+            $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
+        })->where('status',1)->get();
+        $daftarMitraId[] = null;
+        $j = 0;
+        foreach($listMitraSaya as $i){
+            $user1 = $i->user1_id;
+            $user2 = $i->user2_id;
+            // dd($user1);
+            if($userId == $user1){
+                $daftarMitraId[$j] = $user2;
+                $j++;
+            }else if ($userId == $user2){
+                $daftarMitraId[$j] = $user1;
+                $j++;          
+            }
+        }
+        // dd($daftarMitraId);
+        
+        $daftarMitra = collect([]);
+            foreach($daftarMitraId as $k){
+                $akun = User::find($k);
+                if($akun){
+                    if($akun->role < $roleUser){
+                       $daftarMitra->push($akun); 
+                    }
+                }
+            }
+        // dd($daftarMitra);
+        return response()->json([
+            'status' => 'success', 
+            'data' => $daftarMitra->toArray()
         ], 200);
     }
 
@@ -392,7 +430,7 @@ class UserController extends Controller
     }
     public function getPermintaanMasuk(){
         $userId = Auth::user()->id;
-        $transaksi = Transaksi::where('pemasok_id',$userId)->get();
+        $transaksi = Transaksi::where('pemasok_id',$userId)->where('status_pemesanan','!=',1)->orWhereNull('status_pemesanan')->orderBy('id','DESC')->get();
         foreach($transaksi as $i){
             $i->nama = $i->user()->first()->name;
         }
@@ -404,12 +442,12 @@ class UserController extends Controller
     }
     public function getPermintaanSaya(){
         $userId = Auth::user()->id;
-        $transaksi = Transaksi::where('user_id',$userId)->get();
+        $transaksi = Transaksi::where('user_id',$userId)->where('status_pemesanan','!=',1)->orWhereNull('status_pemesanan')->orderBy('id','DESC')->get();
         $j=0;
         foreach($transaksi as $i){
             $id_pemasok = $transaksi[$j]->pemasok_id;
             $user = User::find($id_pemasok);
-            $lokasi = $user->lokasi()->first();
+            $lokasi = $user->lokasi()->first(['kabupaten','kecamatan','kelurahan']);
             $i->lokasi = $lokasi;
             $nama_pemasok = $user->name;
             $role_pemasok = $user->role;
@@ -505,12 +543,23 @@ class UserController extends Controller
         $jumlah_cabai = $request->jumlah_cabai;
         $jenis_cabai = $request->jenis_cabai;
         $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
+        
         foreach ($inventaris as $i ) {
             $jumlah_cabai_sementara = $i->jumlah_cabai;
-            $i->update([
-                'jumlah_cabai' => $jumlah_cabai_sementara - $jumlah_cabai,
-                'harga' => $request->harga,
-            ]);
+            $hargaTemp = $i->harga;
+            if ($hargaTemp == 0){
+                $i->update([
+                    'jumlah_cabai' => $jumlah_cabai_sementara - $jumlah_cabai,
+                    'harga' =>  $request->harga,
+                ]);
+            }
+            else {
+                $i->update([
+                    'jumlah_cabai' => $jumlah_cabai_sementara - $jumlah_cabai,
+                    'harga' => ($hargaTemp + $request->harga)/2,
+                ]);
+                $hargaTemp = 0;  
+            }
         }
         $transaksi = Transaksi::find($idTransaksi);
         $transaksi->update([

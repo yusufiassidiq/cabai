@@ -1,9 +1,9 @@
 <template>
-  <!-- DM : Ini merupakan komponen bagian pada Daftar Mitra -->
+  <!-- DM : Ini merupakan komponen bagian pada Tambah Mitra -->
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Daftar Konsumen</h3>
+        <h3 class="card-title">Daftar Grosir</h3>
         <div class="card-tools">
           <div class="input-group input-group-sm" style="width: 150px;">
             <input
@@ -26,7 +26,6 @@
         <table class="table table-hover text-nowrap">
           <thead>
             <tr>
-              <!-- <th>Id</th> -->
               <th>Nama</th>
               <th>Alamat</th>
               <th>Aksi</th>
@@ -39,7 +38,7 @@
             </tr>
             <tr v-for="data in dataMitra" :key="data.id">
               <td>{{data.name}}</td>
-              <td>{{data.lokasiKelurahan | customFilter}}, {{data.lokasiKecamatan | customFilter}}, {{data.lokasiKabupaten | customFilter}}</td>
+              <td>{{data.lokasiKelurahan | filterAlamat}}, {{data.lokasiKecamatan | filterAlamat}}, {{data.lokasiKabupaten | filterAlamat}}</td>
               <td>
                 <a href="#" class="btn btn-success btn-xs" @click="addMitra(data.id, data.name)">
                   <i class="fas fa-plus-square white"></i>
@@ -64,11 +63,11 @@ export default {
   methods: {
     // Mendapatkan data Mitra
     getMitra() {
-      axios.get("/kemitraan/konsumen/list").then(response => {
+      axios.get("/kemitraan/grosir/list").then(response => {
         this.dataMitra = response.data.data;
       });
     },
-    addMitra(id_produsen, nama) {
+    addMitra(id_grosir, nama) {
       swal
         .fire({
           title: "Mengajukan Permintaan",
@@ -80,12 +79,11 @@ export default {
         })
         .then(result => {
           if (result.value) {
-            // send request to the server
             this.$Progress.start();
             axios
-              .post("/kemitraan/request/" + id_produsen)
+              .post("/kemitraan/request/" + id_grosir)
               .then(() => {
-                UpdateData.$emit("ListKonsumen");
+                UpdateData.$emit("ListGrosir");
                 swal.fire(
                   "Mengajukan Permintaan",
                   "Berhasil mengajukan kemitraan",
@@ -110,7 +108,7 @@ export default {
   },
   mounted() {
     // Custom event on Vue js
-    UpdateData.$on("ListKonsumen", () => {
+    UpdateData.$on("ListGrosir", () => {
       this.getMitra();
     });
   }

@@ -64,7 +64,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/kemitraan/pengajuan/list','UserController@listPengajuanMitra');
     Route::get('/kemitraan/permintaan/list','UserController@listPermintaanMitra');
     Route::get('/kemitraan/mitra/list','UserController@listMitraSaya');
-    
+    //----baru----//
+    Route::get('/kemitraan/mitraPemasok/list','UserController@listMitraPemasok');
+    //------------//
     Route::get('/kemitraan/produsen/list','UserController@getMitraProdusen');
     Route::get('/kemitraan/pengepul/list','UserController@getMitraPengepul');
     Route::get('/kemitraan/grosir/list','UserController@getMitraGrosir');
@@ -84,7 +86,9 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     //Inventaris
     Route::get('/inventaris/list','UserController@getInventaris');
+    //---sementara---
     Route::put('/inventaris/tambah','UserController@addInventaris');
+    //--------------
     Route::put('/inventaris/stokKeluar/{id}','UserController@stokKeluar');
     Route::put('/inventaris/stokMasuk/{id}','UserController@stokMasuk');
     
@@ -93,7 +97,13 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/praProduksi/list','ProdusenController@readLahan');
     Route::put('/praProduksi/update/{id}','ProdusenController@updateLahan');
     Route::delete('/praProduksi/delete/{id}','ProdusenController@deleteLahan');
-
+    //---baru---//
+    //Panen
+    Route::post('/panen/tambah','ProdusenController@addPanen');
+    Route::get('/panen/list','ProdusenController@getPanen');
+    Route::put('/panen/update/{id}','ProdusenController@updatePanen');
+    Route::delete('/panen/delete/{id}','ProdusenController@deletePanen');
+    //----------//
     //Pengeluaran Produksi
     Route::post('/pengeluaran/tambah','ProdusenController@addPengeluaran');
     Route::get('/pengeluaran/list','ProdusenController@readPengeluaran');

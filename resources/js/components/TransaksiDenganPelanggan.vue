@@ -45,19 +45,19 @@
 
           <tbody>
             <tr v-if="!listPermintaanCabai.length">
-              <td colspan="8" align="center">Tidak ada permintaan cabai</td>
+              <td colspan="9" align="center">Tidak ada permintaan cabai</td>
             </tr>
             <tr v-for="data in listPermintaanCabai" :key="data.id">
               <td>{{data.nama}}</td>
               <td>{{data.jenis_cabai}}</td>
-              <td>{{data.jumlah_cabai}}</td>
-              <td>{{data.tanggal_diterima}}</td>
+              <td>{{data.jumlah_cabai | filterAngkaRibuan }}</td>
+              <td>{{data.tanggal_diterima | dateFilter }}</td>
               <td>
-                <div v-if="data.harga!==null">{{ convertToRupiah(data.harga) }}/Kg</div>
+                <div v-if="data.harga!==null">{{ data.harga | convertToRupiah }}/Kg</div>
                 <div v-else>Belum ditetapkan</div>
               </td>
               <td>
-                <div v-if="data.tanggal_pengiriman!==null">{{data.tanggal_pengiriman}}</div>
+                <div v-if="data.tanggal_pengiriman!==null">{{data.tanggal_pengiriman | dateFilter }}</div>
                 <div v-else>Belum ditetapkan</div>
               </td>
               <td>
@@ -140,7 +140,7 @@
                   <p class="normal text-md-left">Jumlah cabai</p>
                 </div>
                 <div class="col-md-8">
-                  <p>:&ensp; {{temp_jumlahcabai}}</p>
+                  <p>:&ensp; {{temp_jumlahcabai | filterAngkaRibuan}} Kg</p>
                 </div>
               </div>
               <div class="row">
@@ -148,7 +148,7 @@
                   <p class="normal text-md-left">Tanggal diterima</p>
                 </div>
                 <div class="col-md-8">
-                  <p>:&ensp; {{temp_tanggalditerima}}</p>
+                  <p>:&ensp; {{temp_tanggalditerima | dateFilter }}</p>
                 </div>
               </div>
 
@@ -170,7 +170,7 @@
                   type="number"
                   name="harga"
                   class="form-control"
-                  placeholder="Harga"
+                  placeholder="Harga per Kg"
                   required
                   :class="{ 'is-invalid': form.errors.has('harga') }"
                 />
@@ -227,7 +227,7 @@
                   <p class="normal text-md-left">Jumlah cabai</p>
                 </div>
                 <div class="col-md-9">
-                  <p>:&ensp; {{temp_jumlahcabai}}</p>
+                  <p>:&ensp; {{temp_jumlahcabai | filterAngkaRibuan }} Kg</p>
                 </div>
               </div>
 
@@ -376,7 +376,7 @@ export default {
       this.form
         .put("/transaksi/permintaanMasuk/terima/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("ListPermintaanCabai");
+          UpdateData.$emit("TransaksiDenganPelanggan");
           $("#modalAccPermintaan").trigger("click");
           toast.fire({
             icon: "success",
@@ -396,7 +396,7 @@ export default {
       this.formReject
         .put("/transaksi/permintaanPembeli/tolak/" + this.formReject.id)
         .then(() => {
-          UpdateData.$emit("ListPermintaanCabai");
+          UpdateData.$emit("TransaksiDenganPelanggan");
           // hide modal
           $("#modalTolakPermintaan").trigger("click");
           toast.fire({
@@ -487,7 +487,7 @@ export default {
       this.formSend
         .put("/inventaris/stokKeluar/" + this.formSend.id)
         .then(() => {
-          UpdateData.$emit("ListPermintaanCabai");
+          UpdateData.$emit("TransaksiDenganPelanggan");
           $("#modalKirimPermintaan").trigger("click");
           toast.fire({
             icon: "success",
@@ -513,7 +513,7 @@ export default {
     this.getPermintaanMasuk();
   },
   mounted() {
-    UpdateData.$on("ListPermintaanCabai", () => {
+    UpdateData.$on("TransaksiDenganPelanggan", () => {
       this.getPermintaanMasuk();
     });
     this.getInventaris();

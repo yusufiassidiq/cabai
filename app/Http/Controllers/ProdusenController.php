@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Auth;
 use Carbon\Carbon;
 use DB;
+use App\Panen;
+use App\Inventaris;
 
 class ProdusenController extends Controller
 {
@@ -45,16 +47,16 @@ class ProdusenController extends Controller
     }
     public function readLahan(){
         $praProduksi = PraProduksi::get();
-        // $praProduksi = PraProduksi::where('id',1)->get();
-        // $asd = $praProduksi[0]->pengeluaranProduksi->first();
-        // dd($asd);
+        foreach($praProduksi as $i){
+            $i->pengeluaran = $i->pengeluaranProduksi()->sum('jumlah_pengeluaran');
+        }
         return response()->json([
             'status' => 'success',
             'data' => $praProduksi->toArray(),
         ]);
     }
     public function updateLahan(Request $request, $id){
-        $praProduksi = PraProduksi::find($id);
+        $praProduksi = PraProduksi::findOrFail($id);
         $tgltnm = $request->tanggal_tanam;
         $parsed_date = Carbon::parse($tgltnm)->toDateTimeString();
         $praProduksi->update([
@@ -66,7 +68,7 @@ class ProdusenController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
     public function deleteLahan($id){
-        $praProduksi = PraProduksi::find($id);
+        $praProduksi = PraProduksi::findOrFail($id);
         $praProduksi->pengeluaranProduksi()->delete();
         $praProduksi->delete();
         return 204;
@@ -75,7 +77,7 @@ class ProdusenController extends Controller
         $v = Validator::make($request->all(), [
             'nama_pengeluaran'      => 'required|string|max:255',
             'jumlah_pengeluaran'    => 'required|integer',
-            'rincian'               => 'required|string|max:255',
+            // 'rincian'               => 'required|string|max:255',
         ]);
         
         if ($v->fails())
@@ -96,6 +98,7 @@ class ProdusenController extends Controller
     public function readPengeluaran(){
         $pengeluaran= PengeluaranProduksi::all();
         foreach($pengeluaran as $i){
+
             $i->kodeLahan = $i->praProduksi()->first()->kode_lahan;
         }
         return response()->json([
@@ -104,7 +107,7 @@ class ProdusenController extends Controller
         ]);
     }
     public function updatePengeluaran(Request $request, $id){
-        $pengeluaran = PengeluaranProduksi::find($id);
+        $pengeluaran = PengeluaranProduksi::findOrFail($id);
         $pengeluaran->update([
             'nama_pengeluaran' => $request->nama_pengeluaran,
             'jumlah_pengeluaran' => $request->jumlah_pengeluaran,
@@ -112,9 +115,62 @@ class ProdusenController extends Controller
         ]);
     }
     public function deletePengeluaran($id){
-        $pengeluaran = PengeluaranProduksi::find($id);
+        $pengeluaran = PengeluaranProduksi::findOrFail($id);
         $pengeluaran->delete();
         return 204;
     }
-    
+    public function addPanen(Request $request){
+        $userId = Auth::user()->id;
+        $panen = new Panen;
+        $panen->pra_produksi_id = $request->pra_produksi_id;
+        $panen->jumlah_panen = $request->jumlah_cabai;
+        $parsed_date = Carbon::parse($request->tanggal_panen)->toDateTimeString();
+        $panen->tanggal_panen = $parsed_date;
+        $panen->save();
+        $jumlah_cabai = $request->jumlah_cabai;
+        $praProduksi = PraProduksi::find($request->pra_produksi_id);
+        $jenis_cabai = $praProduksi->jenis_cabai;
+        $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
+        foreach ($inventaris as $i ) {
+            $jumlah_cabai_sementara = $i->jumlah_cabai;
+            $i->update([
+                'jumlah_cabai' => $jumlah_cabai_sementara + $jumlah_cabai,
+            ]);
+        }
+        return response()->json(['status' => 'success'], 200);
+    }
+    public function getPanen(){
+        $idUser = Auth::user()->id;
+        //bisa pake ini
+        $panens = Panen::whereHas("praProduksi", function($qPraProduksi) use ($idUser){
+            $qPraProduksi->whereHas("user", function($qUser) use($idUser){
+                $qUser->where("id", $idUser);
+            });
+        })->get();
+        //atau ini yg lebih sederhana
+        // $praProduksi_id = PraProduksi::where("user_id", $idUser)->pluck("id");
+        // $panens = Panen::whereIn("pra_produksi_id", $praProduksi_id)->get();
+        foreach($panens as $panen){
+            $panen->kode_lahan = $panen->praProduksi()->first()->kode_lahan;
+            $panen->jenis_cabai = $panen->praProduksi()->first()->jenis_cabai;
+        }
+        // dd($panens);
+        return response()->json([
+            'status' => 'success',
+            'data' => $panens->toArray(),
+        ]);
+    }
+    public function updatePanen($id, Request $request){
+        $panen = Panen::findOrFail($id);
+        $panen->update([
+            'jumlah_panen' => $request->jumlah_cabai,
+            'tanggal_panen' => $request->tanggal_panen,
+        ]);
+        return response()->json(['status' => 'success'], 200);
+    }
+    public function deletePanen($id){
+        $panen = Panen::findOrFail($id);
+        $panen->delete();
+        return 204;
+    }
 }

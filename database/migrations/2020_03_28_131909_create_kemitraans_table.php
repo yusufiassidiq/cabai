@@ -15,15 +15,15 @@ class CreateKemitraansTable extends Migration
     {
         Schema::create('kemitraan', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->unsignedBigInteger('user1_id');
+            $table->unsignedBigInteger('user2_id');
             $table->integer('status');
             $table->unsignedBigInteger('action_user');
             $table->integer('flag')->default(0); //check id terbesar
+            $table->timestamps();
 
-            $table->unsignedBigInteger('user1_id');
             $table->foreign('user1_id')->references('id')->on('users');
 
-            $table->unsignedBigInteger('user2_id');
             $table->foreign('user2_id')->references('id')->on('users');
         });
     }

@@ -36,7 +36,7 @@
               <th>Role</th>
               <th>Lokasi</th>
               <th>Jenis Cabai</th>
-              <th>Jumlah Cabai</th>
+              <th>Jumlah Cabai(Kg)</th>
               <th>Harga Cabai</th>
               <th>Tanggal Diterima</th>
               <th>Tanggal Pengiriman</th>
@@ -48,27 +48,21 @@
 
           <tbody>
             <tr v-if="!listPermintaanSaya.length">
-              <td colspan="7" align="center">Tidak ada permintaan anda</td>
+              <td colspan="11" align="center">Tidak ada permintaan anda</td>
             </tr>
             <tr v-for="data in listPermintaanSaya" :key="data.id">
               <td>{{ data.nama }}</td>
+              <td>{{ data.role | filterRoleUser }}</td>
+              <td>{{ data.lokasi.kelurahan | filterAlamat }} , {{ data.lokasi.kecamatan | filterAlamat }} , {{ data.lokasi.kabupaten | filterAlamat }}</td>
+              <td>{{ data.jenis_cabai }}</td>
+              <td>{{ data.jumlah_cabai | filterAngkaRibuan }}</td>
               <td>
-                <div v-if="data.role===2">Produsen</div>
-                <div v-else-if="data.role===3">Pengepul</div>
-                <div v-else-if="data.role===4">Grosir</div>
-                <div v-else-if="data.role===5">Pengecer</div>
-                <div v-else>Konsumen</div>
-              </td>
-              <td>{{ data.lokasi.kelurahan }} , {{ data.lokasi.kecamatan }} , {{ data.lokasi.kabupaten }}</td>
-              <td>{{data.jenis_cabai}}</td>
-              <td>{{data.jumlah_cabai}}</td>
-              <td>
-                <div v-if="data.harga!==null">{{convertToRupiah(data.harga)}}</div>
+                <div v-if="data.harga!==null">{{data.harga | convertToRupiah }}</div>
                 <div v-else>Belum ditetapkan</div>
               </td>
-              <td>{{data.tanggal_diterima}}</td>
+              <td>{{ data.tanggal_diterima | dateFilter }}</td>
               <td>
-                <div v-if="data.tanggal_pengiriman!==null">{{data.tanggal_pengiriman}}</div>
+                <div v-if="data.tanggal_pengiriman!==null">{{ data.tanggal_pengiriman | dateFilter }}</div>
                 <div v-else>Belum ditetapkan</div>
               </td>
               <td>
@@ -76,10 +70,10 @@
                 <div class="red" v-else-if="data.status_permintaan === 2">Permintaan Anda ditolak</div>
                 <div v-else-if="data.status_permintaan === 4">Anda menolak penawaran</div>
                 <div v-else-if="data.status_permintaan === 3">Menunggu Pengiriman</div>
-                <div v-else-if="data.status_permintaan === 1">Menuggu persetujuan Anda</div>
+                <div v-else-if="data.status_permintaan === 1">Menunggu persetujuan Anda</div>
               </td>
               <td>
-                <div v-if="data.status_permintaan === 2">{{data.keterangan}}</div>
+                <div v-if="data.status_permintaan === 2">{{ data.keterangan }}</div>
                 <div v-else>-</div>
               </td>
               <td>
@@ -162,8 +156,8 @@
                   <option
                     v-for="data in dataMitra"
                     :key="data.id"
-                    v-bind:value="data.mitra"
-                  >{{ data.nama }} - {{ getRole(data.role) }}</option>
+                    v-bind:value="data.id"
+                  >{{ data.name }} - {{ data.role | filterRoleUser }}</option>
                 </select>
                 <has-error :form="form" field="pemasok_id"></has-error>
               </div>
@@ -281,7 +275,7 @@
                   <p class="normal text-md-left">Jumlah cabai</p>
                 </div>
                 <div class="col-md-8">
-                  <p>:&ensp; {{temp_jumlahcabai}}</p>
+                  <p>:&ensp; {{temp_jumlahcabai | filterAngkaRibuan }} Kg</p>
                 </div>
               </div>
               <div class="row">
@@ -289,7 +283,7 @@
                   <p class="normal text-md-left">Tanggal diterima</p>
                 </div>
                 <div class="col-md-8">
-                  <p>:&ensp; {{temp_tanggalditerima}}</p>
+                  <p>:&ensp; {{temp_tanggalditerima | dateFilter }}</p>
                 </div>
               </div>
               <div class="row">
@@ -297,7 +291,7 @@
                   <p class="normal text-md-left">Tanggal Pengiriman</p>
                 </div>
                 <div class="col-md-8">
-                  <p>:&ensp; {{temp_tanggalpengiriman}}</p>
+                  <p>:&ensp; {{temp_tanggalpengiriman | dateFilter }}</p>
                 </div>
               </div>
               <div class="row">
@@ -305,7 +299,7 @@
                   <p class="normal text-md-left">Harga</p>
                 </div>
                 <div class="col-md-8">
-                  <p>:&ensp; {{convertToRupiah(temp_harga)}}</p>
+                  <p>:&ensp; {{ temp_harga | convertToRupiah }} /Kg</p>
                 </div>
               </div>
               <div class v-show="!modalTerima">
@@ -382,7 +376,7 @@ export default {
       this.form
         .post("/transaksi/permintaanSaya/tambah")
         .then(response => {
-          UpdateData.$emit("ListPengajuanCabai");
+          UpdateData.$emit("TransaksiDenganPemasok");
           // hide modal
           $("#modalPermintaan").trigger("click");
           // show Toast if success
@@ -400,47 +394,11 @@ export default {
           document.getElementById("btnaddpermintaan").disabled = false;
         });
     },
-    // fungsi untuk mendapatkan role dari mitra
-    getRole(id_role) {
-      switch (id_role) {
-        case 2:
-          return "Produsen";
-          break;
-        case 3:
-          return "Pengepul";
-          break;
-        case 4:
-          return "Grosir";
-          break;
-        case 5:
-          return "Pengecer";
-          break;
-        default:
-          return "Konsumen";
-      }
-    },
     customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     },
-    convertToRupiah(angka) {
-      var rupiah = "";
-      var angkarev = angka
-        .toString()
-        .split("")
-        .reverse()
-        .join("");
-      for (var i = 0; i < angkarev.length; i++)
-        if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + ".";
-      return (
-        "Rp. " +
-        rupiah
-          .split("", rupiah.length - 1)
-          .reverse()
-          .join("")
-      );
-    },
     getMitra() {
-      axios.get("/kemitraan/mitra/list").then(response => {
+      axios.get("/kemitraan/mitraPemasok/list").then(response => {
         this.dataMitra = response.data.data;
         // console.log(this.dataMitra);
       });
@@ -457,7 +415,7 @@ export default {
       this.form
         .put("/transaksi/permintaanSaya/update/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("ListPengajuanCabai");
+          UpdateData.$emit("TransaksiDenganPemasok");
           // hide modal
           $("#modalPermintaan").trigger("click");
           toast.fire({
@@ -494,7 +452,7 @@ export default {
                   "Pemintaan pasokan berhasil dihapus",
                   "success"
                 );
-                UpdateData.$emit("ListPengajuanCabai");
+                UpdateData.$emit("TransaksiDenganPemasok");
                 this.$Progress.finish();
               })
               .catch(error => {
@@ -548,7 +506,7 @@ export default {
       this.form
         .put("/transaksi/penawaranPemasok/terima/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("ListPengajuanCabai");
+          UpdateData.$emit("TransaksiDenganPemasok");
           $("#modalTerimaPermintaan").trigger("click");
           toast.fire({
             icon: "success",
@@ -568,7 +526,7 @@ export default {
       this.form
         .put("/transaksi/penawaranPemasok/tolak/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("ListPengajuanCabai");
+          UpdateData.$emit("TransaksiDenganPemasok");
           $("#modalTerimaPermintaan").trigger("click");
           toast.fire({
             icon: "success",
@@ -610,7 +568,7 @@ export default {
                     " telah diterima",
                   "success"
                 );
-                UpdateData.$emit("ListPengajuanCabai");
+                UpdateData.$emit("TransaksiDenganPemasok");
                 this.$Progress.finish();
               })
               .catch(error => {
@@ -626,7 +584,7 @@ export default {
     this.getMitra();
   },
   mounted() {
-    UpdateData.$on("ListPengajuanCabai", () => {
+    UpdateData.$on("TransaksiDenganPemasok", () => {
       this.getPermintaanSaya();
     });
   }

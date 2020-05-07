@@ -36,9 +36,9 @@
                     <thead>
                       <tr>
                         <th>Nama</th>
+                        <th>Role</th>
                         <th>Email</th>
                         <th>Tgl Pengajuan</th>
-                        <th>Role</th>
                         <th>Surat Izin Usaha Perdagangan (SIUP)</th>
                         <th>Aksi</th>
                       </tr>
@@ -49,9 +49,9 @@
                       </tr>
                       <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
                         <td>{{ user.name }}</td>
+                        <td>{{ user.role | filterRoleUser }}</td>
                         <td>{{ user.email }}</td>
-                        <td>{{customFormatter(user.created_at)}}</td>
-                        <td>{{ getRole(user.role) }}</td>
+                        <td>{{ customFormatter(user.created_at) }}</td>
                         <td>
                           <button class="btn btn-info btn-xs" @click="previewImage()">
                             <i class="fas fa-eye"></i>&nbsp; Lihat
@@ -99,7 +99,7 @@
           <div class="modal-body">
             <div class="form-group">
               <tr>Nama : {{ userDetail.name }}</tr>
-              <tr>Role : {{ getRole(userDetail.role) }}</tr>
+              <tr>Role : {{ userDetail.role | filterRoleUser }}</tr>
               <tr>Tanggal Registrasi : {{ customFormatter(userDetail.created_at) }}</tr>
             </div>
           </div>
@@ -198,27 +198,6 @@ export default {
           this.$Progress.fail();
         });
     },
-
-    // fungsi untuk mendapatkan Role user berdasarkan role id
-    getRole(id_role) {
-      switch (id_role) {
-        case 2:
-          return "Produsen";
-          break;
-        case 3:
-          return "Pengepul";
-          break;
-        case 4:
-          return "Grosir";
-          break;
-        case 5:
-          return "Pengecer";
-          break;
-        default:
-          return "Konsumen";
-      }
-    },
-
     // fungsi untuk mengubah format tanggal dengan moment js
     customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");

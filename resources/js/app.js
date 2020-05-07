@@ -65,13 +65,63 @@ Vue.router = router
 Vue.use(VueRouter)
 
 // filter string supaya char selain firstchar lowercase
-Vue.filter('customFilter', function (value) {
+Vue.filter('filterAlamat', function (value) {
     if (!value) return ''
 
     var firstChar = value.charAt(0)
     value = value.toString().toLowerCase()
     return firstChar + value.substring(1, value.length)
 
+})
+
+// filter tanggal supaya DDMMYYYY
+Vue.filter('dateFilter', function (value) {
+    let m
+    m = moment(value, 'YYYY-MM-DD')
+    return m.format('DD/MM/YYYY')
+})
+
+// filter convert angka ke rupiah
+Vue.filter('convertToRupiah', function (angka) {
+
+    var rupiah = "";
+    var angkarev = angka.toString().split("").reverse().join("");
+    for (var i = 0; i < angkarev.length; i++)
+        if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + ".";
+    return (
+        "Rp " + rupiah.split("", rupiah.length - 1).reverse().join("")
+    );
+})
+
+// filter mengubah angka menjadi ribuan
+Vue.filter('filterAngkaRibuan', function (value) {
+    var angka = "";
+    var angkarev = value.toString().split("").reverse().join("");
+    for (var i = 0; i < angkarev.length; i++)
+        if (i % 3 == 0) angka += angkarev.substr(i, 3) + ".";
+    return (
+        angka.split("", angka.length - 1).reverse().join("")
+    );
+})
+
+// filter mendapatkan Jenis Role
+Vue.filter('filterRoleUser', function(id_role){
+    switch (id_role) {
+        case 2:
+        return "Produsen";
+        break;
+        case 3:
+        return "Pengepul";
+        break;
+        case 4:
+        return "Grosir";
+        break;
+        case 5:
+        return "Pengecer";
+        break;
+        default:
+        return "Konsumen";
+    }
 })
 
 // Set Vue authentication

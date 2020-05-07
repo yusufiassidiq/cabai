@@ -6,14 +6,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Daftar Mitra</h1>
+            <h1 class="m-0 text-dark">Tambah Mitra</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
                 <a href="#">Produsen</a>
               </li>
-              <li class="breadcrumb-item active">Daftar Mitra</li>
+              <li class="breadcrumb-item active">Tambah Mitra</li>
             </ol>
           </div>
         </div>
@@ -117,10 +117,10 @@
   </div>
 </template>
 <script>
-import listPengepul from "../../../components/DM_ListPengepul";
-import listGrosir from "../../../components/DM_ListGrosir";
-import listPengecer from "../../../components/DM_ListPengecer";
-import listKonsumen from "../../../components/DM_ListKonsumen";
+import listPengepul from "../../../components/ListPengepul";
+import listGrosir from "../../../components/ListGrosir";
+import listPengecer from "../../../components/ListPengecer";
+import listKonsumen from "../../../components/ListKonsumen";
 export default {
   components: {
     pengepul: listPengepul,

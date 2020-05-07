@@ -5,10 +5,10 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Inventaris</h3>
+              <h3 class="card-title">Daftar Inventaris Cabai</h3>
               <vue-progress-bar></vue-progress-bar>
               <div class="card-tools">
-                <button class="btn btn-success btn-sm" @click="newModal">Tambah Inventory</button>
+                <!-- <button class="btn btn-success btn-sm" @click="newModal">Tambah Inventory</button> -->
               </div>
             </div>
             <!-- /.card-header -->
@@ -25,8 +25,8 @@
                 <tbody>
                   <tr v-for="data in inventaris" :key="data.id">
                     <td>{{ data.jenis_cabai }}</td>
-                    <td>{{ data.jumlah_cabai }} Kg</td>
-                    <td>{{ convertToRupiah(data.harga) }}</td>
+                    <td>{{ data.jumlah_cabai | filterAngkaRibuan}} Kg</td>
+                    <td>{{ data.harga | convertToRupiah }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -112,45 +112,28 @@ export default {
         this.inventaris = response.data.data;
       });
     },
-    convertToRupiah(angka) {
-      var rupiah = "";
-      var angkarev = angka
-        .toString()
-        .split("")
-        .reverse()
-        .join("");
-      for (var i = 0; i < angkarev.length; i++)
-        if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + ".";
-      return (
-        "Rp. " +
-        rupiah
-          .split("", rupiah.length - 1)
-          .reverse()
-          .join("")
-      );
-    },
     newModal() {
       this.form.reset()
       $("#modalInventaris").modal("show");
     },
-    addInventaris() {
-      this.$Progress.start();
-      this.form
-        .put("/inventaris/tambah")
-        .then(() => {
-          UpdateData.$emit("Inventaris");
-          $("#modalInventaris").trigger("click");
-          toast.fire({
-            icon: "success",
-            title: "Inventaris berhasil ditambahkan"
-          });
-          this.$Progress.finish();
-          document.getElementById("btnadd").disabled = false;
-        })
-        .catch(() => {
-          this.$Progress.fail();
-        });
-    }
+    // addInventaris() {
+    //   this.$Progress.start();
+    //   this.form
+    //     .put("/inventaris/tambah")
+    //     .then(() => {
+    //       UpdateData.$emit("Inventaris");
+    //       $("#modalInventaris").trigger("click");
+    //       toast.fire({
+    //         icon: "success",
+    //         title: "Inventaris berhasil ditambahkan"
+    //       });
+    //       this.$Progress.finish();
+    //       document.getElementById("btnadd").disabled = false;
+    //     })
+    //     .catch(() => {
+    //       this.$Progress.fail();
+    //     });
+    // }
   },
   created() {
     this.getInventaris();
