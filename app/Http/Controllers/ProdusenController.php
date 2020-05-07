@@ -124,7 +124,8 @@ class ProdusenController extends Controller
         $panen = new Panen;
         $panen->pra_produksi_id = $request->pra_produksi_id;
         $panen->jumlah_panen = $request->jumlah_cabai;
-        $panen->tanggal_panen = $request->tanggal_panen;
+        $parsed_date = Carbon::parse($request->tanggal_panen)->toDateTimeString();
+        $panen->tanggal_panen = $parsed_date;
         $panen->save();
         $jumlah_cabai = $request->jumlah_cabai;
         $praProduksi = PraProduksi::find($request->pra_produksi_id);
@@ -168,7 +169,7 @@ class ProdusenController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
     public function deletePanen($id){
-        $panen = findOrFail($id);
+        $panen = Panen::findOrFail($id);
         $panen->delete();
         return 204;
     }

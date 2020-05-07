@@ -78,7 +78,7 @@ Vue.filter('filterAlamat', function (value) {
 Vue.filter('dateFilter', function (value) {
     let m
     m = moment(value, 'YYYY-MM-DD')
-    return m.format('L')
+    return m.format('DD/MM/YYYY')
 })
 
 // filter convert angka ke rupiah

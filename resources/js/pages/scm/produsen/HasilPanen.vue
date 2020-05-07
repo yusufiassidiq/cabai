@@ -72,7 +72,7 @@
                       <td colspan="5" align="center">Tidak ada Hasil Panen</td>
                     </tr>
                     <tr v-for="data in dataPanen" :key="data.id">
-                      <td>{{ data.created_at | dateFilter }}</td>
+                      <td>{{ data.tanggal_panen | dateFilter }}</td>
                       <td>{{ data.kode_lahan }}</td>
                       <td>{{ data.jenis_cabai }}</td>
                       <td>{{ data.jumlah_panen | filterAngkaRibuan }}</td>
@@ -143,7 +143,7 @@
                 <has-error :form="form" field="jumlah_cabai"></has-error>
               </div>
 
-              <!-- <div class="form-group col-md">
+              <div class="form-group col-md">
                 <datepicker
                   input-class="form-control"
                   required
@@ -154,7 +154,7 @@
                   :class="{ 'is-invalid': form.errors.has('tanggal_panen') }"
                 ></datepicker>
                 <has-error :form="form" field="tanggal_panen"></has-error>
-              </div>-->
+              </div>
             </div>
 
             <div class="modal-footer">
@@ -188,15 +188,16 @@ export default {
       editmode: false, // buat ngebedain modal yg di klik modal tambah lahan /edit lahan
       form: new Form({
         id: "",
-        lahan_id: "",
         jumlah_cabai: "",
         pra_produksi_id: "",
-        // tanggal_panen: "",
+        tanggal_panen: "",
       })
     };
   },
   methods: {
-    // menampilkan daftar panen cabai
+    customFormatter(date) {
+      return moment(date).format("DD MMMM YYYY");
+    },
     getPanen() {
       axios.get("/panen/list").then(response => {
         this.dataPanen = response.data.data;
@@ -226,7 +227,7 @@ export default {
     updatePanen() {
       console.log("berhasil diedit");
       this.$Progress.start();
-      this.form
+      this.form 
         .put("/panen/update/" + this.form.id)
         .then(() => {
           UpdateData.$emit("HasilPanen");
@@ -256,7 +257,7 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .delete("/panen/delete" + id)
+              .delete("/panen/delete/" + id)
               .then(() => {
                 UpdateData.$emit("HasilPanen");
                 swal.fire(
@@ -281,9 +282,6 @@ export default {
       axios.get("praProduksi/list").then(response => {
         this.datalahan = response.data.data;
       });
-    },
-    customFormatter(date) {
-      return moment(date).format("DD MMMM YYYY");
     },
     // Modal
     // Menampilkan modal utk menambahkan pengeluaran baru

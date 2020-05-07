@@ -11572,15 +11572,16 @@ __webpack_require__.r(__webpack_exports__);
       // buat ngebedain modal yg di klik modal tambah lahan /edit lahan
       form: new Form({
         id: "",
-        lahan_id: "",
         jumlah_cabai: "",
-        pra_produksi_id: "" // tanggal_panen: "",
-
+        pra_produksi_id: "",
+        tanggal_panen: ""
       })
     };
   },
   methods: {
-    // menampilkan daftar panen cabai
+    customFormatter: function customFormatter(date) {
+      return moment(date).format("DD MMMM YYYY");
+    },
     getPanen: function getPanen() {
       var _this = this;
 
@@ -11644,7 +11645,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this4.$Progress.start();
 
-          axios["delete"]("/panen/delete" + id).then(function () {
+          axios["delete"]("/panen/delete/" + id).then(function () {
             UpdateData.$emit("HasilPanen");
             swal.fire("Tehapus!", "Hasil Panen berhasil dihapus", "success");
 
@@ -11663,9 +11664,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("praProduksi/list").then(function (response) {
         _this5.datalahan = response.data.data;
       });
-    },
-    customFormatter: function customFormatter(date) {
-      return moment(date).format("DD MMMM YYYY");
     },
     // Modal
     // Menampilkan modal utk menambahkan pengeluaran baru
@@ -102299,7 +102297,7 @@ var render = function() {
                         return _c("tr", { key: data.id }, [
                           _c("td", [
                             _vm._v(
-                              _vm._s(_vm._f("dateFilter")(data.created_at))
+                              _vm._s(_vm._f("dateFilter")(data.tanggal_panen))
                             )
                           ]),
                           _vm._v(" "),
@@ -102503,6 +102501,37 @@ var render = function() {
                         _vm._v(" "),
                         _c("has-error", {
                           attrs: { form: _vm.form, field: "jumlah_cabai" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-md" },
+                      [
+                        _c("datepicker", {
+                          class: {
+                            "is-invalid": _vm.form.errors.has("tanggal_panen")
+                          },
+                          attrs: {
+                            "input-class": "form-control",
+                            required: "",
+                            placeholder: "Tanggal Panen",
+                            format: _vm.customFormatter,
+                            id: "tanggal_panen"
+                          },
+                          model: {
+                            value: _vm.form.tanggal_panen,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "tanggal_panen", $$v)
+                            },
+                            expression: "form.tanggal_panen"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "tanggal_panen" }
                         })
                       ],
                       1
@@ -122393,7 +122422,7 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.filter('filterAlamat', function (valu
 vue__WEBPACK_IMPORTED_MODULE_6___default.a.filter('dateFilter', function (value) {
   var m;
   m = moment(value, 'YYYY-MM-DD');
-  return m.format('L');
+  return m.format('DD/MM/YYYY');
 }); // filter convert angka ke rupiah
 
 vue__WEBPACK_IMPORTED_MODULE_6___default.a.filter('convertToRupiah', function (angka) {
@@ -127766,8 +127795,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
