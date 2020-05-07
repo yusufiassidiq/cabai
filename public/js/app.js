@@ -89864,7 +89864,7 @@ var render = function() {
               [
                 !_vm.listPermintaanCabai.length
                   ? _c("tr", [
-                      _c("td", { attrs: { colspan: "8", align: "center" } }, [
+                      _c("td", { attrs: { colspan: "9", align: "center" } }, [
                         _vm._v("Tidak ada permintaan cabai")
                       ])
                     ])
@@ -90780,7 +90780,7 @@ var render = function() {
               [
                 !_vm.listPermintaanSaya.length
                   ? _c("tr", [
-                      _c("td", { attrs: { colspan: "7", align: "center" } }, [
+                      _c("td", { attrs: { colspan: "11", align: "center" } }, [
                         _vm._v("Tidak ada permintaan anda")
                       ])
                     ])

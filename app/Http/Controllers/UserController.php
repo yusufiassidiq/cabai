@@ -378,14 +378,14 @@ class UserController extends Controller
         // dd($daftarMitraId);
         
         $daftarMitra = collect([]);
-        if(!$daftarMitraId){
             foreach($daftarMitraId as $k){
                 $akun = User::find($k);
-                if($akun->role < $roleUser){
-                   $daftarMitra->push($akun); 
+                if($akun){
+                    if($akun->role < $roleUser){
+                       $daftarMitra->push($akun); 
+                    }
                 }
             }
-        }
         // dd($daftarMitra);
         return response()->json([
             'status' => 'success', 
@@ -430,7 +430,7 @@ class UserController extends Controller
     }
     public function getPermintaanMasuk(){
         $userId = Auth::user()->id;
-        $transaksi = Transaksi::where('pemasok_id',$userId)->where('status_pemesanan',0)->orderBy('id','DESC')->get();
+        $transaksi = Transaksi::where('pemasok_id',$userId)->where('status_pemesanan','!=',1)->orWhereNull('status_pemesanan')->orderBy('id','DESC')->get();
         foreach($transaksi as $i){
             $i->nama = $i->user()->first()->name;
         }
@@ -442,7 +442,7 @@ class UserController extends Controller
     }
     public function getPermintaanSaya(){
         $userId = Auth::user()->id;
-        $transaksi = Transaksi::where('user_id',$userId)->where('status_pemesanan',0)->orderBy('id','DESC')->get();
+        $transaksi = Transaksi::where('user_id',$userId)->where('status_pemesanan','!=',1)->orWhereNull('status_pemesanan')->orderBy('id','DESC')->get();
         $j=0;
         foreach($transaksi as $i){
             $id_pemasok = $transaksi[$j]->pemasok_id;

@@ -45,7 +45,7 @@
 
           <tbody>
             <tr v-if="!listPermintaanCabai.length">
-              <td colspan="8" align="center">Tidak ada permintaan cabai</td>
+              <td colspan="9" align="center">Tidak ada permintaan cabai</td>
             </tr>
             <tr v-for="data in listPermintaanCabai" :key="data.id">
               <td>{{data.nama}}</td>

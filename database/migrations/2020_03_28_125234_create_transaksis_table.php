@@ -29,7 +29,6 @@ class CreateTransaksisTable extends Migration
             $table->integer('status_pemesanan')->nullable();
             $table->timestamps();
             
-            
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
