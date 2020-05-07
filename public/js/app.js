@@ -7922,7 +7922,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       axios.get('/getHarga').then(function (response) {
-        var _ref, _ref2, _ref3, _ref4;
+        var _ref, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9, _ref10, _ref11, _ref12;
 
         _this.dateNow = response.data.dateNow;
         _this.date = response.data.date;
@@ -7947,7 +7947,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               pointHighlightStroke: 'rgba(54, 162, 235, 1)',
               data: response.data.rawitProdusen,
               pointStyle: 'rect'
-            }, _defineProperty(_ref, "pointRadius", 7), _defineProperty(_ref, "pointHoverRadius", 10), _defineProperty(_ref, "fill", false), _ref), (_ref2 = {
+            }, _defineProperty(_ref, "pointRadius", 5), _defineProperty(_ref, "pointHoverRadius", 10), _defineProperty(_ref, "fill", false), _ref), (_ref2 = {
               // type                : 'bar',
               label: 'Pengepul',
               backgroundColor: 'rgba(254, 99, 131, 1)',
@@ -7959,7 +7959,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               pointHighlightStroke: 'rgba(254, 99, 131, 1)',
               data: response.data.rawitPengepul,
               pointStyle: 'triangle'
-            }, _defineProperty(_ref2, "pointRadius", 7), _defineProperty(_ref2, "pointHoverRadius", 10), _defineProperty(_ref2, "fill", false), _ref2), (_ref3 = {
+            }, _defineProperty(_ref2, "pointRadius", 5), _defineProperty(_ref2, "pointHoverRadius", 10), _defineProperty(_ref2, "fill", false), _ref2), (_ref3 = {
               // type                : 'bar',
               label: 'Grosir',
               backgroundColor: 'rgba(74, 192, 192, 1)',
@@ -7971,7 +7971,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               pointHighlightStroke: 'rgba(74, 192, 192, 1)',
               data: response.data.rawitGrosir,
               pointStyle: 'circle'
-            }, _defineProperty(_ref3, "pointRadius", 7), _defineProperty(_ref3, "pointHoverRadius", 10), _defineProperty(_ref3, "fill", false), _ref3), (_ref4 = {
+            }, _defineProperty(_ref3, "pointRadius", 5), _defineProperty(_ref3, "pointHoverRadius", 10), _defineProperty(_ref3, "fill", false), _ref3), (_ref4 = {
               label: 'Pengecer',
               backgroundColor: 'rgba(255,129,0, 1)',
               borderColor: 'rgba(255,129,0, 1)',
@@ -7982,7 +7982,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               pointHighlightStroke: 'rgba(255,129,0, 1)',
               data: response.data.rawitPengecer,
               pointStyle: 'rectRot'
-            }, _defineProperty(_ref4, "pointRadius", 7), _defineProperty(_ref4, "pointHoverRadius", 10), _defineProperty(_ref4, "fill", false), _ref4)]
+            }, _defineProperty(_ref4, "pointRadius", 5), _defineProperty(_ref4, "pointHoverRadius", 10), _defineProperty(_ref4, "fill", false), _ref4)]
           },
           options: {
             responsive: true,
@@ -8013,7 +8013,187 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   display: false
                 },
                 ticks: {
-                  beginAtZero: true
+                  beginAtZero: false
+                }
+              }]
+            }
+          }
+        });
+        var chart2 = _this.$refs.chart2;
+        var ctx2 = chart2.getContext("2d");
+        var myChart2 = new Chart(ctx2, {
+          type: 'line',
+          data: {
+            labels: response.data.date,
+            datasets: [(_ref5 = {
+              // type                : 'bar',
+              label: 'Produsen',
+              backgroundColor: 'rgba(54, 162, 235, 1)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              pointRadius: true,
+              pointColor: 'rgba(54, 162, 235, 1)',
+              pointStrokeColor: '#c1c7d1',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(54, 162, 235, 1)',
+              data: response.data.keritingProdusen,
+              pointStyle: 'rect'
+            }, _defineProperty(_ref5, "pointRadius", 5), _defineProperty(_ref5, "pointHoverRadius", 10), _defineProperty(_ref5, "fill", false), _ref5), (_ref6 = {
+              // type                : 'bar',
+              label: 'Pengepul',
+              backgroundColor: 'rgba(254, 99, 131, 1)',
+              borderColor: 'rgba(254, 99, 131, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(254, 99, 131, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(254, 99, 131, 1)',
+              data: response.data.keritingPengepul,
+              pointStyle: 'triangle'
+            }, _defineProperty(_ref6, "pointRadius", 5), _defineProperty(_ref6, "pointHoverRadius", 10), _defineProperty(_ref6, "fill", false), _ref6), (_ref7 = {
+              // type                : 'bar',
+              label: 'Grosir',
+              backgroundColor: 'rgba(74, 192, 192, 1)',
+              borderColor: 'rgba(74, 192, 192, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(74, 192, 192, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(74, 192, 192, 1)',
+              data: response.data.keritingGrosir,
+              pointStyle: 'circle'
+            }, _defineProperty(_ref7, "pointRadius", 5), _defineProperty(_ref7, "pointHoverRadius", 10), _defineProperty(_ref7, "fill", false), _ref7), (_ref8 = {
+              label: 'Pengecer',
+              backgroundColor: 'rgba(255,129,0, 1)',
+              borderColor: 'rgba(255,129,0, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(255,129,0, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(255,129,0, 1)',
+              data: response.data.keritingPengecer,
+              pointStyle: 'rectRot'
+            }, _defineProperty(_ref8, "pointRadius", 5), _defineProperty(_ref8, "pointHoverRadius", 10), _defineProperty(_ref8, "fill", false), _ref8)]
+          },
+          options: {
+            responsive: true,
+            tooltips: {
+              mode: 'index',
+              intersect: false
+            },
+            //   hover:{
+            //     mode: 'nearest',
+            //     intersect: true,
+            //   },
+            //   snapGaps: false,
+            // elements:{
+            //   line:{
+            //     tension: 0.000001
+            //   }
+            // },
+            scales: {
+              xAxes: [{
+                // stacked: true,
+                gridLines: {
+                  display: false
+                }
+              }],
+              yAxes: [{
+                // stacked: true,
+                gridLines: {
+                  display: false
+                },
+                ticks: {
+                  beginAtZero: false
+                }
+              }]
+            }
+          }
+        });
+        var chart3 = _this.$refs.chart3;
+        var ctx3 = chart3.getContext("2d");
+        var myChart3 = new Chart(ctx3, {
+          type: 'line',
+          data: {
+            labels: response.data.date,
+            datasets: [(_ref9 = {
+              // type                : 'bar',
+              label: 'Produsen',
+              backgroundColor: 'rgba(54, 162, 235, 1)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              pointRadius: true,
+              pointColor: 'rgba(54, 162, 235, 1)',
+              pointStrokeColor: '#c1c7d1',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(54, 162, 235, 1)',
+              data: response.data.besarProdusen,
+              pointStyle: 'rect'
+            }, _defineProperty(_ref9, "pointRadius", 5), _defineProperty(_ref9, "pointHoverRadius", 10), _defineProperty(_ref9, "fill", false), _ref9), (_ref10 = {
+              // type                : 'bar',
+              label: 'Pengepul',
+              backgroundColor: 'rgba(254, 99, 131, 1)',
+              borderColor: 'rgba(254, 99, 131, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(254, 99, 131, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(254, 99, 131, 1)',
+              data: response.data.besarPengepul,
+              pointStyle: 'triangle'
+            }, _defineProperty(_ref10, "pointRadius", 5), _defineProperty(_ref10, "pointHoverRadius", 10), _defineProperty(_ref10, "fill", false), _ref10), (_ref11 = {
+              // type                : 'bar',
+              label: 'Grosir',
+              backgroundColor: 'rgba(74, 192, 192, 1)',
+              borderColor: 'rgba(74, 192, 192, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(74, 192, 192, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(74, 192, 192, 1)',
+              data: response.data.besarGrosir,
+              pointStyle: 'circle'
+            }, _defineProperty(_ref11, "pointRadius", 5), _defineProperty(_ref11, "pointHoverRadius", 10), _defineProperty(_ref11, "fill", false), _ref11), (_ref12 = {
+              label: 'Pengecer',
+              backgroundColor: 'rgba(255,129,0, 1)',
+              borderColor: 'rgba(255,129,0, 1)',
+              pointRadius: true,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(255,129,0, 1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(255,129,0, 1)',
+              data: response.data.besarPengecer,
+              pointStyle: 'rectRot'
+            }, _defineProperty(_ref12, "pointRadius", 5), _defineProperty(_ref12, "pointHoverRadius", 10), _defineProperty(_ref12, "fill", false), _ref12)]
+          },
+          options: {
+            responsive: true,
+            tooltips: {
+              mode: 'index',
+              intersect: false
+            },
+            //   hover:{
+            //     mode: 'nearest',
+            //     intersect: true,
+            //   },
+            //   snapGaps: false,
+            // elements:{
+            //   line:{
+            //     tension: 0.000001
+            //   }
+            // },
+            scales: {
+              xAxes: [{
+                // stacked: true,
+                gridLines: {
+                  display: false
+                }
+              }],
+              yAxes: [{
+                // stacked: true,
+                gridLines: {
+                  display: false
+                },
+                ticks: {
+                  beginAtZero: false
                 }
               }]
             }
@@ -95299,9 +95479,53 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(3),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row justify-content-center" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "chart" }, [
+                      _c("canvas", {
+                        ref: "chart2",
+                        staticStyle: { height: "100px" },
+                        attrs: { height: "100" }
+                      })
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
         _vm._v(" "),
-        _vm._m(4)
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row justify-content-center" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "chart" }, [
+                      _c("canvas", {
+                        ref: "chart3",
+                        staticStyle: { height: "100px" },
+                        attrs: { height: "100" }
+                      })
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
       ])
     ])
   ])
@@ -95377,49 +95601,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h5", { staticClass: "card-title" }, [
-              _vm._v("Grafik Harga Cabai Keriting")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-tools" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-tool",
-                  attrs: { type: "button", "data-card-widget": "collapse" }
-                },
-                [_c("i", { staticClass: "fas fa-minus" })]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-tool",
-                  attrs: { type: "button", "data-card-widget": "remove" }
-                },
-                [_c("i", { staticClass: "fas fa-times" })]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "row justify-content-center" }, [
-              _c("div", { staticClass: "col-md-12" }, [
-                _c("p", { staticClass: "text-center" }, [
-                  _c("strong", [
-                    _vm._v("Harga Cabai Keriting 15 Hari Terakhir")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "chart" })
-              ])
-            ])
-          ])
-        ])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-title" }, [
+        _vm._v("Grafik Harga Cabai Keriting")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-card-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fas fa-minus" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-card-widget": "remove" }
+          },
+          [_c("i", { staticClass: "fas fa-times" })]
+        )
       ])
     ])
   },
@@ -95427,48 +95631,46 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h5", { staticClass: "card-title" }, [
-              _vm._v("Grafik Harga Cabai Besar")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-tools" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-tool",
-                  attrs: { type: "button", "data-card-widget": "collapse" }
-                },
-                [_c("i", { staticClass: "fas fa-minus" })]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-tool",
-                  attrs: { type: "button", "data-card-widget": "remove" }
-                },
-                [_c("i", { staticClass: "fas fa-times" })]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "row justify-content-center" }, [
-              _c("div", { staticClass: "col-md-12" }, [
-                _c("p", { staticClass: "text-center" }, [
-                  _c("strong", [_vm._v("Harga Cabai Besar 15 Hari Terakhir")])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "chart" })
-              ])
-            ])
-          ])
-        ])
+    return _c("p", { staticClass: "text-center" }, [
+      _c("strong", [_vm._v("Harga Cabai Keriting 15 Hari Terakhir")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-title" }, [
+        _vm._v("Grafik Harga Cabai Besar")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-card-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fas fa-minus" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-card-widget": "remove" }
+          },
+          [_c("i", { staticClass: "fas fa-times" })]
+        )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-center" }, [
+      _c("strong", [_vm._v("Harga Cabai Besar 15 Hari Terakhir")])
     ])
   }
 ]
@@ -95626,7 +95828,7 @@ var render = function() {
                     _c("p", { staticClass: "text-center" }, [
                       _c("strong", [
                         _vm._v(
-                          "Penjualan: " +
+                          "Penjualan (Kg): " +
                             _vm._s(_vm.start) +
                             " - " +
                             _vm._s(_vm.end)
@@ -95702,7 +95904,7 @@ var staticRenderFns = [
           _c("div", { staticClass: "col-sm-6" }, [
             _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
               _c("li", { staticClass: "breadcrumb-item" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Produsen")])
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Pegepul")])
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "breadcrumb-item active" }, [
@@ -127766,8 +127968,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -302,7 +302,7 @@ class AnalysisController extends Controller
                             ['status_pengiriman','1'],
                             ['status_pemesanan','1'],
                             ['tanggal_diterima',$tanggal[$x]]
-                            ])->select('jenis_cabai',DB::raw('count(*) as vol'), DB::raw("SUM(jumlah_cabai) as totalCabai"))
+                            ])->select('jenis_cabai', DB::raw("SUM(jumlah_cabai) as totalCabai"))
                             ->groupBy('jenis_cabai')
                             ->get();
             $cabaiByDayRawit[$x]=0;

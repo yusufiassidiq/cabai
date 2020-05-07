@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">Produsen</a>
+                <a href="#">Pegepul</a>
               </li>
               <li class="breadcrumb-item active">Laporan Penjualan</li>
             </ol>
@@ -48,7 +48,7 @@
                 <div class="row justify-content-center">
                   <div class="col-md-12">
                     <p class="text-center">
-                      <strong>Penjualan: {{start}} - {{end}}</strong>
+                      <strong>Penjualan (Kg): {{start}} - {{end}}</strong>
                     </p>
 
                     <div class="chart">
