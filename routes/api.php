@@ -33,7 +33,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('users', 'UserController@index')->middleware('isAdmin');
     Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
 
-<<<<<<< HEAD
     Route::delete('/user/{id}','AdminController@delete')->middleware('isAdmin');
     Route::put('/terima/{id}','AdminController@terima')->middleware('isAdmin');
     Route::put('/tolak/{id}','AdminController@tolak')->middleware('isAdmin');
@@ -46,8 +45,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('/deleteTargetAdmin/{id}','AdminController@deleteTarget');
     Route::get('/getTargetAdmin','AdminController@getTarget');
     
-=======
->>>>>>> 4c0eb4e67f3b5d8b799df53d5ec8cfa934a773b6
     //Get Custom Payload
     // Route::get('user/getcustompayloads','UserController@seeToken');
     //Admin
@@ -111,18 +108,13 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/getTarget','AnalysisController@getTarget');
     Route::get('/getPengeluaran','AnalysisController@getPengeluaran');
     Route::get('/getPenjualan','AnalysisController@getPenjualan');
-<<<<<<< HEAD
-
-    
-
-=======
     Route::get('/getHarga','AnalysisController@getHarga');
->>>>>>> 4c0eb4e67f3b5d8b799df53d5ec8cfa934a773b6
 });
 
 // TANPA LOGIN
 Route::get('/getUserCount','AnalysisHomeController@getUserCount'); //test
 Route::get('/getAllUserLocation','AnalysisHomeController@getAllUserLocation');
+Route::get('/getAllHarga','AnalysisHomeController@getAllHarga');
 
 // Route::resources([
 //     'user' => 'API\DummyController',
