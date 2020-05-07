@@ -11680,7 +11680,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.reset();
       $("#modalHasilPanen").modal("show");
       document.getElementById("lahan__id").disabled = true;
-      this.form.pra_produksi_id = data.id;
+      this.form.fill(data);
       this.form.jumlah_cabai = data.jumlah_panen;
     }
   },
