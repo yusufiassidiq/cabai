@@ -92,7 +92,7 @@
 
                     <div class="chart">
                       <!-- Pengeluaran Chart Canvas -->
-                      <!-- <canvas ref="chart" height="100" style="height: 100px;"></canvas> -->
+                      <canvas ref="chart2" height="100" style="height: 100px;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
                   </div>
@@ -131,7 +131,7 @@
 
                     <div class="chart">
                       <!-- Pengeluaran Chart Canvas -->
-                      <!-- <canvas ref="chart" height="100" style="height: 100px;"></canvas> -->
+                      <canvas ref="chart3" height="100" style="height: 100px;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
                   </div>
@@ -194,7 +194,7 @@
                 pointHighlightStroke: 'rgba(54, 162, 235, 1)',
                 data                : response.data.rawitProdusen,
                 pointStyle          : 'rect',
-                pointRadius         : 7,
+                pointRadius         : 5,
                 pointHoverRadius    : 10,
                 fill                : false,
               },
@@ -210,7 +210,7 @@
                 pointHighlightStroke: 'rgba(254, 99, 131, 1)',
                 data                : response.data.rawitPengepul,
                 pointStyle          : 'triangle',
-                pointRadius         : 7,
+                pointRadius         : 5,
                 pointHoverRadius    : 10,
                 fill                : false,
               },
@@ -226,7 +226,7 @@
                 pointHighlightStroke: 'rgba(74, 192, 192, 1)',
                 data                : response.data.rawitGrosir,
                 pointStyle          : 'circle',
-                pointRadius         : 7,
+                pointRadius         : 5,
                 pointHoverRadius    : 10,
                 fill                : false,
               },
@@ -241,7 +241,7 @@
                 pointHighlightStroke: 'rgba(255,129,0, 1)',
                 data                : response.data.rawitPengecer,
                 pointStyle          : 'rectRot',
-                pointRadius         : 7,
+                pointRadius         : 5,
                 pointHoverRadius    : 10,
                 fill                : false,
               },
@@ -277,12 +277,228 @@
                         display : false,
                         },
                   ticks:{
-                    beginAtZero:true
+                    beginAtZero:false,
                   }
                 }]
               }
             }
-          }); 
+          });
+          var chart2 = this.$refs.chart2;
+          var ctx2 = chart2.getContext("2d");
+          var myChart2 = new Chart(ctx2, {
+              type                : 'line',
+            data:{
+              labels:response.data.date,
+              datasets:[
+              {
+                // type                : 'bar',
+                label               : 'Produsen',
+                backgroundColor     : 'rgba(54, 162, 235, 1)',
+                borderColor         : 'rgba(54, 162, 235, 1)',
+                pointRadius         : true,
+                pointColor          : 'rgba(54, 162, 235, 1)',
+                pointStrokeColor    : '#c1c7d1',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(54, 162, 235, 1)',
+                data                : response.data.keritingProdusen,
+                pointStyle          : 'rect',
+                pointRadius         : 5,
+                pointHoverRadius    : 10,
+                fill                : false,
+              },
+              {
+                // type                : 'bar',
+                label               : 'Pengepul',
+                backgroundColor     : 'rgba(254, 99, 131, 1)',
+                borderColor         : 'rgba(254, 99, 131, 1)',
+                pointRadius         : true,
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(254, 99, 131, 1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(254, 99, 131, 1)',
+                data                : response.data.keritingPengepul,
+                pointStyle          : 'triangle',
+                pointRadius         : 5,
+                pointHoverRadius    : 10,
+                fill                : false,
+              },
+              {
+                // type                : 'bar',
+                label               : 'Grosir',
+                backgroundColor     : 'rgba(74, 192, 192, 1)',
+                borderColor         : 'rgba(74, 192, 192, 1)',
+                pointRadius         : true,
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(74, 192, 192, 1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(74, 192, 192, 1)',
+                data                : response.data.keritingGrosir,
+                pointStyle          : 'circle',
+                pointRadius         : 5,
+                pointHoverRadius    : 10,
+                fill                : false,
+              },
+              {
+                label               : 'Pengecer',
+                backgroundColor     : 'rgba(255,129,0, 1)',
+                borderColor         : 'rgba(255,129,0, 1)',
+                pointRadius         : true,
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(255,129,0, 1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255,129,0, 1)',
+                data                : response.data.keritingPengecer,
+                pointStyle          : 'rectRot',
+                pointRadius         : 5,
+                pointHoverRadius    : 10,
+                fill                : false,
+              },
+              ]
+            },
+            options:{
+              responsive: true,
+              tooltips:{
+                mode:'index',
+                intersect: false,
+              },
+            //   hover:{
+            //     mode: 'nearest',
+            //     intersect: true,
+            //   },
+            //   snapGaps: false,
+              // elements:{
+              //   line:{
+              //     tension: 0.000001
+              //   }
+              // },
+              scales:{
+                xAxes: [{
+                    // stacked: true,
+                    gridLines : {
+                        display : false,
+                    }
+                    
+                }],
+                yAxes:[{
+                    // stacked: true,
+                        gridLines : {
+                        display : false,
+                        },
+                  ticks:{
+                    beginAtZero:false,
+                  }
+                }]
+              }
+            }
+          });
+          var chart3 = this.$refs.chart3;
+          var ctx3 = chart3.getContext("2d");
+          var myChart3 = new Chart(ctx3, {
+              type                : 'line',
+            data:{
+              labels:response.data.date,
+              datasets:[
+              {
+                // type                : 'bar',
+                label               : 'Produsen',
+                backgroundColor     : 'rgba(54, 162, 235, 1)',
+                borderColor         : 'rgba(54, 162, 235, 1)',
+                pointRadius         : true,
+                pointColor          : 'rgba(54, 162, 235, 1)',
+                pointStrokeColor    : '#c1c7d1',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(54, 162, 235, 1)',
+                data                : response.data.besarProdusen,
+                pointStyle          : 'rect',
+                pointRadius         : 5,
+                pointHoverRadius    : 10,
+                fill                : false,
+              },
+              {
+                // type                : 'bar',
+                label               : 'Pengepul',
+                backgroundColor     : 'rgba(254, 99, 131, 1)',
+                borderColor         : 'rgba(254, 99, 131, 1)',
+                pointRadius         : true,
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(254, 99, 131, 1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(254, 99, 131, 1)',
+                data                : response.data.besarPengepul,
+                pointStyle          : 'triangle',
+                pointRadius         : 5,
+                pointHoverRadius    : 10,
+                fill                : false,
+              },
+              {
+                // type                : 'bar',
+                label               : 'Grosir',
+                backgroundColor     : 'rgba(74, 192, 192, 1)',
+                borderColor         : 'rgba(74, 192, 192, 1)',
+                pointRadius         : true,
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(74, 192, 192, 1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(74, 192, 192, 1)',
+                data                : response.data.besarGrosir,
+                pointStyle          : 'circle',
+                pointRadius         : 5,
+                pointHoverRadius    : 10,
+                fill                : false,
+              },
+              {
+                label               : 'Pengecer',
+                backgroundColor     : 'rgba(255,129,0, 1)',
+                borderColor         : 'rgba(255,129,0, 1)',
+                pointRadius         : true,
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(255,129,0, 1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255,129,0, 1)',
+                data                : response.data.besarPengecer,
+                pointStyle          : 'rectRot',
+                pointRadius         : 5,
+                pointHoverRadius    : 10,
+                fill                : false,
+              },
+              ]
+            },
+            options:{
+              responsive: true,
+              tooltips:{
+                mode:'index',
+                intersect: false,
+              },
+            //   hover:{
+            //     mode: 'nearest',
+            //     intersect: true,
+            //   },
+            //   snapGaps: false,
+              // elements:{
+              //   line:{
+              //     tension: 0.000001
+              //   }
+              // },
+              scales:{
+                xAxes: [{
+                    // stacked: true,
+                    gridLines : {
+                        display : false,
+                    }
+                    
+                }],
+                yAxes:[{
+                    // stacked: true,
+                        gridLines : {
+                        display : false,
+                        },
+                  ticks:{
+                    beginAtZero:false,
+                  }
+                }]
+              }
+            }
+          });   
         }).catch(error => {
           console.log(error)
           this.errored= true
