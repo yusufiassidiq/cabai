@@ -59,39 +59,23 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
+                      <th>Tanggal Panen</th>
                       <th>Kode Lahan</th>
                       <th>Jenis Cabai</th>
-                      <th>Jumlah Panen</th>
-                      <th>Tanggal Panen</th>
+                      <th>Jumlah Cabai(Kg)</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
 
                   <tbody>
-                    <!-- <tr v-if="!dataPanen.length">
+                    <tr v-if="!dataPanen.length">
                       <td colspan="5" align="center">Tidak ada Hasil Panen</td>
-                    </tr> -->
-                    <!-- START EXAMPLE DATA -->
-                    <td>kode 12</td>
-                    <td>Cabai keriting</td>
-                    <td>1200 kg</td>
-                    <td>12 12 2002</td>
-                    <td>
-                      <a href="#">
-                          <i class="fas fa-edit blue" @click="editModal(data)"></i>
-                        </a>
-                        /
-                        <a href="#" @click="deletePanen(1)">
-                          <i class="fas fa-trash red"></i>
-                        </a>
-                    </td>
-                    <!-- END EXAMPLE DATA -->
-                    <!-- Silahkan ubah sesuai atribut yg dimiliki -->
-                    <!-- <tr v-for="data in dataPanen" :key="data.id">
-                      <td>{{ data.kodeLahan }}</td>
+                    </tr>
+                    <tr v-for="data in dataPanen" :key="data.id">
+                      <td>{{ data.created_at | dateFilter }}</td>
+                      <td>{{ data.kode_lahan }}</td>
                       <td>{{ data.jenis_cabai }}</td>
-                      <td>{{ data.jumlah_panen }}</td>
-                      <td>{{ data.tanggal_panen }}</td>
+                      <td>{{ data.jumlah_panen | filterAngkaRibuan }}</td>
                       <td>
                         <a href="#">
                           <i class="fas fa-edit blue" @click="editModal(data)"></i>
@@ -101,7 +85,7 @@
                           <i class="fas fa-trash red"></i>
                         </a>
                       </td>
-                    </tr> -->
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -131,13 +115,12 @@
           </div>
           <form @submit.prevent="editmode? updatePanen() : addPanen()">
             <div class="modal-body">
-
               <div class="form-group col-md">
                 <select
-                  id="pemasok__id"
-                  v-model="form.lahan_id"
+                  id="lahan__id"
+                  v-model="form.pra_produksi_id"
                   class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('lahan_id') }"
+                  :class="{ 'is-invalid': form.errors.has('pra_produksi_id') }"
                 >
                   <option value disabled selected>Pilih Lahan</option>
                   <option
@@ -146,7 +129,7 @@
                     v-bind:value="data.id"
                   >{{ data.kode_lahan }} - {{ data.jenis_cabai }}</option>
                 </select>
-                <has-error :form="form" field="lahan_id"></has-error>
+                <has-error :form="form" field="pra_produksi_id"></has-error>
               </div>
 
               <div class="form-group col-md">
@@ -154,13 +137,13 @@
                   v-model="form.jumlah_cabai"
                   type="number"
                   class="form-control"
-                  placeholder="Jumlah Panen"
+                  placeholder="Jumlah Cabai (Kg)"
                   :class="{ 'is-invalid': form.errors.has('jumlah_cabai') }"
                 />
                 <has-error :form="form" field="jumlah_cabai"></has-error>
               </div>
 
-              <div class="form-group col-md">
+              <!-- <div class="form-group col-md">
                 <datepicker
                   input-class="form-control"
                   required
@@ -171,13 +154,18 @@
                   :class="{ 'is-invalid': form.errors.has('tanggal_panen') }"
                 ></datepicker>
                 <has-error :form="form" field="tanggal_panen"></has-error>
-              </div>
+              </div>-->
             </div>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-              <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
-              <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
+              <button v-show="editmode" type="submit" class="btn btn-success">Simpan</button>
+              <button
+                id="btnaddpanen"
+                v-show="!editmode"
+                type="submit"
+                class="btn btn-primary"
+              >Tambah</button>
             </div>
           </form>
         </div>
@@ -195,26 +183,48 @@ export default {
   },
   data() {
     return {
-      datalahan:{},
+      datalahan: {},
       dataPanen: {},
       editmode: false, // buat ngebedain modal yg di klik modal tambah lahan /edit lahan
       form: new Form({
         id: "",
         lahan_id: "",
-        jumlah_cabai:"",
-        tanggal_panen: "",
+        jumlah_cabai: "",
+        pra_produksi_id: "",
+        // tanggal_panen: "",
       })
     };
   },
   methods: {
     // menampilkan daftar panen cabai
-    getPanen(){},
-    addPanen(){
-      console.log("berhasil ditambahkan")
+    getPanen() {
+      axios.get("/panen/list").then(response => {
+        this.dataPanen = response.data.data;
+      });
+    },
+    addPanen() {
+      document.getElementById("btnaddpanen").disabled = true;
+      this.$Progress.start();
+      this.form
+        .post("/panen/tambah")
+        .then(() => {
+          UpdateData.$emit("HasilPanen");
+          $("#modalHasilPanen").trigger("click");
+          toast.fire({
+            icon: "success",
+            title: "Panen berhasil ditambahkan"
+          });
+          this.$Progress.finish();
+          document.getElementById("btnaddpanen").disabled = false;
+        })
+        .catch(error => {
+          this.$Progress.fail();
+          document.getElementById("btnaddpanen").disabled = false;
+        });
     },
     // Memperbarui Hasil Panen
     updatePanen() {
-      console.log("berhasil diedit")
+      console.log("berhasil diedit");
       this.$Progress.start();
       this.form
         .put("/updatePanen/" + this.form.id)
@@ -249,7 +259,11 @@ export default {
               .delete("/deleteHasilPanen/" + id)
               .then(() => {
                 UpdateData.$emit("HasilPanen");
-                swal.fire("Tehapus!", "Hasil Panen berhasil dihapus", "success");
+                swal.fire(
+                  "Tehapus!",
+                  "Hasil Panen berhasil dihapus",
+                  "success"
+                );
                 this.$Progress.finish();
               })
               .catch(() => {
@@ -264,7 +278,7 @@ export default {
         });
     },
     getLahan() {
-      axios.get("/readLahan").then(response => {
+      axios.get("praProduksi/list").then(response => {
         this.datalahan = response.data.data;
       });
     },
@@ -283,16 +297,17 @@ export default {
       this.editmode = true;
       this.form.reset();
       $("#modalHasilPanen").modal("show");
-    //   this.form.fill(data);
+      document.getElementById("lahan__id").disabled = true;
+      this.form.fill(data)
+      this.form.jumlah_cabai = data.jumlah_panen;
     }
   },
-  created() {
-    this.getLahan()
-  },
   mounted() {
+    this.getLahan();
+    this.getPanen();
     // Custom event on Vue js
     UpdateData.$on("HasilPanen", () => {
-      this.getPengeluaran();
+      this.getPanen();
     });
   }
 };

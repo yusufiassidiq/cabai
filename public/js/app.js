@@ -11558,18 +11558,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 // datetimepicker doc : https://github.com/charliekassel/vuejs-datepicker#demo
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -11586,19 +11574,45 @@ __webpack_require__.r(__webpack_exports__);
         id: "",
         lahan_id: "",
         jumlah_cabai: "",
-        tanggal_panen: ""
+        pra_produksi_id: "" // tanggal_panen: "",
+
       })
     };
   },
   methods: {
     // menampilkan daftar panen cabai
-    getPanen: function getPanen() {},
+    getPanen: function getPanen() {
+      var _this = this;
+
+      axios.get("/panen/list").then(function (response) {
+        _this.dataPanen = response.data.data;
+      });
+    },
     addPanen: function addPanen() {
-      console.log("berhasil ditambahkan");
+      var _this2 = this;
+
+      document.getElementById("btnaddpanen").disabled = true;
+      this.$Progress.start();
+      this.form.post("/panen/tambah").then(function () {
+        UpdateData.$emit("HasilPanen");
+        $("#modalHasilPanen").trigger("click");
+        toast.fire({
+          icon: "success",
+          title: "Panen berhasil ditambahkan"
+        });
+
+        _this2.$Progress.finish();
+
+        document.getElementById("btnaddpanen").disabled = false;
+      })["catch"](function (error) {
+        _this2.$Progress.fail();
+
+        document.getElementById("btnaddpanen").disabled = false;
+      });
     },
     // Memperbarui Hasil Panen
     updatePanen: function updatePanen() {
-      var _this = this;
+      var _this3 = this;
 
       console.log("berhasil diedit");
       this.$Progress.start();
@@ -11610,13 +11624,13 @@ __webpack_require__.r(__webpack_exports__);
           title: "Data panen berhasil diperbarui"
         });
 
-        _this.$Progress.finish();
+        _this3.$Progress.finish();
       })["catch"](function () {
-        _this.$Progress.fail();
+        _this3.$Progress.fail();
       });
     },
     deletePanen: function deletePanen(id) {
-      var _this2 = this;
+      var _this4 = this;
 
       swal.fire({
         title: "Apakah kamu yakin?",
@@ -11628,15 +11642,15 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: "Ya"
       }).then(function (result) {
         if (result.value) {
-          _this2.$Progress.start();
+          _this4.$Progress.start();
 
           axios["delete"]("/deleteHasilPanen/" + id).then(function () {
             UpdateData.$emit("HasilPanen");
             swal.fire("Tehapus!", "Hasil Panen berhasil dihapus", "success");
 
-            _this2.$Progress.finish();
+            _this4.$Progress.finish();
           })["catch"](function () {
-            _this2.$Progress.fail();
+            _this4.$Progress.fail();
 
             swal.fire("Gagal!", "Terdapat masalah ketika menghapus", "waning");
           });
@@ -11644,10 +11658,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getLahan: function getLahan() {
-      var _this3 = this;
+      var _this5 = this;
 
-      axios.get("/readLahan").then(function (response) {
-        _this3.datalahan = response.data.data;
+      axios.get("praProduksi/list").then(function (response) {
+        _this5.datalahan = response.data.data;
       });
     },
     customFormatter: function customFormatter(date) {
@@ -11664,18 +11678,20 @@ __webpack_require__.r(__webpack_exports__);
     editModal: function editModal(data) {
       this.editmode = true;
       this.form.reset();
-      $("#modalHasilPanen").modal("show"); //   this.form.fill(data);
+      $("#modalHasilPanen").modal("show");
+      document.getElementById("lahan__id").disabled = true;
+      this.form.fill(data);
+      this.form.jumlah_cabai = data.jumlah_panen;
     }
   },
-  created: function created() {
-    this.getLahan();
-  },
   mounted: function mounted() {
-    var _this4 = this;
+    var _this6 = this;
 
-    // Custom event on Vue js
+    this.getLahan();
+    this.getPanen(); // Custom event on Vue js
+
     UpdateData.$on("HasilPanen", function () {
-      _this4.getPengeluaran();
+      _this6.getPanen();
     });
   }
 });
@@ -102266,43 +102282,71 @@ var render = function() {
                 _c("table", { staticClass: "table table-hover text-nowrap" }, [
                   _vm._m(1),
                   _vm._v(" "),
-                  _c("tbody", [
-                    _c("td", [_vm._v("kode 12")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Cabai keriting")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("1200 kg")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("12 12 2002")]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", {
-                          staticClass: "fas fa-edit blue",
-                          on: {
-                            click: function($event) {
-                              return _vm.editModal(_vm.data)
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(
-                        "\n                      /\n                      "
-                      ),
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              return _vm.deletePanen(1)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-trash red" })]
-                      )
-                    ])
-                  ])
+                  _c(
+                    "tbody",
+                    [
+                      !_vm.dataPanen.length
+                        ? _c("tr", [
+                            _c(
+                              "td",
+                              { attrs: { colspan: "5", align: "center" } },
+                              [_vm._v("Tidak ada Hasil Panen")]
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm._l(_vm.dataPanen, function(data) {
+                        return _c("tr", { key: data.id }, [
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(_vm._f("dateFilter")(data.created_at))
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(data.kode_lahan))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(data.jenis_cabai))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("filterAngkaRibuan")(data.jumlah_panen)
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("a", { attrs: { href: "#" } }, [
+                              _c("i", {
+                                staticClass: "fas fa-edit blue",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.editModal(data)
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(
+                              "\n                      /\n                      "
+                            ),
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deletePanen(data.id)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fas fa-trash red" })]
+                            )
+                          ])
+                        ])
+                      })
+                    ],
+                    2
+                  )
                 ])
               ])
             ])
@@ -102357,15 +102401,17 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.lahan_id,
-                                expression: "form.lahan_id"
+                                value: _vm.form.pra_produksi_id,
+                                expression: "form.pra_produksi_id"
                               }
                             ],
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.form.errors.has("lahan_id")
+                              "is-invalid": _vm.form.errors.has(
+                                "pra_produksi_id"
+                              )
                             },
-                            attrs: { id: "pemasok__id" },
+                            attrs: { id: "lahan__id" },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -102378,7 +102424,7 @@ var render = function() {
                                   })
                                 _vm.$set(
                                   _vm.form,
-                                  "lahan_id",
+                                  "pra_produksi_id",
                                   $event.target.multiple
                                     ? $$selectedVal
                                     : $$selectedVal[0]
@@ -102413,7 +102459,7 @@ var render = function() {
                         ),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.form, field: "lahan_id" }
+                          attrs: { form: _vm.form, field: "pra_produksi_id" }
                         })
                       ],
                       1
@@ -102438,7 +102484,7 @@ var render = function() {
                           },
                           attrs: {
                             type: "number",
-                            placeholder: "Jumlah Panen"
+                            placeholder: "Jumlah Cabai (Kg)"
                           },
                           domProps: { value: _vm.form.jumlah_cabai },
                           on: {
@@ -102457,37 +102503,6 @@ var render = function() {
                         _vm._v(" "),
                         _c("has-error", {
                           attrs: { form: _vm.form, field: "jumlah_cabai" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group col-md" },
-                      [
-                        _c("datepicker", {
-                          class: {
-                            "is-invalid": _vm.form.errors.has("tanggal_panen")
-                          },
-                          attrs: {
-                            "input-class": "form-control",
-                            required: "",
-                            placeholder: "Tanggal Panen",
-                            format: _vm.customFormatter,
-                            id: "tanggal_panen"
-                          },
-                          model: {
-                            value: _vm.form.tanggal_panen,
-                            callback: function($$v) {
-                              _vm.$set(_vm.form, "tanggal_panen", $$v)
-                            },
-                            expression: "form.tanggal_panen"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "tanggal_panen" }
                         })
                       ],
                       1
@@ -102518,7 +102533,7 @@ var render = function() {
                         staticClass: "btn btn-success",
                         attrs: { type: "submit" }
                       },
-                      [_vm._v("Update")]
+                      [_vm._v("Simpan")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -102533,9 +102548,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "btn btn-primary",
-                        attrs: { type: "submit" }
+                        attrs: { id: "btnaddpanen", type: "submit" }
                       },
-                      [_vm._v("Create")]
+                      [_vm._v("Tambah")]
                     )
                   ])
                 ]
@@ -102580,13 +102595,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th", [_vm._v("Tanggal Panen")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Kode Lahan")]),
         _vm._v(" "),
         _c("th", [_vm._v("Jenis Cabai")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Jumlah Panen")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Tanggal Panen")]),
+        _c("th", [_vm._v("Jumlah Cabai(Kg)")]),
         _vm._v(" "),
         _c("th", [_vm._v("Aksi")])
       ])
@@ -127751,8 +127766,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Project\XAMPP\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
