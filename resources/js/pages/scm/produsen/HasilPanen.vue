@@ -280,7 +280,7 @@ export default {
     },
     getLahan() {
       axios.get("praProduksi/list").then(response => {
-        this.datalahan = response.data.data;
+        this.datalahan = response.data.data.data
       });
     },
     // Modal

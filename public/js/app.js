@@ -12962,7 +12962,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this5 = this;
 
       axios.get("praProduksi/list").then(function (response) {
-        _this5.datalahan = response.data.data;
+        _this5.datalahan = response.data.data.data;
       });
     },
     // Modal
@@ -13338,6 +13338,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // datetimepicker doc : https://github.com/charliekassel/vuejs-datepicker#demo
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -13360,10 +13411,31 @@ __webpack_require__.r(__webpack_exports__);
         nama_pengeluaran: "",
         jumlah_pengeluaran: "",
         rincian: ""
-      })
+      }),
+      // pagination
+      pagination: [],
+      url_getLahan: "/praProduksi/list",
+      // untuk modal pengeluaran
+      temp_kodelahan: "",
+      temp_jeniscabai: ""
     };
   },
   methods: {
+    // prev & next paggination
+    fetchPaginateLahan: function fetchPaginateLahan(url) {
+      this.url_getLahan = url;
+      this.getLahan();
+    },
+    // set up pagination
+    makePagination: function makePagination(data) {
+      var pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        prev_page_url: data.prev_page_url
+      };
+      this.pagination = pagination;
+    },
     customFormatter: function customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     },
@@ -13395,8 +13467,10 @@ __webpack_require__.r(__webpack_exports__);
     getLahan: function getLahan() {
       var _this2 = this;
 
-      axios.get("/praProduksi/list").then(function (response) {
-        _this2.datalahan = response.data.data;
+      var $this = this;
+      axios.get(this.url_getLahan).then(function (response) {
+        _this2.datalahan = response.data.data.data;
+        $this.makePagination(response.data.data);
       });
     },
     // Memperbarui data lahan produsen
@@ -13487,19 +13561,19 @@ __webpack_require__.r(__webpack_exports__);
       $("#modalLahan").modal("show");
       this.form.fill(data);
     },
-    pengeluaranModal: function pengeluaranModal(id) {
+    pengeluaranModal: function pengeluaranModal(data) {
+      this.temp_kodelahan = data.kode_lahan;
+      this.temp_jeniscabai = data.jenis_cabai;
       this.formriwayat.reset();
       $("#modalPengeluaran").modal("show");
-      this.formriwayat.pra_produksi_id = id;
+      this.formriwayat.pra_produksi_id = data.id;
     }
-  },
-  created: function created() {
-    this.getLahan();
   },
   mounted: function mounted() {
     var _this6 = this;
 
-    // Custom event on Vue js
+    this.getLahan(); // Custom event on Vue js
+
     UpdateData.$on("ManajemenLahan", function () {
       _this6.getLahan();
     });
@@ -14046,6 +14120,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -14059,16 +14172,36 @@ __webpack_require__.r(__webpack_exports__);
         nama_pengeluaran: "",
         tanggal_pengeluaran: new Date(),
         rincian: ""
-      })
+      }),
+      // pagination
+      pagination: [],
+      url_getPengeluaran: "/pengeluaran/list"
     };
   },
   methods: {
+    // prev & next paggination
+    fetchPaginatePengeluaran: function fetchPaginatePengeluaran(url) {
+      this.url_getPengeluaran = url;
+      this.getPengeluaran();
+    },
+    // set up pagination
+    makePagination: function makePagination(data) {
+      var pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        prev_page_url: data.prev_page_url
+      };
+      this.pagination = pagination;
+    },
     // Menghapus Riwayat Pengeluaran
     getPengeluaran: function getPengeluaran() {
       var _this = this;
 
-      axios.get("/pengeluaran/list").then(function (response) {
-        _this.dataPengeluaran = response.data.data;
+      var $this = this;
+      axios.get(this.url_getPengeluaran).then(function (response) {
+        _this.dataPengeluaran = response.data.data.data;
+        $this.makePagination(response.data.data);
       });
     },
     // Memperbarui Riwayat Pengeluaran
@@ -105367,108 +105500,205 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body table-responsive p-0" }, [
-                  _c(
-                    "table",
-                    { staticClass: "table table-hover text-nowrap" },
-                    [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _c(
-                        "tbody",
-                        [
-                          !_vm.datalahan.length
-                            ? _c("tr", [
-                                _c(
-                                  "td",
-                                  { attrs: { colspan: "7", align: "center" } },
-                                  [_vm._v("Tidak ada data lahan")]
-                                )
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm._l(_vm.datalahan, function(data) {
-                            return _c("tr", { key: data.id }, [
-                              _c("td", [_vm._v(_vm._s(data.kode_lahan))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(data.jenis_cabai))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(data.luas_lahan))]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm._f("dateFilter")(data.tanggal_tanam)
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "table",
+                      { staticClass: "table table-hover text-nowrap" },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          [
+                            !_vm.datalahan.length
+                              ? _c("tr", [
+                                  _c(
+                                    "td",
+                                    {
+                                      attrs: { colspan: "7", align: "center" }
+                                    },
+                                    [_vm._v("Tidak ada data lahan")]
                                   )
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm._f("convertToRupiah")(data.pengeluaran)
-                                  )
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.editModal(data)
-                                      }
-                                    }
-                                  },
-                                  [_c("i", { staticClass: "fas fa-edit blue" })]
-                                ),
-                                _vm._v(
-                                  "\n                      /\n                      "
-                                ),
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.deleteLahan(data.id)
-                                      }
-                                    }
-                                  },
-                                  [_c("i", { staticClass: "fas fa-trash red" })]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-success btn-xs",
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.pengeluaranModal(data.id)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fas fa-plus-square white"
-                                    }),
-                                    _vm._v(
-                                      "\n                        Tambah\n                      "
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm._l(_vm.datalahan, function(data) {
+                              return _c("tr", { key: data.id }, [
+                                _c("td", [_vm._v(_vm._s(data.kode_lahan))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(data.jenis_cabai))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(data.luas_lahan))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm._f("dateFilter")(data.tanggal_tanam)
                                     )
-                                  ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm._f("convertToRupiah")(
+                                        data.pengeluaran
+                                      )
+                                    )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.editModal(data)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-edit blue"
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(
+                                    "\n                        /\n                        "
+                                  ),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deleteLahan(data.id)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-trash red"
+                                      })
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-success btn-xs",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.pengeluaranModal(data)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-plus-square white"
+                                      }),
+                                      _vm._v(
+                                        "\n                          Tambah\n                        "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ])
+                            })
+                          ],
+                          2
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-md-6 d-flex justify-content-start align-self-center"
+                      },
+                      [
+                        _c("div", { staticStyle: { "padding-left": "20px" } }, [
+                          _vm._v(
+                            "Menampilkan " +
+                              _vm._s(_vm.pagination.current_page) +
+                              " dari " +
+                              _vm._s(_vm.pagination.last_page) +
+                              " halaman"
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-md-6 d-flex justify-content-end align-self-end",
+                        staticStyle: { "padding-right": "30px" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "dataTables_paginate paging_simple_numbers"
+                          },
+                          [
+                            _c("ul", { staticClass: "pagination" }, [
+                              _c("li", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-default",
+                                    attrs: {
+                                      href: "#",
+                                      disabled: !_vm.pagination.prev_page_url
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.fetchPaginateLahan(
+                                          _vm.pagination.prev_page_url
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Sebelumnya")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-default",
+                                    attrs: {
+                                      disabled: !_vm.pagination.next_page_url
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.fetchPaginateLahan(
+                                          _vm.pagination.next_page_url
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Selanjutnya")]
                                 )
                               ])
                             ])
-                          })
-                        ],
-                        2
-                      )
-                    ]
-                  )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
                 ])
               ])
             ])
@@ -105805,6 +106035,40 @@ var render = function() {
                     _c("div", { staticClass: "modal-body" }, [
                       _c(
                         "div",
+                        {
+                          staticClass: "row",
+                          staticStyle: { "padding-left": "10px" }
+                        },
+                        [
+                          _vm._m(4),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-8" }, [
+                            _c("p", [
+                              _vm._v(":  " + _vm._s(_vm.temp_kodelahan))
+                            ])
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "row",
+                          staticStyle: { "padding-left": "10px" }
+                        },
+                        [
+                          _vm._m(5),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-8" }, [
+                            _c("p", [
+                              _vm._v(":  " + _vm._s(_vm.temp_jeniscabai))
+                            ])
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
                         { staticClass: "form-group col-md" },
                         [
                           _c(
@@ -105986,7 +106250,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(4)
+                    _vm._m(6)
                   ]
                 )
               ])
@@ -106097,6 +106361,22 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Kode Lahan")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticClass: "normal text-md-left" }, [_vm._v("Jenis Cabai")])
     ])
   },
   function() {
@@ -106793,77 +107073,166 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "card-body table-responsive p-0" }, [
-                _c("table", { staticClass: "table table-hover text-nowrap" }, [
-                  _vm._m(1),
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table table-hover text-nowrap" },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        [
+                          !_vm.dataPengeluaran.length
+                            ? _c("tr", [
+                                _c(
+                                  "td",
+                                  { attrs: { colspan: "6", align: "center" } },
+                                  [_vm._v("Tidak ada pengeluaran")]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm._l(_vm.dataPengeluaran, function(data) {
+                            return _c("tr", { key: data.id }, [
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(_vm._f("dateFilter")(data.created_at))
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(data.kodeLahan))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(data.nama_pengeluaran))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("convertToRupiah")(
+                                      data.jumlah_pengeluaran
+                                    )
+                                  )
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(data.rincian))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", {
+                                    staticClass: "fas fa-edit blue",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editModal(data)
+                                      }
+                                    }
+                                  })
+                                ]),
+                                _vm._v(
+                                  "\n                        /\n                        "
+                                ),
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deletePengeluaran(data.id)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fas fa-trash red" })]
+                                )
+                              ])
+                            ])
+                          })
+                        ],
+                        2
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-md-6 d-flex justify-content-start align-self-center"
+                    },
+                    [
+                      _c("div", { staticStyle: { "padding-left": "20px" } }, [
+                        _vm._v(
+                          "Menampilkan " +
+                            _vm._s(_vm.pagination.current_page) +
+                            " dari " +
+                            _vm._s(_vm.pagination.last_page) +
+                            " halaman"
+                        )
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
-                    "tbody",
+                    "div",
+                    {
+                      staticClass:
+                        "col-md-6 d-flex justify-content-end align-self-end",
+                      staticStyle: { "padding-right": "30px" }
+                    },
                     [
-                      !_vm.dataPengeluaran.length
-                        ? _c("tr", [
-                            _c(
-                              "td",
-                              { attrs: { colspan: "6", align: "center" } },
-                              [_vm._v("Tidak ada pengeluaran")]
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm._l(_vm.dataPengeluaran, function(data) {
-                        return _c("tr", { key: data.id }, [
-                          _c("td", [
-                            _vm._v(
-                              _vm._s(_vm._f("dateFilter")(data.created_at))
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(data.kodeLahan))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(data.nama_pengeluaran))]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _vm._v(
-                              _vm._s(
-                                _vm._f("convertToRupiah")(
-                                  data.jumlah_pengeluaran
-                                )
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "dataTables_paginate paging_simple_numbers"
+                        },
+                        [
+                          _c("ul", { staticClass: "pagination" }, [
+                            _c("li", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-default",
+                                  attrs: {
+                                    href: "#",
+                                    disabled: !_vm.pagination.prev_page_url
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.fetchPaginatePengeluaran(
+                                        _vm.pagination.prev_page_url
+                                      )
+                                    }
+                                  }
+                                },
+                                [_vm._v("Sebelumnya")]
                               )
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(data.rincian))]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("i", {
-                                staticClass: "fas fa-edit blue",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.editModal(data)
-                                  }
-                                }
-                              })
                             ]),
-                            _vm._v(
-                              "\n                      /\n                      "
-                            ),
-                            _c(
-                              "a",
-                              {
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.deletePengeluaran(data.id)
+                            _vm._v(" "),
+                            _c("li", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-default",
+                                  attrs: {
+                                    disabled: !_vm.pagination.next_page_url
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.fetchPaginatePengeluaran(
+                                        _vm.pagination.next_page_url
+                                      )
+                                    }
                                   }
-                                }
-                              },
-                              [_c("i", { staticClass: "fas fa-trash red" })]
-                            )
+                                },
+                                [_vm._v("Selanjutnya")]
+                              )
+                            ])
                           ])
-                        ])
-                      })
-                    ],
-                    2
+                        ]
+                      )
+                    ]
                   )
                 ])
               ])
@@ -106894,7 +107263,43 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.editmode,
+                        expression: "!editmode"
+                      }
+                    ],
+                    staticClass: "modal-title",
+                    attrs: { id: "modalPengeluaranLabel" }
+                  },
+                  [_vm._v("Tambahkan Pengeluaran")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "h5",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.editmode,
+                        expression: "editmode"
+                      }
+                    ],
+                    staticClass: "modal-title",
+                    attrs: { id: "modalPengeluaranLabel" }
+                  },
+                  [_vm._v("Perbarui Pengeluaran")]
+                ),
+                _vm._v(" "),
+                _vm._m(2)
+              ]),
               _vm._v(" "),
               _c(
                 "form",
@@ -107147,7 +107552,7 @@ var render = function() {
                         staticClass: "btn btn-success",
                         attrs: { type: "submit" }
                       },
-                      [_vm._v("Update")]
+                      [_vm._v("perbarui")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -107161,10 +107566,10 @@ var render = function() {
                             expression: "!editmode"
                           }
                         ],
-                        staticClass: "btn btn-primary",
+                        staticClass: "btn btn-success",
                         attrs: { type: "submit" }
                       },
-                      [_vm._v("Create")]
+                      [_vm._v("tambahkan")]
                     )
                   ])
                 ]
@@ -107229,26 +107634,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "modalPengeluaranLabel" } },
-        [_vm._v("Tambahkan Pengeluaran")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true

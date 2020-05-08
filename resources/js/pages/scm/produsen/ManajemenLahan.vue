@@ -49,51 +49,86 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>Kode Lahan</th>
-                      <th>Jenis Cabai</th>
-                      <th>Luas Lahan (ha)</th>
-                      <th>Tanggal Tanam</th>
-                      <th>Total Pengeluaran</th>
-                      <th>Aksi</th>
-                      <th>Pengeluaran</th>
-                    </tr>
-                  </thead>
+                <div class="row">
+                  <table class="table table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>Kode Lahan</th>
+                        <th>Jenis Cabai</th>
+                        <th>Luas Lahan (ha)</th>
+                        <th>Tanggal Tanam</th>
+                        <th>Total Pengeluaran</th>
+                        <th>Aksi</th>
+                        <th>Pengeluaran</th>
+                      </tr>
+                    </thead>
 
-                  <tbody>
-                    <tr v-if="!datalahan.length">
-                      <td colspan="7" align="center">Tidak ada data lahan</td>
-                    </tr>
-                    <tr v-for="data in datalahan" :key="data.id">
-                      <td>{{ data.kode_lahan }}</td>
-                      <td>{{ data.jenis_cabai }}</td>
-                      <td>{{ data.luas_lahan }}</td>
-                      <td>{{ data.tanggal_tanam | dateFilter }}</td>
-                      <td>{{ data.pengeluaran | convertToRupiah }}</td>
-                      <td>
-                        <a href="#" @click="editModal(data)">
-                          <i class="fas fa-edit blue"></i>
-                        </a>
-                        /
-                        <a href="#" @click="deleteLahan(data.id)">
-                          <i class="fas fa-trash red"></i>
-                        </a>
-                      </td>
-                      <td>
-                        <a
-                          href="#"
-                          class="btn btn-success btn-xs"
-                          @click="pengeluaranModal(data.id)"
-                        >
-                          <i class="fas fa-plus-square white"></i>
-                          Tambah
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                    <tbody>
+                      <tr v-if="!datalahan.length">
+                        <td colspan="7" align="center">Tidak ada data lahan</td>
+                      </tr>
+                      <tr v-for="data in datalahan" :key="data.id">
+                        <td>{{ data.kode_lahan }}</td>
+                        <td>{{ data.jenis_cabai }}</td>
+                        <td>{{ data.luas_lahan }}</td>
+                        <td>{{ data.tanggal_tanam | dateFilter }}</td>
+                        <td>{{ data.pengeluaran | convertToRupiah }}</td>
+                        <td>
+                          <a href="#" @click="editModal(data)">
+                            <i class="fas fa-edit blue"></i>
+                          </a>
+                          /
+                          <a href="#" @click="deleteLahan(data.id)">
+                            <i class="fas fa-trash red"></i>
+                          </a>
+                        </td>
+                        <td>
+                          <a
+                            href="#"
+                            class="btn btn-success btn-xs"
+                            @click="pengeluaranModal(data)"
+                          >
+                            <i class="fas fa-plus-square white"></i>
+                            Tambah
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 d-flex justify-content-start align-self-center">
+                    <div
+                      style="padding-left: 20px"
+                    >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
+                  </div>
+
+                  <div
+                    class="col-md-6 d-flex justify-content-end align-self-end"
+                    style="padding-right: 30px"
+                  >
+                    <div class="dataTables_paginate paging_simple_numbers">
+                      <ul class="pagination">
+                        <li>
+                          <button
+                            href="#"
+                            class="btn btn-default"
+                            v-on:click="fetchPaginateLahan(pagination.prev_page_url)"
+                            :disabled="!pagination.prev_page_url"
+                          >Sebelumnya</button>
+                        </li>
+
+                        <li>
+                          <button
+                            class="btn btn-default"
+                            v-on:click="fetchPaginateLahan(pagination.next_page_url)"
+                            :disabled="!pagination.next_page_url"
+                          >Selanjutnya</button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -222,6 +257,22 @@
           </div>
           <form @submit.prevent="addPengeluaran()">
             <div class="modal-body">
+              <div class="row" style="padding-left:10px">
+                <div class="col-md-4">
+                  <p class="normal text-md-left">Kode Lahan</p>
+                </div>
+                <div class="col-md-8">
+                  <p>:&ensp; {{temp_kodelahan}}</p>
+                </div>
+              </div>
+              <div class="row" style="padding-left:10px">
+                <div class="col-md-4">
+                  <p class="normal text-md-left">Jenis Cabai</p>
+                </div>
+                <div class="col-md-8"> 
+                  <p>:&ensp; {{temp_jeniscabai}}</p>
+                </div>
+              </div>
               <div class="form-group col-md">
                 <select
                   v-model="formriwayat.nama_pengeluaran"
@@ -302,10 +353,31 @@ export default {
         nama_pengeluaran: "",
         jumlah_pengeluaran: "",
         rincian: ""
-      })
+      }),
+      // pagination
+      pagination: [],
+      url_getLahan: "/praProduksi/list",
+      // untuk modal pengeluaran
+      temp_kodelahan:"",
+      temp_jeniscabai:"",
     };
   },
   methods: {
+    // prev & next paggination
+    fetchPaginateLahan(url) {
+      this.url_getLahan = url;
+      this.getLahan();
+    },
+    // set up pagination
+    makePagination(data) {
+      let pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        prev_page_url: data.prev_page_url
+      };
+      this.pagination = pagination;
+    },
     customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     },
@@ -333,8 +405,10 @@ export default {
     },
     // Mendapatkan data lahan produsen
     getLahan() {
-      axios.get("/praProduksi/list").then(response => {
-        this.datalahan = response.data.data;
+      let $this = this;
+      axios.get(this.url_getLahan).then(response => {
+        this.datalahan = response.data.data.data;
+        $this.makePagination(response.data.data);
       });
     },
     // Memperbarui data lahan produsen
@@ -426,16 +500,16 @@ export default {
       $("#modalLahan").modal("show");
       this.form.fill(data);
     },
-    pengeluaranModal(id) {
+    pengeluaranModal(data) {
+      this.temp_kodelahan = data.kode_lahan
+      this.temp_jeniscabai = data.jenis_cabai
       this.formriwayat.reset();
       $("#modalPengeluaran").modal("show");
-      this.formriwayat.pra_produksi_id = id;
+      this.formriwayat.pra_produksi_id = data.id;
     }
   },
-  created() {
-    this.getLahan();
-  },
   mounted() {
+    this.getLahan();
     // Custom event on Vue js
     UpdateData.$on("ManajemenLahan", () => {
       this.getLahan();
