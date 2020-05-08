@@ -463,7 +463,6 @@ class AnalysisController extends Controller
             ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
             ->groupBy('tanggal_diterima')
             ->get();
-;
         $awal = Carbon::now()->subweek()->subweek();
         for($i=0;$i<15;$i++){
             $array_date[$i]= $awal->format('Y-m-d');

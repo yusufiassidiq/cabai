@@ -124,6 +124,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 // TANPA LOGIN
 Route::get('/getUserCount','AnalysisHomeController@getUserCount'); //test
 Route::get('/getAllUserLocation','AnalysisHomeController@getAllUserLocation');
+Route::get('/getAllHarga','AnalysisHomeController@getAllHarga');
 
 // Route::resources([
 //     'user' => 'API\DummyController',

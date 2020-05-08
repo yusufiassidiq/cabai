@@ -10,7 +10,15 @@
             <b>CABAI.id</b> - Monitoring Produksi dan Distribusi Cabai Jawa Barat
           </span>
         </a>
-        <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler order-1"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+          aria-controls="navbarCollapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
@@ -35,7 +43,7 @@
                 <li><a href="#" class="dropdown-item">Some action </a></li>
                 <li><a href="#" class="dropdown-item">Some other action</a></li>
               </ul>
-            </li> -->
+            </li>-->
           </ul>
         </div>
       </div>
@@ -140,12 +148,14 @@
             </div>
             <!-- ./col -->
           </div>
-          
+
           <div class="row">
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Fluktuasi Harga Cabai Prov Jawa Barat berdasarkan Stakeholder</h4>
+                  <h4
+                    class="card-title"
+                  >Fluktuasi Harga Cabai Prov Jawa Barat berdasarkan Stakeholder</h4>
 
                   <!-- <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -211,7 +221,6 @@
                   <span class="description-text">MORE INFO</span>
                   <i class="fas fa-arrow-circle-right"></i>
                 </router-link>
-                
 
                 <!-- ./card-body -->
               </div>
@@ -349,7 +358,13 @@ export default {
                 label: "# of User",
                 data: response.data.user,
                 borderWidth: 1,
-                backgroundColor: ["rgba(255, 99, 132, 0.2)","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)"],
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(255, 159, 64, 0.2)",
+                  "rgba(255, 205, 86, 0.2)",
+                  "rgba(75, 192, 192, 0.2)",
+                  "rgba(54, 162, 235, 0.2)"
+                ],
                 borderColor: "rgba(210, 214, 222, 1)"
               }
             ]
