@@ -73,7 +73,7 @@ class UserController extends Controller
             $j++;
         }
         // return $listuser;
-        $listProdusen = User::where('role',2)->where('status',1)->whereNotIn('id',$listuser)->get();
+        $listProdusen = User::where('role',2)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
         foreach ($listProdusen as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -101,7 +101,7 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listPengepul = User::where('role',3)->where('status',1)->whereNotIn('id',$listuser)->get();
+        $listPengepul = User::where('role',3)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
         foreach ($listPengepul as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -129,7 +129,7 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listGrosir = User::where('role',4)->where('status',1)->whereNotIn('id',$listuser)->get();
+        $listGrosir = User::where('role',4)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
         foreach ($listGrosir as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -157,7 +157,7 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listPengecer = User::where('role',5)->where('status',1)->whereNotIn('id',$listuser)->get();
+        $listPengecer = User::where('role',5)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
         foreach ($listPengecer as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -185,7 +185,7 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listKonsumen = User::where('role',6)->where('status',1)->whereNotIn('id',$listuser)->get();
+        $listKonsumen = User::where('role',6)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
         foreach ($listKonsumen as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
