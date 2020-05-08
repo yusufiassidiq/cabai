@@ -47,44 +47,86 @@
                 <vue-progress-bar></vue-progress-bar>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
-                  <table class="table table-hover text-nowrap">
-                    <thead>
-                      <tr>
-                        <th>Nama</th>
-                        <th>Role</th>
-                        <th>Email</th>
-                        <th>Tgl Pengajuan</th>
-                        <th>Surat Izin Usaha Perdagangan (SIUP)</th>
-                        <th>Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-if="!filteredNama.length">
-                        <td colspan="5" align="center">Tidak ada user yang belum divalidasi</td>
-                      </tr>
-                      <tr v-for="user in filteredNama " v-bind:key="user.id" style="margin-bottom: 5px;">
-                        <td>{{ user.name }}</td>
-                        <td>{{ user.role | filterRoleUser }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ customFormatter(user.created_at) }}</td>
-                        <td>
-                          <button class="btn btn-info btn-xs" @click="previewImage()">
-                            <i class="fas fa-eye"></i>&nbsp; Lihat
-                          </button>
-                          &nbsp;/&nbsp;
-                          <button
-                            class="btn btn-secondary btn-xs"
-                            @click="downloadSIUP()"
-                          >
-                            <i class="fas fa-file-download">&nbsp; Download</i>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-success btn-xs" @click="selectUser(user)">Validasi</button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <div class="row">
+                    <table class="table table-hover text-nowrap">
+                      <thead>
+                        <tr>
+                          <th>Nama</th>
+                          <th>Role</th>
+                          <th>Email</th>
+                          <th>Tgl Pengajuan</th>
+                          <th>Surat Izin Usaha Perdagangan (SIUP)</th>
+                          <th>Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-if="!filteredNama.length">
+                          <td colspan="5" align="center">Tidak ada user yang belum divalidasi</td>
+                        </tr>
+                        <tr
+                          v-for="user in filteredNama "
+                          v-bind:key="user.id"
+                          style="margin-bottom: 5px;"
+                        >
+                          <td>{{ user.name }}</td>
+                          <td>{{ user.role | filterRoleUser }}</td>
+                          <td>{{ user.email }}</td>
+                          <td>{{ customFormatter(user.created_at) }}</td>
+                          <td>
+                            <button class="btn btn-info btn-xs" @click="previewImage()">
+                              <i class="fas fa-eye"></i>&nbsp; Lihat
+                            </button>
+                            &nbsp;/&nbsp;
+                            <button
+                              class="btn btn-secondary btn-xs"
+                              @click="downloadSIUP()"
+                            >
+                              <i class="fas fa-file-download">&nbsp; Download</i>
+                            </button>
+                          </td>
+                          <td>
+                            <button
+                              class="btn btn-success btn-xs"
+                              @click="selectUser(user)"
+                            >Validasi</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 d-flex justify-content-start align-self-center">
+                      <div
+                        style="padding-left: 20px"
+                      >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
+                    </div>
+
+                    <div
+                      class="col-md-6 d-flex justify-content-end align-self-end"
+                      style="padding-right: 30px"
+                    >
+                      <div class="dataTables_paginate paging_simple_numbers">
+                        <ul class="pagination">
+                          <li>
+                            <button
+                              href="#"
+                              class="btn btn-default"
+                              v-on:click="fetchPaginateUsers(pagination.prev_page_url)"
+                              :disabled="!pagination.prev_page_url"
+                            >Sebelumnya</button>
+                          </li>
+
+                          <li>
+                            <button
+                              class="btn btn-default"
+                              v-on:click="fetchPaginateUsers(pagination.next_page_url)"
+                              :disabled="!pagination.next_page_url"
+                            >Selanjutnya</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -139,17 +181,36 @@ export default {
       users: {},
       selectedUser: undefined,
       // variabel untuk search
-      filteredusers: {},
       stringNama: "",
+      // untuk pagination
+      pagination: [],
+      url_getUser: "/user/requested"
     };
   },
   methods: {
+    // prev & next paggination
+    fetchPaginateUsers(url) {
+      this.url_getUser = url;
+      this.getUsers();
+    },
+    // set up pagination
+    makePagination(data) {
+      let pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        prev_page_url: data.prev_page_url
+      };
+      this.pagination = pagination;
+    },
     // fungsi untuk mendapatkan objek user dari API
     getUsers() {
+      let $this = this;
       axios
-        .get("/user/requested")
+        .get(this.url_getUser)
         .then(response => {
-          this.users = response.data.users;
+          this.users = response.data.users.data;
+          $this.makePagination(response.data.users);
         })
         .catch(() => {});
     },
@@ -242,11 +303,11 @@ export default {
     }
   },
   mounted() {
-    this.getUsers()
+    this.getUsers();
     // custom event vue to update data changes
     UpdateData.$on("UserValidation", () => {
-      this.getUsers()
-    })
+      this.getUsers();
+    });
   }
 };
 </script>

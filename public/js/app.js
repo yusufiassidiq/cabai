@@ -7199,6 +7199,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7207,18 +7245,39 @@ __webpack_require__.r(__webpack_exports__);
       selectedUser: undefined,
       users: {},
       // variabel untuk search
-      filteredusers: {},
-      stringNama: ""
+      stringNama: "",
+      // untuk pagination
+      pagination: [],
+      url_getUser: "/user/validated"
     };
   },
   methods: {
+    // prev & next paggination
+    fetchPaginateUsers: function fetchPaginateUsers(url) {
+      this.url_getUser = url;
+      this.getUsers();
+    },
+    // set up pagination
+    makePagination: function makePagination(data) {
+      var pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        prev_page_url: data.prev_page_url
+      };
+      this.pagination = pagination;
+    },
+    // get validated user
     getUsers: function getUsers() {
       var _this = this;
 
-      axios.get("/user/validated").then(function (response) {
-        _this.users = response.data.users;
+      var $this = this;
+      axios.get(this.url_getUser).then(function (response) {
+        _this.users = response.data.users.data;
+        $this.makePagination(response.data.users);
       })["catch"](function (error) {});
     },
+    // delete user
     deleteUser: function deleteUser(id) {
       var _this2 = this;
 
@@ -7234,7 +7293,7 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           _this2.$Progress.start();
 
-          axios["delete"]("/user/delete" + id).then(function () {
+          axios["delete"]("/user/delete/" + id).then(function () {
             swal.fire("Terhapus!", "User berhasil dihapus", "success");
             UpdateData.$emit("UserManagement");
 
@@ -7247,6 +7306,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    // showing modal edit
     edituser: function edituser(id) {
       $("#editUser").modal("show");
     },
@@ -7254,6 +7314,7 @@ __webpack_require__.r(__webpack_exports__);
     updateUser: function updateUser() {
       console.log("update user");
     },
+    // format simpan tanggal
     customFormatter: function customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     },
@@ -7263,6 +7324,7 @@ __webpack_require__.r(__webpack_exports__);
     downloadSIUP: function downloadSIUP() {}
   },
   computed: {
+    // fungsi search
     filteredNama: function filteredNama() {
       var namaUser = this.users;
       var stringNama = this.stringNama;
@@ -7280,16 +7342,14 @@ __webpack_require__.r(__webpack_exports__);
       return namaUser;
     }
   },
-  created: function created() {
+  mounted: function mounted() {
     var _this3 = this;
 
-    // custom event vue to update data changes
+    this.getUsers(); // custom event vue to update data changes
+
     UpdateData.$on("UserManagement", function () {
       _this3.getUsers();
     });
-  },
-  mounted: function mounted() {
-    this.getUsers();
   }
 });
 
@@ -7436,6 +7496,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7444,17 +7546,36 @@ __webpack_require__.r(__webpack_exports__);
       users: {},
       selectedUser: undefined,
       // variabel untuk search
-      filteredusers: {},
-      stringNama: ""
+      stringNama: "",
+      // untuk pagination
+      pagination: [],
+      url_getUser: "/user/requested"
     };
   },
   methods: {
+    // prev & next paggination
+    fetchPaginateUsers: function fetchPaginateUsers(url) {
+      this.url_getUser = url;
+      this.getUsers();
+    },
+    // set up pagination
+    makePagination: function makePagination(data) {
+      var pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        prev_page_url: data.prev_page_url
+      };
+      this.pagination = pagination;
+    },
     // fungsi untuk mendapatkan objek user dari API
     getUsers: function getUsers() {
       var _this = this;
 
-      axios.get("/user/requested").then(function (response) {
-        _this.users = response.data.users;
+      var $this = this;
+      axios.get(this.url_getUser).then(function (response) {
+        _this.users = response.data.users.data;
+        $this.makePagination(response.data.users);
       })["catch"](function () {});
     },
     // fungsi untuk melihat gambar SIUP User
@@ -95358,117 +95479,216 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "card-body table-responsive p-0" }, [
-                _c("table", { staticClass: "table table-hover text-nowrap" }, [
-                  _vm._m(3),
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table table-hover text-nowrap" },
+                    [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        [
+                          !_vm.filteredNama.length
+                            ? _c("tr", [
+                                _c(
+                                  "td",
+                                  { attrs: { colspan: "5", align: "center" } },
+                                  [
+                                    _vm._v(
+                                      "Tidak ada user yang belum divalidasi"
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm._l(_vm.filteredNama, function(user) {
+                            return _c(
+                              "tr",
+                              {
+                                key: user.id,
+                                staticStyle: { "margin-bottom": "5px" }
+                              },
+                              [
+                                _c("td", [_vm._v(_vm._s(user.name))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm._f("filterRoleUser")(user.role))
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(user.email))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm.customFormatter(user.updated_at))
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-info btn-xs",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.previewImage()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", { staticClass: "fas fa-eye" }),
+                                      _vm._v(
+                                        "  Lihat\n                        "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(
+                                    "\n                         / \n                        "
+                                  ),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-secondary btn-xs",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.downloadSIUP()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "i",
+                                        { staticClass: "fas fa-file-download" },
+                                        [_vm._v("  Download")]
+                                      )
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("a", { attrs: { href: "#" } }, [
+                                    _c("i", {
+                                      staticClass: "fas fa-edit blue",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.edituser(user.id)
+                                        }
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(
+                                    "\n                        /\n                        "
+                                  ),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deleteUser(user.id)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-trash red"
+                                      })
+                                    ]
+                                  )
+                                ])
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-md-6 d-flex justify-content-start align-self-center"
+                    },
+                    [
+                      _c("div", { staticStyle: { "padding-left": "20px" } }, [
+                        _vm._v(
+                          "Menampilkan " +
+                            _vm._s(_vm.pagination.current_page) +
+                            " dari " +
+                            _vm._s(_vm.pagination.last_page) +
+                            " halaman"
+                        )
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
-                    "tbody",
+                    "div",
+                    {
+                      staticClass:
+                        "col-md-6 d-flex justify-content-end align-self-end",
+                      staticStyle: { "padding-right": "30px" }
+                    },
                     [
-                      !_vm.filteredNama.length
-                        ? _c("tr", [
-                            _c(
-                              "td",
-                              { attrs: { colspan: "5", align: "center" } },
-                              [_vm._v("Tidak ada user yang belum divalidasi")]
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm._l(_vm.filteredNama, function(user) {
-                        return _c(
-                          "tr",
-                          {
-                            key: user.id,
-                            staticStyle: { "margin-bottom": "5px" }
-                          },
-                          [
-                            _c("td", [_vm._v(_vm._s(user.name))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(_vm._f("filterRoleUser")(user.role))
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(user.email))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(_vm.customFormatter(user.updated_at))
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "dataTables_paginate paging_simple_numbers"
+                        },
+                        [
+                          _c("ul", { staticClass: "pagination" }, [
+                            _c("li", [
                               _c(
                                 "button",
                                 {
-                                  staticClass: "btn btn-info btn-xs",
+                                  staticClass: "btn btn-default",
+                                  attrs: {
+                                    href: "#",
+                                    disabled: !_vm.pagination.prev_page_url
+                                  },
                                   on: {
                                     click: function($event) {
-                                      return _vm.previewImage()
+                                      return _vm.fetchPaginateUsers(
+                                        _vm.pagination.prev_page_url
+                                      )
                                     }
                                   }
                                 },
-                                [
-                                  _c("i", { staticClass: "fas fa-eye" }),
-                                  _vm._v("  Lihat\n                      ")
-                                ]
-                              ),
-                              _vm._v(
-                                "\n                       / \n                      "
-                              ),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-secondary btn-xs",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.downloadSIUP()
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "i",
-                                    { staticClass: "fas fa-file-download" },
-                                    [_vm._v("  Download")]
-                                  )
-                                ]
+                                [_vm._v("Sebelumnya")]
                               )
                             ]),
                             _vm._v(" "),
-                            _c("td", [
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("i", {
-                                  staticClass: "fas fa-edit blue",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.edituser(user.id)
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(
-                                "\n                      /\n                      "
-                              ),
+                            _c("li", [
                               _c(
-                                "a",
+                                "button",
                                 {
-                                  attrs: { href: "#" },
+                                  staticClass: "btn btn-default",
+                                  attrs: {
+                                    disabled: !_vm.pagination.next_page_url
+                                  },
                                   on: {
                                     click: function($event) {
-                                      return _vm.deleteUser(user.id)
+                                      return _vm.fetchPaginateUsers(
+                                        _vm.pagination.next_page_url
+                                      )
                                     }
                                   }
                                 },
-                                [_c("i", { staticClass: "fas fa-trash red" })]
+                                [_vm._v("Selanjutnya")]
                               )
                             ])
-                          ]
-                        )
-                      })
-                    ],
-                    2
+                          ])
+                        ]
+                      )
+                    ]
                   )
                 ])
               ])
@@ -95721,124 +95941,217 @@ var render = function() {
                   _c("vue-progress-bar"),
                   _vm._v(" "),
                   _c("div", { staticClass: "card-body table-responsive p-0" }, [
-                    _c(
-                      "table",
-                      { staticClass: "table table-hover text-nowrap" },
-                      [
-                        _vm._m(2),
-                        _vm._v(" "),
-                        _c(
-                          "tbody",
-                          [
-                            !_vm.filteredNama.length
-                              ? _c("tr", [
-                                  _c(
-                                    "td",
-                                    {
-                                      attrs: { colspan: "5", align: "center" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "Tidak ada user yang belum divalidasi"
-                                      )
-                                    ]
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm._l(_vm.filteredNama, function(user) {
-                              return _c(
-                                "tr",
-                                {
-                                  key: user.id,
-                                  staticStyle: { "margin-bottom": "5px" }
-                                },
-                                [
-                                  _c("td", [_vm._v(_vm._s(user.name))]),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm._f("filterRoleUser")(user.role)
-                                      )
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(user.email))]),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.customFormatter(user.created_at)
-                                      )
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", [
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "table",
+                        { staticClass: "table table-hover text-nowrap" },
+                        [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            [
+                              !_vm.filteredNama.length
+                                ? _c("tr", [
                                     _c(
-                                      "button",
+                                      "td",
                                       {
-                                        staticClass: "btn btn-info btn-xs",
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.previewImage()
-                                          }
-                                        }
+                                        attrs: { colspan: "5", align: "center" }
                                       },
                                       [
-                                        _c("i", { staticClass: "fas fa-eye" }),
                                         _vm._v(
-                                          "  Lihat\n                        "
+                                          "Tidak ada user yang belum divalidasi"
                                         )
                                       ]
-                                    ),
-                                    _vm._v(
-                                      "\n                         / \n                        "
-                                    ),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-secondary btn-xs",
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.downloadSIUP()
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "i",
-                                          {
-                                            staticClass: "fas fa-file-download"
-                                          },
-                                          [_vm._v("  Download")]
-                                        )
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-success btn-xs",
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.selectUser(user)
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("Validasi")]
                                     )
                                   ])
-                                ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm._l(_vm.filteredNama, function(user) {
+                                return _c(
+                                  "tr",
+                                  {
+                                    key: user.id,
+                                    staticStyle: { "margin-bottom": "5px" }
+                                  },
+                                  [
+                                    _c("td", [_vm._v(_vm._s(user.name))]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("filterRoleUser")(user.role)
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(user.email))]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.customFormatter(user.created_at)
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-info btn-xs",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.previewImage()
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fas fa-eye"
+                                          }),
+                                          _vm._v(
+                                            "  Lihat\n                          "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(
+                                        "\n                           / \n                          "
+                                      ),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "btn btn-secondary btn-xs",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.downloadSIUP()
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "i",
+                                            {
+                                              staticClass:
+                                                "fas fa-file-download"
+                                            },
+                                            [_vm._v("  Download")]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-success btn-xs",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.selectUser(user)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Validasi")]
+                                      )
+                                    ])
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "col-md-6 d-flex justify-content-start align-self-center"
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticStyle: { "padding-left": "20px" } },
+                            [
+                              _vm._v(
+                                "Menampilkan " +
+                                  _vm._s(_vm.pagination.current_page) +
+                                  " dari " +
+                                  _vm._s(_vm.pagination.last_page) +
+                                  " halaman"
                               )
-                            })
-                          ],
-                          2
-                        )
-                      ]
-                    )
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "col-md-6 d-flex justify-content-end align-self-end",
+                          staticStyle: { "padding-right": "30px" }
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "dataTables_paginate paging_simple_numbers"
+                            },
+                            [
+                              _c("ul", { staticClass: "pagination" }, [
+                                _c("li", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-default",
+                                      attrs: {
+                                        href: "#",
+                                        disabled: !_vm.pagination.prev_page_url
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.fetchPaginateUsers(
+                                            _vm.pagination.prev_page_url
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Sebelumnya")]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("li", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-default",
+                                      attrs: {
+                                        disabled: !_vm.pagination.next_page_url
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.fetchPaginateUsers(
+                                            _vm.pagination.next_page_url
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Selanjutnya")]
+                                  )
+                                ])
+                              ])
+                            ]
+                          )
+                        ]
+                      )
+                    ])
                   ])
                 ],
                 1
@@ -130167,8 +130480,8 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\cabai\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\cabai\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\cabai\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

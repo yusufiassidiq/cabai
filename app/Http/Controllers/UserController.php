@@ -39,7 +39,7 @@ class UserController extends Controller
     // }
 
     public function requesteduser(){
-        $users = DB::table('users')->where('status', '=', '0')->get();
+        $users = DB::table('users')->where('status', '=', '0')->paginate(6);
         return response()->json(
             [
                 'status' => 'success',
@@ -48,7 +48,7 @@ class UserController extends Controller
     }
 
     public function validateduser(){
-        $users = DB::table('users')->where('status', '=', '1')->where('role', '!=', '1')->get();
+        $users = DB::table('users')->where('status', '=', '1')->where('role', '!=', '1')->paginate(6);
         return response()->json(
             [
                 'status' => 'success',
