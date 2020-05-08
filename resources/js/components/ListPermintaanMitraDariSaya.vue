@@ -8,18 +8,19 @@
   >
     <div class="card">
       <div class="card-header">
+        <vue-progress-bar></vue-progress-bar>
         <h3 class="card-title">Daftar Permintaan Pembentukan Kemitraan</h3>
 
         <div class="card-tools">
           <div class="input-group input-group-sm" style="width: 150px;">
             <input
               type="text"
-              name="table_search"
-              class="form-control float-right"
-              placeholder="Search"
+              class="form-control input-sm float-right"
+              placeholder="Cari User"
+              v-model="stringNama"
             />
             <div class="input-group-append">
-              <button type="submit" class="btn btn-default">
+              <button class="btn btn-default">
                 <i class="fas fa-search"></i>
               </button>
             </div>
@@ -39,10 +40,10 @@
           </thead>
 
           <tbody>
-            <tr v-if="!dataListPengajuanMitra.length">
+            <tr v-if="!filteredNama.length">
               <td colspan="4" align="center">Tidak ada mitra yang diajukan</td>
             </tr>
-            <tr v-for="data in dataListPengajuanMitra" :key="data.id">
+            <tr v-for="data in filteredNama" :key="data.id">
               <td>{{ data.nama }}</td>
               <td>{{ data.role | filterRoleUser }}</td>
               <td>{{ data.lokasi.kelurahan | filterAlamat }} , {{ data.lokasi.kecamatan | filterAlamat }} , {{ data.lokasi.kabupaten | filterAlamat }}</td>
@@ -59,7 +60,9 @@
 export default {
   data() {
     return {
-      dataListPengajuanMitra: {}
+      dataListPengajuanMitra: {},
+      filteredusers: {},
+      stringNama: "",
     };
   },
   methods: {
@@ -67,6 +70,27 @@ export default {
       axios.get("/kemitraan/pengajuan/list").then(response => {
         this.dataListPengajuanMitra = response.data.data;
       });
+    }
+  },
+  computed: {
+    filteredNama: function() {
+      var namaUser = this.dataListPengajuanMitra;
+      var stringNama = this.stringNama;
+
+      if (!stringNama) {
+        return namaUser;
+      }
+
+      let searchString = stringNama.trim()
+      searchString = searchString.toLowerCase();
+
+      namaUser = namaUser.filter(function(item) {
+        if (item.nama.toLowerCase().indexOf(stringNama) !== -1) {
+          return item;
+        }
+      });
+
+      return namaUser;
     }
   },
   created() {

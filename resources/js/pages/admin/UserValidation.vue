@@ -28,6 +28,21 @@
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">Validasi User</h3>
+                  <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                      <input
+                        type="text"
+                        class="form-control input-sm float-right"
+                        placeholder="Cari User"
+                        v-model="stringNama"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-default">
+                          <i class="fas fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <vue-progress-bar></vue-progress-bar>
                 <!-- /.card-header -->
@@ -44,10 +59,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-if="!users.length">
+                      <tr v-if="!filteredNama.length">
                         <td colspan="5" align="center">Tidak ada user yang belum divalidasi</td>
                       </tr>
-                      <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
+                      <tr v-for="user in filteredNama " v-bind:key="user.id" style="margin-bottom: 5px;">
                         <td>{{ user.name }}</td>
                         <td>{{ user.role | filterRoleUser }}</td>
                         <td>{{ user.email }}</td>
@@ -122,7 +137,10 @@ export default {
       userDetail: "",
       has_error: false,
       users: {},
-      selectedUser: undefined
+      selectedUser: undefined,
+      // variabel untuk search
+      filteredusers: {},
+      stringNama: "",
     };
   },
   methods: {
@@ -203,14 +221,32 @@ export default {
       return moment(date).format("DD MMMM YYYY");
     }
   },
-  mounted() {
-    this.getUsers();
+  computed: {
+    filteredNama: function() {
+      var namaUser = this.users;
+      var stringNama = this.stringNama;
+
+      if (!stringNama) {
+        return namaUser;
+      }
+
+      var searchString = stringNama.trim().toLowerCase();
+
+      namaUser = namaUser.filter(function(item) {
+        if (item.name.toLowerCase().indexOf(stringNama) !== -1) {
+          return item;
+        }
+      });
+
+      return namaUser;
+    }
   },
-  created() {
+  mounted() {
+    this.getUsers()
     // custom event vue to update data changes
     UpdateData.$on("UserValidation", () => {
-      this.getUsers();
-    });
+      this.getUsers()
+    })
   }
 };
 </script>

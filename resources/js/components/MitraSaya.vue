@@ -6,19 +6,18 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Mitra Saya</h3>
               <vue-progress-bar></vue-progress-bar>
+              <h3 class="card-title">Mitra Saya</h3>
               <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input
                     type="text"
-                    name="table_search"
-                    class="form-control float-right"
-                    placeholder="Search"
+                    class="form-control input-sm float-right"
+                    placeholder="Cari User"
+                    v-model="stringNama"
                   />
-
                   <div class="input-group-append">
-                    <button type="submit" class="btn btn-default">
+                    <button class="btn btn-default">
                       <i class="fas fa-search"></i>
                     </button>
                   </div>
@@ -38,10 +37,10 @@
                 </thead>
 
                 <tbody>
-                  <tr v-if="!dataMitra.length">
-                    <td colspan="4" align="center">Tidak memiliki mitra</td>
+                  <tr v-if="!filteredNama.length">
+                    <td colspan="4" align="center">Tidak ada mitra</td>
                   </tr>
-                  <tr v-for="data in dataMitra" :key="data.id">
+                  <tr v-for="data in filteredNama" :key="data.id">
                     <td>{{ data.nama }}</td>
                     <td>{{ data.role | filterRoleUser }}</td>
                     <td>{{ data.lokasi.kelurahan | filterAlamat }}, {{ data.lokasi.kecamatan | filterAlamat }}, {{ data.lokasi.kabupaten | filterAlamat}}</td>
@@ -70,8 +69,30 @@
 export default {
   data() {
     return {
-      dataMitra: {}
+      dataMitra: {},
+      // variabel untuk search
+      stringNama: "",
     };
+  },
+  computed: {
+    filteredNama: function() {
+      var namaUser = this.dataMitra;
+      var stringNama = this.stringNama;
+
+      if (!stringNama) {
+        return namaUser;
+      }
+
+      var searchString = stringNama.trim().toLowerCase();
+
+      namaUser = namaUser.filter(function(item) {
+        if (item.nama.toLowerCase().indexOf(stringNama) !== -1) {
+          return item;
+        }
+      });
+
+      return namaUser;
+    }
   },
   methods: {
     // Mendapatkan data Mitra

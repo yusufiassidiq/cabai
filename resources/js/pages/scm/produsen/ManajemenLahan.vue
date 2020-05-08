@@ -239,7 +239,8 @@
               </div>
 
               <div class="form-group col-md">
-                <input required
+                <input
+                  required
                   v-model="formriwayat.jumlah_pengeluaran"
                   type="number"
                   name="jumlah_pengeluaran"
@@ -426,7 +427,7 @@ export default {
       this.form.fill(data);
     },
     pengeluaranModal(id) {
-      this.formriwayat.reset()
+      this.formriwayat.reset();
       $("#modalPengeluaran").modal("show");
       this.formriwayat.pra_produksi_id = id;
     }

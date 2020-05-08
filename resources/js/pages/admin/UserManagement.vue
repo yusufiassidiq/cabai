@@ -34,22 +34,20 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Management User</h3>
-
                 <div class="card-tools">
-                  <!-- <div class="input-group input-group-sm" style="width: 150px;">
+                  <div class="input-group input-group-sm" style="width: 150px;">
                     <input
                       type="text"
-                      name="table_search"
-                      class="form-control float-right"
-                      placeholder="Search"
+                      class="form-control input-sm float-right"
+                      placeholder="Cari User"
+                      v-model="stringNama"
                     />
-
                     <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
+                      <button class="btn btn-default">
                         <i class="fas fa-search"></i>
                       </button>
                     </div>
-                  </div>-->
+                  </div>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -67,24 +65,31 @@
                   </thead>
 
                   <tbody>
-                    <tr v-if="!users.length">
+                    <tr v-if="!filteredNama.length">
                       <td colspan="5" align="center">Tidak ada user yang belum divalidasi</td>
                     </tr>
-                    <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
+                    <tr
+                      v-for="user in filteredNama"
+                      v-bind:key="user.id"
+                      style="margin-bottom: 5px;"
+                    >
                       <td>{{ user.name }}</td>
                       <td>{{ user.role | filterRoleUser }}</td>
                       <td>{{ user.email }}</td>
                       <td>{{ customFormatter(user.updated_at) }}</td>
                       <td>
                         <button class="btn btn-info btn-xs" @click="previewImage()">
-                            <i class="fas fa-eye"></i>&nbsp; Lihat
-                          </button>
-                          &nbsp;/&nbsp;
-                          <button class="btn btn-secondary btn-xs" @click="downloadSIUP()">
-                            <i class="fas fa-file-download">&nbsp; Download</i>
-                          </button>
+                          <i class="fas fa-eye"></i>&nbsp; Lihat
+                        </button>
+                        &nbsp;/&nbsp;
+                        <button
+                          class="btn btn-secondary btn-xs"
+                          @click="downloadSIUP()"
+                        >
+                          <i class="fas fa-file-download">&nbsp; Download</i>
+                        </button>
                       </td>
-                      
+
                       <td>
                         <a href="#">
                           <i class="fas fa-edit blue" v-on:click="edituser(user.id)"></i>
@@ -144,14 +149,26 @@
     <!-- /.content-wrapper -->
   </div>
 </template>
+<style>
+.input-container input {
+  /* border: none;
+	background: transparent; */
+  color: black;
+  padding: 6px 6px;
+  font-size: 16px;
+}
+</style>
 <script>
 export default {
   data() {
     return {
       userDetail: "",
       has_error: false,
+      selectedUser: undefined,
       users: {},
-      selectedUser: undefined
+      // variabel untuk search
+      filteredusers: {},
+      stringNama: "",
     };
   },
   methods: {
@@ -207,9 +224,28 @@ export default {
     },
     // fungsi untuk melihat gambar SIUP User
     previewImage() {},
-
     // fungsi mendownload SIUP User
-    downloadSIUP() {},
+    downloadSIUP() {}
+  },
+  computed: {
+    filteredNama: function() {
+      var namaUser = this.users;
+      var stringNama = this.stringNama;
+
+      if (!stringNama) {
+        return namaUser;
+      }
+
+      var searchString = stringNama.trim().toLowerCase();
+
+      namaUser = namaUser.filter(function(item) {
+        if (item.name.toLowerCase().indexOf(stringNama) !== -1) {
+          return item;
+        }
+      });
+
+      return namaUser;
+    }
   },
   created() {
     // custom event vue to update data changes

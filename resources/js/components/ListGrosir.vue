@@ -1,20 +1,19 @@
 <template>
-  <!-- DM : Ini merupakan komponen bagian pada Tambah Mitra -->
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
+        <vue-progress-bar></vue-progress-bar>
         <h3 class="card-title">Daftar Grosir</h3>
         <div class="card-tools">
           <div class="input-group input-group-sm" style="width: 150px;">
             <input
               type="text"
-              name="table_search"
-              class="form-control float-right"
-              placeholder="Search"
+              class="form-control input-sm float-right"
+              placeholder="Cari User"
+              v-model="stringNama"
             />
-            <vue-progress-bar></vue-progress-bar>
             <div class="input-group-append">
-              <button type="submit" class="btn btn-default">
+              <button class="btn btn-default">
                 <i class="fas fa-search"></i>
               </button>
             </div>
@@ -33,10 +32,10 @@
           </thead>
 
           <tbody>
-            <tr v-if="!dataMitra.length">
+            <tr v-if="!filteredNama.length">
               <td colspan="3" align="center">Tidak ada mitra yang dapat ditambahkan</td>
             </tr>
-            <tr v-for="data in dataMitra" :key="data.id">
+            <tr v-for="data in filteredNama" :key="data.id">
               <td>{{data.name}}</td>
               <td>{{data.lokasiKelurahan | filterAlamat}}, {{data.lokasiKecamatan | filterAlamat}}, {{data.lokasiKabupaten | filterAlamat}}</td>
               <td>
@@ -57,7 +56,10 @@
 export default {
   data() {
     return {
-      dataMitra: {}
+      dataMitra: {},
+      // variabel untuk search
+      filteredusers: {},
+      stringNama: "",
     };
   },
   methods: {
@@ -103,14 +105,32 @@ export default {
         });
     }
   },
-  created() {
-    this.getMitra();
+  computed: {
+    filteredNama: function() {
+      var namaUser = this.dataMitra;
+      var stringNama = this.stringNama;
+
+      if (!stringNama) {
+        return namaUser;
+      }
+
+      var searchString = stringNama.trim().toLowerCase();
+
+      namaUser = namaUser.filter(function(item) {
+        if (item.name.toLowerCase().indexOf(stringNama) !== -1) {
+          return item;
+        }
+      });
+
+      return namaUser;
+    }
   },
   mounted() {
     // Custom event on Vue js
     UpdateData.$on("ListGrosir", () => {
       this.getMitra();
     });
+    this.getMitra();
   }
 };
 </script>
