@@ -275,7 +275,7 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $listPengajuanMitra = Kemitraan::orWhere(function($query)use($userId){
             $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
-        })->where('status',0)->where('action_user',$userId)->get();
+        })->where('status',0)->where('action_user',$userId)->paginate(6);
         $j=0;
         
         foreach ($listPengajuanMitra as $i){
@@ -301,7 +301,7 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $listPermintaanMitra = Kemitraan::orWhere(function($query)use($userId){
             $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
-        })->where('status',0)->whereNotIn('action_user',[$userId])->get();
+        })->where('status',0)->whereNotIn('action_user',[$userId])->paginate(6);
         $j=0;
         foreach ($listPermintaanMitra as $i){
             if($listPermintaanMitra[$j]->flag == 0){
@@ -326,7 +326,7 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $listMitraSaya = Kemitraan::orWhere(function($query)use($userId){
             $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
-        })->where('status',1)->get();
+        })->where('status',1)->paginate(6);
         
         $j=0;
         foreach($listMitraSaya as $i){
