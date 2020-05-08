@@ -55,42 +55,80 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>Tanggal</th>
-                      <th>Kode Lahan</th>
-                      <th>Jenis Pengeluaran</th>
-                      <th>Jumlah Pengeluaran</th>
-                      <th>Rincian</th>
-                      
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
+                <div class="row">
+                  <table class="table table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>Tanggal</th>
+                        <th>Kode Lahan</th>
+                        <th>Jenis Pengeluaran</th>
+                        <th>Jumlah Pengeluaran</th>
+                        <th>Rincian</th>
 
-                  <tbody>
-                    <tr v-if="!dataPengeluaran.length">
-                      <td colspan="6" align="center">Tidak ada pengeluaran</td>
-                    </tr>
-                    <tr v-for="data in dataPengeluaran" :key="data.id">
-                      <td>{{ data.created_at | dateFilter}}</td>
-                      <td>{{ data.kodeLahan }}</td>
-                      <td>{{ data.nama_pengeluaran }}</td>
-                      <td>{{ data.jumlah_pengeluaran | convertToRupiah }}</td>
-                      <td>{{ data.rincian }}</td>
-                      <td>
-                        <a href="#">
-                          <i class="fas fa-edit blue" @click="editModal(data)"></i>
-                        </a>
-                        /
-                        <a href="#" @click="deletePengeluaran(data.id)">
-                          <i class="fas fa-trash red"></i>
-                        </a>
-                      </td>
-                      <!-- end example data -->
-                    </tr>
-                  </tbody>
-                </table>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr v-if="!dataPengeluaran.length">
+                        <td colspan="6" align="center">Tidak ada pengeluaran</td>
+                      </tr>
+                      <tr v-for="data in dataPengeluaran" :key="data.id">
+                        <td>{{ data.created_at | dateFilter}}</td>
+                        <td>{{ data.kodeLahan }}</td>
+                        <td>{{ data.nama_pengeluaran }}</td>
+                        <td>{{ data.jumlah_pengeluaran | convertToRupiah }}</td>
+                        <td>{{ data.rincian }}</td>
+                        <td>
+                          <a href="#">
+                            <i class="fas fa-edit blue" @click="editModal(data)"></i>
+                          </a>
+                          /
+                          <a
+                            href="#"
+                            @click="deletePengeluaran(data.id)"
+                          >
+                            <i class="fas fa-trash red"></i>
+                          </a>
+                        </td>
+                        <!-- end example data -->
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 d-flex justify-content-start align-self-center">
+                    <div
+                      style="padding-left: 20px"
+                    >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
+                  </div>
+
+                  <div
+                    class="col-md-6 d-flex justify-content-end align-self-end"
+                    style="padding-right: 30px"
+                  >
+                    <div class="dataTables_paginate paging_simple_numbers">
+                      <ul class="pagination">
+                        <li>
+                          <button
+                            href="#"
+                            class="btn btn-default"
+                            v-on:click="fetchPaginatePengeluaran(pagination.prev_page_url)"
+                            :disabled="!pagination.prev_page_url"
+                          >Sebelumnya</button>
+                        </li>
+
+                        <li>
+                          <button
+                            class="btn btn-default"
+                            v-on:click="fetchPaginatePengeluaran(pagination.next_page_url)"
+                            :disabled="!pagination.next_page_url"
+                          >Selanjutnya</button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -111,7 +149,8 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalPengeluaranLabel">Tambahkan Pengeluaran</h5>
+            <h5 class="modal-title" v-show="!editmode" id="modalPengeluaranLabel">Tambahkan Pengeluaran</h5>
+            <h5 class="modal-title" v-show="editmode" id="modalPengeluaranLabel">Perbarui Pengeluaran</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -179,8 +218,8 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-              <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
-              <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
+              <button v-show="editmode" type="submit" class="btn btn-success">perbarui</button>
+              <button v-show="!editmode" type="submit" class="btn btn-success">tambahkan</button>
             </div>
           </form>
           <!-- </form> -->
@@ -204,14 +243,34 @@ export default {
         nama_pengeluaran: "",
         tanggal_pengeluaran: new Date(),
         rincian: ""
-      })
+      }),
+      // pagination
+      pagination: [],
+      url_getPengeluaran: "/pengeluaran/list"
     };
   },
   methods: {
+    // prev & next paggination
+    fetchPaginatePengeluaran(url) {
+      this.url_getPengeluaran = url;
+      this.getPengeluaran();
+    },
+    // set up pagination
+    makePagination(data) {
+      let pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        prev_page_url: data.prev_page_url
+      };
+      this.pagination = pagination;
+    },
     // Menghapus Riwayat Pengeluaran
     getPengeluaran() {
-      axios.get("/pengeluaran/list").then(response => {
-        this.dataPengeluaran = response.data.data;
+      let $this = this;
+      axios.get(this.url_getPengeluaran).then(response => {
+        this.dataPengeluaran = response.data.data.data;
+        $this.makePagination(response.data.data);
       });
     },
     // Memperbarui Riwayat Pengeluaran
@@ -250,7 +309,11 @@ export default {
               .delete("/pengeluaran/delete/" + id)
               .then(() => {
                 UpdateData.$emit("RiwayatPengeluaran");
-                swal.fire("Tehapus!", "Pengeluaran berhasil dihapus", "success");
+                swal.fire(
+                  "Tehapus!",
+                  "Pengeluaran berhasil dihapus",
+                  "success"
+                );
                 this.$Progress.finish();
               })
               .catch(() => {

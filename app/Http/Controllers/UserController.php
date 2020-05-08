@@ -39,7 +39,7 @@ class UserController extends Controller
     // }
 
     public function requesteduser(){
-        $users = DB::table('users')->where('status', '=', '0')->get();
+        $users = DB::table('users')->where('status', '=', '0')->paginate(6);
         return response()->json(
             [
                 'status' => 'success',
@@ -48,7 +48,7 @@ class UserController extends Controller
     }
 
     public function validateduser(){
-        $users = DB::table('users')->where('status', '=', '1')->where('role', '!=', '1')->get();
+        $users = DB::table('users')->where('status', '=', '1')->where('role', '!=', '1')->paginate(6);
         return response()->json(
             [
                 'status' => 'success',
@@ -73,7 +73,7 @@ class UserController extends Controller
             $j++;
         }
         // return $listuser;
-        $listProdusen = User::where('role',2)->where('status',1)->whereNotIn('id',$listuser)->get();
+        $listProdusen = User::where('role',2)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
         foreach ($listProdusen as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -101,7 +101,7 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listPengepul = User::where('role',3)->where('status',1)->whereNotIn('id',$listuser)->get();
+        $listPengepul = User::where('role',3)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
         foreach ($listPengepul as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -129,7 +129,7 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listGrosir = User::where('role',4)->where('status',1)->whereNotIn('id',$listuser)->get();
+        $listGrosir = User::where('role',4)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
         foreach ($listGrosir as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -157,7 +157,7 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listPengecer = User::where('role',5)->where('status',1)->whereNotIn('id',$listuser)->get();
+        $listPengecer = User::where('role',5)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
         foreach ($listPengecer as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -185,7 +185,7 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listKonsumen = User::where('role',6)->where('status',1)->whereNotIn('id',$listuser)->get();
+        $listKonsumen = User::where('role',6)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
         foreach ($listKonsumen as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -275,7 +275,7 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $listPengajuanMitra = Kemitraan::orWhere(function($query)use($userId){
             $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
-        })->where('status',0)->where('action_user',$userId)->get();
+        })->where('status',0)->where('action_user',$userId)->paginate(6);
         $j=0;
         
         foreach ($listPengajuanMitra as $i){
@@ -301,7 +301,7 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $listPermintaanMitra = Kemitraan::orWhere(function($query)use($userId){
             $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
-        })->where('status',0)->whereNotIn('action_user',[$userId])->get();
+        })->where('status',0)->whereNotIn('action_user',[$userId])->paginate(6);
         $j=0;
         foreach ($listPermintaanMitra as $i){
             if($listPermintaanMitra[$j]->flag == 0){
@@ -326,7 +326,7 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $listMitraSaya = Kemitraan::orWhere(function($query)use($userId){
             $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
-        })->where('status',1)->get();
+        })->where('status',1)->paginate(6);
         
         $j=0;
         foreach($listMitraSaya as $i){

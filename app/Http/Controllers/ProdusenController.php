@@ -46,7 +46,8 @@ class ProdusenController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
     public function readLahan(){
-        $praProduksi = PraProduksi::get();
+        $userId = Auth::user()->id;
+        $praProduksi = PraProduksi::where('user_id',$userId)->paginate(6);
         foreach($praProduksi as $i){
             $i->pengeluaran = $i->pengeluaranProduksi()->sum('jumlah_pengeluaran');
         }
@@ -95,8 +96,8 @@ class ProdusenController extends Controller
         $pengeluaran->save();
         return response()->json(['status' => 'success'], 200);
     }
-    public function readPengeluaran(){
-        $pengeluaran= PengeluaranProduksi::all();
+    public function readPengeluaran(){  
+        $pengeluaran= PengeluaranProduksi::paginate(6);
         foreach($pengeluaran as $i){
 
             $i->kodeLahan = $i->praProduksi()->first()->kode_lahan;
