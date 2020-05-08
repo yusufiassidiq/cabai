@@ -85,7 +85,7 @@
                 <p>Pengajuan Mitra</p>
               </router-link>
             </li> -->
-            <li class="nav-header">MANAJEMEN PERSEDIAAN</li>
+            <li class="nav-header">Inventaris</li>
             <li class="nav-item">
               <router-link to="/pengepul/inventaris" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>

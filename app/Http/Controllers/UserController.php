@@ -430,7 +430,14 @@ class UserController extends Controller
     }
     public function getPermintaanMasuk(){
         $userId = Auth::user()->id;
-        $transaksi = Transaksi::where('pemasok_id',$userId)->where('status_pemesanan','!=',1)->orWhereNull('status_pemesanan')->orderBy('id','DESC')->get();
+        $transaksi = Transaksi::where([
+            ['pemasok_id','=',$userId],
+            ['status_pemesanan', '=', null],
+        ])->orWhere([
+            ['pemasok_id','=',$userId],
+            ['status_pemesanan', '=', 0],
+        ])
+        ->orderBy('updated_at','DESC')->paginate(6);
         foreach($transaksi as $i){
             $i->nama = $i->user()->first()->name;
         }
@@ -442,7 +449,15 @@ class UserController extends Controller
     }
     public function getPermintaanSaya(){
         $userId = Auth::user()->id;
-        $transaksi = Transaksi::where('user_id',$userId)->where('status_pemesanan','!=',1)->orWhereNull('status_pemesanan')->orderBy('id','DESC')->get();
+        $transaksi = Transaksi::where([
+            ['user_id','=',$userId],
+            ['status_pemesanan', '=', null],
+        ])->orWhere([
+            ['user_id','=',$userId],
+            ['status_pemesanan', '=', 0],
+        ])
+        ->orderBy('updated_at','DESC')->paginate(6);
+
         $j=0;
         foreach($transaksi as $i){
             $id_pemasok = $transaksi[$j]->pemasok_id;
