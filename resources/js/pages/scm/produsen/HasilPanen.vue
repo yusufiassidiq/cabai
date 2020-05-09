@@ -334,8 +334,8 @@ export default {
         });
     },
     getLahan() {
-      axios.get("praProduksi/list").then(response => {
-        this.datalahan = response.data.data.data;
+      axios.get("praProduksi/list/all").then(response => {
+        this.datalahan = response.data.data;
       });
     },
     // Modal

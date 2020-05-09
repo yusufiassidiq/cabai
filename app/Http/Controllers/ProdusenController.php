@@ -56,6 +56,17 @@ class ProdusenController extends Controller
             'data' => $praProduksi->toArray(),
         ]);
     }
+    public function readAllLahan(){
+        $userId = Auth::user()->id;
+        $praProduksi = PraProduksi::where('user_id',$userId)->get();
+        foreach($praProduksi as $i){
+            $i->pengeluaran = $i->pengeluaranProduksi()->sum('jumlah_pengeluaran');
+        }
+        return response()->json([
+            'status' => 'success',
+            'data' => $praProduksi->toArray(),
+        ]);
+    }
     public function updateLahan(Request $request, $id){
         $praProduksi = PraProduksi::findOrFail($id);
         $tgltnm = $request->tanggal_tanam;

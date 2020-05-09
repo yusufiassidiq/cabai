@@ -97,6 +97,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Manajemen lahan
     Route::post('/praProduksi/tambah','ProdusenController@addLahan');
     Route::get('/praProduksi/list','ProdusenController@readLahan');
+    Route::get('/praProduksi/list/all','ProdusenController@readAllLahan');
     Route::put('/praProduksi/update/{id}','ProdusenController@updateLahan');
     Route::delete('/praProduksi/delete/{id}','ProdusenController@deleteLahan');
     //---baru---//
