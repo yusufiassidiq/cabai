@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import UnverifiedDashboard from './pages/UnverifiedDashboard'
+import FailedValidation from './pages/UserGagalValidasi'
 import NotfoundLoggedUser from './pages/NotFoundLoggedUser'
 import NotFoundNonLoggedUser from './pages/NotFoundNonLoggedUser'
 
@@ -519,21 +520,15 @@ const routes = [
             requiresVerified: true,
         }
     },
-    // ADMIN ROUTES
-    // {
-    //     path: '/:userId/details',
-    //     name: 'userDetails',
-    //     component: UserDetails,
-    //     meta: {
-    //         auth: {
-    //             roles: 1,
-    //             redirect: {
-    //                 name: 'login'
-    //             },
-    //             forbiddenRedirect: '/403'
-    //         }
-    //     }
-    // },
+    {
+        path: '/gagalvalidasi',
+        name: 'gagalvalidasi',
+        component: FailedValidation,
+        meta: {
+            auth: true,
+            requiresVerified: true,
+        }
+    },
 ]
 
 const router = new VueRouter({
