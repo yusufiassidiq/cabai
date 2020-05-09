@@ -447,6 +447,21 @@ class UserController extends Controller
             'data' => $transaksi->toArray()
         ], 200);
     }
+    public function getRiwayatPermintaanMasuk(){
+        $userId = Auth::user()->id;
+        $transaksi = Transaksi::where([
+            ['pemasok_id','=',$userId],
+            ['status_pemesanan', '=', 1],
+        ])
+        ->orderBy('tanggal_pengiriman','DESC')->paginate(6);
+        foreach($transaksi as $i){
+            $i->nama = $i->user()->first()->name;
+        }
+        return response()->json([
+            'status' => 'success', 
+            'data' => $transaksi->toArray()
+        ], 200);
+    }
     public function getPermintaanSaya(){
         $userId = Auth::user()->id;
         $transaksi = Transaksi::where([
@@ -457,6 +472,32 @@ class UserController extends Controller
             ['status_pemesanan', '=', 0],
         ])
         ->orderBy('updated_at','DESC')->paginate(6);
+
+        $j=0;
+        foreach($transaksi as $i){
+            $id_pemasok = $transaksi[$j]->pemasok_id;
+            $user = User::find($id_pemasok);
+            $lokasi = $user->lokasi()->first(['kabupaten','kecamatan','kelurahan']);
+            $i->lokasi = $lokasi;
+            $nama_pemasok = $user->name;
+            $role_pemasok = $user->role;
+            $i->nama = $nama_pemasok;
+            $i->role = $role_pemasok;
+            // $
+            $j++;
+        }
+        return response()->json([
+            'status' => 'success', 
+            'data' => $transaksi->toArray()
+        ], 200);
+    }
+    public function getRiwayatPermintaanSaya(){
+        $userId = Auth::user()->id;
+        $transaksi = Transaksi::where([
+            ['user_id','=',$userId],
+            ['status_pemesanan', '=', 1],
+        ])
+        ->orderBy('tanggal_diterima','DESC')->paginate(6);
 
         $j=0;
         foreach($transaksi as $i){

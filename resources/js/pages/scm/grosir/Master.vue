@@ -9,7 +9,7 @@
           </a>
         </li>
       </ul>
-      <!-- Right navbar links -->
+      <!-- Right navbar links --> 
       <ul class="navbar-nav ml-auto">
         <li v-if="$auth.check()">
           <a href @click.prevent="$auth.logout();clearLocalStorage()">Logout</a>
@@ -98,6 +98,12 @@
               <router-link to="/grosir/transaksicabai" class="nav-link">
                 <i class="fas fa-file-invoice nav-icon"></i>
                 <p>Transaksi Cabai</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/grosir/riwayattransaksi" class="nav-link">
+                <i class="fas fa-receipt nav-icon"></i>
+                <p>Riwayat Transaksi</p>
               </router-link>
             </li>
             <li class="nav-header">Bisnis Analitik</li>
