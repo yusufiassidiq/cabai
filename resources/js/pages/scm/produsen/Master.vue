@@ -62,6 +62,12 @@
                 <p>Dashboard</p>
               </router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/produsen/chat" class="nav-link">
+                <i class="nav-icon fas fa-envelope"></i>
+                <p>Pesan</p>
+              </router-link>
+            </li>
             <li class="nav-header">Produksi</li>
             <li class="nav-item">
               <router-link to="/produsen/manajemenlahan" class="nav-link">
@@ -167,13 +173,10 @@
 </template>
 <script>
 export default {
-  mounted() {
-    //
-  },
   methods: {
     clearLocalStorage() {
       localStorage.clear();
-    }
-  }
-};
+    },
+  },
+}
 </script>

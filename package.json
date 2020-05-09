@@ -27,6 +27,8 @@
         "@websanova/vue-auth": "^2.22.0-beta",
         "chart.js": "^2.9.3",
         "es6-promise": "^4.2.8",
+        "laravel-echo": "^1.7.0",
+        "pusher-js": "^6.0.2",
         "sweetalert2": "^9.10.7",
         "vform": "^1.0.1",
         "vue": "^2.6.11",

@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->integer('role');
             $table->integer('status')->default(0);
             $table->string('password');
+            $table->string('profile_image')->default('http://via.placeholder.com/150x150');
             $table->string('fotosk');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

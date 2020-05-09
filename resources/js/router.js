@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import UnverifiedDashboard from './pages/UnverifiedDashboard'
 import NotfoundLoggedUser from './pages/NotFoundLoggedUser'
 import NotFoundNonLoggedUser from './pages/NotFoundNonLoggedUser'
+import Chat from './components/chat/Chat'
 
 // Pages - SCM
 import AdminMaster from './pages/admin/Master'
@@ -136,6 +137,11 @@ const routes = [
                 name: "DashboardProd"
             },
             {
+                path: 'chat',
+                component: Chat,
+                name: "Chat-Produsen",
+            },
+            {
                 path: 'inventaris',
                 component: InventarisProdusen,
                 name: "InventarisProdusen"
@@ -219,6 +225,11 @@ const routes = [
                 name: "DashboardGrosir"
             },
             {
+                path: 'chat',
+                component: Chat,
+                name: "Chat-Grosir",
+            },
+            {
                 path: 'daftarmitra',
                 component: DaftarMitraGrosir,
                 name: "DaftarMitraGrosir"
@@ -265,6 +276,11 @@ const routes = [
                 path: '',
                 component: DashboardPengecer,
                 name: "DashboardPengecer"
+            },
+            {
+                path: 'chat',
+                component: Chat,
+                name: "Chat-Pengecer",
             },
             {
                 path: 'daftarmitra',
@@ -314,6 +330,11 @@ const routes = [
                 name: "DashboardPengepul"
             },
             {
+                path: 'chat',
+                component: Chat,
+                name: "Chat-Pengepul",
+            },
+            {
                 path: 'daftarmitra',
                 component: DaftarMitraPengepul,
                 name: "DaftarMitraPengepul"
@@ -359,6 +380,11 @@ const routes = [
                 path: '',
                 component: DashboardKonsumen,
                 name: "DashboardKonsumen"
+            },
+            {
+                path: 'chat',
+                component: Chat,
+                name: "Chat-Konsumen",
             },
             {
                 path: 'daftarmitra',

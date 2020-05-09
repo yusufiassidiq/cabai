@@ -4,13 +4,20 @@ namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
+use Auth;
 
 class Authenticate extends Middleware
 {
     public function handle($request, Closure $next, ...$guards)
     {
+        // $credentials = [
+        //     'email' => session('email'),
+        //     'password' => session('password'),
+        // ];
+        // dd($credentials);
+        // Auth::attempt(['email' => $email[email], 'password' => 'asd']);
         if ($this->authenticate($request, $guards) === 'authentication_error') {
-            return response()->json(['error'=>'Unauthorized']);
+            return response()->json(['error'=>Auth::user()]);
         }        
         return $next($request);
     }    

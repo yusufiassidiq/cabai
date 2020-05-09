@@ -55,6 +55,13 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('/user/delete/{id}','AdminController@delete')->middleware('isAdmin');
     Route::get('/admin/dashboard','AdminController@dashboardAdmin')->middleware('isAdmin');
 
+    //----Baru----
+    //Chat
+    Route::get('/chat/contact/list','ChatController@get');
+    Route::get('/chat/conversation/{id}','ChatController@getMessagesFor');
+    Route::post('/chat/conversation/send','ChatController@send');
+    //------------
+
     //Kemitraan
     Route::post('/kemitraan/request/{id}','UserController@requestMitra');
     Route::put('/kemitraan/terima/{id}','UserController@terimaMitra');
