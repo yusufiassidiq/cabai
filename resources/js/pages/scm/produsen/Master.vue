@@ -126,6 +126,12 @@
                 <p>Transaksi Cabai</p>
               </router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/produsen/riwayattransaksi" class="nav-link">
+                <i class="fas fa-receipt nav-icon"></i>
+                <p>Riwayat Transaksi</p>
+              </router-link>
+            </li>
             <li class="nav-header">MANAJEMEN BISNIS</li>
             <li class="nav-item">
               <router-link to="/produsen/target" class="nav-link">

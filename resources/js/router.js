@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import UnverifiedDashboard from './pages/UnverifiedDashboard'
+import FailedValidation from './pages/UserGagalValidasi'
 import NotfoundLoggedUser from './pages/NotFoundLoggedUser'
 import NotFoundNonLoggedUser from './pages/NotFoundNonLoggedUser'
 import Chat from './components/chat/Chat'
@@ -26,6 +27,7 @@ import TransaksiCabai from './pages/scm/produsen/TransaksiCabai'
 import MitraSayaProd from './pages/scm/produsen/MitraSaya'
 import InventarisProdusen from "./pages/scm/produsen/Inventaris"
 import HasilPanenProd from './pages/scm/produsen/HasilPanen'
+import RiwayatTransaksiProd from './pages/scm/produsen/RiwayatTransaksi'
 
 import MasterPengepul from './pages/scm/pengepul/Master' // pengepul
 import DashboardPengepul from './pages/scm/pengepul/Dashboard'
@@ -34,6 +36,7 @@ import PermintaanMitraPengepul from './pages/scm/pengepul/PermintaanMitra'
 import TransaksiCabaiPengepul from './pages/scm/pengepul/TransaksiCabai'
 import InventarisPengepul from './pages/scm/pengepul/Inventaris'
 import MitraSayaPengepul from './pages/scm/pengepul/MitraSaya'
+import RiwayatTransaksiPengepul from './pages/scm/pengepul/RiwayatTransaksi'
 
 import MasterGrosir from './pages/scm/grosir/Master' // grosir
 import DashboardGrosir from './pages/scm/grosir/Dashboard'
@@ -42,6 +45,7 @@ import PermintaanMitraGrosir from './pages/scm/grosir/PermintaanMitra'
 import TransaksiCabaiGrosir from './pages/scm/grosir/TransaksiCabai'
 import InventarisGrosir from './pages/scm/grosir/Inventaris'
 import MitraSayaGrosir from './pages/scm/grosir/MitraSaya'
+import RiwayatTransaksiGrosir from './pages/scm/grosir/RiwayatTransaksi'
 
 
 import MasterPengecer from './pages/scm/pengecer/Master' // pengecer
@@ -51,6 +55,8 @@ import PermintaanMitraPengecer from './pages/scm/pengecer/PermintaanMitra'
 import TransaksiCabaiPengecer from './pages/scm/pengecer/TransaksiCabai'
 import InventarisPengecer from './pages/scm/pengecer/Inventaris'
 import MitraSayaPengecer from './pages/scm/pengecer/MitraSaya'
+import RiwayatTransaksiPengecer from './pages/scm/pengecer/RiwayatTransaksi'
+
 
 import MasterKonsumen from './pages/scm/konsumen/Master' // Konsumen
 import DashboardKonsumen from './pages/scm/konsumen/Dashboard'
@@ -61,6 +67,7 @@ import PermintaanMitraKonsumen from './pages/scm/konsumen/PermintaanMitra'
 // import InventarisKonsumen from './pages/scm/konsumen/Inventaris'
 import TransaksiCabaiKonsumen from './pages/scm/konsumen/TransaksiCabai'
 import MitraSayaKonsumen from './pages/scm/konsumen/MitraSaya'
+import RiwayatTransaksiKonsumen from './pages/scm/konsumen/RiwayatTransaksi'
 
 // Pages - Bisnis Analitik
 // Home
@@ -182,6 +189,11 @@ const routes = [
                 component: TransaksiCabai,
                 name: "transaksicabai"
             },
+            {
+                path: 'riwayattransaksi',
+                component: RiwayatTransaksiProd,
+                name: 'riwayattransaksiProd'
+            },
             //BA
             {
                 path: 'target',
@@ -255,6 +267,11 @@ const routes = [
                 component: InventarisGrosir,
                 name: "InventarisGrosir"
             },
+            {
+                path: 'riwayattransaksi',
+                component: RiwayatTransaksiGrosir,
+                name: 'riwayattransaksiGrosir'
+            },
         ]
     },
     {
@@ -308,6 +325,11 @@ const routes = [
                 component: InventarisPengecer,
                 name: "InventarisPengecer"
             },
+            {
+                path: 'riwayattransaksi',
+                component: RiwayatTransaksiPengecer,
+                name: 'riwayattransaksiPengecer'
+            },
         ]
     },
     {
@@ -360,6 +382,11 @@ const routes = [
                 component: InventarisPengepul,
                 name: "InventarisPengepul"
             },
+            {
+                path: 'riwayattransaksi',
+                component: RiwayatTransaksiPengepul,
+                name: 'riwayattransaksiPengepul'
+            },
         ]
     },
     {
@@ -406,9 +433,12 @@ const routes = [
                 path: 'transaksicabai',
                 component: TransaksiCabaiKonsumen,
                 name: "transaksicabaiKonsumen"
-            }
-            
-            
+            },
+            {
+                path: 'riwayattransaksi',
+                component: RiwayatTransaksiKonsumen,
+                name: 'riwayattransaksiKonsumen'
+            },
         ]
     },
     { path: '*', component: NotFoundNonLoggedUser },
@@ -516,21 +546,15 @@ const routes = [
             requiresVerified: true,
         }
     },
-    // ADMIN ROUTES
-    // {
-    //     path: '/:userId/details',
-    //     name: 'userDetails',
-    //     component: UserDetails,
-    //     meta: {
-    //         auth: {
-    //             roles: 1,
-    //             redirect: {
-    //                 name: 'login'
-    //             },
-    //             forbiddenRedirect: '/403'
-    //         }
-    //     }
-    // },
+    {
+        path: '/gagalvalidasi',
+        name: 'gagalvalidasi',
+        component: FailedValidation,
+        meta: {
+            auth: true,
+            requiresVerified: true,
+        }
+    },
 ]
 
 const router = new VueRouter({

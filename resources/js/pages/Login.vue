@@ -104,31 +104,36 @@ export default {
           // const redirectTo = redirect ? redirect.from.name : this.$auth.user().role === 2 ? 'admin.dashboard' : 'dashboard'
 
           let redirectTo;
-          if (redirect) {
-            redirectTo = redirect.from.name;
-          } else if (this.$auth.user().role === 1) {
-            redirectTo = "DashboardAdmin";
-          } else if (this.$auth.user().role === 2) {
-            if (this.$auth.user().status === 0)
-              redirectTo = "unverifiedDashboard";
-            else redirectTo = "DashboardProd";
-          } else if (this.$auth.user().role === 3) {
-            if (this.$auth.user().status === 0)
-              redirectTo = "unverifiedDashboard";
-            else redirectTo = "DashboardPengepul";
-          } else if (this.$auth.user().role === 4) {
-            if (this.$auth.user().status === 0)
-              redirectTo = "unverifiedDashboard";
-            else redirectTo = "DashboardGrosir";
-          } else if (this.$auth.user().role === 5) {
-            if (this.$auth.user().status === 0)
-              redirectTo = "unverifiedDashboard";
-            else redirectTo = "DashboardPengecer";
-          } else {
-            if (this.$auth.user().status === 0)
-              redirectTo = "unverifiedDashboard";
-            else redirectTo = "DashboardKonsumen";
-          }
+          if (this.$auth.user().status === 1) {
+            switch (this.$auth.user().role) {
+              case 1:
+                redirectTo = "DashboardAdmin";
+                break;
+              case 2:
+                redirectTo = "DashboardProd";
+                break;
+              case 3:
+                redirectTo = "DashboardPengepul";
+                break;
+              case 4:
+                redirectTo = "DashboardGrosir";
+                break;
+              case 5:
+                redirectTo = "DashboardPengecer";
+                break;
+              case 6:
+                redirectTo = "DashboardKonsumen";
+                break;
+              default:
+                // do nothing
+                break;
+            }
+          } 
+          else if (this.$auth.user().status === 0)
+            redirectTo = "unverifiedDashboard"
+          else
+            redirectTo = "gagalvalidasi"
+            
           this.$Progress.finish();
           // var sts = this.$auth.user()
           window.localStorage.setItem("isLoggedUser", true);

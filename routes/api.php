@@ -83,8 +83,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Transaksi Permintaan Cabai
     Route::post('/transaksi/permintaanSaya/tambah','UserController@addPermintaanSaya');
     Route::get('/transaksi/permintaanSaya/list','UserController@getPermintaanSaya');
+    Route::get('/transaksi/riwPermintaanSaya/list','UserController@getRiwayatPermintaanSaya');
     Route::put('/transaksi/permintaanSaya/update/{id}','UserController@requestUlangPermintaanSaya');
     Route::get('/transaksi/permintaanMasuk/list','UserController@getPermintaanMasuk');
+    Route::get('/transaksi/riwPermintaanMasuk/list','UserController@getRiwayatPermintaanMasuk');
     Route::put('/transaksi/permintaanMasuk/terima/{id}','UserController@terimaPermintaanMasuk');
     Route::put('/transaksi/permintaanPembeli/tolak/{id}','UserController@tolakPermintaanPembeli');
     Route::put('/transaksi/penawaranPemasok/tolak/{id}','UserController@tolakPenawaranPemasok');
@@ -102,6 +104,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Manajemen lahan
     Route::post('/praProduksi/tambah','ProdusenController@addLahan');
     Route::get('/praProduksi/list','ProdusenController@readLahan');
+    Route::get('/praProduksi/list/all','ProdusenController@readAllLahan');
     Route::put('/praProduksi/update/{id}','ProdusenController@updateLahan');
     Route::delete('/praProduksi/delete/{id}','ProdusenController@deleteLahan');
     //---baru---//

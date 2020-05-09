@@ -34,70 +34,111 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Management User</h3>
-
                 <div class="card-tools">
-                  <!-- <div class="input-group input-group-sm" style="width: 150px;">
+                  <div class="input-group input-group-sm" style="width: 150px;">
                     <input
                       type="text"
-                      name="table_search"
-                      class="form-control float-right"
-                      placeholder="Search"
+                      class="form-control input-sm float-right"
+                      placeholder="Cari User"
+                      v-model="stringNama"
                     />
-
                     <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
+                      <button class="btn btn-default">
                         <i class="fas fa-search"></i>
                       </button>
                     </div>
-                  </div>-->
+                  </div>
                 </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>Nama</th>
-                      <th>Role</th>
-                      <th>Email</th>
-                      <th>Tanggal divalidasi</th>
-                      <th>Surat Izin(SIUP)</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
+                <div class="row">
+                  <table class="table table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>Nama</th>
+                        <th>Role</th>
+                        <th>Email</th>
+                        <th>Tanggal divalidasi</th>
+                        <th>Surat Izin(SIUP)</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
 
-                  <tbody>
-                    <tr v-if="!users.length">
-                      <td colspan="5" align="center">Tidak ada user yang belum divalidasi</td>
-                    </tr>
-                    <tr v-for="user in users" v-bind:key="user.id" style="margin-bottom: 5px;">
-                      <td>{{ user.name }}</td>
-                      <td>{{ user.role | filterRoleUser }}</td>
-                      <td>{{ user.email }}</td>
-                      <td>{{ customFormatter(user.updated_at) }}</td>
-                      <td>
-                        <button class="btn btn-info btn-xs" @click="previewImage()">
+                    <tbody>
+                      <tr v-if="!filteredNama.length">
+                        <td colspan="5" align="center">Tidak ada user yang belum divalidasi</td>
+                      </tr>
+                      <tr
+                        v-for="user in filteredNama"
+                        v-bind:key="user.id"
+                        style="margin-bottom: 5px;"
+                      >
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.role | filterRoleUser }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ customFormatter(user.updated_at) }}</td>
+                        <td>
+                          <button class="btn btn-info btn-xs" @click="previewImage()">
                             <i class="fas fa-eye"></i>&nbsp; Lihat
                           </button>
                           &nbsp;/&nbsp;
-                          <button class="btn btn-secondary btn-xs" @click="downloadSIUP()">
+                          <button
+                            class="btn btn-secondary btn-xs"
+                            @click="downloadSIUP()"
+                          >
                             <i class="fas fa-file-download">&nbsp; Download</i>
                           </button>
-                      </td>
-                      
-                      <td>
-                        <a href="#">
-                          <i class="fas fa-edit blue" v-on:click="edituser(user.id)"></i>
-                        </a>
-                        /
-                        <a href="#" v-on:click="deleteUser(user.id)">
-                          <i class="fas fa-trash red"></i>
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                        </td>
+
+                        <td>
+                          <a href="#">
+                            <i class="fas fa-edit blue" v-on:click="edituser(user.id)"></i>
+                          </a>
+                          /
+                          <a href="#" v-on:click="deleteUser(user.id)">
+                            <i class="fas fa-trash red"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 d-flex justify-content-start align-self-center">
+                    <div
+                      style="padding-left: 20px"
+                    >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
+                  </div>
+
+                  <div
+                    class="col-md-6 d-flex justify-content-end align-self-end"
+                    style="padding-right: 30px"
+                  >
+                    <div class="dataTables_paginate paging_simple_numbers">
+                      <ul class="pagination">
+                        <li>
+                          <button
+                            href="#"
+                            class="btn btn-default"
+                            v-on:click="fetchPaginateUsers(pagination.prev_page_url)"
+                            :disabled="!pagination.prev_page_url"
+                          >Sebelumnya</button>
+                        </li>
+
+                        <li>
+                          <button
+                            class="btn btn-default"
+                            v-on:click="fetchPaginateUsers(pagination.next_page_url)"
+                            :disabled="!pagination.next_page_url"
+                          >Selanjutnya</button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
+
               <!-- /.card-body -->
             </div>
           </div>
@@ -144,25 +185,60 @@
     <!-- /.content-wrapper -->
   </div>
 </template>
+
+<style>
+.input-container input {
+  /* border: none;
+	background: transparent; */
+  color: black;
+  padding: 6px 6px;
+  font-size: 16px;
+}
+</style>
+
 <script>
 export default {
   data() {
     return {
       userDetail: "",
       has_error: false,
+      selectedUser: undefined,
       users: {},
-      selectedUser: undefined
+      // variabel untuk search
+      stringNama: "",
+      // untuk pagination
+      pagination: [],
+      url_getUser: "/user/validated"
     };
   },
   methods: {
+    // prev & next paggination
+    fetchPaginateUsers(url) {
+      this.url_getUser = url
+      this.getUsers()
+    },
+    // set up pagination
+    makePagination(data) {
+      let pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        prev_page_url: data.prev_page_url
+      };
+      this.pagination = pagination;
+    },
+    // get validated user
     getUsers() {
+      let $this = this;
       axios
-        .get("/user/validated")
+        .get(this.url_getUser)
         .then(response => {
-          this.users = response.data.users;
+          this.users = response.data.users.data
+          $this.makePagination(response.data.users)
         })
         .catch(error => {});
     },
+    // delete user
     deleteUser(id) {
       swal
         .fire({
@@ -178,7 +254,7 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .delete("/user/delete" + id)
+              .delete("/user/delete/" + id)
               .then(() => {
                 swal.fire("Terhapus!", "User berhasil dihapus", "success");
                 UpdateData.$emit("UserManagement");
@@ -195,6 +271,7 @@ export default {
           }
         });
     },
+    // showing modal edit
     edituser(id) {
       $("#editUser").modal("show");
     },
@@ -202,23 +279,42 @@ export default {
     updateUser() {
       console.log("update user");
     },
+    // format simpan tanggal
     customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     },
     // fungsi untuk melihat gambar SIUP User
     previewImage() {},
-
     // fungsi mendownload SIUP User
-    downloadSIUP() {},
+    downloadSIUP() {}
   },
-  created() {
+  computed: {
+    // fungsi search
+    filteredNama: function() {
+      var namaUser = this.users;
+      var stringNama = this.stringNama;
+
+      if (!stringNama) {
+        return namaUser;
+      }
+
+      var searchString = stringNama.trim().toLowerCase();
+
+      namaUser = namaUser.filter(function(item) {
+        if (item.name.toLowerCase().indexOf(stringNama) !== -1) {
+          return item;
+        }
+      });
+
+      return namaUser;
+    }
+  },
+  mounted() {
+    this.getUsers();
     // custom event vue to update data changes
     UpdateData.$on("UserManagement", () => {
       this.getUsers();
     });
-  },
-  mounted() {
-    this.getUsers();
   }
 };
 </script>
