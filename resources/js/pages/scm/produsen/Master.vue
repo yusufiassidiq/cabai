@@ -123,25 +123,25 @@
             <li class="nav-header">MANAJEMEN BISNIS</li>
             <li class="nav-item">
               <router-link to="/produsen/target" class="nav-link">
-                <i class="nav-icon fas fa-tasks"></i>
+                <i class="fas fa-bullseye nav-icon"></i>
                 <p>Rekap Target</p>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link to="/produsen/penjualan" class="nav-link">
-                <i class="fas fa-user-friends nav-icon"></i>
+                <i class="fas fa-chart-line nav-icon"></i>
                 <p>Rekap Penjualan</p>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link to="/produsen/pengeluaran" class="nav-link">
-                <i class="fas fa-user-friends nav-icon"></i>
+                <i class="fas fa-hand-holding-usd nav-icon"></i>
                 <p>Rekap Pengeluaran</p>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link to="/produsen/harga" class="nav-link">
-                <i class="nav-icon fas fa-tasks"></i>
+                <i class="fas fa-money-bill-wave nav-icon"></i>
                 <p>Rekap Harga Cabai</p>
               </router-link>
             </li>

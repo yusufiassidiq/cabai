@@ -212,6 +212,11 @@ class AnalysisController extends Controller
         //mengambil id dari PraProduksi yang dimiliki oleh user
         $year = Carbon::now()->format('Y'); //tahun saat ini
         $lahan = PraProduksi::Where('user_id',$idUser)->pluck('id');
+        $pengeluaranByLahanPupuk=null;
+        $pengeluaranByLahanAlatTani=null;  
+        $pengeluaranByLahanPestisida=null; 
+        $pengeluaranByLahanLainnya=null; 
+        $kodeLahan=null;  
         for ($i=0;$i<count($lahan);$i++){
             $pengeluaran[$i]= PengeluaranProduksi::where('pra_produksi_id',$lahan[$i])
                     ->select('nama_pengeluaran',DB::raw('count(*) as vol'), DB::raw("SUM(jumlah_pengeluaran) as total"))
@@ -238,7 +243,7 @@ class AnalysisController extends Controller
             }
         }
         return response()->json([
-            'month' => $kodeLahan,
+            'lahan' => $kodeLahan,
             'pupuk' => $pengeluaranByLahanPupuk,
             'alatTani' => $pengeluaranByLahanAlatTani,  
             'pestisida' => $pengeluaranByLahanPestisida, 
