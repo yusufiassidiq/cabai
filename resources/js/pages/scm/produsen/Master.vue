@@ -62,6 +62,12 @@
                 <p>Dashboard</p>
               </router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/produsen/chat" class="nav-link">
+                <i class="nav-icon fas fa-envelope"></i>
+                <p>Pesan</p>
+              </router-link>
+            </li>
             <li class="nav-header">Produksi</li>
             <li class="nav-item">
               <router-link to="/produsen/manajemenlahan" class="nav-link">
@@ -120,6 +126,12 @@
                 <p>Transaksi Cabai</p>
               </router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/produsen/riwayattransaksi" class="nav-link">
+                <i class="fas fa-receipt nav-icon"></i>
+                <p>Riwayat Transaksi</p>
+              </router-link>
+            </li>
             <li class="nav-header">MANAJEMEN BISNIS</li>
             <li class="nav-item">
               <router-link to="/produsen/target" class="nav-link">
@@ -167,13 +179,10 @@
 </template>
 <script>
 export default {
-  mounted() {
-    //
-  },
   methods: {
     clearLocalStorage() {
       localStorage.clear();
-    }
-  }
-};
+    },
+  },
+}
 </script>

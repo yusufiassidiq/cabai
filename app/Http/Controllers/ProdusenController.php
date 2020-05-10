@@ -46,7 +46,19 @@ class ProdusenController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
     public function readLahan(){
-        $praProduksi = PraProduksi::get();
+        $userId = Auth::user()->id;
+        $praProduksi = PraProduksi::where('user_id',$userId)->paginate(6);
+        foreach($praProduksi as $i){
+            $i->pengeluaran = $i->pengeluaranProduksi()->sum('jumlah_pengeluaran');
+        }
+        return response()->json([
+            'status' => 'success',
+            'data' => $praProduksi->toArray(),
+        ]);
+    }
+    public function readAllLahan(){
+        $userId = Auth::user()->id;
+        $praProduksi = PraProduksi::where('user_id',$userId)->get();
         foreach($praProduksi as $i){
             $i->pengeluaran = $i->pengeluaranProduksi()->sum('jumlah_pengeluaran');
         }
@@ -87,16 +99,19 @@ class ProdusenController extends Controller
                 'errors' => $v->errors()
             ], 422);
         }    
+        $userId = Auth::user()->id;
         $pengeluaran = new PengeluaranProduksi;
         $pengeluaran->pra_produksi_id = $request->pra_produksi_id;
         $pengeluaran->nama_pengeluaran = $request->nama_pengeluaran;
         $pengeluaran->jumlah_pengeluaran = $request->jumlah_pengeluaran;
         $pengeluaran->rincian = $request->rincian;
+        $pengeluaran->user_id = $userId;
         $pengeluaran->save();
         return response()->json(['status' => 'success'], 200);
     }
-    public function readPengeluaran(){
-        $pengeluaran= PengeluaranProduksi::all();
+    public function readPengeluaran(){  
+        $userId = Auth::user()->id;
+        $pengeluaran= PengeluaranProduksi::where('user_id',$userId)->paginate(6);
         foreach($pengeluaran as $i){
 
             $i->kodeLahan = $i->praProduksi()->first()->kode_lahan;
@@ -124,7 +139,9 @@ class ProdusenController extends Controller
         $panen = new Panen;
         $panen->pra_produksi_id = $request->pra_produksi_id;
         $panen->jumlah_panen = $request->jumlah_cabai;
-        $panen->tanggal_panen = $request->tanggal_panen;
+        $parsed_date = Carbon::parse($request->tanggal_panen)->toDateTimeString();
+        $panen->tanggal_panen = $parsed_date;
+        $panen->user_id = $userId;
         $panen->save();
         $jumlah_cabai = $request->jumlah_cabai;
         $praProduksi = PraProduksi::find($request->pra_produksi_id);
@@ -145,7 +162,7 @@ class ProdusenController extends Controller
             $qPraProduksi->whereHas("user", function($qUser) use($idUser){
                 $qUser->where("id", $idUser);
             });
-        })->get();
+        })->paginate(6);
         //atau ini yg lebih sederhana
         // $praProduksi_id = PraProduksi::where("user_id", $idUser)->pluck("id");
         // $panens = Panen::whereIn("pra_produksi_id", $praProduksi_id)->get();
@@ -168,7 +185,7 @@ class ProdusenController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
     public function deletePanen($id){
-        $panen = findOrFail($id);
+        $panen = Panen::findOrFail($id);
         $panen->delete();
         return 204;
     }

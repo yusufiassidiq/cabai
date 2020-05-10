@@ -14,7 +14,14 @@
 
           <form autocomplete="off" @submit.prevent="register" v-if="!success" method="post">
             <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.name }">
-              <input type="text" id="name" class="form-control" placeholder="Nama" v-model="name" required/>
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                placeholder="Nama"
+                v-model="name"
+                required
+              />
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-user"></span>
@@ -24,7 +31,14 @@
             <span class="help-block" v-if="has_error && errors.name">{{ errors.name }}</span>
 
             <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.email }">
-              <input type="email" id="email" class="form-control" placeholder="Email" v-model="email" required/>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                placeholder="Email"
+                v-model="email"
+                required
+              />
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
@@ -63,8 +77,17 @@
               </select>
             </div>
 
-            <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.password }">
-              <input type="password" class="form-control" placeholder="Password" v-model="password" required/>
+            <div
+              class="input-group mb-3"
+              v-bind:class="{ 'has-error': has_error && errors.password }"
+            >
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                v-model="password"
+                required
+              />
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
@@ -73,8 +96,18 @@
             </div>
             <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
 
-            <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.password }">
-              <input type="password" id="password_confirmation" class="form-control" v-model="password_confirmation" placeholder="Masukan ulang Password" required>
+            <div
+              class="input-group mb-3"
+              v-bind:class="{ 'has-error': has_error && errors.password }"
+            >
+              <input
+                type="password"
+                id="password_confirmation"
+                class="form-control"
+                v-model="password_confirmation"
+                placeholder="Masukan ulang Password"
+                required
+              />
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
@@ -82,7 +115,21 @@
               </div>
             </div>
             <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
-           
+
+            <label>Unggah Surat Izin Usaha Perdagangan (SIUP)</label>
+            <div
+              class="input-group mb-3"
+              v-bind:class="{ 'has-error': has_error && errors.fotosk }"
+            >
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input form-control" id="exampleInputFile" />
+                  <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
+                </div>
+              </div>
+            </div>
+            <span class="help-block" v-if="has_error && errors.fotosk">{{ errors.fotosk }}</span>
+
             <div class="row">
               <div class="col-12">
                 <button type="submit" class="btn btn-primary btn-block">Daftar</button>
@@ -91,11 +138,11 @@
           </form>
         </div>
         <div class="card-footer">
-        <small class="text-muted">Sudah punya akun?</small>
-        <router-link to="/login">
-          <small>Masuk</small>
-        </router-link>
-      </div>
+          <small class="text-muted">Sudah punya akun?</small>
+          <router-link to="/login">
+            <small>Masuk</small>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -118,24 +165,29 @@ export default {
       success: false
     };
   },
-  mounted: function(){
-    function makeRequest (method, url, done) {
+  mounted: function() {
+    function makeRequest(method, url, done) {
       var xhr = new XMLHttpRequest();
       xhr.open(method, url);
-      xhr.onload = function () {
+      xhr.onload = function() {
         done(null, xhr.response);
       };
-      xhr.onerror = function () {
+      xhr.onerror = function() {
         done(xhr.response);
       };
       xhr.send();
     }
 
-    var hasil = makeRequest('GET', 'https://x.rajaapi.com/poe', function (err, datums) {
-      if (err) { throw err; }
-      hasil = JSON.parse(datums)
-      var return_first = hasil.token
-    
+    var hasil = makeRequest("GET", "https://x.rajaapi.com/poe", function(
+      err,
+      datums
+    ) {
+      if (err) {
+        throw err;
+      }
+      hasil = JSON.parse(datums);
+      var return_first = hasil.token;
+
       // var return_first = function() {
       // var tmp = null;
       // $.ajax({
@@ -153,69 +205,121 @@ export default {
       // }();
 
       $(document).ready(function() {
-          var propinsi = 32; //id jawa barat
-          $.ajax({
-              url: 'https://x.rajaapi.com/MeP7c5ne' + return_first + '/m/wilayah/kabupaten',
-              data: "idpropinsi=" + propinsi,
-              type: 'GET',
-              dataType: 'json',
-              success: function(json) {
-                  if (json.code == 200) {
-                      for (var i = 0; i < Object.keys(json.data).length; i++) {
-                          $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name).attr('idnya', json.data[i].id)); 
-                      }
-                  } else {
-                      $('#kecamatan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
-                  }
+        var propinsi = 32; //id jawa barat
+        $.ajax({
+          url:
+            "https://x.rajaapi.com/MeP7c5ne" +
+            return_first +
+            "/m/wilayah/kabupaten",
+          data: "idpropinsi=" + propinsi,
+          type: "GET",
+          dataType: "json",
+          success: function(json) {
+            if (json.code == 200) {
+              for (var i = 0; i < Object.keys(json.data).length; i++) {
+                $("#kabupaten").append(
+                  $("<option>")
+                    .text(json.data[i].name)
+                    .attr("value", json.data[i].name)
+                    .attr("idnya", json.data[i].id)
+                );
               }
-          });
-                      
-          $("#kabupaten").change(function() {
-              // var kabupaten = $("#kabupaten").val();
-              var kabupaten = $("#kabupaten option:selected").attr('idnya');
-              $.ajax({
-                  url: 'https://x.rajaapi.com/MeP7c5ne' + return_first + '/m/wilayah/kecamatan',
-                  data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi,
-                  type: 'GET',
-                  cache: false,
-                  dataType: 'json',
-                  success: function(json) {
-                      $("#kecamatan").html('');
-                      if (json.code == 200) {
-                        $('#kecamatan').append($('<option>').text('Pilih Kecamatan').attr('value', ''));
-                          for (var i = 0; i < Object.keys(json.data).length; i++) {
-                              $('#kecamatan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name).attr('idnya', json.data[i].id));
-                          }
-                          $('#kelurahan').html($('<option>').text('Pilih Kelurahan').attr('value', ''));
+            } else {
+              $("#kecamatan").append(
+                $("<option>")
+                  .text("Data tidak di temukan")
+                  .attr("value", "Data tidak di temukan")
+              );
+            }
+          }
+        });
 
-                      } else {
-                          $('#kecamatan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
-                      }
-                  }
-              });
+        $("#kabupaten").change(function() {
+          // var kabupaten = $("#kabupaten").val();
+          var kabupaten = $("#kabupaten option:selected").attr("idnya");
+          $.ajax({
+            url:
+              "https://x.rajaapi.com/MeP7c5ne" +
+              return_first +
+              "/m/wilayah/kecamatan",
+            data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi,
+            type: "GET",
+            cache: false,
+            dataType: "json",
+            success: function(json) {
+              $("#kecamatan").html("");
+              if (json.code == 200) {
+                $("#kecamatan").append(
+                  $("<option>")
+                    .text("Pilih Kecamatan")
+                    .attr("value", "")
+                );
+                for (var i = 0; i < Object.keys(json.data).length; i++) {
+                  $("#kecamatan").append(
+                    $("<option>")
+                      .text(json.data[i].name)
+                      .attr("value", json.data[i].name)
+                      .attr("idnya", json.data[i].id)
+                  );
+                }
+                $("#kelurahan").html(
+                  $("<option>")
+                    .text("Pilih Kelurahan")
+                    .attr("value", "")
+                );
+              } else {
+                $("#kecamatan").append(
+                  $("<option>")
+                    .text("Data tidak di temukan")
+                    .attr("value", "Data tidak di temukan")
+                );
+              }
+            }
           });
-          $("#kecamatan").change(function() {
-              // var kecamatan = $("#kecamatan").val();
-              var kecamatan = $("#kecamatan option:selected").attr('idnya');
-              $.ajax({
-                  url: 'https://x.rajaapi.com/MeP7c5ne' + return_first + '/m/wilayah/kelurahan',
-                  data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi + "&idkecamatan=" + kecamatan,
-                  type: 'GET',
-                  dataType: 'json',
-                  cache: false,
-                  success: function(json) {
-                      $("#kelurahan").html('');
-                      if (json.code == 200) {
-                        $('#kelurahan').html($('<option>').text('Pilih Kelurahan').attr('value', ''));
-                          for (var i = 0; i < Object.keys(json.data).length; i++) {
-                              $('#kelurahan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name));
-                          }
-                      } else {
-                          $('#kelurahan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
-                      }
-                  }
-              });
+        });
+        $("#kecamatan").change(function() {
+          // var kecamatan = $("#kecamatan").val();
+          var kecamatan = $("#kecamatan option:selected").attr("idnya");
+          $.ajax({
+            url:
+              "https://x.rajaapi.com/MeP7c5ne" +
+              return_first +
+              "/m/wilayah/kelurahan",
+            data:
+              "idkabupaten=" +
+              kabupaten +
+              "&idpropinsi=" +
+              propinsi +
+              "&idkecamatan=" +
+              kecamatan,
+            type: "GET",
+            dataType: "json",
+            cache: false,
+            success: function(json) {
+              $("#kelurahan").html("");
+              if (json.code == 200) {
+                $("#kelurahan").html(
+                  $("<option>")
+                    .text("Pilih Kelurahan")
+                    .attr("value", "")
+                );
+                for (var i = 0; i < Object.keys(json.data).length; i++) {
+                  $("#kelurahan").append(
+                    $("<option>")
+                      .text(json.data[i].name)
+                      .attr("value", json.data[i].name)
+                  );
+                }
+              } else {
+                $("#kelurahan").append(
+                  $("<option>")
+                    .text("Data tidak di temukan")
+                    .attr("value", "Data tidak di temukan")
+                );
+              }
+            }
           });
+        });
       });
       // if (localStorage.getItem('reloaded')) {
       //     // The page was just reloaded. Clear the value from local storage
@@ -256,7 +360,7 @@ export default {
           app.has_error = true;
           app.error = res.response.data.error;
           app.errors = res.response.data.errors || {};
-          this.$Progress.fail()
+          this.$Progress.fail();
         }
       });
     }
