@@ -47,7 +47,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow:hidden;
+  overflow-x: auto;
+  overflow-y: auto;
 
   h1 {
     font-size: 20px;

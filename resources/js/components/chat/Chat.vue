@@ -114,6 +114,6 @@ export default {
 <style lang="scss" scoped>
 .chat-app {
   display: flex;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 </style>
