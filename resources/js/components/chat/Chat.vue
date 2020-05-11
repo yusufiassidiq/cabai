@@ -11,9 +11,9 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">Produsen</a>
+                <a href="#"></a>
               </li>
-              <li class="breadcrumb-item active">Pesan</li>
+              <li class="">Pesan</li>
             </ol>
           </div>
         </div>
@@ -60,8 +60,9 @@ export default {
     };
   },
   mounted() {
+    
     Echo.connector.pusher.config.auth.headers['Authorization'] = 'Bearer '+this.$auth.token()
-    console.log("mounted")
+    // console.log("mounted")
     Echo.private(`messages.${this.$auth.user().id}`).listen("NewMessage", (e) => {
       console.log("abc")
       this.handleIncoming(e.message);
@@ -113,5 +114,6 @@ export default {
 <style lang="scss" scoped>
 .chat-app {
   display: flex;
+  overflow: hidden;
 }
 </style>

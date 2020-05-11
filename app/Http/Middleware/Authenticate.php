@@ -10,12 +10,6 @@ class Authenticate extends Middleware
 {
     public function handle($request, Closure $next, ...$guards)
     {
-        // $credentials = [
-        //     'email' => session('email'),
-        //     'password' => session('password'),
-        // ];
-        // dd($credentials);
-        // Auth::attempt(['email' => $email[email], 'password' => 'asd']);
         if ($this->authenticate($request, $guards) === 'authentication_error') {
             return response()->json(['error'=>Auth::user()]);
         }        

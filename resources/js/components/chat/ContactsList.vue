@@ -61,7 +61,7 @@ export default {
   flex: 2;
   max-height: 100%;
   height: 600px;
-  overflow: scroll;
+  overflow: hidden;
   border-left: 1px solid #a6a6a6;
 
   ul {

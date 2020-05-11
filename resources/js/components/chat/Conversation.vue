@@ -47,6 +47,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow:hidden;
 
   h1 {
     font-size: 20px;

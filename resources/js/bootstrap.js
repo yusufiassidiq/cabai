@@ -45,7 +45,7 @@ if (token) {
 
 import Echo from 'laravel-echo';
 
-const bearer = localStorage.getItem('token')
+// const bearer = localStorage.getItem('token')
 window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
