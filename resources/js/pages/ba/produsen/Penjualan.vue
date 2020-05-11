@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">Pegepul</a>
+                <a href="#">Produsen</a>
               </li>
               <li class="breadcrumb-item active">Laporan Penjualan</li>
             </ol>
