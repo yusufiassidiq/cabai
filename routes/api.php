@@ -96,7 +96,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Inventaris
     Route::get('/inventaris/list','UserController@getInventaris');
     //---sementara---
-    Route::put('/inventaris/tambah','UserController@addInventaris');
+    // Route::put('/inventaris/tambah','UserController@addInventaris');
     //--------------
     Route::put('/inventaris/stokKeluar/{id}','UserController@stokKeluar');
     Route::put('/inventaris/stokMasuk/{id}','UserController@stokMasuk');
