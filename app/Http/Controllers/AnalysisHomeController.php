@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+// use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Lokasi;
 use App\Transaksi;
+use App\Panen;
+use App\PraProduksi;
 use App\User;
+use App\Kabupaten;
 use Carbon\Carbon;
 use DB;
 
@@ -140,4 +145,111 @@ class AnalysisHomeController extends Controller
         ]);
     }
 
+    public function getDaerah()
+    {
+        $daerah = Kabupaten::all(['name','id']);
+        return response()->json(
+            [
+                'daerah' => $daerah,
+                
+            ], 200);
+
+
+    }
+    
+    public function getHarga(Request $request, $idKab, $idRole)
+    {
+        // Mengambil data user dari kab/kota
+        $kab = Kabupaten::where('id',$idKab)->first('name');
+        $idUser = Lokasi::whereIn('kabupaten',$kab)->pluck('user_id');
+        $idPemasok = User::whereIn('id', $idUser)->where('role',$idRole)->pluck('id');
+        $role = array('ADMIN', 'PRODUSEN', 'PENGEPUL', 'GROSIR', 'ECERAN');
+
+        $dateNow = Carbon::now()->isoFormat('dddd, Do MMMM YYYY');
+        $now = Carbon::now()->format('Y-m-d');
+        $start = Carbon::now()->subweek(4)->format('Y-m-d');
+        $end = Carbon::now()->format('Y-m-d');
+        
+        $jenisCabai = array('Cabai rawit', 'Cabai keriting', 'Cabai besar');
+
+        for ($i=0;$i<count($jenisCabai);$i++){
+            $transaksiPemasok[$i] = Transaksi::whereIn('pemasok_id', $idPemasok)
+                    ->Where([['status_permintaan', '3'],
+                        ['status_pengiriman', '1'],
+                        ['status_pemesanan', '1'],
+                        ['jenis_cabai', $jenisCabai[$i]],
+                    ])->whereBetween('tanggal_diterima', [$start, $end])
+                    ->select('tanggal_diterima', DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai",))
+                    ->groupBy('tanggal_diterima')
+                    ->get();
+        }
+
+        $awal = Carbon::now()->subweek(4);
+        for ($i = 0; $i < 28; $i++) {
+            $array_date[$i] = $awal->format('Y-m-d');
+            $awal = $awal->addDay();
+            
+            // k = loop berdasarkan jenis cabai
+            for ($k = 0; $k < count($jenisCabai); $k++) {
+                $harga = $transaksiPemasok[$k]->firstWhere('tanggal_diterima', $array_date[$i]) ?
+                    $transaksiPemasok[$k]->firstWhere('tanggal_diterima', $array_date[$i])->hargaCabai : 0;
+                //Harga per stakeholder, jenis cabai, dan tanggal
+                $hargaByDay[$k][$i] = $harga;
+            }
+
+        }
+        
+        return response()->json([
+            'transaksi' => $transaksiPemasok,
+            'hargaHarianRawit' => $hargaByDay[0],
+            'hargaHarianKeriting' => $hargaByDay[1],
+            'hargaHarianBesar' => $hargaByDay[2],
+            'date' => $array_date,
+            'dateNow' => $dateNow,
+            'kabupaten' => $kab,
+            'role' => $role[$idRole - 1],
+            // 'hargaMingguan' => $hargaMingguan,
+        ], 200);
+
+    }
+    
+    public function getProduksi(Request $request, $idKab)
+    {
+        // ambil data panen/produksi sesuai lokasi/kabupaten
+        // $idKab = 1;
+        $nameKab = Kabupaten::where('id',$idKab)->first('name');
+        $userId = Lokasi::whereIn('kabupaten',$nameKab)->pluck('user_id');
+        $praProduksi = PraProduksi::whereIn('user_id',$userId)->pluck('id');
+        $panen = Panen::whereIn('pra_produksi_id',$praProduksi)->get();
+        $rataanPanen = $panen->avg('jumlah_panen');
+        $jumlahPanen = $panen->sum('jumlah_panen');
+        
+        $dateNow = Carbon::now()->isoFormat('dddd, Do MMMM YYYY');
+        $now = Carbon::now()->format('Y-m-d');
+        $start = Carbon::now()->subweek(4)->format('Y-m-d');
+        $end = Carbon::now()->format('Y-m-d');
+
+        $awal = Carbon::now()->subweek(4);
+        for ($i=0;$i<28;$i++)
+        {
+            $array_date[$i] = $awal->format('Y-m-d');
+            $awal = $awal->addDay();
+
+            $produksiByDay[$i] = $panen->where('tanggal_panen',$array_date[$i])->sum('jumlah_panen');
+
+        }
+
+        return response()->json([
+            'produksi' => array($userId,$praProduksi,$panen,$rataanPanen),
+            'produksiByDay' => $produksiByDay,
+            'date' => $array_date,
+            'dateNow' => $dateNow,
+            'kabupaten' => $nameKab,
+
+            // 'role_user' => $role_user,
+            // 'year' => $year,
+            // 'total_user' => $jml_user,
+            // 'user' => $data_user,
+        ], 200); 
+    }
 }

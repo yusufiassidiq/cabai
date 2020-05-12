@@ -125,6 +125,10 @@ Route::group(['middleware' => 'auth:api'], function(){
 Route::get('/getUserCount','AnalysisHomeController@getUserCount'); //test
 Route::get('/getAllUserLocation','AnalysisHomeController@getAllUserLocation');
 Route::get('/getAllHarga','AnalysisHomeController@getAllHarga');
+Route::get('/getDaerah','AnalysisHomeController@getDaerah');
+Route::get('/getHarga/{idKab}/{idRole}','AnalysisHomeController@getHarga');
+Route::get('/getProduksi/{idKab}','AnalysisHomeController@getProduksi');
+
 
 // Route::resources([
 //     'user' => 'API\DummyController',
