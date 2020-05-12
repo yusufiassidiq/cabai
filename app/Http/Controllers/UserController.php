@@ -261,13 +261,19 @@ class UserController extends Controller
         $user1 = $kemitraan->user1_id;
         $user2 = $kemitraan->user2_id;
 
-        if($userId != $user1 || $userId != $user2){
-            return response()->json(['status' => 'error'], 422);
+        if($userId != $user1){
+            if($userId != $user2){
+                return response()->json(['status' => 'error'], 422);
+            }
         }
-
-        $kemitraan->update([
-            'status' => 3,
-        ]);
+        // semula
+        // $kemitraan->update([
+        //     'status' => 3,
+        // ]);
+        
+        // di hapus dulu karena user yang telah ditolak tidak bisa mengajukan kembali
+        // kalau udah solve siliahkan ubah ke semula
+        $kemitraan->delete();
         return response()->json(['status' => 'success'], 200);
     }
 
@@ -430,7 +436,14 @@ class UserController extends Controller
     }
     public function getPermintaanMasuk(){
         $userId = Auth::user()->id;
-        $transaksi = Transaksi::where('pemasok_id',$userId)->where('status_pemesanan','!=',1)->orWhereNull('status_pemesanan')->orderBy('id','DESC')->get();
+        $transaksi = Transaksi::where([
+            ['pemasok_id','=',$userId],
+            ['status_pemesanan', '=', null],
+        ])->orWhere([
+            ['pemasok_id','=',$userId],
+            ['status_pemesanan', '=', 0],
+        ])
+        ->orderBy('updated_at','DESC')->paginate(6);
         foreach($transaksi as $i){
             $i->nama = $i->user()->first()->name;
         }
@@ -440,9 +453,58 @@ class UserController extends Controller
             'data' => $transaksi->toArray()
         ], 200);
     }
+    public function getRiwayatPermintaanMasuk(){
+        $userId = Auth::user()->id;
+        $transaksi = Transaksi::where([
+            ['pemasok_id','=',$userId],
+            ['status_pemesanan', '=', 1],
+        ])
+        ->orderBy('tanggal_pengiriman','DESC')->paginate(6);
+        foreach($transaksi as $i){
+            $i->nama = $i->user()->first()->name;
+        }
+        return response()->json([
+            'status' => 'success', 
+            'data' => $transaksi->toArray()
+        ], 200);
+    }
     public function getPermintaanSaya(){
         $userId = Auth::user()->id;
-        $transaksi = Transaksi::where('user_id',$userId)->where('status_pemesanan','!=',1)->orWhereNull('status_pemesanan')->orderBy('id','DESC')->get();
+        $transaksi = Transaksi::where([
+            ['user_id','=',$userId],
+            ['status_pemesanan', '=', null],
+        ])->orWhere([
+            ['user_id','=',$userId],
+            ['status_pemesanan', '=', 0],
+        ])
+        ->orderBy('updated_at','DESC')->paginate(6);
+
+        $j=0;
+        foreach($transaksi as $i){
+            $id_pemasok = $transaksi[$j]->pemasok_id;
+            $user = User::find($id_pemasok);
+            $lokasi = $user->lokasi()->first(['kabupaten','kecamatan','kelurahan']);
+            $i->lokasi = $lokasi;
+            $nama_pemasok = $user->name;
+            $role_pemasok = $user->role;
+            $i->nama = $nama_pemasok;
+            $i->role = $role_pemasok;
+            // $
+            $j++;
+        }
+        return response()->json([
+            'status' => 'success', 
+            'data' => $transaksi->toArray()
+        ], 200);
+    }
+    public function getRiwayatPermintaanSaya(){
+        $userId = Auth::user()->id;
+        $transaksi = Transaksi::where([
+            ['user_id','=',$userId],
+            ['status_pemesanan', '=', 1],
+        ])
+        ->orderBy('tanggal_diterima','DESC')->paginate(6);
+
         $j=0;
         foreach($transaksi as $i){
             $id_pemasok = $transaksi[$j]->pemasok_id;
@@ -525,19 +587,19 @@ class UserController extends Controller
             'role' =>$userId
         ], 200);
     }
-    public function addInventaris(Request $request){
-        $userId = Auth::user()->id;
-        $jumlah_cabai = $request->jumlah_cabai;
-        $jenis_cabai = $request->jenis_cabai;
-        $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
-        foreach ($inventaris as $i ) {
-            $jumlah_cabai_sementara = $i->jumlah_cabai;
-            $i->update([
-                'jumlah_cabai' => $jumlah_cabai_sementara + $jumlah_cabai
-            ]);
-        }
-        return response()->json(['status' => 'success'], 200);
-    }
+    // public function addInventaris(Request $request){
+    //     $userId = Auth::user()->id;
+    //     $jumlah_cabai = $request->jumlah_cabai;
+    //     $jenis_cabai = $request->jenis_cabai;
+    //     $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
+    //     foreach ($inventaris as $i ) {
+    //         $jumlah_cabai_sementara = $i->jumlah_cabai;
+    //         $i->update([
+    //             'jumlah_cabai' => $jumlah_cabai_sementara + $jumlah_cabai
+    //         ]);
+    //     }
+    //     return response()->json(['status' => 'success'], 200);
+    // }
     public function stokKeluar(Request $request, $idTransaksi){
         $userId = Auth::user()->id;
         $jumlah_cabai = $request->jumlah_cabai;

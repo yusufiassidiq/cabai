@@ -139,7 +139,7 @@ export default {
     // prev & next paggination
     fetchPaginate(url) {
       this.url_getMitra = url;
-      this.getMitra();
+      this.getPermintaanMitra();
     },
     // set up pagination
     makePagination(data) {

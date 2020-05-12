@@ -7,7 +7,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#">
             <i class="fas fa-bars"></i>
           </a>
-        </li>
+        </li> 
       </ul>
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
@@ -86,7 +86,7 @@
                 <p>Pengajuan Mitra</p>
               </router-link>
             </li> -->
-            <li class="nav-header">MANAJEMEN PERSEDIAAN</li>
+            <li class="nav-header">Inventaris</li>
             <li class="nav-item">
               <router-link to="/pengecer/inventaris" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
@@ -98,6 +98,12 @@
               <router-link to="/pengecer/transaksicabai" class="nav-link">
                 <i class="fas fa-file-invoice nav-icon"></i>
                 <p>Transaksi Cabai</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/pengecer/riwayattransaksi" class="nav-link">
+                <i class="fas fa-receipt nav-icon"></i>
+                <p>Riwayat Transaksi</p>
               </router-link>
             </li>
             <li class="nav-header">Bisnis Analitik</li>

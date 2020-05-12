@@ -15,7 +15,7 @@
           <a href @click.prevent="$auth.logout();clearLocalStorage()">Logout</a>
         </li>
         <!-- SEARCH FORM -->
-        <!-- <li class="nac-item">
+        <!-- <li class="nac-item"> 
             <form class="form-inline ml-3">
               <div class="input-group input-group-sm">
                 <input
@@ -60,6 +60,12 @@
                 <p>Dashboard</p>
               </router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/pengepul/chat" class="nav-link">
+                <i class="nav-icon fas fa-envelope"></i>
+                <p>Pesan</p>
+              </router-link>
+            </li>
             <li class="nav-header">Kemitraan</li>
             <li class="nav-item">
               <router-link to="/pengepul/daftarmitra" class="nav-link">
@@ -85,7 +91,7 @@
                 <p>Pengajuan Mitra</p>
               </router-link>
             </li> -->
-            <li class="nav-header">MANAJEMEN PERSEDIAAN</li>
+            <li class="nav-header">Inventaris</li>
             <li class="nav-item">
               <router-link to="/pengepul/inventaris" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
@@ -97,6 +103,12 @@
               <router-link to="/pengepul/transaksicabai" class="nav-link">
                 <i class="fas fa-file-invoice nav-icon"></i>
                 <p>Transaksi Cabai</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/pengepul/riwayattransaksi" class="nav-link">
+                <i class="fas fa-receipt nav-icon"></i>
+                <p>Riwayat Transaksi</p>
               </router-link>
             </li>
             <li class="nav-header">Bisnis Analitik</li>

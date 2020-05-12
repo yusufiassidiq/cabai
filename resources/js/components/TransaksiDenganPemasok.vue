@@ -29,90 +29,127 @@
       </div>
       <!-- /.card-header -->
       <div class="card-body table-responsive p-0">
-        <table class="table table-hover text-nowrap">
-          <thead>
-            <tr>
-              <th>Pemasok</th>
-              <th>Role</th>
-              <th>Lokasi</th>
-              <th>Jenis Cabai</th>
-              <th>Jumlah Cabai(Kg)</th>
-              <th>Harga Cabai</th>
-              <th>Tanggal Diterima</th>
-              <th>Tanggal Pengiriman</th>
-              <th>Status</th>
-              <th>Keterangan</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
+        <div class="row">
+          <table class="table table-hover text-nowrap">
+            <thead>
+              <tr>
+                <th>Pemasok</th>
+                <th>Role</th>
+                <th>Alamat</th>
+                <th>Jenis Cabai</th>
+                <th>Jumlah Cabai(Kg)</th>
+                <th>Harga Cabai</th>
+                <th>Tanggal Diterima</th>
+                <th>Tanggal Pengiriman</th>
+                <th>Status</th>
+                <th>Keterangan</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <tr v-if="!listPermintaanSaya.length">
-              <td colspan="11" align="center">Tidak ada permintaan anda</td>
-            </tr>
-            <tr v-for="data in listPermintaanSaya" :key="data.id">
-              <td>{{ data.nama }}</td>
-              <td>{{ data.role | filterRoleUser }}</td>
-              <td>{{ data.lokasi.kelurahan | filterAlamat }} , {{ data.lokasi.kecamatan | filterAlamat }} , {{ data.lokasi.kabupaten | filterAlamat }}</td>
-              <td>{{ data.jenis_cabai }}</td>
-              <td>{{ data.jumlah_cabai | filterAngkaRibuan }}</td>
-              <td>
-                <div v-if="data.harga!==null">{{data.harga | convertToRupiah }}</div>
-                <div v-else>Belum ditetapkan</div>
-              </td>
-              <td>{{ data.tanggal_diterima | dateFilter }}</td>
-              <td>
-                <div v-if="data.tanggal_pengiriman!==null">{{ data.tanggal_pengiriman | dateFilter }}</div>
-                <div v-else>Belum ditetapkan</div>
-              </td>
-              <td>
-                <div v-if="data.status_permintaan === 0">Menunggu penawaran pemasok</div>
-                <div class="red" v-else-if="data.status_permintaan === 2">Permintaan Anda ditolak</div>
-                <div v-else-if="data.status_permintaan === 4">Anda menolak penawaran</div>
-                <div v-else-if="data.status_permintaan === 3">Menunggu Pengiriman</div>
-                <div v-else-if="data.status_permintaan === 1">Menunggu persetujuan Anda</div>
-              </td>
-              <td>
-                <div v-if="data.status_permintaan === 2">{{ data.keterangan }}</div>
-                <div v-else>-</div>
-              </td>
-              <td>
-                <div v-if="data.status_permintaan === 2">
+            <tbody>
+              <tr v-if="!listPermintaanSaya.length">
+                <td colspan="11" align="center">Tidak ada permintaan anda</td>
+              </tr>
+              <tr v-for="data in listPermintaanSaya" :key="data.id">
+                <td>{{ data.nama }}</td>
+                <td>{{ data.role | filterRoleUser }}</td>
+                <td>{{ data.lokasi.kabupaten | filterAlamat }}</td>
+                <td>{{ data.jenis_cabai }}</td>
+                <td>{{ data.jumlah_cabai | filterAngkaRibuan }}</td>
+                <td>
+                  <div v-if="data.harga!==null">{{data.harga | convertToRupiah }}</div>
+                  <div v-else>Belum ditetapkan</div>
+                </td>
+                <td>{{ data.tanggal_diterima | dateFilter }}</td>
+                <td>
+                  <div
+                    v-if="data.tanggal_pengiriman!==null"
+                  >{{ data.tanggal_pengiriman | dateFilter }}</div>
+                  <div v-else>Belum ditetapkan</div>
+                </td>
+                <td>
+                  <div v-if="data.status_permintaan === 0">Menunggu penawaran pemasok</div>
+                  <div class="red" v-else-if="data.status_permintaan === 2">Permintaan Anda ditolak</div>
+                  <div v-else-if="data.status_permintaan === 4">Anda menolak penawaran</div>
+                  <div v-else-if="data.status_permintaan === 3">Menunggu Pengiriman</div>
+                  <div v-else-if="data.status_permintaan === 1">Menunggu persetujuan Anda</div>
+                </td>
+                <td>
+                  <div v-if="data.status_permintaan === 2">{{ data.keterangan }}</div>
+                  <div v-else>-</div>
+                </td>
+                <td>
+                  <div v-if="data.status_permintaan === 2">
+                    <button
+                      type="button"
+                      class="btn btn-success btn-xs"
+                      @click="modalRequestUlang(data)"
+                    >Permintaan ulang</button>
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-xs"
+                      @click="deletePermintaanCabai(data.id)"
+                    >Hapus</button>
+                  </div>
+                  <div v-else-if="data.status_permintaan === 1">
+                    <button
+                      type="button"
+                      class="btn btn-success btn-xs"
+                      @click="modalTerimaPenawaran(data)"
+                    >Terima</button>
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-xs"
+                      @click="modalTolakPenawaran(data)"
+                    >Tolak</button>
+                  </div>
+                  <div v-else-if="data.status_permintaan === 3 && data.status_pengiriman === 1">
+                    <button
+                      type="button"
+                      class="btn btn-success btn-xs"
+                      @click="sudahDiterima(data)"
+                    >Sudah diterima?</button>
+                  </div>
+                  <div v-else>-</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-6 d-flex justify-content-start align-self-center">
+            <div
+              style="padding-left: 20px"
+            >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
+          </div>
+
+          <div
+            class="col-md-6 d-flex justify-content-end align-self-end"
+            style="padding-right: 30px"
+          >
+            <div class="dataTables_paginate paging_simple_numbers">
+              <ul class="pagination">
+                <li>
                   <button
-                    type="button"
-                    class="btn btn-success btn-xs"
-                    @click="modalRequestUlang(data)"
-                  >Permintaan ulang</button>
+                    href="#"
+                    class="btn btn-default"
+                    v-on:click="fetchPaginate(pagination.prev_page_url)"
+                    :disabled="!pagination.prev_page_url"
+                  >Sebelumnya</button>
+                </li>
+
+                <li>
                   <button
-                    type="button"
-                    class="btn btn-danger btn-xs"
-                    @click="deletePermintaanCabai(data.id)"
-                  >Hapus</button>
-                </div>
-                <div v-else-if="data.status_permintaan === 1">
-                  <button
-                    type="button"
-                    class="btn btn-success btn-xs"
-                    @click="modalTerimaPenawaran(data)"
-                  >Terima</button>
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-xs"
-                    @click="modalTolakPenawaran(data)"
-                  >Tolak</button>
-                </div>
-                <div v-else-if="data.status_permintaan === 3 && data.status_pengiriman === 1">
-                  <button
-                    type="button"
-                    class="btn btn-success btn-xs"
-                    @click="sudahDiterima(data)"
-                  >Sudah diterima?</button>
-                </div>
-                <div v-else>-</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                    class="btn btn-default"
+                    v-on:click="fetchPaginate(pagination.next_page_url)"
+                    :disabled="!pagination.next_page_url"
+                  >Selanjutnya</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- /.card-body -->
     </div>
@@ -333,7 +370,6 @@
       </div>
     </div>
     <vue-progress-bar></vue-progress-bar>
-    
   </div>
 </template>
 <script>
@@ -359,17 +395,35 @@ export default {
         keterangan: ""
       }),
       formReceived: new Form({
-        id:"",
-        jenis_cabai:"",
-        jumlah_cabai:"",
+        id: "",
+        jenis_cabai: "",
+        jumlah_cabai: ""
       }),
       requestUlang: false,
       modalTerima: true,
       listPermintaanSaya: {},
-      dataMitra: {}
+      dataMitra: {},
+      // pagination
+      pagination: [],
+      url_permintaanSaya: "/transaksi/permintaanSaya/list"
     };
   },
   methods: {
+    // prev & next paggination
+    fetchPaginate(url) {
+      this.url_permintaanSaya = url;
+      this.getPermintaanMasuk();
+    },
+    // set up pagination
+    makePagination(data) {
+      let pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        prev_page_url: data.prev_page_url
+      };
+      this.pagination = pagination;
+    },
     addPermintaan() {
       document.getElementById("btnaddpermintaan").disabled = true;
       this.$Progress.start();
@@ -400,13 +454,13 @@ export default {
     getMitra() {
       axios.get("/kemitraan/mitraPemasok/list").then(response => {
         this.dataMitra = response.data.data;
-        // console.log(this.dataMitra);
       });
     },
     getPermintaanSaya() {
-      axios.get("/transaksi/permintaanSaya/list").then(response => {
-        this.listPermintaanSaya = response.data.data;
-        // console.log(this.listPermintaanSaya);
+      let $this = this
+      axios.get(this.url_permintaanSaya).then(response => {
+        this.listPermintaanSaya = response.data.data.data
+        $this.makePagination(response.data.data)
       });
     },
     requestUlangPermintaan() {
@@ -445,7 +499,9 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .delete("/transaksi/permintaanPesanan/delete/" + id_permintaanSaya)
+              .delete(
+                "/transaksi/permintaanPesanan/delete/" + id_permintaanSaya
+              )
               .then(response => {
                 swal.fire(
                   "Menghapus Permintaan Pasokan",
@@ -541,9 +597,9 @@ export default {
         });
     },
     sudahDiterima(data) {
-      this.formReceived.jumlah_cabai = data.jumlah_cabai
-      this.formReceived.jenis_cabai = data.jenis_cabai
-      this.formReceived.id = data.id
+      this.formReceived.jumlah_cabai = data.jumlah_cabai;
+      this.formReceived.jenis_cabai = data.jenis_cabai;
+      this.formReceived.id = data.id;
       // console.log(this.formReceived.jumlah_cabai)
       swal
         .fire({

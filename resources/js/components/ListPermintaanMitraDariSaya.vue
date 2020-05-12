@@ -107,7 +107,7 @@ export default {
     // prev & next paggination
     fetchPaginate(url) {
       this.url_getMitra = url;
-      this.getMitra();
+      this.getPengajuanMitra();
     },
     // set up pagination
     makePagination(data) {

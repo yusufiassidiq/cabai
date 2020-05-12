@@ -56,38 +56,73 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>Tanggal Panen</th>
-                      <th>Kode Lahan</th>
-                      <th>Jenis Cabai</th>
-                      <th>Jumlah Cabai(Kg)</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
+                <div class="row">
+                  <table class="table table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>Tanggal Panen</th>
+                        <th>Kode Lahan</th>
+                        <th>Jenis Cabai</th>
+                        <th>Jumlah Cabai(Kg)</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
 
-                  <tbody>
-                    <tr v-if="!dataPanen.length">
-                      <td colspan="5" align="center">Tidak ada Hasil Panen</td>
-                    </tr>
-                    <tr v-for="data in dataPanen" :key="data.id">
-                      <td>{{ data.tanggal_panen | dateFilter }}</td>
-                      <td>{{ data.kode_lahan }}</td>
-                      <td>{{ data.jenis_cabai }}</td>
-                      <td>{{ data.jumlah_panen | filterAngkaRibuan }}</td>
-                      <td>
-                        <a href="#">
-                          <i class="fas fa-edit blue" @click="editModal(data)"></i>
-                        </a>
-                        /
-                        <a href="#" @click="deletePanen(data.id)">
-                          <i class="fas fa-trash red"></i>
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                    <tbody>
+                      <tr v-if="!dataPanen.length">
+                        <td colspan="5" align="center">Tidak ada Hasil Panen</td>
+                      </tr>
+                      <tr v-for="data in dataPanen" :key="data.id">
+                        <td>{{ data.tanggal_panen | dateFilter }}</td>
+                        <td>{{ data.kode_lahan }}</td>
+                        <td>{{ data.jenis_cabai }}</td>
+                        <td>{{ data.jumlah_panen | filterAngkaRibuan }}</td>
+                        <td>
+                          <a href="#">
+                            <i class="fas fa-edit blue" @click="editModal(data)"></i>
+                          </a>
+                          /
+                          <a href="#" @click="deletePanen(data.id)">
+                            <i class="fas fa-trash red"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 d-flex justify-content-start align-self-center">
+                    <div
+                      style="padding-left: 20px"
+                    >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
+                  </div>
+
+                  <div
+                    class="col-md-6 d-flex justify-content-end align-self-end"
+                    style="padding-right: 30px"
+                  >
+                    <div class="dataTables_paginate paging_simple_numbers">
+                      <ul class="pagination">
+                        <li>
+                          <button
+                            href="#"
+                            class="btn btn-default"
+                            v-on:click="fetchPaginatePanen(pagination.prev_page_url)"
+                            :disabled="!pagination.prev_page_url"
+                          >Sebelumnya</button>
+                        </li>
+
+                        <li>
+                          <button
+                            class="btn btn-default"
+                            v-on:click="fetchPaginatePanen(pagination.next_page_url)"
+                            :disabled="!pagination.next_page_url"
+                          >Selanjutnya</button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -190,17 +225,37 @@ export default {
         id: "",
         jumlah_cabai: "",
         pra_produksi_id: "",
-        tanggal_panen: "",
-      })
+        tanggal_panen: ""
+      }),
+      // pagination
+      pagination: [],
+      url_getPanen: "/panen/list",
     };
   },
   methods: {
+    // prev & next paggination
+    fetchPaginatePanen(url) {
+      this.url_getPanen = url;
+      this.getPanen();
+    },
+    // set up pagination
+    makePagination(data) {
+      let pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        prev_page_url: data.prev_page_url
+      };
+      this.pagination = pagination;
+    },
     customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     },
     getPanen() {
-      axios.get("/panen/list").then(response => {
-        this.dataPanen = response.data.data;
+      let $this = this
+      axios.get(this.url_getPanen).then(response => {
+        this.dataPanen = response.data.data.data
+        $this.makePagination(response.data.data)
       });
     },
     addPanen() {
@@ -227,7 +282,7 @@ export default {
     updatePanen() {
       console.log("berhasil diedit");
       this.$Progress.start();
-      this.form 
+      this.form
         .put("/panen/update/" + this.form.id)
         .then(() => {
           UpdateData.$emit("HasilPanen");
@@ -279,8 +334,8 @@ export default {
         });
     },
     getLahan() {
-      axios.get("praProduksi/list").then(response => {
-        this.datalahan = response.data.data.data
+      axios.get("praProduksi/list/all").then(response => {
+        this.datalahan = response.data.data;
       });
     },
     // Modal
@@ -296,7 +351,7 @@ export default {
       this.form.reset();
       $("#modalHasilPanen").modal("show");
       document.getElementById("lahan__id").disabled = true;
-      this.form.fill(data)
+      this.form.fill(data);
       this.form.jumlah_cabai = data.jumlah_panen;
     }
   },

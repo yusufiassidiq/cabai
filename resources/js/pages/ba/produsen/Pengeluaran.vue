@@ -28,12 +28,11 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
+        <div v-show= "lahan!==null" class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">Grafik Pengeluaran Produksi Cabai</h5>
-
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -48,9 +47,8 @@
                 <div class="row justify-content-center">
                   <div class="col-md-12">
                     <p class="text-center">
-                      <strong>Pengeluaran Tahun {{ year }}</strong>
+                        <strong>Pengeluaran Tahun {{ year }}</strong>
                     </p>
-
                     <div class="chart">
                       <!-- Pengeluaran Chart Canvas -->
                       <canvas ref="chart" height="100" style="height: 100px;"></canvas>
@@ -67,6 +65,26 @@
           </div>
           <!-- /.col -->
         </div>
+        <div v-if= "lahan===null" class="row">
+          <div class="col">
+            <!-- <div class="card alert alert-warning alert"> -->
+            <div class="card callout callout-warning">
+                  <h5>
+                    <i class="icon fas fa-exclamation-triangle"></i>
+                  Belum Ada Data Lahan
+                  </h5>
+                  <p>
+                  Silahkan Mengisi Data Lahan
+                      <router-link to="/produsen/manajemenlahan">
+                        Disini
+                      </router-link>
+                  </p>
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
       </div>
     </section>
     <!-- /.content -->
@@ -90,12 +108,13 @@
       fillData () {
         axios.get('/getPengeluaran').then(response=>{
           this.year = response.data.tahun;
+          this.lahan = response.data.lahan;
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
           var myChart = new Chart(ctx, {
             type : 'bar',
             data:{
-              labels:response.data.month,
+              labels:response.data.lahan,
               datasets:[{
                 label               : 'Pupuk',
                 backgroundColor     : 'rgba(54, 162, 235, 1)',
@@ -146,6 +165,7 @@
               }]
             },
             options:{
+              barValueSpacing:100,
               responsive: true,
               tooltips:{
                 mode:'index',

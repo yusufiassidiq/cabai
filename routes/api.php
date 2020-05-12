@@ -55,6 +55,13 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('/user/delete/{id}','AdminController@delete')->middleware('isAdmin');
     Route::get('/admin/dashboard','AdminController@dashboardAdmin')->middleware('isAdmin');
 
+    //----Baru----
+    //Chat
+    Route::get('/chat/contact/list','ChatController@get');
+    Route::get('/chat/conversation/{id}','ChatController@getMessagesFor');
+    Route::post('/chat/conversation/send','ChatController@send');
+    //------------
+
     //Kemitraan
     Route::post('/kemitraan/request/{id}','UserController@requestMitra');
     Route::put('/kemitraan/terima/{id}','UserController@terimaMitra');
@@ -76,8 +83,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Transaksi Permintaan Cabai
     Route::post('/transaksi/permintaanSaya/tambah','UserController@addPermintaanSaya');
     Route::get('/transaksi/permintaanSaya/list','UserController@getPermintaanSaya');
+    Route::get('/transaksi/riwPermintaanSaya/list','UserController@getRiwayatPermintaanSaya');
     Route::put('/transaksi/permintaanSaya/update/{id}','UserController@requestUlangPermintaanSaya');
     Route::get('/transaksi/permintaanMasuk/list','UserController@getPermintaanMasuk');
+    Route::get('/transaksi/riwPermintaanMasuk/list','UserController@getRiwayatPermintaanMasuk');
     Route::put('/transaksi/permintaanMasuk/terima/{id}','UserController@terimaPermintaanMasuk');
     Route::put('/transaksi/permintaanPembeli/tolak/{id}','UserController@tolakPermintaanPembeli');
     Route::put('/transaksi/penawaranPemasok/tolak/{id}','UserController@tolakPenawaranPemasok');
@@ -87,7 +96,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Inventaris
     Route::get('/inventaris/list','UserController@getInventaris');
     //---sementara---
-    Route::put('/inventaris/tambah','UserController@addInventaris');
+    // Route::put('/inventaris/tambah','UserController@addInventaris');
     //--------------
     Route::put('/inventaris/stokKeluar/{id}','UserController@stokKeluar');
     Route::put('/inventaris/stokMasuk/{id}','UserController@stokMasuk');
@@ -95,6 +104,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Manajemen lahan
     Route::post('/praProduksi/tambah','ProdusenController@addLahan');
     Route::get('/praProduksi/list','ProdusenController@readLahan');
+    Route::get('/praProduksi/list/all','ProdusenController@readAllLahan');
     Route::put('/praProduksi/update/{id}','ProdusenController@updateLahan');
     Route::delete('/praProduksi/delete/{id}','ProdusenController@deleteLahan');
     //---baru---//
