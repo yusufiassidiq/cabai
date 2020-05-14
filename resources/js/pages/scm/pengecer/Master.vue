@@ -61,6 +61,12 @@
                 <p>Dashboard</p>
               </router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/pengecer/chat" class="nav-link">
+                <i class="nav-icon fas fa-envelope"></i>
+                <p>Pesan</p>
+              </router-link>
+            </li>
             <li class="nav-header">Kemitraan</li>
             <li class="nav-item">
               <router-link to="/pengecer/daftarmitra" class="nav-link">

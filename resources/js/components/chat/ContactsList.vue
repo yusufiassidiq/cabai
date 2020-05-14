@@ -63,7 +63,7 @@ export default {
   height: 600px;
   overflow-x: auto;
   overflow-y: auto;
-  border-left: 1px solid #a6a6a6;
+  // border-left: 1px solid #a6a6a6;
 
   ul {
     list-style-type: none;
@@ -72,10 +72,11 @@ export default {
     li {
       display: flex;
       padding: 2px;
-      border-bottom: 1px solid #aaaaaa;
+      border: 1px solid #aaaaaa;
       height: 80px;
       position: relative;
       cursor: pointer;
+      border-radius: 10px;
 
       &.selected {
         background: #dfdfdf;
