@@ -422,6 +422,7 @@
     },
     created(){
       this.loadTarget();
+      // this.fillData();
       // setInterval(()=> this.loadTarget(), 3000);
     },
     mounted() {

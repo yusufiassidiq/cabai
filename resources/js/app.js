@@ -83,14 +83,19 @@ Vue.filter('dateFilter', function (value) {
 
 // filter convert angka ke rupiah
 Vue.filter('convertToRupiah', function (angka) {
-
-    var rupiah = "";
-    var angkarev = angka.toString().split("").reverse().join("");
-    for (var i = 0; i < angkarev.length; i++)
-        if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + ".";
-    return (
-        "Rp " + rupiah.split("", rupiah.length - 1).reverse().join("")
-    );
+    if(typeof angka !=='string'){
+        var rupiah = "";
+        var angkarev = angka.toString().split("").reverse().join("");
+        
+        for (var i = 0; i < angkarev.length; i++)
+            if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + ".";
+        return (
+            "Rp " + rupiah.split("", rupiah.length - 1).reverse().join("")
+        );
+    }
+    else{
+        return(angka);
+    }
 })
 
 // filter mengubah angka menjadi ribuan

@@ -385,7 +385,7 @@
                         display : false,
                         },
                   ticks:{
-                    beginAtZero:false,
+                    beginAtZero:true,
                   }
                 }]
               }
