@@ -121,17 +121,23 @@
               class="input-group mb-3"
               v-bind:class="{ 'has-error': has_error && errors.fotosk }"
             >
-              <div class="input-group">
+              <div class="input-group ">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input form-control" id="exampleInputFile" />
-                  <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
+                  <!-- <input type="file" v-on:change="onFileChange" class="form-control "> -->
+                  <input type="file" v-on:change="onFileChange" class="custom-file-input form-control" id="exampleInputFile" />
+                  <label class="custom-file-label" for="exampleInputFile" id="exampleInputFile">Pilih file</label>
                 </div>
               </div>
             </div>
             <span class="help-block" v-if="has_error && errors.fotosk">{{ errors.fotosk }}</span>
-
             <div class="row">
-              <div class="col-12">
+              <div class="col-12 fotosk">
+                <img :src="fotosk" class="img-responsive">
+              </div>
+            </div>
+            <!-- <br> -->
+            <div class="row btncstm">
+              <div class="col-12 ">
                 <button type="submit" class="btn btn-primary btn-block">Daftar</button>
               </div>
             </div>
@@ -147,6 +153,19 @@
     </div>
   </div>
 </template>
+<style scoped>
+    .btncstm{
+      padding-top: 10px;
+    }
+    .fotosk{
+      text-align: center;
+      /* display: inline-block; */
+    }
+    img{
+        max-height: 200px;
+        max-width: 320px;
+    }
+</style>
 <script>
 export default {
   data() {
@@ -157,6 +176,7 @@ export default {
       kabupaten: "",
       kecamatan: "",
       kelurahan: "",
+      fotosk: "",
       password: "",
       password_confirmation: "",
       has_error: false,
@@ -333,6 +353,20 @@ export default {
     });
   },
   methods: {
+    onFileChange(e) {
+        let files = e.target.files || e.dataTransfer.files;
+        if (!files.length)
+            return;
+        this.createImage(files[0]);
+    },
+    createImage(file) {
+        let reader = new FileReader();
+        let vm = this;
+        reader.onload = (e) => {
+            vm.fotosk = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    },
     register() {
       this.$Progress.start();
       var app = this;
@@ -344,6 +378,7 @@ export default {
           kabupaten: app.kabupaten,
           kecamatan: app.kecamatan,
           kelurahan: app.kelurahan,
+          fotosk: app.fotosk,
           password: app.password,
           password_confirmation: app.password_confirmation
         },

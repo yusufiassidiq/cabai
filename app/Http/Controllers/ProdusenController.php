@@ -177,15 +177,36 @@ class ProdusenController extends Controller
         ]);
     }
     public function updatePanen($id, Request $request){
+        $userId = Auth::id();
         $panen = Panen::findOrFail($id);
+        $perubahan_jumlah_panen = $request->jumlah_cabai - $panen->jumlah_panen;
         $panen->update([
             'jumlah_panen' => $request->jumlah_cabai,
             'tanggal_panen' => $request->tanggal_panen,
         ]);
+        $praProduksi = PraProduksi::find($request->pra_produksi_id);
+        $jenis_cabai = $praProduksi->jenis_cabai;
+        $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
+        foreach ($inventaris as $i ) {
+            $jumlah_cabai_sementara = $i->jumlah_cabai;
+            $i->update([
+                'jumlah_cabai' => $jumlah_cabai_sementara  + $perubahan_jumlah_panen,
+            ]);
+        }
         return response()->json(['status' => 'success'], 200);
     }
     public function deletePanen($id){
+        $userId = Auth::id();
         $panen = Panen::findOrFail($id);
+        $panen_sebelumnya = $panen->jumlah_panen;
+        $jenis_cabai = $panen->praProduksi->jenis_cabai;
+        $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
+        foreach ($inventaris as $i ) {
+            $jumlah_cabai_sementara = $i->jumlah_cabai;
+            $i->update([
+                'jumlah_cabai' => $jumlah_cabai_sementara  - $panen_sebelumnya,
+            ]);
+        }
         $panen->delete();
         return 204;
     }

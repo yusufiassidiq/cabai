@@ -84,10 +84,34 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
+              
               <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label>Pilih Daerah</label>
+                      <select class="form-control select2" @change="changeHandler" v-model="selectedDaerah" id="daerah" style="width: 100%;">
+                        <option disabled value="">PILIH DAERAH</option>
+                        <option v-for="daerah in daerah" :key="daerah.id" v-bind:value="daerah.id">{{ daerah.name }}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label>Harga di Tingkat</label>
+                      <select class="form-control select2" @change="changeHandler" v-model="selectedStakeholder" id="daerah" style="width: 100%;">
+                        <option disabled value="">Pilih Stakeholder</option>
+                        <option value="2">PRODUSEN</option>
+                        <option value="3">PENGEPUL</option>
+                        <option value="4">GROSIR</option>
+                        <option value="5">ECERAN</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="card" id="cardCabai" style="display: none;">
                 <div class="card-header">
-                  <h5 class="card-title">Grafik Harga Cabai Rawit</h5>
-
+                  <h5 class="card-title">GRAFIK HARGA CABAI {{ kab.name }} DI TINGKAT {{ role }} </h5>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus"></i>
@@ -108,84 +132,6 @@
                       <div class="chart">
                         <!-- Pengeluaran Chart Canvas -->
                         <canvas ref="chart" height="100" style="height: 100px;"></canvas>
-                      </div>
-                      <!-- /.chart-responsive -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-                <!-- ./card-body -->
-              </div>
-              <!-- /.card -->
-            </div>
-            <!-- /.col -->
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="card-title">Grafik Harga Cabai Keriting</h5>
-
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                  <div class="row justify-content-center">
-                    <div class="col-md-12">
-                      <p class="text-center">
-                        <strong>Harga Cabai Keriting 15 Hari Terakhir</strong>
-                      </p>
-
-                      <div class="chart">
-                        <!-- Pengeluaran Chart Canvas -->
-                        <!-- <canvas ref="chart" height="100" style="height: 100px;"></canvas> -->
-                      </div>
-                      <!-- /.chart-responsive -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-                <!-- ./card-body -->
-              </div>
-              <!-- /.card -->
-            </div>
-            <!-- /.col -->
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="card-title">Grafik Harga Cabai Besar</h5>
-
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                  <div class="row justify-content-center">
-                    <div class="col-md-12">
-                      <p class="text-center">
-                        <strong>Harga Cabai Besar 15 Hari Terakhir</strong>
-                      </p>
-
-                      <div class="chart">
-                        <!-- Pengeluaran Chart Canvas -->
-                        <!-- <canvas ref="chart" height="100" style="height: 100px;"></canvas> -->
                       </div>
                       <!-- /.chart-responsive -->
                     </div>
@@ -224,10 +170,12 @@ export default {
   data() {
     return {
       dateNow: {},
-      start: {},
-      end: {},
-      data: {},
-      date: {}
+      date: {},
+      selectedDaerah: '',
+      selectedStakeholder: '2',
+      daerah: {},
+      kab: {},
+      role: {},
     };
   },
   mounted() {
@@ -236,17 +184,24 @@ export default {
   methods: {
     fillData() {
       axios
-        .get("/getAllHarga")
-        .then(response => {
-          console.log(response.data.hargaByDay);
-          console.log("x = ", response.data.cek);
-          console.log(response.data.transaksiProdusenRawit);
-          console.log(response.data.transaksiUser);
+        .get("/getDaerah")
+        .then(response =>{
+          this.daerah = response.data.daerah;
+        })
+        .catch(error => {});
+    },
+    changeHandler() {
+      let selectedDaerah = this.selectedDaerah;
+      let selectedStakeholder = this.selectedStakeholder;
+      axios.get('/getHarga/'+ selectedDaerah + '/' + selectedStakeholder)
+        .then(response=>{
+          console.log(response.data.hargaHarian);
+          $("#cardCabai").show();
+          console.log(selectedStakeholder);
           this.dateNow = response.data.dateNow;
           this.date = response.data.date;
-          this.data = response.data.data;
-          this.start = response.data.start;
-          this.end = response.data.end;
+          this.kab = response.data.kabupaten;
+          this.role = response.data.role;
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
           var myChart = new Chart(ctx, {
@@ -255,8 +210,7 @@ export default {
               labels: response.data.date,
               datasets: [
                 {
-                  // type                : 'bar',
-                  label: "Produsen",
+                  label: "Cabai Rawit",
                   backgroundColor: "rgba(54, 162, 235, 1)",
                   borderColor: "rgba(54, 162, 235, 1)",
                   pointRadius: true,
@@ -264,15 +218,14 @@ export default {
                   pointStrokeColor: "#c1c7d1",
                   pointHighlightFill: "#fff",
                   pointHighlightStroke: "rgba(54, 162, 235, 1)",
-                  data: response.data.rawitProdusen,
+                  data: response.data.hargaHarianRawit,
                   pointStyle: "rect",
                   pointRadius: 7,
                   pointHoverRadius: 10,
                   fill: false
                 },
                 {
-                  // type                : 'bar',
-                  label: "Pengepul",
+                  label: "Cabai Keriting",
                   backgroundColor: "rgba(254, 99, 131, 1)",
                   borderColor: "rgba(254, 99, 131, 1)",
                   pointRadius: true,
@@ -280,15 +233,14 @@ export default {
                   pointStrokeColor: "rgba(254, 99, 131, 1)",
                   pointHighlightFill: "#fff",
                   pointHighlightStroke: "rgba(254, 99, 131, 1)",
-                  data: response.data.rawitPengepul,
-                  pointStyle: "triangle",
+                  data: response.data.hargaHarianKeriting,
+                  pointStyle: "rect",
                   pointRadius: 7,
                   pointHoverRadius: 10,
                   fill: false
                 },
                 {
-                  // type                : 'bar',
-                  label: "Grosir",
+                  label: "Cabai Besar",
                   backgroundColor: "rgba(74, 192, 192, 1)",
                   borderColor: "rgba(74, 192, 192, 1)",
                   pointRadius: true,
@@ -296,23 +248,8 @@ export default {
                   pointStrokeColor: "rgba(74, 192, 192, 1)",
                   pointHighlightFill: "#fff",
                   pointHighlightStroke: "rgba(74, 192, 192, 1)",
-                  data: response.data.rawitGrosir,
-                  pointStyle: "circle",
-                  pointRadius: 7,
-                  pointHoverRadius: 10,
-                  fill: false
-                },
-                {
-                  label: "Pengecer",
-                  backgroundColor: "rgba(255,129,0, 1)",
-                  borderColor: "rgba(255,129,0, 1)",
-                  pointRadius: true,
-                  pointColor: "#3b8bba",
-                  pointStrokeColor: "rgba(255,129,0, 1)",
-                  pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(255,129,0, 1)",
-                  data: response.data.rawitPengecer,
-                  pointStyle: "rectRot",
+                  data: response.data.hargaHarianKeriting,
+                  pointStyle: "rect",
                   pointRadius: 7,
                   pointHoverRadius: 10,
                   fill: false
@@ -325,16 +262,6 @@ export default {
                 mode: "index",
                 intersect: false
               },
-              //   hover:{
-              //     mode: 'nearest',
-              //     intersect: true,
-              //   },
-              //   snapGaps: false,
-              // elements:{
-              //   line:{
-              //     tension: 0.000001
-              //   }
-              // },
               scales: {
                 xAxes: [
                   {
@@ -355,7 +282,8 @@ export default {
                     }
                   }
                 ]
-              }
+              },
+              
             }
           });
         })

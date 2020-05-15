@@ -32,7 +32,10 @@
     <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
     <!-- Muli Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:400" rel="stylesheet">
-    
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+
     
     <!-- Daterange picker -->
     <!-- <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css')}}"> -->
@@ -73,7 +76,8 @@
     <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- datepicker -->
     <script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-    
+    <!-- Form Select2 -->
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js')}}"></script>
     <!-- daterangepicker -->
     <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
     <!-- Bootstrap 4 -->

@@ -12,7 +12,7 @@
         </div>
         <div class="contact">
           <p class="name">{{ contact.name }}</p>
-          <p class="email">{{ contact.email }}</p>
+          <p class="lokasi">{{ contact.lokasi.kabupaten }}, {{ contact.lokasi.kecamatan }}, {{ contact.lokasi.kelurahan }}</p>
         </div>
         <span class="unread" v-if="contact.unread">{{ contact.unread }}</span>
       </li>
@@ -61,8 +61,9 @@ export default {
   flex: 2;
   max-height: 100%;
   height: 600px;
-  overflow: scroll;
-  border-left: 1px solid #a6a6a6;
+  overflow-x: auto;
+  overflow-y: auto;
+  // border-left: 1px solid #a6a6a6;
 
   ul {
     list-style-type: none;
@@ -71,10 +72,11 @@ export default {
     li {
       display: flex;
       padding: 2px;
-      border-bottom: 1px solid #aaaaaa;
+      border: 1px solid #aaaaaa;
       height: 80px;
       position: relative;
       cursor: pointer;
+      border-radius: 10px;
 
       &.selected {
         background: #dfdfdf;
@@ -112,7 +114,8 @@ export default {
       .contact {
         flex: 3;
         font-size: 10px;
-        overflow: hidden;
+        overflow-x: auto;
+        overflow-y: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;

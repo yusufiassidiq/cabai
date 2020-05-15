@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -22,6 +23,7 @@ class AuthController extends Controller
             'kabupaten' => 'required',
             'kecamatan' => 'required',
             'kelurahan' => 'required',
+            'fotosk' => 'required|image64:jpeg,png,jpg',
         ]);        
         
         if ($v->fails())
@@ -31,13 +33,21 @@ class AuthController extends Controller
                 'errors' => $v->errors()
             ], 422);
         }        
-        
+        $fotosk = $request->get('fotosk');
+        if(isset($fotosk)){
+            // $nama_gambar = Carbon::now()."_".$fotosk->getClientOriginalName();
+            // // isi dengan nama folder tempat kemana gambar diupload
+		    // $tujuan_upload = 'uploads/fotosk';
+            // $fotosk->move($tujuan_upload,$nama_gambar);
+            $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($fotosk, 0, strpos($fotosk, ';')))[1])[1];
+            \Image::make($request->get('fotosk'))->save(public_path('images/fotosk').$fileName);
+        }
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->role = $request->role;
         $user->password = bcrypt($request->password);
-        $user->fotosk = Str::random(5);
+        $user->fotosk = $fileName;
         $user->save();        
         $lokasi = new Lokasi([
             'user_id'=>$user->id
@@ -63,12 +73,9 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');        
-        // dd($credentials);
-        
         if ($token = $this->guard()->attempt($credentials)) {
             return response()->json(['status' => 'success'], 200)->header('Authorization', $token);
         }        
-        
         return response()->json(['error' => 'login_error'], 401);
     }    
     

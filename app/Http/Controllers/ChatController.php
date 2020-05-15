@@ -51,7 +51,9 @@ class ChatController extends Controller
 
             return $contact;
         });
-
+        foreach ($contacts as $i){
+            $i->lokasi = $i->lokasi()->first(['kabupaten','kecamatan','kelurahan']);
+        }
         // dd($unreadIds);
         return response()->json([
             'status' => 'success',

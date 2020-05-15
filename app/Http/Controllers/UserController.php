@@ -587,19 +587,19 @@ class UserController extends Controller
             'role' =>$userId
         ], 200);
     }
-    public function addInventaris(Request $request){
-        $userId = Auth::user()->id;
-        $jumlah_cabai = $request->jumlah_cabai;
-        $jenis_cabai = $request->jenis_cabai;
-        $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
-        foreach ($inventaris as $i ) {
-            $jumlah_cabai_sementara = $i->jumlah_cabai;
-            $i->update([
-                'jumlah_cabai' => $jumlah_cabai_sementara + $jumlah_cabai
-            ]);
-        }
-        return response()->json(['status' => 'success'], 200);
-    }
+    // public function addInventaris(Request $request){
+    //     $userId = Auth::user()->id;
+    //     $jumlah_cabai = $request->jumlah_cabai;
+    //     $jenis_cabai = $request->jenis_cabai;
+    //     $inventaris = Inventaris::where('jenis_cabai',$jenis_cabai)->where('user_id',$userId)->get();
+    //     foreach ($inventaris as $i ) {
+    //         $jumlah_cabai_sementara = $i->jumlah_cabai;
+    //         $i->update([
+    //             'jumlah_cabai' => $jumlah_cabai_sementara + $jumlah_cabai
+    //         ]);
+    //     }
+    //     return response()->json(['status' => 'success'], 200);
+    // }
     public function stokKeluar(Request $request, $idTransaksi){
         $userId = Auth::user()->id;
         $jumlah_cabai = $request->jumlah_cabai;

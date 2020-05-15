@@ -47,7 +47,8 @@ export default {
   background: #f0f0f0;
   height: 100%;
   max-height: 470px;
-  overflow: scroll;
+  overflow-x: auto;
+  overflow-y: auto;
 
   ul {
     list-style-type: none;

@@ -96,7 +96,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     //Inventaris
     Route::get('/inventaris/list','UserController@getInventaris');
     //---sementara---
-    Route::put('/inventaris/tambah','UserController@addInventaris');
+    // Route::put('/inventaris/tambah','UserController@addInventaris');
     //--------------
     Route::put('/inventaris/stokKeluar/{id}','UserController@stokKeluar');
     Route::put('/inventaris/stokMasuk/{id}','UserController@stokMasuk');
@@ -136,6 +136,10 @@ Route::group(['middleware' => 'auth:api'], function(){
 Route::get('/getUserCount','AnalysisHomeController@getUserCount'); //test
 Route::get('/getAllUserLocation','AnalysisHomeController@getAllUserLocation');
 Route::get('/getAllHarga','AnalysisHomeController@getAllHarga');
+Route::get('/getDaerah','AnalysisHomeController@getDaerah');
+Route::get('/getHarga/{idKab}/{idRole}','AnalysisHomeController@getHarga');
+Route::get('/getProduksi/{idKab}','AnalysisHomeController@getProduksi');
+
 
 // Route::resources([
 //     'user' => 'API\DummyController',

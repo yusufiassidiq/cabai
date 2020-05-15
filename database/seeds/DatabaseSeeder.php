@@ -15,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            KabupatenSeeder::class,
+            UserSeeder::class,
+        ]);
+
         // $this->call(UsersTableSeeder::class);
         User::create([
             'name' => 'Admin',
@@ -25,38 +30,7 @@ class DatabaseSeeder extends Seeder
             'fotosk' => Str::random(5)
 
         ]);        
-        // User::create([
-        //     'name' => 'Produsen',
-        //     'email' => 'produsen@test.com',
-        //     'password' => Hash::make('asd'),
-        //     'role' => 2,
-        //     'status' => 1,
-        //     'fotosk' => Str::random(5)
-        // ]);
-        // User::create([
-        //     'name' => 'Pengepul',
-        //     'email' => 'pengepul@test.com',
-        //     'password' => Hash::make('asd'),
-        //     'role' => 3,
-        //     'status' => 1,
-        //     'fotosk' => Str::random(5)
-        // ]);
-        // User::create([
-        //     'name' => 'Grosir',
-        //     'email' => 'grosir@test.com',
-        //     'password' => Hash::make('asd'),
-        //     'role' => 4,
-        //     'status' => 1,
-        //     'fotosk' => Str::random(5)
-        // ]);
-        // User::create([
-        //     'name' => 'Pengecer',
-        //     'email' => 'pengecer@test.com',
-        //     'password' => Hash::make('asd'),
-        //     'role' => 5,
-        //     'status' => 1,
-        //     'fotosk' => Str::random(5)
-        // ]);
+        
         $user = new User;
         $user->name = "Produsen";
         $user->email = "produsen@test.com";
