@@ -73,7 +73,7 @@
                           <td>{{ user.email }}</td>
                           <td>{{ customFormatter(user.created_at) }}</td>
                           <td>
-                            <button class="btn btn-info btn-xs" @click="previewImage()">
+                            <button class="btn btn-info btn-xs" @click="previewImage(user)">
                               <i class="fas fa-eye"></i>&nbsp; Lihat
                             </button>
                             &nbsp;/&nbsp;
@@ -169,6 +169,37 @@
         </div>
       </div>
     </div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="fotosk"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="detailUserLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailUserLabel">Foto SIUP</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <img :src="lokasifotosk" class="img-responsive">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+            <!-- <button class="btn btn-danger" v-on:click="tolak(userDetail.id)">Tolak</button>
+            <button class="btn btn-success" v-on:click="terima(userDetail.id)">Terima</button> -->
+          </div>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
     <!-- /.content-wrapper -->
   </div>
 </template>
@@ -176,6 +207,8 @@
 export default {
   data() {
     return {
+      selectedImage: "",
+      lokasifotosk: "",
       userDetail: "",
       has_error: false,
       users: {},
@@ -216,8 +249,11 @@ export default {
     },
 
     // fungsi untuk melihat gambar SIUP User
-    previewImage() {},
-
+    previewImage(user) {
+      this.selectedImage = user.fotosk
+      console.log(this.selectedImage)
+      $("#fotosk").modal("show");
+    },
     // fungsi mendownload SIUP User
     downloadSIUP() {},
 
@@ -225,6 +261,7 @@ export default {
     selectUser(user) {
       this.userDetail = user;
       $("#detailUser").modal("show");
+      // this.lokasifotosk = require('/assets/images/fotosk/fotosk.png')
     },
 
     // funsi untuk menolak validasi user

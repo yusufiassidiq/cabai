@@ -497,8 +497,6 @@ class AnalysisController extends Controller
             $besarByDayPengecer[$i]=$transaksiPengecerBesar->firstWhere('tanggal_diterima',$array_date[$i]) ?
                 $transaksiPengecerBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
         }
-
-        
         return response()->json([
             'rawitProdusen' => $rawitByDayProdusen,
             'keritingProdusen' => $keritingByDayProdusen,
@@ -514,6 +512,161 @@ class AnalysisController extends Controller
             'besarPengecer' => $besarByDayPengecer,
             'date' => $array_date,
             'dateNow' => $dateNow, 
+        ]);
+    }
+    public function getGapAch(){
+        $idUser = Auth::user()->id;
+        $year= Carbon::now()->format('Y');
+        $month=Carbon::now()->format('m');
+        $bulan = Carbon::now()->isoFormat('MMMM');
+        //Target bulan ini
+        $targetMonthNow=Target::Where([['user_id',$idUser],
+            ['bulan', $bulan],
+            ['tahun', $year],
+            ])
+            ->pluck('jumlah_cabai','jenis_cabai')
+            ->all();
+        $filter = $year . '-' . $month; //GET DATA BULAN & TAHUN YANG DIKIRIMKAN SEBAGAI PARAMETER
+        $parse = Carbon::parse($filter); 
+        //BUAT RANGE TANGGAL PADA BULAN TERKAIT
+        //GET DATA TRANSAKSI BERDASARKAN BULAN & TANGGAL YANG DIMINTA.
+        //GROUP / KELOMPOKKAN BERDASARKAN TANGGALNYA
+        //SUM DATA AMOUNT DAN SIMPAN KE NAMA BARU YAKNI TOTAL
+        $transaksiMonthNow=Transaksi::Where([['pemasok_id',$idUser],
+            ['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['tanggal_diterima', 'LIKE',  $filter . '%']
+            ])
+            ->select('jenis_cabai',DB::raw("sum(jumlah_cabai*harga) as total"))
+            ->groupBy('jenis_cabai')
+            ->pluck('total','jenis_cabai')
+            ->all();
+        // Penjualan Terbanyak
+        $maxJumlah=Transaksi::Where([['pemasok_id',$idUser],
+            ['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['tanggal_diterima', 'LIKE',  $filter . '%']
+            ])
+            ->select('jenis_cabai',DB::raw("sum(jumlah_cabai) as jumlah"))
+            ->groupBy('jenis_cabai')
+            ->orderBy('jumlah','DESC')
+            ->first();
+        if($maxJumlah){
+            $maxJumlahQty=(int)$maxJumlah->jumlah;
+            $maxJumlahJenis=$maxJumlah->jenis_cabai;
+        }
+        else{
+            $maxJumlahQty='-';
+            $maxJumlahJenis='-';
+        }
+        // Penjualan Terendah
+        $minJumlah=Transaksi::Where([['pemasok_id',$idUser],
+            ['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['tanggal_diterima', 'LIKE',  $filter . '%']
+            ])
+            ->select('jenis_cabai',DB::raw("sum(jumlah_cabai) as jumlah"))
+            ->groupBy('jenis_cabai')
+            ->orderBy('jumlah','ASC')
+            ->first();
+        if($minJumlah){
+                $minJumlahQty=(int)$minJumlah->jumlah;
+                $minJumlahJenis=$minJumlah->jenis_cabai;
+            }
+            else{
+                $minJumlahQty='-';
+                $minJumlahJenis='-';
+            }
+        //Penjualan Harga tertinggi
+        $maxHarga=Transaksi::Where([['pemasok_id',$idUser],
+            ['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['tanggal_diterima', 'LIKE',  $filter . '%']
+            ])
+            
+            ->orderBy('harga','DESC')
+            ->first();
+        if($maxHarga){
+            $maxHargaQty=(int)$maxHarga->harga;
+            $maxHargaJenis=$maxHarga->jenis_cabai;
+        }
+        else{
+            $maxHargaQty='-';
+            $maxHargaJenis='-';
+        }
+        $jenisCabai=['Cabai rawit','Cabai keriting','Cabai besar'];
+        // Transaksi bulan ini terhadap target bulan ini
+        foreach($jenisCabai as $jenis){
+            if(array_key_exists($jenis, $targetMonthNow)){
+                if(array_key_exists($jenis, $transaksiMonthNow)){
+                    //ada target dan transaksi
+                    $terjual=(int)$transaksiMonthNow[$jenis];
+                    $gap=$targetMonthNow[$jenis]-$terjual;
+                    $ach=ROUND(($transaksiMonthNow[$jenis]*100)/$targetMonthNow[$jenis]) . '%';
+                }
+                else{
+                    //belum ada transaksi
+                    $terjual=0;
+                    $gap=$targetMonthNow[$jenis];
+                    $ach=0 . "%";
+                }
+            }
+            //belum ada target 
+            else{
+                $terjual='Belum Ada Target';
+                $gap='-';
+                $ach='-';
+            }
+            //memasukan data menjadi object
+            $penjualanTarget[]=[
+                'jenis' => $jenis,
+                'terjual' => $terjual,
+                'gap' => $gap,
+                'ach' => $ach,
+            ];
+        }
+        $end = Carbon::now()->startOfMonth()->addDay();
+        for($i=5;$i>=0;$i--){
+            $range=$end->format('Y-m');
+            $last6Month[$i]=$end->isoFormat('MMMM');
+            $pemasukan[$i]=Transaksi::Where([['pemasok_id',$idUser],
+                ['status_permintaan','3'],
+                ['status_pengiriman','1'],
+                ['status_pemesanan','1'],
+                ['tanggal_diterima', 'LIKE',  $range . '%']
+                ])
+                ->select(DB::raw("sum(jumlah_cabai*harga) as jumlah"))
+                ->pluck('jumlah')
+                ->first();
+            if($pemasukan[$i]==null){
+                $pemasukan[$i]=0;
+            }
+            else{
+                $pemasukan[$i]=(int)$pemasukan[$i];
+            }
+            
+            $end=$end->subMonth()->startOfMonth()->addDay();
+        }
+        $last6MonthArray=[$last6Month[0],$last6Month[1],$last6Month[2],$last6Month[3],$last6Month[4],$last6Month[5]];
+        $pemasukanArray=[$pemasukan[0],$pemasukan[1],$pemasukan[2],$pemasukan[3],$pemasukan[4],$pemasukan[5]];
+        $filterBulan = $year . '-' . $month; 
+        return response()->json([
+            'maxJumlahQty' => $maxJumlahQty,
+            'maxJumlahJenis' => $maxJumlahJenis,
+            'minJumlahQty' => $minJumlahQty,
+            'minJumlahJenis' => $minJumlahJenis,
+            'maxHargaQty' => $maxHargaQty,
+            'maxHargaJenis' => $maxHargaJenis,
+            'penjualanTarget' => $penjualanTarget,
+            'pemasukan' => $pemasukanArray,
+            'last6Month' => $last6MonthArray,
+            'month' => $month,
+            'bulan' => $bulan,
+            'targetByJenisCabai' => $targetMonthNow,
         ]);
     }
 }
