@@ -138,6 +138,8 @@ Route::get('/getAllHarga','AnalysisHomeController@getAllHarga');
 Route::get('/getDaerah','AnalysisHomeController@getDaerah');
 Route::get('/getHarga/{idKab}/{idRole}','AnalysisHomeController@getHarga');
 Route::get('/getProduksi/{idKab}','AnalysisHomeController@getProduksi');
+Route::get('/getStok/{idKab}','AnalysisHomeController@getStok');
+Route::get('/getProduktivitas/{idKab}','AnalysisHomeController@getProduktivitas');
 
 
 // Route::resources([

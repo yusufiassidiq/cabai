@@ -49,6 +49,8 @@
       </div>
     </nav>
     <!-- /.navbar -->
+    
+    <vue-progress-bar></vue-progress-bar>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="container">
@@ -183,6 +185,7 @@ export default {
       let selectedDaerah = this.selectedDaerah;
       axios.get('/getProduksi/'+ selectedDaerah)
         .then(response=>{
+          this.$Progress.start();
           console.log(response.data.produksiByDay);
           $("#cardCabai").show();
           this.dateNow = response.data.dateNow;
@@ -190,6 +193,7 @@ export default {
           this.kab = response.data.kabupaten;
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
+           
           var myChart = new Chart(ctx, {
             type: "line",
             data: {
@@ -204,42 +208,42 @@ export default {
                   pointStrokeColor: "#c1c7d1",
                   pointHighlightFill: "#fff",
                   pointHighlightStroke: "rgba(54, 162, 235, 1)",
-                  data: response.data.produksiByDay,
+                  data: response.data.produksiRawit,
                   pointStyle: "rect",
                   pointRadius: 7,
                   pointHoverRadius: 10,
                   fill: false
                 },
-                // {
-                //   label: "Cabai Keriting",
-                //   backgroundColor: "rgba(254, 99, 131, 1)",
-                //   borderColor: "rgba(254, 99, 131, 1)",
-                //   pointRadius: true,
-                //   pointColor: "#3b8bba",
-                //   pointStrokeColor: "rgba(254, 99, 131, 1)",
-                //   pointHighlightFill: "#fff",
-                //   pointHighlightStroke: "rgba(254, 99, 131, 1)",
-                //   data: response.data.hargaHarianKeriting,
-                //   pointStyle: "rect",
-                //   pointRadius: 7,
-                //   pointHoverRadius: 10,
-                //   fill: false
-                // },
-                // {
-                //   label: "Cabai Besar",
-                //   backgroundColor: "rgba(74, 192, 192, 1)",
-                //   borderColor: "rgba(74, 192, 192, 1)",
-                //   pointRadius: true,
-                //   pointColor: "#3b8bba",
-                //   pointStrokeColor: "rgba(74, 192, 192, 1)",
-                //   pointHighlightFill: "#fff",
-                //   pointHighlightStroke: "rgba(74, 192, 192, 1)",
-                //   data: response.data.hargaHarianKeriting,
-                //   pointStyle: "rect",
-                //   pointRadius: 7,
-                //   pointHoverRadius: 10,
-                //   fill: false
-                // }
+                {
+                  label: "Cabai Keriting",
+                  backgroundColor: "rgba(254, 99, 131, 1)",
+                  borderColor: "rgba(254, 99, 131, 1)",
+                  pointRadius: true,
+                  pointColor: "#3b8bba",
+                  pointStrokeColor: "rgba(254, 99, 131, 1)",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(254, 99, 131, 1)",
+                  data: response.data.produksiKeriting,
+                  pointStyle: "rect",
+                  pointRadius: 7,
+                  pointHoverRadius: 10,
+                  fill: false
+                },
+                {
+                  label: "Cabai Besar",
+                  backgroundColor: "rgba(74, 192, 192, 1)",
+                  borderColor: "rgba(74, 192, 192, 1)",
+                  pointRadius: true,
+                  pointColor: "#3b8bba",
+                  pointStrokeColor: "rgba(74, 192, 192, 1)",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(74, 192, 192, 1)",
+                  data: response.data.produksiBesar,
+                  pointStyle: "rect",
+                  pointRadius: 7,
+                  pointHoverRadius: 10,
+                  fill: false
+                }
               ]
             },
             options: {
@@ -272,6 +276,7 @@ export default {
               
             }
           });
+          this.$Progress.finish();
         })
         .catch(error => {
           console.log(error);

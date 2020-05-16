@@ -8,6 +8,7 @@ use App\Lokasi;
 use App\Transaksi;
 use App\Panen;
 use App\PraProduksi;
+use App\Inventaris;
 use App\User;
 use App\Kabupaten;
 use Carbon\Carbon;
@@ -219,11 +220,17 @@ class AnalysisHomeController extends Controller
         // $idKab = 1;
         $nameKab = Kabupaten::where('id',$idKab)->first('name');
         $userId = Lokasi::whereIn('kabupaten',$nameKab)->pluck('user_id');
-        $praProduksi = PraProduksi::whereIn('user_id',$userId)->pluck('id');
-        $panen = Panen::whereIn('pra_produksi_id',$praProduksi)->get();
-        $rataanPanen = $panen->avg('jumlah_panen');
-        $jumlahPanen = $panen->sum('jumlah_panen');
+
+        $jenisCabai = array('Cabai rawit', 'Cabai keriting', 'Cabai besar');
         
+        $praProduksiRawit = PraProduksi::whereIn('user_id',$userId)->where('jenis_cabai', $jenisCabai[0])->pluck('id');
+        $praProduksiKeriting = PraProduksi::whereIn('user_id',$userId)->where('jenis_cabai', $jenisCabai[1])->pluck('id');
+        $praProduksiBesar = PraProduksi::whereIn('user_id',$userId)->where('jenis_cabai', $jenisCabai[2])->pluck('id');
+
+        $panenRawit = Panen::whereIn('pra_produksi_id',$praProduksiRawit)->get();
+        $panenKeriting = Panen::whereIn('pra_produksi_id',$praProduksiKeriting)->get();
+        $panenBesar = Panen::whereIn('pra_produksi_id',$praProduksiBesar)->get();
+
         $dateNow = Carbon::now()->isoFormat('dddd, Do MMMM YYYY');
         $now = Carbon::now()->format('Y-m-d');
         $start = Carbon::now()->subweek(4)->format('Y-m-d');
@@ -235,21 +242,119 @@ class AnalysisHomeController extends Controller
             $array_date[$i] = $awal->format('Y-m-d');
             $awal = $awal->addDay();
 
-            $produksiByDay[$i] = $panen->where('tanggal_panen',$array_date[$i])->sum('jumlah_panen');
+            $produksiByDayRawit[$i] = $panenRawit->where('tanggal_panen',$array_date[$i])->sum('jumlah_panen');
+            $produksiByDayKeriting[$i] = $panenKeriting->where('tanggal_panen',$array_date[$i])->sum('jumlah_panen');
+            $produksiByDayBesar[$i] = $panenBesar->where('tanggal_panen',$array_date[$i])->sum('jumlah_panen');
+        }
+
+        return response()->json([
+            'produksiRawit' => $produksiByDayRawit,
+            'produksiKeriting' => $produksiByDayKeriting,
+            'produksiBesar' => $produksiByDayBesar,
+            'date' => $array_date,
+            'dateNow' => $dateNow,
+            'kabupaten' => $nameKab,
+        ], 200); 
+    }
+    
+    public function getStok(Request $request, $idKab)
+    {
+        $kab = Kabupaten::where('id',$idKab)->first('name');
+        $idUser = Lokasi::whereIn('kabupaten',$kab)->pluck('user_id');
+
+        $dateNow = Carbon::now()->isoFormat('dddd, Do MMMM YYYY');
+        $now = Carbon::now()->format('Y-m-d');
+        $start = Carbon::now()->subweek(4)->format('Y-m-d');
+        $end = Carbon::now()->format('Y-m-d');
+
+        $awal = Carbon::now()->subweek(4);
+        for ($i=0;$i<28;$i++)
+        {
+            $array_date[$i] = $awal->format('Y-m-d');
+            $awal = $awal->addDay();
+            
+            $stokByDayRawit[$i] = Inventaris::whereIn('user_id', $idUser)
+                ->where('jenis_cabai', 'Cabai rawit')
+                ->whereDate('updated_at', $array_date[$i])
+                ->sum('jumlah_cabai');
+
+            $stokByDayKeriting[$i] = Inventaris::whereIn('user_id', $idUser)
+                ->where('jenis_cabai', 'Cabai keriting')
+                ->whereDate('updated_at', $array_date[$i])
+                ->sum('jumlah_cabai');
+
+            $stokByDayBesar[$i] = Inventaris::whereIn('user_id', $idUser)
+                ->where('jenis_cabai', 'Cabai besar')
+                ->whereDate('updated_at', $array_date[$i])
+                ->sum('jumlah_cabai');
+
+        }
+        
+        return response()->json([
+            'stokRawit' => $stokByDayRawit,
+            'stokKeriting' => $stokByDayKeriting,
+            'stokBesar' => $stokByDayBesar,
+            'date' => $array_date,
+            'dateNow' => $dateNow,
+            'kabupaten' => $kab,
+        ], 200);
+    }
+
+    public function getProduktivitas(Request $request, $idKab)
+    {
+        $nameKab = Kabupaten::where('id',$idKab)->first('name');
+        $userId = Lokasi::whereIn('kabupaten',$nameKab)->pluck('user_id');
+
+        $jenisCabai = array('Cabai rawit', 'Cabai keriting', 'Cabai besar');
+        
+        // get pra produksi
+        $praProduksiRawit = PraProduksi::whereIn('user_id',$userId)->where('jenis_cabai', $jenisCabai[0])->get();
+        $praProduksiKeriting = PraProduksi::whereIn('user_id',$userId)->where('jenis_cabai', $jenisCabai[1])->get();
+        $praProduksiBesar = PraProduksi::whereIn('user_id',$userId)->where('jenis_cabai', $jenisCabai[2])->get();
+
+        $panenRawit = Panen::whereIn('pra_produksi_id',$praProduksiRawit->pluck('id'))->get();
+        $panenKeriting = Panen::whereIn('pra_produksi_id',$praProduksiKeriting->pluck('id'))->get();
+        $panenBesar = Panen::whereIn('pra_produksi_id',$praProduksiBesar->pluck('id'))->get();
+
+        $dateNow = Carbon::now()->isoFormat('dddd, Do MMMM YYYY');
+        $now = Carbon::now()->format('Y-m-d');
+        $start = Carbon::now()->subweek(4)->format('Y-m-d');
+        $end = Carbon::now()->format('Y-m-d');
+
+        $awal = Carbon::now()->subweek(4);
+        for ($i=0;$i<28;$i++)
+        {
+            $array_date[$i] = $awal->format('Y-m-d');
+            $awal = $awal->addDay();
+
+            $panenRawit = Panen::whereIn('pra_produksi_id',$praProduksiRawit->pluck('id'))->where('tanggal_panen',$array_date[$i]);
+            $panenKeriting = Panen::whereIn('pra_produksi_id',$praProduksiKeriting->pluck('id'))->where('tanggal_panen',$array_date[$i]);
+            $panenBesar = Panen::whereIn('pra_produksi_id',$praProduksiBesar->pluck('id'))->where('tanggal_panen',$array_date[$i]);
+            
+            // $idPraProduksi[$i] = $panenRawit -> value('pra_produksi_id') ;
+            
+            $luasRawit[$i] = PraProduksi::where('id',$panenRawit -> value('pra_produksi_id'))->value('luas_lahan');
+            $luasKeriting[$i] = PraProduksi::where('id',$panenKeriting -> value('pra_produksi_id'))->value('luas_lahan');
+            $luasBesar[$i] = PraProduksi::where('id',$panenBesar -> value('pra_produksi_id'))->value('luas_lahan');
+
+            $produksiByDayRawit[$i] = $panenRawit->sum('jumlah_panen');
+            $produksiByDayKeriting[$i] = $panenKeriting->sum('jumlah_panen');
+            $produksiByDayBesar[$i] = $panenBesar->sum('jumlah_panen');
+
+            $produktivitasByDayRawit[$i] = $luasRawit[$i] ? round($produksiByDayRawit[$i]/$luasRawit[$i]) : 0;
+            $produktivitasByDayKeriting[$i] = $luasKeriting[$i] ? round($produksiByDayKeriting[$i]/$luasKeriting[$i]) : 0;
+            $produktivitasByDayBesar[$i] = $luasBesar[$i] ? round($produksiByDayBesar[$i]/$luasBesar[$i]) : 0;
 
         }
 
         return response()->json([
-            'produksi' => array($userId,$praProduksi,$panen,$rataanPanen),
-            'produksiByDay' => $produksiByDay,
+            'produktivitasRawit' => $produktivitasByDayRawit,
+            'produktivitasKeriting' => $produktivitasByDayKeriting,
+            'produktivitasBesar' => $produktivitasByDayBesar,
             'date' => $array_date,
             'dateNow' => $dateNow,
             'kabupaten' => $nameKab,
-
-            // 'role_user' => $role_user,
-            // 'year' => $year,
-            // 'total_user' => $jml_user,
-            // 'user' => $data_user,
         ], 200); 
     }
+    
 }
