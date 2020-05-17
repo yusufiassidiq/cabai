@@ -142,8 +142,8 @@
                       <!-- <td>{{ data.id }}</td> -->
                       <td>{{transaksi.tanggal_diterima}}</td>
                       <!-- <td>coba</td> -->
-                      <td>{{transaksi.jumlah_cabai}}</td>
-                      <td>{{transaksi.total_transaksi}}</td>
+                      <td>{{transaksi.jumlah_cabai | filterAngkaRibuan}}</td>
+                      <td>{{transaksi.total_transaksi | convertToRupiah}}</td>
                     </tr>
                     <!-- end example data -->
                   </tbody>

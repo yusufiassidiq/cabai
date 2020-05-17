@@ -277,7 +277,7 @@
                         display : false,
                         },
                   ticks:{
-                    beginAtZero:false,
+                    beginAtZero:true,
                   }
                 }]
               }
@@ -493,7 +493,7 @@
                         display : false,
                         },
                   ticks:{
-                    beginAtZero:false,
+                    beginAtZero:true,
                   }
                 }]
               }

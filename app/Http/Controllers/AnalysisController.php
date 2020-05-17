@@ -274,9 +274,9 @@ class AnalysisController extends Controller
             $date = $filter . '-' . $n_date;
             $total_transaksi=$transaksi->firstWhere('tanggal_diterima',$date);
             $data[]=[
-                'tanggal_diterima' => $date,
+                'tanggal_diterima' => $n_date . '/' . $month . '/' . $year,
                 //if $total_transaksi true maka nilainya $total_transaksi->total selainnya 0
-                'total_transaksi' => $total_transaksi ? $total_transaksi->total:0,
+                'total_transaksi' => $total_transaksi ? (int)$total_transaksi->total:0,
                 'jumlah_cabai' => $total_transaksi ? $total_transaksi->jumlah:0
             ];
         }
@@ -629,10 +629,10 @@ class AnalysisController extends Controller
                 'ach' => $ach,
             ];
         }
-        $end = Carbon::now()->startOfMonth()->addDay();
-        for($i=5;$i>=0;$i--){
-            $range=$end->format('Y-m');
-            $last6Month[$i]=$end->isoFormat('MMMM');
+        $start = Carbon::now()->subMonths(5)->startOfMonth();
+        for($i=0;$i<6;$i++){
+            $range=$start->format('Y-m');
+            $last6Month[$i]=$start->isoFormat('MMMM');
             $pemasukan[$i]=Transaksi::Where([['pemasok_id',$idUser],
                 ['status_permintaan','3'],
                 ['status_pengiriman','1'],
@@ -642,18 +642,40 @@ class AnalysisController extends Controller
                 ->select(DB::raw("sum(jumlah_cabai*harga) as jumlah"))
                 ->pluck('jumlah')
                 ->first();
+            $pengeluaran[$i]=PengeluaranProduksi::where([
+                ['user_id',$idUser],
+                ['created_at', 'LIKE',  $range . '%']
+            ])->select(DB::raw("sum(jumlah_pengeluaran) as jumlah_pengeluaran"))
+            ->pluck('jumlah_pengeluaran')
+            ->first();
+            $target[$i]=Target::Where([['user_id',$idUser],
+                ['bulan', $last6Month[$i]]])
+                ->select(DB::raw("sum(jumlah_cabai) as jumlah_target"))
+                ->pluck('jumlah_target')
+                ->first();
+            if($target==null){
+                $target[$i]=0;
+            }
+            else{
+                $target[$i]=(int)($target[$i]/1000);
+            }
+            if($pengeluaran[$i]==null){
+                $pengeluaran[$i]=0;
+            }
+            else{
+                $pengeluaran[$i]=(int)($pengeluaran[$i]/1000);
+            }
             if($pemasukan[$i]==null){
                 $pemasukan[$i]=0;
             }
             else{
-                $pemasukan[$i]=(int)$pemasukan[$i];
+                $pemasukan[$i]=(int)($pemasukan[$i]/1000);
             }
-            
-            $end=$end->subMonth()->startOfMonth()->addDay();
+            $start=$start->addMonth()->startOfMonth();
         }
-        $last6MonthArray=[$last6Month[0],$last6Month[1],$last6Month[2],$last6Month[3],$last6Month[4],$last6Month[5]];
-        $pemasukanArray=[$pemasukan[0],$pemasukan[1],$pemasukan[2],$pemasukan[3],$pemasukan[4],$pemasukan[5]];
-        $filterBulan = $year . '-' . $month; 
+        $terjualTotal=$pemasukan[5]*1000;
+        $gapTotal=($target[5]*1000-$terjualTotal);
+        $achTotal=ROUND(($pemasukan[5]*100)/$target[5]) . "%";
         return response()->json([
             'maxJumlahQty' => $maxJumlahQty,
             'maxJumlahJenis' => $maxJumlahJenis,
@@ -662,8 +684,13 @@ class AnalysisController extends Controller
             'maxHargaQty' => $maxHargaQty,
             'maxHargaJenis' => $maxHargaJenis,
             'penjualanTarget' => $penjualanTarget,
-            'pemasukan' => $pemasukanArray,
-            'last6Month' => $last6MonthArray,
+            'terjualTotal' => $terjualTotal,
+            'achTotal' => $achTotal,
+            'gapTotal' => $gapTotal,
+            'pemasukan' => $pemasukan,
+            'pengeluaran' => $pengeluaran,
+            'target' => $target,
+            'last6Month' => $last6Month,
             'month' => $month,
             'bulan' => $bulan,
             'targetByJenisCabai' => $targetMonthNow,
