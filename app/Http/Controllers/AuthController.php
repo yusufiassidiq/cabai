@@ -40,7 +40,7 @@ class AuthController extends Controller
 		    // $tujuan_upload = 'uploads/fotosk';
             // $fotosk->move($tujuan_upload,$nama_gambar);
             $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($fotosk, 0, strpos($fotosk, ';')))[1])[1];
-            \Image::make($request->get('fotosk'))->save(public_path('images/fotosk').$fileName);
+            \Image::make($request->get('fotosk'))->save(public_path('images/').$fileName);
         }
         $user = new User;
         $user->name = $request->name;

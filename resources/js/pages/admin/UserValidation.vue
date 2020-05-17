@@ -55,7 +55,7 @@
                           <th>Role</th>
                           <th>Email</th>
                           <th>Tgl Pengajuan</th>
-                          <th>Surat Izin Usaha Perdagangan (SIUP)</th>
+                          <th>Surat Izin (SIUP)</th>
                           <th>Aksi</th>
                         </tr>
                       </thead>
@@ -76,13 +76,13 @@
                             <button class="btn btn-info btn-xs" @click="previewImage(user)">
                               <i class="fas fa-eye"></i>&nbsp; Lihat
                             </button>
-                            &nbsp;/&nbsp;
-                            <button
+                            <!-- &nbsp;/&nbsp; -->
+                            <!-- <button
                               class="btn btn-secondary btn-xs"
                               @click="downloadSIUP()"
                             >
                               <i class="fas fa-file-download">&nbsp; Download</i>
-                            </button>
+                            </button> -->
                           </td>
                           <td>
                             <button
@@ -169,7 +169,7 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
+    <!-- Modal Preview Image-->
     <div
       class="modal fade"
       id="fotosk"
@@ -188,13 +188,8 @@
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <img :src="lokasifotosk" class="img-responsive">
+              <img :src="getphoto()" class="img-responsive" />
             </div>
-          </div>
-          <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-            <!-- <button class="btn btn-danger" v-on:click="tolak(userDetail.id)">Tolak</button>
-            <button class="btn btn-success" v-on:click="terima(userDetail.id)">Terima</button> -->
           </div>
           <!-- </form> -->
         </div>
@@ -203,12 +198,20 @@
     <!-- /.content-wrapper -->
   </div>
 </template>
+
+<style scoped>
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+</style>
+
 <script>
 export default {
   data() {
     return {
-      selectedImage: "",
-      lokasifotosk: "",
+      selectedImage: "logo",
       userDetail: "",
       has_error: false,
       users: {},
@@ -221,6 +224,9 @@ export default {
     };
   },
   methods: {
+    getphoto() {
+      return "/images/" + this.selectedImage;
+    },
     // prev & next paggination
     fetchPaginateUsers(url) {
       this.url_getUser = url;
@@ -247,23 +253,18 @@ export default {
         })
         .catch(() => {});
     },
-
     // fungsi untuk melihat gambar SIUP User
     previewImage(user) {
-      this.selectedImage = user.fotosk
-      console.log(this.selectedImage)
+      this.selectedImage = user.fotosk;
       $("#fotosk").modal("show");
     },
     // fungsi mendownload SIUP User
-    downloadSIUP() {},
-
+    // downloadSIUP() {},
     // fungsi untuk melihat detail User yang belum divalidasi
     selectUser(user) {
       this.userDetail = user;
       $("#detailUser").modal("show");
-      // this.lokasifotosk = require('/assets/images/fotosk/fotosk.png')
     },
-
     // funsi untuk menolak validasi user
     tolak(id) {
       swal
@@ -298,7 +299,6 @@ export default {
           }
         });
     },
-
     // fungsi untuk menerima validasi User
     terima(id) {
       this.$Progress.start();

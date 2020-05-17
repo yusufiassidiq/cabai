@@ -79,16 +79,16 @@
                         <td>{{ user.email }}</td>
                         <td>{{ customFormatter(user.updated_at) }}</td>
                         <td>
-                          <button class="btn btn-info btn-xs" @click="previewImage()">
+                          <button class="btn btn-info btn-xs" @click="previewImage(user)">
                             <i class="fas fa-eye"></i>&nbsp; Lihat
                           </button>
-                          &nbsp;/&nbsp;
+                          <!-- &nbsp;/&nbsp;
                           <button
                             class="btn btn-secondary btn-xs"
                             @click="downloadSIUP()"
                           >
                             <i class="fas fa-file-download">&nbsp; Download</i>
-                          </button>
+                          </button> -->
                         </td>
 
                         <td>
@@ -182,11 +182,38 @@
         </div>
       </div>
     </div>
-    <!-- /.content-wrapper -->
+    
+    <!-- Modal Preview Image -->
+    <!-- Modal Preview Image-->
+    <div
+      class="modal fade"
+      id="fotosk"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="detailUserLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailUserLabel">Foto SIUP</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <img :src="getphoto()" class="img-responsive" />
+            </div>
+          </div>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .input-container input {
   /* border: none;
 	background: transparent; */
@@ -194,12 +221,18 @@
   padding: 6px 6px;
   font-size: 16px;
 }
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 </style>
 
 <script>
 export default {
   data() {
     return {
+      selectedImage: "logo",
       userDetail: "",
       has_error: false,
       selectedUser: undefined,
@@ -284,9 +317,13 @@ export default {
       return moment(date).format("DD MMMM YYYY");
     },
     // fungsi untuk melihat gambar SIUP User
-    previewImage() {},
-    // fungsi mendownload SIUP User
-    downloadSIUP() {}
+    previewImage(user) {
+      this.selectedImage = user.fotosk;
+      $("#fotosk").modal("show");
+    },
+    getphoto() {
+      return "/images/" + this.selectedImage;
+    },
   },
   computed: {
     // fungsi search
