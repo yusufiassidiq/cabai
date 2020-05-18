@@ -101,15 +101,15 @@
             </li>
             <li class="nav-header">Distribusi</li>
             <li class="nav-item">
-              <router-link to="/grosir/transaksicabai" class="nav-link">
+              <router-link to="/grosir/distribusicabai" class="nav-link">
                 <i class="fas fa-file-invoice nav-icon"></i>
-                <p>Transaksi Cabai</p>
+                <p>Distribusi Cabai</p>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/grosir/riwayattransaksi" class="nav-link">
+              <router-link to="/grosir/riwayatdistribusi" class="nav-link">
                 <i class="fas fa-receipt nav-icon"></i>
-                <p>Riwayat Transaksi</p>
+                <p>Riwayat Distribusi</p>
               </router-link>
             </li>
             <li class="nav-header">Bisnis Analitik</li>

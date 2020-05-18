@@ -121,15 +121,15 @@
             </li> -->
             <li class="nav-header">Distribusi</li>
             <li class="nav-item">
-              <router-link to="/produsen/transaksicabai" class="nav-link">
+              <router-link to="/produsen/distribusicabai" class="nav-link">
                 <i class="fas fa-receipt nav-icon"></i>
-                <p>Transaksi Cabai</p>
+                <p>Distribusi Cabai</p>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/produsen/riwayattransaksi" class="nav-link">
+              <router-link to="/produsen/riwayatdistribusi" class="nav-link">
                 <i class="fas fa-receipt nav-icon"></i>
-                <p>Riwayat Transaksi</p>
+                <p>Riwayat Distribusi</p>
               </router-link>
             </li>
             <li class="nav-header">MANAJEMEN BISNIS</li>
