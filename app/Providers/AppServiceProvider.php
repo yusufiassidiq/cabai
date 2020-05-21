@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\URL;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
+use App;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,7 +28,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        URL::forceScheme('https');
+        if(App::environment() !== 'local')
+        {
+            URL::forceScheme('https');
+        }
+        // echo("qwe");
         config(['app.locale' => 'id']);
 	    Carbon::setLocale('id');
         date_default_timezone_set('Asia/Jakarta');
