@@ -131,7 +131,7 @@ Vue.filter('filterRoleUser', function(id_role){
 
 // Set Vue authentication
 Vue.use(VueAxios, axios)
-if(env('APP_ENV') === 'local')
+if(`${process.env.APP_ENV}` === 'local')
         {
             axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api`
         }
