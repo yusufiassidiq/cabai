@@ -596,6 +596,7 @@ router.beforeEach((to, from, next) => {
             axios.get('/auth/user').then(response => {
                 if (response.data.status === "success"){
                     callback (response.data.data)
+                    window.localStorage.setItem("namauser", response.data.data.name)
                 } else {
                     callback("error")
                 }

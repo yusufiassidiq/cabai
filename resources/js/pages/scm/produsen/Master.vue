@@ -13,26 +13,11 @@
       <ul class="navbar-nav ml-auto">
         <!-- logout -->
         <li v-if="$auth.check()">
-          <a href @click.prevent="$auth.logout();clearLocalStorage()">Logout</a>
+          <a href="" class="btn btn-block btn-danger btn-sm" @click.prevent="$auth.logout();clearLocalStorage()">
+            <i class="nav-icon fas fa-sign-out-alt"></i>
+            Logout
+          </a>
         </li>
-        <!-- SEARCH FORM -->
-        <!-- <li class="nac-item">
-            <form class="form-inline ml-3">
-              <div class="input-group input-group-sm">
-                <input
-                  class="form-control form-control-navbar"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <div class="input-group-append">
-                  <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
-        </li>-->
       </ul>
     </nav>
     <!-- Main Sidebar Container -->
@@ -49,6 +34,14 @@
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar Menu -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="/dist/img/userprofile.png" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="">{{ userlogin }}</a>
+          </div>
+        </div>
         <nav class="mt-2">
           <ul
             class="nav nav-pills nav-sidebar flex-column"
@@ -113,12 +106,6 @@
                 <p>Permintaan Mitra</p>
               </router-link>
             </li>
-            <!-- <li class="nav-item">
-              <router-link to="/produsen/pengajuanmitra" class="nav-link">
-                <i class="fas fa-user-clock nav-icon"></i>
-                <p>Pengajuan Mitra</p>
-              </router-link>
-            </li> -->
             <li class="nav-header">Distribusi</li>
             <li class="nav-item">
               <router-link to="/produsen/distribusicabai" class="nav-link">
@@ -179,6 +166,15 @@
 </template>
 <script>
 export default {
+  data(){
+    return{
+      userlogin:"",
+      role:""
+    }
+  },
+  mounted() {
+    this.userlogin = localStorage.getItem("namauser")
+  },
   methods: {
     clearLocalStorage() {
       localStorage.clear();
