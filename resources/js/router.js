@@ -597,6 +597,7 @@ router.beforeEach((to, from, next) => {
                 if (response.data.status === "success"){
                     callback (response.data.data)
                     window.localStorage.setItem("namauser", response.data.data.name)
+                    window.localStorage.setItem("role", response.data.data.role)
                 } else {
                     callback("error")
                 }

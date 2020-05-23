@@ -3,7 +3,7 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
-        <div class="row">
+        <div class="row" v-show="role != 6">
           <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-info red">
@@ -94,6 +94,7 @@
 export default {
   data(){
     return{
+      role:"",
       jml_cabai_rawit:"",
       jml_cabai_besar:"",
       jml_cabai_keriting:"",
@@ -126,6 +127,7 @@ export default {
     }
   },
   mounted(){
+    this.role = localStorage.getItem("role")
     this.getInventaris()
     this.getInfoKemitraan()
     
