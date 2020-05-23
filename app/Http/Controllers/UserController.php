@@ -647,4 +647,26 @@ class UserController extends Controller
         ]);
         return response()->json(['status' => 'success'], 200);
     }
+    public function InfoKemitraan()
+    {
+        $userId = Auth::user()->id;
+        $jumlahMitraSaya = Kemitraan::orWhere(function($query)use($userId){
+            $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
+        })->where('status',1)->count();
+        
+        $jumlahPengajuanMitra = Kemitraan::orWhere(function($query)use($userId){
+            $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
+        })->where('status',0)->where('action_user',$userId)->count();
+
+        $jumlahPermintaanMitra = Kemitraan::orWhere(function($query)use($userId){
+            $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
+        })->where('status',0)->whereNotIn('action_user',[$userId])->count();
+        
+        $info = [
+            "jml_mitra_saya" => $jumlahMitraSaya,
+            "jml_pengajuan_mitra" => $jumlahPengajuanMitra,
+            "jml_permintaan_mitra" => $jumlahPermintaanMitra
+        ];
+        return response()->json(['data' => $info],200);
+    }
 }
