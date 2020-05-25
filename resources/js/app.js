@@ -83,7 +83,6 @@ Vue.filter('dateFilter', function (value) {
 
 // filter convert angka ke rupiah
 Vue.filter('convertToRupiah', function (angka) {
-    if(typeof angka !=='string'){
         var rupiah = "";
         var angkarev = angka.toString().split("").reverse().join("");
         
@@ -92,10 +91,6 @@ Vue.filter('convertToRupiah', function (angka) {
         return (
             "Rp " + rupiah.split("", rupiah.length - 1).reverse().join("")
         );
-    }
-    else{
-        return(angka);
-    }
 })
 
 // filter mengubah angka menjadi ribuan
@@ -108,6 +103,11 @@ Vue.filter('filterAngkaRibuan', function (value) {
         angka.split("", angka.length - 1).reverse().join("")
     );
 })
+
+// Vue.filter('classFlag', function (value) {
+//     var flag= value;
+//     return(flag);
+// })
 
 // filter mendapatkan Jenis Role
 Vue.filter('filterRoleUser', function(id_role){
@@ -128,6 +128,52 @@ Vue.filter('filterRoleUser', function(id_role){
         return "Konsumen";
     }
 })
+
+// filter convert angka ke rupiah
+Vue.filter('angkaPersentase', function (angka) {
+    if(typeof angka !=='string'){
+        var angka = angka;
+        if (angka<0) 
+            return( angka * -1 + "%");
+        else 
+            return( angka + "%");
+    }
+    else
+        return(angka);
+})
+
+Vue.filter('filterRealisasiTarget', function (value) {
+    if(typeof value !=='string'){
+        var angka = "";
+        var angkarev = value.toString().split("").reverse().join("");
+        for (var i = 0; i < angkarev.length; i++)
+            if (i % 3 == 0) angka += angkarev.substr(i, 3) + ".";
+        return (
+            angka.split("", angka.length - 1).reverse().join("") + " Kg"
+        );
+    }
+    else
+        return(value);
+})
+
+Vue.filter('filterGapTarget', function (value) {
+    if(typeof value !=='string'){
+        if(value > 0){
+            var angka = "";
+            var angkarev = value.toString().split("").reverse().join("");
+            for (var i = 0; i < angkarev.length; i++)
+                if (i % 3 == 0) angka += angkarev.substr(i, 3) + ".";
+            return (
+                "Kurang " + angka.split("", angka.length - 1).reverse().join("") + " Kg"
+            );
+        }
+        else 
+            return "Tercapai"
+    }
+    else
+        return (value);
+})
+
 
 // Set Vue authentication
 Vue.use(VueAxios, axios)

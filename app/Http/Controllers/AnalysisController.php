@@ -336,10 +336,7 @@ class AnalysisController extends Controller
             'transaksi' => $transaksi,
             'data' => $data,
             'monthYearNow' => $monthYearNow,
-            // 'lastmonth' => $lastmonth,
-            // 'totalTransaksi' => $totalTransaksi,
             'tanggal' => $tanggal,
-            // 'totalByTanggal' => $totalByTanggal,
             'start' => $startTitle,
             'end' => $endTitle,
             'cabai' => $cabaiByDay,
@@ -538,7 +535,7 @@ class AnalysisController extends Controller
             ['status_pemesanan','1'],
             ['tanggal_diterima', 'LIKE',  $filter . '%']
             ])
-            ->select('jenis_cabai',DB::raw("sum(jumlah_cabai*harga) as total"))
+            ->select('jenis_cabai',DB::raw("sum(jumlah_cabai) as total"))
             ->groupBy('jenis_cabai')
             ->pluck('total','jenis_cabai')
             ->all();
@@ -606,13 +603,13 @@ class AnalysisController extends Controller
                     //ada target dan transaksi
                     $terjual=(int)$transaksiMonthNow[$jenis];
                     $gap=$targetMonthNow[$jenis]-$terjual;
-                    $ach=ROUND(($transaksiMonthNow[$jenis]*100)/$targetMonthNow[$jenis]) . '%';
+                    $ach=ROUND(($transaksiMonthNow[$jenis]*100)/$targetMonthNow[$jenis]);
                 }
                 else{
                     //belum ada transaksi
                     $terjual=0;
                     $gap=$targetMonthNow[$jenis];
-                    $ach=0 . "%";
+                    $ach=0;
                 }
             }
             //belum ada target 
@@ -621,8 +618,22 @@ class AnalysisController extends Controller
                 $gap='-';
                 $ach='-';
             }
+            if($ach=='-'){
+                $warna="#909090";
+            } 
+            else if($ach>=85){
+                $warna="#00a65a";
+            }
+            else if($ach>=50){
+                $warna="#e98b2d";
+            }
+            else if($ach>=0){
+                $warna="#dd4b39";
+            }
             //memasukan data menjadi object
             $penjualanTarget[]=[
+                'text' => "#ffffff",
+                'warna' => $warna,
                 'jenis' => $jenis,
                 'terjual' => $terjual,
                 'gap' => $gap,
@@ -633,31 +644,30 @@ class AnalysisController extends Controller
         for($i=0;$i<6;$i++){
             $range=$start->format('Y-m');
             $last6Month[$i]=$start->isoFormat('MMMM');
-            $pemasukan[$i]=Transaksi::Where([['pemasok_id',$idUser],
-                ['status_permintaan','3'],
-                ['status_pengiriman','1'],
-                ['status_pemesanan','1'],
-                ['tanggal_diterima', 'LIKE',  $range . '%']
-                ])
-                ->select(DB::raw("sum(jumlah_cabai*harga) as jumlah"))
-                ->pluck('jumlah')
-                ->first();
             $pengeluaran[$i]=PengeluaranProduksi::where([
                 ['user_id',$idUser],
                 ['created_at', 'LIKE',  $range . '%']
             ])->select(DB::raw("sum(jumlah_pengeluaran) as jumlah_pengeluaran"))
             ->pluck('jumlah_pengeluaran')
             ->first();
+            $transaksi[$i]=Transaksi::Where([['pemasok_id',$idUser],
+                ['status_permintaan','3'],
+                ['status_pengiriman','1'],
+                ['status_pemesanan','1'],
+                ['tanggal_diterima', 'LIKE',  $range . '%']
+                ])
+                ->select(DB::raw("sum(jumlah_cabai) as jumlah_cabai"), DB::raw("sum(jumlah_cabai*harga) as jumlah"))
+                ->first();
             $target[$i]=Target::Where([['user_id',$idUser],
                 ['bulan', $last6Month[$i]]])
                 ->select(DB::raw("sum(jumlah_cabai) as jumlah_target"))
                 ->pluck('jumlah_target')
                 ->first();
-            if($target==null){
+            if($target[$i]==null){
                 $target[$i]=0;
             }
             else{
-                $target[$i]=(int)($target[$i]/1000);
+                $target[$i]=(int)$target[$i];
             }
             if($pengeluaran[$i]==null){
                 $pengeluaran[$i]=0;
@@ -665,18 +675,62 @@ class AnalysisController extends Controller
             else{
                 $pengeluaran[$i]=(int)($pengeluaran[$i]/1000);
             }
-            if($pemasukan[$i]==null){
+            if($transaksi[$i]->jumlah==null || $transaksi[$i]->jumlah_cabai==null){
                 $pemasukan[$i]=0;
+                $penjualan[$i]=0;
             }
             else{
-                $pemasukan[$i]=(int)($pemasukan[$i]/1000);
+                $pemasukan[$i]=(int)($transaksi[$i]->jumlah/1000);
+                $penjualan[$i]=(int)$transaksi[$i]->jumlah_cabai;
+            }
+            if($i==5){
+                $pemasukanTotal=$pemasukan[$i]*1000;
+                $pengeluaranTotal=$pengeluaran[$i]*1000;
+                $labaTotal=$pemasukanTotal-$pengeluaranTotal;
+                $terjualTotal=$penjualan[$i];
+                $labaLastMonth=$pemasukan[$i-1]*1000-$pengeluaran[$i-1]*1000;
+                if($pemasukan[$i-1]){
+                $mtdPemasukan=ROUND(($pemasukan[$i]-$pemasukan[$i-1])*100/$pemasukan[$i-1]);
+                $mtdPengeluaran=ROUND(($pengeluaran[$i]-$pengeluaran[$i-1])*100/$pengeluaran[$i-1]);
+                $mtdLaba=ROUND(($labaTotal-$labaLastMonth)*100/$labaLastMonth);
+                    // if($mtdPemasukan<0){
+                    //     $warnaPemasukan='#e3342f';
+                    //     $flagPemasukan=-1;
+                    //     $mtdPemasukan=$mtdPemasukan*-1;
+                    // }
+                    // else if($mtdPemasukan==0){
+                    //     $warnaPemasukan='#ffed4a';
+                    //     $flagPemasukan=0;
+                    // }
+                    // else if($mtdPemasukan>0){
+                    //     $warnaPemasukan='#38c172';
+                    //     $flagPemasukan=1;
+                    // }
+                }
+                else{
+                    $mtdPemasukan="-";
+                    $mtdPengeluaran="-";
+                    $mtdLaba="-";
+                    // $warnaPemasukan='#000000';
+                    // $flagPemasukan="";
+                }
+                if($penjualan[$i-1]){
+                    
+                    // $gapTotal=($target[$i]-$terjualTotal);
+                    // $achTotal=ROUND(($penjualan[5]*100)/$target[5]);
+                    $mtdTerjual=ROUND(($penjualan[$i]-$penjualan[$i-1])*100/$penjualan[$i-1]);
+                }
+                else{
+                    $mtdTerjual="-";
+                    // $gapTotal="-";
+                    // $achTotal="-";
+                }
             }
             $start=$start->addMonth()->startOfMonth();
         }
-        $terjualTotal=$pemasukan[5]*1000;
-        $gapTotal=($target[5]*1000-$terjualTotal);
-        $achTotal=ROUND(($pemasukan[5]*100)/$target[5]) . "%";
         return response()->json([
+            // 'test' => $test,
+            'penjualan' => $penjualan,
             'maxJumlahQty' => $maxJumlahQty,
             'maxJumlahJenis' => $maxJumlahJenis,
             'minJumlahQty' => $minJumlahQty,
@@ -684,9 +738,18 @@ class AnalysisController extends Controller
             'maxHargaQty' => $maxHargaQty,
             'maxHargaJenis' => $maxHargaJenis,
             'penjualanTarget' => $penjualanTarget,
+            'pemasukanTotal' => $pemasukanTotal,
+            // 'warnaPemasukan' => $warnaPemasukan,
+            // 'flagPemasukan' => $flagPemasukan,
+            'mtdPemasukan' => $mtdPemasukan,
+            'pengeluaranTotal' => $pengeluaranTotal,
+            'mtdPengeluaran' => $mtdPengeluaran,
+            'labaTotal' => $labaTotal,
+            'mtdLaba' => $mtdLaba,
             'terjualTotal' => $terjualTotal,
-            'achTotal' => $achTotal,
-            'gapTotal' => $gapTotal,
+            'mtdTerjual' => $mtdTerjual,
+            // 'achTotal' => $achTotal,
+            // 'gapTotal' => $gapTotal,
             'pemasukan' => $pemasukan,
             'pengeluaran' => $pengeluaran,
             'target' => $target,

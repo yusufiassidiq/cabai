@@ -31,7 +31,7 @@
         <div class="row">
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-money-bill-wave"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Harga Tertinggi</span>
@@ -69,51 +69,6 @@
                 <span class="info-box-text">Penjualan terbanyak</span>
                 <span class="info-box-number">{{ maxJumlahQty }} Kg</span>
                 <span class="info-box-number">{{ maxJumlahJenis }}</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-        <div class="row">
-          <div class="col-md-3 col-sm-6 col-12"  v-for="data in penjualanTarget" :key="data.jenis">
-            <div class="info-box bg-info">
-              <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">{{ data.jenis }}</span>
-                <span class="info-box-number">{{ data.terjual | convertToRupiah }}</span>
-
-                <div class="progress">
-                  <div class="progress-bar" v-bind:style="{width: data.ach}"></div>
-                </div>
-                <span class="progress-description">
-                  {{ data.ach }}<br>
-                  Kurang {{ data.gap |convertToRupiah }} 
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-info">
-              <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Total Target</span>
-                <span class="info-box-number">{{ terjualTotal | convertToRupiah }}</span>
-
-                <div class="progress">
-                  <div class="progress-bar" v-bind:style="{width: achTotal}"></div>
-                </div>
-                <span class="progress-description">
-                  {{ achTotal }}<br>
-                  Kurang {{ gapTotal | convertToRupiah }}
-                </span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -164,7 +119,8 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title">Rekap Penjualan Bulan Mei</h5>
+                <h5 class="card-title">Monthly Recap Report</h5>
+
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -176,22 +132,88 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <div class="row justify-content-center">
-                  <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-9">
                     <p class="text-center">
-                        <strong>Pendapatan dan Target</strong>
+                      <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
                     </p>
+
                     <div class="chart">
-                      <!-- Pengeluaran Chart Canvas -->
-                      <canvas ref="chart2" height="100" style="height: 100px;"></canvas>
+                      <!-- Sales Chart Canvas -->
+                      <canvas ref="chart2" height="250" style="height: 250px;"></canvas>
+                      <!-- <canvas id="salesChart" height="180" style="height: 180px;"></canvas> -->
                     </div>
                     <!-- /.chart-responsive -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-md-3">
+                    <p class="text-center">
+                      <strong>Pencapaian Target</strong>
+                    </p>
+
+                    <div class="progress-group"  v-for="data in penjualanTarget" :key="data.jenis">
+                      {{ data.jenis }}
+                      <span class="float-right"><b>{{ data.terjual | filterRealisasiTarget }}</b></span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar progress-bar-striped" v-bind:style="{backgroundColor: data.warna, width: data.ach + '%'}"></div>
+                      </div>
+                      <span class="progress-description float-right">
+                        {{ data.gap | filterGapTarget }}
+                      </span><br>
+                    </div>
+                    <!-- /.progress-group -->
                   </div>
                   <!-- /.col -->
                 </div>
                 <!-- /.row -->
               </div>
               <!-- ./card-body -->
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <span class="description-percentage" v-bind:style="{color:getColor(mtdPemasukan)}">
+                        <i v-bind:class="getClass(mtdPemasukan)"></i> {{ mtdPemasukan | angkaPersentase }}</span>
+                      <h5 class="description-header">{{ pemasukanTotal | convertToRupiah }}</h5>
+                      <span class="description-text">TOTAL PEMASUKAN</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <span class="description-percentage" v-bind:style="{color:getColor(mtdPengeluaran)}">
+                        <i v-bind:class="getClass(mtdPengeluaran)"></i> {{ mtdPengeluaran | angkaPersentase }}</span>
+                      <h5 class="description-header">{{ pengeluaranTotal | convertToRupiah }}</h5>
+                      <span class="description-text">TOTAL PENGELUARAN</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <span class="description-percentage" v-bind:style="{color:getColor(mtdLaba)}">
+                        <i v-bind:class="getClass(mtdLaba)"></i> {{ mtdLaba | angkaPersentase }}</span>
+                      <h5 class="description-header">{{ labaTotal | convertToRupiah }}</h5>
+                      <span class="description-text">TOTAL LABA</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block">
+                      <span class="description-percentage" v-bind:style="{color:getColor(mtdTerjual)}">
+                        <i v-bind:class="getClass(mtdTerjual)"></i> {{ mtdTerjual | angkaPersentase }}</span>
+                      <h5 class="description-header">{{ terjualTotal | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">TOTAL PENJUALAN</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.card-footer -->
             </div>
             <!-- /.card -->
           </div>
@@ -207,6 +229,7 @@
 
 <script>
   import { Bar } from 'vue-chartjs'
+  import { Line } from 'vue-chartjs'
 
   export default {
     data(){
@@ -215,22 +238,110 @@
         maxHargaQty :{},
         maxHargaJenis : {},
         year : {},
+      //summary month now
+        //pemasukan
+        pemasukanTotal: {},
+        mtdPemasukan : {},
+        // warnaPemasukan : {},
+        // flagPemasukan : {},
+        //pengeluaran
+        pengeluaranTotal: {},
+        mtdPengeluaran : {},
+        //laba
+        labaTotal : {},
+        mtdLaba : {},
+        //penjualan
         terjualTotal : {},
-        achTotal : {},
-        gapTotal : {},
+        mtdTerjual : {},
+        // achTotal : {},
+        // gapTotal : {},
+        myStyle:{
+          color:"#16a085",
+        }
       };
     },
     mounted () {
       this.fillData()
     },
+    computed:{
+      // classPemasukan:function(){
+      //   if(this.flagPemasukan === -1){
+      //     return "fas fa-caret-down";
+      //   }
+      //   else if(this.flagPemasukan === 0){
+      //     return "fas fa-caret-left";
+      //   }
+      //   else if(this.flagPemasukan === 1){
+      //     return "fas fa-caret-up";
+      //   }
+      //   else{
+      //     return " ";
+      //   }
+      },
     methods: {
+      getColor: function(item){
+        if(item<0){
+          return '#e3342f';
+        }
+        else if(item===0){
+          return '#ffed4a';
+        }
+        else if(item>0){
+          return '#38c172';
+        }
+      },
+      getClass:function(item){
+        if(item < 0){
+          return "fas fa-caret-down";
+        }
+        else if(item === 0){
+          return "fas fa-caret-left";
+        }
+        else if(item > 0){
+          return "fas fa-caret-up";
+        }
+        else{
+          return " ";
+        }
+      },
       fillData () {
         axios.get('/getGapAch').then(response=>{
           this.year = response.data.tahun;
+          this.mtdPemasukan = response.data.mtdPemasukan;
+          // this.warnaPemasukan = response.data.warnaPemasukan;
+          // this.flagPemasukan = response.data.flagPemasukan;
+          this.pemasukanTotal = response.data.pemasukanTotal;
+          this.mtdPengeluaran = response.data.mtdPengeluaran;
+          this.pengeluaranTotal = response.data.pengeluaranTotal;
+          this.mtdLaba = response.data.mtdLaba;
+          this.labaTotal = response.data.labaTotal;
+          this.mtdTerjual = response.data.mtdTerjual;
           this.terjualTotal = response.data.terjualTotal;
-          this.achTotal = response.data.achTotal;
-          this.gapTotal = response.data.gapTotal;
+          // this.achTotal = response.data.achTotal;
+          // this.gapTotal = response.data.gapTotal;
           this.penjualanTarget = response.data.penjualanTarget;
+          if(this.achTotal>=85){
+            this.myStyle.color="#00a65a";
+          }
+          else if(this.achTotal>=50){
+            this.myStyle.color="#e98b2d";
+          }
+          else if(this.achTotal>=0){
+            this.myStyle.color="#dd4b39";
+          }
+          // else{
+          //   this.myStyle.color="#909090";
+          // } 
+          // console.log(this.penjualanTarget[]);
+          // if(this.pen>=85){
+          //   this.myStyle.backgroundColor="#00a65a";
+          // }
+          // else if(this.achTotal>=50){
+          //   this.myStyle.backgroundColor="#f39c12";
+          // }
+          // else if(this.achTotal>=0){
+          //   this.myStyle.backgroundColor="#dd4b39";
+          // } 
           this.maxHargaQty = response.data.maxHargaQty;
           this.maxHargaJenis = response.data.maxHargaJenis;
           this.maxJumlahQty = response.data.maxJumlahQty;
@@ -256,7 +367,7 @@
                 fill                : true,
               },
               {
-                label : 'Pengeluaran',
+                label               : 'Pengeluaran',
                 backgroundColor     : 'rgba(255, 0, 0, 0.8)',
                 borderColor         : 'rgba(255, 0, 0, 1)',
                 pointRadius         : true,
@@ -301,9 +412,9 @@
                   // gridLines : {
                   //   display : false,
                   // },
-                  // ticks:{
-                  //   beginAtZero:true
-                  // }
+                  ticks:{
+                    beginAtZero:true
+                  }
                 }]
               }
             }
@@ -311,40 +422,41 @@
           var chart2 = this.$refs.chart2;
           var ctx2 = chart2.getContext("2d");
           var myChart2 = new Chart(ctx2, {
-            type : 'bar',
+            type : 'line',
             data:{
               labels:response.data.last6Month,
               datasets:[
               {
                 label               : 'Target',
-                backgroundColor     : 'rgba(254, 99, 131, 0.8)',
-                borderColor         : 'rgba(254, 99, 131, 1)',
+                backgroundColor     : 'rgba(259, 99, 131, 0.9)',
+                borderColor         : 'rgba(259, 99, 131, 0.8)',
                 pointRadius         : true,
-                pointColor          : 'rgba(254, 99, 131, 1)',
-                pointStrokeColor    : '#c1c7d1',
+                pointColor          : '#35a0e9',
+                pointStrokeColor    : 'rgba(259, 99, 131, 1)',
                 pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(254, 99, 131, 1)',
+                pointHighlightStroke: 'rgba(259, 99, 131, 1)',
                 data                : response.data.target,
-                fill                : true,
+                // fill                : true,
               },
               {
                 label               : 'Realisasi',
-                backgroundColor     : 'rgba(54, 162, 235, 1)',
-                borderColor         : 'rgba(54, 162, 235, 1)',
+                backgroundColor     : 'rgba(201, 222, 235, 1)',
+                borderColor         : 'rgba(201, 222, 235, 1)',
                 pointRadius         : true,
-                pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(54, 162, 235, 1)',
+                pointColor          : 'rgba(201, 222, 235, 1)',
+                pointStrokeColor    : '#d0e3f8',
                 pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(54, 162, 235, 1)',
-                data                : response.data.pemasukan,
-                fill                : true,
+                pointHighlightStroke: 'rgba(201, 222, 235, 1)',
+                data                : response.data.penjualan,
+                // fill                : true,
               },
+              
               
             //   
             ]
             },
             options:{
-              barValueSpacing:100,
+              maintainAspectRatio : false,
               responsive: true,
               tooltips:{
                 mode:'index',
@@ -369,14 +481,14 @@
                   // stacked: true,
                   scaleLabel: {
                     display:true,
-                    labelString : 'Rp (ribu)'
+                    labelString : 'Kg'
                   },
-                  // gridLines : {
-                  //   display : false,
-                  // },
-                  // ticks:{
-                  //   beginAtZero:true
-                  // }
+                  gridLines : {
+                    display : false,
+                  },
+                  ticks:{
+                    beginAtZero:true
+                  }
                 }]
               }
             }
