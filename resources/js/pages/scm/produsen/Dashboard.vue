@@ -156,6 +156,20 @@
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-seedling"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Produktivitas Tertinggi</span>
+                <span class="info-box-number">X</span>
+                <span class="info-box-number">Lahan X</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
         </div>
         <!-- /.row -->
         <div class="row">
@@ -315,27 +329,22 @@
   export default {
     data(){
       return{
-        penjualanTarget : {},
-        maxHargaQty :{},
-        maxHargaJenis : {},
-        year : {},
-      //summary month now
-        //pemasukan
-        pemasukanTotal: {},
-        mtdPemasukan : {},
-        // warnaPemasukan : {},
-        // flagPemasukan : {},
-        //pengeluaran
-        pengeluaranTotal: {},
-        mtdPengeluaran : {},
-        //laba
-        labaTotal : {},
-        mtdLaba : {},
-        //penjualan
-        terjualTotal : {},
-        mtdTerjual : {},
-        // achTotal : {},
-        // gapTotal : {},
+        penjualanTarget : "",
+        maxHargaQty :"",
+        maxHargaJenis : "",
+        maxJumlahQty :"",
+        maxJumlahJenis : "",
+        minJumlahQty :"",
+        minJumlahJenis : "",
+        year : "",
+        pemasukanTotal: "",
+        mtdPemasukan : "",
+        pengeluaranTotal: "",
+        mtdPengeluaran : "",
+        labaTotal : "",
+        mtdLaba : "",
+        terjualTotal : "",
+        mtdTerjual : "",
         jml_cabai_rawit:"",
         jml_cabai_besar:"",
         jml_cabai_keriting:"",
@@ -358,21 +367,6 @@
         this.getInfoKemitraan()
       }, 1800000)
     },
-    computed:{
-      // classPemasukan:function(){
-      //   if(this.flagPemasukan === -1){
-      //     return "fas fa-caret-down";
-      //   }
-      //   else if(this.flagPemasukan === 0){
-      //     return "fas fa-caret-left";
-      //   }
-      //   else if(this.flagPemasukan === 1){
-      //     return "fas fa-caret-up";
-      //   }
-      //   else{
-      //     return " ";
-      //   }
-      },
     methods: {
       getColor: function(item){
         if(item<0){
@@ -400,11 +394,9 @@
         }
       },
       fillData () {
-        axios.get('/getGapAch').then(response=>{
+        axios.get('/getSummaryProdusen').then(response=>{
           this.year = response.data.tahun;
           this.mtdPemasukan = response.data.mtdPemasukan;
-          // this.warnaPemasukan = response.data.warnaPemasukan;
-          // this.flagPemasukan = response.data.flagPemasukan;
           this.pemasukanTotal = response.data.pemasukanTotal;
           this.mtdPengeluaran = response.data.mtdPengeluaran;
           this.pengeluaranTotal = response.data.pengeluaranTotal;
@@ -412,8 +404,6 @@
           this.labaTotal = response.data.labaTotal;
           this.mtdTerjual = response.data.mtdTerjual;
           this.terjualTotal = response.data.terjualTotal;
-          // this.achTotal = response.data.achTotal;
-          // this.gapTotal = response.data.gapTotal;
           this.penjualanTarget = response.data.penjualanTarget;
           if(this.achTotal>=85){
             this.myStyle.color="#00a65a";
@@ -424,19 +414,6 @@
           else if(this.achTotal>=0){
             this.myStyle.color="#dd4b39";
           }
-          // else{
-          //   this.myStyle.color="#909090";
-          // } 
-          // console.log(this.penjualanTarget[]);
-          // if(this.pen>=85){
-          //   this.myStyle.backgroundColor="#00a65a";
-          // }
-          // else if(this.achTotal>=50){
-          //   this.myStyle.backgroundColor="#f39c12";
-          // }
-          // else if(this.achTotal>=0){
-          //   this.myStyle.backgroundColor="#dd4b39";
-          // } 
           this.maxHargaQty = response.data.maxHargaQty;
           this.maxHargaJenis = response.data.maxHargaJenis;
           this.maxJumlahQty = response.data.maxJumlahQty;

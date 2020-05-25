@@ -131,7 +131,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/getPengeluaran','AnalysisController@getPengeluaran');
     Route::get('/getPenjualan','AnalysisController@getPenjualan');
     Route::get('/getHarga','AnalysisController@getHarga');
-    Route::get('/getGapAch','AnalysisController@getGapAch');
+    Route::get('/getSummaryProdusen','AnalysisController@getSummaryProdusen');
 });
 
 // TANPA LOGIN

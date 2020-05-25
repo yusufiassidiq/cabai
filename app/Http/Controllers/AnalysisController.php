@@ -511,7 +511,7 @@ class AnalysisController extends Controller
             'dateNow' => $dateNow, 
         ]);
     }
-    public function getGapAch(){
+    public function getSummaryProdusen(){
         $idUser = Auth::user()->id;
         $year= Carbon::now()->format('Y');
         $month=Carbon::now()->format('m');
@@ -641,6 +641,7 @@ class AnalysisController extends Controller
             ];
         }
         $start = Carbon::now()->subMonths(5)->startOfMonth();
+        // $startTargetRealisasi = $start->isoFormat('MMMM');
         for($i=0;$i<6;$i++){
             $range=$start->format('Y-m');
             $last6Month[$i]=$start->isoFormat('MMMM');
@@ -693,43 +694,22 @@ class AnalysisController extends Controller
                 $mtdPemasukan=ROUND(($pemasukan[$i]-$pemasukan[$i-1])*100/$pemasukan[$i-1]);
                 $mtdPengeluaran=ROUND(($pengeluaran[$i]-$pengeluaran[$i-1])*100/$pengeluaran[$i-1]);
                 $mtdLaba=ROUND(($labaTotal-$labaLastMonth)*100/$labaLastMonth);
-                    // if($mtdPemasukan<0){
-                    //     $warnaPemasukan='#e3342f';
-                    //     $flagPemasukan=-1;
-                    //     $mtdPemasukan=$mtdPemasukan*-1;
-                    // }
-                    // else if($mtdPemasukan==0){
-                    //     $warnaPemasukan='#ffed4a';
-                    //     $flagPemasukan=0;
-                    // }
-                    // else if($mtdPemasukan>0){
-                    //     $warnaPemasukan='#38c172';
-                    //     $flagPemasukan=1;
-                    // }
                 }
                 else{
                     $mtdPemasukan="-";
                     $mtdPengeluaran="-";
                     $mtdLaba="-";
-                    // $warnaPemasukan='#000000';
-                    // $flagPemasukan="";
                 }
                 if($penjualan[$i-1]){
-                    
-                    // $gapTotal=($target[$i]-$terjualTotal);
-                    // $achTotal=ROUND(($penjualan[5]*100)/$target[5]);
                     $mtdTerjual=ROUND(($penjualan[$i]-$penjualan[$i-1])*100/$penjualan[$i-1]);
                 }
                 else{
                     $mtdTerjual="-";
-                    // $gapTotal="-";
-                    // $achTotal="-";
                 }
             }
             $start=$start->addMonth()->startOfMonth();
         }
         return response()->json([
-            // 'test' => $test,
             'penjualan' => $penjualan,
             'maxJumlahQty' => $maxJumlahQty,
             'maxJumlahJenis' => $maxJumlahJenis,
@@ -739,8 +719,6 @@ class AnalysisController extends Controller
             'maxHargaJenis' => $maxHargaJenis,
             'penjualanTarget' => $penjualanTarget,
             'pemasukanTotal' => $pemasukanTotal,
-            // 'warnaPemasukan' => $warnaPemasukan,
-            // 'flagPemasukan' => $flagPemasukan,
             'mtdPemasukan' => $mtdPemasukan,
             'pengeluaranTotal' => $pengeluaranTotal,
             'mtdPengeluaran' => $mtdPengeluaran,
@@ -748,8 +726,6 @@ class AnalysisController extends Controller
             'mtdLaba' => $mtdLaba,
             'terjualTotal' => $terjualTotal,
             'mtdTerjual' => $mtdTerjual,
-            // 'achTotal' => $achTotal,
-            // 'gapTotal' => $gapTotal,
             'pemasukan' => $pemasukan,
             'pengeluaran' => $pengeluaran,
             'target' => $target,
