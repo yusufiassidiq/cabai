@@ -79,6 +79,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/kemitraan/grosir/list','UserController@getMitraGrosir');
     Route::get('/kemitraan/pengecer/list','UserController@getMitraPengecer');
     Route::get('/kemitraan/konsumen/list','UserController@getMitraKonsumen');
+    // jumlah mitra saya
+    Route::get('/kemitraan/mitra/info','UserController@InfoKemitraan');
 
     //Transaksi Permintaan Cabai
     Route::post('/transaksi/permintaanSaya/tambah','UserController@addPermintaanSaya');

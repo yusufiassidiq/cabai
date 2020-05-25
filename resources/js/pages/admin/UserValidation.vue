@@ -61,7 +61,7 @@
                       </thead>
                       <tbody>
                         <tr v-if="!filteredNama.length">
-                          <td colspan="5" align="center">Tidak ada user yang belum divalidasi</td>
+                          <td colspan="6" align="center">Tidak ada user yang belum divalidasi</td>
                         </tr>
                         <tr
                           v-for="user in filteredNama "

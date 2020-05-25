@@ -6,14 +6,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Riwayat Transaksi Cabai</h1>
+            <h1 class="m-0 text-dark">Riwayat Distribusi Cabai</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
                 <a href="#">Produsen</a>
               </li>
-              <li class="breadcrumb-item active">Riwayat Transaksi Cabai</li>
+              <li class="breadcrumb-item active">Riwayat Distribusi Cabai</li>
             </ol>
           </div>
         </div>
@@ -36,7 +36,7 @@
                       role="tab"
                       aria-controls="custom-tabs-three-permintaan"
                       aria-selected="true"
-                    >Transaksi dengan Pelanggan</a>
+                    >Distribusi dengan pelanggan</a>
                   </li>
                 </ul>
               </div>
@@ -54,10 +54,10 @@
   </div>
 </template>
 <script>
-import RiwayatTransaksi from "../../../components/RiwTransaksiDgnPelanggan";
+import riwayatdistribusi from "../../../components/RiwTransaksiDgnPelanggan";
 export default {
   components: {
-    riwTransaksi: RiwayatTransaksi
+    riwTransaksi: riwayatdistribusi
   }
 };
 </script>

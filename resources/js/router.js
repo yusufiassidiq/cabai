@@ -185,12 +185,12 @@ const routes = [
 
             },
             {
-                path: 'transaksicabai',
+                path: 'distribusicabai',
                 component: TransaksiCabai,
                 name: "transaksicabai"
             },
             {
-                path: 'riwayattransaksi',
+                path: 'riwayatdistribusi',
                 component: RiwayatTransaksiProd,
                 name: 'riwayattransaksiProd'
             },
@@ -258,7 +258,7 @@ const routes = [
 
             },
             {
-                path: 'transaksicabai',
+                path: 'distribusicabai',
                 component: TransaksiCabaiGrosir,
                 name: "transaksicabaiGrosir"
             },
@@ -268,7 +268,7 @@ const routes = [
                 name: "InventarisGrosir"
             },
             {
-                path: 'riwayattransaksi',
+                path: 'riwayatdistribusi',
                 component: RiwayatTransaksiGrosir,
                 name: 'riwayattransaksiGrosir'
             },
@@ -316,7 +316,7 @@ const routes = [
 
             },
             {
-                path: 'transaksicabai',
+                path: 'distribusicabai',
                 component: TransaksiCabaiPengecer,
                 name: "transaksicabaiPengecer"
             },
@@ -326,7 +326,7 @@ const routes = [
                 name: "InventarisPengecer"
             },
             {
-                path: 'riwayattransaksi',
+                path: 'riwayatdistribusi',
                 component: RiwayatTransaksiPengecer,
                 name: 'riwayattransaksiPengecer'
             },
@@ -373,7 +373,7 @@ const routes = [
 
             },
             {
-                path: 'transaksicabai',
+                path: 'distribusicabai',
                 component: TransaksiCabaiPengepul,
                 name: "transaksicabaiPengepul"
             },
@@ -383,7 +383,7 @@ const routes = [
                 name: "InventarisPengepul"
             },
             {
-                path: 'riwayattransaksi',
+                path: 'riwayatdistribusi',
                 component: RiwayatTransaksiPengepul,
                 name: 'riwayattransaksiPengepul'
             },
@@ -430,12 +430,12 @@ const routes = [
 
             },
             {
-                path: 'transaksicabai',
+                path: 'distribusicabai',
                 component: TransaksiCabaiKonsumen,
                 name: "transaksicabaiKonsumen"
             },
             {
-                path: 'riwayattransaksi',
+                path: 'riwayatdistribusi',
                 component: RiwayatTransaksiKonsumen,
                 name: 'riwayattransaksiKonsumen'
             },
@@ -596,6 +596,8 @@ router.beforeEach((to, from, next) => {
             axios.get('/auth/user').then(response => {
                 if (response.data.status === "success"){
                     callback (response.data.data)
+                    window.localStorage.setItem("namauser", response.data.data.name)
+                    window.localStorage.setItem("role", response.data.data.role)
                 } else {
                     callback("error")
                 }
