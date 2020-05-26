@@ -130,16 +130,24 @@ Vue.filter('filterRoleUser', function(id_role){
 })
 
 // filter convert angka ke rupiah
-Vue.filter('angkaPersentase', function (angka) {
-    if(typeof angka !=='string'){
-        var angka = angka;
-        if (angka<0) 
-            return( angka * -1 + "%");
+Vue.filter('angkaPersentase', function (value) {
+    if(typeof value !=='string'){
+        if (value<0) 
+            return( value * -1 + "%");
         else 
-            return( angka + "%");
+            return( value + "%");
     }
-    else
-        return(angka);
+    else{
+        if (value<0) 
+            value = value * -1;
+        var angka = "";
+        var angkarev = value.toString().split("").reverse().join("");
+        for (var i = 0; i < angkarev.length; i++)
+            if (i % 3 == 0) angka += angkarev.substr(i, 3) + ".";
+        return (
+            angka.split("", angka.length - 1).reverse().join("")
+        );
+    }
 })
 
 Vue.filter('filterRealisasiTarget', function (value) {

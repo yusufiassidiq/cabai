@@ -158,12 +158,12 @@
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-seedling"></i></span>
+              <span class="info-box-icon elevation-1" v-bind:style="{backgroundColor: '#a0622d',color:'#ffffff'}"><i class="fas fa-seedling"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Produktivitas Tertinggi</span>
-                <span class="info-box-number">X</span>
-                <span class="info-box-number">Lahan X</span>
+                <span class="info-box-number">{{ maxProduktivitas }}</span>
+                <span class="info-box-number">{{ maxKodeLahan }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -176,22 +176,14 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title">Rekap Penjualan Bulan Mei</h5>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
+                <h5 class="card-title">Rekap Penjualan Bulan {{ bulan }} {{ year }}</h5>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row justify-content-center">
                   <div class="col-md-12">
                     <p class="text-center">
-                        <strong>Pendapatan dan Pengeluaran</strong>
+                        <strong>Penjualan: {{ start }} - {{end}}</strong>
                     </p>
                     <div class="chart">
                       <!-- Pengeluaran Chart Canvas -->
@@ -213,24 +205,15 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header">
+              <!-- <div class="card-header">
                 <h5 class="card-title">Monthly Recap Report</h5>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
+              </div> -->
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-9">
                     <p class="text-center">
-                      <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                      <strong>Penjualan: {{ start }} - {{end}}</strong>
                     </p>
 
                     <div class="chart">
@@ -250,7 +233,7 @@
                       {{ data.jenis }}
                       <span class="float-right"><b>{{ data.terjual | filterRealisasiTarget }}</b></span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar progress-bar-striped" v-bind:style="{backgroundColor: data.warna, width: data.ach + '%'}"></div>
+                        <div class="progress-bar progress-bar-striped" v-bind:style="{backgroundColor: getColorProgress(data.ach), width: data.ach + '%'}"></div>
                       </div>
                       <span class="progress-description float-right">
                         {{ data.gap | filterGapTarget }}
@@ -330,13 +313,18 @@
     data(){
       return{
         penjualanTarget : "",
+        start : "",
+        end : "",
         maxHargaQty :"",
         maxHargaJenis : "",
         maxJumlahQty :"",
         maxJumlahJenis : "",
         minJumlahQty :"",
         minJumlahJenis : "",
+        maxProduktivitas : "",
+        maxKodeLahan: "",
         year : "",
+        bulan : "",
         pemasukanTotal: "",
         mtdPemasukan : "",
         pengeluaranTotal: "",
@@ -351,51 +339,57 @@
         jml_mitra_dimiliki:"",
         jml_pengajuan_mitra:"",
         jml_permintaan_mitra:"",
-        myStyle:{
-          color:"#16a085",
-        }
       };
     },
     mounted () {
-      this.fillData()
-      
+      this.getData()
       this.getInventaris()
       this.getInfoKemitraan()
-      
       window.setInterval(() => {
+        this.getData()
         this.getInventaris()
         this.getInfoKemitraan()
       }, 1800000)
     },
     methods: {
+      getColorProgress:function(value){
+        if(value=='-')
+          return "#909090";
+        else if(value>=85)
+          return "#00a65a";
+        else if(value>=50)
+          return "#e98b2d";
+        else if(value>=0)
+          return "#dd4b39";
+      },
       getColor: function(item){
-        if(item<0){
+        if(parseInt(item)<0){
           return '#e3342f';
         }
-        else if(item===0){
-          return '#ffed4a';
+        else if(parseInt(item)==0){
+          return '#e98b2d';
         }
-        else if(item>0){
+        else if(parseInt(item)>0){
           return '#38c172';
         }
       },
       getClass:function(item){
-        if(item < 0){
+        if(parseInt(item) < 0){
           return "fas fa-caret-down";
         }
-        else if(item === 0){
+        else if(parseInt(item) == 0){
           return "fas fa-caret-left";
         }
-        else if(item > 0){
+        else if(parseInt(item) > 0){
           return "fas fa-caret-up";
         }
-        else{
-          return " ";
-        }
       },
-      fillData () {
+      getData () {
         axios.get('/getSummaryProdusen').then(response=>{
-          this.year = response.data.tahun;
+          this.year = response.data.year;
+          this.bulan = response.data.bulan;
+          this.start = response.data.start;
+          this.end = response.data.end;
           this.mtdPemasukan = response.data.mtdPemasukan;
           this.pemasukanTotal = response.data.pemasukanTotal;
           this.mtdPengeluaran = response.data.mtdPengeluaran;
@@ -405,21 +399,14 @@
           this.mtdTerjual = response.data.mtdTerjual;
           this.terjualTotal = response.data.terjualTotal;
           this.penjualanTarget = response.data.penjualanTarget;
-          if(this.achTotal>=85){
-            this.myStyle.color="#00a65a";
-          }
-          else if(this.achTotal>=50){
-            this.myStyle.color="#e98b2d";
-          }
-          else if(this.achTotal>=0){
-            this.myStyle.color="#dd4b39";
-          }
           this.maxHargaQty = response.data.maxHargaQty;
           this.maxHargaJenis = response.data.maxHargaJenis;
           this.maxJumlahQty = response.data.maxJumlahQty;
           this.maxJumlahJenis = response.data.maxJumlahJenis;
           this.minJumlahQty = response.data.minJumlahQty;
           this.minJumlahJenis = response.data.minJumlahJenis;
+          this.maxProduktivitas = response.data.maxProduktivitas;
+          this.maxKodeLahan = response.data.maxKodeLahan;
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
           var myChart = new Chart(ctx, {

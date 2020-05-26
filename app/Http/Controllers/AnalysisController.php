@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Auth;
 use App\Target;
 use App\PraProduksi;
+use App\Panen;
 use App\PengeluaranProduksi;
 use App\Transaksi;
 use App\User;
@@ -539,6 +540,24 @@ class AnalysisController extends Controller
             ->groupBy('jenis_cabai')
             ->pluck('total','jenis_cabai')
             ->all();
+        //Harga tertinggi
+        $maxHarga=Transaksi::Where([['pemasok_id',$idUser],
+            ['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['tanggal_diterima', 'LIKE',  $filter . '%']
+            ])
+            
+            ->orderBy('harga','DESC')
+            ->first();
+        if($maxHarga){
+            $maxHargaQty=(int)$maxHarga->harga;
+            $maxHargaJenis=$maxHarga->jenis_cabai;
+        }
+        else{
+            $maxHargaQty='-';
+            $maxHargaJenis='-';
+        }
         // Penjualan Terbanyak
         $maxJumlah=Transaksi::Where([['pemasok_id',$idUser],
             ['status_permintaan','3'],
@@ -573,28 +592,51 @@ class AnalysisController extends Controller
                 $minJumlahQty=(int)$minJumlah->jumlah;
                 $minJumlahJenis=$minJumlah->jenis_cabai;
             }
-            else{
-                $minJumlahQty='-';
-                $minJumlahJenis='-';
-            }
-        //Penjualan Harga tertinggi
-        $maxHarga=Transaksi::Where([['pemasok_id',$idUser],
-            ['status_permintaan','3'],
-            ['status_pengiriman','1'],
-            ['status_pemesanan','1'],
-            ['tanggal_diterima', 'LIKE',  $filter . '%']
-            ])
-            
-            ->orderBy('harga','DESC')
-            ->first();
-        if($maxHarga){
-            $maxHargaQty=(int)$maxHarga->harga;
-            $maxHargaJenis=$maxHarga->jenis_cabai;
-        }
         else{
-            $maxHargaQty='-';
-            $maxHargaJenis='-';
+            $minJumlahQty='-';
+            $minJumlahJenis='-';
         }
+        //Produktivitas Tertinggi
+        $idLahan=PraProduksi::Where('user_id',$idUser)
+        ->pluck('id');
+        // ->all();
+        $jmlPanen=Panen::Where('user_id',$idUser)
+                    ->select('pra_produksi_id',DB::raw("sum(jumlah_panen) as jumlah"))
+                    ->groupBy('pra_produksi_id')
+                    ->pluck('jumlah','pra_produksi_id')
+                    ->all();
+        $luasLahan=PraProduksi::Where('user_id',$idUser)
+        ->pluck('luas_lahan','id')
+        ->all();
+        $maxProduktivitas=0;
+        foreach($idLahan as $id){
+            if(array_key_exists($id,$jmlPanen))
+                if(array_key_exists($id,$luasLahan))
+                    $produktivitas=((int)$jmlPanen[$id])/$luasLahan[$id];
+                        if($maxProduktivitas<$produktivitas){
+                            $maxProduktivitas=$produktivitas;
+                            $maxProduktivitasId=$id;
+                        }
+        }
+        if($maxProduktivitas==0)
+            $maxKodeLahan="-";
+        else{
+            $maxKodeLahan=PraProduksi::where('id',$maxProduktivitasId)
+            ->pluck('kode_lahan')
+            ->first();
+        }   
+        // $lagi=array_merge_recursive($jmlPanen,$luasLahan);
+        // $join=DB::table('panen')
+        // ->where('panen.user_id', $idUser)
+        // ->join('pra_produksi','pra_produksi.id', '=', 'panen.pra_produksi_id')
+        // ->select('pra_produksi.id','jumlah_panen','kode_lahan','luas_lahan')
+        // ->select(DB::raw("sum(jumlah_panen) as jumlah"))
+        // ->groupBy('pra_produksi.id')
+        // ->select('pra_produksi.id','jumlah_panen','kode_lahan','luas_lahan')
+        // ->get();
+        // $lagi=$join->select(DB::raw("sum(jumlah_panen) as jumlah"))
+        // ->get();
+        // $maxProduktivitas=
         $jenisCabai=['Cabai rawit','Cabai keriting','Cabai besar'];
         // Transaksi bulan ini terhadap target bulan ini
         foreach($jenisCabai as $jenis){
@@ -604,6 +646,8 @@ class AnalysisController extends Controller
                     $terjual=(int)$transaksiMonthNow[$jenis];
                     $gap=$targetMonthNow[$jenis]-$terjual;
                     $ach=ROUND(($transaksiMonthNow[$jenis]*100)/$targetMonthNow[$jenis]);
+                    if($ach>100)
+                        $ach=100;
                 }
                 else{
                     //belum ada transaksi
@@ -618,22 +662,8 @@ class AnalysisController extends Controller
                 $gap='-';
                 $ach='-';
             }
-            if($ach=='-'){
-                $warna="#909090";
-            } 
-            else if($ach>=85){
-                $warna="#00a65a";
-            }
-            else if($ach>=50){
-                $warna="#e98b2d";
-            }
-            else if($ach>=0){
-                $warna="#dd4b39";
-            }
             //memasukan data menjadi object
             $penjualanTarget[]=[
-                'text' => "#ffffff",
-                'warna' => $warna,
                 'jenis' => $jenis,
                 'terjual' => $terjual,
                 'gap' => $gap,
@@ -641,7 +671,7 @@ class AnalysisController extends Controller
             ];
         }
         $start = Carbon::now()->subMonths(5)->startOfMonth();
-        // $startTargetRealisasi = $start->isoFormat('MMMM');
+        $startTargetRealisasi = $start->isoFormat('Do MMMM YYYY');
         for($i=0;$i<6;$i++){
             $range=$start->format('Y-m');
             $last6Month[$i]=$start->isoFormat('MMMM');
@@ -695,21 +725,26 @@ class AnalysisController extends Controller
                 $mtdPengeluaran=ROUND(($pengeluaran[$i]-$pengeluaran[$i-1])*100/$pengeluaran[$i-1]);
                 $mtdLaba=ROUND(($labaTotal-$labaLastMonth)*100/$labaLastMonth);
                 }
-                else{
-                    $mtdPemasukan="-";
-                    $mtdPengeluaran="-";
-                    $mtdLaba="-";
+                else if($pemasukan[$i-1]==0){
+                    $mtdPemasukan=(string)(($pemasukan[$i]-$pemasukan[$i-1])*1000);
+                    $mtdPengeluaran=(string)(($pengeluaran[$i]-$pengeluaran[$i-1])*1000);
+                    $mtdLaba=(string)($labaTotal-$labaLastMonth);
                 }
                 if($penjualan[$i-1]){
                     $mtdTerjual=ROUND(($penjualan[$i]-$penjualan[$i-1])*100/$penjualan[$i-1]);
                 }
                 else{
-                    $mtdTerjual="-";
+                    $mtdTerjual=(string)($penjualan[$i]-$penjualan[$i-1]);
                 }
             }
             $start=$start->addMonth()->startOfMonth();
         }
+        $endTargetRealisasi = $start->subMonth()->endOfMonth()->isoFormat('Do MMM YYYY');
         return response()->json([
+            'bulan' => $bulan,
+            'year' => $year,
+            'start' => $startTargetRealisasi,
+            'end' => $endTargetRealisasi,
             'penjualan' => $penjualan,
             'maxJumlahQty' => $maxJumlahQty,
             'maxJumlahJenis' => $maxJumlahJenis,
@@ -717,6 +752,8 @@ class AnalysisController extends Controller
             'minJumlahJenis' => $minJumlahJenis,
             'maxHargaQty' => $maxHargaQty,
             'maxHargaJenis' => $maxHargaJenis,
+            'maxProduktivitas' => $maxProduktivitas,
+            'maxKodeLahan' => $maxKodeLahan,
             'penjualanTarget' => $penjualanTarget,
             'pemasukanTotal' => $pemasukanTotal,
             'mtdPemasukan' => $mtdPemasukan,
@@ -730,8 +767,7 @@ class AnalysisController extends Controller
             'pengeluaran' => $pengeluaran,
             'target' => $target,
             'last6Month' => $last6Month,
-            'month' => $month,
-            'bulan' => $bulan,
+            
             'targetByJenisCabai' => $targetMonthNow,
         ]);
     }
