@@ -20,27 +20,6 @@ use DB;
 class AnalysisController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function readTarget()
-    {
-        $idUser = Auth::user()->id;
-        $year = Carbon::now()->format('Y'); //tahun saat ini
-        $target = Target::where([
-                ['user_id',$idUser],
-                ['tahun',$year],
-                ])->orderBy('jenis_cabai','ASC')
-                ->paginate(6);
-        
-        return response()->json([
-            'status' => 'success',
-            'tahun' => $year,
-            'data' => $target->toArray(),
-        ]);
-    }
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -157,42 +136,18 @@ class AnalysisController extends Controller
     public function getTarget()
     {
         $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
+        $roleUser = Auth::user()->role;
         $year = Carbon::now()->format('Y'); //tahun saat ini
-        // $target = Target::where([
-        //     ['user_id',$idUser],
-        //     ['tahun',$year],
-        //     ])->orderBy('jenis_cabai','ASC')
-        //     ->get();
-        //$month untuk label pada chart
         $month = array('Januari','Februari','Maret','April','Mei','Juni', 'Juli', 
                         'Agustus','September', 'Oktober', 'November', 'Desember');
-        // $c=0;
-        // foreach($month as $m){
-        //     $target = Target::where([
-        //         ['bulan', $m],
-        //         ['user_id',$idUser],
-        //         ['tahun',$year],
-        //         ])->orderBy('jenis_cabai','ASC')
-        //         ->get();
-        //     if($target){
-        //         for($i=0;$i<count($target);$i++){
-        //             $targetByMonthArray[]=$target[$i];}
-        //     }
-        // }
-        // $targetByMonth = $this->paginate($targetByMonthArray);
-        // $targetByMonth->paginate(2);\
-        // $sorted = $collection->sortBy(function($model) use ($month)){
-        //     return array_search($item->bulan, $month);
-        // }
-        $targetByMonth=$target = Target::where([
-            // ['bulan', $m],
-            ['user_id',$idUser],
-            ['tahun',$year],
-            ])
-            // ->orderBy('bulan','ASC')
-            ->orderByRaw("FIELD(bulan,'Januari','Februari','Maret','April','Mei','Juni'
-            'Juli', 'Agustus','September', 'Oktober', 'November', 'Desember')ASC")
-            ->paginate(9);
+        //untuk ditampikan pada tabel
+        $targetByMonth=Target::where([
+                ['user_id',$idUser],
+                ['tahun',$year],
+                ])
+                ->orderByRaw("FIELD(bulan,'Januari','Februari','Maret','April','Mei','Juni'
+                'Juli', 'Agustus','September', 'Oktober', 'November', 'Desember')ASC")
+                ->paginate(9);
         //membuat array kosong sebanyak bulan 
         //ex targetByMonthRawit[Januari]=0 dst
         for($i=0;$i<count($month);$i++){
@@ -241,23 +196,19 @@ class AnalysisController extends Controller
             $data_targetBesar[$i]=$targetByMonthBesar[$month[$i]];  
         }
         return response()->json([
-            // 'test' => $targetByMonth,
             'status' => 'success',
             'data' => $targetByMonth,
             'month' => $month,
             'year'  => $year,
+            'roleUser' => $roleUser,
             'rawit' => $data_targetRawit,
             'keriting' => $data_targetKeriting,
             'besar' => $data_targetBesar,
         ]);
     }
-    // public function paginate($items, $perPage=5, $page=null,$options=[]){
-    //     $page = $page ?: (Paginator::resolveCurrentPage() ?:1);
-    //     $items = $items instanceof Collection ? $items : Collection::make($items);
-    //     return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
-    // }
     public function getPengeluaran(){
         $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
+        $roleUser = Auth::user()->role;
         //mengambil id dari PraProduksi yang dimiliki oleh user
         $year = Carbon::now()->format('Y'); //tahun saat ini
         $lahan = PraProduksi::Where('user_id',$idUser)->pluck('id');
@@ -292,6 +243,7 @@ class AnalysisController extends Controller
             }
         }
         return response()->json([
+            'roleUser' => $roleUser,
             'lahan' => $kodeLahan,
             'pupuk' => $pengeluaranByLahanPupuk,
             'alatTani' => $pengeluaranByLahanAlatTani,  
@@ -302,6 +254,8 @@ class AnalysisController extends Controller
     }
     public function getPenjualan()
     {
+        $roleUser = Auth::user()->role;
+        $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
         // $lastweek = Carbon::now()->subweek();
         // $tomorrow = Carbon::now()->addDay();
         $year= Carbon::now()->format('Y');
@@ -314,7 +268,13 @@ class AnalysisController extends Controller
         //GET DATA TRANSAKSI BERDASARKAN BULAN & TANGGAL YANG DIMINTA.
         //GROUP / KELOMPOKKAN BERDASARKAN TANGGALNYA
         //SUM DATA AMOUNT DAN SIMPAN KE NAMA BARU YAKNI TOTAL
-        $transaksi = Transaksi::where('tanggal_diterima', 'LIKE',  $filter . '%')
+        $transaksi = Transaksi::where([
+            ['pemasok_id',$idUser],
+            ['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+            ['tanggal_diterima', 'LIKE',  $filter . '%']
+            ])
             ->select('tanggal_diterima',DB::raw('sum(jumlah_cabai) as jumlah'),DB::raw('sum(jumlah_cabai*harga) as total'))
             ->groupBy('tanggal_diterima')
             ->get();
@@ -331,7 +291,6 @@ class AnalysisController extends Controller
         }
         $lastmonth = Carbon::now()->subMonth()->addDay()->format('Y-m-d');
         $startMonth = Carbon::now()->startOfMonth()->format('Y-m-d');
-        $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
         $start = Carbon::now()->subweek()->addDay()->format('Y-m-d');
         $end = Carbon::now()->format('Y-m-d');
         $startTitle = Carbon::now()->subweek()->addDay()->isoFormat('Do MMMM YYYY');
@@ -382,6 +341,7 @@ class AnalysisController extends Controller
             $x++;
         }
         return response()->json([
+            'roleUser' => $roleUser,
             'transaksi' => $transaksi,
             'data' => $data,
             'monthYearNow' => $monthYearNow,
@@ -395,6 +355,7 @@ class AnalysisController extends Controller
         ]);
     }
     public function getHarga(){
+        $roleUser = Auth::user()->role;
         $dateNow=Carbon::now()->isoFormat('dddd, Do MMMM YYYY');
         $now=Carbon::now()->format('Y-m-d');
         $start = Carbon::now()->subweek()->subweek()->format('Y-m-d');
@@ -544,6 +505,7 @@ class AnalysisController extends Controller
                 $transaksiPengecerBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
         }
         return response()->json([
+            'roleUser' => $roleUser,
             'rawitProdusen' => $rawitByDayProdusen,
             'keritingProdusen' => $keritingByDayProdusen,
             'besarProdusen' => $besarByDayProdusen,
@@ -561,6 +523,7 @@ class AnalysisController extends Controller
         ]);
     }
     public function getSummaryProdusen(){
+        $roleUser = Auth::user()->role;
         $idUser = Auth::user()->id;
         $year= Carbon::now()->format('Y');
         $month=Carbon::now()->format('m');
@@ -789,6 +752,7 @@ class AnalysisController extends Controller
         }
         $endTargetRealisasi = $start->subMonth()->endOfMonth()->isoFormat('Do MMM YYYY');
         return response()->json([
+            'roleUser' => $roleUser,
             'bulan' => $bulan,
             'year' => $year,
             'start' => $startTargetRealisasi,

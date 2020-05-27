@@ -98,11 +98,23 @@
                 <p>Riwayat Distribusi</p>
               </router-link>
             </li>
-            <li class="nav-header">Bisnis Analitik</li>
+            <li class="nav-header">Manajemen Bisnis</li>
             <li class="nav-item">
-              <router-link to="/pengepul/analitik" class="nav-link">
-                <i class="nav-icon fas fa-chart-bar"></i>
-                <p>Bisnis Analitik</p>
+              <router-link to="/pengepul/target" class="nav-link">
+                <i class="fas fa-bullseye nav-icon"></i>
+                <p>Rekap Target</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/pengepul/penjualan" class="nav-link">
+                <i class="fas fa-chart-line nav-icon"></i>
+                <p>Rekap Penjualan</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/pengepul/harga" class="nav-link">
+                <i class="fas fa-money-bill-wave nav-icon"></i>
+                <p>Rekap Harga Cabai</p>
               </router-link>
             </li>
           </ul>

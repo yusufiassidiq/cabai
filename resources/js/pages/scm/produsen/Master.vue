@@ -119,7 +119,7 @@
                 <p>Riwayat Distribusi</p>
               </router-link>
             </li>
-            <li class="nav-header">MANAJEMEN BISNIS</li>
+            <li class="nav-header">Manajemen Bisnis</li>
             <li class="nav-item">
               <router-link to="/produsen/target" class="nav-link">
                 <i class="fas fa-bullseye nav-icon"></i>

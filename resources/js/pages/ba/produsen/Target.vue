@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">Produsen</a>
+                <a href="#">{{ roleUser | filterRoleUser }}</a>
               </li>
               <li class="breadcrumb-item active">Rekap Target</li>
             </ol>
@@ -283,6 +283,7 @@
       return {
         editmode : false,
         year : "",
+        roleUser : "",
         datatarget :"",
         form : new Form({
           id: "",
@@ -402,6 +403,7 @@
           this.datatarget = response.data.data.data;
           $this.makePagination(response.data.data);
           this.year = response.data.year;
+          this.roleUser = response.data.roleUser;
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
           var myChart = new Chart(ctx, {
@@ -419,8 +421,8 @@
                 pointHighlightStroke: 'rgba(60,141,188,1)',
                 data                : response.data.rawit,
                 pointStyle          : 'circle',
-                pointRadius         : 5,
-                pointHoverRadius    : 10,
+                pointRadius         : 3.5,
+                pointHoverRadius    : 7,
                 fill                : false,
               },
               {
@@ -434,8 +436,8 @@
                 pointHighlightStroke: 'rgba(255, 0, 0, 0.8)',
                 data                : response.data.keriting,
                 pointStyle          : 'triangle',
-                pointRadius         : 5,
-                pointHoverRadius    : 10,
+                pointRadius         : 3.5,
+                pointHoverRadius    : 7,
                 fill                : false,
               },
               {
@@ -449,8 +451,8 @@
                 pointHighlightStroke: 'rgba(11, 156, 49, 1)',
                 data                : response.data.besar,
                 pointStyle          : 'rect',
-                pointRadius         : 5,
-                pointHoverRadius    : 10,
+                pointRadius         : 3.5,
+                pointHoverRadius    : 7,
                 fill                : false,
               }]
             },
@@ -467,11 +469,19 @@
               },
               scales:{
                 xAxes: [{
+                  scaleLabel: {
+                    display:true,
+                    labelString : 'Bulan'
+                  },
                   gridLines : {
                     display : false,
                   }
                 }],
                 yAxes:[{
+                  scaleLabel: {
+                    display:true,
+                    labelString : 'Kg'
+                  },
                   gridLines : {
                     display : false,
                   },
