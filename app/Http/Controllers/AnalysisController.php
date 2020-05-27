@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Auth;
 use App\Target;
 use App\PraProduksi;
@@ -29,7 +32,7 @@ class AnalysisController extends Controller
                 ['user_id',$idUser],
                 ['tahun',$year],
                 ])->orderBy('jenis_cabai','ASC')
-                ->get();
+                ->paginate(6);
         
         return response()->json([
             'status' => 'success',
@@ -146,13 +149,50 @@ class AnalysisController extends Controller
         $target->delete();
         return 204;
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getTarget()
     {
         $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
         $year = Carbon::now()->format('Y'); //tahun saat ini
+        // $target = Target::where([
+        //     ['user_id',$idUser],
+        //     ['tahun',$year],
+        //     ])->orderBy('jenis_cabai','ASC')
+        //     ->get();
         //$month untuk label pada chart
         $month = array('Januari','Februari','Maret','April','Mei','Juni', 'Juli', 
                         'Agustus','September', 'Oktober', 'November', 'Desember');
+        // $c=0;
+        // foreach($month as $m){
+        //     $target = Target::where([
+        //         ['bulan', $m],
+        //         ['user_id',$idUser],
+        //         ['tahun',$year],
+        //         ])->orderBy('jenis_cabai','ASC')
+        //         ->get();
+        //     if($target){
+        //         for($i=0;$i<count($target);$i++){
+        //             $targetByMonthArray[]=$target[$i];}
+        //     }
+        // }
+        // $targetByMonth = $this->paginate($targetByMonthArray);
+        // $targetByMonth->paginate(2);\
+        // $sorted = $collection->sortBy(function($model) use ($month)){
+        //     return array_search($item->bulan, $month);
+        // }
+        $targetByMonth=$target = Target::where([
+            // ['bulan', $m],
+            ['user_id',$idUser],
+            ['tahun',$year],
+            ])
+            // ->orderBy('bulan','ASC')
+            ->orderByRaw("FIELD(bulan,'Januari','Februari','Maret','April','Mei','Juni'
+            'Juli', 'Agustus','September', 'Oktober', 'November', 'Desember')ASC")
+            ->paginate(9);
         //membuat array kosong sebanyak bulan 
         //ex targetByMonthRawit[Januari]=0 dst
         for($i=0;$i<count($month);$i++){
@@ -201,6 +241,9 @@ class AnalysisController extends Controller
             $data_targetBesar[$i]=$targetByMonthBesar[$month[$i]];  
         }
         return response()->json([
+            // 'test' => $targetByMonth,
+            'status' => 'success',
+            'data' => $targetByMonth,
             'month' => $month,
             'year'  => $year,
             'rawit' => $data_targetRawit,
@@ -208,6 +251,11 @@ class AnalysisController extends Controller
             'besar' => $data_targetBesar,
         ]);
     }
+    // public function paginate($items, $perPage=5, $page=null,$options=[]){
+    //     $page = $page ?: (Paginator::resolveCurrentPage() ?:1);
+    //     $items = $items instanceof Collection ? $items : Collection::make($items);
+    //     return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    // }
     public function getPengeluaran(){
         $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
         //mengambil id dari PraProduksi yang dimiliki oleh user

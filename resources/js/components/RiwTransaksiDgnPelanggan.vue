@@ -83,7 +83,7 @@
                     class="btn btn-default"
                     v-on:click="fetchPaginate(pagination.next_page_url)"
                     :disabled="!pagination.next_page_url"
-                  >Selanjutnya</button>
+                  >Selanjutnya{{pagination.next_page_url}}</button>
                 </li>
               </ul>
             </div>
