@@ -16,9 +16,10 @@ class AdminController extends Controller
     public function delete($id)
     {
         $user = User::find($id);
-        $praProduksis = $user->praProduksi->load('pengeluaranProduksi');
+        $praProduksis = $user->praProduksi->load('pengeluaranProduksi','panen');
         foreach($praProduksis as $i){
             $i->pengeluaranProduksi()->delete();
+            $i->panen()->delete();
         }
         $user->lokasi()->delete();
         $user->praProduksi()->delete();
