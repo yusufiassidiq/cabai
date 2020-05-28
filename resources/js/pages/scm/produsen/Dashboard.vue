@@ -11,7 +11,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">Produsen</a>
+                <a href="#">{{ roleUser | filterRoleUser }}</a>
               </li>
               <li class="breadcrumb-item active">Dashboard</li>
             </ol>
@@ -312,6 +312,7 @@
   export default {
     data(){
       return{
+        roleUser :"",
         penjualanTarget : "",
         start : "",
         end : "",
@@ -386,6 +387,7 @@
       },
       getData () {
         axios.get('/getSummaryProdusen').then(response=>{
+          this.roleUser = response.data.roleUser;
           this.year = response.data.year;
           this.bulan = response.data.bulan;
           this.start = response.data.start;

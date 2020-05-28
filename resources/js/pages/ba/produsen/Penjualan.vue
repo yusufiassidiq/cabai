@@ -12,9 +12,9 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">Produsen</a>
+                <a href="#">{{ roleUser | filterRoleUser }}</a>
               </li>
-              <li class="breadcrumb-item active">Laporan Penjualan</li>
+              <li class="breadcrumb-item active">Rekap Penjualan</li>
             </ol>
           </div>
           <!-- /.col -->
@@ -166,18 +166,23 @@
   export default {
     data(){
       return{
-        monthYearNow : {},
-        start: {},
-        end : {},
-        data:{},
+        roleUser : "",
+        monthYearNow : "",
+        start: "",
+        end : "",
+        data:"",
       };
     },
     mounted () {
       this.fillData()
+      window.setInterval(() => {
+        this.fillData()
+      }, 1800000)
     },
     methods: {
       fillData () {
         axios.get('/getPenjualan').then(response=>{
+          this.roleUser = response.data.roleUser;
           this.monthYearNow = response.data.monthYearNow;
           this.data = response.data.data;
           this.start = response.data.start;

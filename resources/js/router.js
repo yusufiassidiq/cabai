@@ -76,12 +76,17 @@ import BADetailHarga from './pages/ba/detail/Harga'
 import BADetailProduksi from './pages/ba/detail/Produksi'
 import BADetailProduktivitas from './pages/ba/detail/Produktivitas'
 import BADetailStok from './pages/ba/detail/Stok'
+
 // Auth
 import TargetProd from './pages/ba/produsen/Target'
 import PenjualanProd from './pages/ba/produsen/Penjualan'
 import PengeluaranProd from './pages/ba/produsen/Pengeluaran'
 import HargaProd from './pages/ba/produsen/Harga'
 
+import TargetPengepul from './pages/ba/produsen/Target'
+import PenjualanPengepul from './pages/ba/produsen/Penjualan'
+import PengeluaranPengepul from './pages/ba/produsen/Pengeluaran'
+import HargaPengepul from './pages/ba/produsen/Harga'
 
 //test
 import BAMaster2 from './pages/ba/Master2'
@@ -386,6 +391,27 @@ const routes = [
                 path: 'riwayatdistribusi',
                 component: RiwayatTransaksiPengepul,
                 name: 'riwayattransaksiPengepul'
+            },
+            //BA
+            {
+                path: 'target',
+                component: TargetPengepul,
+                name: "TargetPengepul"
+            },
+            {
+                path: 'penjualan',
+                component: PenjualanPengepul,
+                name: "PenjualanPengepul"
+            },
+            {
+                path: 'pengeluaran',
+                component: PengeluaranPengepul,
+                name: "PengeluaranPengepul"
+            },
+            {
+                path: 'harga',
+                component: HargaPengepul,
+                name: "HargaPengepul"
             },
         ]
     },

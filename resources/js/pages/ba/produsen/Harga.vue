@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">Produsen</a>
+                <a href="#">{{ roleUser | filterRoleUser }}</a>
               </li>
               <li class="breadcrumb-item active">Rekap Harga</li>
             </ol>
@@ -157,6 +157,7 @@
   export default {
     data(){
       return{
+        roleUser : "",
         dateNow : {},
         start: {},
         end : {},
@@ -166,10 +167,14 @@
     },
     mounted () {
       this.fillData()
+      window.setInterval(() => {
+        this.fillData()
+      }, 1800000)
     },
     methods: {
       fillData () {
         axios.get('/getHarga').then(response=>{
+          this.roleUser = response.data.roleUser;
           this.dateNow = response.data.dateNow;
           this.date = response.data.date;
           this.data = response.data.data;

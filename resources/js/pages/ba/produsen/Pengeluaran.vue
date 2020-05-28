@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">Produsen</a>
+                <a href="#">{{ roleUser | filterRoleUser }}</a>
               </li>
               <li class="breadcrumb-item active">Rekap Pengeluaran</li>
             </ol>
@@ -98,15 +98,21 @@
   export default {
     data(){
       return{
-        year : {},
+        roleUser : "",
+        year : "",
+        lahan : "",
       };
     },
     mounted () {
       this.fillData()
+      window.setInterval(() => {
+        this.fillData()
+      }, 1800000)
     },
     methods: {
       fillData () {
         axios.get('/getPengeluaran').then(response=>{
+          this.roleUser = response.data.roleUser;
           this.year = response.data.tahun;
           this.lahan = response.data.lahan;
           var chart = this.$refs.chart;

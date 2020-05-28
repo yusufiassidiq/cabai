@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">Produsen</a>
+                <a href="#">{{ roleUser | filterRoleUser }}</a>
               </li>
               <li class="breadcrumb-item active">Rekap Target</li>
             </ol>
@@ -75,8 +75,8 @@
                 <h3 class="card-title">Rekap Target Tahun {{ year }}</h3>
 
                 <div class="card-tools">
-                  <button class="btn btn-success" @click="newModal">Tambah Target 
-                    <i class="fas fa-plus fa-fw"></i>
+                  <button class="btn btn-sm btn-success" @click="newModal">Tambah Target 
+                    <!-- <i class="fas fa-plus fa-fw"></i> -->
                   </button>
                   <!-- <div class="input-group input-group-sm" style="width: 150px;"> -->
                   <!-- <input
@@ -96,44 +96,82 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                      <!-- <th>No</th> -->
-                      <!-- <th>ID </th> -->
-                      <th>Tahun</th>
-                      <th>Bulan</th>
-                      <th>Jenis Cabai</th>
-                      <th>Total Target</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="data in datatarget" :key="data.id">
-                      <!-- <td></td> -->
-                      <!-- <td>{{ data.id }}</td> -->
-                      <td>{{ data.tahun }}</td>
-                      <td>{{ data.bulan }}</td>
-                      <td>{{ data.jenis_cabai }}</td>
-                      <td>Rp{{ data.jumlah_cabai }}</td>
-                      <td>
-                        <a href="#" @click="editModal(data)">
-                          <i class="fa fa-edit blue"></i>
-                        </a>
-                        /
-                        <a href="#" @click="deleteTarget(data.id)">
-                          <i class="fa fa-trash red"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <!-- end example data -->
-                  </tbody>
-                </table>
+                <div class="row">
+                  <table class="table table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <!-- <th>No</th> -->
+                        <!-- <th>ID </th> -->
+                        <th>Tahun</th>
+                        <th>Bulan</th>
+                        <th>Jenis Cabai</th>
+                        <th>Total Target (Kg)</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-if="!datatarget.length">
+                        <td colspan="7" align="center">Tidak ada data target</td>
+                      </tr>
+                      <tr v-for="data in datatarget" :key="data.id">
+                        <!-- <td></td> -->
+                        <!-- <td>{{ data.id }}</td> -->
+                        <td>{{ data.tahun }}</td>
+                        <td>{{ data.bulan }}</td>
+                        <td>{{ data.jenis_cabai }}</td>
+                        <td>{{ data.jumlah_cabai | filterAngkaRibuan }}</td>
+                        <td>
+                          <a href="#" @click="editModal(data)">
+                            <i class="fa fa-edit blue"></i>
+                          </a>
+                          /
+                          <a href="#" @click="deleteTarget(data.id)">
+                            <i class="fa fa-trash red"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 d-flex justify-content-start align-self-center">
+                    <div
+                      style="padding-left: 20px"
+                    >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
+                  </div>
+
+                  <div
+                    class="col-md-6 d-flex justify-content-end align-self-end"
+                    style="padding-right: 30px"
+                  >
+                    <div class="dataTables_paginate paging_simple_numbers">
+                      <ul class="pagination">
+                        <li>
+                          <button
+                            href="#"
+                            class="btn btn-default"
+                            v-on:click="fetchPaginateTarget(pagination.prev_page_url)"
+                            :disabled="!pagination.prev_page_url"
+                          >Sebelumnya</button>
+                        </li>
+
+                        <li>
+                          <button
+                            class="btn btn-default"
+                            v-on:click="fetchPaginateTarget(pagination.next_page_url)"
+                            :disabled="!pagination.next_page_url"
+                          >Selanjutnya </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
           </div>
         </div>
+
       </div>
     </section>
     <!-- /.content -->
@@ -222,7 +260,7 @@
               </div>
             </div> 
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
               <button v-show="!editmode" type="submit" class="btn btn-primary">Tambahkan</button>
               <button v-show="editmode" type="submit" class="btn btn-success">Perbarui</button>
             </div>
@@ -244,17 +282,37 @@
     data(){
       return {
         editmode : false,
-        datatarget :{},
+        year : "",
+        roleUser : "",
+        datatarget :"",
         form : new Form({
           id: "",
           tahun : "",
           bulan : "",
           jenis_cabai: "",
           jumlah_cabai:"",
-        })
+        }),
+        // pagination
+        pagination: [],
+        url_loadTarget: "/getTarget",
+        // paginate:['target'],
       };
     },
     methods:{
+    fetchPaginateTarget(url) {
+      this.url_loadTarget = url;
+      this.loadTarget();
+    },
+    // set up pagination
+    makePagination(data) {
+      let pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        prev_page_url: data.prev_page_url
+      };
+      this.pagination = pagination;
+    },
       newModal(){
         this.editmode = false,
         this.form.reset();
@@ -275,13 +333,9 @@
           });
           this.$Progress.finish();
         })
-      },
-      loadTarget(){
-        axios.get('/readTarget').then(response =>{
-          this.datatarget = response.data.data;
-          this.year = response.data.tahun;
+        .catch(error => {
+          this.$Progress.fail();
         });
-        console.log(response.data.data)
       },
       editModal(t){
         this.editmode = true,
@@ -343,8 +397,13 @@
           }
         });
       },
-      fillData () {
-        axios.get('/getTarget').then(response=>{
+      loadTarget () {
+        let $this = this;
+        axios.get(this.url_loadTarget).then(response=>{
+          this.datatarget = response.data.data.data;
+          $this.makePagination(response.data.data);
+          this.year = response.data.year;
+          this.roleUser = response.data.roleUser;
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
           var myChart = new Chart(ctx, {
@@ -360,7 +419,10 @@
                 pointStrokeColor    : 'rgba(60,141,188,1)',
                 pointHighlightFill  : '#fff',
                 pointHighlightStroke: 'rgba(60,141,188,1)',
-                data: response.data.rawit,
+                data                : response.data.rawit,
+                pointStyle          : 'circle',
+                pointRadius         : 3.5,
+                pointHoverRadius    : 7,
                 fill                : false,
               },
               {
@@ -373,6 +435,9 @@
                 pointHighlightFill  : '#fff',
                 pointHighlightStroke: 'rgba(255, 0, 0, 0.8)',
                 data                : response.data.keriting,
+                pointStyle          : 'triangle',
+                pointRadius         : 3.5,
+                pointHoverRadius    : 7,
                 fill                : false,
               },
               {
@@ -385,10 +450,15 @@
                 pointHighlightFill  : '#fff',
                 pointHighlightStroke: 'rgba(11, 156, 49, 1)',
                 data                : response.data.besar,
+                pointStyle          : 'rect',
+                pointRadius         : 3.5,
+                pointHoverRadius    : 7,
                 fill                : false,
               }]
             },
             options:{
+              maintainAspectRatio : true,
+              responsive: true,
               tooltips:{
                 mode:'index',
                 intersect: false,
@@ -399,11 +469,19 @@
               },
               scales:{
                 xAxes: [{
+                  scaleLabel: {
+                    display:true,
+                    labelString : 'Bulan'
+                  },
                   gridLines : {
                     display : false,
                   }
                 }],
                 yAxes:[{
+                  scaleLabel: {
+                    display:true,
+                    labelString : 'Kg'
+                  },
                   gridLines : {
                     display : false,
                   },
@@ -420,16 +498,10 @@
         });
       }
     },
-    created(){
-      this.loadTarget();
-      // this.fillData();
-      // setInterval(()=> this.loadTarget(), 3000);
-    },
     mounted() {
-    this.fillData();
+    this.loadTarget();
     // Custom event on Vue js
     UpdateData.$on("update", () => {
-      this.fillData();
       this.loadTarget();
     });
   }
