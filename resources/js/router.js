@@ -78,15 +78,25 @@ import BADetailProduktivitas from './pages/ba/detail/Produktivitas'
 import BADetailStok from './pages/ba/detail/Stok'
 
 // Auth
-import TargetProd from './pages/ba/produsen/Target'
-import PenjualanProd from './pages/ba/produsen/Penjualan'
-import PengeluaranProd from './pages/ba/produsen/Pengeluaran'
-import HargaProd from './pages/ba/produsen/Harga'
+import TargetProd from './pages/ba/auth/Target'
+import PenjualanProd from './pages/ba/auth/Penjualan'
+import PengeluaranProd from './pages/ba/auth/produsen/Pengeluaran'
+import HargaProd from './pages/ba/auth/Harga'
 
-import TargetPengepul from './pages/ba/produsen/Target'
-import PenjualanPengepul from './pages/ba/produsen/Penjualan'
-import PengeluaranPengepul from './pages/ba/produsen/Pengeluaran'
-import HargaPengepul from './pages/ba/produsen/Harga'
+import TargetPengepul from './pages/ba/auth/Target'
+import PenjualanPengepul from './pages/ba/auth/Penjualan'
+import PasokanPengepul from './pages/ba/auth/others/Pasokan'
+import HargaPengepul from './pages/ba/auth/Harga'
+
+import TargetGrosir from './pages/ba/auth/Target'
+import PenjualanGrosir from './pages/ba/auth/Penjualan'
+import PasokanGrosir from './pages/ba/auth/others/Pasokan'
+import HargaGrosir from './pages/ba/auth/Harga'
+
+import TargetPengecer from './pages/ba/auth/Target'
+import PenjualanPengecer from './pages/ba/auth/Penjualan'
+import PasokanPengecer from './pages/ba/auth/others/Pasokan'
+import HargaPengecer from './pages/ba/auth/Harga'
 
 //test
 import BAMaster2 from './pages/ba/Master2'
@@ -277,6 +287,27 @@ const routes = [
                 component: RiwayatTransaksiGrosir,
                 name: 'riwayattransaksiGrosir'
             },
+            //BA
+            {
+                path: 'target',
+                component: TargetGrosir,
+                name: "TargetGrosir"
+            },
+            {
+                path: 'penjualan',
+                component: PenjualanGrosir,
+                name: "PenjualanGrosir"
+            },
+            {
+                path: 'Pasokan',
+                component: PasokanGrosir,
+                name: "PasokanGrosir"
+            },
+            {
+                path: 'harga',
+                component: HargaGrosir,
+                name: "HargaGrosir"
+            },
         ]
     },
     {
@@ -334,6 +365,27 @@ const routes = [
                 path: 'riwayatdistribusi',
                 component: RiwayatTransaksiPengecer,
                 name: 'riwayattransaksiPengecer'
+            },
+            //BA
+            {
+                path: 'target',
+                component: TargetPengecer,
+                name: "TargetPengecer"
+            },
+            {
+                path: 'penjualan',
+                component: PenjualanPengecer,
+                name: "PenjualanPengecer"
+            },
+            {
+                path: 'Pasokan',
+                component: PasokanPengecer,
+                name: "PasokanPengecer"
+            },
+            {
+                path: 'harga',
+                component: HargaPengecer,
+                name: "HargaPengecer"
             },
         ]
     },
@@ -404,9 +456,9 @@ const routes = [
                 name: "PenjualanPengepul"
             },
             {
-                path: 'pengeluaran',
-                component: PengeluaranPengepul,
-                name: "PengeluaranPengepul"
+                path: 'Pasokan',
+                component: PasokanPengepul,
+                name: "PasokanPengepul"
             },
             {
                 path: 'harga',

@@ -670,8 +670,8 @@ class AnalysisController extends Controller
             //belum ada target 
             else{
                 $terjual='Belum Ada Target';
-                $gap='-';
-                $ach='-';
+                $gap='';
+                $ach=0;
             }
             //memasukan data menjadi object
             $penjualanTarget[]=[
