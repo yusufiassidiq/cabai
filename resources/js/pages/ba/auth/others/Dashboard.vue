@@ -158,12 +158,12 @@
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon elevation-1" v-bind:style="{backgroundColor: '#a0622d',color:'#ffffff'}"><i class="fas fa-seedling"></i></span>
+              <span class="info-box-icon elevation-1" v-bind:style="{backgroundColor: '#a0622d',color:'#ffffff'}"><i class="fas fa-user"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Produktivitas Tertinggi</span>
-                <span class="info-box-number">{{ maxProduktivitas }} Kg/ha</span>
-                <span class="info-box-number">{{ maxKodeLahan }}</span>
+                <span class="info-box-text">Pemasok Terbanyak</span>
+                <span class="info-box-number">{{ maxPemasokName | filterName }}</span>
+                <span class="info-box-number">{{ maxPemasokQty }} Kg</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -186,7 +186,7 @@
                         <strong>Penjualan: {{ start }} - {{end}}</strong>
                     </p>
                     <div class="chart">
-                      <!-- Pengeluaran Chart Canvas -->
+                      <!-- Pemasukan Modal Chart Canvas -->
                       <canvas ref="chart" style="height: 300px;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
@@ -260,10 +260,10 @@
                   <!-- /.col -->
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
-                      <span class="description-percentage" v-bind:style="{color:getColor(mtdPengeluaran)}">
-                        <i v-bind:class="getClass(mtdPengeluaran)"></i> {{ mtdPengeluaran | angkaPersentase }}</span>
-                      <h5 class="description-header">{{ pengeluaranTotal | convertToRupiah }}</h5>
-                      <span class="description-text">TOTAL PENGELUARAN</span>
+                      <span class="description-percentage" v-bind:style="{color:getColor(mtdModal)}">
+                        <i v-bind:class="getClass(mtdModal)"></i> {{ mtdModal | angkaPersentase }}</span>
+                      <h5 class="description-header">{{ modalTotal | convertToRupiah }}</h5>
+                      <span class="description-text">TOTAL MODAL</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -322,14 +322,14 @@
         maxJumlahJenis : "",
         minJumlahQty :"",
         minJumlahJenis : "",
-        maxProduktivitas : "",
-        maxKodeLahan: "",
+        maxPemasokName : "",
+        maxPemasokQty: "",
         year : "",
         bulan : "",
         pemasukanTotal: "",
         mtdPemasukan : "",
-        pengeluaranTotal: "",
-        mtdPengeluaran : "",
+        modalTotal: "",
+        mtdModal : "",
         labaTotal : "",
         mtdLaba : "",
         terjualTotal : "",
@@ -386,7 +386,7 @@
         }
       },
       getData () {
-        axios.get('/getSummaryProdusen').then(response=>{
+        axios.get('/getSummaryOthers').then(response=>{
           this.roleUser = response.data.roleUser;
           this.year = response.data.year;
           this.bulan = response.data.bulan;
@@ -394,8 +394,8 @@
           this.end = response.data.end;
           this.mtdPemasukan = response.data.mtdPemasukan;
           this.pemasukanTotal = response.data.pemasukanTotal;
-          this.mtdPengeluaran = response.data.mtdPengeluaran;
-          this.pengeluaranTotal = response.data.pengeluaranTotal;
+          this.mtdModal = response.data.mtdModal;
+          this.modalTotal = response.data.modalTotal;
           this.mtdLaba = response.data.mtdLaba;
           this.labaTotal = response.data.labaTotal;
           this.mtdTerjual = response.data.mtdTerjual;
@@ -407,8 +407,8 @@
           this.maxJumlahJenis = response.data.maxJumlahJenis;
           this.minJumlahQty = response.data.minJumlahQty;
           this.minJumlahJenis = response.data.minJumlahJenis;
-          this.maxProduktivitas = response.data.maxProduktivitas;
-          this.maxKodeLahan = response.data.maxKodeLahan;
+          this.maxPemasokName = response.data.maxPemasokName;
+          this.maxPemasokQty = response.data.maxPemasokQty;
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
           var myChart = new Chart(ctx, {
@@ -428,7 +428,7 @@
                 fill                : true,
               },
               {
-                label               : 'Pengeluaran',
+                label               : 'Modal',
                 backgroundColor     : 'rgba(255, 0, 0, 0.8)',
                 borderColor         : 'rgba(255, 0, 0, 1)',
                 pointRadius         : true,
@@ -436,7 +436,7 @@
                 pointStrokeColor    : '#c1c7d1',
                 pointHighlightFill  : '#fff',
                 pointHighlightStroke: 'rgba(255, 0, 0, 1)',
-                data                : response.data.pengeluaran,
+                data                : response.data.modal,
                 fill                : true,
               },
             //   

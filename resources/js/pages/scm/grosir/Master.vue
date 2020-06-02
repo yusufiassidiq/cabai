@@ -114,7 +114,7 @@
             </li>
             <li class="nav-item">
               <router-link to="/grosir/pasokan" class="nav-link">
-                <i class="fas fa-hand-holding-usd nav-icon"></i>
+                <i class="fas fa-boxes nav-icon"></i>
                 <p>Rekap Pasokan Cabai</p>
               </router-link>
             </li>

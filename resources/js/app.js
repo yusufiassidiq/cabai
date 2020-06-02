@@ -182,6 +182,19 @@ Vue.filter('filterGapTarget', function (value) {
         return (value);
 })
 
+Vue.filter('filterName', function (value) {
+    var name = value.split(' ');
+    if (name.length>1){
+        var splitName = name[0] + " " + name[1];
+        if(splitName.length<16)
+            return splitName;
+        else
+            return name[0];
+    }
+    else 
+        return value;
+})
+
 Vue.filter('filterRoleName', function(value) {
     if(value === 2)
         return "Produsen";

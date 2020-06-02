@@ -30,7 +30,7 @@ import HasilPanenProd from './pages/scm/produsen/HasilPanen'
 import RiwayatTransaksiProd from './pages/scm/produsen/RiwayatTransaksi'
 
 import MasterPengepul from './pages/scm/pengepul/Master' // pengepul
-import DashboardPengepul from './pages/scm/pengepul/Dashboard'
+import DashboardPengepul from './pages/ba/auth/others/Dashboard'
 import DaftarMitraPengepul from './pages/scm/pengepul/DaftarMitra'
 import PermintaanMitraPengepul from './pages/scm/pengepul/PermintaanMitra'
 import TransaksiCabaiPengepul from './pages/scm/pengepul/TransaksiCabai'
@@ -39,7 +39,7 @@ import MitraSayaPengepul from './pages/scm/pengepul/MitraSaya'
 import RiwayatTransaksiPengepul from './pages/scm/pengepul/RiwayatTransaksi'
 
 import MasterGrosir from './pages/scm/grosir/Master' // grosir
-import DashboardGrosir from './pages/scm/grosir/Dashboard'
+import DashboardGrosir from './pages/ba/auth/others/Dashboard'
 import DaftarMitraGrosir from './pages/scm/grosir/DaftarMitra'
 import PermintaanMitraGrosir from './pages/scm/grosir/PermintaanMitra'
 import TransaksiCabaiGrosir from './pages/scm/grosir/TransaksiCabai'
@@ -49,7 +49,7 @@ import RiwayatTransaksiGrosir from './pages/scm/grosir/RiwayatTransaksi'
 
 
 import MasterPengecer from './pages/scm/pengecer/Master' // pengecer
-import DashboardPengecer from './pages/scm/pengecer/Dashboard'
+import DashboardPengecer from './pages/ba/auth/others/Dashboard'
 import DaftarMitraPengecer from './pages/scm/pengecer/DaftarMitra'
 import PermintaanMitraPengecer from './pages/scm/pengecer/PermintaanMitra'
 import TransaksiCabaiPengecer from './pages/scm/pengecer/TransaksiCabai'
