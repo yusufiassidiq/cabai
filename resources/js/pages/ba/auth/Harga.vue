@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">{{ roleUser | filterRoleUser }}</a>
+                <a href="#">{{ roleUser | filterRoleName }}</a>
               </li>
               <li class="breadcrumb-item active">Rekap Harga</li>
             </ol>

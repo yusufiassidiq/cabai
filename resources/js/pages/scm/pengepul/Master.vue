@@ -112,6 +112,12 @@
               </router-link>
             </li>
             <li class="nav-item">
+              <router-link to="/pengepul/pasokan" class="nav-link">
+                <i class="fas fa-boxes nav-icon"></i>
+                <p>Rekap Pasokan Cabai</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
               <router-link to="/pengepul/harga" class="nav-link">
                 <i class="fas fa-money-bill-wave nav-icon"></i>
                 <p>Rekap Harga Cabai</p>

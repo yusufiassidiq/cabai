@@ -181,7 +181,7 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-9">
+                  <div class="col-md-8">
                     <p class="text-center">
                       <strong>Penjualan: {{ start }} - {{end}}</strong>
                     </p>
@@ -194,20 +194,20 @@
                     <!-- /.chart-responsive -->
                   </div>
                   <!-- /.col -->
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <p class="text-center">
                       <strong>Pencapaian Target</strong>
                     </p>
 
                     <div class="progress-group"  v-for="data in penjualanTarget" :key="data.jenis">
                       {{ data.jenis }}
-                      <span class="float-right"><b>{{ data.terjual | filterRealisasiTarget }}</b></span>
+                      <span class="float-right"><b>{{ data.terjual | filterRealisasiTarget }}</b>{{ data.gap | filterGapTarget }}</span>
                       <div class="progress progress-sm">
                         <div class="progress-bar progress-bar-striped" v-bind:style="{backgroundColor: getColorProgress(data.ach), width: data.ach + '%'}"></div>
                       </div>
-                      <span class="progress-description float-right">
+                      <!-- <span class="progress-description float-right">
                         {{ data.gap | filterGapTarget }}
-                      </span><br>
+                      </span> -->
                     </div>
                     <!-- /.progress-group -->
                   </div>

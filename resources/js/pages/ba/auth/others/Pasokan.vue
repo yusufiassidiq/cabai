@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">{{ roleUser | filterRoleUser }}</a>
+                <a href="#">{{ roleUser | filterRoleName }}</a>
               </li>
               <li class="breadcrumb-item active">Rekap Pengeluaran</li>
             </ol>
@@ -28,7 +28,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div v-show= "lahan!==null" class="row">
+        <div v-show= "pemasok!==null" class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
@@ -47,7 +47,7 @@
                 <div class="row justify-content-center">
                   <div class="col-md-12">
                     <p class="text-center">
-                        <strong>Pengeluaran Tahun {{ year }}</strong>
+                        <strong>Pasokan Cabai {{ rangePasokan }}</strong>
                     </p>
                     <div class="chart">
                       <!-- Pengeluaran Chart Canvas -->
@@ -65,17 +65,17 @@
           </div>
           <!-- /.col -->
         </div>
-        <div v-if= "lahan===null" class="row">
+        <div v-if= "pemasok===null" class="row">
           <div class="col">
             <!-- <div class="card alert alert-warning alert"> -->
             <div class="card callout callout-warning">
                   <h5>
                     <i class="icon fas fa-exclamation-triangle"></i>
-                  Belum Ada Data Lahan
+                  Belum Ada Data Distribusi Cabai dengan Pemasok
                   </h5>
                   <p>
-                  Silahkan Mengisi Data Lahan
-                      <router-link to="/produsen/manajemenlahan">
+                  Silahkan Tambah Permintaan Pasokan
+                      <router-link v-bind:to="getLink(roleUser)">
                         Disini
                       </router-link>
                   </p>
@@ -93,14 +93,17 @@
 </template>
 
 <script>
-  import { Bar } from 'vue-chartjs'
+  import { horizontalBar } from 'vue-chartjs'
 
   export default {
     data(){
       return{
+        rangePasokan : "",
         roleUser : "",
-        year : "",
-        lahan : "",
+        pemasok : "",
+        totalRawit : "",
+        totalKeriting : "",
+        totalBesar : "",
       };
     },
     mounted () {
@@ -110,19 +113,27 @@
       }, 1800000)
     },
     methods: {
+      getLink:function(value){
+        if(value === 3)
+            return "/pengepul/distribusicabai";
+        else if(value === 4)
+            return "/grosir/distribusicabai";
+        else if(value === 5)
+            return "/pengecer/distribusicabai";
+      },
       fillData () {
-        axios.get('/getPengeluaran').then(response=>{
+        axios.get('/getPasokan').then(response=>{
           this.roleUser = response.data.roleUser;
-          this.year = response.data.tahun;
-          this.lahan = response.data.lahan;
+          this.pemasok = response.data.pemasok;
+          this.rangePasokan = response.data.rangePasokan;
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
           var myChart = new Chart(ctx, {
-            type : 'bar',
+            type : 'horizontalBar',
             data:{
-              labels:response.data.lahan,
+              labels:response.data.pemasok,
               datasets:[{
-                label               : 'Pupuk',
+                label               : 'CabaiRawit',
                 backgroundColor     : 'rgba(54, 162, 235, 1)',
                 borderColor         : 'rgba(54, 162, 235, 1)',
                 pointRadius         : true,
@@ -130,11 +141,10 @@
                 pointStrokeColor    : 'rgba(54, 162, 235, 1)',
                 pointHighlightFill  : '#fff',
                 pointHighlightStroke: 'rgba(54, 162, 235, 1)',
-                data                : response.data.pupuk,
-                // fill                : false,
+                data                : response.data.totalRawit,
               },
               {
-                label               : 'Alat Tani',
+                label               : 'Cabai Keriting',
                 backgroundColor     : 'rgba(254, 99, 131, 1)',
                 borderColor         : 'rgba(254, 99, 131, 1)',
                 pointRadius         : true,
@@ -142,11 +152,11 @@
                 pointStrokeColor    : '#c1c7d1',
                 pointHighlightFill  : '#fff',
                 pointHighlightStroke: 'rgba(254, 99, 131, 1)',
-                data                : response.data.alatTani,
+                data                : response.data.totalKeriting,
                 // fill                : false,
               },
               {
-                label               : 'Pestisida',
+                label               : 'Cabai besar',
                 backgroundColor     : 'rgba(74, 192, 192, 1)',
                 borderColor         : 'rgba(74, 192, 192, 1)',
                 pointRadius         : true,
@@ -154,21 +164,10 @@
                 pointStrokeColor    : 'rgba(74, 192, 192, 1)',
                 pointHighlightFill  : '#fff',
                 pointHighlightStroke: 'rgba(74, 192, 192, 1)',
-                data                : response.data.pestisida,
+                data                : response.data.totalBesar,
                 // fill                : false,
               },
-              {
-                label               : 'Lainnya',
-                backgroundColor     : 'rgba(247, 249, 127, 1)',
-                borderColor         : 'rgba(247, 249, 127, 1)',
-                pointRadius         : true,
-                pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(247, 249, 127, 1)',
-                pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(247, 249, 127, 1)',
-                data                : response.data.lainnya,
-                fill                : false,
-              }]
+            ]
             },
             options:{
               barValueSpacing:100,
@@ -183,13 +182,13 @@
               },
               scales:{
                 xAxes: [{
-                  // stacked: true,
+                  stacked: true,
                   gridLines : {
                     display : false,
                   }
                 }],
                 yAxes:[{
-                  // stacked: true,
+                  stacked: true,
                   gridLines : {
                     display : false,
                   },

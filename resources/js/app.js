@@ -172,14 +172,40 @@ Vue.filter('filterGapTarget', function (value) {
             for (var i = 0; i < angkarev.length; i++)
                 if (i % 3 == 0) angka += angkarev.substr(i, 3) + ".";
             return (
-                "Kurang " + angka.split("", angka.length - 1).reverse().join("") + " Kg"
+                "/" + angka.split("", angka.length - 1).reverse().join("") + " Kg"
             );
         }
         else 
-            return "Tercapai"
+            return "";
     }
     else
         return (value);
+})
+
+Vue.filter('filterName', function (value) {
+    var name = value.split(' ');
+    if (name.length>1){
+        var splitName = name[0] + " " + name[1];
+        if(splitName.length<16)
+            return splitName;
+        else
+            return name[0];
+    }
+    else 
+        return value;
+})
+
+Vue.filter('filterRoleName', function(value) {
+    if(value === 2)
+        return "Produsen";
+    else if(value === 3)
+        return "Pengepul";
+    else if(value === 4)
+        return "Grosir";
+    else if(value === 5)
+        return "Pengecer";
+    else if(value === 6)
+        return "Konsumen";
 })
 
 

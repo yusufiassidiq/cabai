@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico')}}" type="image/x-icon">
     
     <title>Monitoring Produksi dan Distribusi Cabai Jawa Barat</title>
     <!-- Load css -->
@@ -60,6 +62,20 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Homepage CSS Files -->
+    <link href="{{asset('plugins/icofont/icofont.min.css')}}" rel="stylesheet">
+    <link href="{{asset('plugins/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{asset('plugins/remixicon/remixicon.css')}}" rel="stylesheet">
+    <link href="{{asset('plugins/venobox/venobox.css')}}" rel="stylesheet">
+    <link href="{{asset('plugins/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{asset('plugins/aos/aos.css')}}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -105,6 +121,16 @@
     <!-- <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script> -->
     <!-- AdminLTE for demo purposes -->
     <!-- <script src="{{ asset('dist/js/demo.js') }}"></script> -->
+
+    <!-- Asset Homepage -->
+    <!-- Vendor JS Files -->
+    <script src="{{asset('plugins/counterup/counterup.min.js')}}"></script>
+    <script src="{{asset('plugins/venobox/venobox.min.js')}}"></script>
+    <script src="{{asset('plugins/owl.carousel/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('plugins/aos/aos.js')}}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{asset('assets/js/main.js')}}"></script>
     
 </body>
 </html>
