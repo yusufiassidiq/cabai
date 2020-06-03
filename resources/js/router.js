@@ -576,6 +576,28 @@ const routes = [
         path: '/gagalvalidasi',
         name: 'gagalvalidasi',
         component: FailedValidation,
+        beforeEnter: (to, from, next) => {
+            if (to.meta.requiresVerified) {
+                var datauser = []
+                const url = "/auth/user"
+                const axiosTest = axios.get
+                axiosTest(url).then(function (axiosResult) {
+                    datauser = axiosResult.data.data
+                    // console.log(datauser)
+                    var status = (datauser.status)
+                    var role = datauser.role
+                    console.log(role)
+                    if (status === 1) {
+                        if(role === 2){next('/produsen') }
+                        else if(role === 3){next('/pengepul') }
+                        else if(role === 4){next('/grosir') }
+                        else if(role === 5){next('/pengecer') }
+                    } else {
+                        next();
+                    }
+                });
+            }
+        },
         meta: {
             auth: true,
             requiresVerified: true,
