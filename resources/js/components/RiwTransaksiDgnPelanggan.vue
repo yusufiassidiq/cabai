@@ -8,7 +8,7 @@
   >
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Daftar Riwayat Transaksi Cabai</h3>
+        <h3 class="card-title">Daftar Riwayat Distribusi Cabai</h3>
 
         <div class="card-tools">
           <div class="input-group input-group-sm" style="width: 150px;">
@@ -43,7 +43,7 @@
 
             <tbody>
               <tr v-if="!listPermintaanCabai.length">
-                <td colspan="9" align="center">Tidak ada riwayat transaksi cabai</td>
+                <td colspan="9" align="center">Tidak ada riwayat Distribusi Cabai</td>
               </tr>
               <tr v-for="data in listPermintaanCabai" :key="data.id">
                 <td>{{ data.tanggal_pengiriman | dateFilter }}</td>
@@ -83,7 +83,7 @@
                     class="btn btn-default"
                     v-on:click="fetchPaginate(pagination.next_page_url)"
                     :disabled="!pagination.next_page_url"
-                  >Selanjutnya</button>
+                  >Selanjutnya{{pagination.next_page_url}}</button>
                 </li>
               </ul>
             </div>

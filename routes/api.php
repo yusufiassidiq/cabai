@@ -79,6 +79,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/kemitraan/grosir/list','UserController@getMitraGrosir');
     Route::get('/kemitraan/pengecer/list','UserController@getMitraPengecer');
     Route::get('/kemitraan/konsumen/list','UserController@getMitraKonsumen');
+    // jumlah mitra saya
+    Route::get('/kemitraan/mitra/info','UserController@InfoKemitraan');
 
     //Transaksi Permintaan Cabai
     Route::post('/transaksi/permintaanSaya/tambah','UserController@addPermintaanSaya');
@@ -122,14 +124,15 @@ Route::group(['middleware' => 'auth:api'], function(){
     
     //Business Analytic
     Route::post('/addTarget','AnalysisController@addTarget');
-    Route::get('/readTarget','AnalysisController@readTarget');
     Route::put('/updateTarget/{id}','AnalysisController@updateTarget');
     Route::delete('/deleteTarget/{id}','AnalysisController@deleteTarget');
     Route::get('/getTarget','AnalysisController@getTarget');
     Route::get('/getPengeluaran','AnalysisController@getPengeluaran');
     Route::get('/getPenjualan','AnalysisController@getPenjualan');
     Route::get('/getHarga','AnalysisController@getHarga');
-    Route::get('/getGapAch','AnalysisController@getGapAch');
+    Route::get('/getSummaryProdusen','AnalysisController@getSummaryProdusen');
+    Route::get('/getPasokan','AnalysisController@getPasokan');
+    Route::get('/getSummaryOthers','AnalysisController@getSummaryOthers');
 });
 
 // TANPA LOGIN

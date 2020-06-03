@@ -83,7 +83,6 @@ Vue.filter('dateFilter', function (value) {
 
 // filter convert angka ke rupiah
 Vue.filter('convertToRupiah', function (angka) {
-    if(typeof angka !=='string'){
         var rupiah = "";
         var angkarev = angka.toString().split("").reverse().join("");
         
@@ -92,10 +91,6 @@ Vue.filter('convertToRupiah', function (angka) {
         return (
             "Rp " + rupiah.split("", rupiah.length - 1).reverse().join("")
         );
-    }
-    else{
-        return(angka);
-    }
 })
 
 // filter mengubah angka menjadi ribuan
@@ -108,6 +103,11 @@ Vue.filter('filterAngkaRibuan', function (value) {
         angka.split("", angka.length - 1).reverse().join("")
     );
 })
+
+// Vue.filter('classFlag', function (value) {
+//     var flag= value;
+//     return(flag);
+// })
 
 // filter mendapatkan Jenis Role
 Vue.filter('filterRoleUser', function(id_role){
@@ -129,9 +129,95 @@ Vue.filter('filterRoleUser', function(id_role){
     }
 })
 
+// filter convert angka ke rupiah
+Vue.filter('angkaPersentase', function (value) {
+    if(typeof value !=='string'){
+        if (value<0) 
+            return( value * -1 + "%");
+        else 
+            return( value + "%");
+    }
+    else{
+        if (value<0) 
+            value = value * -1;
+        var angka = "";
+        var angkarev = value.toString().split("").reverse().join("");
+        for (var i = 0; i < angkarev.length; i++)
+            if (i % 3 == 0) angka += angkarev.substr(i, 3) + ".";
+        return (
+            angka.split("", angka.length - 1).reverse().join("")
+        );
+    }
+})
+
+Vue.filter('filterRealisasiTarget', function (value) {
+    if(typeof value !=='string'){
+        var angka = "";
+        var angkarev = value.toString().split("").reverse().join("");
+        for (var i = 0; i < angkarev.length; i++)
+            if (i % 3 == 0) angka += angkarev.substr(i, 3) + ".";
+        return (
+            angka.split("", angka.length - 1).reverse().join("") + " Kg"
+        );
+    }
+    else
+        return(value);
+})
+
+Vue.filter('filterGapTarget', function (value) {
+    if(typeof value !=='string'){
+        if(value > 0){
+            var angka = "";
+            var angkarev = value.toString().split("").reverse().join("");
+            for (var i = 0; i < angkarev.length; i++)
+                if (i % 3 == 0) angka += angkarev.substr(i, 3) + ".";
+            return (
+                "/" + angka.split("", angka.length - 1).reverse().join("") + " Kg"
+            );
+        }
+        else 
+            return "";
+    }
+    else
+        return (value);
+})
+
+Vue.filter('filterName', function (value) {
+    var name = value.split(' ');
+    if (name.length>1){
+        var splitName = name[0] + " " + name[1];
+        if(splitName.length<16)
+            return splitName;
+        else
+            return name[0];
+    }
+    else 
+        return value;
+})
+
+Vue.filter('filterRoleName', function(value) {
+    if(value === 2)
+        return "Produsen";
+    else if(value === 3)
+        return "Pengepul";
+    else if(value === 4)
+        return "Grosir";
+    else if(value === 5)
+        return "Pengecer";
+    else if(value === 6)
+        return "Konsumen";
+})
+
+
 // Set Vue authentication
 Vue.use(VueAxios, axios)
-axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api`
+if(`${process.env.APP_ENV}` === 'local')
+        {
+            axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api`
+        }
+        else{
+            axios.defaults.baseURL = `/api`
+        }
 // console.log(process.env.MIX_APP_URL)
 Vue.use(VueAuth, auth)
 

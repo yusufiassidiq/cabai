@@ -81,6 +81,10 @@ class ProdusenController extends Controller
     }
     public function deleteLahan($id){
         $praProduksi = PraProduksi::findOrFail($id);
+        $panen = $praProduksi->panen()->get('id');
+        foreach ($panen as $i){
+            $this->deletePanen($i->id);
+        }
         $praProduksi->pengeluaranProduksi()->delete();
         $praProduksi->delete();
         return 204;

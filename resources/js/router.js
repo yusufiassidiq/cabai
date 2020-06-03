@@ -30,7 +30,7 @@ import HasilPanenProd from './pages/scm/produsen/HasilPanen'
 import RiwayatTransaksiProd from './pages/scm/produsen/RiwayatTransaksi'
 
 import MasterPengepul from './pages/scm/pengepul/Master' // pengepul
-import DashboardPengepul from './pages/scm/pengepul/Dashboard'
+import DashboardPengepul from './pages/ba/auth/others/Dashboard'
 import DaftarMitraPengepul from './pages/scm/pengepul/DaftarMitra'
 import PermintaanMitraPengepul from './pages/scm/pengepul/PermintaanMitra'
 import TransaksiCabaiPengepul from './pages/scm/pengepul/TransaksiCabai'
@@ -39,7 +39,7 @@ import MitraSayaPengepul from './pages/scm/pengepul/MitraSaya'
 import RiwayatTransaksiPengepul from './pages/scm/pengepul/RiwayatTransaksi'
 
 import MasterGrosir from './pages/scm/grosir/Master' // grosir
-import DashboardGrosir from './pages/scm/grosir/Dashboard'
+import DashboardGrosir from './pages/ba/auth/others/Dashboard'
 import DaftarMitraGrosir from './pages/scm/grosir/DaftarMitra'
 import PermintaanMitraGrosir from './pages/scm/grosir/PermintaanMitra'
 import TransaksiCabaiGrosir from './pages/scm/grosir/TransaksiCabai'
@@ -49,7 +49,7 @@ import RiwayatTransaksiGrosir from './pages/scm/grosir/RiwayatTransaksi'
 
 
 import MasterPengecer from './pages/scm/pengecer/Master' // pengecer
-import DashboardPengecer from './pages/scm/pengecer/Dashboard'
+import DashboardPengecer from './pages/ba/auth/others/Dashboard'
 import DaftarMitraPengecer from './pages/scm/pengecer/DaftarMitra'
 import PermintaanMitraPengecer from './pages/scm/pengecer/PermintaanMitra'
 import TransaksiCabaiPengecer from './pages/scm/pengecer/TransaksiCabai'
@@ -76,12 +76,27 @@ import BADetailHarga from './pages/ba/detail/Harga'
 import BADetailProduksi from './pages/ba/detail/Produksi'
 import BADetailProduktivitas from './pages/ba/detail/Produktivitas'
 import BADetailStok from './pages/ba/detail/Stok'
-// Auth
-import TargetProd from './pages/ba/produsen/Target'
-import PenjualanProd from './pages/ba/produsen/Penjualan'
-import PengeluaranProd from './pages/ba/produsen/Pengeluaran'
-import HargaProd from './pages/ba/produsen/Harga'
 
+// Auth
+import TargetProd from './pages/ba/auth/Target'
+import PenjualanProd from './pages/ba/auth/Penjualan'
+import PengeluaranProd from './pages/ba/auth/produsen/Pengeluaran'
+import HargaProd from './pages/ba/auth/Harga'
+
+import TargetPengepul from './pages/ba/auth/Target'
+import PenjualanPengepul from './pages/ba/auth/Penjualan'
+import PasokanPengepul from './pages/ba/auth/others/Pasokan'
+import HargaPengepul from './pages/ba/auth/Harga'
+
+import TargetGrosir from './pages/ba/auth/Target'
+import PenjualanGrosir from './pages/ba/auth/Penjualan'
+import PasokanGrosir from './pages/ba/auth/others/Pasokan'
+import HargaGrosir from './pages/ba/auth/Harga'
+
+import TargetPengecer from './pages/ba/auth/Target'
+import PenjualanPengecer from './pages/ba/auth/Penjualan'
+import PasokanPengecer from './pages/ba/auth/others/Pasokan'
+import HargaPengecer from './pages/ba/auth/Harga'
 
 //test
 import BAMaster2 from './pages/ba/Master2'
@@ -185,12 +200,12 @@ const routes = [
 
             },
             {
-                path: 'transaksicabai',
+                path: 'distribusicabai',
                 component: TransaksiCabai,
                 name: "transaksicabai"
             },
             {
-                path: 'riwayattransaksi',
+                path: 'riwayatdistribusi',
                 component: RiwayatTransaksiProd,
                 name: 'riwayattransaksiProd'
             },
@@ -258,7 +273,7 @@ const routes = [
 
             },
             {
-                path: 'transaksicabai',
+                path: 'distribusicabai',
                 component: TransaksiCabaiGrosir,
                 name: "transaksicabaiGrosir"
             },
@@ -268,9 +283,30 @@ const routes = [
                 name: "InventarisGrosir"
             },
             {
-                path: 'riwayattransaksi',
+                path: 'riwayatdistribusi',
                 component: RiwayatTransaksiGrosir,
                 name: 'riwayattransaksiGrosir'
+            },
+            //BA
+            {
+                path: 'target',
+                component: TargetGrosir,
+                name: "TargetGrosir"
+            },
+            {
+                path: 'penjualan',
+                component: PenjualanGrosir,
+                name: "PenjualanGrosir"
+            },
+            {
+                path: 'Pasokan',
+                component: PasokanGrosir,
+                name: "PasokanGrosir"
+            },
+            {
+                path: 'harga',
+                component: HargaGrosir,
+                name: "HargaGrosir"
             },
         ]
     },
@@ -316,7 +352,7 @@ const routes = [
 
             },
             {
-                path: 'transaksicabai',
+                path: 'distribusicabai',
                 component: TransaksiCabaiPengecer,
                 name: "transaksicabaiPengecer"
             },
@@ -326,9 +362,30 @@ const routes = [
                 name: "InventarisPengecer"
             },
             {
-                path: 'riwayattransaksi',
+                path: 'riwayatdistribusi',
                 component: RiwayatTransaksiPengecer,
                 name: 'riwayattransaksiPengecer'
+            },
+            //BA
+            {
+                path: 'target',
+                component: TargetPengecer,
+                name: "TargetPengecer"
+            },
+            {
+                path: 'penjualan',
+                component: PenjualanPengecer,
+                name: "PenjualanPengecer"
+            },
+            {
+                path: 'Pasokan',
+                component: PasokanPengecer,
+                name: "PasokanPengecer"
+            },
+            {
+                path: 'harga',
+                component: HargaPengecer,
+                name: "HargaPengecer"
             },
         ]
     },
@@ -373,7 +430,7 @@ const routes = [
 
             },
             {
-                path: 'transaksicabai',
+                path: 'distribusicabai',
                 component: TransaksiCabaiPengepul,
                 name: "transaksicabaiPengepul"
             },
@@ -383,9 +440,30 @@ const routes = [
                 name: "InventarisPengepul"
             },
             {
-                path: 'riwayattransaksi',
+                path: 'riwayatdistribusi',
                 component: RiwayatTransaksiPengepul,
                 name: 'riwayattransaksiPengepul'
+            },
+            //BA
+            {
+                path: 'target',
+                component: TargetPengepul,
+                name: "TargetPengepul"
+            },
+            {
+                path: 'penjualan',
+                component: PenjualanPengepul,
+                name: "PenjualanPengepul"
+            },
+            {
+                path: 'Pasokan',
+                component: PasokanPengepul,
+                name: "PasokanPengepul"
+            },
+            {
+                path: 'harga',
+                component: HargaPengepul,
+                name: "HargaPengepul"
             },
         ]
     },
@@ -430,12 +508,12 @@ const routes = [
 
             },
             {
-                path: 'transaksicabai',
+                path: 'distribusicabai',
                 component: TransaksiCabaiKonsumen,
                 name: "transaksicabaiKonsumen"
             },
             {
-                path: 'riwayattransaksi',
+                path: 'riwayatdistribusi',
                 component: RiwayatTransaksiKonsumen,
                 name: 'riwayattransaksiKonsumen'
             },
@@ -596,6 +674,8 @@ router.beforeEach((to, from, next) => {
             axios.get('/auth/user').then(response => {
                 if (response.data.status === "success"){
                     callback (response.data.data)
+                    window.localStorage.setItem("namauser", response.data.data.name)
+                    window.localStorage.setItem("role", response.data.data.role)
                 } else {
                     callback("error")
                 }

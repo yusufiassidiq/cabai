@@ -12,6 +12,7 @@
     <title>Monitoring Produksi dan Distribusi Cabai Jawa Barat</title>
     <!-- Load css -->
     <link rel="stylesheet" href="/css/app.css">
+    
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -79,7 +80,7 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     @yield('content')
-
+    
     <!-- jQuery -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->

@@ -12,26 +12,11 @@
       <!-- Right navbar links --> 
       <ul class="navbar-nav ml-auto">
         <li v-if="$auth.check()">
-          <a href @click.prevent="$auth.logout();clearLocalStorage()">Logout</a>
+          <a href="" class="btn btn-block btn-danger btn-sm" @click.prevent="$auth.logout();clearLocalStorage()">
+            <i class="nav-icon fas fa-sign-out-alt"></i>
+            Logout
+          </a>
         </li>
-        <!-- SEARCH FORM -->
-        <!-- <li class="nac-item">
-            <form class="form-inline ml-3">
-              <div class="input-group input-group-sm">
-                <input
-                  class="form-control form-control-navbar"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <div class="input-group-append">
-                  <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
-        </li>-->
       </ul>
     </nav>
     <!-- Main Sidebar Container -->
@@ -48,6 +33,14 @@
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar Menu -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="/dist/img/userprofile.png" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="">{{ userlogin }}</a>
+          </div>
+        </div>
         <nav class="mt-2">
           <ul
             class="nav nav-pills nav-sidebar flex-column"
@@ -86,12 +79,6 @@
                 <p>Permintaan Mitra</p>
               </router-link>
             </li>
-            <!-- <li class="nav-item">
-              <router-link to="/grosir/pengajuanmitra" class="nav-link">
-                <i class="fas fa-user-clock nav-icon"></i>
-                <p>Pengajuan Mitra</p>
-              </router-link>
-            </li> -->
             <li class="nav-header">Inventaris</li>
             <li class="nav-item">
               <router-link to="/grosir/inventaris" class="nav-link">
@@ -101,22 +88,40 @@
             </li>
             <li class="nav-header">Distribusi</li>
             <li class="nav-item">
-              <router-link to="/grosir/transaksicabai" class="nav-link">
+              <router-link to="/grosir/distribusicabai" class="nav-link">
                 <i class="fas fa-file-invoice nav-icon"></i>
-                <p>Transaksi Cabai</p>
+                <p>Distribusi Cabai</p>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/grosir/riwayattransaksi" class="nav-link">
+              <router-link to="/grosir/riwayatdistribusi" class="nav-link">
                 <i class="fas fa-receipt nav-icon"></i>
-                <p>Riwayat Transaksi</p>
+                <p>Riwayat Distribusi</p>
               </router-link>
             </li>
-            <li class="nav-header">Bisnis Analitik</li>
+            <li class="nav-header">Manajemen Bisnis</li>
             <li class="nav-item">
-              <router-link to="/grosir/analitik" class="nav-link">
-                <i class="nav-icon fas fa-chart-bar"></i>
-                <p>Bisnis Analitik</p>
+              <router-link to="/grosir/target" class="nav-link">
+                <i class="fas fa-bullseye nav-icon"></i>
+                <p>Rekap Target</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/grosir/penjualan" class="nav-link">
+                <i class="fas fa-chart-line nav-icon"></i>
+                <p>Rekap Penjualan</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/grosir/pasokan" class="nav-link">
+                <i class="fas fa-boxes nav-icon"></i>
+                <p>Rekap Pasokan Cabai</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/grosir/harga" class="nav-link">
+                <i class="fas fa-money-bill-wave nav-icon"></i>
+                <p>Rekap Harga Cabai</p>
               </router-link>
             </li>
           </ul>
@@ -140,8 +145,14 @@
 </template>
 <script>
 export default {
+  data(){
+    return{
+      userlogin:"",
+      role:""
+    }
+  },
   mounted() {
-    //
+    this.userlogin = localStorage.getItem("namauser")
   },
   methods: {
     clearLocalStorage() {

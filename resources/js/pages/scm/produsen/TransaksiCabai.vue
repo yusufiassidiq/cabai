@@ -6,14 +6,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Transaksi Cabai</h1>
+            <h1 class="m-0 text-dark">Distribusi Cabai</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
                 <a href="#">Produsen</a>
               </li>
-              <li class="breadcrumb-item active">Transaksi Cabai</li>
+              <li class="breadcrumb-item active">Distribusi Cabai</li>
             </ol>
           </div>
         </div>
@@ -36,7 +36,7 @@
                       role="tab"
                       aria-controls="custom-tabs-three-permintaan"
                       aria-selected="true"
-                    >Transaksi dengan Pelanggan</a>
+                    >Distribusi dengan pelanggan</a>
                   </li>
                 </ul>
               </div>
