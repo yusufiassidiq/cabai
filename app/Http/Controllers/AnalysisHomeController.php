@@ -13,6 +13,8 @@ use App\User;
 use App\Kabupaten;
 use Carbon\Carbon;
 use DB;
+use DateTime;
+
 
 class AnalysisHomeController extends Controller
 {
@@ -35,7 +37,11 @@ class AnalysisHomeController extends Controller
             'role_user' => $role_user,
             'year' => $year,
             'total_user' => $jml_user,
-            'user' => $data_user,
+            'produsen' => $data_user[0],
+            'pengepul' => $data_user[1],
+            'grosir' => $data_user[2],
+            'pengecer' => $data_user[3],
+            'konsumen' => $data_user[4],
         ]);
     }
 
@@ -237,14 +243,27 @@ class AnalysisHomeController extends Controller
         $end = Carbon::now()->format('Y-m-d');
 
         $awal = Carbon::now()->subweek(4);
-        for ($i=0;$i<28;$i++)
+        for ($i=0;$i<4;$i++)
         {
-            $array_date[$i] = $awal->format('Y-m-d');
-            $awal = $awal->addDay();
+            $sumRawit = $sumBesar = $sumKeriting = 0;
+            $array_week[$i] = $awal->format('W');
+            for ($d=0; $d<7; $d++){
+                $date = $awal->format('Y-m-d');
+                $array_date[$i*7 + $d] = $date;
 
-            $produksiByDayRawit[$i] = $panenRawit->where('tanggal_panen',$array_date[$i])->sum('jumlah_panen');
-            $produksiByDayKeriting[$i] = $panenKeriting->where('tanggal_panen',$array_date[$i])->sum('jumlah_panen');
-            $produksiByDayBesar[$i] = $panenBesar->where('tanggal_panen',$array_date[$i])->sum('jumlah_panen');
+                $produksiByDayRawit[$d] = $panenRawit->where('tanggal_panen',$date)->sum('jumlah_panen');
+                $produksiByDayKeriting[$d] = $panenKeriting->where('tanggal_panen',$date)->sum('jumlah_panen');
+                $produksiByDayBesar[$d] = $panenBesar->where('tanggal_panen',$date)->sum('jumlah_panen');
+
+                $sumRawit = $produksiByDayRawit[$d] + $sumRawit;
+                $sumKeriting = $produksiByDayKeriting[$d] + $sumKeriting;
+                $sumBesar = $produksiByDayBesar[$d] + $sumBesar;
+
+                $awal = $awal->addDay();
+            }
+            $produksiByWeekRawit[$i] = $sumRawit;
+            $produksiByWeekKeriting[$i] = $sumKeriting;
+            $produksiByWeekBesar[$i] = $sumBesar;
         }
 
         return response()->json([
@@ -254,7 +273,44 @@ class AnalysisHomeController extends Controller
             'date' => $array_date,
             'dateNow' => $dateNow,
             'kabupaten' => $nameKab,
+            'week' => $array_week,
+            'produksiRawitWeek' => $produksiByWeekRawit,
+            'produksiKeritingWeek' => $produksiByWeekKeriting,
+            'produksiBesarWeek' => $produksiByWeekBesar,
         ], 200); 
+    }
+
+    public function getProduksiTabel(Request $request, $idKab)
+    {
+        $nameKab = Kabupaten::where('id',$idKab)->first('name');
+        $userId = Lokasi::whereIn('kabupaten',$nameKab)->pluck('user_id');
+
+        $jenisCabai = array('Cabai rawit', 'Cabai keriting', 'Cabai besar');
+        
+        $praProduksiRawit = PraProduksi::whereIn('user_id',$userId)->where('jenis_cabai', $jenisCabai[0])->pluck('id');
+        $praProduksiKeriting = PraProduksi::whereIn('user_id',$userId)->where('jenis_cabai', $jenisCabai[1])->pluck('id');
+        $praProduksiBesar = PraProduksi::whereIn('user_id',$userId)->where('jenis_cabai', $jenisCabai[2])->pluck('id');
+
+        $year = Carbon::now()->format('Y');
+
+        for ($i=1;$i<=12;$i++){
+            $produksiByMonthRawit[$i] = Panen::whereYear('tanggal_panen',$year)->whereMonth('tanggal_panen',sprintf("%02d", $i))->whereIn('pra_produksi_id',$praProduksiRawit)->sum('jumlah_panen');
+            $produksiByMonthKeriting[$i] = Panen::whereYear('tanggal_panen',$year)->whereMonth('tanggal_panen',sprintf("%02d", $i))->whereIn('pra_produksi_id',$praProduksiKeriting)->sum('jumlah_panen');
+            $produksiByMonthBesar[$i] = Panen::whereYear('tanggal_panen',$year)->whereMonth('tanggal_panen',sprintf("%02d", $i))->whereIn('pra_produksi_id',$praProduksiBesar)->sum('jumlah_panen');
+            $bulan = DateTime::createFromFormat('!m', $i)->format('F');
+            $data[]=[
+                'bulan' => $bulan,
+                'rawit' => $produksiByMonthRawit[$i],
+                'keriting' => $produksiByMonthKeriting[$i],
+                'besar' => $produksiByMonthBesar[$i],
+                'total' => $produksiByMonthRawit[$i] + $produksiByMonthKeriting[$i] + $produksiByMonthBesar[$i]
+            ];
+        }
+
+        return response() -> json([
+            'data' => $data
+
+        ], 200);
     }
     
     public function getStok(Request $request, $idKab)
@@ -262,41 +318,62 @@ class AnalysisHomeController extends Controller
         $kab = Kabupaten::where('id',$idKab)->first('name');
         $idUser = Lokasi::whereIn('kabupaten',$kab)->pluck('user_id');
 
-        $dateNow = Carbon::now()->isoFormat('dddd, Do MMMM YYYY');
-        $now = Carbon::now()->format('Y-m-d');
-        $start = Carbon::now()->subweek(4)->format('Y-m-d');
-        $end = Carbon::now()->format('Y-m-d');
+        $stokRawit = Inventaris::whereIn('user_id', $idUser)
+            ->where('jenis_cabai', 'Cabai rawit')
+            ->sum('jumlah_cabai');
 
-        $awal = Carbon::now()->subweek(4);
-        for ($i=0;$i<28;$i++)
-        {
-            $array_date[$i] = $awal->format('Y-m-d');
-            $awal = $awal->addDay();
-            
-            $stokByDayRawit[$i] = Inventaris::whereIn('user_id', $idUser)
-                ->where('jenis_cabai', 'Cabai rawit')
-                ->whereDate('updated_at', $array_date[$i])
-                ->sum('jumlah_cabai');
+        $stokKeriting = Inventaris::whereIn('user_id', $idUser)
+            ->where('jenis_cabai', 'Cabai keriting')
+            ->sum('jumlah_cabai');
 
-            $stokByDayKeriting[$i] = Inventaris::whereIn('user_id', $idUser)
-                ->where('jenis_cabai', 'Cabai keriting')
-                ->whereDate('updated_at', $array_date[$i])
-                ->sum('jumlah_cabai');
-
-            $stokByDayBesar[$i] = Inventaris::whereIn('user_id', $idUser)
-                ->where('jenis_cabai', 'Cabai besar')
-                ->whereDate('updated_at', $array_date[$i])
-                ->sum('jumlah_cabai');
-
-        }
+        $stokBesar = Inventaris::whereIn('user_id', $idUser)
+            ->where('jenis_cabai', 'Cabai besar')
+            ->sum('jumlah_cabai');
         
         return response()->json([
-            'stokRawit' => $stokByDayRawit,
-            'stokKeriting' => $stokByDayKeriting,
-            'stokBesar' => $stokByDayBesar,
-            'date' => $array_date,
-            'dateNow' => $dateNow,
+            'stokRawit' => $stokRawit,
+            'stokKeriting' => $stokKeriting,
+            'stokBesar' => $stokBesar,
             'kabupaten' => $kab,
+        ], 200);
+    }
+
+    public function getAllStok()
+    {
+        $kabupaten = Kabupaten::all()->pluck('name');
+        $i = 0;
+        foreach($kabupaten as $kab){
+            $idUser = Lokasi::where('kabupaten',$kab)->pluck('user_id');
+
+            $stokRawit[$i] = Inventaris::whereIn('user_id', $idUser)
+                ->where('jenis_cabai', 'Cabai rawit')
+                ->sum('jumlah_cabai');
+
+            $stokKeriting[$i] = Inventaris::whereIn('user_id', $idUser)
+                ->where('jenis_cabai', 'Cabai keriting')
+                ->sum('jumlah_cabai');
+
+            $stokBesar[$i] = Inventaris::whereIn('user_id', $idUser)
+                ->where('jenis_cabai', 'Cabai besar')
+                ->sum('jumlah_cabai');
+            
+            $data[]=[
+                'kab' => $kab,
+                'rawit' => $stokRawit,
+                'keriting' => $stokKeriting,
+                'besar' => $stokBesar,
+
+            ];
+
+            $i = $i + 1;
+        }
+
+        return response()->json([
+            'kabupaten' => $kabupaten,
+            'data' => $data,
+            'rawit' => $stokRawit,
+            'keriting' => $stokKeriting,
+            'besar' => $stokBesar,
         ], 200);
     }
 

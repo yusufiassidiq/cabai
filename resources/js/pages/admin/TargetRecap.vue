@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <a href="#">Produsen</a>
+                <a href="#">Admin</a>
               </li>
               <li class="breadcrumb-item active">Rekap Target</li>
             </ol>
@@ -245,12 +245,14 @@
       return {
         editmode : false,
         datatarget :{},
+        year: "",
         form : new Form({
           id: "",
           tahun : "",
           bulan : "",
           jenis_cabai: "",
           jumlah_cabai:"",
+          
         })
       };
     },
@@ -422,7 +424,6 @@
     },
     created(){
       this.loadTarget();
-      // setInterval(()=> this.loadTarget(), 3000);
     },
     mounted() {
     this.fillData();

@@ -16,7 +16,7 @@
           <li><a href="#team">Team</a></li>
         </ul>
       </nav><!-- .nav-menu -->
-      <router-link to= "/login" class="get-started-btn scrollto">Login</router-link>
+      <router-link to= "/login" class="get-started-btn" target="_blank">Login</router-link>
 
     </div>
   </header><!-- End Header -->
@@ -26,7 +26,7 @@
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
 	  <div class="text-center">
         <h1>CABAI JABAR</h1>
-		<p class="description">Lorem Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+		<p class="description">Aplikasi Supply Chain Management dan Business Analytics untuk Pelaku Usaha Cabai Jawa Barat</p>
       </div>
 
       <div class="row icon-boxes">
@@ -34,7 +34,7 @@
           <div class="icon-box">
             <div class="icon"><i class="ri-line-chart-line"></i></div>
             <h4 class="title"><router-link to="/harga">Harga Cabai</router-link></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+            <p class="description">Pantau harga cabai per sentra produksi sesuai tingkat rantai pasok</p>
           </div>
         </div>
 
@@ -42,7 +42,7 @@
           <div class="icon-box">
             <div class="icon"><i class="ri-bar-chart-fill"></i></div>
             <h4 class="title"><router-link to="/produksi">Produksi Cabai</router-link></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+            <p class="description">Pantau hasil panen per sentra produksi mingguan maupun bulanan</p>
           </div>
         </div>
 
@@ -50,7 +50,7 @@
           <div class="icon-box">
             <div class="icon"><i class="ri-stack-fill"></i></div>
             <h4 class="title"><router-link to="/stok">Stok Cabai</router-link></h4>
-            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+            <p class="description">Pantau stok cabai per sentra produksi saat ini maupun secara berkala</p>
           </div>
         </div>
 
@@ -58,7 +58,7 @@
           <div class="icon-box">
             <div class="icon"><i class="ri-bar-chart-grouped-fill"></i></div>
             <h4 class="title"><router-link to="/produktivitas">Produktivitas Cabai</router-link></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+            <p class="description">Pantau efisiensi produksi dengan melihat produktivitas setiap sentra produksi</p>
           </div>
         </div>
 
@@ -74,28 +74,25 @@
 
         <div class="section-title">
           <h2>About Us</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. </p>
+          <p>Aplikasi Monitoring Produksi dan Distribusi Cabai di Jawa Barat </p>
         </div>
 
         <div class="row content">
           <div class="col-lg-6">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              Beberapa fitur-fitur dari aplikasi ini yang dapat memudahkan pencatatan produksi dan transaksi anda:
             </p>
             <ul>
-              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-              <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+              <li><i class="ri-check-double-line"></i> Pencatatan Lahan, Panen, dan Pengeluaran Produksi</li>
+              <li><i class="ri-check-double-line"></i> Rekap Transaksi, Distribusi, dan Inventori </li>
+              <li><i class="ri-check-double-line"></i> Informasi Target, Pencapaian, dan Dashboard</li>
             </ul>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
+              Aplikasi meliputi lima aktor pelaku rantai pasok yaitu produsen, pengepul, grosir, pengecer, dan konsumen
             </p>
-            <router-link to="/register" class="btn-learn-more">Daftar Sekarang</router-link>
+            <router-link to="/register" class="btn-learn-more" target="_blank">Daftar Sekarang</router-link>
           </div>
         </div>
 
@@ -110,29 +107,29 @@
 
           <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
-              <span data-toggle="counter-up">65</span>
-              <p>Happy Clients</p>
+              <span data-toggle="counter-up">{{produsen}}</span>
+              <p>Produsen</p>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
-              <span data-toggle="counter-up">85</span>
-              <p>Projects</p>
+              <span data-toggle="counter-up">{{pengepul}}</span>
+              <p>Pengepul</p>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
-              <span data-toggle="counter-up">12</span>
-              <p>Years of experience</p>
+              <span data-toggle="counter-up">{{grosir}}</span>
+              <p>Grosir</p>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
-              <span data-toggle="counter-up">15</span>
-              <p>Awards</p>
+              <span data-toggle="counter-up">{{pengecer}}</span>
+              <p>Pengecer</p>
             </div>
           </div>
 
@@ -142,7 +139,7 @@
     </section><!-- End Counts Section -->
 
     <!-- ======= About Video Section ======= -->
-    <section id="about-video" class="about-video">
+    <!-- <section id="about-video" class="about-video">
       <div class="container" data-aos="fade-up">
 
         <div class="row">
@@ -174,11 +171,11 @@
         </div>
 
       </div>
-    </section><!-- End About Video Section -->
+    </section>End About Video Section -->
 
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
+    <!-- <section id="services" class="services section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -268,21 +265,21 @@
         </div>
 
       </div>
-    </section><!-- End Sevices Section -->
+    </section>End Sevices Section -->
 
     <!-- ======= Cta Section ======= -->
     <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
         <div class="text-center">
           <h3>Call To Action</h3>
-          <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <a class="cta-btn" href="#">Call To Action</a>
+          <p> Pertanyaan, saran, maupun kritik terhadap aplikasi ini dapat menghubungi kami dengan mengklik tombol di bawah ini.  </p>
+          <a class="cta-btn" href="https://wa.me/6282335056500" target="_blank">Call To Action</a>
         </div>
       </div>
     </section><!-- End Cta Section -->
 
     <!-- ======= Team Section ======= -->
-    <section id="team" class="team section-bg">
+    <!-- <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -367,10 +364,10 @@
         </div>
 
       </div>
-    </section><!-- End Team Section -->
+    </section>End Team Section -->
 
     <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq section-bg">
+    <!-- <section id="faq" class="faq section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -429,7 +426,7 @@
         </div>
 
       </div>
-    </section><!-- End Frequently Asked Questions Section -->
+    </section>End Frequently Asked Questions Section -->
 
   </main><!-- End #main -->
 
@@ -493,154 +490,25 @@
 </style>
 
 <script>
-// import { Bar, Line } from "vue-chartjs";
 
-// export default {
-//   mounted() {
-//     axios
-//       .get("/getUserCount")
-//       .then(response => {
-//         var chart = this.$refs.chart;
-//         var ctx = chart.getContext("2d");
-//         var myChart = new Chart(ctx, {
-//           type: "bar",
-//           data: {
-//             labels: response.data.role_user,
-//             datasets: [
-//               {
-//                 label: "# of User",
-//                 data: response.data.user,
-//                 borderWidth: 1,
-//                 backgroundColor: [
-//                   "rgba(255, 99, 132, 0.2)",
-//                   "rgba(255, 159, 64, 0.2)",
-//                   "rgba(255, 205, 86, 0.2)",
-//                   "rgba(75, 192, 192, 0.2)",
-//                   "rgba(54, 162, 235, 0.2)"
-//                 ],
-//                 borderColor: "rgba(210, 214, 222, 1)"
-//               }
-//             ]
-//           },
-//           options: {
-//             maintainAspectRatio: false,
-//             responsive: true,
-//             legend: {
-//               display: false
-//             },
-//             scales: {
-//               xAxes: [
-//                 {
-//                   gridLines: {
-//                     display: false
-//                   }
-//                 }
-//               ],
-//               yAxes: [
-//                 {
-//                   gridLines: {
-//                     display: false
-//                   },
-//                   ticks: {
-//                     stepSize: 1,
-//                     beginAtZero: true
-//                   }
-//                 }
-//               ]
-//             }
-//           }
-//         });
-//       })
-//       .catch(error => {
-//         console.log(error);
-//         this.errored = true;
-//       });
-//     new Chart(document.getElementById("chart2"), {
-//       type: "line",
-//       data: {
-//         labels: [
-//           "Jan",
-//           "Feb",
-//           "Mar",
-//           "Apr",
-//           "May",
-//           "Jun",
-//           "Jul",
-//           "Aug",
-//           "Sep",
-//           "Oct",
-//           "Nov",
-//           "Dec"
-//         ],
-//         datasets: [
-//           {
-//             data: [86, 75, 54, 40],
-//             label: "Produsen - Pengepul",
-//             borderColor: "#3e95cd",
-//             fill: false
-//           },
-//           {
-//             data: [90, 80, 60, 45],
-//             label: "Pengepul - Grosir",
-//             borderColor: "#8e5ea2",
-//             fill: false
-//           },
-//           {
-//             data: [93, 82, 65, 48],
-//             label: "Grosir - Pengecer",
-//             borderColor: "#3cba9f",
-//             fill: false
-//           },
-//           {
-//             data: [95, 85, 68, 50],
-//             label: "Pengecer - Konsumen",
-//             borderColor: "#e8c3b9",
-//             fill: false
-//           }
-//         ]
-//       },
-//       options: {
-//         responsive: true,
-//         tooltips: {
-//           mode: "index",
-//           intersect: false
-//         },
-//         hover: {
-//           mode: "nearest",
-//           intersect: true
-//         },
-//         scales: {
-//           xAxes: [
-//             {
-//               display: true,
-//               scaleLabel: {
-//                 display: true,
-//                 labelString: "Bulan"
-//               }
-//             }
-//           ],
-//           yAxes: [
-//             {
-//               display: true,
-//               scaleLabel: {
-//                 display: true,
-//                 labelString: "Harga/kg (Rp .000)"
-//               },
-//               ticks: {
-//                 stepSize: 20,
-//                 beginAtZero: true
-//               }
-//             }
-//           ]
-//         }
-//       }
-//     });
-
-//     axios.get("/getAllUserLocation").then(response => {
-//       var lokasi = response.data.lokasi;
-//       console.log(lokasi);
-//       console.log(response.data.status);
-//     });
-//   }
-// };
+export default {
+  data() {
+    return {
+      produsen: {},
+      pengepul: {},
+      grosir: {},
+      pengecer: {},
+      konsumen: {},
+    };
+  },
+  mounted() {
+    axios.get("/getUserCount").then(response => {
+      this.produsen = response.data.produsen;
+      this.pengepul = response.data.pengepul;
+      this.grosir = response.data.grosir;
+      this.pengecer = response.data.pengecer;
+      this.konsumen = response.data.konsumen;
+    });
+  }
+};
 </script>
