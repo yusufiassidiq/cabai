@@ -104,14 +104,14 @@
               <div class="card" id="cardCabai" style="display: none;">
                 <div class="card-header">
                   <h5 class="card-title">GRAFIK PRODUKSI CABAI {{ kab.name }} </h5>
-                  <div class="card-tools">
+                  <!-- <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus"></i>
                     </button>
                     <button type="button" class="btn btn-tool" data-card-widget="remove">
                       <i class="fas fa-times"></i>
                     </button>
-                  </div>
+                  </div> -->
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -133,6 +133,46 @@
                 </div>
                 <!-- ./card-body -->
               </div>
+
+              <div class="card" id="tabelCabai" style="display: none;">
+                <div class="card-header">
+                  <h3 class="card-title">PRODUKSI CABAI BULANAN {{kab.name}} TAHUN 2020</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <!-- <th>No</th> -->
+                        <!-- <th>ID </th> -->
+                        <th>Bulan</th>
+                        <!-- <th>Jenis Cabai</th> -->
+                        <th>Cabai Rawit (Kg)</th>
+                        <th>Cabai Keriting (Kg)</th>
+                        <th>Cabai Besar (Kg)</th>
+                        <th>Total (Kg)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="transaksi in data" :key="transaksi.bulan">
+                        <!-- <td></td> -->
+                        <!-- <td>{{ data.id }}</td> -->
+                        <td>{{transaksi.bulan}}</td>
+                        <!-- <td>coba</td> -->
+                        <td style="text-align:right">{{transaksi.rawit | filterAngkaRibuan}}</td>
+                        <td style="text-align:right">{{transaksi.keriting | filterAngkaRibuan}}</td>
+                        <td style="text-align:right">{{transaksi.besar | filterAngkaRibuan}}</td>
+                        <td style="text-align:right">{{transaksi.total | filterAngkaRibuan}}</td>
+                        
+                      </tr>
+                      <!-- end example data -->
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+
+
               <!-- /.card -->
             </div>
             <!-- /.col -->
@@ -156,7 +196,7 @@
 </body>
 </template>
 <script>
-import { Line } from "vue-chartjs";
+import { Line,Bar } from "vue-chartjs";
 
 export default {
   data() {
@@ -167,6 +207,7 @@ export default {
       daerah: {},
       kab: {},
       role: {},
+      data: "",
     };
   },
   mounted() {
@@ -195,9 +236,9 @@ export default {
           var ctx = chart.getContext("2d");
            
           var myChart = new Chart(ctx, {
-            type: "line",
+            type: "bar",
             data: {
-              labels: response.data.date,
+              labels: response.data.week,
               datasets: [
                 {
                   label: "Cabai Rawit",
@@ -208,7 +249,7 @@ export default {
                   pointStrokeColor: "#c1c7d1",
                   pointHighlightFill: "#fff",
                   pointHighlightStroke: "rgba(54, 162, 235, 1)",
-                  data: response.data.produksiRawit,
+                  data: response.data.produksiRawitWeek,
                   pointStyle: "rect",
                   pointRadius: 7,
                   pointHoverRadius: 10,
@@ -223,7 +264,7 @@ export default {
                   pointStrokeColor: "rgba(254, 99, 131, 1)",
                   pointHighlightFill: "#fff",
                   pointHighlightStroke: "rgba(254, 99, 131, 1)",
-                  data: response.data.produksiKeriting,
+                  data: response.data.produksiKeritingWeek,
                   pointStyle: "rect",
                   pointRadius: 7,
                   pointHoverRadius: 10,
@@ -238,7 +279,7 @@ export default {
                   pointStrokeColor: "rgba(74, 192, 192, 1)",
                   pointHighlightFill: "#fff",
                   pointHighlightStroke: "rgba(74, 192, 192, 1)",
-                  data: response.data.produksiBesar,
+                  data: response.data.produksiBesarWeek,
                   pointStyle: "rect",
                   pointRadius: 7,
                   pointHoverRadius: 10,
@@ -258,7 +299,11 @@ export default {
                     // stacked: true,
                     gridLines: {
                       display: false
-                    }
+                    },
+                    scaleLabel: {
+                      display:true,
+                      labelString : 'Minggu ke-'
+                    },              
                   }
                 ],
                 yAxes: [
@@ -269,7 +314,12 @@ export default {
                     },
                     ticks: {
                       beginAtZero: true
-                    }
+                    },
+                    scaleLabel: {
+                      display:true,
+                      labelString : 'Jumlah Produksi (kg)'
+                    },
+                    
                   }
                 ]
               },
@@ -282,6 +332,11 @@ export default {
           console.log(error);
           this.errored = true;
         });
+      axios.get('/getProduksiTabel/'+selectedDaerah)
+        .then(response =>{
+          this.data = response.data.data;
+          $("#tabelCabai").show();
+      })
     }
   }
 };

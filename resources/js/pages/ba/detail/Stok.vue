@@ -36,14 +36,6 @@
             <li class="nav-item">
               <router-link to="/login" class="nav-link">Masuk</router-link>
             </li>
-
-            <!-- <li class="nav-item dropdown">
-              <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
-              <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                <li><a href="#" class="dropdown-item">Some action </a></li>
-                <li><a href="#" class="dropdown-item">Some other action</a></li>
-              </ul>
-            </li>-->
           </ul>
         </div>
       </div>
@@ -98,8 +90,46 @@
                   </div>
                 </div>
               </div>
+
+              <div class="card" id="summaryCabai" style="display: none;">
+                <div class="row card-body">
+                  <div class="col-lg-4 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                      <div class="inner">
+                        <h3>{{stokRawit}} kg</h3>
+                        <p>ketersediaan cabai rawit</p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-4 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                      <div class="inner">
+                        <h3>
+                          {{stokKeriting}} kg
+                        </h3>
+                        <p>ketersediaan cabai keriting</p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-4 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                      <div class="inner">
+                        <h3>{{stokBesar}} kg</h3>
+                        <p>ketersediaan cabai besar</p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  
+                </div>
+              </div>
               
-              <div class="card" id="cardCabai" style="display: none;">
+              <div class="card" id="cardCabai">
                 <div class="card-header">
                   <h5 class="card-title">GRAFIK STOK CABAI {{ kab.name }} </h5>
                   <div class="card-tools">
@@ -154,7 +184,7 @@
 </body>
 </template>
 <script>
-import { Line } from "vue-chartjs";
+import { Bar } from "vue-chartjs";
 
 export default {
   data() {
@@ -165,6 +195,9 @@ export default {
       daerah: {},
       kab: {},
       role: {},
+      stokRawit: {},
+      stokKeriting: {},
+      stokBesar: {},
     };
   },
   mounted() {
@@ -177,23 +210,18 @@ export default {
         .then(response =>{
           this.daerah = response.data.daerah;
         })
-        .catch(error => {});
-    },
-    changeHandler() {
-      let selectedDaerah = this.selectedDaerah;
-      axios.get('/getStok/'+ selectedDaerah)
-        .then(response=>{
-          console.log(response.data.stokKeriting);
-          $("#cardCabai").show();
-          this.dateNow = response.data.dateNow;
-          this.date = response.data.date;
-          this.kab = response.data.kabupaten;
+        .catch(error => {
+          console.log(error);
+          this.errored = true;  
+        });
+      axios.get("/getAllStok").then(response=>{
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
+          var color = Chart.helpers.color;
           var myChart = new Chart(ctx, {
-            type: "line",
+            type: "horizontalBar",
             data: {
-              labels: response.data.date,
+              labels: response.data.kabupaten,
               datasets: [
                 {
                   label: "Cabai Rawit",
@@ -204,7 +232,7 @@ export default {
                   pointStrokeColor: "#c1c7d1",
                   pointHighlightFill: "#fff",
                   pointHighlightStroke: "rgba(54, 162, 235, 1)",
-                  data: response.data.stokRawit,
+                  data: response.data.rawit,
                   pointStyle: "rect",
                   pointRadius: 7,
                   pointHoverRadius: 10,
@@ -212,14 +240,14 @@ export default {
                 },
                 {
                   label: "Cabai Keriting",
-                  backgroundColor: "rgba(254, 99, 131, 1)",
-                  borderColor: "rgba(254, 99, 131, 1)",
+                  backgroundColor: "rgba(75,181,67, 1)",
+                  borderColor: "rgba(75,181,67, 1)",
                   pointRadius: true,
-                  pointColor: "#3b8bba",
-                  pointStrokeColor: "rgba(254, 99, 131, 1)",
+                  pointColor: "rgba(75,181,67, 1)",
+                  pointStrokeColor: "#c1c7d1",
                   pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(254, 99, 131, 1)",
-                  data: response.data.stokKeriting,
+                  pointHighlightStroke: "rgba(75,181,67, 1)",
+                  data: response.data.keriting,
                   pointStyle: "rect",
                   pointRadius: 7,
                   pointHoverRadius: 10,
@@ -227,19 +255,19 @@ export default {
                 },
                 {
                   label: "Cabai Besar",
-                  backgroundColor: "rgba(74, 192, 192, 1)",
-                  borderColor: "rgba(74, 192, 192, 1)",
+                  backgroundColor: "rgba(179,58,58, 1)",
+                  borderColor: "rgba(179,58,58, 1)",
                   pointRadius: true,
-                  pointColor: "#3b8bba",
-                  pointStrokeColor: "rgba(74, 192, 192, 1)",
+                  pointColor: "rgba(179,58,58, 1)",
+                  pointStrokeColor: "#c1c7d1",
                   pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(74, 192, 192, 1)",
-                  data: response.data.stokBesar,
+                  pointHighlightStroke: "rgba(179,58,58, 1)",
+                  data: response.data.besar,
                   pointStyle: "rect",
                   pointRadius: 7,
                   pointHoverRadius: 10,
                   fill: false
-                }
+                },
               ]
             },
             options: {
@@ -272,11 +300,26 @@ export default {
               
             }
           });
+        }).catch(error=>{
+          console.log(error);
+          this.errored = true;  
+        });
+    },
+    changeHandler() {
+      let selectedDaerah = this.selectedDaerah;
+      axios.get('/getStok/'+ selectedDaerah)
+        .then(response=>{
+          $("#summaryCabai").show();
+          this.kab = response.data.kabupaten;
+          this.stokRawit = response.data.stokRawit;
+          this.stokKeriting = response.data.stokKeriting;
+          this.stokBesar = response.data.stokBesar;
         })
         .catch(error => {
           console.log(error);
           this.errored = true;
         });
+    
     }
   }
 };
