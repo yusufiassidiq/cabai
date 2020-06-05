@@ -145,7 +145,7 @@ class AnalysisController extends Controller
                 ['user_id',$idUser],
                 ['tahun',$year],
                 ])
-                ->orderByRaw("FIELD(bulan,'Januari','Februari','Maret','April','Mei','Juni'
+                ->orderByRaw("FIELD(bulan,'Januari','Februari','Maret','April','Mei','Juni',
                 'Juli', 'Agustus','September', 'Oktober', 'November', 'Desember')ASC")
                 ->paginate(9);
         //membuat array kosong sebanyak bulan 
@@ -364,7 +364,8 @@ class AnalysisController extends Controller
         $idPengepul= User::Where('role','3')->pluck('id');
         $idGrosir= User::Where('role','4')->pluck('id');
         $idPengecer= User::Where('role','5')->pluck('id');
-
+        $idKonsumen= User::Where('role','6')->pluck('id');
+        
         //Harga 30 Hari Terakhir
         
         $transaksiProdusenRawit=Transaksi::whereIn('pemasok_id',$idProdusen)
@@ -475,6 +476,45 @@ class AnalysisController extends Controller
             ->select('tanggal_diterima',DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai"))
             ->groupBy('tanggal_diterima')
             ->get();
+        $konsumRawit=Transaksi::whereIn('user_id', $idKonsumen)
+        -> Where([['status_permintaan','3'],
+        ['status_pengiriman','1'],
+        ['status_pemesanan','1'],
+        ['jenis_cabai','Cabai rawit'],
+        ])->whereBetween('tanggal_diterima', [$start, $end])
+        ->select('user_id','pemasok_id','jumlah_cabai')
+        ->get();
+        $konsumRawitProdusen=$konsumRawit->whereIn('pemasok_id', $idProdusen)->sum('jumlah_cabai');
+        $konsumRawitPengepul=$konsumRawit->whereIn('pemasok_id', $idPengepul)->sum('jumlah_cabai');
+        $konsumRawitGrosir=$konsumRawit->whereIn('pemasok_id', $idGrosir)->sum('jumlah_cabai');
+        $konsumRawitPengecer=$konsumRawit->whereIn('pemasok_id', $idPengecer)->sum('jumlah_cabai');
+        
+        $konsumKeriting=Transaksi::whereIn('user_id', $idKonsumen)
+        -> Where([['status_permintaan','3'],
+        ['status_pengiriman','1'],
+        ['status_pemesanan','1'],
+        ['jenis_cabai','Cabai keriting'],
+        ])->whereBetween('tanggal_diterima', [$start, $end])
+        ->select('user_id','pemasok_id','jumlah_cabai')
+        ->get();
+        $konsumKeritingProdusen=$konsumKeriting->whereIn('pemasok_id', $idProdusen)->sum('jumlah_cabai');
+        $konsumKeritingPengepul=$konsumKeriting->whereIn('pemasok_id', $idPengepul)->sum('jumlah_cabai');
+        $konsumKeritingGrosir=$konsumKeriting->whereIn('pemasok_id', $idGrosir)->sum('jumlah_cabai');
+        $konsumKeritingPengecer=$konsumKeriting->whereIn('pemasok_id', $idPengecer)->sum('jumlah_cabai');
+
+        $konsumBesar=Transaksi::whereIn('user_id', $idKonsumen)
+        -> Where([['status_permintaan','3'],
+        ['status_pengiriman','1'],
+        ['status_pemesanan','1'],
+        ['jenis_cabai','Cabai besar'],
+        ])->whereBetween('tanggal_diterima', [$start, $end])
+        ->select('user_id','pemasok_id','jumlah_cabai')
+        ->get();
+        $konsumBesarProdusen=$konsumBesar->whereIn('pemasok_id', $idProdusen)->sum('jumlah_cabai');
+        $konsumBesarPengepul=$konsumBesar->whereIn('pemasok_id', $idPengepul)->sum('jumlah_cabai');
+        $konsumBesarGrosir=$konsumBesar->whereIn('pemasok_id', $idGrosir)->sum('jumlah_cabai');
+        $konsumBesarPengecer=$konsumBesar->whereIn('pemasok_id', $idPengecer)->sum('jumlah_cabai');
+        // $terjualProdusenBesar = array_sum(array_column($transaksiProdusenBesar->toArray(), 'totalCabai'));
         $awal = Carbon::now()->subweek()->subweek();
         for($i=0;$i<15;$i++){
             $array_date[$i]= $awal->format('Y-m-d');
@@ -505,6 +545,7 @@ class AnalysisController extends Controller
                 $transaksiPengecerBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
         }
         return response()->json([
+            // 'test' => $test,
             'roleUser' => $roleUser,
             'rawitProdusen' => $rawitByDayProdusen,
             'keritingProdusen' => $keritingByDayProdusen,
@@ -518,6 +559,18 @@ class AnalysisController extends Controller
             'rawitPengecer' => $rawitByDayPengecer,
             'keritingPengecer' => $keritingByDayPengecer,
             'besarPengecer' => $besarByDayPengecer,
+            'konsumRawitProdusen' => $konsumRawitProdusen,
+            'konsumKeritingProdusen' => $konsumKeritingProdusen,
+            'konsumBesarProdusen' => $konsumBesarProdusen,
+            'konsumRawitPengepul' => $konsumRawitPengepul,
+            'konsumKeritingPengepul' => $konsumKeritingPengepul,
+            'konsumBesarPengepul' => $konsumBesarPengepul,
+            'konsumRawitGrosir' => $konsumRawitGrosir,
+            'konsumKeritingGrosir' => $konsumKeritingGrosir,
+            'konsumBesarGrosir' => $konsumBesarGrosir,
+            'konsumRawitPengecer' => $konsumRawitPengecer,
+            'konsumKeritingPengecer' => $konsumKeritingPengecer,
+            'konsumBesarPengecer' => $konsumBesarPengecer,
             'date' => $array_date,
             'dateNow' => $dateNow, 
         ]);
@@ -643,7 +696,8 @@ class AnalysisController extends Controller
                 if(array_key_exists($jenis, $transaksiMonthNow)){
                     //ada target dan transaksi
                     $terjual=(int)$transaksiMonthNow[$jenis];
-                    $gap=$targetMonthNow[$jenis]-$terjual;
+                    // $gap=$targetMonthNow[$jenis]-$terjual;
+                    $gap=$targetMonthNow[$jenis];
                     $ach=ROUND(($transaksiMonthNow[$jenis]*100)/$targetMonthNow[$jenis]);
                     if($ach>100)
                         $ach=100;
@@ -741,7 +795,7 @@ class AnalysisController extends Controller
             }
             $start=$start->addMonth()->startOfMonth();
         }
-        $endTargetRealisasi = $start->subMonth()->endOfMonth()->isoFormat('Do MMM YYYY');
+        $endTargetRealisasi = $start->subMonth()->endOfMonth()->isoFormat('Do MMMM YYYY');
         return response()->json([
             'roleUser' => $roleUser,
             'bulan' => $bulan,
@@ -777,7 +831,7 @@ class AnalysisController extends Controller
     {
         $roleUser = Auth::user()->role;
         $idUser = Auth::user()->id;
-        $range= Carbon::now()->startOfMonth()->format('Y-m');
+        $range= Carbon::now()->subweek()->format('Y-m');
         $pasokan = Transaksi::Where([
             ['user_id', $idUser],
             ['status_permintaan','3'],
@@ -837,14 +891,21 @@ class AnalysisController extends Controller
             foreach($idPemasok as $id){
                 if(array_key_exists($id,$pasokanRawit))
                     $totalRawit[]=$pasokanRawit[$id];
+                else
+                    $totalRawit[]=0;
                 if(array_key_exists($id,$pasokanKeriting))
                     $totalKeriting[]=$pasokanKeriting[$id];
+                else
+                    $totalKeriting[]=0;
                 if(array_key_exists($id,$pasokanBesar))
                     $totalBesar[]=$pasokanBesar[$id];
+                else
+                    $totalBesar[]=0;
             }
         }
         $rangePasokan= Carbon::now()->isoFormat('MMMM YYYY');
         return response()->json([
+            'test' => $pasokanRawit,
             'rangePasokan' => $rangePasokan,
             'pemasok' => $pemasok,
             'totalRawit' => $totalRawit,

@@ -53,15 +53,54 @@
 
                     <div class="chart">
                       <!-- Pengeluaran Chart Canvas -->
-                      <canvas ref="chart" height="100" style="height: 100px;"></canvas>
+                      <canvas ref="chart" style="height: 300px;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
+                  </div>
+                  <!-- /.col -->
+
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- ./card-body -->
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <h5 class="description-header">{{ konsumRawitProdusen | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">KONSUMSI DARI PRODUSEN</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <h5 class="description-header">{{ konsumRawitPengepul | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">KONSUMSI DARI PENGEPUL</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <h5 class="description-header">{{ konsumRawitGrosir | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">KONSUMSI DARI GROSIR</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block">
+                      <h5 class="description-header">{{ konsumRawitPengecer | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">KONSUMSI DARI PENGECER</span>
+                    </div>
+                    <!-- /.description-block -->
                   </div>
                   <!-- /.col -->
                 </div>
                 <!-- /.row -->
               </div>
-              <!-- ./card-body -->
+              <!-- /.card-footer -->
             </div>
             <!-- /.card -->
           </div>
@@ -92,7 +131,7 @@
 
                     <div class="chart">
                       <!-- Pengeluaran Chart Canvas -->
-                      <canvas ref="chart2" height="100" style="height: 100px;"></canvas>
+                      <canvas ref="chart2" style="height: 300px;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
                   </div>
@@ -101,6 +140,44 @@
                 <!-- /.row -->
               </div>
               <!-- ./card-body -->
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <h5 class="description-header">{{ konsumKeritingProdusen | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">KONSUMSI DARI PRODUSEN</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <h5 class="description-header">{{ konsumKeritingPengepul | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">KONSUMSI DARI PENGEPUL</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <h5 class="description-header">{{ konsumKeritingGrosir | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">KONSUMSI DARI GROSIR</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block">
+                      <h5 class="description-header">{{ konsumKeritingPengecer | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">KONSUMSI DARI PENGECER</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.card-footer -->
             </div>
             <!-- /.card -->
           </div>
@@ -131,7 +208,7 @@
 
                     <div class="chart">
                       <!-- Pengeluaran Chart Canvas -->
-                      <canvas ref="chart3" height="100" style="height: 100px;"></canvas>
+                      <canvas ref="chart3" style="height: 300px;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
                   </div>
@@ -140,6 +217,44 @@
                 <!-- /.row -->
               </div>
               <!-- ./card-body -->
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <h5 class="description-header">{{ konsumBesarProdusen | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">KONSUMSI DARI PRODUSEN</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <h5 class="description-header">{{ konsumBesarPengepul | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">KONSUMSI DARI PENGEPUL</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <h5 class="description-header">{{ konsumBesarGrosir | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">KONSUMSI DARI GROSIR</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block">
+                      <h5 class="description-header">{{ konsumBesarPengecer | filterAngkaRibuan }} Kg</h5>
+                      <span class="description-text">KONSUMSI DARI PENGECER</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.card-footer -->
             </div>
             <!-- /.card -->
           </div>
@@ -162,7 +277,19 @@
         start: {},
         end : {},
         data:{},
-        date: {}
+        date: {},
+        konsumRawitProdusen :"",
+        konsumRawitPengepul : "",
+        konsumRawitGrosir : "",
+        konsumRawitPengecer : "",
+        konsumKeritingProdusen :"",
+        konsumKeritingPengepul : "",
+        konsumKeritingGrosir : "",
+        konsumKeritingPengecer : "",
+        konsumBesarProdusen :"",
+        konsumBesarPengepul : "",
+        konsumBesarGrosir : "",
+        konsumBesarPengecer : "",
       };
     },
     mounted () {
@@ -179,7 +306,11 @@
           this.date = response.data.date;
           this.data = response.data.data;
           this.start = response.data.start;
-          this.end = response.data.end;                              
+          this.end = response.data.end;  
+          this.konsumRawitProdusen = response.data.konsumRawitProdusen; 
+          this.konsumRawitPengepul = response.data.konsumRawitPengepul; 
+          this.konsumRawitGrosir = response.data.konsumRawitGrosir; 
+          this.konsumRawitPengecer = response.data.konsumRawitPengecer;                            
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
           var myChart = new Chart(ctx, {
@@ -253,21 +384,12 @@
               ]
             },
             options:{
+              maintainAspectRatio : false,
               responsive: true,
               tooltips:{
                 mode:'index',
                 intersect: false,
               },
-            //   hover:{
-            //     mode: 'nearest',
-            //     intersect: true,
-            //   },
-            //   snapGaps: false,
-              // elements:{
-              //   line:{
-              //     tension: 0.000001
-              //   }
-              // },
               scales:{
                 xAxes: [{
                     // stacked: true,
@@ -288,6 +410,10 @@
               }
             }
           });
+          this.konsumKeritingProdusen = response.data.konsumKeritingProdusen; 
+          this.konsumKeritingPengepul = response.data.konsumKeritingPengepul; 
+          this.konsumKeritingGrosir = response.data.konsumKeritingGrosir; 
+          this.konsumKeritingPengecer = response.data.konsumKeritingPengecer;
           var chart2 = this.$refs.chart2;
           var ctx2 = chart2.getContext("2d");
           var myChart2 = new Chart(ctx2, {
@@ -361,21 +487,12 @@
               ]
             },
             options:{
+              maintainAspectRatio : false,
               responsive: true,
               tooltips:{
                 mode:'index',
                 intersect: false,
               },
-            //   hover:{
-            //     mode: 'nearest',
-            //     intersect: true,
-            //   },
-            //   snapGaps: false,
-              // elements:{
-              //   line:{
-              //     tension: 0.000001
-              //   }
-              // },
               scales:{
                 xAxes: [{
                     // stacked: true,
@@ -396,6 +513,10 @@
               }
             }
           });
+           this.konsumBesarProdusen = response.data.konsumBesarProdusen; 
+          this.konsumBesarPengepul = response.data.konsumBesarPengepul; 
+          this.konsumBesarGrosir = response.data.konsumBesarGrosir; 
+          this.konsumBesarPengecer = response.data.konsumBesarPengecer;
           var chart3 = this.$refs.chart3;
           var ctx3 = chart3.getContext("2d");
           var myChart3 = new Chart(ctx3, {
@@ -469,31 +590,20 @@
               ]
             },
             options:{
+              maintainAspectRatio : false,
               responsive: true,
               tooltips:{
                 mode:'index',
                 intersect: false,
               },
-            //   hover:{
-            //     mode: 'nearest',
-            //     intersect: true,
-            //   },
-            //   snapGaps: false,
-              // elements:{
-              //   line:{
-              //     tension: 0.000001
-              //   }
-              // },
               scales:{
                 xAxes: [{
-                    // stacked: true,
                     gridLines : {
                         display : false,
                     }
                     
                 }],
                 yAxes:[{
-                    // stacked: true,
                         gridLines : {
                         display : false,
                         },
