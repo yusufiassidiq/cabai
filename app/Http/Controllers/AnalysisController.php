@@ -1085,7 +1085,9 @@ class AnalysisController extends Controller
                 ->select(DB::raw("sum(jumlah_cabai) as jumlah_cabai"), DB::raw("sum(jumlah_cabai*harga) as jumlah"))
                 ->first();
             $target[$i]=Target::Where([['user_id',$idUser],
-                ['bulan', $last6Month[$i]]])
+                ['bulan', $last6Month[$i]],
+                ['tahun', $year]
+                ])
                 ->select(DB::raw("sum(jumlah_cabai) as jumlah_target"))
                 ->pluck('jumlah_target')
                 ->first();
