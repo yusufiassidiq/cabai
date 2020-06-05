@@ -442,7 +442,7 @@
             <p>
               IPB University || Dramaga, Bogor 16680 || Indonesia <br><br>
               <strong>Phone:</strong> +62 888888888<br>
-              <strong>Email:</strong> info@cabaijabar.xyz<br>
+              <strong>Email:</strong> info@cabaiku.com<br>
             </p>
           </div>
         </div>

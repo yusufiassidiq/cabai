@@ -674,13 +674,15 @@ class AnalysisController extends Controller
         ->all();
         $maxProduktivitas=0;
         foreach($idLahan as $id){
-            if(array_key_exists($id,$jmlPanen))
-                if(array_key_exists($id,$luasLahan))
+            if(array_key_exists($id,$jmlPanen)){
+                if(array_key_exists($id,$luasLahan)){
                     $produktivitas=((int)$jmlPanen[$id])/$luasLahan[$id];
                         if($maxProduktivitas<$produktivitas){
                             $maxProduktivitas=$produktivitas;
                             $maxProduktivitasId=$id;
                         }
+                }
+            }
         }
         if($maxProduktivitas==0)
             $maxKodeLahan="-";
