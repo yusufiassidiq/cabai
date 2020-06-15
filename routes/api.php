@@ -126,9 +126,11 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/addTarget','AnalysisController@addTarget');
     Route::put('/updateTarget/{id}','AnalysisController@updateTarget');
     Route::delete('/deleteTarget/{id}','AnalysisController@deleteTarget');
-    Route::get('/getTarget','AnalysisController@getTarget');
+    Route::get('/getFilterTarget','AnalysisController@getFilterTarget');
+    Route::get('/getTarget/{tahun}','AnalysisController@getTarget');
     Route::get('/getPengeluaran','AnalysisController@getPengeluaran');
-    Route::get('/getPenjualan','AnalysisController@getPenjualan');
+    Route::get('/getPenjualan/{bulan}/{tahun}','AnalysisController@getPenjualan');
+    Route::get('/getFilterPenjualan','AnalysisController@getFilterPenjualan');
     Route::get('/getHarga','AnalysisController@getHarga');
     Route::get('/getSummaryProdusen','AnalysisController@getSummaryProdusen');
     Route::get('/getPasokan','AnalysisController@getPasokan');

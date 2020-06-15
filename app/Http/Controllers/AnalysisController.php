@@ -128,22 +128,40 @@ class AnalysisController extends Controller
         $target->delete();
         return 204;
     }
+    public function getFilterTarget()
+    {
+        $roleUser = Auth::user()->role;
+        $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
+        $year = Target::Where('user_id',$idUser)
+        ->orderBy('tahun','ASC')
+        ->pluck('tahun')
+        ->first();
+        $yearNow= Carbon::now()->format('Y');
+        if($year<$yearNow){
+            $year=range($year,$yearNow);
+        }
+        else
+            $year=[$year];
+        return response()->json([
+            'roleUser' => $roleUser,
+            'tahun' => $year,
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getTarget()
+    public function getTarget(Request $request, $tahun)
     {
         $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
         $roleUser = Auth::user()->role;
-        $year = Carbon::now()->format('Y'); //tahun saat ini
         $month = array('Januari','Februari','Maret','April','Mei','Juni', 'Juli', 
                         'Agustus','September', 'Oktober', 'November', 'Desember');
         //untuk ditampikan pada tabel
         $targetByMonth=Target::where([
                 ['user_id',$idUser],
-                ['tahun',$year],
+                ['tahun',$tahun],
                 ])
                 ->orderByRaw("FIELD(bulan,'Januari','Februari','Maret','April','Mei','Juni',
                 'Juli', 'Agustus','September', 'Oktober', 'November', 'Desember')ASC")
@@ -159,7 +177,7 @@ class AnalysisController extends Controller
         //Data Target Rawit yang akan di tampilkan pada chart
         $targetRawit = Target::Where([
             ['user_id',$idUser],
-            ['tahun',$year],
+            ['tahun',$tahun],
             ['jenis_cabai','Cabai rawit'],
         ])->get();
         //memasukan data target rawit pada database ke dalam array
@@ -170,7 +188,7 @@ class AnalysisController extends Controller
         //Data Target Keriting yang akan di tampilkan pada chart
         $targetKeriting = Target::Where([
             ['user_id',$idUser],
-            ['tahun',$year],
+            ['tahun',$tahun],
             ['jenis_cabai','Cabai keriting'],
         ])->get();
         //memasukan data target Keriting pada database ke dalam array
@@ -181,7 +199,7 @@ class AnalysisController extends Controller
         //Data Target Besar yang akan di tampilkan pada chart
         $targetBesar = Target::Where([
             ['user_id',$idUser],
-            ['tahun',$year],
+            ['tahun',$tahun],
             ['jenis_cabai','Cabai Besar'],
         ])->get();
         //memasukan data target Besar pada database ke dalam array
@@ -199,7 +217,7 @@ class AnalysisController extends Controller
             'status' => 'success',
             'data' => $targetByMonth,
             'month' => $month,
-            'year'  => $year,
+            'year'  => $tahun,
             'roleUser' => $roleUser,
             'rawit' => $data_targetRawit,
             'keriting' => $data_targetKeriting,
@@ -252,94 +270,78 @@ class AnalysisController extends Controller
             'tahun' => $year,
         ]);
     }
-    public function getPenjualan()
+    public function getFilterPenjualan()
     {
         $roleUser = Auth::user()->role;
         $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
-        // $lastweek = Carbon::now()->subweek();
-        // $tomorrow = Carbon::now()->addDay();
+        $tahun = Transaksi::Where([['pemasok_id',$idUser],
+        ['status_permintaan','3'],
+        ['status_pengiriman','1'],
+        ['status_pemesanan','1'],
+        ])
+        ->orderBy('tanggal_diterima','ASC')
+        ->pluck('tanggal_diterima')
+        ->first();
+        $year=Carbon::createFromFormat('Y-m-d',$tahun)->year;
+        $yearNow= Carbon::now()->format('Y');
+        if($year<$yearNow){
+            $year=range($year,$yearNow);
+        }
+        else
+            $year=[$year];
+        return response()->json([
+            'roleUser' => $roleUser,
+            'tahun' => $year,
+        ]);
+    }
+    public function getPenjualan(Request $request, $bulan, $tahun)
+    {
+        $roleUser = Auth::user()->role;
+        $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
         $year= Carbon::now()->format('Y');
         $month=Carbon::now()->format('m');
-        $monthYearNow = Carbon::now()->isoFormat('MMMM YYYY');
-        $filter = $year . '-' . $month; //GET DATA BULAN & TAHUN YANG DIKIRIMKAN SEBAGAI PARAMETER
+        //TABEL
+        $filter = $tahun . '-' . $bulan; //GET DATA BULAN & TAHUN YANG DIKIRIMKAN SEBAGAI PARAMETER
         $parse = Carbon::parse($filter); 
+        $monthiso = $parse->isoFormat('MMMM');
+        $monthYearNow = $parse->isoFormat('MMMM YYYY');
         //BUAT RANGE TANGGAL PADA BULAN TERKAIT
         $array_date = range($parse->startOfMonth()->format('d'), $parse->endOfMonth()->format('d'));
         //GET DATA TRANSAKSI BERDASARKAN BULAN & TANGGAL YANG DIMINTA.
         //GROUP / KELOMPOKKAN BERDASARKAN TANGGALNYA
         //SUM DATA AMOUNT DAN SIMPAN KE NAMA BARU YAKNI TOTAL
         $transaksi = Transaksi::where([
-            ['pemasok_id',$idUser],
-            ['status_permintaan','3'],
-            ['status_pengiriman','1'],
-            ['status_pemesanan','1'],
-            ['tanggal_diterima', 'LIKE',  $filter . '%']
-            ])
-            ->select('tanggal_diterima',DB::raw('sum(jumlah_cabai) as jumlah'),DB::raw('sum(jumlah_cabai*harga) as total'))
-            ->groupBy('tanggal_diterima')
-            ->get();
+                ['pemasok_id',$idUser],
+                ['status_permintaan','3'],
+                ['status_pengiriman','1'],
+                ['status_pemesanan','1'],
+                ])
+                ->select('jumlah_cabai','harga','jenis_cabai','tanggal_diterima')
+                ->addSelect(DB::raw('jumlah_cabai*harga as total'))->get();
         foreach($array_date as $i){
             $n_date=strlen($i) == 1 ? 0 . $i:$i;
             $date = $filter . '-' . $n_date;
-            $total_transaksi=$transaksi->firstWhere('tanggal_diterima',$date);
+            $total_transaksi=$transaksi->where('tanggal_diterima',$date);
+            //Data untuk tabel
             $data[]=[
-                'tanggal_diterima' => $n_date . '/' . $month . '/' . $year,
+                'tanggal_diterima' => $i . '/' . $monthiso. '/' . $tahun,
+                'tanggal' => $i,
                 //if $total_transaksi true maka nilainya $total_transaksi->total selainnya 0
-                'total_transaksi' => $total_transaksi ? (int)$total_transaksi->total:0,
-                'jumlah_cabai' => $total_transaksi ? $total_transaksi->jumlah:0
+                'total_transaksi' => $total_transaksi->sum('total'),
+                'jumlah_cabai' => $total_transaksi->sum('jumlah_cabai'),
+                'jumlah_rawit' => $total_transaksi->where('jenis_cabai','Cabai rawit')->sum('jumlah_cabai'),
+                'jumlah_keriting' => $total_transaksi->where('jenis_cabai','Cabai keriting')->sum('jumlah_cabai'),
+                'jumlah_besar' => $total_transaksi->where('jenis_cabai','Cabai besar')->sum('jumlah_cabai'),    
             ];
         }
-        $lastmonth = Carbon::now()->subMonth()->addDay()->format('Y-m-d');
-        $startMonth = Carbon::now()->startOfMonth()->format('Y-m-d');
-        $start = Carbon::now()->subweek()->addDay()->format('Y-m-d');
-        $end = Carbon::now()->format('Y-m-d');
-        $startTitle = Carbon::now()->subweek()->addDay()->isoFormat('Do MMMM YYYY');
-        $endTitle = Carbon::now()->isoFormat('Do MMMM YYYY');
-        $totalTransaksi = Transaksi::Where([
-                        ['pemasok_id',$idUser],
-                        ['status_permintaan','3'],
-                        ['status_pengiriman','1'],
-                        ['status_pemesanan','1'],
-                        ])->whereBetween('tanggal_diterima', [$start, $end])
-                        ->select('tanggal_diterima',DB::raw('count(*) as vol'), DB::raw("SUM(jumlah_cabai) as totalTransaksi"))
-                        ->groupBy('tanggal_diterima')
-                        ->get()
-                        ->pluck('totalTransaksi','tanggal_diterima')
-                        ->all();
-        $x=0;
-        for($i=Carbon::now()->subweek()->addDay();$i<=Carbon::now();$i->addDay()){
-            $tanggal[$x]=$i->format('Y-m-d');
-            $cabaiByDay[$x]=Transaksi::Where([
-                            ['pemasok_id',$idUser],
-                            ['status_permintaan','3'],
-                            ['status_pengiriman','1'],
-                            ['status_pemesanan','1'],
-                            ['tanggal_diterima',$tanggal[$x]]
-                            ])->select('jenis_cabai', DB::raw("SUM(jumlah_cabai) as totalCabai"))
-                            ->groupBy('jenis_cabai')
-                            ->get();
-            $cabaiByDayRawit[$x]=0;
-            $cabaiByDayKeriting[$x]=0;
-            $cabaiByDayBesar[$x]=0;
-            for($j=0;$j<count($cabaiByDay[$x]);$j++){
-                if($cabaiByDay[$x][$j]->jenis_cabai == 'Cabai rawit'){
-                    $cabaiByDayRawit[$x]=$cabaiByDay[$x][$j]->totalCabai;
-                }
-                elseif($cabaiByDay[$x][$j]->jenis_cabai == 'Cabai keriting'){
-                    $cabaiByDayKeriting[$x]=$cabaiByDay[$x][$j]->totalCabai;
-                }
-                else{
-                    $cabaiByDayBesar[$x]=$cabaiByDay[$x][$j]->totalCabai;
-                }
-            }
-            if(array_key_exists($i->format('Y-m-d'), $totalTransaksi)){
-                $totalByTanggal[$x]=$totalTransaksi[$i->format('Y-m-d')];
-            }
-            else{
-                $totalByTanggal[$x]=0;
-            }
-            $x++;
-        }
+        // Data untuk grafik
+        $tanggal=array_column($data, 'tanggal');
+        $startTitle = reset($tanggal) . ' ' . $monthiso . ' ' . $tahun;
+        $endTitle = end($tanggal) . ' ' . $monthiso . ' ' . $tahun;
+        // $totalTransaksi = array_column($data, 'total_transaksi');
+        $cabaiByDayRawit = array_column($data, 'jumlah_rawit');
+        $cabaiByDayKeriting = array_column($data, 'jumlah_keriting');
+        $cabaiByDayBesar = array_column($data, 'jumlah_besar');
         return response()->json([
             'roleUser' => $roleUser,
             'transaksi' => $transaksi,
@@ -348,7 +350,8 @@ class AnalysisController extends Controller
             'tanggal' => $tanggal,
             'start' => $startTitle,
             'end' => $endTitle,
-            'cabai' => $cabaiByDay,
+            // 'cabai' => $cabaiByDay,
+            // 'totalTransaksi' => $totalTransaksi,
             'rawit' => $cabaiByDayRawit,
             'keriting' => $cabaiByDayKeriting,
             'besar' => $cabaiByDayBesar,
