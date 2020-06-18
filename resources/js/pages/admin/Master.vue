@@ -80,6 +80,12 @@
                   <p>Rekap Target</p>
                 </router-link>
               </li>
+              <li class="nav-item">
+                <router-link to="/admin/capaian" class="nav-link">
+                  <i class="nav-icon fas fa-chart-line"></i>
+                  <p>Rekap Pencapaian</p>
+                </router-link>
+              </li>
             </ul>
           </nav>
           <!-- /.sidebar-menu -->

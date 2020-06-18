@@ -10,6 +10,8 @@ use DB;
 use Carbon\Carbon;
 use App\Inventaris;
 use App\Target;
+use App\PraProduksi;
+use App\Panen;
 
 class AdminController extends Controller
 {
@@ -67,7 +69,7 @@ class AdminController extends Controller
         $target = Target::where([
                 ['user_id',$idUser],
                 ['tahun',$year],
-                ])->orderBy('jenis_cabai','ASC')
+                ])->orderBy('jenis_cabai','DESC')->orderBy('created_at','ASC')
                 ->get();
         
         return response()->json([
@@ -199,6 +201,38 @@ class AdminController extends Controller
             'keriting' => $data_targetKeriting,
             'besar' => $data_targetBesar,
         ]);
+    }
+
+    public function getPencapaian(Request $request, $idCabai)
+    {
+        $idUser = Auth::user()->id;
+        $cabai = array('Cabai rawit','Cabai keriting', 'Cabai besar');
+        $month = array('Januari','Februari','Maret','April','Mei','Juni', 'Juli', 'Agustus','September', 'Oktober', 'November', 'Desember');
+
+        // Capaian
+        $praProduksiId = PraProduksi::where('jenis_cabai',$cabai[$idCabai])->pluck('id');
+
+        $now = Carbon::now()->format('Y');
+        for ($i=1;$i<=12;$i++){
+            $capaian[$i-1] = Panen::whereYear('tanggal_panen',$now)->whereMonth('tanggal_panen',sprintf("%02d", $i))
+                ->whereIn('pra_produksi_id',$praProduksiId)->sum('jumlah_panen');
+            
+            $target[$i-1] = Target::where('user_id',$idUser)->where('jenis_cabai',$cabai[$idCabai])->where('bulan',$month[$i-1])->sum('jumlah_cabai');
+            
+            $data[]=[
+                "bulan"=>$month[$i-1],
+                "capaian"=>$capaian[$i-1],
+                "target"=>$target[$i-1],
+                "selisih"=> $capaian[$i-1] - $target[$i-1]
+            ];
+        }
+
+        return response()->json([
+            'target'=> $target,
+            'capaian'=> $capaian,
+            'month'=> $month,
+            'data'=> $data
+        ],200);    
     }
 
 }

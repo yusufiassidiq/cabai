@@ -61,6 +61,20 @@ class AnalysisHomeController extends Controller
             ], 200);
     }
 
+    
+
+    public function getDaerah()
+    {
+        $daerah = Kabupaten::all(['name','id']);
+        return response()->json(
+            [
+                'daerah' => $daerah,
+                
+            ], 200);
+
+
+    }
+
     public function getAllHarga()
     {
         // $test = Carbon::now()->subweek()->format('Y-m-d');
@@ -151,18 +165,6 @@ class AnalysisHomeController extends Controller
 
         ]);
     }
-
-    public function getDaerah()
-    {
-        $daerah = Kabupaten::all(['name','id']);
-        return response()->json(
-            [
-                'daerah' => $daerah,
-                
-            ], 200);
-
-
-    }
     
     public function getHarga(Request $request, $idKab, $idRole)
     {
@@ -216,6 +218,35 @@ class AnalysisHomeController extends Controller
             'kabupaten' => $kab,
             'role' => $role[$idRole - 1],
             // 'hargaMingguan' => $hargaMingguan,
+        ], 200);
+    }
+
+    public function getHargaProvinsi(Request $request, $idRole)
+    {
+        $idPemasok = User::where('role',$idRole)->pluck('id');
+        $role = array('ADMIN', 'PRODUSEN', 'PENGEPUL', 'GROSIR', 'ECERAN');
+
+        $dateNow = Carbon::now()->isoFormat('dddd, Do MMMM YYYY');
+        $now = Carbon::now()->format('Y-m-d');
+        $start = Carbon::now()->subweek(4)->format('Y-m-d');
+        $end = Carbon::now()->format('Y-m-d');
+        $jenisCabai = array('Cabai rawit', 'Cabai keriting', 'Cabai besar');
+
+        //get Harga Jawa Barat terakhir
+        for ($i=0;$i<count($jenisCabai);$i++){
+            $transaksiPemasok[$i] = Transaksi::whereIn('pemasok_id', $idPemasok)
+                    ->Where([['status_permintaan', '3'],
+                        ['status_pengiriman', '1'],
+                        ['status_pemesanan', '1'],
+                        ['jenis_cabai', $jenisCabai[$i]],
+                    ])->whereDate('tanggal_diterima', Transaksi::max('tanggal_diterima'))
+                    ->select('tanggal_diterima', DB::raw("ROUND(AVG(harga)) as hargaCabai"), DB::raw("SUM(jumlah_cabai) as totalCabai",))
+                    ->groupBy('tanggal_diterima')
+                    ->get();
+        }
+
+        return response()->json([
+            'harga'=> $transaksiPemasok
         ], 200);
 
     }
@@ -359,9 +390,10 @@ class AnalysisHomeController extends Controller
             
             $data[]=[
                 'kab' => $kab,
-                'rawit' => $stokRawit,
-                'keriting' => $stokKeriting,
-                'besar' => $stokBesar,
+                'rawit' => $stokRawit[$i],
+                'keriting' => $stokKeriting[$i],
+                'besar' => $stokBesar[$i],
+                'total' => $stokRawit[$i] + $stokKeriting[$i] + $stokBesar[$i]
 
             ];
 
@@ -433,5 +465,7 @@ class AnalysisHomeController extends Controller
             'kabupaten' => $nameKab,
         ], 200); 
     }
+
+
     
 }
