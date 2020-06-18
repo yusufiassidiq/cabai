@@ -273,7 +273,7 @@
                       <span class="description-percentage" v-bind:style="{color:getColor(mtdLaba)}">
                         <i v-bind:class="getClass(mtdLaba)"></i> {{ mtdLaba | angkaPersentase }}</span>
                       <h5 class="description-header">{{ labaTotal | convertToRupiah }}</h5>
-                      <span class="description-text">TOTAL LABA</span>
+                      <span class="description-text">TOTAL PENDAPATAN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -368,7 +368,7 @@
           return '#e3342f';
         }
         else if(parseInt(item)==0){
-          return '#e98b2d';
+          return '#fcd12a';
         }
         else if(parseInt(item)>0){
           return '#38c172';

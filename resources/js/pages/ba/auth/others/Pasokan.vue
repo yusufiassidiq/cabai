@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Rekap Pengeluaran Poduksi Cabai</h1>
+            <h1 class="m-0 text-dark">Rekap Pasokan Cabai</h1>
           </div>
           <!-- /.col -->
           <div class="col-sm-6">
@@ -14,7 +14,7 @@
               <li class="breadcrumb-item">
                 <a href="#">{{ roleUser | filterRoleName }}</a>
               </li>
-              <li class="breadcrumb-item active">Rekap Pengeluaran</li>
+              <li class="breadcrumb-item active">Rekap Pasokan</li>
             </ol>
           </div>
           <!-- /.col -->
@@ -32,7 +32,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title">Grafik Pengeluaran Produksi Cabai</h5>
+                <h5 class="card-title">Grafik Pasokan Cabai</h5>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -182,12 +182,20 @@
               },
               scales:{
                 xAxes: [{
+                  scaleLabel: {
+                    display:true,
+                    labelString : 'Kg'
+                  },
                   stacked: true,
                   gridLines : {
                     display : false,
                   }
                 }],
                 yAxes:[{
+                  scaleLabel: {
+                    display:false,
+                    labelString : 'Pemasok'
+                  },
                   stacked: true,
                   gridLines : {
                     display : false,

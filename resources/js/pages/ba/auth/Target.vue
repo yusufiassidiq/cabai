@@ -28,6 +28,30 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                 <!-- FORM FILTER BERDASARKAN BULAN DAN TAHUN -->
+                <div class="row"> 
+                  <div class="col-md-3 form-group">
+                      <!-- <div class="form-group"> -->
+                          <label for="">Pilih Tahun</label>
+                          <select class="form-control select2"
+                                  @change="loadTarget"
+                                  v-model="tahunFilter">>
+                              <!-- <option value disabled selected>Tahun</option> -->
+                              <option v-for="t in arrayTahun" :key="t" v-bind:value="t">{{ t }}</option>
+                          </select>
+                      <!-- </div> -->
+                  </div>
+                </div>
+                <!-- FORM FILTER BERDASARKAN BULAN DAN TAHUN -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -281,6 +305,10 @@
   export default{
     data(){
       return {
+        //filter
+        tahunFilter: moment().format('Y'), //DEFAULT TAHUN YG AKTIF BERDASARKAN TAHUN SAAT INI
+        arrayTahun:"",
+
         editmode : false,
         year : "",
         roleUser : "",
@@ -294,11 +322,27 @@
         }),
         // pagination
         pagination: [],
-        url_loadTarget: "/getTarget",
-        // paginate:['target'],
+        url_loadTarget: '/getTarget/',
       };
     },
-    methods:{
+    mounted() {
+      this.filterData(),
+      this.loadTarget();
+      // Custom event on Vue js
+      UpdateData.$on("update", () => {
+        this.loadTarget();
+      });
+    },
+    methods: {
+    filterData() {
+        axios
+          .get("/getFilterTarget")
+          .then(response =>{
+            // this.roleUser = response.data.roleUser;
+            this.arrayTahun = response.data.tahun;
+          })
+          .catch(error => {});
+      },
     fetchPaginateTarget(url) {
       this.url_loadTarget = url;
       this.loadTarget();
@@ -342,10 +386,9 @@
         this.form.reset();
         $("#modalTarget").modal("show");
         this.form.fill(t);
-        console.log(t)
+        // console.log(t)
       },
       updateTarget(){
-        console.log("satu")
         this.$Progress.start();
         this.form
           .put("updateTarget/" + this.form.id,{
@@ -398,8 +441,9 @@
         });
       },
       loadTarget () {
+        let tahunFilter = this.tahunFilter;
         let $this = this;
-        axios.get(this.url_loadTarget).then(response=>{
+        axios.get(this.url_loadTarget + tahunFilter).then(response=>{
           this.datatarget = response.data.data.data;
           $this.makePagination(response.data.data);
           this.year = response.data.year;
@@ -498,12 +542,5 @@
         });
       }
     },
-    mounted() {
-    this.loadTarget();
-    // Custom event on Vue js
-    UpdateData.$on("update", () => {
-      this.loadTarget();
-    });
-  }
 };
 </script>

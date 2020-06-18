@@ -28,6 +28,54 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                 <!-- FORM FILTER BERDASARKAN BULAN DAN TAHUN -->
+                <div class="row"> 
+                  <div class="col-md-3 form-group">
+                      <!-- <div class="form-group"> -->
+                          <label for="">Pilih Bulan</label>
+                          <select class="form-control select2" 
+                                  @change="getData"
+                                  v-model="bulan">
+                              <!-- <option value disabled selected>Bulan</option> -->
+                              <option value="01">Januari</option>
+                              <option value="02">Februari</option>
+                              <option value="03">Maret</option>
+                              <option value="04">April</option>
+                              <option value="05">Mei</option>
+                              <option value="06">Juni</option>
+                              <option value="07">Juli</option>
+                              <option value="08">Agustus</option>
+                              <option value="09">September</option>
+                              <option value="10">Oktober</option>
+                              <option value="11">November</option>
+                              <option value="12">Desember</option>
+                          </select>
+                      <!-- </div> -->
+                  </div>
+                  <div class="col-md-3 form-group">
+                      <!-- <div class="form-group"> -->
+                          <label for="">Pilih Tahun</label>
+                          <select class="form-control select2"
+                                  @change="getData"
+                                  v-model="tahun">>
+                              <!-- <option v-for="t in tahun" :key="t.i" v-bind:value="t.i">{{t.i}}</option> -->
+                              <!-- <option v-for="(y, i) in tahun" :key="i" :value="y">{{ y }}</option> -->
+                              <!-- <option value disabled selected>Tahun</option> -->
+                              <option v-for="t in arrayTahun" :key="t" v-bind:value="t">{{ t }}</option>
+                          </select>
+                      <!-- </div> -->
+                  </div>
+                </div>
+                <!-- FORM FILTER BERDASARKAN BULAN DAN TAHUN -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -37,9 +85,6 @@
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
                   </button>
                 </div>
               </div>
@@ -74,6 +119,9 @@
                 <h3 class="card-title">Penjualan Cabai Bulan {{monthYearNow}}</h3>
 
                 <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
                   <!-- <div class="input-group input-group-sm" style="width: 150px;"> -->
                   <!-- <input
                       type="text"
@@ -91,63 +139,39 @@
                 </div>
               </div>
               <!-- /.card-header -->
-              <!-- FORM FILTER BERDASARKAN BULAN DAN TAHUN -->
-              <!-- <form role="form">
-                <div class="card-body">  
-                  <div class="col-md-5">
-                      <div class="form-group">
-                          <label for="">Bulan</label>
-                          <select v-model="month" class="form-control">
-                              <option value="01">Januari</option>
-                              <option value="02">Februari</option>
-                              <option value="03">Maret</option>
-                              <option value="04">April</option>
-                              <option value="05">Mei</option>
-                              <option value="06">Juni</option>
-                              <option value="07">Juli</option>
-                              <option value="08">Agustus</option>
-                              <option value="09">September</option>
-                              <option value="10">Oktober</option>
-                              <option value="11">November</option>
-                              <option value="12">Desember</option>
-                          </select>
-                      </div>
-                  </div>
-                  <div class="col-md-5">
-                      <div class="form-group">
-                          <label for="">Tahun</label>
-                          <select v-model="year" class="form-control">
-                              <option v-for="(y, i) in years" :key="i" :value="y">{{ y }}</option>
-                          </select>
-                      </div>
-                  </div>
-              </div>
-              </form> -->
-              <!-- FORM FILTER BERDASARKAN BULAN DAN TAHUN -->
+             
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                      <!-- <th>No</th> -->
-                      <!-- <th>ID </th> -->
-                      <th>Tanggal Transaksi</th>
-                      <!-- <th>Jenis Cabai</th> -->
-                      <th>Jumlah Cabai (Kg)</th>
-                      <th>Total Penjualan (Rp)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="transaksi in data" :key="transaksi.tanggal_diterima">
-                      <!-- <td></td> -->
-                      <!-- <td>{{ data.id }}</td> -->
-                      <td>{{transaksi.tanggal_diterima}}</td>
-                      <!-- <td>coba</td> -->
-                      <td>{{transaksi.jumlah_cabai | filterAngkaRibuan}}</td>
-                      <td>{{transaksi.total_transaksi | convertToRupiah}}</td>
-                    </tr>
-                    <!-- end example data -->
-                  </tbody>
-                </table>
+                <div class="row">
+                  <table class="table table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <!-- <th>No</th> -->
+                        <!-- <th>ID </th> -->
+                        <th>Tanggal Transaksi</th>
+                        <!-- <th>Jenis Cabai</th> -->
+                        <th>Cabai Rawit (Kg)</th>
+                        <th>Cabai Keriting (Kg)</th>
+                        <th>Cabai Besar (Kg)</th>
+                        <th>Jumlah Cabai (Kg)</th>
+                        <th>Total Penjualan (Rp)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="transaksi in data" :key="transaksi.tanggal_diterima">
+                        <!-- <td></td> -->
+                        <!-- <td>{{ data.id }}</td> -->
+                        <td>{{transaksi.tanggal_diterima}}</td>
+                        <!-- <td>coba</td> -->
+                        <td>{{transaksi.jumlah_rawit | filterAngkaRibuan}}</td>
+                        <td>{{transaksi.jumlah_keriting | filterAngkaRibuan}}</td>
+                        <td>{{transaksi.jumlah_besar | filterAngkaRibuan}}</td>
+                        <td>{{transaksi.jumlah_cabai | filterAngkaRibuan}}</td>
+                        <td>{{transaksi.total_transaksi | convertToRupiah}}</td>
+                      </tr>
+                      <!-- end example data -->
+                    </tbody>
+                  </table>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -167,21 +191,41 @@
     data(){
       return{
         roleUser : "",
+        //filter
+        bulan: moment().format('MM'), //DEFAULT BULAN YG AKTIF BERDASARKAN BULAN SAAT INI
+        tahun: moment().format('Y'), //DEFAULT TAHUN YG AKTIF BERDASARKAN TAHUN SAAT INI
+        
+        //Table&Graph
         monthYearNow : "",
         start: "",
         end : "",
         data:"",
+        arrayTahun:"",
+        
       };
     },
     mounted () {
-      this.fillData()
-      window.setInterval(() => {
-        this.fillData()
-      }, 1800000)
+      this.fillData(),
+      this.getData()
+      // window.setInterval(() => {
+      //   this.getData()
+      // }, 1800000)
     },
     methods: {
-      fillData () {
-        axios.get('/getPenjualan').then(response=>{
+      fillData() {
+        axios
+          .get("/getFilterPenjualan")
+          .then(response =>{
+            this.roleUser = response.data.roleUser;
+            this.arrayTahun = response.data.tahun;
+          })
+          .catch(error => {});
+      },
+      getData () {
+        let bulan = this.bulan;
+        let tahun = this.tahun;
+        axios.get('/getPenjualan/'+ bulan + '/' + tahun)
+          .then(response=>{
           this.roleUser = response.data.roleUser;
           this.monthYearNow = response.data.monthYearNow;
           this.data = response.data.data;
@@ -190,7 +234,7 @@
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
           var myChart = new Chart(ctx, {
-              type                : 'bar',
+              type                : 'line',
             data:{
               labels:response.data.tanggal,
               datasets:[
@@ -252,16 +296,24 @@
               // },
               scales:{
                 xAxes: [{
-                    stacked: true,
+                    // stacked: true,
+                    scaleLabel: {
+                      display:true,
+                      labelString : 'Tanggal'
+                    },
                     gridLines : {
                         display : false,
                     }
                 }],
                 yAxes:[{
-                    stacked: true,
-                        gridLines : {
-                        display : false,
-                        },
+                  scaleLabel: {
+                    display:true,
+                    labelString : 'Kg'
+                  },
+                    // stacked: true,
+                  gridLines : {
+                    display : false,
+                  },
                   ticks:{
                     beginAtZero:true
                   }
