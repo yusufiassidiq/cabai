@@ -132,17 +132,23 @@ class AnalysisController extends Controller
     {
         $roleUser = Auth::user()->role;
         $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
-        $year = Target::Where('user_id',$idUser)
+        $tahun = Target::Where('user_id',$idUser)
         ->orderBy('tahun','ASC')
         ->pluck('tahun')
-        ->first();
-        $yearNow= Carbon::now()->format('Y');
-        if($year<$yearNow){
-            $year=range($year,$yearNow);
+        // ->select('tahun')
+        ->all();
+        $yearStart= reset($tahun);
+        // $year = "2020";
+        // $test=$start;
+        $yearEnd= end($tahun);
+        if($yearStart && $yearStart<$yearEnd){
+            $year=range($yearStart,$yearEnd);
+            // $test = "yuhu";
         }
         else
-            $year=[$year];
+            $year=[$yearStart];
         return response()->json([
+            // 'test' => $test,
             'roleUser' => $roleUser,
             'tahun' => $year,
         ]);
@@ -224,50 +230,70 @@ class AnalysisController extends Controller
             'besar' => $data_targetBesar,
         ]);
     }
-    public function getPengeluaran(){
+    public function getPengeluaran(Request $request, $bulan, $tahun){
         $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
         $roleUser = Auth::user()->role;
         //mengambil id dari PraProduksi yang dimiliki oleh user
-        $year = Carbon::now()->format('Y'); //tahun saat ini
-        $lahan = PraProduksi::Where('user_id',$idUser)->pluck('id');
-        $pengeluaranByLahanPupuk=null;
-        $pengeluaranByLahanAlatTani=null;  
-        $pengeluaranByLahanPestisida=null; 
-        $pengeluaranByLahanLainnya=null; 
-        $kodeLahan=null;  
-        for ($i=0;$i<count($lahan);$i++){
-            $pengeluaran[$i]= PengeluaranProduksi::where('pra_produksi_id',$lahan[$i])
-                    ->select('nama_pengeluaran',DB::raw('count(*) as vol'), DB::raw("SUM(jumlah_pengeluaran) as total"))
-                    ->groupBy('nama_pengeluaran')
-                    ->get();
-            $pengeluaranByLahanPupuk[$i]=0;
-            $pengeluaranByLahanAlatTani[$i]=0;  
-            $pengeluaranByLahanPestisida[$i]=0; 
-            $pengeluaranByLahanLainnya[$i]=0; 
-            $kodeLahan[$i]=PraProduksi::Where('id',$lahan[$i])->pluck('kode_lahan');  
-            for($j=0;$j<count($pengeluaran[$i]);$j++){
-                if($pengeluaran[$i][$j]->nama_pengeluaran=='Pupuk'){
-                    $pengeluaranByLahanPupuk[$i]=$pengeluaran[$i][$j]->total;
-                }
-                elseif($pengeluaran[$i][$j]->nama_pengeluaran=='Pestisida'){
-                    $pengeluaranByLahanPestisida[$i]=$pengeluaran[$i][$j]->total;
-                }
-                elseif($pengeluaran[$i][$j]->nama_pengeluaran=='Alat Tani'){
-                    $pengeluaranByLahanAlatTani[$i]=$pengeluaran[$i][$j]->total;
-                }
-                else{
-                    $pengeluaranByLahanLainnya[$i]=$pengeluaran[$i][$j]->total;
-                }
-            }
+        $filter = $tahun . '-' . $bulan; //GET DATA BULAN & TAHUN YANG DIKIRIMKAN SEBAGAI PARAMETER
+        $parse = Carbon::parse($filter);
+        $monthiso = $parse->isoFormat('MMMM');
+        $start = $filter . '-' . $parse->startOfMonth()->format('d');
+        $end = $filter . '-' . $parse->endOfMonth()->format('d');
+        $array_date = range($parse->startOfMonth()->format('d'), $parse->endOfMonth()->format('d'));
+        $pengeluaran = PengeluaranProduksi::Where('user_id',$idUser)
+                ->select('nama_pengeluaran', 'jumlah_pengeluaran')
+                ->addSelect(DB::raw('date(created_at) as date'))
+                ->get();
+                
+        foreach($array_date as $i){
+            $n_date=strlen($i) == 1 ? 0 . $i:$i;
+            $date = $filter . '-' . $n_date;
+            $pengeluaranByDay=$pengeluaran->where('date',$date);
+            //Data untuk tabel
+            $dataTabel[]=[
+                'tanggal' => $i . '/' . $monthiso. '/' . $tahun,
+                'jumlahPengeluaran' => $pengeluaranByDay->sum('jumlah_pengeluaran'),
+                'pupuk' => $pengeluaranByDay->where('nama_pengeluaran','Pupuk')->sum('jumlah_pengeluaran'),
+                'alatTani' => $pengeluaranByDay->where('nama_pengeluaran','Alat Tani')->sum('jumlah_pengeluaran'),
+                'pestisida' => $pengeluaranByDay->where('nama_pengeluaran','Pestisida')->sum('jumlah_pengeluaran'),    
+                'lainnya' => $pengeluaranByDay->where('nama_pengeluaran','Lainnya')->sum('jumlah_pengeluaran'),    
+            ];
         }
+        $lahan = PraProduksi::Where('user_id',$idUser)
+        ->select('id','kode_lahan', 'jenis_cabai')
+        ->get();
+        $data=array();
+        foreach($lahan as $l){
+            $pengeluaran=$l->pengeluaranProduksi->whereBetween('created_at',[$start, $end]);
+            $data[]=[
+                'nama'=>$l->kode_lahan . ' ' . $l->jenis_cabai,
+                'Pupuk' => $pengeluaran->where('nama_pengeluaran','Pupuk')
+                            ->sum('jumlah_pengeluaran'),
+                'Alat Tani' => $pengeluaran->where('nama_pengeluaran','Alat Tani')
+                            ->sum('jumlah_pengeluaran'),
+                'Pestisida' => $pengeluaran->where('nama_pengeluaran','Pestisida')
+                            ->sum('jumlah_pengeluaran'),
+                'Lainnya' => $pengeluaran->where('nama_pengeluaran','Lainnya')
+                            ->sum('jumlah_pengeluaran'),
+            ];
+        }
+        $kodeLahan = array_column($data, 'nama');
+        if(!$kodeLahan)
+            $kodeLahan=null;
+        $pengeluaranByLahanPupuk = array_column($data, 'Pupuk');
+        $pengeluaranByLahanAlatTani = array_column($data, 'Alat Tani');
+        $pengeluaranByLahanPestisida = array_column($data, 'Pestisida'); 
+        $pengeluaranByLahanLainnya = array_column($data, 'Lainnya');  
         return response()->json([
+            'month' => $monthiso,
             'roleUser' => $roleUser,
             'lahan' => $kodeLahan,
             'pupuk' => $pengeluaranByLahanPupuk,
             'alatTani' => $pengeluaranByLahanAlatTani,  
             'pestisida' => $pengeluaranByLahanPestisida, 
             'lainnya' => $pengeluaranByLahanLainnya, 
-            'tahun' => $year,
+            'tahun' => $tahun,
+            'pengeluaran' => $dataTabel,
         ]);
     }
     public function getFilterPenjualan()
@@ -282,13 +308,16 @@ class AnalysisController extends Controller
         ->orderBy('tanggal_diterima','ASC')
         ->pluck('tanggal_diterima')
         ->first();
-        $year=Carbon::createFromFormat('Y-m-d',$tahun)->year;
-        $yearNow= Carbon::now()->format('Y');
-        if($year<$yearNow){
-            $year=range($year,$yearNow);
-        }
-        else
-            $year=[$year];
+        if($tahun){
+            $year=Carbon::createFromFormat('Y-m-d',$tahun)->year;
+            $yearNow= Carbon::now()->format('Y');
+            if($year<$yearNow){
+                $year=range($year,$yearNow);
+            }
+            else
+                $year=[$year];}
+        else 
+            $year=null;
         return response()->json([
             'roleUser' => $roleUser,
             'tahun' => $year,
@@ -323,19 +352,17 @@ class AnalysisController extends Controller
             $date = $filter . '-' . $n_date;
             $total_transaksi=$transaksi->where('tanggal_diterima',$date);
             //Data untuk tabel
+            $tanggal[] = $i;
             $data[]=[
-                'tanggal_diterima' => $i . '/' . $monthiso. '/' . $tahun,
-                'tanggal' => $i,
-                //if $total_transaksi true maka nilainya $total_transaksi->total selainnya 0
-                'total_transaksi' => $total_transaksi->sum('total'),
-                'jumlah_cabai' => $total_transaksi->sum('jumlah_cabai'),
+                'tanggal_transaksi' => $i . '/' . $monthiso. '/' . $tahun,
                 'jumlah_rawit' => $total_transaksi->where('jenis_cabai','Cabai rawit')->sum('jumlah_cabai'),
                 'jumlah_keriting' => $total_transaksi->where('jenis_cabai','Cabai keriting')->sum('jumlah_cabai'),
                 'jumlah_besar' => $total_transaksi->where('jenis_cabai','Cabai besar')->sum('jumlah_cabai'),    
+                'jumlah_cabai' => $total_transaksi->sum('jumlah_cabai'),
+                'total_transaksi' => $total_transaksi->sum('total'),
             ];
         }
         // Data untuk grafik
-        $tanggal=array_column($data, 'tanggal');
         $startTitle = reset($tanggal) . ' ' . $monthiso . ' ' . $tahun;
         $endTitle = end($tanggal) . ' ' . $monthiso . ' ' . $tahun;
         // $totalTransaksi = array_column($data, 'total_transaksi');
@@ -679,7 +706,7 @@ class AnalysisController extends Controller
         foreach($idLahan as $id){
             if(array_key_exists($id,$jmlPanen)){
                 if(array_key_exists($id,$luasLahan)){
-                    $produktivitas=((int)$jmlPanen[$id])/$luasLahan[$id];
+                    $produktivitas=Round(((int)$jmlPanen[$id])/$luasLahan[$id]);
                         if($maxProduktivitas<$produktivitas){
                             $maxProduktivitas=$produktivitas;
                             $maxProduktivitasId=$id;

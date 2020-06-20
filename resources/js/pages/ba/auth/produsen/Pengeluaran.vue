@@ -28,6 +28,52 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <div v-show= "lahan!==null" class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                 <!-- FORM FILTER BERDASARKAN BULAN DAN TAHUN -->
+                <div class="row"> 
+                  <div class="col-md-3 form-group">
+                      <!-- <div class="form-group"> -->
+                          <label for="">Pilih Bulan</label>
+                          <select class="form-control select2" 
+                                  @change="fillData"
+                                  v-model="bulanFilter">
+                              <!-- <option value disabled selected>Bulan</option> -->
+                              <option value="01">Januari</option>
+                              <option value="02">Februari</option>
+                              <option value="03">Maret</option>
+                              <option value="04">April</option>
+                              <option value="05">Mei</option>
+                              <option value="06">Juni</option>
+                              <option value="07">Juli</option>
+                              <option value="08">Agustus</option>
+                              <option value="09">September</option>
+                              <option value="10">Oktober</option>
+                              <option value="11">November</option>
+                              <option value="12">Desember</option>
+                          </select>
+                      <!-- </div> -->
+                  </div>
+                  <div class="col-md-3 form-group">
+                      <!-- <div class="form-group"> -->
+                          <label for="">Pilih Tahun</label>
+                          <select class="form-control select2"
+                                  @change="fillData"
+                                  v-model="tahunFilter">>
+                              <!-- <option value disabled selected>Tahun</option> -->
+                              <option v-for="t in arrayTahun" :key="t" v-bind:value="t">{{ t }}</option>
+                          </select>
+                      <!-- </div> -->
+                  </div>
+                </div>
+                <!-- FORM FILTER BERDASARKAN BULAN DAN TAHUN -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+        </div>
         <div v-show= "lahan!==null" class="row">
           <div class="col-md-12">
             <div class="card">
@@ -47,7 +93,7 @@
                 <div class="row justify-content-center">
                   <div class="col-md-12">
                     <p class="text-center">
-                        <strong>Pengeluaran Tahun {{ year }}</strong>
+                        <strong>Pengeluaran Bulan {{month}} {{ year }}</strong>
                     </p>
                     <div class="chart">
                       <!-- Pengeluaran Chart Canvas -->
@@ -64,6 +110,50 @@
             <!-- /.card -->
           </div>
           <!-- /.col -->
+        </div>
+        <div v-show= "lahan!==null" class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Pengeluaran Cabai Bulan {{month}} {{tahunFilter}}</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+             
+              <div class="card-body table-responsive p-0">
+                <div class="row">
+                  <table class="table table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>Tanggal</th>
+                        <th>Pupuk</th>
+                        <th>Alat Tani</th>
+                        <th>Pestisida</th>
+                        <th>Lainnya</th>
+                        <th>Total Pengeluaran</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="p in pengeluaran" :key="p.tanggal">
+                        <td>{{p.tanggal}}</td>
+                        <td>{{p.pupuk | convertToRupiah}}</td>
+                        <td>{{p.alatTani | convertToRupiah}}</td>
+                        <td>{{p.pestisida | convertToRupiah}}</td>
+                        <td>{{p.lainnya | convertToRupiah}}</td>
+                        <td>{{p.jumlahPengeluaran | convertToRupiah}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
         </div>
         <div v-if= "lahan===null" class="row">
           <div class="col">
@@ -98,21 +188,43 @@
   export default {
     data(){
       return{
+        //filter
+        bulanFilter: moment().format('MM'), //DEFAULT BULAN YG AKTIF BERDASARKAN BULAN SAAT INI
+        tahunFilter: moment().format('Y'), //DEFAULT TAHUN YG AKTIF BERDASARKAN TAHUN SAAT INI
+        arrayTahun:"",
+        //tabel
+        month:"",
+        pengeluaran:"",
+
         roleUser : "",
         year : "",
         lahan : "",
       };
     },
     mounted () {
+      this.filterData(),
       this.fillData()
       window.setInterval(() => {
         this.fillData()
       }, 1800000)
     },
     methods: {
+      filterData() {
+        axios
+          .get("/getFilterTarget")
+          .then(response =>{
+            // this.roleUser = response.data.roleUser;
+            this.arrayTahun = response.data.tahun;
+          })
+          .catch(error => {});
+      },
       fillData () {
-        axios.get('/getPengeluaran').then(response=>{
+        let bulanFilter = this.bulanFilter;
+        let tahunFilter = this.tahunFilter;
+        axios.get('/getPengeluaran/' + bulanFilter + '/' + tahunFilter).then(response=>{
           this.roleUser = response.data.roleUser;
+          this.pengeluaran = response.data.pengeluaran;
+          this.month = response.data.month;
           this.year = response.data.tahun;
           this.lahan = response.data.lahan;
           var chart = this.$refs.chart;
@@ -183,12 +295,20 @@
               },
               scales:{
                 xAxes: [{
+                  scaleLabel: {
+                    display:true,
+                    labelString : 'Nama Lahan'
+                  },
                   // stacked: true,
                   gridLines : {
                     display : false,
                   }
                 }],
                 yAxes:[{
+                  scaleLabel: {
+                    display:true,
+                    labelString : 'Rp'
+                  },
                   // stacked: true,
                   gridLines : {
                     display : false,

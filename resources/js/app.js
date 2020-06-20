@@ -13,6 +13,11 @@ import VueAuth from '@websanova/vue-auth'
 // Set Vue globally
 window.Vue = require('vue');
 
+// Import excel xlsx Library
+// Doc = https://github.com/t-chatoyan/vue-excel-xlsx
+import VueExcelXlsx from 'vue-excel-xlsx'
+Vue.use(VueExcelXlsx);
+
 // import vform library create these global variable
 // Doc = https://github.com/cretueusebiu/vform
 import {

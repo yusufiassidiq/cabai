@@ -94,11 +94,27 @@
                   <div class="col-md-12">
                     <p class="text-center">
                       <strong>Penjualan (Kg): {{start}} - {{end}}</strong>
+                      <a id="download">
+                        <button class="btn btn-primary float-right bg-flat-color-1" @click="downloadChart">
+                        <!-- Download Icon -->
+                        <i class="fa fa-download"></i>
+                        </button>
+                      </a>
                     </p>
 
                     <div class="chart">
+                      <!-- <button id="download2" @click="chartToImage">Save Image!</button> -->
                       <!-- Pengeluaran Chart Canvas -->
-                      <canvas ref="chart" height="100" style="height: 100px;"></canvas>
+                      <canvas id=chart ref="chart" height="100" style="height: 100px;"></canvas>
+                      <!-- <a id="download"
+                        download="ChartPenjualan.jpg" 
+                        href=""
+                        class="btn btn-primary float-right bg-flat-color-1"
+                        title="chart"> -->
+                      <!-- Download Icon -->
+                      <!-- <i class="fa fa-download"></i> -->
+                      </a>
+                    
                     </div>
                     <!-- /.chart-responsive -->
                   </div>
@@ -119,9 +135,20 @@
                 <h3 class="card-title">Penjualan Cabai Bulan {{monthYearNow}}</h3>
 
                 <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <!-- TOMBOL UNTUK EXPORT DATA KE EXCEL -->
+                  <vue-excel-xlsx
+                    class = "btn btn-primary float-right bg-flat-color-1"
+                    :data="data"
+                    :columns="columns"
+                    :filename="'Penjualan Cabai ' + this.monthYearNow"
+                    :sheetname="this.monthYearNow"
+                    >
+                    <i class="fas fa-download fa-fw"></i>
+                  </vue-excel-xlsx>
+                  <!-- TOMBOL UNTUK EXPORT DATA KE EXCEL --> 
+                  <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
-                  </button>
+                  </button> -->
                   <!-- <div class="input-group input-group-sm" style="width: 150px;"> -->
                   <!-- <input
                       type="text"
@@ -142,13 +169,10 @@
              
               <div class="card-body table-responsive p-0">
                 <div class="row">
-                  <table class="table table-hover text-nowrap">
+                  <table id="mytable" class="table table-hover text-nowrap">
                     <thead>
                       <tr>
-                        <!-- <th>No</th> -->
-                        <!-- <th>ID </th> -->
                         <th>Tanggal Transaksi</th>
-                        <!-- <th>Jenis Cabai</th> -->
                         <th>Cabai Rawit (Kg)</th>
                         <th>Cabai Keriting (Kg)</th>
                         <th>Cabai Besar (Kg)</th>
@@ -157,11 +181,8 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="transaksi in data" :key="transaksi.tanggal_diterima">
-                        <!-- <td></td> -->
-                        <!-- <td>{{ data.id }}</td> -->
-                        <td>{{transaksi.tanggal_diterima}}</td>
-                        <!-- <td>coba</td> -->
+                      <tr v-for="transaksi in data" :key="transaksi.tanggal_transaksi">
+                        <td>{{transaksi.tanggal_transaksi}}</td>
                         <td>{{transaksi.jumlah_rawit | filterAngkaRibuan}}</td>
                         <td>{{transaksi.jumlah_keriting | filterAngkaRibuan}}</td>
                         <td>{{transaksi.jumlah_besar | filterAngkaRibuan}}</td>
@@ -186,6 +207,7 @@
 
 <script>
   import { Bar } from 'vue-chartjs'
+  import XLSX from 'xlsx'
 
   export default {
     data(){
@@ -201,6 +223,38 @@
         end : "",
         data:"",
         arrayTahun:"",
+
+        columns : [
+          {
+              label: "Tanggal Transaksi",
+              field: "tanggal_transaksi",
+          },
+          {
+              label: "Cabai Rawit (Kg)",
+              field: "jumlah_rawit",
+              dataFormat: this.$options.filters.filterAngkaRibuan
+          },
+          {
+              label: "Cabai Keriting (Kg)",
+              field: "jumlah_keriting",
+              dataFormat: this.$options.filters.filterAngkaRibuan
+          },
+          {
+              label: "Cabai Besar (Kg)",
+              field: "jumlah_besar",
+              dataFormat: this.$options.filters.filterAngkaRibuan
+          },
+          {
+              label: "Jumlah Cabai (Kg)",
+              field: "jumlah_cabai",
+              dataFormat: this.$options.filters.filterAngkaRibuan
+          },
+          {
+              label: "Total Penjualan (Rp)",
+              field: "total_transaksi",
+              dataFormat: this.$options.filters.convertToRupiah
+          },
+        ],
         
       };
     },
@@ -212,6 +266,22 @@
       // }, 1800000)
     },
     methods: {
+      downloadChart(){
+        /*get download button (tag: <a></a>) */
+        var download = document.getElementById("download");
+        /*Get image of canvas element*/
+        var image = document.getElementById("chart").toDataURL("image/png");
+        /*insert chart image url to download button (tag: <a></a>) */
+        download.setAttribute("href", image);
+        download.setAttribute('download', 'Grafik Penjualan '+this.monthYearNow + '.png');
+      },
+      onexport() {
+        // var data = XLSX.utils.json_to_sheet(this.data)
+        // var wb = XLSX.utils.book_new()
+        // var wb2 = XLSX.utils.table_to_book(document.getElementById('mytable'), {sheet:"Sheet JS"});
+        // XLSX.utils.book_append_sheet(wb2, 'Penjualan ' + this.monthYearNow)
+        // XLSX.writeFile(wb, 'Penjualan Cabai ' + this.monthYearNow + '.xlsx')
+      },
       fillData() {
         axios
           .get("/getFilterPenjualan")
@@ -220,6 +290,9 @@
             this.arrayTahun = response.data.tahun;
           })
           .catch(error => {});
+      },
+      exportData() {
+        window.open('/api/export?api_token=${this.token}')
       },
       getData () {
         let bulan = this.bulan;

@@ -123,12 +123,12 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('/pengeluaran/delete/{id}','ProdusenController@deletePengeluaran');
     
     //Business Analytic
-    Route::post('/addTarget','AnalysisController@addTarget');
+    Route::post('/addTarget','AnalysisController@addTarget')->name('target.store');;
     Route::put('/updateTarget/{id}','AnalysisController@updateTarget');
     Route::delete('/deleteTarget/{id}','AnalysisController@deleteTarget');
     Route::get('/getFilterTarget','AnalysisController@getFilterTarget');
     Route::get('/getTarget/{tahun}','AnalysisController@getTarget');
-    Route::get('/getPengeluaran','AnalysisController@getPengeluaran');
+    Route::get('/getPengeluaran/{bulan}/{tahun}','AnalysisController@getPengeluaran');
     Route::get('/getPenjualan/{bulan}/{tahun}','AnalysisController@getPenjualan');
     Route::get('/getFilterPenjualan','AnalysisController@getFilterPenjualan');
     Route::get('/getHarga','AnalysisController@getHarga');
