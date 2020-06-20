@@ -16,7 +16,7 @@
           <li><a href="#team">Team</a></li>
         </ul>
       </nav><!-- .nav-menu -->
-      <router-link to= "/login" class="get-started-btn" target="_blank">Login</router-link>
+      <router-link to= "/login" class="get-started-btn">Login</router-link>
 
     </div>
   </header><!-- End Header -->

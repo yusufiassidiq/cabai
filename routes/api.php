@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('/updateTargetAdmin/{id}','AdminController@updateTarget');
     Route::delete('/deleteTargetAdmin/{id}','AdminController@deleteTarget');
     Route::get('/getTargetAdmin','AdminController@getTarget');
+    Route::get('/getPencapaian/{idCabai}','AdminController@getPencapaian');
     
     //Get Custom Payload
     // Route::get('user/getcustompayloads','UserController@seeToken');
@@ -143,6 +144,7 @@ Route::get('/getAllUserLocation','AnalysisHomeController@getAllUserLocation');
 Route::get('/getAllHarga','AnalysisHomeController@getAllHarga');
 Route::get('/getDaerah','AnalysisHomeController@getDaerah');
 Route::get('/getHarga/{idKab}/{idRole}','AnalysisHomeController@getHarga');
+Route::get('/getHargaProvinsi/{idRole}','AnalysisHomeController@getHargaProvinsi');
 Route::get('/getProduksi/{idKab}','AnalysisHomeController@getProduksi');
 Route::get('/getProduksiTabel/{idKab}','AnalysisHomeController@getProduksiTabel');
 Route::get('/getStok/{idKab}','AnalysisHomeController@getStok');

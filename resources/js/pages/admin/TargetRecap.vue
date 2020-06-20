@@ -32,6 +32,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
+                <vue-progress-bar></vue-progress-bar>
                 <h5 class="card-title">Grafik Target Penjualan Cabai</h5>
 
                 <div class="card-tools">
@@ -72,26 +73,12 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Rekap Target Tahun {{ year }}</h3>
+                <h3 class="card-title">Rekap Target Produksi Tahun {{ year }}</h3>
 
                 <div class="card-tools">
                   <button class="btn btn-success" @click="newModal">Tambah Target 
                     <i class="fas fa-plus fa-fw"></i>
                   </button>
-                  <!-- <div class="input-group input-group-sm" style="width: 150px;"> -->
-                  <!-- <input
-                      type="text"
-                      name="table_search"
-                      class="form-control float-right"
-                      placeholder="Search"
-                  />-->
-
-                  <!-- <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
-                  </div>-->
-                  <!-- </div> -->
                 </div>
               </div>
               <!-- /.card-header -->
@@ -115,7 +102,7 @@
                       <td>{{ data.tahun }}</td>
                       <td>{{ data.bulan }}</td>
                       <td>{{ data.jenis_cabai }}</td>
-                      <td>Rp{{ data.jumlah_cabai }}</td>
+                      <td>{{ data.jumlah_cabai }} kg</td>
                       <td>
                         <a href="#" @click="editModal(data)">
                           <i class="fa fa-edit blue"></i>
@@ -245,7 +232,7 @@
       return {
         editmode : false,
         datatarget :{},
-        year: "",
+        year: {},
         form : new Form({
           id: "",
           tahun : "",
@@ -279,11 +266,12 @@
         })
       },
       loadTarget(){
+        this.$Progress.start();
         axios.get('/readTargetAdmin').then(response =>{
           this.datatarget = response.data.data;
           this.year = response.data.tahun;
         });
-        console.log(response.data.data)
+        this.$Progress.finish();
       },
       editModal(t){
         this.editmode = true,
@@ -346,6 +334,7 @@
         });
       },
       fillData () {
+        this.$Progress.start();
         axios.get('/getTargetAdmin').then(response=>{
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
@@ -416,6 +405,7 @@
               }
             }
           }); 
+          this.$Progress.finish();
         }).catch(error => {
           console.log(error)
           this.errored= true

@@ -16,6 +16,7 @@ import DashboardAdmin from './pages/admin/Dashboard'
 import UserValidation from './pages/admin/UserValidation'
 import UserManagement from './pages/admin/UserManagement'
 import TargetRecap from './pages/admin/TargetRecap'
+import CapaianRecap from './pages/admin/CapaianRecap'
 
 import MasterProd from './pages/scm/produsen/Master' // prod == produsen
 import DashboardProd from './pages/scm/produsen/Dashboard' 
@@ -135,6 +136,11 @@ const routes = [
                 path: 'target',
                 component: TargetRecap,
                 name: "TargetRecap"
+            },
+            {
+                path: 'capaian',
+                component: CapaianRecap,
+                name: "CapaianRecap"
             },
             { path: '*', component: NotfoundLoggedUser },
         ]

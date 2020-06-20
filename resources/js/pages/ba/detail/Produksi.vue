@@ -1,198 +1,174 @@
 <template>
-<body class="hold-transition layout-top-nav">
-  <div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <a href="/" class="navbar-brand">
-          <img src="/dist/img/icon_cabai.png" class="brand-image" />
-          <span class="brand-text font-weight-light">
-            <b>CABAI.id</b> - Monitoring Produksi dan Distribusi Cabai Jawa Barat
-          </span>
-        </a>
-        <button
-          class="navbar-toggler order-1"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarCollapse"
-          aria-controls="navbarCollapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-          <!-- Left navbar links -->
-          <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">
-                Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <router-link to="/register" class="nav-link">Daftar</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/login" class="nav-link">Masuk</router-link>
-            </li>
+<body>
+  <!-- Navbar -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo mr-auto">
+        <a href="/">CabaiJabar</a>
+      </h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-            <!-- <li class="nav-item dropdown">
-              <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
-              <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                <li><a href="#" class="dropdown-item">Some action </a></li>
-                <li><a href="#" class="dropdown-item">Some other action</a></li>
-              </ul>
-            </li>-->
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- /.navbar -->
-    
-    <vue-progress-bar></vue-progress-bar>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="container">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="custom-container">
-          <div class="row">
-            <div class="col-6">
-              <h2 class="text-dark">
-                Produksi
-                <small>Provinsi Jawa Barat</small>
-              </h2>
-            </div>
-            <!-- /.col -->
-            <div class="col-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item">
-                  <router-link to="/">Home</router-link>
-                </li>
-                <li class="breadcrumb-item active">Dashboard Jawa Barat</li>
-              </ol>
-            </div>
-            <!-- /.col -->
-          </div>
-          <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
-
-      <!-- Main content -->
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              
-              <div class="card">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-6 form-group">
-                      <label>Pilih Daerah</label>
-                      <select class="form-control select2" @change="changeHandler" v-model="selectedDaerah" id="daerah" style="width: 100%;">
-                        <option disabled value="">PILIH DAERAH</option>
-                        <option v-for="daerah in daerah" :key="daerah.id" v-bind:value="daerah.id">{{ daerah.name }}</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="card" id="cardCabai" style="display: none;">
-                <div class="card-header">
-                  <h5 class="card-title">GRAFIK PRODUKSI CABAI {{ kab.name }} </h5>
-                  <!-- <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div> -->
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                  <div class="row justify-content-center">
-                    <div class="col-md-12">
-                      <p class="text-center">
-                        <strong>Produksi Cabai Rawit 4 Minggu Terakhir</strong>
-                      </p>
-
-                      <div class="chart">
-                        <!-- Pengeluaran Chart Canvas -->
-                        <canvas ref="chart" height="100" style="height: 100px;"></canvas>
-                      </div>
-                      <!-- /.chart-responsive -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-                <!-- ./card-body -->
-              </div>
-
-              <div class="card" id="tabelCabai" style="display: none;">
-                <div class="card-header">
-                  <h3 class="card-title">PRODUKSI CABAI BULANAN {{kab.name}} TAHUN 2020</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body p-0">
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <!-- <th>No</th> -->
-                        <!-- <th>ID </th> -->
-                        <th>Bulan</th>
-                        <!-- <th>Jenis Cabai</th> -->
-                        <th>Cabai Rawit (Kg)</th>
-                        <th>Cabai Keriting (Kg)</th>
-                        <th>Cabai Besar (Kg)</th>
-                        <th>Total (Kg)</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="transaksi in data" :key="transaksi.bulan">
-                        <!-- <td></td> -->
-                        <!-- <td>{{ data.id }}</td> -->
-                        <td>{{transaksi.bulan}}</td>
-                        <!-- <td>coba</td> -->
-                        <td style="text-align:right">{{transaksi.rawit | filterAngkaRibuan}}</td>
-                        <td style="text-align:right">{{transaksi.keriting | filterAngkaRibuan}}</td>
-                        <td style="text-align:right">{{transaksi.besar | filterAngkaRibuan}}</td>
-                        <td style="text-align:right">{{transaksi.total | filterAngkaRibuan}}</td>
-                        
-                      </tr>
-                      <!-- end example data -->
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.card-body -->
-              </div>
-
-
-              <!-- /.card -->
-            </div>
-            <!-- /.col -->
-          </div>
-        </div>
-        <!-- /.container-fluid -->
-      </div>
-
-      <!-- /.content -->
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active">
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="#about">About</a>
+          </li>
+          <li>
+            <a href="#services">Services</a>
+          </li>
+          <li>
+            <a href="#team">Team</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- .nav-menu -->
+      <router-link to="/login" class="get-started-btn">Login</router-link>
     </div>
-    <footer class="main-footer">
-      <!-- To the right -->
-      <div class="float-right d-none d-sm-inline">Cabai.id</div>
-      <!-- Default to the left -->
-      <strong>
-        Copyright &copy; 2014-2019
-        <a href="https://adminlte.io">AdminLTE.io</a>.
-      </strong> All rights reserved.
-    </footer>
-  </div>
+  </header>
+
+  <main id="main">
+    <vue-progress-bar></vue-progress-bar>
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Produksi Cabai di Jawa Barat</h2>
+          <ol>
+            <li>
+              <a href="index.html">Home</a>
+            </li>
+            <li>Produksi Cabai</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+    <!-- End Breadcrumbs -->
+
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container" data-aos="fade-up">
+        <div class="portfolio-details-container">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label>Pilih Daerah</label>
+                  <select class="form-control select2" @change="changeHandler" v-model="selectedDaerah" id="daerah" style="width: 100%;">
+                    <option disabled value="">PILIH DAERAH</option>
+                    <option v-for="daerah in daerah" :key="daerah.id" v-bind:value="daerah.id">{{ daerah.name }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card" id="cardCabai" style="display: none;">
+            <div class="card-header">
+              <h5 class="card-title">GRAFIK PRODUKSI CABAI {{ kab.name }} </h5>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="row justify-content-center">
+                <div class="col-md-12">
+                  <p class="text-center">
+                    <strong>Produksi Cabai Rawit 4 Minggu Terakhir</strong>
+                  </p>
+
+                  <div class="chart">
+                    <!-- Pengeluaran Chart Canvas -->
+                    <canvas ref="chart" height="100" style="height: 100px;"></canvas>
+                  </div>
+                  <!-- /.chart-responsive -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- ./card-body -->
+          </div>
+
+          <div class="card" id="tabelCabai" style="display: none;">
+            <div class="card-header">
+              <h3 class="card-title">PRODUKSI CABAI BULANAN {{kab.name}} TAHUN 2020</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <!-- <th>No</th> -->
+                    <!-- <th>ID </th> -->
+                    <th>Bulan</th>
+                    <!-- <th>Jenis Cabai</th> -->
+                    <th>Cabai Rawit (Kg)</th>
+                    <th>Cabai Keriting (Kg)</th>
+                    <th>Cabai Besar (Kg)</th>
+                    <th>Total (Kg)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="transaksi in data" :key="transaksi.bulan">
+                    <!-- <td></td> -->
+                    <!-- <td>{{ data.id }}</td> -->
+                    <td>{{transaksi.bulan}}</td>
+                    <!-- <td>coba</td> -->
+                    <td style="text-align:right">{{transaksi.rawit | filterAngkaRibuan}}</td>
+                    <td style="text-align:right">{{transaksi.keriting | filterAngkaRibuan}}</td>
+                    <td style="text-align:right">{{transaksi.besar | filterAngkaRibuan}}</td>
+                    <td style="text-align:right">{{transaksi.total | filterAngkaRibuan}}</td>
+                    
+                  </tr>
+                  <!-- end example data -->
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer">
+    <div class="container d-md-flex py-4">
+      <div class="mr-md-auto text-center text-md-left">
+        <div class="copyright">
+          &copy; Copyright
+          <strong>
+            <span>OnePage</span>
+          </strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/ -->
+          Designed by
+          <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="#" class="twitter">
+          <i class="bx bxl-twitter"></i>
+        </a>
+        <a href="#" class="facebook">
+          <i class="bx bxl-facebook"></i>
+        </a>
+        <a href="#" class="instagram">
+          <i class="bx bxl-instagram"></i>
+        </a>
+        <a href="#" class="google-plus">
+          <i class="bx bxl-skype"></i>
+        </a>
+        <a href="#" class="linkedin">
+          <i class="bx bxl-linkedin"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
 </body>
 </template>
 <script>
@@ -215,18 +191,20 @@ export default {
   },
   methods: {
     fillData(){
+      this.$Progress.start();
       axios
         .get("/getDaerah")
         .then(response =>{
           this.daerah = response.data.daerah;
+          this.$Progress.finish();
         })
         .catch(error => {});
     },
     changeHandler() {
+      this.$Progress.start();
       let selectedDaerah = this.selectedDaerah;
       axios.get('/getProduksi/'+ selectedDaerah)
         .then(response=>{
-          this.$Progress.start();
           console.log(response.data.produksiByDay);
           $("#cardCabai").show();
           this.dateNow = response.data.dateNow;
@@ -326,17 +304,20 @@ export default {
               
             }
           });
-          this.$Progress.finish();
-        })
+      })
         .catch(error => {
           console.log(error);
           this.errored = true;
-        });
+      });
       axios.get('/getProduksiTabel/'+selectedDaerah)
         .then(response =>{
           this.data = response.data.data;
           $("#tabelCabai").show();
-      })
+          this.$Progress.finish();
+      }).catch(error => {
+          console.log(error);
+          this.errored = true;
+      });
     }
   }
 };

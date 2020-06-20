@@ -109,6 +109,10 @@ Vue.filter('filterAngkaRibuan', function (value) {
     );
 })
 
+Vue.filter('numberWithDot', function(value) {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+})
+
 // Vue.filter('classFlag', function (value) {
 //     var flag= value;
 //     return(flag);
