@@ -28,7 +28,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="row justify-content-center">
+        <div v-if= "arrayTahun!==null" class="row justify-content-center">
           <div class="col-md-12">
             <div class="card">
               <div class="card-body">
@@ -38,7 +38,7 @@
                       <!-- <div class="form-group"> -->
                           <label for="">Pilih Tahun</label>
                           <select class="form-control select2"
-                                  @change="loadTarget"
+                                  @change="fetchPaginateTarget('/getTarget/' + tahunFilter)"
                                   v-model="tahunFilter">>
                               <!-- <option value disabled selected>Tahun</option> -->
                               <option v-for="t in arrayTahun" :key="t" v-bind:value="t">{{ t }}</option>
@@ -59,28 +59,29 @@
                 <h5 class="card-title">Grafik Target Penjualan Cabai</h5>
 
                 <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <a id="download">
+                    <button class="btn btn-primary float-right bg-flat-color-1" @click="downloadChart">
+                    <!-- Download Icon -->
+                    <i class="fa fa-download"></i>
+                    </button>
+                  </a>
+                  <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <p class="text-center">
+                    <!-- <p class="text-center">
                       <strong>Target Januari - Desember Tahun {{ year }}</strong>
-                    </p>
-
+                    </p> -->
                     <div class="chart">
-                      <!-- Sales Chart Canvas -->
-                      <canvas ref="chart" height="100" style="height: 100px;"></canvas>
-                      <!-- <canvas id="salesChart" height="180" style="height: 180px;"></canvas> -->
+                      <!-- Target Chart Canvas -->
+                      <canvas id=chart ref="chart" height="100" style="height: 100px;"></canvas>
                     </div>
-                    <!-- /.chart-responsive -->
+                    <!-- /.chart -->
                   </div>
                   <!-- /.col -->
                 </div>
@@ -102,6 +103,17 @@
                   <button class="btn btn-sm btn-success" @click="newModal">Tambah Target 
                     <!-- <i class="fas fa-plus fa-fw"></i> -->
                   </button>
+                  <!-- TOMBOL UNTUK EXPORT DATA KE EXCEL -->
+                  <vue-excel-xlsx
+                    class = "btn btn-sm btn-primary bg-flat-color-1"
+                    :data="dataTabel"
+                    :columns="columns"
+                    :filename="'Target Cabai ' + this.year"
+                    :sheetname="this.year"
+                    >
+                    <i class="fas fa-download fa-fw"></i>
+                  </vue-excel-xlsx>
+                  <!-- TOMBOL UNTUK EXPORT DATA KE EXCEL -->
                   <!-- <div class="input-group input-group-sm" style="width: 150px;"> -->
                   <!-- <input
                       type="text"
@@ -124,8 +136,6 @@
                   <table class="table table-hover text-nowrap">
                     <thead>
                       <tr>
-                        <!-- <th>No</th> -->
-                        <!-- <th>ID </th> -->
                         <th>Tahun</th>
                         <th>Bulan</th>
                         <th>Jenis Cabai</th>
@@ -138,8 +148,6 @@
                         <td colspan="7" align="center">Tidak ada data target</td>
                       </tr>
                       <tr v-for="data in datatarget" :key="data.id">
-                        <!-- <td></td> -->
-                        <!-- <td>{{ data.id }}</td> -->
                         <td>{{ data.tahun }}</td>
                         <td>{{ data.bulan }}</td>
                         <td>{{ data.jenis_cabai }}</td>
@@ -184,7 +192,7 @@
                             class="btn btn-default"
                             v-on:click="fetchPaginateTarget(pagination.next_page_url)"
                             :disabled="!pagination.next_page_url"
-                          >Selanjutnya </button>
+                          >Selanjutnya</button>
                         </li>
                       </ul>
                     </div>
@@ -313,6 +321,7 @@
         year : "",
         roleUser : "",
         datatarget :"",
+        dataTabel :"",
         form : new Form({
           id: "",
           tahun : "",
@@ -322,7 +331,28 @@
         }),
         // pagination
         pagination: [],
-        url_loadTarget: '/getTarget/',
+        url_loadTarget: "",
+
+        //download table
+        columns : [
+          {
+              label: "Tahun",
+              field: "tahun",
+          },
+          {
+              label: "Bulan",
+              field: "bulan",
+          },
+          {
+              label: "Jenis Cabai",
+              field: "jenis_cabai",
+          },
+          {
+              label: "Jumlah Cabai (Kg)",
+              field: "jumlah_cabai",
+              dataFormat: this.$options.filters.filterAngkaRibuan
+          },
+        ],
       };
     },
     mounted() {
@@ -333,7 +363,16 @@
         this.loadTarget();
       });
     },
-    methods: {
+  methods: {
+    downloadChart(){
+        /*get download button (tag: <a></a>) */
+        var download = document.getElementById("download");
+        /*Get image of canvas element*/
+        var image = document.getElementById("chart").toDataURL("image/png");
+        /*insert chart image url to download button (tag: <a></a>) */
+        download.setAttribute("href", image);
+        download.setAttribute('download', 'Grafik Target '+ this.year + '.png');
+      },
     filterData() {
         axios
           .get("/getFilterTarget")
@@ -345,6 +384,7 @@
       },
     fetchPaginateTarget(url) {
       this.url_loadTarget = url;
+      console.log(url);
       this.loadTarget();
     },
     // set up pagination
@@ -443,8 +483,13 @@
       loadTarget () {
         let tahunFilter = this.tahunFilter;
         let $this = this;
-        axios.get(this.url_loadTarget + tahunFilter).then(response=>{
+        if(!this.url_loadTarget){
+          this.url_loadTarget = '/getTarget/' + tahunFilter;
+        }
+        console.log(this.url_loadTarget);
+        axios.get(this.url_loadTarget).then(response=>{
           this.datatarget = response.data.data.data;
+          this.dataTabel = response.data.dataTabel;
           $this.makePagination(response.data.data);
           this.year = response.data.year;
           this.roleUser = response.data.roleUser;
@@ -503,6 +548,12 @@
             options:{
               maintainAspectRatio : true,
               responsive: true,
+              title:{
+                display : true,
+                fontSize : 16,
+                fontColor : '#333',
+                text : 'Target Januari - Desember Tahun ' + this.year,
+              },
               tooltips:{
                 mode:'index',
                 intersect: false,
