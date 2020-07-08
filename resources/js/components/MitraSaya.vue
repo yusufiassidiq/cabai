@@ -1,5 +1,5 @@
 <template>
-  <!-- MS : Ini merupakan komponen bagian pada Mitra Saya-->
+  <!-- MS : Ini merupakan komponen bagian pada Kelola mitra-->
   <section class="content">
     <div class="container-fluid">
       <div class="row justify-content-center">
@@ -7,7 +7,7 @@
           <div class="card">
             <div class="card-header">
               <vue-progress-bar></vue-progress-bar>
-              <h3 class="card-title">Mitra Saya</h3>
+              <h3 class="card-title">Kelola mitra</h3>
               <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input

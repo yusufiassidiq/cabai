@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Manajemen User</h1>
+            <h1 class="m-0 text-dark">Manajemen akun</h1>
           </div>
           <vue-progress-bar></vue-progress-bar>
           <!-- /.col -->
@@ -15,7 +15,7 @@
               <li class="breadcrumb-item">
                 <a href="#">Admin</a>
               </li>
-              <li class="breadcrumb-item active">Manajemen User</li>
+              <li class="breadcrumb-item active">Manajemen akun</li>
             </ol>
           </div>
           <!-- /.col -->

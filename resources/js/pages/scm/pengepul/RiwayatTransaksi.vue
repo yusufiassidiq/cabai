@@ -36,7 +36,7 @@
                       role="tab"
                       aria-controls="custom-tabs-three-permintaan"
                       aria-selected="true"
-                    >Distribusi dengan pelanggan</a>
+                    >Distribusi sebagai pemasok</a>
                   </li>
                   <li class="nav-item">
                     <a
@@ -47,7 +47,7 @@
                       role="tab"
                       aria-controls="custom-tabs-three-pengajuan"
                       aria-selected="false"
-                    >Distribusi dengan pemasok</a>
+                    >Distribusi sebagai pelanggan</a>
                   </li>
                 </ul>
               </div>

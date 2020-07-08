@@ -7,14 +7,14 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Validasi User</h1>
+              <h1 class="m-0 text-dark">Validasi akun</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item">
                   <a href="#">Admin</a>
                 </li>
-                <li class="breadcrumb-item active">Validasi User</li>
+                <li class="breadcrumb-item active">Validasi akun</li>
               </ol>
             </div>
           </div>
@@ -27,7 +27,7 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Validasi User</h3>
+                  <h3 class="card-title">Validasi akun</h3>
                   <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
                       <input
@@ -265,7 +265,7 @@ export default {
       this.userDetail = user;
       $("#detailUser").modal("show");
     },
-    // funsi untuk menolak validasi user
+    // funsi untuk menolak Validasi akun
     tolak(id) {
       swal
         .fire({
@@ -299,7 +299,7 @@ export default {
           }
         });
     },
-    // fungsi untuk menerima validasi User
+    // fungsi untuk menerima Validasi akun
     terima(id) {
       this.$Progress.start();
       axios
