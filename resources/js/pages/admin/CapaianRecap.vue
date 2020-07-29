@@ -235,10 +235,8 @@
       this.loadTarget();
     },
     mounted() {
-    this.fillData();
     // Custom event on Vue js
     UpdateData.$on("update", () => {
-      this.fillData();
       this.loadTarget();
     });
   }

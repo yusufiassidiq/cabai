@@ -12,16 +12,7 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active">
-            <a href="index.html">Home</a>
-          </li>
-          <li>
-            <a href="#about">About</a>
-          </li>
-          <li>
-            <a href="#services">Services</a>
-          </li>
-          <li>
-            <a href="#team">Team</a>
+            <a href="/">Home</a>
           </li>
         </ul>
       </nav>
@@ -57,7 +48,7 @@
                 <div class="col-md-6 form-group">
                   <label>Pilih Daerah</label>
                   <select class="form-control select2" @change="changeHandler" v-model="selectedDaerah" id="daerah" style="width: 100%;">
-                    <option disabled value="">PILIH DAERAH</option>
+                    <option disabled value="">PILIH SENTRA PRODUKSI</option>
                     <option v-for="daerah in daerah" :key="daerah.id" v-bind:value="daerah.id">{{ daerah.name }}</option>
                   </select>
                 </div>

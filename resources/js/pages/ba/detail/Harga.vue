@@ -12,16 +12,7 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active">
-            <a href="index.html">Home</a>
-          </li>
-          <li>
-            <a href="#about">About</a>
-          </li>
-          <li>
-            <a href="#services">Services</a>
-          </li>
-          <li>
-            <a href="#team">Team</a>
+            <a href="/">Home</a>
           </li>
         </ul>
       </nav>
@@ -64,8 +55,7 @@
                     id="daerah"
                     style="width: 100%;"
                   >
-                    <option value disabled>Pilih Daerah</option>
-                    <option value="0">PROVINSI JAWA BARAT</option>
+                    <option value="0" disabled>PILIH SENTRA PRODUKSI</option>
                     <option
                       v-for="daerah in daerah"
                       :key="daerah.id"
@@ -90,6 +80,44 @@
                   </select>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div class="card" id="summaryCabai" style="display: none;">
+            <div class="row card-body">
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                  <div class="inner">
+                    <h3>Rp{{hargaNewRawit | numberWithDot}}</h3>
+                    <p>Harga terbaru cabai rawit</p>
+                  </div>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                  <div class="inner">
+                    <h3>
+                      Rp{{hargaNewKeriting | numberWithDot}}
+                    </h3>
+                    <p>Harga terbaru cabai keriting</p>
+                  </div>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3>Rp{{hargaNewBesar | numberWithDot}}</h3>
+                    <p>Harga terbaru cabai besar</p>
+                  </div>
+                </div>
+              </div>
+              <!-- ./col -->
+              
             </div>
           </div>
 
@@ -181,7 +209,10 @@ export default {
       selectedStakeholder: "2",
       daerah: {},
       kab: {},
-      role: {}
+      role: {},
+      hargaNewRawit: {},
+      hargaNewKeriting: {},
+      hargaNewBesar: {}
     };
   },
   mounted() {
@@ -225,11 +256,15 @@ export default {
           .then(response => {
             console.log(response.data.hargaHarian);
             $("#cardCabai").show();
+            $("#summaryCabai").show();
             console.log(selectedStakeholder);
             this.dateNow = response.data.dateNow;
             this.date = response.data.date;
             this.kab = response.data.kabupaten;
             this.role = response.data.role;
+            this.hargaNewRawit = response.data.hargaNewRawit;
+            this.hargaNewKeriting = response.data.hargaNewKeriting;
+            this.hargaNewBesar = response.data.hargaNewBesar;
             var chart = this.$refs.chart;
             var ctx = chart.getContext("2d");
             var myChart = new Chart(ctx, {
@@ -276,7 +311,7 @@ export default {
                     pointStrokeColor: "rgba(74, 192, 192, 1)",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(74, 192, 192, 1)",
-                    data: response.data.hargaHarianKeriting,
+                    data: response.data.hargaHarianBesar,
                     pointStyle: "rect",
                     pointRadius: 7,
                     pointHoverRadius: 10,

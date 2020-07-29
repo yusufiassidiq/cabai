@@ -138,8 +138,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/getSummaryOthers','AnalysisController@getSummaryOthers');
 });
 
-// TANPA LOGIN
-Route::get('/getUserCount','AnalysisHomeController@getUserCount'); //test
+// Bussiness Analytic (Tanpa Login)
+Route::get('/getUserCount','AnalysisHomeController@getUserCount'); 
 Route::get('/getAllUserLocation','AnalysisHomeController@getAllUserLocation');
 Route::get('/getAllHarga','AnalysisHomeController@getAllHarga');
 Route::get('/getDaerah','AnalysisHomeController@getDaerah');
