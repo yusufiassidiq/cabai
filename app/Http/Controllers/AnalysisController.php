@@ -31,6 +31,7 @@ class AnalysisController extends Controller
         $bulan = $request->bulan;
         $jenisCabai = $request->jenis_cabai;
         $check = Target::Where([
+            ['user_id', $idUser],
             ['tahun',$tahun],
             ['bulan',$bulan],
             ['jenis_cabai',$jenisCabai],
@@ -145,8 +146,10 @@ class AnalysisController extends Controller
             $year=range($yearStart,$yearEnd);
             // $test = "yuhu";
         }
-        else
+        else if($yearStart && $yearStart==$yearEnd)
             $year=[$yearStart];
+        else
+            $year=null;
         return response()->json([
             // 'test' => $test,
             'roleUser' => $roleUser,
@@ -172,12 +175,19 @@ class AnalysisController extends Controller
                 ->orderByRaw("FIELD(bulan,'Januari','Februari','Maret','April','Mei','Juni',
                 'Juli', 'Agustus','September', 'Oktober', 'November', 'Desember')ASC")
                 ->paginate(9);
+        $dataTabel=Target::where([
+            ['user_id',$idUser],
+            ['tahun',$tahun],
+            ])
+            ->orderByRaw("FIELD(bulan,'Januari','Februari','Maret','April','Mei','Juni',
+            'Juli', 'Agustus','September', 'Oktober', 'November', 'Desember')ASC")
+            ->get();
         //membuat array kosong sebanyak bulan 
         //ex targetByMonthRawit[Januari]=0 dst
         for($i=0;$i<count($month);$i++){
-            $targetByMonthRawit[$month[$i]]=0;
-            $targetByMonthKeriting[$month[$i]]=0;  
-            $targetByMonthBesar[$month[$i]]=0;  
+            $targetByMonthRawit[$month[$i]]=null;
+            $targetByMonthKeriting[$month[$i]]=null;  
+            $targetByMonthBesar[$month[$i]]=null;  
         }
 
         //Data Target Rawit yang akan di tampilkan pada chart
@@ -221,6 +231,7 @@ class AnalysisController extends Controller
         }
         return response()->json([
             'status' => 'success',
+            'dataTabel' => $dataTabel,
             'data' => $targetByMonth,
             'month' => $month,
             'year'  => $tahun,
@@ -228,6 +239,29 @@ class AnalysisController extends Controller
             'rawit' => $data_targetRawit,
             'keriting' => $data_targetKeriting,
             'besar' => $data_targetBesar,
+        ]);
+    }
+    public function getFilterPengeluaran()
+    {
+        $roleUser = Auth::user()->role;
+        $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
+        $tahun = PengeluaranProduksi::Where('user_id',$idUser)
+        ->orderBy('created_at','ASC')
+        ->pluck('created_at') 
+        ->first();
+        if($tahun){
+            $year=$tahun->format('Y');
+            $yearNow= Carbon::now()->format('Y');
+            if($year<$yearNow){
+                $year=range($year,$yearNow);
+            }
+            else
+                $year=[$year];}
+        else 
+            $year=null;
+        return response()->json([
+            'roleUser' => $roleUser,
+            'tahun' => $year,
         ]);
     }
     public function getPengeluaran(Request $request, $bulan, $tahun){
@@ -550,29 +584,29 @@ class AnalysisController extends Controller
             $array_date[$i]= $awal->format('Y-m-d');
             $awal=$awal->addDay();
             $rawitByDayProdusen[$i]=$transaksiProdusenRawit->firstWhere('tanggal_diterima',$array_date[$i]) ?
-                $transaksiProdusenRawit->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+                $transaksiProdusenRawit->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:null;
             $keritingByDayProdusen[$i]=$transaksiProdusenKeriting->firstWhere('tanggal_diterima',$array_date[$i]) ?
-                $transaksiProdusenKeriting->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+                $transaksiProdusenKeriting->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:null;
             $besarByDayProdusen[$i]=$transaksiProdusenBesar->firstWhere('tanggal_diterima',$array_date[$i]) ?
-                $transaksiProdusenBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+                $transaksiProdusenBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:null;
             $rawitByDayPengepul[$i]=$transaksiPengepulRawit->firstWhere('tanggal_diterima',$array_date[$i]) ?
-                $transaksiPengepulRawit->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+                $transaksiPengepulRawit->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:null;
             $keritingByDayPengepul[$i]=$transaksiPengepulKeriting->firstWhere('tanggal_diterima',$array_date[$i]) ?
-                $transaksiPengepulKeriting->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+                $transaksiPengepulKeriting->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:null;
             $besarByDayPengepul[$i]=$transaksiPengepulBesar->firstWhere('tanggal_diterima',$array_date[$i]) ?
-                $transaksiPengepulBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+                $transaksiPengepulBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:null;
             $rawitByDayGrosir[$i]=$transaksiGrosirRawit->firstWhere('tanggal_diterima',$array_date[$i]) ?
-                $transaksiGrosirRawit->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+                $transaksiGrosirRawit->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:null;
             $keritingByDayGrosir[$i]=$transaksiGrosirKeriting->firstWhere('tanggal_diterima',$array_date[$i]) ?
-                $transaksiGrosirKeriting->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+                $transaksiGrosirKeriting->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:null;
             $besarByDayGrosir[$i]=$transaksiGrosirBesar->firstWhere('tanggal_diterima',$array_date[$i]) ?
-                $transaksiGrosirBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+                $transaksiGrosirBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:null;
             $rawitByDayPengecer[$i]=$transaksiPengecerRawit->firstWhere('tanggal_diterima',$array_date[$i]) ?
-                $transaksiPengecerRawit->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+                $transaksiPengecerRawit->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:null;
             $keritingByDayPengecer[$i]=$transaksiPengecerKeriting->firstWhere('tanggal_diterima',$array_date[$i]) ?
-                $transaksiPengecerKeriting->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+                $transaksiPengecerKeriting->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:null;
             $besarByDayPengecer[$i]=$transaksiPengecerBesar->firstWhere('tanggal_diterima',$array_date[$i]) ?
-                $transaksiPengecerBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:0;
+                $transaksiPengecerBesar->firstWhere('tanggal_diterima',$array_date[$i])->hargaCabai:null;
         }
         return response()->json([
             // 'test' => $test,
@@ -861,90 +895,102 @@ class AnalysisController extends Controller
             'targetByJenisCabai' => $targetMonthNow,
         ]);
     }
-    public function getPasokan()
+    public function getFilterPasokan()
+    {
+        $roleUser = Auth::user()->role;
+        $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
+        $tahun = Transaksi::Where([['user_id',$idUser],
+        ['status_permintaan','3'],
+        ['status_pengiriman','1'],
+        ['status_pemesanan','1'],
+        ])
+        ->orderBy('tanggal_diterima','ASC')
+        ->pluck('tanggal_diterima')
+        ->first();
+        if($tahun){
+            $year=Carbon::createFromFormat('Y-m-d',$tahun)->year;
+            $yearNow= Carbon::now()->format('Y');
+            if($year<$yearNow){
+                $year=range($year,$yearNow);
+            }
+            else
+                $year=[$year];}
+        else 
+            $year=null;
+        return response()->json([
+            'roleUser' => $roleUser,
+            'tahun' => $year,
+        ]);
+    }
+    public function getPasokan(Request $request, $bulan, $tahun)
     {
         $roleUser = Auth::user()->role;
         $idUser = Auth::user()->id;
-        $range= Carbon::now()->subweek()->format('Y-m');
+        $range= $tahun . '-' . $bulan;
+        $parse = Carbon::parse($range);
+        $monthiso = $parse->isoFormat('MMMM');
+        $array_date = range($parse->startOfMonth()->format('d'), $parse->endOfMonth()->format('d'));
+        $rangePasokan= $monthiso . " " . $tahun;
         $pasokan = Transaksi::Where([
             ['user_id', $idUser],
             ['status_permintaan','3'],
             ['status_pengiriman','1'],
             ['status_pemesanan','1'],
-            // ['jenis_cabai','Cabai rawit']
             ['tanggal_diterima', 'LIKE',  $range . '%']
-        ])->select('pemasok_id',DB::raw("sum(jumlah_cabai) as total"))
-        ->groupBy('pemasok_id')
-        ->orderBy('total','DESC')
+        ])->select('pemasok_id','jumlah_cabai','harga','jenis_cabai','tanggal_diterima')
         ->get();
-        for($i=0;$i<count($pasokan);$i++){
-            $pemasok[$i]=User::find($pasokan[$i]->pemasok_id)->name;
-            $idPemasok[$i]=$pasokan[$i]->pemasok_id;
+        $pasokanUnique=$pasokan->unique('pemasok_id')->all();
+        $idPemasok=array_column($pasokanUnique, 'pemasok_id');
+        $dataGrafik=array();
+        foreach($idPemasok as $id){
+            $datapasokan=$pasokan->where('pemasok_id', $id);
+            $dataGrafik[]=[
+                'namaPemasok' => User::find($id)->name,
+                'rawit' => $datapasokan->where('jenis_cabai','Cabai rawit')
+                            ->sum('jumlah_cabai'),
+                'keriting' => $datapasokan->where('jenis_cabai','Cabai keriting')
+                            ->sum('jumlah_cabai'),
+                'besar' => $datapasokan->where('jenis_cabai','Cabai besar')
+                            ->sum('jumlah_cabai'),
+                'total' => $datapasokan->sum('jumlah_cabai'),
+            ];
         }
-        if(count($pasokan)==0){
+        $pemasok = array_column($dataGrafik,'namaPemasok');
+        $totalRawit = array_column($dataGrafik,'rawit');
+        $totalKeriting = array_column($dataGrafik,'keriting');
+        $totalBesar = array_column($dataGrafik,'besar');
+        $checkPemasok = Transaksi::firstWhere([
+            ['user_id', $idUser],
+            ['status_permintaan','3'],
+            ['status_pengiriman','1'],
+            ['status_pemesanan','1'],
+        ]);
+        if($pemasok==[])
             $pemasok=null;
-            $totalRawit=null;
-            $totalKeriting=null;
-            $totalBesar=null;
+        foreach($array_date as $i){
+            $n_date=strlen($i) == 1 ? 0 . $i:$i;
+            $date = $range . '-' . $n_date;
+            $datapasokan=$pasokan->where('tanggal_diterima',$date);
+            //Data untuk tabel
+            $dataTabel[]=[
+                'tanggal' => $i . '/' . $monthiso. '/' . $tahun,
+                'rawit' => $datapasokan->where('jenis_cabai','Cabai rawit')
+                            ->sum('jumlah_cabai'),
+                'keriting' => $datapasokan->where('jenis_cabai','Cabai keriting')
+                            ->sum('jumlah_cabai'),
+                'besar' => $datapasokan->where('jenis_cabai','Cabai besar')
+                            ->sum('jumlah_cabai'),
+                'total' => $datapasokan->sum('jumlah_cabai'),
+            ];
         }
-        else{
-            $pasokanRawit = Transaksi::whereIn('pemasok_id',$idPemasok)
-            ->Where([['user_id', $idUser],
-                ['status_permintaan','3'],
-                ['status_pengiriman','1'],
-                ['status_pemesanan','1'],
-                ['jenis_cabai','Cabai rawit'],
-                ['tanggal_diterima', 'LIKE',  $range . '%']
-            ])->select('pemasok_id',DB::raw("sum(jumlah_cabai) as total"))
-            ->groupBy('pemasok_id')
-            ->pluck('total','pemasok_id')
-            ->all();
-            $pasokanKeriting = Transaksi::whereIn('pemasok_id',$idPemasok)
-            ->Where([['user_id', $idUser],
-                ['status_permintaan','3'],
-                ['status_pengiriman','1'],
-                ['status_pemesanan','1'],
-                ['jenis_cabai','Cabai keriting'],
-                ['tanggal_diterima', 'LIKE',  $range . '%']
-            ])->select('pemasok_id',DB::raw("sum(jumlah_cabai) as total"))
-            ->groupBy('pemasok_id')
-            ->pluck('total','pemasok_id')
-            ->all();
-            $pasokanBesar = Transaksi::whereIn('pemasok_id',$idPemasok)
-            ->Where([['user_id', $idUser],
-                ['status_permintaan','3'],
-                ['status_pengiriman','1'],
-                ['status_pemesanan','1'],
-                ['jenis_cabai','Cabai besar'],
-                ['tanggal_diterima', 'LIKE',  $range . '%']
-            ])->select('pemasok_id',DB::raw("sum(jumlah_cabai) as total"))
-            ->groupBy('pemasok_id')
-            ->pluck('total','pemasok_id')
-            ->all();
-            $c=0;
-            foreach($idPemasok as $id){
-                if(array_key_exists($id,$pasokanRawit))
-                    $totalRawit[]=$pasokanRawit[$id];
-                else
-                    $totalRawit[]=0;
-                if(array_key_exists($id,$pasokanKeriting))
-                    $totalKeriting[]=$pasokanKeriting[$id];
-                else
-                    $totalKeriting[]=0;
-                if(array_key_exists($id,$pasokanBesar))
-                    $totalBesar[]=$pasokanBesar[$id];
-                else
-                    $totalBesar[]=0;
-            }
-        }
-        $rangePasokan= Carbon::now()->isoFormat('MMMM YYYY');
         return response()->json([
-            'test' => $pasokanRawit,
+            'checkPemasok' => $checkPemasok,
             'rangePasokan' => $rangePasokan,
             'pemasok' => $pemasok,
             'totalRawit' => $totalRawit,
             'totalKeriting' => $totalKeriting,
             'totalBesar' => $totalBesar,
+            'pasokan' => $dataTabel,
             'roleUser' => $roleUser,
         ]);
     }

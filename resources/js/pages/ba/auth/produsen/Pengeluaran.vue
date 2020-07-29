@@ -80,24 +80,27 @@
               <div class="card-header">
                 <h5 class="card-title">Grafik Pengeluaran Produksi Cabai</h5>
                 <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <a id="download">
+                    <button class="btn btn-primary float-right bg-flat-color-1" @click="downloadChart">
+                    <!-- Download Icon -->
+                    <i class="fa fa-download"></i>
+                    </button>
+                  </a>
+                  <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row justify-content-center">
                   <div class="col-md-12">
-                    <p class="text-center">
-                        <strong>Pengeluaran Bulan {{month}} {{ year }}</strong>
-                    </p>
+                    <!-- <p class="text-center">
+                      <strong>Pengeluaran Bulan {{month}} {{ year }}</strong>
+                    </p> -->
                     <div class="chart">
                       <!-- Pengeluaran Chart Canvas -->
-                      <canvas ref="chart" height="100" style="height: 100px;"></canvas>
+                      <canvas id=chart ref="chart" height="100" style="height: 100px;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
                   </div>
@@ -118,9 +121,20 @@
                 <h3 class="card-title">Pengeluaran Cabai Bulan {{month}} {{tahunFilter}}</h3>
 
                 <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <!-- TOMBOL UNTUK EXPORT DATA KE EXCEL -->
+                  <vue-excel-xlsx
+                    class = "btn btn-primary float-right bg-flat-color-1"
+                    :data="pengeluaran"
+                    :columns="columns"
+                    :filename="'Pengeluaran ' + this.month + ' ' + this.tahunFilter"
+                    :sheetname="this.month + ' ' + this.tahunFilter"
+                    >
+                    <i class="fas fa-download fa-fw"></i>
+                  </vue-excel-xlsx>
+                  <!-- TOMBOL UNTUK EXPORT DATA KE EXCEL --> 
+                  <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
               <!-- /.card-header -->
@@ -199,6 +213,39 @@
         roleUser : "",
         year : "",
         lahan : "",
+
+        //download table
+        columns : [
+          {
+              label: "Tanggal",
+              field: "tanggal",
+          },
+          {
+              label: "Pupuk",
+              field: "pupuk",
+              dataFormat: this.$options.filters.convertToRupiah
+          },
+          {
+              label: "Alat Tani",
+              field: "alatTani",
+              dataFormat: this.$options.filters.convertToRupiah
+          },
+          {
+              label: "Pestisida",
+              field: "pestisida",
+              dataFormat: this.$options.filters.convertToRupiah
+          },
+          {
+              label: "Lainnya",
+              field: "lainnya",
+              dataFormat: this.$options.filters.convertToRupiah
+          },
+          {
+              label: "Total Pengeluaran",
+              field: "jumlahPengeluaran",
+              dataFormat: this.$options.filters.convertToRupiah
+          },
+        ],
       };
     },
     mounted () {
@@ -209,9 +256,18 @@
       }, 1800000)
     },
     methods: {
+      downloadChart(){
+        /*get download button (tag: <a></a>) */
+        var download = document.getElementById("download");
+        /*Get image of canvas element*/
+        var image = document.getElementById("chart").toDataURL("image/png");
+        /*insert chart image url to download button (tag: <a></a>) */
+        download.setAttribute("href", image);
+        download.setAttribute('download', 'Grafik Pengeluaran '+ this.month + ' ' + this.year  + '.png');
+      },
       filterData() {
         axios
-          .get("/getFilterTarget")
+          .get("/getFilterPengeluaran")
           .then(response =>{
             // this.roleUser = response.data.roleUser;
             this.arrayTahun = response.data.tahun;
@@ -285,6 +341,12 @@
             options:{
               barValueSpacing:100,
               responsive: true,
+              title:{
+                display : true,
+                fontSize : 16,
+                fontColor : '#333',
+                text : 'Pengeluaran Bulan ' + this.month + ' ' + this.year,
+              },
               tooltips:{
                 mode:'index',
                 intersect: false,

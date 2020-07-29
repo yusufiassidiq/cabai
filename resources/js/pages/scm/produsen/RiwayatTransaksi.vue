@@ -36,7 +36,7 @@
                       role="tab"
                       aria-controls="custom-tabs-three-permintaan"
                       aria-selected="true"
-                    >Distribusi dengan pelanggan</a>
+                    >Distribusi sebagai pemasok</a>
                   </li>
                 </ul>
               </div>

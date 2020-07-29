@@ -35,39 +35,31 @@
                  <!-- FORM FILTER BERDASARKAN BULAN DAN TAHUN -->
                 <div class="row"> 
                   <div class="col-md-3 form-group">
-                      <!-- <div class="form-group"> -->
-                          <label for="">Pilih Bulan</label>
-                          <select class="form-control select2" 
-                                  @change="getData"
-                                  v-model="bulan">
-                              <!-- <option value disabled selected>Bulan</option> -->
-                              <option value="01">Januari</option>
-                              <option value="02">Februari</option>
-                              <option value="03">Maret</option>
-                              <option value="04">April</option>
-                              <option value="05">Mei</option>
-                              <option value="06">Juni</option>
-                              <option value="07">Juli</option>
-                              <option value="08">Agustus</option>
-                              <option value="09">September</option>
-                              <option value="10">Oktober</option>
-                              <option value="11">November</option>
-                              <option value="12">Desember</option>
-                          </select>
-                      <!-- </div> -->
+                    <label for="">Pilih Bulan</label>
+                    <select class="form-control select2" 
+                            @change="getData"
+                            v-model="bulan">
+                        <option value="01">Januari</option>
+                        <option value="02">Februari</option>
+                        <option value="03">Maret</option>
+                        <option value="04">April</option>
+                        <option value="05">Mei</option>
+                        <option value="06">Juni</option>
+                        <option value="07">Juli</option>
+                        <option value="08">Agustus</option>
+                        <option value="09">September</option>
+                        <option value="10">Oktober</option>
+                        <option value="11">November</option>
+                        <option value="12">Desember</option>
+                    </select>
                   </div>
                   <div class="col-md-3 form-group">
-                      <!-- <div class="form-group"> -->
-                          <label for="">Pilih Tahun</label>
-                          <select class="form-control select2"
-                                  @change="getData"
-                                  v-model="tahun">>
-                              <!-- <option v-for="t in tahun" :key="t.i" v-bind:value="t.i">{{t.i}}</option> -->
-                              <!-- <option v-for="(y, i) in tahun" :key="i" :value="y">{{ y }}</option> -->
-                              <!-- <option value disabled selected>Tahun</option> -->
-                              <option v-for="t in arrayTahun" :key="t" v-bind:value="t">{{ t }}</option>
-                          </select>
-                      <!-- </div> -->
+                    <label for="">Pilih Tahun</label>
+                    <select class="form-control select2"
+                            @change="getData"
+                            v-model="tahun">>
+                        <option v-for="t in arrayTahun" :key="t" v-bind:value="t">{{ t }}</option>
+                    </select>
                   </div>
                 </div>
                 <!-- FORM FILTER BERDASARKAN BULAN DAN TAHUN -->
@@ -83,38 +75,28 @@
                 <h5 class="card-title">Grafik Penjualan Cabai</h5>
 
                 <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <a id="download">
+                        <button class="btn btn-primary float-right bg-flat-color-1" @click="downloadChart">
+                        <!-- Download Icon -->
+                        <i class="fa fa-download"></i>
+                        </button>
+                      </a>
+                  <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row justify-content-center">
                   <div class="col-md-12">
-                    <p class="text-center">
+                    <!-- <p class="text-center">
                       <strong>Penjualan (Kg): {{start}} - {{end}}</strong>
-                      <a id="download">
-                        <button class="btn btn-primary float-right bg-flat-color-1" @click="downloadChart">
-                        <!-- Download Icon -->
-                        <i class="fa fa-download"></i>
-                        </button>
-                      </a>
-                    </p>
+                    </p> -->
 
                     <div class="chart">
-                      <!-- <button id="download2" @click="chartToImage">Save Image!</button> -->
                       <!-- Pengeluaran Chart Canvas -->
                       <canvas id=chart ref="chart" height="100" style="height: 100px;"></canvas>
-                      <!-- <a id="download"
-                        download="ChartPenjualan.jpg" 
-                        href=""
-                        class="btn btn-primary float-right bg-flat-color-1"
-                        title="chart"> -->
-                      <!-- Download Icon -->
-                      <!-- <i class="fa fa-download"></i> -->
-                      </a>
-                    
                     </div>
                     <!-- /.chart-responsive -->
                   </div>
@@ -223,7 +205,8 @@
         end : "",
         data:"",
         arrayTahun:"",
-
+        
+        //download table
         columns : [
           {
               label: "Tanggal Transaksi",
@@ -259,7 +242,7 @@
       };
     },
     mounted () {
-      this.fillData(),
+      this.filterData(),
       this.getData()
       // window.setInterval(() => {
       //   this.getData()
@@ -275,14 +258,7 @@
         download.setAttribute("href", image);
         download.setAttribute('download', 'Grafik Penjualan '+this.monthYearNow + '.png');
       },
-      onexport() {
-        // var data = XLSX.utils.json_to_sheet(this.data)
-        // var wb = XLSX.utils.book_new()
-        // var wb2 = XLSX.utils.table_to_book(document.getElementById('mytable'), {sheet:"Sheet JS"});
-        // XLSX.utils.book_append_sheet(wb2, 'Penjualan ' + this.monthYearNow)
-        // XLSX.writeFile(wb, 'Penjualan Cabai ' + this.monthYearNow + '.xlsx')
-      },
-      fillData() {
+      filterData() {
         axios
           .get("/getFilterPenjualan")
           .then(response =>{
@@ -290,9 +266,6 @@
             this.arrayTahun = response.data.tahun;
           })
           .catch(error => {});
-      },
-      exportData() {
-        window.open('/api/export?api_token=${this.token}')
       },
       getData () {
         let bulan = this.bulan;
@@ -353,6 +326,12 @@
             },
             options:{
               responsive: true,
+              title:{
+                display : true,
+                fontSize : 16,
+                fontColor : '#333',
+                text : 'Penjualan (Kg): ' + this.start + ' - ' + this.end,
+              },
               tooltips:{
                 mode:'index',
                 intersect: false,

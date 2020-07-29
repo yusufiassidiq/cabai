@@ -130,11 +130,13 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/getFilterTarget','AnalysisController@getFilterTarget');
     Route::get('/getTarget/{tahun}','AnalysisController@getTarget');
     Route::get('/getPengeluaran/{bulan}/{tahun}','AnalysisController@getPengeluaran');
+    Route::get('/getFilterPengeluaran','AnalysisController@getFilterPengeluaran');
     Route::get('/getPenjualan/{bulan}/{tahun}','AnalysisController@getPenjualan');
     Route::get('/getFilterPenjualan','AnalysisController@getFilterPenjualan');
     Route::get('/getHarga','AnalysisController@getHarga');
     Route::get('/getSummaryProdusen','AnalysisController@getSummaryProdusen');
-    Route::get('/getPasokan','AnalysisController@getPasokan');
+    Route::get('/getPasokan/{bulan}/{tahun}','AnalysisController@getPasokan');
+    Route::get('/getFilterPasokan','AnalysisController@getFilterPasokan');
     Route::get('/getSummaryOthers','AnalysisController@getSummaryOthers');
 });
 
