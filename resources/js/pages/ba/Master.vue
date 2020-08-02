@@ -10,10 +10,10 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
+          <li class="active"><a href="/">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#team">Team</a></li>
+          <!-- <li><a href="#services">Services</a></li>
+          <li><a href="#team">Team</a></li> -->
         </ul>
       </nav><!-- .nav-menu -->
       <router-link to= "/login" class="get-started-btn">Login</router-link>

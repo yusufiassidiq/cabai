@@ -202,7 +202,7 @@
                   type="text"
                   name="jumlah_cabai"
                   class="form-control"
-                  placeholder="Total Penjualan (dalam Rupiah)"
+                  placeholder="Total Produksi (dalam Kg)"
                   :class="{ 'is-invalid': form.errors.has('jumlah_cabai') }"
                 />
                 <has-error :form="form" field="jumlah_cabai"></has-error>
