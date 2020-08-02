@@ -152,8 +152,8 @@
             <div class="modal-body">
               <div class="form-group col-md">
                 <select
-                  id="lahan__id" v-model="form.lahan_id" class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('lahan_id') }"
+                  id="lahan__id" v-model="form.pra_produksi_id" class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('pra_produksi_id') }"
                 >
                   <option value disabled selected>Pilih Lahan</option>
                   <option v-for="data in datalahan" :key="data.id"
@@ -161,7 +161,7 @@
                   >{{ data.kode_lahan }} - {{ data.jenis_cabai }}
                   </option>
                 </select>
-                <has-error :form="form" field="lahan_id"></has-error>
+                <has-error :form="form" field="pra_produksi_id"></has-error>
               </div>
 
               <div class="form-group col-md">
@@ -214,7 +214,7 @@ export default {
       form: new Form({
         id: "",
         jumlah_cabai: "",
-        lahan_id: "",
+        pra_produksi_id: "",
         tanggal_panen: ""
       }),
       // pagination
