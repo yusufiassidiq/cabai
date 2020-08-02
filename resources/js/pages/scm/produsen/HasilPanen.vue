@@ -152,40 +152,30 @@
             <div class="modal-body">
               <div class="form-group col-md">
                 <select
-                  id="lahan__id"
-                  v-model="form.pra_produksi_id"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('pra_produksi_id') }"
+                  id="lahan__id" v-model="form.lahan_id" class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('lahan_id') }"
                 >
                   <option value disabled selected>Pilih Lahan</option>
-                  <option
-                    v-for="data in datalahan"
-                    :key="data.id"
+                  <option v-for="data in datalahan" :key="data.id"
                     v-bind:value="data.id"
-                  >{{ data.kode_lahan }} - {{ data.jenis_cabai }}</option>
+                  >{{ data.kode_lahan }} - {{ data.jenis_cabai }}
+                  </option>
                 </select>
-                <has-error :form="form" field="pra_produksi_id"></has-error>
+                <has-error :form="form" field="lahan_id"></has-error>
               </div>
 
               <div class="form-group col-md">
-                <input
-                  v-model="form.jumlah_cabai"
-                  type="number"
-                  class="form-control"
-                  placeholder="Jumlah Cabai (Kg)"
+                <input v-model="form.jumlah_cabai" type="number"
+                  class="form-control" placeholder="Jumlah Cabai (Kg)"
                   :class="{ 'is-invalid': form.errors.has('jumlah_cabai') }"
                 />
                 <has-error :form="form" field="jumlah_cabai"></has-error>
               </div>
 
               <div class="form-group col-md">
-                <datepicker
-                  input-class="form-control"
-                  required
-                  placeholder="Tanggal Panen"
-                  v-model="form.tanggal_panen"
-                  :format="customFormatter"
-                  id="tanggal_panen"
+                <datepicker input-class="form-control" required
+                  placeholder="Tanggal Panen" v-model="form.tanggal_panen"
+                  :format="customFormatter" id="tanggal_panen"
                   :class="{ 'is-invalid': form.errors.has('tanggal_panen') }"
                 ></datepicker>
                 <has-error :form="form" field="tanggal_panen"></has-error>
@@ -224,15 +214,23 @@ export default {
       form: new Form({
         id: "",
         jumlah_cabai: "",
-        pra_produksi_id: "",
+        lahan_id: "",
         tanggal_panen: ""
       }),
       // pagination
       pagination: [],
-      url_getPanen: "/panen/list",
+      url_getPanen: "/panen/list"
     };
   },
   methods: {
+    getPanen() {
+      let $this = this;
+      axios.get("/panen/list").then(response => {
+        this.dataPanen = response.data.data.data;
+        $this.makePagination(response.data.data);
+      });
+    },
+
     // prev & next paggination
     fetchPaginatePanen(url) {
       this.url_getPanen = url;
@@ -251,24 +249,14 @@ export default {
     customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     },
-    getPanen() {
-      let $this = this
-      axios.get(this.url_getPanen).then(response => {
-        this.dataPanen = response.data.data.data
-        $this.makePagination(response.data.data)
-      });
-    },
+
     addPanen() {
       document.getElementById("btnaddpanen").disabled = true;
       this.$Progress.start();
-      this.form
-        .post("/panen/tambah")
-        .then(() => {
+      this.form.post("/panen/tambah").then(() => {
           UpdateData.$emit("HasilPanen");
           $("#modalHasilPanen").trigger("click");
-          toast.fire({
-            icon: "success",
-            title: "Panen berhasil ditambahkan"
+          toast.fire({ icon: "success", title: "Panen berhasil ditambahkan"
           });
           this.$Progress.finish();
           document.getElementById("btnaddpanen").disabled = false;
@@ -298,8 +286,7 @@ export default {
         });
     },
     deletePanen(id) {
-      swal
-        .fire({
+      swal .fire({
           title: "Apakah kamu yakin?",
           text: "Panen yang dihapus tidak dapat dikembalikan",
           icon: "warning",
@@ -307,31 +294,25 @@ export default {
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: "Ya"
-        })
-        .then(result => {
-          if (result.value) {
-            this.$Progress.start();
-            axios
-              .delete("/panen/delete/" + id)
-              .then(() => {
-                UpdateData.$emit("HasilPanen");
-                swal.fire(
-                  "Tehapus!",
-                  "Hasil Panen berhasil dihapus",
-                  "success"
-                );
-                this.$Progress.finish();
-              })
-              .catch(() => {
-                this.$Progress.fail();
-                swal.fire(
-                  "Gagal!",
-                  "Terdapat masalah ketika menghapus",
-                  "waning"
-                );
-              });
-          }
-        });
+      }).then(result => {
+        if (result.value) {
+          this.$Progress.start();
+          axios.delete("/panen/delete/" + id).then(() => {
+              UpdateData.$emit("HasilPanen");
+              swal.fire( "Tehapus!", 
+              "Hasil Panen berhasil dihapus", "success");
+              this.$Progress.finish();
+            })
+            .catch(() => {
+              this.$Progress.fail();
+              swal.fire(
+                "Gagal!",
+                "Terdapat masalah ketika menghapus",
+                "waning"
+              );
+            });
+        }
+      });
     },
     getLahan() {
       axios.get("praProduksi/list/all").then(response => {

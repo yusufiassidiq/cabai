@@ -45,10 +45,10 @@
             </thead>
 
             <tbody>
-              <tr v-if="!listPermintaanCabai.length">
+              <tr v-if="!dataDistribusi.length">
                 <td colspan="9" align="center">Tidak ada permintaan cabai</td>
               </tr>
-              <tr v-for="data in listPermintaanCabai" :key="data.id">
+              <tr v-for="data in dataDistribusi" :key="data.id">
                 <td>{{data.nama}}</td>
                 <td>{{data.jenis_cabai}}</td>
                 <td>{{data.jumlah_cabai | filterAngkaRibuan }}</td>
@@ -193,29 +193,17 @@
                   <p>:&ensp; {{temp_tanggalditerima | dateFilter }}</p>
                 </div>
               </div>
-
               <div class>
-                <datepicker
-                  input-class="form-control"
-                  placeholder="Tanggal Pengiriman"
-                  v-model="form.tanggal_pengiriman"
-                  :format="customFormatter"
-                  id="tanggal_pengiriman"
+                <datepicker input-class="form-control" placeholder="Tanggal Pengiriman"
+                  v-model="form.tanggal_pengiriman" :format="customFormatter" id="tanggal_pengiriman"
                   :class="{ 'is-invalid': form.errors.has('tanggal_pengiriman') }"
                 ></datepicker>
                 <has-error :form="form" field="tanggal_pengiriman"></has-error>
               </div>
               <br />
               <div class>
-                <input
-                  v-model="form.harga"
-                  type="number"
-                  name="harga"
-                  class="form-control"
-                  placeholder="Harga per Kg"
-                  required
-                  :class="{ 'is-invalid': form.errors.has('harga') }"
-                />
+                <input v-model="form.harga" type="number" name="harga" class="form-control" 
+                placeholder="Harga per Kg" required :class="{ 'is-invalid': form.errors.has('harga') }"/>
                 <has-error :form="form" field="Penawaran harga"></has-error>
               </div>
             </div>
@@ -402,13 +390,20 @@ export default {
       temp_inv_hargacabai: "",
       // for update keterangan
       keterangan: "",
-      listPermintaanCabai: {},
+      dataDistribusi: {},
       // pagination
       pagination: [],
       url_permintaanMasuk: "/transaksi/permintaanMasuk/list"
     };
   },
   methods: {
+    getPermintaanMasuk() {
+      let $this = this
+      axios.get("/transaksi/permintaanMasuk/list").then(response => {
+        this.dataDistribusi = response.data.data.data
+        $this.makePagination(response.data.data)
+      });
+    },
     // prev & next paggination
     fetchPaginate(url) {
       this.url_permintaanMasuk = url;
@@ -427,22 +422,18 @@ export default {
     getPermintaanMasuk() {
       let $this = this
       axios.get(this.url_permintaanMasuk).then(response => {
-        this.listPermintaanCabai = response.data.data.data
+        this.dataDistribusi = response.data.data.data
         $this.makePagination(response.data.data)
       });
     },
     acceptPermintaan() {
       document.getElementById("btnAccPermintaan").disabled = true;
       this.$Progress.start();
-      this.form
-        .put("/transaksi/permintaanMasuk/terima/" + this.form.id)
+      this.form.put("/transaksi/permintaanMasuk/terima/" + this.form.id)
         .then(() => {
           UpdateData.$emit("TransaksiDenganPelanggan");
           $("#modalAccPermintaan").trigger("click");
-          toast.fire({
-            icon: "success",
-            title: "Permintaan berhasil diterima"
-          });
+          toast.fire({ icon: "success", title: "Permintaan berhasil diterima"});
           this.$Progress.finish();
           document.getElementById("btnAccPermintaan").disabled = false;
         })

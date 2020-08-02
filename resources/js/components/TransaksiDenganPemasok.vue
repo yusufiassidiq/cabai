@@ -380,12 +380,6 @@ export default {
   },
   data() {
     return {
-      temp_nama: "",
-      temp_jeniscabai: "",
-      temp_jumlahcabai: "",
-      temp_tanggalditerima: "",
-      temp_tanggalpengiriman: "",
-      temp_harga: "",
       form: new Form({
         id: "",
         jenis_cabai: "",
@@ -394,6 +388,14 @@ export default {
         tanggal_diterima: "",
         keterangan: ""
       }),
+      
+      temp_nama: "",
+      temp_jeniscabai: "",
+      temp_jumlahcabai: "",
+      temp_tanggalditerima: "",
+      temp_tanggalpengiriman: "",
+      temp_harga: "",
+      
       formReceived: new Form({
         id: "",
         jenis_cabai: "",

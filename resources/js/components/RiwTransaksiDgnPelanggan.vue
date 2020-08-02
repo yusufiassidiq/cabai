@@ -42,10 +42,10 @@
             </thead>
 
             <tbody>
-              <tr v-if="!listPermintaanCabai.length">
+              <tr v-if="!dataDistribusi.length">
                 <td colspan="9" align="center">Tidak ada riwayat Distribusi Cabai</td>
               </tr>
-              <tr v-for="data in listPermintaanCabai" :key="data.id">
+              <tr v-for="data in dataDistribusi" :key="data.id">
                 <td>{{ data.tanggal_pengiriman | dateFilter }}</td>
                 <td>{{ data.tanggal_diterima | dateFilter }}</td>
                 <td>{{ data.nama }}</td>
@@ -99,7 +99,7 @@
 export default {
   data() {
     return {
-      listPermintaanCabai: {},
+      dataDistribusi: {},
       // pagination
       pagination: [],
       url_permintaanMasuk: "/transaksi/riwPermintaanMasuk/list"
@@ -124,7 +124,7 @@ export default {
     getRiwPermintaanMasuk() {
       let $this = this;
       axios.get(this.url_permintaanMasuk).then(response => {
-        this.listPermintaanCabai = response.data.data.data;
+        this.dataDistribusi = response.data.data.data;
         $this.makePagination(response.data.data);
       });
     }

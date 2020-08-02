@@ -197,159 +197,108 @@ export default {
       };
       xhr.send();
     }
-
-    var hasil = makeRequest("GET", "https://x.rajaapi.com/poe", function(
-      err,
-      datums
-    ) {
-      if (err) {
-        throw err;
-      }
-      hasil = JSON.parse(datums);
-      var return_first = hasil.token;
-
-      // var return_first = function() {
-      // var tmp = null;
-      // $.ajax({
-      //     'async': false,
-      //     'type': "get",
-      //     'global': false,
-      //     'dataType': 'json',
-      //     'url': 'https://x.rajaapi.com/poe',
-      //     'success': function(data) {
-      //         tmp = data.token;
-      //     },
-      // });
-      // // console.log(tmp)
-      // return tmp;
-      // }();
-
-      $(document).ready(function() {
-        var propinsi = 32; //id jawa barat
-        $.ajax({
-          url:
-            "https://x.rajaapi.com/MeP7c5ne" +
-            return_first +
-            "/m/wilayah/kabupaten",
-          data: "idpropinsi=" + propinsi,
-          type: "GET",
-          dataType: "json",
-          success: function(json) {
-            if (json.code == 200) {
-              for (var i = 0; i < Object.keys(json.data).length; i++) {
-                $("#kabupaten").append(
-                  $("<option>")
-                    .text(json.data[i].name)
-                    .attr("value", json.data[i].name)
-                    .attr("idnya", json.data[i].id)
-                );
-              }
-            } else {
-              $("#kecamatan").append(
-                $("<option>")
-                  .text("Data tidak di temukan")
-                  .attr("value", "Data tidak di temukan")
-              );
-            }
-          }
-        });
-
-        $("#kabupaten").change(function() {
-          // var kabupaten = $("#kabupaten").val();
-          var kabupaten = $("#kabupaten option:selected").attr("idnya");
+  
+    $(document).ready(function() {
+          var propinsi = 32; //id jawa barat
           $.ajax({
             url:
-              "https://x.rajaapi.com/MeP7c5ne" +
-              return_first +
-              "/m/wilayah/kecamatan",
-            data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi,
+              "https://dev.farizdotid.com/api/daerahindonesia/kota",
+            data: "id_provinsi=" + propinsi,
             type: "GET",
-            cache: false,
             dataType: "json",
             success: function(json) {
-              $("#kecamatan").html("");
-              if (json.code == 200) {
+              if(json){
+                for (var i = 0; i < Object.keys(json.kota_kabupaten).length; i++) {
+                  $("#kabupaten").append(
+                    $("<option>")
+                      .text(json.kota_kabupaten[i].nama)
+                      .attr("value", json.kota_kabupaten[i].nama)
+                      .attr("idnya", json.kota_kabupaten[i].id)
+                  );
+                }
+              }
+              else {
                 $("#kecamatan").append(
                   $("<option>")
-                    .text("Pilih Kecamatan")
-                    .attr("value", "")
+                    .text("Data tidak di temukan")
+                    .attr("value", "Data tidak di temukan")
                 );
-                for (var i = 0; i < Object.keys(json.data).length; i++) {
+              }
+            }
+          });
+          $("#kabupaten").change(function() {
+            var kabupaten = $("#kabupaten option:selected").attr("idnya");
+            $.ajax({
+              url:
+                "https://dev.farizdotid.com/api/daerahindonesia/kecamatan",
+              data: "id_kota=" + kabupaten,
+              type: "GET",
+              dataType: "json",
+              success: function(json) {
+                $("#kecamatan").html("");
+                if (json) {
                   $("#kecamatan").append(
                     $("<option>")
-                      .text(json.data[i].name)
-                      .attr("value", json.data[i].name)
-                      .attr("idnya", json.data[i].id)
+                      .text("Pilih Kecamatan")
+                      .attr("value", "")
+                  );
+                  for (var i = 0; i < Object.keys(json.kecamatan).length; i++) {
+                    $("#kecamatan").append(
+                      $("<option>")
+                        .text(json.kecamatan[i].nama)
+                        .attr("value", json.kecamatan[i].nama)
+                        .attr("idnya", json.kecamatan[i].id)
+                    );
+                  }
+                  $("#kelurahan").html(
+                    $("<option>")
+                      .text("Pilih Kelurahan")
+                      .attr("value", "")
+                  );
+                } else {
+                  $("#kecamatan").append(
+                    $("<option>")
+                      .text("Data tidak di temukan")
+                      .attr("value", "Data tidak di temukan")
                   );
                 }
-                $("#kelurahan").html(
-                  $("<option>")
-                    .text("Pilih Kelurahan")
-                    .attr("value", "")
-                );
-              } else {
-                $("#kecamatan").append(
-                  $("<option>")
-                    .text("Data tidak di temukan")
-                    .attr("value", "Data tidak di temukan")
-                );
               }
-            }
+            });
           });
-        });
-        $("#kecamatan").change(function() {
-          // var kecamatan = $("#kecamatan").val();
-          var kecamatan = $("#kecamatan option:selected").attr("idnya");
-          $.ajax({
-            url:
-              "https://x.rajaapi.com/MeP7c5ne" +
-              return_first +
-              "/m/wilayah/kelurahan",
-            data:
-              "idkabupaten=" +
-              kabupaten +
-              "&idpropinsi=" +
-              propinsi +
-              "&idkecamatan=" +
-              kecamatan,
-            type: "GET",
-            dataType: "json",
-            cache: false,
-            success: function(json) {
-              $("#kelurahan").html("");
-              if (json.code == 200) {
-                $("#kelurahan").html(
-                  $("<option>")
-                    .text("Pilih Kelurahan")
-                    .attr("value", "")
-                );
-                for (var i = 0; i < Object.keys(json.data).length; i++) {
+          $("#kecamatan").change(function() {
+            var kecamatan = $("#kecamatan option:selected").attr("idnya");
+            $.ajax({
+              url:
+                "https://dev.farizdotid.com/api/daerahindonesia/kelurahan",
+              data:
+                "id_kecamatan=" + kecamatan,
+              type: "GET",
+              dataType: "json",
+              success: function(json) {
+                $("#kelurahan").html("");
+                if (json) {
+                  $("#kelurahan").html(
+                    $("<option>")
+                      .text("Pilih Kelurahan")
+                      .attr("value", "")
+                  );
+                  for (var i = 0; i < Object.keys(json.kelurahan).length; i++) {
+                    $("#kelurahan").append(
+                      $("<option>")
+                        .text(json.kelurahan[i].nama)
+                        .attr("value", json.kelurahan[i].nama)
+                    );
+                  }
+                } else {
                   $("#kelurahan").append(
                     $("<option>")
-                      .text(json.data[i].name)
-                      .attr("value", json.data[i].name)
+                      .text("Data tidak di temukan")
+                      .attr("value", "Data tidak di temukan")
                   );
                 }
-              } else {
-                $("#kelurahan").append(
-                  $("<option>")
-                    .text("Data tidak di temukan")
-                    .attr("value", "Data tidak di temukan")
-                );
               }
-            }
+            });
           });
-        });
-      });
-      // if (localStorage.getItem('reloaded')) {
-      //     // The page was just reloaded. Clear the value from local storage
-      //     // so that it will reload the next time this page is visited.
-      //     localStorage.removeItem('reloaded');
-      // } else {
-      //     // Set a flag so that we know not to reload the page twice.
-      //     localStorage.setItem('reloaded', '1');
-      //     location.reload();
-      // }
     });
   },
   methods: {
