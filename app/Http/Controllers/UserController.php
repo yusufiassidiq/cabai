@@ -39,21 +39,38 @@ class UserController extends Controller
     // }
 
     public function requesteduser(){
-        $users = DB::table('users')->where('status', '=', '0')->paginate(6);
-        return response()->json(
-            [
-                'status' => 'success',
-                'users' => $users->toArray()
-            ], 200);
+        $users = User::where('status', '=', '0')->orderBy(request()->sortby, request()->sortbydesc)
+            ->when(request()->q, function($users){
+                $users = $users->where([
+                    ['status', '=', '0'],
+                    ['name', 'LIKE', '%' . request()->q . '%']
+                ])->orwhere([
+                    ['status', '=', '0'],
+                    ['email', 'LIKE', '%' . request()->q . '%']
+                ])->orwhere([
+                    ['status', '=', '0'],
+                    ['role', 'LIKE', '%' . request()->q . '%']
+                ]);
+            })->paginate(request()->per_page);
+        return response()->json([ 'status' => 'success', 'users' => $users->toArray()], 200);
     }
 
     public function validateduser(){
         $users = User::where('status', '=', '1')->where('role', '!=', '1')->orderBy(request()->sortby, request()->sortbydesc)
             ->when(request()->q, function($users){
-                $users = $users->where('name', 'LIKE', '%' . request()->q . '%')
-                ->orwhere('role', 'LIKE', '%' . request()->q . '%')
-                ->orwhere('email', 'LIKE', '%' . request()->q . '%')
-                ->orwhere('updated_at', 'LIKE', '%' . request()->q . '%');
+                $users = $users->where([
+                    ['status', '=', '1'],
+                    ['role', '!=', '1'],
+                    ['name', 'LIKE', '%' . request()->q . '%']
+                ])->orwhere([
+                    ['status', '=', '1'],
+                    ['role', '!=', '1'],
+                    ['role', 'LIKE', '%' . request()->q . '%']
+                ])->orwhere([
+                    ['status', '=', '1'],
+                    ['role', '!=', '1'],
+                    ['email', 'LIKE', '%' . request()->q . '%']
+                ]);
             })->paginate(request()->per_page);
         return response()->json([ 'status' => 'success', 'users' => $users->toArray()], 200);
     }

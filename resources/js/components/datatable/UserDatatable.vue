@@ -1,4 +1,5 @@
 <template>
+    <!-- REUSABLE COMPONENT for user management and user validation -->
     <div class="row">
         <div class="col-md-4 mb-2">
             <div class="form-inline">
@@ -20,9 +21,8 @@
         </div>
         <div class="col-md-12">
             <b-table responsive striped hover :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" show-empty >
-                <template v-slot:cell(actions)="row">
-                    <!-- <a :href="editUrl" v-if="editUrl" class="btn btn-warning btn-sm">Edit</a>
-                    <button class="btn btn-danger btn-sm" @click="openDeleteModal(row)">Delete</button> -->
+                <!-- untuk Manajemen akun -->
+                <template v-slot:cell(managementUserAction)="row">
                     <a href="#">
                         <i class="fas fa-edit blue" v-on:click="openEditModal(row)"></i>
                     </a>
@@ -31,17 +31,28 @@
                         <i class="fas fa-trash red"></i>
                     </a>
                 </template>
+
+                <!-- Untuk validasi akun -->
+                <template v-slot:cell(validatedUserAction)="row">
+                    <button class="btn btn-success btn-xs" v-on:click="terima(row)">Terima</button>
+                    <button class="btn btn-danger btn-xs" v-on:click="tolak(row)">Tolak</button>
+                </template>
+                
+                <!-- untuk SIUP -->
                 <template v-slot:cell(siup)="row">
                     <button class="btn btn-info btn-xs" @click="openSiupModal(row)">
                         <i class="fas fa-eye"></i>&nbsp; Lihat
                     </button>
                 </template>
-                <!-- <template v-slot:cell(filteredRole)="row">
+                
+                <!-- untuk Role user -->
+                <template v-slot:cell(role)="row">
                     <div v-if="row.item.role == 2"> Produsen </div>
-                    <div v-else>
-                        HAHA
-                    </div>
-                </template> -->
+                    <div v-else-if="row.item.role == 3"> Pengepul </div>
+                    <div v-else-if="row.item.role == 4"> Grosir </div>
+                    <div v-else-if="row.item.role == 5"> Pengecer </div>
+                    <div v-else> Konsumen </div>
+                </template>
             </b-table>   
         </div>
         <div class="col-md-6">
@@ -70,20 +81,20 @@
                 Edit user
             </template>
             <form @submit.prevent="updateUser()">
-            <div class="modal-body">
-              <div class="form-group">
-                <select class="form-control" placeholder="status">
-                  <option value disabled selected>Select status</option>
-                  <option value="1">Aktif</option>
-                  <option value="0">Non-aktif</option>
-                </select>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-              <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-          </form>
+                <div class="modal-body">
+                <div class="form-group">
+                    <select class="form-control" placeholder="status">
+                        <option value disabled selected>Select status</option>
+                        <option value="1">Aktif</option>
+                        <option value="0">Non-aktif</option>
+                    </select>
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
         </b-modal>
     </div>
 </template>
@@ -192,7 +203,61 @@ export default {
         },
         updateUser(row){
             console.log("user with id " + this.selectedUser + " updated")
-        }
+        },
+        // fungsi untuk menolak registrasi akun
+        tolak(row) {
+            swal
+            .fire({
+                title: "Apakah kamu yakin?",
+                text: "User akan ditolak",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes"
+            })
+            .then(result => {
+                if (result.value) {
+                    this.$Progress.start();
+                    axios.put("/user/tolak/" + row.item.id)
+                    .then(() => {
+                        swal.fire("Terhapus!", "User berhasil dihapus", "success");
+                        this.$Progress.finish();
+                    })
+                    .catch(() => {
+                        swal.fire( "Gagal!", "Terdapat masalah ketika menghapus", "waning");
+                        this.$Progress.fail();
+                    });
+                }
+            });
+        },
+        // fungsi untuk menyetujui registrasi akun
+        terima(row) {
+            swal
+            .fire({
+                title: "Apakah kamu yakin?",
+                text: "User akan diterima",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes"
+            })
+            .then(result => {
+                if (result.value) {
+                    this.$Progress.start();
+                    axios.put("/user/terima/" + row.item.id)
+                    .then(() => {
+                        swal.fire("Diterima!", "User berhasil diterima", "success");
+                        this.$Progress.finish();
+                    })
+                    .catch(() => {
+                        swal.fire( "Gagal!", "Terdapat masalah ketika menerima", "waning");
+                        this.$Progress.fail();
+                    });
+                }
+            });  
+        },
     }
 }
 </script>
