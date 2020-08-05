@@ -10,6 +10,13 @@ import Vue from 'vue';
 import 'es6-promise/auto'
 import VueAuth from '@websanova/vue-auth'
 
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 // Set Vue globally
 window.Vue = require('vue');
 

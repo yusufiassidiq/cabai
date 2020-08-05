@@ -30,124 +30,36 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row justify-content-center">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Management User</h3>
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input
-                      type="text"
-                      class="form-control input-sm float-right"
-                      placeholder="Cari User"
-                      v-model="stringNama"
-                    />
-                    <div class="input-group-append">
-                      <button class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
+          <div class="container" style="padding-top: 30px">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <!-- <div class="card-header">
+                            <h5 class="card-title">VueJS Datatables</h5>
+                        </div> -->
+                        <div class="card-body">
+                            <app-datatable 
+                                :items="items" 
+                                :fields="fields" 
+                                :meta="meta"
+                                :editUrl="'/a/b'"
+                                :title="'Delete Posts'"
+                                @per_page="handlePerPage" 
+                                @pagination="handlePagination" 
+                                @search="handleSearch" 
+                                @sort="handleSort"
+                            />
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <div class="row">
-                  <table class="table table-hover text-nowrap">
-                    <thead>
-                      <tr>
-                        <th>Nama</th>
-                        <th>Role</th>
-                        <th>Email</th>
-                        <th>Tanggal divalidasi</th>
-                        <th>Surat Izin(SIUP)</th>
-                        <th>Aksi</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <tr v-if="!filteredNama.length">
-                        <td colspan="5" align="center">Tidak ada user yang belum divalidasi</td>
-                      </tr>
-                      <tr
-                        v-for="user in filteredNama"
-                        v-bind:key="user.id"
-                        style="margin-bottom: 5px;"
-                      >
-                        <td>{{ user.name }}</td>
-                        <td>{{ user.role | filterRoleUser }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ customFormatter(user.updated_at) }}</td>
-                        <td>
-                          <button class="btn btn-info btn-xs" @click="previewImage(user)">
-                            <i class="fas fa-eye"></i>&nbsp; Lihat
-                          </button>
-                        </td>
-
-                        <td>
-                          <a href="#">
-                            <i class="fas fa-edit blue" v-on:click="edituser(user.id)"></i>
-                          </a>
-                          /
-                          <a href="#" v-on:click="deleteUser(user.id)">
-                            <i class="fas fa-trash red"></i>
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 d-flex justify-content-start align-self-center">
-                    <div
-                      style="padding-left: 20px"
-                    >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
-                  </div>
-
-                  <div
-                    class="col-md-6 d-flex justify-content-end align-self-end"
-                    style="padding-right: 30px"
-                  >
-                    <div class="dataTables_paginate paging_simple_numbers">
-                      <ul class="pagination">
-                        <li>
-                          <button
-                            href="#"
-                            class="btn btn-default"
-                            v-on:click="fetchPaginateUsers(pagination.prev_page_url)"
-                            :disabled="!pagination.prev_page_url"
-                          >Sebelumnya</button>
-                        </li>
-
-                        <li>
-                          <button
-                            class="btn btn-default"
-                            v-on:click="fetchPaginateUsers(pagination.next_page_url)"
-                            :disabled="!pagination.next_page_url"
-                          >Selanjutnya</button>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- /.card-body -->
             </div>
-          </div>
+        </div>
         </div>
       </div>
     </section>
     <!-- /.content -->
     <!-- Modal Add new user Start-->
-    <div
-      class="modal fade"
-      id="editUser"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="editUserLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="editUserLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -175,33 +87,6 @@
         </div>
       </div>
     </div>
-    
-    <!-- Modal Preview Image -->
-    <div
-      class="modal fade"
-      id="fotosk"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="detailUserLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="detailUserLabel">Foto SIUP</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <img :src="getphoto()" class="img-responsive" />
-            </div>
-          </div>
-          <!-- </form> -->
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -221,9 +106,30 @@ img {
 </style>
 
 <script>
+import Datatable from '../../components/datatable/ValidatedUserDatatable'
 export default {
+  components: {
+        'app-datatable': Datatable //REGISTER COMPONENT DATATABLE
+  },
   data() {
     return {
+      //UNTUK VARIABLE FIELDS, DEFINISIKAN KEY UNTUK MASING-MASING DATA DAN SORTABLE BERNILAI TRUE JIKA INGIN MENAKTIFKAN FITUR SORTING DAN FALSE JIKA TIDAK INGIN MENGAKTIFKAN
+      fields: [
+          {key: 'name', sortable: true, label: "Nama"},
+          {key: 'role', sortable: true, label: "Role"},
+          {key: 'email', sortable: true, label: "Email"},
+          {key: 'updated_at', sortable: true, label: "Tanggal validasi"},
+          {key: 'siup', sortable: false, label: "SIUP"},
+          {key: 'actions', sortable: false, label: "Aksi"},
+      ],
+      items: [], //DEFAULT VALUE DARI ITEMS ADALAH KOSONG
+      meta: [], //JUGA BERLAKU UNTUK META
+      current_page: 1, //DEFAULT PAGE YANG AKTIF ADA PAGE 1
+      per_page: 10, //DEFAULT LOAD PERPAGE ADALAH 10
+      search: '',
+      sortBy: 'updated_at', //DEFAULT SORTNYA ADALAH CREATED_AT
+      sortByDesc: false, //ASCEDING
+      // old
       selectedImage: "logo",
       userDetail: "",
       has_error: false,
@@ -236,65 +142,60 @@ export default {
       url_getUser: "/user/validated"
     };
   },
+  created() {
+    this.loadPostsData()
+  },
   methods: {
-    // prev & next paggination
-    fetchPaginateUsers(url) {
-      this.url_getUser = url
-      this.getUsers()
-    },
-    // set up pagination
-    makePagination(data) {
-      let pagination = {
-        current_page: data.current_page,
-        last_page: data.last_page,
-        next_page_url: data.next_page_url,
-        prev_page_url: data.prev_page_url
-      };
-      this.pagination = pagination;
-    },
-    // get validated user
-    getUsers() {
-      let $this = this;
-      axios
-        .get(this.url_getUser)
-        .then(response => {
-          this.users = response.data.users.data
-          $this.makePagination(response.data.users)
+    //METHOD INI AKAN MENGHANDLE REQUEST DATA KE API
+    loadPostsData() {
+        let current_page = this.search == '' ? this.current_page:1
+        //LAKUKAN REQUEST KE API UNTUK MENGAMBIL DATA POSTINGAN
+        axios.get(`/user/validated`, {
+            //KIRIMKAN PARAMETER BERUPA PAGE YANG SEDANG DILOAD, PENCARIAN, LOAD PERPAGE DAN SORTING.
+            params: {
+                page: current_page,
+                per_page: this.per_page,
+                q: this.search,
+                sortby: this.sortBy,
+                sortbydesc: this.sortByDesc ? 'DESC':'ASC'
+            }
         })
-        .catch(error => {});
-    },
-    // delete user
-    deleteUser(id) {
-      swal
-        .fire({
-          title: "Apakah kamu yakin?",
-          text: "User dihapus tidak dapat dikembalikan!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, hapus!"
+        .then((response) => {
+            //JIKA RESPONSENYA DITERIMA
+            let getData = response.data.users
+            this.items = getData.data //MAKA ASSIGN DATA POSTINGAN KE DALAM VARIABLE ITEMS
+            //DAN ASSIGN INFORMASI LAINNYA KE DALAM VARIABLE META
+            this.meta = {
+                total: getData.total,
+                current_page: getData.current_page,
+                per_page: getData.per_page,
+                from: getData.from,
+                to: getData.to
+            }
         })
-        .then(result => {
-          if (result.value) {
-            this.$Progress.start();
-            axios
-              .delete("/user/delete/" + id)
-              .then(() => {
-                swal.fire("Terhapus!", "User berhasil dihapus", "success");
-                UpdateData.$emit("UserManagement");
-                this.$Progress.finish();
-              })
-              .catch(() => {
-                swal.fire(
-                  "Gagal!",
-                  "Terdapat masalah ketika menghapus",
-                  "waning"
-                );
-                this.$Progress.fail();
-              });
-          }
-        });
+    },
+    //JIKA ADA EMIT TERKAIT LOAD PERPAGE, MAKA FUNGSI INI AKAN DIJALANKAN
+    handlePerPage(val) {
+        this.per_page = val //SET PER_PAGE DENGAN VALUE YANG DIKIRIM DARI EMIT
+        this.loadPostsData() //DAN REQUEST DATA BARU KE SERVER
+    },
+    //JIKA ADA EMIT PAGINATION YANG DIKIRIM, MAKA FUNGSI INI AKAN DIEKSEKUSI
+    handlePagination(val) {
+        this.current_page = val //SET CURRENT PAGE YANG AKTIF
+        this.loadPostsData()
+    },
+    //JIKA ADA DATA PENCARIAN
+    handleSearch(val) {
+        this.search = val //SET VALUE PENCARIAN KE VARIABLE SEARCH
+        this.loadPostsData() //REQUEST DATA BARU
+    },
+    //JIKA ADA EMIT SORT
+    handleSort(val) {
+        //MAKA SET SORT-NYA
+        this.sortBy = val.sortBy
+        this.sortByDesc = val.sortDesc
+
+        this.loadPostsData() //DAN LOAD DATA BARU BERDASARKAN SORT
     },
     // showing modal edit
     edituser(id) {
@@ -308,42 +209,6 @@ export default {
     customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     },
-    // fungsi untuk melihat gambar SIUP User
-    previewImage(user) {
-      this.selectedImage = user.fotosk;
-      $("#fotosk").modal("show");
-    },
-    getphoto() {
-      return "/images/" + this.selectedImage;
-    },
-  },
-  computed: {
-    // fungsi search
-    filteredNama: function() {
-      var namaUser = this.users;
-      var stringNama = this.stringNama;
-
-      if (!stringNama) {
-        return namaUser;
-      }
-
-      var searchString = stringNama.trim().toLowerCase();
-
-      namaUser = namaUser.filter(function(item) {
-        if (item.name.toLowerCase().indexOf(stringNama) !== -1) {
-          return item;
-        }
-      });
-
-      return namaUser;
-    }
-  },
-  mounted() {
-    this.getUsers();
-    // custom event vue to update data changes
-    UpdateData.$on("UserManagement", () => {
-      this.getUsers();
-    });
   }
 };
 </script>

@@ -33,7 +33,7 @@ class UserController extends Controller
             ], 200);
     }
     // public function seeToken(){
-    //     $token = JWTAuth::getToken();
+    //     $token = JWTAuth::getToken(); 
     //     $isiToken = JWTAuth::getPayload($token)->toArray();
     //     return $isiToken;
     // }
@@ -48,12 +48,14 @@ class UserController extends Controller
     }
 
     public function validateduser(){
-        $users = DB::table('users')->where('status', '=', '1')->where('role', '!=', '1')->paginate(6);
-        return response()->json(
-            [
-                'status' => 'success',
-                'users' => $users->toArray()
-            ], 200);
+        $users = User::where('status', '=', '1')->where('role', '!=', '1')->orderBy(request()->sortby, request()->sortbydesc)
+            ->when(request()->q, function($users){
+                $users = $users->where('name', 'LIKE', '%' . request()->q . '%')
+                ->orwhere('role', 'LIKE', '%' . request()->q . '%')
+                ->orwhere('email', 'LIKE', '%' . request()->q . '%')
+                ->orwhere('updated_at', 'LIKE', '%' . request()->q . '%');
+            })->paginate(request()->per_page);
+        return response()->json([ 'status' => 'success', 'users' => $users->toArray()], 200);
     }
 
     public function getMitraProdusen(){
