@@ -1,157 +1,133 @@
 <template>
-  <div class="hold-transition login-page">
-    <div class="login-box">
-      <div class="login-logo">
-        <p class="font-putih">
-          <b>SCM</b>Cabai
-        </p>
-      </div>
-      <vue-progress-bar></vue-progress-bar>
-      <!-- /.Register-logo -->
-      <div class="card">
-        <div class="card-body login-card-body">
-          <p class="login-box-msg">Pendaftaran anggota baru</p>
-
-          <form autocomplete="off" @submit.prevent="register" v-if="!success" method="post">
-            <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.name }">
-              <input
-                type="text"
-                id="name"
-                class="form-control"
-                placeholder="Nama"
-                v-model="name"
-                required
-              />
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-user"></span>
+  <div class="page-wrapper bg-cabai p-t-100 p-b-100 font-robo">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-1">
+                <!-- <h5 class="card-title d-flex justify-content-center" >Registrasi</h5> -->
+                <div class="regist-page d-flex justify-content-center">
+                  <h2>Registrasi akun</h2>
                 </div>
-              </div>
-            </div>
-            <span class="help-block" v-if="has_error && errors.name">{{ errors.name }}</span>
+                <div class="card-body">
+                  <div class="container">
+                    <form autocomplete="off" @submit.prevent="register" v-if="!success" method="post">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label>Nama</label>
+                          <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.name }">
+                            <input type="text" id="name" class="form-control" placeholder="Masukan nama anda" v-model="name" required />
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="help-block" v-if="has_error && errors.name">{{ errors.name }}</span>
+                          
+                          <label>Password</label>
+                          <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.password }">
+                            <input id="password" type="password" class="form-control" placeholder="Masukan password" v-model="password" required />
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-eye" v-on:click="lihatpassword('password')"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
 
-            <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.email }">
-              <input
-                type="email"
-                id="email"
-                class="form-control"
-                placeholder="Email"
-                v-model="email"
-                required
-              />
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-envelope"></span>
+                          <label>Masukan ulang password</label>
+                          <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.password }" >
+                            <input type="password" id="password_confirmation" class="form-control" v-model="password_confirmation" placeholder="Masukan ulang Password" required />
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-eye" v-on:click="lihatpassword('password_confirmation')"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
+
+                          <label>Role</label>
+                          <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.role }">
+                            <select id="role" class="form-control" v-model="role" required>
+                              <option value selected disabled>Pilih role</option>
+                              <option value="2">Produsen</option>
+                              <option value="3">Pengepul</option>
+                              <option value="4">Grosir</option>
+                              <option value="5">Pengecer</option>
+                              <option value="6">Konsumen</option>
+                            </select>
+                          </div>
+                          <span class="help-block" v-if="has_error && errors.role">{{ errors.role }}</span>
+                        </div>
+                        <div class="col-md-6">
+                          <label>Email</label>
+                          <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.email }">
+                            <input type="email" id="email" class="form-control" placeholder="Masukan email" v-model="email" required/>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="help-block" v-if="has_error && errors.email">{{ errors.email }}</span>
+                          <label>Kabupaten</label>
+                          <div class="input-group mb-3">
+                            <select class="form-control" v-model="kabupaten" id="kabupaten" required>
+                              <option selected value>Pilih Kabupaten</option>
+                            </select>
+                          </div>
+
+                          <label>Kota</label>
+                          <div class="input-group mb-3">
+                            <select class="form-control m-b" v-model="kecamatan" id="kecamatan" required>
+                              <option selected value>Pilih Kecamatan</option>
+                            </select>
+                          </div>
+
+                          <label>Kabupaten</label>
+                          <div class="input-group mb-3">
+                            <select class="form-control m-b" v-model="kelurahan" id="kelurahan" required>
+                              <option selected value>Pilih Kelurahan</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <label>Unggah Surat Izin Usaha Perdagangan (SIUP)</label>
+                      <div
+                        class="input-group mb-3"
+                        v-bind:class="{ 'has-error': has_error && errors.fotosk }"
+                      >
+                        <div class="input-group ">
+                          <div class="custom-file">
+                            <!-- <input type="file" v-on:change="onFileChange" class="form-control "> -->
+                            <input type="file" v-on:change="onFileChange" class="custom-file-input form-control" id="exampleInputFile" />
+                            <label class="custom-file-label" for="exampleInputFile" id="exampleInputFile">Pilih file</label>
+                          </div>
+                        </div>
+                      </div>
+                      <span class="help-block" v-if="has_error && errors.fotosk">{{ errors.fotosk }}</span>
+                      <div class="row">
+                        <div class="col-12 fotosk">
+                          <img :src="fotosk" class="img-responsive">
+                        </div>
+                      </div>
+                      <!-- <br> -->
+                      <div class="row btncstm">
+                        <div class="col-12 ">
+                          <button type="submit" class="btn btn-primary btn-block">Daftar</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">Sudah punya akun?</small>
+                    <router-link to="/login">
+                      <small>Masuk</small>
+                    </router-link>
+                  </div>
                 </div>
-              </div>
             </div>
-            <span class="help-block" v-if="has_error && errors.email">{{ errors.email }}</span>
-
-            <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.role }">
-              <select id="role" class="form-control" v-model="role" required>
-                <option value selected disabled>Pilih Peran Keanggotaan</option>
-                <option value="2">Produsen</option>
-                <option value="3">Pengepul</option>
-                <option value="4">Grosir</option>
-                <option value="5">Pengecer</option>
-                <option value="6">Konsumen</option>
-              </select>
-            </div>
-            <span class="help-block" v-if="has_error && errors.role">{{ errors.role }}</span>
-
-            <div class="input-group mb-3">
-              <select class="form-control" v-model="kabupaten" id="kabupaten" required>
-                <option selected value>Pilih Kabupaten</option>
-              </select>
-            </div>
-
-            <div class="input-group mb-3">
-              <select class="form-control m-b" v-model="kecamatan" id="kecamatan" required>
-                <option selected value>Pilih Kecamatan</option>
-              </select>
-            </div>
-
-            <div class="input-group mb-3">
-              <select class="form-control m-b" v-model="kelurahan" id="kelurahan" required>
-                <option selected value>Pilih Kelurahan</option>
-              </select>
-            </div>
-
-            <div
-              class="input-group mb-3"
-              v-bind:class="{ 'has-error': has_error && errors.password }"
-            >
-              <input
-                type="password"
-                class="form-control"
-                placeholder="Password"
-                v-model="password"
-                required
-              />
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-lock"></span>
-                </div>
-              </div>
-            </div>
-            <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
-
-            <div
-              class="input-group mb-3"
-              v-bind:class="{ 'has-error': has_error && errors.password }"
-            >
-              <input
-                type="password"
-                id="password_confirmation"
-                class="form-control"
-                v-model="password_confirmation"
-                placeholder="Masukan ulang Password"
-                required
-              />
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-lock"></span>
-                </div>
-              </div>
-            </div>
-            <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
-
-            <label>Unggah Surat Izin Usaha Perdagangan (SIUP)</label>
-            <div
-              class="input-group mb-3"
-              v-bind:class="{ 'has-error': has_error && errors.fotosk }"
-            >
-              <div class="input-group ">
-                <div class="custom-file">
-                  <!-- <input type="file" v-on:change="onFileChange" class="form-control "> -->
-                  <input type="file" v-on:change="onFileChange" class="custom-file-input form-control" id="exampleInputFile" />
-                  <label class="custom-file-label" for="exampleInputFile" id="exampleInputFile">Pilih file</label>
-                </div>
-              </div>
-            </div>
-            <span class="help-block" v-if="has_error && errors.fotosk">{{ errors.fotosk }}</span>
-            <div class="row">
-              <div class="col-12 fotosk">
-                <img :src="fotosk" class="img-responsive">
-              </div>
-            </div>
-            <!-- <br> -->
-            <div class="row btncstm">
-              <div class="col-12 ">
-                <button type="submit" class="btn btn-primary btn-block">Daftar</button>
-              </div>
-            </div>
-          </form>
         </div>
-        <div class="card-footer">
-          <small class="text-muted">Sudah punya akun?</small>
-          <router-link to="/login">
-            <small>Masuk</small>
-          </router-link>
-        </div>
-      </div>
     </div>
-  </div>
 </template>
 <style scoped>
     .btncstm{
@@ -302,6 +278,14 @@ export default {
     });
   },
   methods: {
+    lihatpassword(id){
+      var x = document.getElementById(id);
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    },
     onFileChange(e) {
         let files = e.target.files || e.dataTransfer.files;
         if (!files.length)
