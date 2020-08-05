@@ -43,7 +43,7 @@
                 <td>
                   <a href="#" class="btn btn-success btn-xs" @click="addMitra(data.id, data.name)">
                     <i class="fas fa-plus-square white"></i>
-                    Tambah sebagai mitra
+                    Tambah
                   </a>
                 </td>
               </tr>

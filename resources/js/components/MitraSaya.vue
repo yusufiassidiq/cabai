@@ -51,8 +51,8 @@
                           class="btn btn-danger btn-xs"
                           @click="deleteMitra(data.id, data.nama)"
                         >
-                          <i class="fas fa-plus-square white"></i>
-                          Hapus Mitra
+                          <i class="fas fa-trash white"></i>
+                          Hapus
                         </a>
                       </td>
                     </tr>

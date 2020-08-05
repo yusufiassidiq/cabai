@@ -82,13 +82,6 @@
                           <button class="btn btn-info btn-xs" @click="previewImage(user)">
                             <i class="fas fa-eye"></i>&nbsp; Lihat
                           </button>
-                          <!-- &nbsp;/&nbsp;
-                          <button
-                            class="btn btn-secondary btn-xs"
-                            @click="downloadSIUP()"
-                          >
-                            <i class="fas fa-file-download">&nbsp; Download</i>
-                          </button> -->
                         </td>
 
                         <td>
@@ -174,8 +167,8 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-success">Update</button>
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+              <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
           </form>
           <!-- </form> -->
@@ -184,7 +177,6 @@
     </div>
     
     <!-- Modal Preview Image -->
-    <!-- Modal Preview Image-->
     <div
       class="modal fade"
       id="fotosk"

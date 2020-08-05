@@ -36,22 +36,7 @@
                 <vue-progress-bar></vue-progress-bar>
 
                 <div class="card-tools">
-                  <button class="btn btn-success btn-sm" @click="newModal">Tambah Panen</button>
-                  <!-- <button class="btn btn-success" @click="newModal">Tambahkan Pengeluaran</button> -->
-                  <!-- <div class="input-group input-group-sm" style="width: 150px;">
-                    <input
-                      type="text"
-                      name="table_search"
-                      class="form-control float-right"
-                      placeholder="Search"
-                    />
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
-                    </div>
-                  </div>-->
+                  <button class="btn btn-primary btn-sm" @click="newModal">Tambah Panen</button>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -61,7 +46,7 @@
                     <thead>
                       <tr>
                         <th>Tanggal Panen</th>
-                        <th>Kode Lahan</th>
+                        <th>Nama Lahan</th>
                         <th>Jenis Cabai</th>
                         <th>Jumlah Cabai(Kg)</th>
                         <th>Aksi</th>
@@ -132,14 +117,7 @@
     </section>
     <!-- /.content -->
     <!-- Modal -->
-    <div
-      class="modal fade"
-      id="modalHasilPanen"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="modalHasilPanenLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="modalHasilPanen" tabindex="-1" role="dialog" aria-labelledby="modalHasilPanenLabel" aria-hidden="true" >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -151,10 +129,8 @@
           <form @submit.prevent="editmode? updatePanen() : addPanen()">
             <div class="modal-body">
               <div class="form-group col-md">
-                <select
-                  id="lahan__id" v-model="form.pra_produksi_id" class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('pra_produksi_id') }"
-                >
+                <label>Nama lahan</label>
+                <select id="lahan__id" v-model="form.pra_produksi_id" class="form-control" :class="{ 'is-invalid': form.errors.has('pra_produksi_id') }">
                   <option value disabled selected>Pilih Lahan</option>
                   <option v-for="data in datalahan" :key="data.id"
                     v-bind:value="data.id"
@@ -163,18 +139,19 @@
                 </select>
                 <has-error :form="form" field="pra_produksi_id"></has-error>
               </div>
-
               <div class="form-group col-md">
+                <label>Jumlah panen (Kg)</label>
                 <input v-model="form.jumlah_cabai" type="number"
-                  class="form-control" placeholder="Jumlah Cabai (Kg)"
+                  class="form-control" placeholder="Masukan jumlah panen"
                   :class="{ 'is-invalid': form.errors.has('jumlah_cabai') }"
                 />
                 <has-error :form="form" field="jumlah_cabai"></has-error>
               </div>
 
               <div class="form-group col-md">
+                <label >Tanggal panen</label>
                 <datepicker input-class="form-control" required
-                  placeholder="Tanggal Panen" v-model="form.tanggal_panen"
+                  placeholder="Masukan tanggal panen" v-model="form.tanggal_panen"
                   :format="customFormatter" id="tanggal_panen"
                   :class="{ 'is-invalid': form.errors.has('tanggal_panen') }"
                 ></datepicker>
@@ -183,14 +160,8 @@
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-              <button v-show="editmode" type="submit" class="btn btn-success">Simpan</button>
-              <button
-                id="btnaddpanen"
-                v-show="!editmode"
-                type="submit"
-                class="btn btn-primary"
-              >Tambah</button>
+              <button v-show="editmode" type="submit" class="btn btn-primary">Simpan</button>
+              <button id="btnaddpanen" v-show="!editmode" type="submit" class="btn btn-primary">Tambah</button>
             </div>
           </form>
         </div>
@@ -324,6 +295,7 @@ export default {
     newModal() {
       this.editmode = false;
       this.form.reset();
+      document.getElementById("lahan__id").disabled = false;
       $("#modalHasilPanen").modal("show");
     },
     // Menampilkan modal utk mengedit pengeluaran

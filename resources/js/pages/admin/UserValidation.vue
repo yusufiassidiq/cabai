@@ -85,10 +85,8 @@
                             </button> -->
                           </td>
                           <td>
-                            <button
-                              class="btn btn-success btn-xs"
-                              @click="selectUser(user)"
-                            >Validasi</button>
+                            <button class="btn btn-success btn-xs" v-on:click="terima(user.id)">Terima</button>
+                            <button class="btn btn-danger btn-xs" v-on:click="tolak(user.id)">Tolak</button>
                           </td>
                         </tr>
                       </tbody>
@@ -136,48 +134,9 @@
       </section>
       <!-- /.content -->
     </div>
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="detailUser"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="detailUserLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="detailUserLabel">Detail User</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <tr>Nama : {{ userDetail.name }}</tr>
-              <tr>Role : {{ userDetail.role | filterRoleUser }}</tr>
-              <tr>Tanggal Registrasi : {{ customFormatter(userDetail.created_at) }}</tr>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-            <button class="btn btn-danger" v-on:click="tolak(userDetail.id)">Tolak</button>
-            <button class="btn btn-success" v-on:click="terima(userDetail.id)">Terima</button>
-          </div>
-          <!-- </form> -->
-        </div>
-      </div>
-    </div>
+
     <!-- Modal Preview Image-->
-    <div
-      class="modal fade"
-      id="fotosk"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="detailUserLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="fotosk" tabindex="-1" role="dialog" aria-labelledby="detailUserLabel" aria-hidden="true" >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -257,13 +216,6 @@ export default {
     previewImage(user) {
       this.selectedImage = user.fotosk;
       $("#fotosk").modal("show");
-    },
-    // fungsi mendownload SIUP User
-    // downloadSIUP() {},
-    // fungsi untuk melihat detail User yang belum divalidasi
-    selectUser(user) {
-      this.userDetail = user;
-      $("#detailUser").modal("show");
     },
     // funsi untuk menolak Validasi akun
     tolak(id) {

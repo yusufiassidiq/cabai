@@ -60,7 +60,7 @@
                     <thead>
                       <tr>
                         <th>Tanggal</th>
-                        <th>Kode Lahan</th>
+                        <th>Nama Lahan</th>
                         <th>Jenis Pengeluaran</th>
                         <th>Jumlah Pengeluaran</th>
                         <th>Rincian</th>
@@ -138,18 +138,10 @@
     </section>
     <!-- /.content -->
     <!-- Modal -->
-    <div
-      class="modal fade"
-      id="modalPengeluaran"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="modalRiwayatLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="modalPengeluaran" tabindex="-1" role="dialog" aria-labelledby="modalRiwayatLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" v-show="!editmode" id="modalPengeluaranLabel">Tambahkan Pengeluaran</h5>
             <h5 class="modal-title" v-show="editmode" id="modalPengeluaranLabel">Perbarui Pengeluaran</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -158,29 +150,14 @@
           <form @submit.prevent="editmode? updatePengeluaran() : addPengeluaran()">
             <div class="modal-body">
               <div class="form-group col-md">
-                <input
-                  disabled
-                  v-model="form.kodeLahan"
-                  type="text"
-                  name="kodeLahan"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('kodeLahan') }"
-                />
+                <label>Nama lahan</label>
+                <input disabled v-model="form.kodeLahan" type="text" name="kodeLahan" class="form-control" :class="{ 'is-invalid': form.errors.has('kodeLahan') }" />
                 <has-error :form="form" field="kodeLahan"></has-error>
               </div>
-
               <div class="form-group col-md">
-                <select
-                  v-model="form.nama_pengeluaran"
-                  class="form-control"
-                  required
-                  :class="{ 'is-invalid': form.errors.has('nama_pengeluaran') }"
-                >
-                  <option
-                    :value="form.nama_pengeluaran"
-                    disabled
-                    hidden
-                    selected
+                <label>Jenis pengeluaran</label>
+                <select v-model="form.nama_pengeluaran" class="form-control" required :class="{ 'is-invalid': form.errors.has('nama_pengeluaran') }" >
+                  <option :value="form.nama_pengeluaran" disabled hidden selected
                   >{{form.nama_pengeluaran}}</option>
                   <option value="Pupuk">Pupuk</option>
                   <option value="Alat Tani">Alat Tani</option>
@@ -189,37 +166,21 @@
                 </select>
                 <has-error :form="form" field="nama_pengeluaran"></has-error>
               </div>
-
               <div class="form-group col-md">
-                <input
-                  v-model="form.jumlah_pengeluaran"
-                  type="number"
-                  name="jumlah_pengeluaran"
-                  class="form-control"
-                  required
-                  placeholder="Jumlah Pengeluaran (dalam rupiah)"
-                  :class="{ 'is-invalid': form.errors.has('jumlah_pengeluaran') }"
-                />
+                <label>Biaya pengeluaran (Rp)</label>
+                <input v-model="form.jumlah_pengeluaran" type="number" name="jumlah_pengeluaran" class="form-control" required placeholder="Jumlah Pengeluaran (dalam rupiah)" :class="{ 'is-invalid': form.errors.has('jumlah_pengeluaran') }"/>
                 <has-error :form="form" field="jumlah_pengeluaran"></has-error>
               </div>
 
               <div class="form-group col-md">
-                <input
-                  v-model="form.rincian"
-                  type="text"
-                  name="rincian"
-                  class="form-control"
-                  placeholder
-                  :class="{ 'is-invalid': form.errors.has('rincian') }"
-                />
+                <label>Rincian pengeluaran (opsional)</label>
+                <input v-model="form.rincian" type="text" name="rincian" class="form-control" placeholder :class="{ 'is-invalid': form.errors.has('rincian') }" />
                 <has-error :form="form" field="rincian"></has-error>
               </div>
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-              <button v-show="editmode" type="submit" class="btn btn-success">perbarui</button>
-              <button v-show="!editmode" type="submit" class="btn btn-success">tambahkan</button>
+              <button v-show="editmode" type="submit" class="btn btn-primary">Simpan</button>
             </div>
           </form>
           <!-- </form> -->
