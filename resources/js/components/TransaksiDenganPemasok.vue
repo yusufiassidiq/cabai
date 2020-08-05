@@ -11,7 +11,7 @@
         <h3 class="card-title">Daftar Permintaan Cabai</h3>
 
         <div class="card-tools">
-          <button class="btn btn-success btn-sm" @click="newModal">Tambah Permintaan pasokan</button>
+          <button class="btn btn-primary btn-sm" @click="newModal">Tambah distribusi</button>
           <!-- <div class="input-group input-group-sm" style="width: 150px;">
             <input
               type="text"
@@ -154,27 +154,12 @@
       <!-- /.card-body -->
     </div>
     <!-- Modal Permintaan Cabai -->
-    <div
-      class="modal fade"
-      id="modalPermintaan"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="modalPermintaanLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="modalPermintaan" tabindex="-1" role="dialog" aria-labelledby="modalPermintaanLabel" aria-hidden="true" >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5
-              class="modal-title"
-              v-show="!requestUlang"
-              id="modalPermintaanLabel"
-            >Permintaan Pasokan Cabai</h5>
-            <h5
-              class="modal-title"
-              v-show="requestUlang"
-              id="modalPermintaanLabel"
-            >Permintaan Ulang Pasokan Cabai</h5>
+            <h5 class="modal-title" v-show="!requestUlang" id="modalPermintaanLabel" >Permintaan Pasokan Cabai</h5>
+            <h5 class="modal-title" v-show="requestUlang" id="modalPermintaanLabel" >Permintaan Ulang Pasokan Cabai</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -183,29 +168,19 @@
           <form @submit.prevent="requestUlang? requestUlangPermintaan() : addPermintaan()">
             <div class="modal-body">
               <div class="form-group col-md">
-                <select
-                  id="pemasok__id"
-                  v-model="form.pemasok_id"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('pemasok_id') }"
-                >
+                <label >Pemasok</label>
+                <select id="pemasok__id" v-model="form.pemasok_id" class="form-control" :class="{ 'is-invalid': form.errors.has('pemasok_id') }">
                   <option value disabled selected>Pilih pemasok</option>
-                  <option
-                    v-for="data in dataMitra"
-                    :key="data.id"
-                    v-bind:value="data.id"
-                  >{{ data.name }} - {{ data.role | filterRoleUser }}</option>
+                  <option v-for="data in dataMitra" :key="data.id" v-bind:value="data.id">
+                    {{ data.name }} - {{ data.role | filterRoleUser }}
+                  </option>
                 </select>
                 <has-error :form="form" field="pemasok_id"></has-error>
               </div>
               <div class="form-group col-md">
-                <select
-                  id="jenis__cabai"
-                  v-model="form.jenis_cabai"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('jenis_cabai') }"
-                >
-                  <option value disabled selected>Jenis cabai</option>
+                <label>Jenis cabai</label>
+                <select id="jenis__cabai" v-model="form.jenis_cabai" class="form-control" :class="{ 'is-invalid': form.errors.has('jenis_cabai') }">
+                  <option value disabled selected>Pilih jenis cabai</option>
                   <option value="Cabai rawit">Cabai rawit</option>
                   <option value="Cabai keriting">Cabai keriting</option>
                   <option value="Cabai besar">Cabai besar</option>
@@ -213,50 +188,25 @@
                 <has-error :form="form" field="jenis_cabai"></has-error>
               </div>
               <div class="form-group col-md">
-                <input
-                  v-model="form.jumlah_cabai"
-                  type="number"
-                  name="jumlah_cabai"
-                  class="form-control"
-                  placeholder="Jumlah Cabai /kg"
-                  :class="{ 'is-invalid': form.errors.has('jumlah_cabai') }"
-                />
+                <label>Jumlah cabai (kg)</label>
+                <input v-model="form.jumlah_cabai" type="number" name="jumlah_cabai" class="form-control" placeholder="Jumlah Cabai /kg" :class="{ 'is-invalid': form.errors.has('jumlah_cabai') }"/>
                 <has-error :form="form" field="jumlah_cabai"></has-error>
               </div>
               <div class="form-group col-md">
-                <datepicker
-                  input-class="form-control"
-                  placeholder="Tanggal cabai diterima"
-                  v-model="form.tanggal_diterima"
-                  :format="customFormatter"
-                  id="tanggal_diterima"
-                  :class="{ 'is-invalid': form.errors.has('tanggal_diterima') }"
-                ></datepicker>
+                <label>Tanggal terima</label>
+                <datepicker input-class="form-control" placeholder="Tanggal cabai diterima" v-model="form.tanggal_diterima" :format="customFormatter" id="tanggal_diterima" :class="{ 'is-invalid': form.errors.has('tanggal_diterima') }"></datepicker>
                 <has-error :form="form" field="tanggal_diterima"></has-error>
               </div>
               <div class="form-group col-md" v-if="requestUlang">
-                <textarea
-                  class="form-control"
-                  v-model="form.keterangan"
-                  :class="{ 'is-invalid': form.errors.has('keterangan') }"
-                />
+                <label>Keterangan</label>
+                <textarea class="form-control" v-model="form.keterangan" :class="{ 'is-invalid': form.errors.has('keterangan') }"/>
                 <has-error :form="form" field="keterangan"></has-error>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-              <button
-                id="btnReqUlang"
-                v-show="requestUlang"
-                type="submit"
-                class="btn btn-success"
-              >Simpan</button>
-              <button
-                id="btnaddpermintaan"
-                v-show="!requestUlang"
-                type="submit"
-                class="btn btn-primary"
-              >Tambahkan</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"> Tutup</button>
+              <button id="btnReqUlang" v-show="requestUlang" type="submit" class="btn btn-success"> Simpan</button>
+              <button id="btnaddpermintaan" v-show="!requestUlang" type="submit" class="btn btn-primary"> Tambahkan</button>
             </div>
           </form>
           <!-- </form> -->
@@ -264,27 +214,12 @@
       </div>
     </div>
     <!-- Modal Terima Penawaran -->
-    <div
-      class="modal fade"
-      id="modalTerimaPermintaan"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="modalTerimaPermintaanLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="modalTerimaPermintaan" tabindex="-1" role="dialog" aria-labelledby="modalTerimaPermintaanLabel" aria-hidden="true" >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5
-              v-show="modalTerima"
-              class="modal-title"
-              id="modalTerimaPermintaanLabel"
-            >Terima Penawaran Pemasok</h5>
-            <h5
-              v-show="!modalTerima"
-              class="modal-title"
-              id="modalTerimaPermintaanLabel"
-            >Tolak Penawaran Pemasok</h5>
+            <h5 v-show="modalTerima" class="modal-title" id="modalTerimaPermintaanLabel">Terima Penawaran Pemasok</h5>
+            <h5 v-show="!modalTerima" class="modal-title" id="modalTerimaPermintaanLabel">Tolak Penawaran Pemasok</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -317,7 +252,7 @@
               </div>
               <div class="row">
                 <div class="col-md-4">
-                  <p class="normal text-md-left">Tanggal diterima</p>
+                  <p class="normal text-md-left">Tanggal terima</p>
                 </div>
                 <div class="col-md-8">
                   <p>:&ensp; {{temp_tanggalditerima | dateFilter }}</p>
@@ -340,29 +275,14 @@
                 </div>
               </div>
               <div class v-show="!modalTerima">
-                <textarea
-                  class="form-control"
-                  v-model="form.keterangan"
-                  placeholder="Alasan menolak"
-                  :class="{ 'is-invalid': form.errors.has('keterangan') }"
-                />
+                <textarea class="form-control" v-model="form.keterangan" placeholder="Alasan menolak" :class="{ 'is-invalid': form.errors.has('keterangan') }"/>
                 <has-error :form="form" field="keterangan"></has-error>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-              <button
-                v-show="modalTerima"
-                id="btnAcceptPenawaran"
-                type="submit"
-                class="btn btn-primary"
-              >Terima</button>
-              <button
-                v-show="!modalTerima"
-                id="btnRejectPenawaran"
-                type="submit"
-                class="btn btn-danger"
-              >Tolak</button>
+              <button v-show="modalTerima" id="btnAcceptPenawaran" type="submit" class="btn btn-primary">Terima</button>
+              <button v-show="!modalTerima" id="btnRejectPenawaran" type="submit" class="btn btn-danger">Tolak</button>
             </div>
           </form>
           <!-- </form> -->

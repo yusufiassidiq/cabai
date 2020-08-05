@@ -1,23 +1,12 @@
 <template>
-  <!-- PM : Permintaanmitra dari Pengguna Lain-->
-  <div
-    class="tab-pane fade active show"
-    id="custom-tabs-three-permintaan"
-    role="tabpanel"
-    aria-labelledby="custom-tabs-three-permintaan-tab"
-  >
+  <div class="tab-pane fade active show" id="custom-tabs-three-permintaan" role="tabpanel" aria-labelledby="custom-tabs-three-permintaan-tab">
+    <!-- TABLE -->
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Daftar Permintaan Cabai</h3>
-
         <div class="card-tools">
           <div class="input-group input-group-sm" style="width: 150px;">
-            <input
-              type="text"
-              name="table_search"
-              class="form-control float-right"
-              placeholder="Search"
-            />
+            <input type="text" name="table_search" class="form-control float-right" placeholder="Search" />
             <div class="input-group-append">
               <button type="submit" class="btn btn-default">
                 <i class="fas fa-search"></i>
@@ -26,7 +15,6 @@
           </div>
         </div>
       </div>
-      <!-- /.card-header -->
       <div class="card-body table-responsive p-0">
         <div class="row">
           <table class="table table-hover text-nowrap">
@@ -43,7 +31,6 @@
                 <th>Aksi</th>
               </tr>
             </thead>
-
             <tbody>
               <tr v-if="!dataDistribusi.length">
                 <td colspan="9" align="center">Tidak ada permintaan cabai</td>
@@ -58,22 +45,15 @@
                   <div v-else>Belum ditetapkan</div>
                 </td>
                 <td>
-                  <div
-                    v-if="data.tanggal_pengiriman!==null"
-                  >{{data.tanggal_pengiriman | dateFilter }}</div>
+                  <div v-if="data.tanggal_pengiriman!==null" >{{data.tanggal_pengiriman | dateFilter }}</div>
                   <div v-else>Belum ditetapkan</div>
                 </td>
                 <td>
                   <div class="orange" v-if="data.status_permintaan === 0">Belum ditanggapi</div>
                   <div v-else-if="data.status_permintaan === 1">Menunggu persetujuan pembeli</div>
                   <div class="red" v-else-if="data.status_permintaan === 4">Penawaran anda ditolak</div>
-                  <div
-                    class="green"
-                    v-else-if="data.status_permintaan === 3 && data.status_pengiriman===0"
-                  >Penawaran anda diterima</div>
-                  <div
-                    v-else-if="data.status_permintaan === 3 && data.status_pengiriman===1"
-                  >Dalam Pengiriman</div>
+                  <div class="green" v-else-if="data.status_permintaan === 3 && data.status_pengiriman===0">Penawaran anda diterima</div>
+                  <div v-else-if="data.status_permintaan === 3 && data.status_pengiriman===1">Dalam Pengiriman</div>
                   <div class="red" v-else-if="data.status_permintaan === 2">Permintaan ditolak</div>
                 </td>
                 <td>
@@ -82,23 +62,11 @@
                 </td>
                 <td>
                   <div v-if="data.status_permintaan === 0">
-                    <button
-                      type="button"
-                      class="btn btn-success btn-xs"
-                      @click="modalAccPermintaan(data)"
-                    >Terima</button>
-                    <button
-                      type="button"
-                      class="btn btn-danger btn-xs"
-                      @click="modalTolakPermintaan(data)"
-                    >Tolak</button>
+                    <button type="button" class="btn btn-success btn-xs" @click="modalAccPermintaan(data)" >Terima</button>
+                    <button type="button" class="btn btn-danger btn-xs" @click="modalTolakPermintaan(data)">Tolak</button>
                   </div>
                   <div v-else-if="data.status_permintaan === 3 && data.status_pengiriman===0">
-                    <button
-                      type="button"
-                      class="btn btn-success btn-xs"
-                      @click="modalKirimPesanan(data)"
-                    >Kirim Pesanan</button>
+                    <button type="button" class="btn btn-success btn-xs" @click="modalKirimPesanan(data)">Kirim Pesanan</button>
                   </div>
                   <div v-else>-</div>
                 </td>
@@ -108,49 +76,28 @@
         </div>
         <div class="row">
           <div class="col-md-6 d-flex justify-content-start align-self-center">
-            <div
-              style="padding-left: 20px"
-            >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
+            <div style="padding-left: 20px" >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
           </div>
-
-          <div
-            class="col-md-6 d-flex justify-content-end align-self-end"
-            style="padding-right: 30px"
-          >
+          <div class="col-md-6 d-flex justify-content-end align-self-end" style="padding-right: 30px">
             <div class="dataTables_paginate paging_simple_numbers">
               <ul class="pagination">
                 <li>
-                  <button
-                    href="#"
-                    class="btn btn-default"
-                    v-on:click="fetchPaginate(pagination.prev_page_url)"
-                    :disabled="!pagination.prev_page_url"
-                  >Sebelumnya</button>
+                  <button href="#" class="btn btn-default" v-on:click="fetchPaginate(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">Sebelumnya</button>
                 </li>
-
                 <li>
-                  <button
-                    class="btn btn-default"
-                    v-on:click="fetchPaginate(pagination.next_page_url)"
-                    :disabled="!pagination.next_page_url"
-                  >Selanjutnya</button>
+                  <button class="btn btn-default" v-on:click="fetchPaginate(pagination.next_page_url)" :disabled="!pagination.next_page_url">Selanjutnya</button>
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-      <!-- /.card-body -->
     </div>
+    <!-- END TABLE -->
+
+    <!-- STATE 2-->
     <!-- Modal Penerimaan Permintaan Cabai -->
-    <div
-      class="modal fade"
-      id="modalAccPermintaan"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="modalAccPermintaanLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="modalAccPermintaan" tabindex="-1" role="dialog" aria-labelledby="modalAccPermintaanLabel" aria-hidden="true" >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -193,17 +140,16 @@
                   <p>:&ensp; {{temp_tanggalditerima | dateFilter }}</p>
                 </div>
               </div>
+              <br>
               <div class>
-                <datepicker input-class="form-control" placeholder="Tanggal Pengiriman"
-                  v-model="form.tanggal_pengiriman" :format="customFormatter" id="tanggal_pengiriman"
-                  :class="{ 'is-invalid': form.errors.has('tanggal_pengiriman') }"
-                ></datepicker>
+                <label >Tanggal pengiriman</label>
+                <datepicker input-class="form-control" placeholder="Masukan tanggal Pengiriman" v-model="form.tanggal_pengiriman" :format="customFormatter" id="tanggal_pengiriman" :class="{ 'is-invalid': form.errors.has('tanggal_pengiriman') }"></datepicker>
                 <has-error :form="form" field="tanggal_pengiriman"></has-error>
               </div>
               <br />
               <div class>
-                <input v-model="form.harga" type="number" name="harga" class="form-control" 
-                placeholder="Harga per Kg" required :class="{ 'is-invalid': form.errors.has('harga') }"/>
+                <label>Harga per Kg</label>
+                <input v-model="form.harga" type="number" name="harga" class="form-control"  placeholder="Harga per Kg" required :class="{ 'is-invalid': form.errors.has('harga') }"/>
                 <has-error :form="form" field="Penawaran harga"></has-error>
               </div>
             </div>
@@ -217,15 +163,8 @@
       </div>
     </div>
     <vue-progress-bar></vue-progress-bar>
-    <!-- Modal Penerimaan Penolakan Cabai -->
-    <div
-      class="modal fade"
-      id="modalTolakPermintaan"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="modalTolakPermintaanLabel"
-      aria-hidden="true"
-    >
+    <!-- Modal Penolakan permintaan Cabai -->
+    <div class="modal fade" id="modalTolakPermintaan" tabindex="-1" role="dialog" aria-labelledby="modalTolakPermintaanLabel" aria-hidden="true" >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -260,22 +199,14 @@
                   <p>:&ensp; {{temp_jumlahcabai | filterAngkaRibuan }} Kg</p>
                 </div>
               </div>
-
+              <br>
               <div class>
-                <textarea
-                  v-model="formReject.keterangan"
-                  type="textarea"
-                  name="keterangan"
-                  class="form-control"
-                  placeholder="Alasan Menolak"
-                  :class="{ 'is-invalid': formReject.errors.has('keterangan') }"
-                  required
-                />
+                <label>Alasan penolakan</label>
+                <textarea v-model="formReject.keterangan" type="textarea" name="keterangan" class="form-control" placeholder="Masukan alasan penolakan" :class="{ 'is-invalid': formReject.errors.has('keterangan') }" required/>
                 <has-error :form="formReject" field="Penawaran harga"></has-error>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
               <button id="btnTolakPermintaan" type="submit" class="btn btn-primary">Tolak</button>
             </div>
           </form>
@@ -283,14 +214,9 @@
         </div>
       </div>
     </div>
-    <div
-      class="modal fade"
-      id="modalKirimPermintaan"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="modalKirimPermintaanLabel"
-      aria-hidden="true"
-    >
+    <!-- END STATE 2-->
+    <!-- STATE 3 -->
+    <div class="modal fade" id="modalKirimPermintaan" tabindex="-1" role="dialog" aria-labelledby="modalKirimPermintaanLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -550,7 +476,7 @@ export default {
           this.$Progress.finish();
         });
     },
-    getInventaris() {
+    getStok() {
       axios.get("/inventaris/list").then(response => {
         // console.log(response.data)
         this.temp_inv_jumlahcabai = response.data.jumlah_cabai;
@@ -560,7 +486,7 @@ export default {
   },
   mounted() {
     this.getPermintaanMasuk();
-    this.getInventaris();
+    this.getStok();
     UpdateData.$on("TransaksiDenganPelanggan", () => {
       this.getPermintaanMasuk();
     });
