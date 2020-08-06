@@ -357,7 +357,7 @@ export default {
       this.$Progress.start();
       this.form.put("/transaksi/permintaanMasuk/terima/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("TransaksiDenganPelanggan");
+          UpdateData.$emit("DistribusiPemasok");
           $("#modalAccPermintaan").trigger("click");
           toast.fire({ icon: "success", title: "Permintaan berhasil diterima"});
           this.$Progress.finish();
@@ -374,7 +374,7 @@ export default {
       this.formReject
         .put("/transaksi/permintaanPembeli/tolak/" + this.formReject.id)
         .then(() => {
-          UpdateData.$emit("TransaksiDenganPelanggan");
+          UpdateData.$emit("DistribusiPemasok");
           // hide modal
           $("#modalTolakPermintaan").trigger("click");
           toast.fire({
@@ -462,7 +462,7 @@ export default {
       this.formSend
         .put("/inventaris/stokKeluar/" + this.formSend.id)
         .then(() => {
-          UpdateData.$emit("TransaksiDenganPelanggan");
+          UpdateData.$emit("DistribusiPemasok");
           $("#modalKirimPermintaan").trigger("click");
           toast.fire({
             icon: "success",
@@ -487,7 +487,7 @@ export default {
   mounted() {
     this.getPermintaanMasuk();
     this.getStok();
-    UpdateData.$on("TransaksiDenganPelanggan", () => {
+    UpdateData.$on("DistribusiPemasok", () => {
       this.getPermintaanMasuk();
     });
   }

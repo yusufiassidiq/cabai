@@ -352,7 +352,7 @@ export default {
       this.form
         .post("/transaksi/permintaanSaya/tambah")
         .then(response => {
-          UpdateData.$emit("TransaksiDenganPemasok");
+          UpdateData.$emit("DistribusiPelanggan");
           // hide modal
           $("#modalPermintaan").trigger("click");
           // show Toast if success
@@ -391,7 +391,7 @@ export default {
       this.form
         .put("/transaksi/permintaanSaya/update/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("TransaksiDenganPemasok");
+          UpdateData.$emit("DistribusiPelanggan");
           // hide modal
           $("#modalPermintaan").trigger("click");
           toast.fire({
@@ -430,7 +430,7 @@ export default {
                   "Pemintaan pasokan berhasil dihapus",
                   "success"
                 );
-                UpdateData.$emit("TransaksiDenganPemasok");
+                UpdateData.$emit("DistribusiPelanggan");
                 this.$Progress.finish();
               })
               .catch(error => {
@@ -484,7 +484,7 @@ export default {
       this.form
         .put("/transaksi/penawaranPemasok/terima/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("TransaksiDenganPemasok");
+          UpdateData.$emit("DistribusiPelanggan");
           $("#modalTerimaPermintaan").trigger("click");
           toast.fire({
             icon: "success",
@@ -504,7 +504,7 @@ export default {
       this.form
         .put("/transaksi/penawaranPemasok/tolak/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("TransaksiDenganPemasok");
+          UpdateData.$emit("DistribusiPelanggan");
           $("#modalTerimaPermintaan").trigger("click");
           toast.fire({
             icon: "success",
@@ -546,7 +546,7 @@ export default {
                     " telah diterima",
                   "success"
                 );
-                UpdateData.$emit("TransaksiDenganPemasok");
+                UpdateData.$emit("DistribusiPelanggan");
                 this.$Progress.finish();
               })
               .catch(error => {
@@ -562,7 +562,7 @@ export default {
     this.getMitra();
   },
   mounted() {
-    UpdateData.$on("TransaksiDenganPemasok", () => {
+    UpdateData.$on("DistribusiPelanggan", () => {
       this.getPermintaanSaya();
     });
   }

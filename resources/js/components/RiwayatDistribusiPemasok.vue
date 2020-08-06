@@ -3,13 +3,13 @@
   <div class="tab-pane fade active show" id="custom-tabs-three-permintaan" role="tabpanel" aria-labelledby="custom-tabs-three-permintaan-tab">
     <div class="card">
       <div class="card-body">
-            <app-datatable
-              :items="items" :fields="fields"
-              :meta="meta" @per_page= "handlePerPage"
-              @pagination="handlePagination" @search="handleSearch"
-              @sort="handleSort">
-            </app-datatable>
-          </div>
+        <app-datatable
+          :items="items" :fields="fields"
+          :meta="meta" @per_page= "handlePerPage"
+          @pagination="handlePagination" @search="handleSearch"
+          @sort="handleSort">
+        </app-datatable>
+      </div>
     </div>
     <vue-progress-bar></vue-progress-bar>
   </div>
