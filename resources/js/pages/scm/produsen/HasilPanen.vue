@@ -123,11 +123,8 @@ export default {
       search: '',
       sortBy: 'updated_at',
       sortByDesc: false,
-
-
       datalahan: {},
-      dataPanen: {},
-      editmode: false, // buat ngebedain modal yg di klik modal tambah lahan /edit lahan
+      editmode: false, 
       form: new Form({
         id: "",
         jumlah_cabai: "",
@@ -202,7 +199,6 @@ export default {
     },
     // Memperbarui Hasil Panen
     updatePanen() {
-      console.log("berhasil diedit");
       this.$Progress.start();
       this.form
         .put("/panen/update/" + this.form.id)

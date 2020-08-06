@@ -1,14 +1,11 @@
 <template>
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Riwayat Pengeluaran</h1>
           </div>
-          <!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
@@ -17,13 +14,9 @@
               <li class="breadcrumb-item active">Riwayat Pengeluaran</li>
             </ol>
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
 
     <!-- Main content -->
     <section class="content">
@@ -31,112 +24,21 @@
         <div class="row justify-content-center">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Daftar Pengeluaran Lahan</h3>
-                <vue-progress-bar></vue-progress-bar>
-
-                <div class="card-tools">
-                  <!-- <button class="btn btn-success" @click="newModal">Tambahkan Pengeluaran</button> -->
-                  <!-- <div class="input-group input-group-sm" style="width: 150px;">
-                    <input
-                      type="text"
-                      name="table_search"
-                      class="form-control float-right"
-                      placeholder="Search"
-                    />
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
-                    </div>
-                  </div>-->
-                </div>
+              <div class="card-body">
+                <app-datatable
+                  :items="items" :fields="fields"
+                  :meta="meta" @per_page= "handlePerPage"
+                  @pagination="handlePagination" @search="handleSearch"
+                  @sort="handleSort" @editPengeluaran="editModal" 
+                  @hapusPengeluaran="deletePengeluaran">
+                </app-datatable>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <div class="row">
-                  <table class="table table-hover text-nowrap">
-                    <thead>
-                      <tr>
-                        <th>Tanggal</th>
-                        <th>Nama Lahan</th>
-                        <th>Jenis Pengeluaran</th>
-                        <th>Jumlah Pengeluaran</th>
-                        <th>Rincian</th>
-
-                        <th>Aksi</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <tr v-if="!dataPengeluaran.length">
-                        <td colspan="6" align="center">Tidak ada pengeluaran</td>
-                      </tr>
-                      <tr v-for="data in dataPengeluaran" :key="data.id">
-                        <td>{{ data.created_at | dateFilter}}</td>
-                        <td>{{ data.kodeLahan }}</td>
-                        <td>{{ data.nama_pengeluaran }}</td>
-                        <td>{{ data.jumlah_pengeluaran | convertToRupiah }}</td>
-                        <td>{{ data.rincian }}</td>
-                        <td>
-                          <a href="#">
-                            <i class="fas fa-edit blue" @click="editModal(data)"></i>
-                          </a>
-                          /
-                          <a
-                            href="#"
-                            @click="deletePengeluaran(data.id)"
-                          >
-                            <i class="fas fa-trash red"></i>
-                          </a>
-                        </td>
-                        <!-- end example data -->
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 d-flex justify-content-start align-self-center">
-                    <div
-                      style="padding-left: 20px"
-                    >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
-                  </div>
-
-                  <div
-                    class="col-md-6 d-flex justify-content-end align-self-end"
-                    style="padding-right: 30px"
-                  >
-                    <div class="dataTables_paginate paging_simple_numbers">
-                      <ul class="pagination">
-                        <li>
-                          <button
-                            href="#"
-                            class="btn btn-default"
-                            v-on:click="fetchPaginatePengeluaran(pagination.prev_page_url)"
-                            :disabled="!pagination.prev_page_url"
-                          >Sebelumnya</button>
-                        </li>
-
-                        <li>
-                          <button
-                            class="btn btn-default"
-                            v-on:click="fetchPaginatePengeluaran(pagination.next_page_url)"
-                            :disabled="!pagination.next_page_url"
-                          >Selanjutnya</button>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.card-body -->
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- /.content -->
+    
     <!-- Modal -->
     <div class="modal fade" id="modalPengeluaran" tabindex="-1" role="dialog" aria-labelledby="modalRiwayatLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -188,15 +90,33 @@
       </div>
     </div>
   </div>
-  <!-- /.content-wrapper -->
 </template>
 
 <script>
+import PengeluaranDatatable from '../../../components/datatable/RiwayatPengeluaranDatatable'
 export default {
+  components: {
+    'app-datatable' : PengeluaranDatatable
+  },
   data() {
     return {
-      dataPengeluaran: {},
-      editmode: false, // buat ngebedain modal yg di klik modal tambah lahan /edit lahan
+      fields:[
+        { key: 'created_at', sortable: true, label:"Tanggal"},
+        { key: 'kodeLahan', sortable: true, label:"Nama Lahan"},
+        { key: 'nama_pengeluaran', sortable: true, label:"Jenis pengeluaran"},
+        { key: 'jumlah_pengeluaran', sortable: true, label:"Jumlah pengeluaran"},
+        { key: 'rincian', sortable: true, label:"Rincian"},
+        { key: 'action', sortable: true, label:"Aksi"},
+      ],
+      items: [],
+      meta: [],
+      current_page: 1,
+      per_page: 10,
+      search: '',
+      sortBy: 'updated_at',
+      sortByDesc: false,
+
+      editmode: false,
       form: new Form({
         id: "",
         kodeLahan: "",
@@ -205,47 +125,64 @@ export default {
         tanggal_pengeluaran: new Date(),
         rincian: ""
       }),
-      // pagination
-      pagination: [],
-      url_getPengeluaran: "/pengeluaran/list"
     };
   },
+  created(){
+    this.getRiwayatPengeluaran()
+  },
   methods: {
-    // prev & next paggination
-    fetchPaginatePengeluaran(url) {
-      this.url_getPengeluaran = url;
-      this.getPengeluaran();
+    getRiwayatPengeluaran(){
+      let current_page = this.search == '' ? this.current_page : 1
+      axios.get("/pengeluaran/list", {
+        params: {
+          page: current_page,
+          per_page: this.per_page,
+          q: this.search,
+          sortby: this.sortBy,
+          sortbydesc: this.sortByDesc ? 'DESC' : 'ASC'
+        }
+      })
+      .then((response) => {
+        let getData = response.data.data
+        this.items = getData.data,
+        this.meta = {
+          total: getData.total,
+          current_page: getData.current_page,
+          per_page: getData.per_page,
+          from: getData.from,
+          to: getData.to
+        }
+      })
     },
-    // set up pagination
-    makePagination(data) {
-      let pagination = {
-        current_page: data.current_page,
-        last_page: data.last_page,
-        next_page_url: data.next_page_url,
-        prev_page_url: data.prev_page_url
-      };
-      this.pagination = pagination;
+    handlePerPage(val) {
+        this.per_page = val 
+        this.getRiwayatPengeluaran() 
     },
-    // Menghapus Riwayat Pengeluaran
-    getPengeluaran() {
-      let $this = this;
-      axios.get(this.url_getPengeluaran).then(response => {
-        this.dataPengeluaran = response.data.data.data;
-        $this.makePagination(response.data.data);
-      });
+    handlePagination(val) {
+        this.current_page = val 
+        this.getRiwayatPengeluaran()
     },
+    handleSearch(val) {
+        this.search = val 
+        this.getRiwayatPengeluaran()
+    },
+    handleSort(val) {
+        this.sortBy = val.sortBy
+        this.sortByDesc = val.sortDesc
+        this.getRiwayatPengeluaran()
+    },
+    customFormatter(date) {
+      return moment(date).format("DD MMMM YYYY");
+    },
+
     // Memperbarui Riwayat Pengeluaran
     updatePengeluaran() {
       this.$Progress.start();
-      this.form
-        .put("/pengeluaran/update/" + this.form.id)
+      this.form.put("/pengeluaran/update/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("RiwayatPengeluaran");
+          this.getRiwayatPengeluaran()
           $("#modalPengeluaran").trigger("click");
-          toast.fire({
-            icon: "success",
-            title: "Pengeluaran berhasil diperbarui"
-          });
+          toast.fire({icon: "success", title: "Pengeluaran berhasil diperbarui"});
           this.$Progress.finish();
         })
         .catch(() => {
@@ -266,24 +203,15 @@ export default {
         .then(result => {
           if (result.value) {
             this.$Progress.start();
-            axios
-              .delete("/pengeluaran/delete/" + id)
+            axios.delete("/pengeluaran/delete/" + id)
               .then(() => {
-                UpdateData.$emit("RiwayatPengeluaran");
-                swal.fire(
-                  "Tehapus!",
-                  "Pengeluaran berhasil dihapus",
-                  "success"
-                );
+                this.getRiwayatPengeluaran()
+                swal.fire( "Tehapus!", "Pengeluaran berhasil dihapus", "success");
                 this.$Progress.finish();
               })
               .catch(() => {
                 this.$Progress.fail();
-                swal.fire(
-                  "Gagal!",
-                  "Terdapat masalah ketika menghapus",
-                  "waning"
-                );
+                swal.fire( "Gagal!", "Terdapat masalah ketika menghapus", "waning");
               });
           }
         });
@@ -303,14 +231,5 @@ export default {
       this.form.fill(data);
     }
   },
-  created() {
-    this.getPengeluaran();
-  },
-  mounted() {
-    // Custom event on Vue js
-    UpdateData.$on("RiwayatPengeluaran", () => {
-      this.getPengeluaran();
-    });
-  }
 };
 </script>
