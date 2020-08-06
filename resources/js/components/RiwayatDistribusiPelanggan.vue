@@ -1,15 +1,20 @@
 <template>
   <!-- PM : Permintaanmitra dari Pengguna Lain-->
-  <div class="tab-pane fade active show" id="custom-tabs-three-permintaan" role="tabpanel" aria-labelledby="custom-tabs-three-permintaan-tab">
+  <div
+    class="tab-pane fade"
+    id="custom-tabs-three-pengajuan"
+    role="tabpanel"
+    aria-labelledby="custom-tabs-three-pengajuan-tab"
+  >
     <div class="card">
       <div class="card-body">
-            <app-datatable
-              :items="items" :fields="fields"
-              :meta="meta" @per_page= "handlePerPage"
-              @pagination="handlePagination" @search="handleSearch"
-              @sort="handleSort">
-            </app-datatable>
-          </div>
+        <app-datatable
+          :items="items" :fields="fields"
+          :meta="meta" @per_page= "handlePerPage"
+          @pagination="handlePagination" @search="handleSearch"
+          @sort="handleSort">
+        </app-datatable>
+      </div>
     </div>
     <vue-progress-bar></vue-progress-bar>
   </div>
@@ -26,7 +31,7 @@ export default {
       fields:[
         { key: 'tanggal_pengiriman', sortable: true, label:"Tgl kirim"},
         { key: 'tanggal_diterima', sortable: true, label: "Tgl terima"},
-        { key: 'nama', sortable: true, label: "Pelanggan"},
+        { key: 'nama', sortable: true, label: "Pemasok"},
         { key: 'jenis_cabai', sortable: true, label: "Jenis cabai"},
         { key: 'jumlah_cabai', sortable: true, label: "Jumlah cabai"},
         { key: 'harga', sortable: false, label: "Harga"},
@@ -46,7 +51,7 @@ export default {
   methods: {
     getRiwayatPemasok(){
       let current_page = this.search == '' ? this.current_page : 1
-      axios.get("/transaksi/riwPermintaanMasuk/list", {
+      axios.get("/transaksi/riwPermintaanSaya/list", {
         params: {
           page: current_page,
           per_page: this.per_page,
