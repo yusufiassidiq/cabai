@@ -26,6 +26,19 @@
                     <template v-slot:cell(aksiKelolaMitra)="row">
                         <button class="btn btn-danger btn-xs" @click="deleteMitra(row)">Hapus</button>
                     </template>
+                    <template v-slot:cell(aksiTambahMitra)="row">
+                        <a href="#" class="btn btn-success btn-xs" @click="tambahMitra(row)">
+                            <i class="fas fa-plus-square white"></i>
+                            Tambah
+                        </a>
+                    </template>
+                    <template v-slot:cell(role)="row">
+                        <div v-if="row.item.role == 2"> Produsen </div>
+                        <div v-else-if="row.item.role == 3"> Pengepul </div>
+                        <div v-else-if="row.item.role == 4"> Grosir </div>
+                        <div v-else-if="row.item.role == 5"> Pengecer </div>
+                        <div v-else> Konsumen </div>
+                    </template>
                 </b-table>
             </div>
             <div class="col-md-6">
@@ -95,7 +108,11 @@ export default {
         }, 500),
         deleteMitra(row){
             this.$emit('deleteMitraKu', row.item.id)
+        },
+        tambahMitra(row){
+            this.$emit('tambahMitraKu', row.item.id)
         }
+
     }
 }
 </script>

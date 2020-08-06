@@ -25,7 +25,7 @@ class UserController extends Controller
     }    
 
     public function show(Request $request, $id){
-        $user = User::find($id);        
+        $user = User::find($id);         
         return response()->json(
             [
                 'status' => 'success',
@@ -91,8 +91,8 @@ class UserController extends Controller
             }
             $j++;
         }
-        // return $listuser;
-        $listProdusen = User::where('role',2)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
+        $listProdusen = User::where('role',2)->where('status',1)->whereNotIn('id',$listuser)
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         foreach ($listProdusen as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -105,6 +105,7 @@ class UserController extends Controller
     }
 
     public function getMitraPengepul(){
+        // belum ada fitur search
         $userId = Auth::user()->id;
         $mitra = Kemitraan::whereHas('user1')->get();
         $j=0;
@@ -120,7 +121,8 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listPengepul = User::where('role',3)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
+        $listPengepul = User::where('role',3)->where('status',1)->whereNotIn('id',$listuser)
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         foreach ($listPengepul as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -133,6 +135,7 @@ class UserController extends Controller
     }
 
     public function getMitraGrosir(){
+        // belum ada fitur search
         $userId = Auth::user()->id;
         $mitra = Kemitraan::whereHas('user1')->get();
         $j=0;
@@ -148,7 +151,8 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listGrosir = User::where('role',4)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
+        $listGrosir = User::where('role',4)->where('status',1)->whereNotIn('id',$listuser)
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         foreach ($listGrosir as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -176,7 +180,8 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listPengecer = User::where('role',5)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
+        $listPengecer = User::where('role',5)->where('status',1)->whereNotIn('id',$listuser)
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         foreach ($listPengecer as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -204,7 +209,8 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listKonsumen = User::where('role',6)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
+        $listKonsumen = User::where('role',6)->where('status',1)->whereNotIn('id',$listuser)
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         foreach ($listKonsumen as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
