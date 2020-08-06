@@ -22,16 +22,23 @@
             </div>
             <div class="col-md-12">
                 <b-table responsive striped hover :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" show-empty>
-                    <!-- Untuk validasi akun -->
+                    <!-- Untuk Hapus mitra -->
                     <template v-slot:cell(aksiKelolaMitra)="row">
                         <button class="btn btn-danger btn-xs" @click="deleteMitra(row)">Hapus</button>
                     </template>
+                    <!-- untuk menerima/menolak pembentukan mitra -->
+                    <template v-slot:cell(aksiPembentukanMitra)="row">
+                        <button type="button" class="btn btn-success btn-xs" @click="accMitra(row)" >Terima</button>
+                        <button type="button" class="btn btn-danger btn-xs" @click="rejectMitra(row)">Tolak</button>
+                    </template>
+                    <!-- untuk menambahkan pembentukan kemitraan -->
                     <template v-slot:cell(aksiTambahMitra)="row">
                         <a href="#" class="btn btn-success btn-xs" @click="tambahMitra(row)">
                             <i class="fas fa-plus-square white"></i>
                             Tambah
                         </a>
                     </template>
+                    <!-- untuk filter role -->
                     <template v-slot:cell(role)="row">
                         <div v-if="row.item.role == 2"> Produsen </div>
                         <div v-else-if="row.item.role == 3"> Pengepul </div>
@@ -111,6 +118,12 @@ export default {
         },
         tambahMitra(row){
             this.$emit('tambahMitraKu', row.item.id)
+        },
+        accMitra(row){
+            this.$emit('acceptMitraKu', row.item.id)
+        },
+        rejectMitra(row){
+            this.$emit('rejectMitraKu', row.item.id)
         }
 
     }
