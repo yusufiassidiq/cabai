@@ -22,8 +22,17 @@
             </div>
             <div class="col-md-12">
                 <b-table responsive striped hover :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" show-empty>
-                    <template v-slot:cell(tanggal_panen)="row">
-                        {{ row.item.tanggal_panen | dateFilter}}
+                    <template v-slot:cell(tanggal_tanam)="row">
+                        {{ row.item.tanggal_tanam | dateFilter}}
+                    </template>
+                    <template v-slot:cell(pengeluaran)="row">
+                        {{ row.item.pengeluaran | convertToRupiah}}
+                    </template>
+                    <template v-slot:cell(Addpengeluaran)="row">
+                        <a href="#" class="btn btn-secondary btn-xs" @click="addPengeluaran(row)">
+                            <i class="fas fa-plus-square white"></i>
+                            Tambah
+                        </a>
                     </template>
                     <template v-slot:cell(action)="row">
                         <a href="#" @click="editLahan(row)">
@@ -102,10 +111,13 @@ export default {
             this.$emit('search', e.target.value)
         }, 500),
         editLahan(row){
-            this.$emit('editPanen', row.item)
+            this.$emit('editLahan', row.item)
         },
         deleteLahan(row){
-            this.$emit('hapusPanen', row.item.id)
+            this.$emit('hapusLahan', row.item.id)
+        },
+        addPengeluaran(row){
+            this.$emit('addPengeluaran', row.item)
         }
     }
 }

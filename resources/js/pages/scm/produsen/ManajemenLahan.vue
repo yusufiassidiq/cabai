@@ -1,11 +1,9 @@
 <template>
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-sm-6"> 
             <h1 class="m-0 text-dark">Manajemen Lahan</h1>
           </div>
           <div class="col-sm-6">
@@ -27,110 +25,19 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Daftar Lahan</h3>
-
                 <div class="card-tools">
                   <button class="btn btn-primary btn-sm" @click="newModal">Tambah Lahan</button>
-                  <!-- <div class="input-group input-group-sm" style="width: 150px;"> -->
-                  <!-- <input
-                      type="text"
-                      name="table_search"
-                      class="form-control float-right"
-                      placeholder="Search"
-                  />-->
-
-                  <!-- <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
-                  </div>-->
-                  <!-- </div> -->
                 </div>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <div class="row">
-                  <table class="table table-hover text-nowrap">
-                    <thead>
-                      <tr>
-                        <th>Nama Lahan</th>
-                        <th>Jenis Cabai</th>
-                        <th>Luas Lahan (ha)</th>
-                        <th>Tanggal Tanam</th>
-                        <th>Total Pengeluaran</th>
-                        <th>Aksi</th>
-                        <th>Pengeluaran</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <tr v-if="!datalahan.length">
-                        <td colspan="7" align="center">Tidak ada data lahan</td>
-                      </tr>
-                      <tr v-for="data in datalahan" :key="data.id">
-                        <td>{{ data.kode_lahan }}</td>
-                        <td>{{ data.jenis_cabai }}</td>
-                        <td>{{ data.luas_lahan }}</td>
-                        <td>{{ data.tanggal_tanam | dateFilter }}</td>
-                        <td>{{ data.pengeluaran | convertToRupiah }}</td>
-                        <td>
-                          <a href="#" @click="editModal(data)">
-                            <i class="fas fa-edit blue"></i>
-                          </a>
-                          /
-                          <a href="#" @click="deleteLahan(data.id)">
-                            <i class="fas fa-trash red"></i>
-                          </a>
-                        </td>
-                        <td>
-                          <a
-                            href="#"
-                            class="btn btn-secondary btn-xs"
-                            @click="pengeluaranModal(data)"
-                          >
-                            <i class="fas fa-plus-square white"></i>
-                            Tambah
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 d-flex justify-content-start align-self-center">
-                    <div
-                      style="padding-left: 20px"
-                    >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
-                  </div>
-
-                  <div
-                    class="col-md-6 d-flex justify-content-end align-self-end"
-                    style="padding-right: 30px"
-                  >
-                    <div class="dataTables_paginate paging_simple_numbers">
-                      <ul class="pagination">
-                        <li>
-                          <button
-                            href="#"
-                            class="btn btn-default"
-                            v-on:click="fetchPaginateLahan(pagination.prev_page_url)"
-                            :disabled="!pagination.prev_page_url"
-                          >Sebelumnya</button>
-                        </li>
-
-                        <li>
-                          <button
-                            class="btn btn-default"
-                            v-on:click="fetchPaginateLahan(pagination.next_page_url)"
-                            :disabled="!pagination.next_page_url"
-                          >Selanjutnya</button>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+              <div class="card-body">
+                <app-datatable
+                  :items="items" :fields="fields"
+                  :meta="meta" @per_page= "handlePerPage"
+                  @pagination="handlePagination" @search="handleSearch"
+                  @sort="handleSort" @editLahan="editModal" 
+                  @hapusLahan="deleteLahan" @addPengeluaran="pengeluaranModal">
+                </app-datatable>
               </div>
-              <!-- /.card-body -->
             </div>
           </div>
         </div>
@@ -255,13 +162,32 @@
 <script>
 // datetimepicker doc : https://github.com/charliekassel/vuejs-datepicker#demo
 import datepicker from "vuejs-datepicker";
+import LahanDatatable from '../../../components/datatable/LahanDatatable'
 
 export default {
   components: {
-    datepicker
+    datepicker,
+    'app-datatable' : LahanDatatable
   },
   data() {
     return {
+      fields:[
+        { key: 'kode_lahan', sortable: true, label:"Nama Lahan"},
+        { key: 'jenis_cabai', sortable: true, label:"Jenis cabai"},
+        { key: 'luas_lahan', sortable: true, label:"Luas lahan"},
+        { key: 'tanggal_tanam', sortable: true, label:"Tanggal tanam"},
+        { key: 'pengeluaran', sortable: true, label:"Total pengeluaran"},
+        { key: 'action', sortable: false, label:"Aksi"},
+        { key: 'Addpengeluaran', sortable: false, label:"Aksi"}
+      ],
+      items: [],
+      meta: [],
+      current_page: 1,
+      per_page: 10,
+      search: '',
+      sortBy: 'updated_at',
+      sortByDesc: false,
+
       datalahan: {},
       editmode: false,
       form: new Form({
@@ -277,34 +203,59 @@ export default {
         jumlah_pengeluaran: "",
         rincian: ""
       }),
-      // pagination
-      pagination: [],
       url_getLahan: "/praProduksi/list",
       // untuk modal pengeluaran
       temp_kodelahan:"",
       temp_jeniscabai:"",
     };
   },
+  created(){
+    this.getLahan()
+  },
   methods: {
-    // prev & next paggination
-    fetchPaginateLahan(url) {
-      this.url_getLahan = url;
-      this.getLahan();
+    getLahan(){
+      let current_page = this.search == '' ? this.current_page : 1
+      axios.get("/praProduksi/list", {
+        params: {
+          page: current_page,
+          per_page: this.per_page,
+          q: this.search,
+          sortby: this.sortBy,
+          sortbydesc: this.sortByDesc ? 'DESC' : 'ASC'
+        }
+      })
+      .then((response) => {
+        let getData = response.data.data
+        this.items = getData.data,
+        this.meta = {
+          total: getData.total,
+          current_page: getData.current_page,
+          per_page: getData.per_page,
+          from: getData.from,
+          to: getData.to
+        }
+      })
     },
-    // set up pagination
-    makePagination(data) {
-      let pagination = {
-        current_page: data.current_page,
-        last_page: data.last_page,
-        next_page_url: data.next_page_url,
-        prev_page_url: data.prev_page_url
-      };
-      this.pagination = pagination;
+    handlePerPage(val) {
+        this.per_page = val 
+        this.getLahan() 
+    },
+    handlePagination(val) {
+        this.current_page = val 
+        this.getLahan()
+    },
+    handleSearch(val) {
+        this.search = val 
+        this.getLahan()
+    },
+    handleSort(val) {
+        this.sortBy = val.sortBy
+        this.sortByDesc = val.sortDesc
+        this.getLahan()
     },
     customFormatter(date) {
       return moment(date).format("DD MMMM YYYY");
     },
-    // CRUD
     // Menambahkan data lahan Produsen
     addLahan() {
       document.getElementById("btnadd").disabled = true;
@@ -312,12 +263,9 @@ export default {
       this.form
         .post("/praProduksi/tambah")
         .then(() => {
-          UpdateData.$emit("ManajemenLahan");
-          $("#modalLahan").trigger("click");
-          toast.fire({
-            icon: "success",
-            title: "Lahan berhasil ditambahkan"
-          });
+          this.getLahan()
+          $("#modalLahan").trigger("click")
+          toast.fire({ icon: "success", title: "Lahan berhasil ditambahkan" });
           this.$Progress.finish();
           document.getElementById("btnadd").disabled = false;
         })
@@ -326,14 +274,6 @@ export default {
           document.getElementById("btnadd").disabled = false;
         });
     },
-    // Mendapatkan data lahan produsen
-    getLahan() {
-      let $this = this;
-      axios.get(this.url_getLahan).then(response => {
-        this.datalahan = response.data.data.data;
-        $this.makePagination(response.data.data);
-      });
-    },
     // Memperbarui data lahan produsen
     updateLahan() {
       document.getElementById("btnupdate").disabled = true;
@@ -341,12 +281,9 @@ export default {
       this.form
         .put("/praProduksi/update/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("ManajemenLahan");
+          this.getLahan()
           $("#modalLahan").trigger("click");
-          toast.fire({
-            icon: "success",
-            title: "Lahan berhasil diperbarui"
-          });
+          toast.fire({ icon: "success", title: "Lahan berhasil diperbarui"});
           this.$Progress.finish();
           document.getElementById("btnupdate").disabled = false;
         })
@@ -360,8 +297,7 @@ export default {
       swal
         .fire({
           title: "Apakah kamu yakin?",
-          text:
-            "Menghapus lahan dapat menghapus seluruh riwayat pengeluaran lahan ini",
+          text: "Menghapus lahan dapat menghapus seluruh riwayat pengeluaran lahan ini",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -374,17 +310,13 @@ export default {
             axios
               .delete("/praProduksi/delete/" + id)
               .then(() => {
-                UpdateData.$emit("ManajemenLahan");
+                this.getLahan()
                 swal.fire("Tehapus!", "Lahan berhasil dihapus", "success");
                 this.$Progress.finish();
               })
               .catch(() => {
                 this.$Progress.fail();
-                swal.fire(
-                  "Gagal!",
-                  "Terdapat masalah ketika menghapus",
-                  "warning"
-                );
+                swal.fire( "Gagal!", "Terdapat masalah ketika menghapus", "warning");
               });
           }
         });
@@ -395,12 +327,9 @@ export default {
       this.formriwayat
         .post("/pengeluaran/tambah")
         .then(() => {
-          UpdateData.$emit("ManajemenLahan");
+          this.getLahan()
           $("#modalPengeluaran").trigger("click");
-          toast.fire({
-            icon: "success",
-            title: "Pengeluaran berhasil ditambahkan"
-          });
+          toast.fire({ icon: "success", title: "Pengeluaran berhasil ditambahkan"});
           this.$Progress.finish();
           document.getElementById("btnaddpengeluaran").disabled = false;
         })
@@ -430,13 +359,6 @@ export default {
       $("#modalPengeluaran").modal("show");
       this.formriwayat.pra_produksi_id = data.id;
     }
-  },
-  mounted() {
-    this.getLahan();
-    // Custom event on Vue js
-    UpdateData.$on("ManajemenLahan", () => {
-      this.getLahan();
-    });
   }
 };
 </script>
