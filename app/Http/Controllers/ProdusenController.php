@@ -46,8 +46,24 @@ class ProdusenController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
     public function readLahan(){
-        $userId = Auth::user()->id;
-        $praProduksi = PraProduksi::where('user_id',$userId)->paginate(6);
+        $userId = Auth::user()->id; 
+        $praProduksi = PraProduksi::where('user_id',$userId)->orderBy(request()->sortby, request()->sortbydesc)
+        ->when(request()->q, function($praProduksi){
+            $praProduksi = $praProduksi->where([
+                ['user_id', '=', Auth::user()->id],
+                ['created_at', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['user_id', '=', Auth::user()->id],
+                ['nama_pengeluaran', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['user_id', '=', Auth::user()->id],
+                ['jumlah_pengeluaran', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['user_id', '=', Auth::user()->id],
+                ['rincian', 'LIKE', '%' . request()->q . '%']
+            ]);
+        })->paginate(request()->per_page);
+
         foreach($praProduksi as $i){
             $i->pengeluaran = $i->pengeluaranProduksi()->sum('jumlah_pengeluaran');
         }
@@ -166,7 +182,7 @@ class ProdusenController extends Controller
             $qPraProduksi->whereHas("user", function($qUser) use($idUser){
                 $qUser->where("id", $idUser);
             });
-        })->paginate(6);
+        })->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         //atau ini yg lebih sederhana
         // $praProduksi_id = PraProduksi::where("user_id", $idUser)->pluck("id");
         // $panens = Panen::whereIn("pra_produksi_id", $praProduksi_id)->get();
