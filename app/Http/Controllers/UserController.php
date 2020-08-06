@@ -541,7 +541,7 @@ class UserController extends Controller
             ['user_id','=',$userId],
             ['status_pemesanan', '=', 0],
         ])
-        ->orderBy('updated_at','DESC')->paginate(6);
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
 
         $j=0;
         foreach($transaksi as $i){
