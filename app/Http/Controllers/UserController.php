@@ -499,8 +499,31 @@ class UserController extends Controller
         $transaksi = Transaksi::where([
             ['pemasok_id','=',$userId],
             ['status_pemesanan', '=', 1],
-        ])
-        ->orderBy('tanggal_pengiriman','DESC')->paginate(6);
+        ])->orderBy(request()->sortby, request()->sortbydesc)
+        ->when(request()->q, function($transaksi){
+            $transaksi = $transaksi->where([
+                ['pemasok_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['tanggal_pengiriman', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['pemasok_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['jenis_cabai', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['pemasok_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['jumlah_cabai', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['pemasok_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['harga', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['pemasok_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['tanggal_diterima', 'LIKE', '%' . request()->q . '%']
+            ]);
+            // filter berdasarkan nama masih belum bisa
+        })->paginate(request()->per_page);
         foreach($transaksi as $i){
             $i->nama = $i->user()->first()->name;
         }

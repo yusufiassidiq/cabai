@@ -38,13 +38,26 @@
                             Tambah
                         </a>
                     </template>
-                    <!-- untuk filter role -->
                     <template v-slot:cell(role)="row">
-                        <div v-if="row.item.role == 2"> Produsen </div>
-                        <div v-else-if="row.item.role == 3"> Pengepul </div>
-                        <div v-else-if="row.item.role == 4"> Grosir </div>
-                        <div v-else-if="row.item.role == 5"> Pengecer </div>
-                        <div v-else> Konsumen </div>
+                        {{ row.item.role | filterRoleUser}}
+                    </template>
+                    <template v-slot:cell(lokasiKabupaten)="row">
+                        {{ row.item.lokasiKabupaten | filterAlamat}}
+                    </template>
+                    <template v-slot:cell(lokasiKecamatan)="row">
+                        {{ row.item.lokasiKecamatan | filterAlamat}}
+                    </template>
+                    <template v-slot:cell(lokasiKelurahan)="row">
+                        {{ row.item.lokasiKelurahan | filterAlamat}}
+                    </template>
+                    <template v-slot:cell(lokasi.kabupaten)="row">
+                        {{ row.item.lokasi.kabupaten | filterAlamat}}
+                    </template>
+                    <template v-slot:cell(lokasi.kecamatan)="row">
+                        {{ row.item.lokasi.kecamatan | filterAlamat}}
+                    </template>
+                    <template v-slot:cell(lokasi.kelurahan)="row">
+                        {{ row.item.lokasi.kelurahan | filterAlamat}}
                     </template>
                 </b-table>
             </div>
