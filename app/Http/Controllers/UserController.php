@@ -8,7 +8,7 @@ use Auth;
 use App\Kemitraan;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator; 
 use App\Transaksi;
 use App\Inventaris;
 use Carbon\Carbon;
@@ -348,11 +348,28 @@ class UserController extends Controller
     }
 
     public function listMitraSaya(){
+        // Query = select * from USER where (status = 1 and user2_id = userId) OR
+        // (status = 1 and user1_id = userId)
         $userId = Auth::user()->id;
-        $listMitraSaya = Kemitraan::orWhere(function($query)use($userId){
-            $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
-        })->where('status',1)->paginate(6);
+        // $listMitraSaya = Kemitraan::orWhere(function($query)use($userId){
+        //     $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
+        // })->where('status',1)->paginate(6);
         
+        // $listMitraSaya = Kemitraan::where([
+        //     ['status', '=', 1],
+        //     ['user2_id', '=', $userId]
+        // ])->orwhere([
+        //     ['status', '=', 1],
+        //     ['user1_id', '=', $userId]
+        // ])->paginate(6);
+
+        $listMitraSaya = Kemitraan::where([
+            ['status', '=', 1],
+            ['user2_id', '=', $userId]
+        ])->orwhere([
+            ['status', '=', 1],
+            ['user1_id', '=', $userId]
+        ])->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         $j=0;
         foreach($listMitraSaya as $i){
             $user1 = $i->user1_id;
@@ -374,10 +391,7 @@ class UserController extends Controller
             $j++;
         }
         // dd($listMitraSaya);
-        return response()->json([
-            'status' => 'success', 
-            'data' => $listMitraSaya->toArray()
-        ], 200);
+        return response()->json([ 'status' => 'success', 'data' => $listMitraSaya->toArray() ], 200);
     }
 
     public function listMitraPemasok(){

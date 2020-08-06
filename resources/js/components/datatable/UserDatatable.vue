@@ -120,14 +120,6 @@ export default {
         meta: {
             required: true
         },
-        title: {
-            type: String,
-            default: "Delete Modal"
-        },
-        editUrl: {
-            type: String,
-            default: null
-        },
     },
     data() {
         return {
