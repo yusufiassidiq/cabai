@@ -250,11 +250,8 @@
     },
     methods: {
       downloadChart(){
-        /*get download button (tag: <a></a>) */
         var download = document.getElementById("download");
-        /*Get image of canvas element*/
         var image = document.getElementById("chart").toDataURL("image/png");
-        /*insert chart image url to download button (tag: <a></a>) */
         download.setAttribute("href", image);
         download.setAttribute('download', 'Grafik Penjualan '+this.monthYearNow + '.png');
       },

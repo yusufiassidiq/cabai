@@ -13,6 +13,60 @@ use Carbon\Carbon;
 
 class AuthController extends Controller
 {
+    /**
+     * @SWG\Post(
+     *   path="/api/auth/register",
+     *   summary="Register User",
+     *   operationId="register",
+     *   tags={"Auth"},
+     *   @SWG\Parameter(
+     *         name="body",
+     *         in="body",              
+     *         required=true, 
+     *        @SWG\Schema(
+     *              @SWG\Property(
+     *                  property="name",
+     *                  type="string",
+     *                  example="name", 
+     *              ),   
+     *              @SWG\Property(
+     *                  property="email",
+     *                  type="string",
+     *                  example="email@email.com", 
+     *              ),        
+     *              @SWG\Property(   
+     *                  property="password",
+     *                  type="string",
+     *                  example="abcd"
+     *              ),
+     *              @SWG\Property(
+     *                  property="role",
+     *                  type="string",
+     *                  example="2", 
+     *              ),
+     *              @SWG\Property(
+     *                  property="kabupaten",
+     *                  type="string",
+     *                  example="KABUPATEN BOGOR", 
+     *              ), 
+     *              @SWG\Property(
+     *                  property="kecamatan",
+     *                  type="string",
+     *                  example="CIAMPEA", 
+     *              ),
+     *              @SWG\Property(
+     *                  property="kelurahan",
+     *                  type="string",
+     *                  example="CIHIDEUNG ILIR", 
+     *              ),
+     *         )
+     *       ), 
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=422, description="unprocessable entity"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     * )
+     *
+     */
     public function register(Request $request)
     {
         $v = Validator::make($request->all(), [
@@ -69,7 +123,35 @@ class AuthController extends Controller
         }
         return response()->json(['status' => 'success'], 200);
     }    
-    
+    /**
+     * @SWG\Post(
+     *   path="/api/auth/login",
+     *   summary="Login User",
+     *   operationId="login",
+     *   tags={"Auth"},
+     *   @SWG\Parameter(
+     *         name="body",
+     *         in="body",              
+     *         required=true, 
+     *        @SWG\Schema(
+     *              @SWG\Property(
+     *                  property="email",
+     *                  type="string",
+     *                  example="email@email.com", 
+     *              ),        
+     *              @SWG\Property(   
+     *                  property="password",
+     *                  type="string",
+     *                  example="abcd"
+     *              ),
+     *         )
+     *       ), 
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     * )
+     *
+     */
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');        

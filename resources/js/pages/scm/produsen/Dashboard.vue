@@ -483,7 +483,7 @@
           var chart2 = this.$refs.chart2;
           var ctx2 = chart2.getContext("2d");
           var myChart2 = new Chart(ctx2, {
-            type : 'line',
+            type : 'bar',
             data:{
               labels:response.data.last6Month,
               datasets:[
