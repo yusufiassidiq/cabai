@@ -10,18 +10,11 @@
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Masuk dengan akun SCM Cabai</p>
         <vue-progress-bar></vue-progress-bar>
         <form autocomplete="on" @submit.prevent="login" method="post">
+          <label for="email">Email</label>
           <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.email }">
-            <input
-              type="email"
-              id="email"
-              class="form-control"
-              placeholder="Email"
-              v-model="email"
-              required
-            />
+            <input type="email" id="email" class="form-control" placeholder="Masukan email" v-model="email" required />
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -29,21 +22,12 @@
             </div>
           </div>
 
-          <div
-            class="input-group mb-3"
-            v-bind:class="{ 'has-error': has_error && errors.password }"
-          >
-            <input
-              type="password"
-              class="form-control"
-              placeholder="Password"
-              v-model="password"
-              autocomplete="on"
-              required
-            />
+          <label for="password">Password</label>
+          <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.password }" >
+            <input id="password" type="password" class="form-control" placeholder="Masukan password" v-model="password" autocomplete="on" required />
             <div class="input-group-append">
               <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+                <span class="fas fa-eye" v-on:click="lihatpassword"></span>
               </div>
             </div>
           </div>
@@ -87,6 +71,14 @@ export default {
   mounted() {},
 
   methods: {
+    lihatpassword(){
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    },
     login() {
       this.$Progress.start();
       document.getElementById("btnmasuk").disabled = true;

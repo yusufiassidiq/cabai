@@ -36,7 +36,7 @@
                       role="tab"
                       aria-controls="custom-tabs-three-permintaan"
                       aria-selected="true"
-                    >Distribusi dengan pelanggan</a>
+                    >Distribusi sebagai pemasok</a>
                   </li>
                 </ul>
               </div>
@@ -54,7 +54,7 @@
   </div>
 </template>
 <script>
-import riwayatdistribusi from "../../../components/RiwTransaksiDgnPelanggan";
+import riwayatdistribusi from "../../../components/RiwayatDistribusiPemasok";
 export default {
   components: {
     riwTransaksi: riwayatdistribusi

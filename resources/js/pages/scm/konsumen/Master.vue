@@ -70,7 +70,7 @@
             <li class="nav-item">
               <router-link to="/konsumen/mitrasaya" class="nav-link">
                 <i class="fas fas fa-user-friends nav-icon"></i>
-                <p>Mitra Saya</p>
+                <p>Kelola mitra</p>
               </router-link>
             </li>
             <li class="nav-item">

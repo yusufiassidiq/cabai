@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Daftar Inventaris Cabai</h3>
+              <h3 class="card-title">Daftar Stok Cabai</h3>
               <vue-progress-bar></vue-progress-bar>
               <div class="card-tools">
                 <!-- <button class="btn btn-success btn-sm" @click="newModal">Tambah Inventory</button> -->
@@ -36,62 +36,6 @@
         </div>
       </div>
     </div>
-    <div
-      class="modal fade"
-      id="modalInventaris"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="modalInventarisLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalInventarisLabel">Informasi Lahan</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <form @submit.prevent="editmode? updateLahan() : addInventaris()">
-            <div class="modal-body">
-              <div class="form-group col-md">
-                <select
-                  v-model="form.jenis_cabai"
-                  class="form-control"
-                  required
-                  :class="{ 'is-invalid': form.errors.has('jenis_cabai') }"
-                >
-                  <option value disabled selected>Jenis cabai</option>
-                  <option value="Cabai rawit">Cabai rawit</option>
-                  <option value="Cabai keriting">Cabai keriting</option>
-                  <option value="Cabai besar">Cabai besar</option>
-                </select>
-                <has-error :form="form" field="jenis_cabai"></has-error>
-              </div>
-
-              <div class="form-group col-md">
-                <input
-                  v-model="form.jumlah_cabai"
-                  type="number"
-                  name="jumlah_cabai"
-                  class="form-control"
-                  placeholder="Jumlah cabai"
-                  required
-                  :class="{ 'is-invalid': form.errors.has('jumlah_cabai') }"
-                />
-                <has-error :form="form" field="luas_lahan"></has-error>
-              </div>
-            </div>
-
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-              <button id="btnadd" type="submit" class="btn btn-primary">Tambahkan</button>
-            </div>
-          </form>
-          <!-- </form> -->
-        </div>
-      </div>
-    </div>
   </section>
 </template>
 <script>
@@ -112,28 +56,6 @@ export default {
         this.inventaris = response.data.data;
       });
     },
-    newModal() {
-      this.form.reset()
-      $("#modalInventaris").modal("show");
-    },
-    // addInventaris() {
-    //   this.$Progress.start();
-    //   this.form
-    //     .put("/inventaris/tambah")
-    //     .then(() => {
-    //       UpdateData.$emit("Inventaris");
-    //       $("#modalInventaris").trigger("click");
-    //       toast.fire({
-    //         icon: "success",
-    //         title: "Inventaris berhasil ditambahkan"
-    //       });
-    //       this.$Progress.finish();
-    //       document.getElementById("btnadd").disabled = false;
-    //     })
-    //     .catch(() => {
-    //       this.$Progress.fail();
-    //     });
-    // }
   },
   created() {
     this.getInventaris();

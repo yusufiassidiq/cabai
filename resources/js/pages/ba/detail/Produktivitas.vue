@@ -14,7 +14,7 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active">
-            <a href="index.html">Home</a>
+            <a href="/">Home</a>
           </li>
           <li>
             <a href="#about">About</a>
@@ -65,7 +65,7 @@
                     id="daerah"
                     style="width: 100%;"
                   >
-                    <option disabled value>PILIH DAERAH</option>
+                    <option disabled value>PILIH SENTRA PRODUKSI</option>
                     <option
                       v-for="daerah in daerah"
                       :key="daerah.id"
@@ -155,7 +155,7 @@
 </template>
 
 <script>
-import { Line } from "vue-chartjs";
+import { Bar } from "vue-chartjs";
 var myChart = 0;
 export default {
   data() {
@@ -198,7 +198,7 @@ export default {
           var chart = this.$refs.chart;
           var ctx = chart.getContext("2d");
           var myChart = new Chart(ctx, {
-            type: "line",
+            type: "bar",
             data: {
               labels: response.data.date,
               datasets: [

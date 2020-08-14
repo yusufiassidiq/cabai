@@ -344,11 +344,11 @@
     },
     mounted () {
       this.getData()
-      this.getInventaris()
+      this.getStok()
       this.getInfoKemitraan()
       window.setInterval(() => {
         this.getData()
-        this.getInventaris()
+        this.getStok()
         this.getInfoKemitraan()
       }, 1800000)
     },
@@ -559,7 +559,7 @@
           this.errored= true
         });
       },
-      getInventaris() {
+      getStok() {
       axios.get("/inventaris/list").then(response => {
         // cabai besar
         if(response.data.data[0].jenis_cabai = "Cabai besar")

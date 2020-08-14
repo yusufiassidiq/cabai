@@ -70,7 +70,7 @@
             <li class="nav-item">
               <router-link to="/pengecer/mitrasaya" class="nav-link">
                 <i class="fas fa-user-friends nav-icon"></i>
-                <p>Mitra saya</p>
+                <p>Kelola mitra</p>
               </router-link>
             </li>
             <li class="nav-item">
@@ -85,11 +85,11 @@
                 <p>Pengajuan Mitra</p>
               </router-link>
             </li> -->
-            <li class="nav-header">Inventaris</li>
+            <li class="nav-header">Stok</li>
             <li class="nav-item">
               <router-link to="/pengecer/inventaris" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
-                <p>Inventaris</p>
+                <p>Stok</p>
               </router-link>
             </li>
             <li class="nav-header">Distribusi</li>

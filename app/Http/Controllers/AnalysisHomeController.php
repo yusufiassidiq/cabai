@@ -215,8 +215,15 @@ class AnalysisHomeController extends Controller
             for ($k = 0; $k < count($jenisCabai); $k++) {
                 $harga = $transaksiPemasok[$k]->firstWhere('tanggal_diterima', $array_date[$i]) ?
                     $transaksiPemasok[$k]->firstWhere('tanggal_diterima', $array_date[$i])->hargaCabai : 0;
-                //Harga per stakeholder, jenis cabai, dan tanggal
-                $hargaByDay[$k][$i] = $harga;
+                //Harga per stakeholder, jenis cabai, da    n tanggal
+                
+                if($harga!=0){
+                    $hargaByDay[$k][$i] = $harga;
+                    $hargaNew[$k] = $harga;
+                }
+                else{
+                    $hargaByDay[$k][$i] = null;
+                }
             }
 
         }
@@ -230,6 +237,9 @@ class AnalysisHomeController extends Controller
             'dateNow' => $dateNow,
             'kabupaten' => $kab,
             'role' => $role[$idRole - 1],
+            'hargaNewRawit' => $hargaNew[0],
+            'hargaNewKeriting' => $hargaNew[1],
+            'hargaNewBesar' => $hargaNew[2],
             // 'hargaMingguan' => $hargaMingguan,
         ], 200);
     }

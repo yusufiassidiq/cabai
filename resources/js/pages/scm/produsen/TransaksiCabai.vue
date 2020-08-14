@@ -36,7 +36,7 @@
                       role="tab"
                       aria-controls="custom-tabs-three-permintaan"
                       aria-selected="true"
-                    >Distribusi dengan pelanggan</a>
+                    >Distribusi sebagai pemasok</a>
                   </li>
                 </ul>
               </div>
@@ -54,7 +54,7 @@
   </div>
 </template>
 <script>
-import listPermintaan from "../../../components/TransaksiDenganPelanggan";
+import listPermintaan from "../../../components/DistribusiPemasok";
 export default {
   components: {
     permintaan: listPermintaan

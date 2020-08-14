@@ -65,13 +65,13 @@
               <li class="nav-item">
                 <router-link to="/admin/usermanagement" class="nav-link">
                   <i class="nav-icon fas fa-user-cog"></i>
-                  <p>Manajemen User</p>
+                  <p>Manajemen akun</p>
                 </router-link>
               </li>
               <li class="nav-item">
                 <router-link to="/admin/uservalidation" class="nav-link">
                   <i class="nav-icon fas fa-user-check"></i>
-                  <p>Validasi User</p>
+                  <p>Validasi akun</p>
                 </router-link>
               </li>
               <li class="nav-item">
