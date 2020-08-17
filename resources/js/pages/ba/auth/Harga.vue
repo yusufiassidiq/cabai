@@ -65,10 +65,19 @@
               <!-- ./card-body -->
               <div class="card-footer">
                 <div class="row">
+                  <div class="col-sm-2 col-3">
+                    <div class="description-block">
+                      <h5 class="description-header">TOTAL KONSUMSI</h5>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.row -->
+                <div class="row">
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
                       <h5 class="description-header">{{ konsumRawitProdusen | filterAngkaRibuan }} Kg</h5>
-                      <span class="description-text">KONSUMSI DARI PRODUSEN</span>
+                      <!-- <span class="description-text">KONSUMSI DARI PRODUSEN</span> -->
+                      <span class="description-text">PRODUSEN - KONSUMEN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -76,7 +85,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
                       <h5 class="description-header">{{ konsumRawitPengepul | filterAngkaRibuan }} Kg</h5>
-                      <span class="description-text">KONSUMSI DARI PENGEPUL</span>
+                      <!-- <span class="description-text">KONSUMSI DARI PENGEPUL</span> -->
+                      <span class="description-text">PENGEPUL - KONSUMEN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -84,7 +94,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
                       <h5 class="description-header">{{ konsumRawitGrosir | filterAngkaRibuan }} Kg</h5>
-                      <span class="description-text">KONSUMSI DARI GROSIR</span>
+                      <!-- <span class="description-text">KONSUMSI DARI GROSIR</span> -->
+                      <span class="description-text">GROSIR - KONSUMEN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -92,7 +103,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block">
                       <h5 class="description-header">{{ konsumRawitPengecer | filterAngkaRibuan }} Kg</h5>
-                      <span class="description-text">KONSUMSI DARI PENGECER</span>
+                      <!-- <span class="description-text">KONSUMSI DARI PENGECER</span> -->
+                      <span class="description-text">PENGECER - KONSUMEN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -142,10 +154,18 @@
               <!-- ./card-body -->
               <div class="card-footer">
                 <div class="row">
+                  <div class="col-sm-2 col-3">
+                    <div class="description-block">
+                      <h5 class="description-header">TOTAL KONSUMSI</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
                       <h5 class="description-header">{{ konsumKeritingProdusen | filterAngkaRibuan }} Kg</h5>
-                      <span class="description-text">KONSUMSI DARI PRODUSEN</span>
+                      <!-- <span class="description-text">KONSUMSI DARI PRODUSEN</span> -->
+                      <span class="description-text">PRODUSEN - KONSUMEN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -153,7 +173,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
                       <h5 class="description-header">{{ konsumKeritingPengepul | filterAngkaRibuan }} Kg</h5>
-                      <span class="description-text">KONSUMSI DARI PENGEPUL</span>
+                      <!-- <span class="description-text">KONSUMSI DARI PENGEPUL</span> -->
+                      <span class="description-text">PENGEPUL - KONSUMEN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -161,7 +182,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
                       <h5 class="description-header">{{ konsumKeritingGrosir | filterAngkaRibuan }} Kg</h5>
-                      <span class="description-text">KONSUMSI DARI GROSIR</span>
+                      <!-- <span class="description-text">KONSUMSI DARI GROSIR</span> -->
+                      <span class="description-text">GROSIR - KONSUMEN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -169,7 +191,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block">
                       <h5 class="description-header">{{ konsumKeritingPengecer | filterAngkaRibuan }} Kg</h5>
-                      <span class="description-text">KONSUMSI DARI PENGECER</span>
+                      <!-- <span class="description-text">KONSUMSI DARI PENGECER</span> -->
+                      <span class="description-text">PENGECER - KONSUMEN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -219,10 +242,18 @@
               <!-- ./card-body -->
               <div class="card-footer">
                 <div class="row">
+                  <div class="col-sm-2 col-3">
+                    <div class="description-block">
+                      <h5 class="description-header">TOTAL KONSUMSI</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
                       <h5 class="description-header">{{ konsumBesarProdusen | filterAngkaRibuan }} Kg</h5>
-                      <span class="description-text">KONSUMSI DARI PRODUSEN</span>
+                      <!-- <span class="description-text">KONSUMSI DARI PRODUSEN</span> -->
+                      <span class="description-text">PRODUSEN - KONSUMEN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -230,7 +261,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
                       <h5 class="description-header">{{ konsumBesarPengepul | filterAngkaRibuan }} Kg</h5>
-                      <span class="description-text">KONSUMSI DARI PENGEPUL</span>
+                      <!-- <span class="description-text">KONSUMSI DARI PENGEPUL</span> -->
+                      <span class="description-text">PENGEPUL - KONSUMEN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -238,7 +270,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
                       <h5 class="description-header">{{ konsumBesarGrosir | filterAngkaRibuan }} Kg</h5>
-                      <span class="description-text">KONSUMSI DARI GROSIR</span>
+                      <!-- <span class="description-text">KONSUMSI DARI GROSIR</span> -->
+                      <span class="description-text">GROSIR - KONSUMEN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -246,7 +279,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block">
                       <h5 class="description-header">{{ konsumBesarPengecer | filterAngkaRibuan }} Kg</h5>
-                      <span class="description-text">KONSUMSI DARI PENGECER</span>
+                      <!-- <span class="description-text">KONSUMSI DARI PENGECER</span> -->
+                      <span class="description-text">PENGECER - KONSUMEN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
