@@ -3,94 +3,20 @@
     <!-- TABLE -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Daftar Permintaan Cabai</h3>
         <div class="card-tools">
-          <div class="input-group input-group-sm" style="width: 150px;">
-            <input type="text" name="table_search" class="form-control float-right" placeholder="Search" />
-            <div class="input-group-append">
-              <button type="submit" class="btn btn-default">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
-          </div>
+          
         </div>
       </div>
-      <div class="card-body table-responsive p-0">
-        <div class="row">
-          <table class="table table-hover text-nowrap">
-            <thead>
-              <tr>
-                <th>Pembeli</th>
-                <th>Jenis cabai</th>
-                <th>Jumlah cabai(Kg)</th>
-                <th>Permintaan Cabai diterima</th>
-                <th>Harga cabai</th>
-                <th>Tanggal pengiriman</th>
-                <th>Status</th>
-                <th>Keterangan</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-if="!dataDistribusi.length">
-                <td colspan="9" align="center">Tidak ada permintaan cabai</td>
-              </tr>
-              <tr v-for="data in dataDistribusi" :key="data.id">
-                <td>{{data.nama}}</td>
-                <td>{{data.jenis_cabai}}</td>
-                <td>{{data.jumlah_cabai | filterAngkaRibuan }}</td>
-                <td>{{data.tanggal_diterima | dateFilter }}</td>
-                <td>
-                  <div v-if="data.harga!==null">{{ data.harga | convertToRupiah }}/Kg</div>
-                  <div v-else>Belum ditetapkan</div>
-                </td>
-                <td>
-                  <div v-if="data.tanggal_pengiriman!==null" >{{data.tanggal_pengiriman | dateFilter }}</div>
-                  <div v-else>Belum ditetapkan</div>
-                </td>
-                <td>
-                  <div class="orange" v-if="data.status_permintaan === 0">Belum ditanggapi</div>
-                  <div v-else-if="data.status_permintaan === 1">Menunggu persetujuan pembeli</div>
-                  <div class="red" v-else-if="data.status_permintaan === 4">Penawaran anda ditolak</div>
-                  <div class="green" v-else-if="data.status_permintaan === 3 && data.status_pengiriman===0">Penawaran anda diterima</div>
-                  <div v-else-if="data.status_permintaan === 3 && data.status_pengiriman===1">Dalam Pengiriman</div>
-                  <div class="red" v-else-if="data.status_permintaan === 2">Permintaan ditolak</div>
-                </td>
-                <td>
-                  <div v-if="data.status_permintaan === 2">{{data.keterangan}}</div>
-                  <div v-else>-</div>
-                </td>
-                <td>
-                  <div v-if="data.status_permintaan === 0">
-                    <button type="button" class="btn btn-success btn-xs" @click="modalAccPermintaan(data)" >Terima</button>
-                    <button type="button" class="btn btn-danger btn-xs" @click="modalTolakPermintaan(data)">Tolak</button>
-                  </div>
-                  <div v-else-if="data.status_permintaan === 3 && data.status_pengiriman===0">
-                    <button type="button" class="btn btn-success btn-xs" @click="modalKirimPesanan(data)">Kirim Pesanan</button>
-                  </div>
-                  <div v-else>-</div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="row">
-          <div class="col-md-6 d-flex justify-content-start align-self-center">
-            <div style="padding-left: 20px" >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
-          </div>
-          <div class="col-md-6 d-flex justify-content-end align-self-end" style="padding-right: 30px">
-            <div class="dataTables_paginate paging_simple_numbers">
-              <ul class="pagination">
-                <li>
-                  <button href="#" class="btn btn-default" v-on:click="fetchPaginate(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">Sebelumnya</button>
-                </li>
-                <li>
-                  <button class="btn btn-default" v-on:click="fetchPaginate(pagination.next_page_url)" :disabled="!pagination.next_page_url">Selanjutnya</button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="card-body">
+        <app-datatable
+          :items="items" :fields="fields"
+          :meta="meta" @per_page= "handlePerPage"
+        @pagination="handlePagination" @search="handleSearch"
+          @sort="handleSort" 
+          @terimaPermintaanPelanggan="modalAccPermintaan"
+          @tolakPermintaanPelanggan="modalTolakPermintaan"
+          @kirimCabai="modalKirimPesanan">
+        </app-datatable>
       </div>
     </div>
     <!-- END TABLE -->
@@ -285,12 +211,33 @@
 </template>
 <script>
 import datepicker from "vuejs-datepicker";
+import KemitraanDatatable from '../components/datatable/DistribusiDatatable'
 export default {
   components: {
-    datepicker
+    datepicker,
+    'app-datatable': KemitraanDatatable
   },
   data() {
     return {
+      fields:[
+        { key: 'nama', sortable: true, label:"Pelanggan"},
+        { key: 'jenis_cabai', sortable: true, label:"Jenis"},
+        { key: 'jumlah_cabai', sortable: true, label:"Jumlah"},
+        { key: 'tanggal_diterima', sortable: true, label:"Tgl terima"},
+        { key: 'tanggal_pengiriman', sortable: true, label:"Tgl kirim"},
+        { key: 'harga', sortable: true, label:"Harga"},
+        { key: 'statusPemasok', sortable: true, label:"Status"},
+        { key: 'keterangan', sortable: true, label:"Keterangan"},
+        { key: 'AksiPemasok', sortable: false, label:"Aksi"},
+      ],
+      items: [],
+      meta: [],
+      current_page: 1,
+      per_page: 10,
+      search: '',
+      sortBy: 'updated_at',
+      sortByDesc: false,
+
       form: new Form({
         id: "",
         tanggal_pengiriman: "",
@@ -317,47 +264,59 @@ export default {
       // for update keterangan
       keterangan: "",
       dataDistribusi: {},
-      // pagination
-      pagination: [],
-      url_permintaanMasuk: "/transaksi/permintaanMasuk/list"
     };
   },
+  created(){
+    this.getDistribusiPemasok()
+    this.getStok()
+  },
   methods: {
-    getPermintaanMasuk() {
-      let $this = this
-      axios.get("/transaksi/permintaanMasuk/list").then(response => {
-        this.dataDistribusi = response.data.data.data
-        $this.makePagination(response.data.data)
-      });
+    getDistribusiPemasok(){
+      let current_page = this.search == '' ? this.current_page : 1
+      axios.get("/transaksi/permintaanMasuk/list", {
+        params: {
+          page: current_page,
+          per_page: this.per_page,
+          q: this.search,
+          sortby: this.sortBy,
+          sortbydesc: this.sortByDesc ? 'DESC' : 'ASC'
+        }
+      })
+      .then((response) => {
+        let getData = response.data.data
+        this.items = getData.data,
+        this.meta = {
+          total: getData.total,
+          current_page: getData.current_page,
+          per_page: getData.per_page,
+          from: getData.from,
+          to: getData.to
+        }
+      })
     },
-    // prev & next paggination
-    fetchPaginate(url) {
-      this.url_permintaanMasuk = url;
-      this.getPermintaanMasuk();
+    handlePerPage(val) {
+        this.per_page = val 
+        this.getDistribusiPemasok() 
     },
-    // set up pagination
-    makePagination(data) {
-      let pagination = {
-        current_page: data.current_page,
-        last_page: data.last_page,
-        next_page_url: data.next_page_url,
-        prev_page_url: data.prev_page_url
-      };
-      this.pagination = pagination;
+    handlePagination(val) {
+        this.current_page = val 
+        this.getDistribusiPemasok()
     },
-    getPermintaanMasuk() {
-      let $this = this
-      axios.get(this.url_permintaanMasuk).then(response => {
-        this.dataDistribusi = response.data.data.data
-        $this.makePagination(response.data.data)
-      });
+    handleSearch(val) {
+        this.search = val 
+        this.getDistribusiPemasok()
+    },
+    handleSort(val) {
+        this.sortBy = val.sortBy
+        this.sortByDesc = val.sortDesc
+        this.getDistribusiPemasok()
     },
     acceptPermintaan() {
       document.getElementById("btnAccPermintaan").disabled = true;
       this.$Progress.start();
       this.form.put("/transaksi/permintaanMasuk/terima/" + this.form.id)
         .then(() => {
-          UpdateData.$emit("DistribusiPemasok");
+          this.getDistribusiPemasok()
           $("#modalAccPermintaan").trigger("click");
           toast.fire({ icon: "success", title: "Permintaan berhasil diterima"});
           this.$Progress.finish();
@@ -374,7 +333,7 @@ export default {
       this.formReject
         .put("/transaksi/permintaanPembeli/tolak/" + this.formReject.id)
         .then(() => {
-          UpdateData.$emit("DistribusiPemasok");
+          this.getDistribusiPemasok()
           // hide modal
           $("#modalTolakPermintaan").trigger("click");
           toast.fire({
@@ -462,7 +421,7 @@ export default {
       this.formSend
         .put("/inventaris/stokKeluar/" + this.formSend.id)
         .then(() => {
-          UpdateData.$emit("DistribusiPemasok");
+          this.getDistribusiPemasok()
           $("#modalKirimPermintaan").trigger("click");
           toast.fire({
             icon: "success",
@@ -483,13 +442,6 @@ export default {
         this.temp_inv_hargacabai = response.data.harga;
       });
     }
-  },
-  mounted() {
-    this.getPermintaanMasuk();
-    this.getStok();
-    UpdateData.$on("DistribusiPemasok", () => {
-      this.getPermintaanMasuk();
-    });
   }
 };
 </script>

@@ -178,7 +178,7 @@ export default {
         { key: 'tanggal_tanam', sortable: true, label:"Tanggal tanam"},
         { key: 'pengeluaran', sortable: true, label:"Total pengeluaran"},
         { key: 'action', sortable: false, label:"Aksi"},
-        { key: 'Addpengeluaran', sortable: false, label:"Aksi"}
+        { key: 'Addpengeluaran', sortable: false, label:"Pengeluaran"}
       ],
       items: [],
       meta: [],

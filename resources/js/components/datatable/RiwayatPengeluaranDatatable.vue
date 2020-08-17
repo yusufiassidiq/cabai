@@ -41,7 +41,7 @@
                 </b-table>
             </div>
             <div class="col-md-6">
-                <p>Menampilkan {{ meta.form }} dari {{ meta.to }} dari keseluruhan {{ meta.total }} data</p>
+                Showing {{ meta.from }} to {{ meta.to }} of {{ meta.total }} items
             </div>
             <div class="col-md-6">
                 <b-pagination

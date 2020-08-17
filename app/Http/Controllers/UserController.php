@@ -483,8 +483,7 @@ class UserController extends Controller
         ])->orWhere([
             ['pemasok_id','=',$userId],
             ['status_pemesanan', '=', 0],
-        ])
-        ->orderBy('updated_at','DESC')->paginate(6);
+        ])->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         foreach($transaksi as $i){
             $i->nama = $i->user()->first()->name;
         }

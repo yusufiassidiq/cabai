@@ -20,14 +20,29 @@
                     <input type="text" class="form-control" @input="search">
                 </div>
             </div>
+            <br>
+            <div class="col-md-4 offset-md-8">
+                <div class="form-inline float-right">
+                    <label class="mr-2">Satuan cabai</label>
+                    <select class="form-control" v-model="satuan" @change="ubahsatuan">
+                        <option value="Kg" selected>Kg</option>
+                        <option value="Kw">Kwintal</option>
+                        <option value="Ton">Ton</option>
+                    </select>
+                    <label class="ml-2"> </label>
+                </div>
+            </div>
             <div class="col-md-12">
                 <b-table responsive striped hover :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" show-empty>
                     <template v-slot:cell(tanggal_panen)="row">
                         {{ row.item.tanggal_panen | dateFilter}}
                     </template>
+                    <template v-slot:cell(jumlah_panen)="row">
+                        {{ row.item.jumlah_panen}} Kg
+                    </template>
                     <template v-slot:cell(action)="row">
                         <a href="#" @click="editLahan(row)">
-                            <i class="fas fa-edit orange"></i>
+                            <i class="fas fa-edit orange text-warning"></i>
                         </a>
                         /
                         <a href="#" @click="deleteLahan(row)">
@@ -37,7 +52,7 @@
                 </b-table>
             </div>
             <div class="col-md-6">
-                <p>Menampilkan {{ meta.form }} dari {{ meta.to }} dari keseluruhan {{ meta.total }} data</p>
+                Showing {{ meta.from }} to {{ meta.to }} of {{ meta.total }} items
             </div>
             <div class="col-md-6">
                 <b-pagination
@@ -75,6 +90,7 @@ export default {
         return {
             sortBy: null,
             sortDesc: false,
+            satuan: 'Kg'
         }
     },
     watch: {
@@ -106,6 +122,11 @@ export default {
         },
         deleteLahan(row){
             this.$emit('hapusPanen', row.item.id)
+        },
+        ubahsatuan(){
+            // belum ada yg terjadi, perlu pengembangan
+            // jadi nanti pas ini terjadu, satuan dlm jumlah cabai sama harga cabai dibagi/ dikali sesuai satuan
+            this.$emit('ubahsatuan', this.satuan)
         }
     }
 }

@@ -25,14 +25,16 @@
                     <template v-slot:cell(tanggal_tanam)="row">
                         {{ row.item.tanggal_tanam | dateFilter}}
                     </template>
+                    <template v-slot:cell(luas_lahan)="row">
+                        {{ row.item.luas_lahan }} ha
+                    </template>
                     <template v-slot:cell(pengeluaran)="row">
                         {{ row.item.pengeluaran | convertToRupiah}}
                     </template>
                     <template v-slot:cell(Addpengeluaran)="row">
-                        <a href="#" class="btn btn-secondary btn-xs" @click="addPengeluaran(row)">
-                            <i class="fas fa-plus-square white"></i>
-                            Tambah
-                        </a>
+                        <b-button variant="secondary" size="sm" @click="addPengeluaran(row)"> 
+                            <i class="fas fa-plus-square white"></i> &ensp;Tambah
+                        </b-button>
                     </template>
                     <template v-slot:cell(action)="row">
                         <a href="#" @click="editLahan(row)">
@@ -46,7 +48,7 @@
                 </b-table>
             </div>
             <div class="col-md-6">
-                <p>Menampilkan {{ meta.form }} dari {{ meta.to }} dari keseluruhan {{ meta.total }} data</p>
+                Showing {{ meta.from }} to {{ meta.to }} of {{ meta.total }} items
             </div>
             <div class="col-md-6">
                 <b-pagination

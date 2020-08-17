@@ -106,7 +106,7 @@ export default {
         { key: 'nama_pengeluaran', sortable: true, label:"Jenis pengeluaran"},
         { key: 'jumlah_pengeluaran', sortable: true, label:"Jumlah pengeluaran"},
         { key: 'rincian', sortable: true, label:"Rincian"},
-        { key: 'action', sortable: true, label:"Aksi"},
+        { key: 'action', sortable: false, label:"Aksi"},
       ],
       items: [],
       meta: [],

@@ -3,19 +3,19 @@
     <div class="row">
         <div class="col-md-4 mb-2">
             <div class="form-inline">
-                <label class="mr-2">Menampilkan</label>
+                <label class="mr-2">Showing</label>
                 <select class="form-control" v-model="meta.per_page" @change="loadPerPage">
                     <option value="10">10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
-                <label class="ml-2">data</label>
+                <label class="ml-2">Entries</label>
             </div>
         </div>
         <div class="col-md-4 offset-md-4">
             <div class="form-inline float-right">
-                <label class="mr-2">Cari</label>
+                <label class="mr-2">Search</label>
                 <input type="text" class="form-control" @input="search">
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <!-- untuk Manajemen akun -->
                 <template v-slot:cell(managementUserAction)="row">
                     <a href="#">
-                        <i class="fas fa-edit blue" v-on:click="openEditModal(row)"></i>
+                        <i class="fas fa-edit orange" v-on:click="openEditModal(row)"></i>
                     </a>
                     /
                     <a href="#" v-on:click="deleteUser(row)">
@@ -34,15 +34,24 @@
 
                 <!-- Untuk validasi akun -->
                 <template v-slot:cell(validatedUserAction)="row">
-                    <button class="btn btn-success btn-xs" v-on:click="terima(row)">Terima</button>
-                    <button class="btn btn-danger btn-xs" v-on:click="tolak(row)">Tolak</button>
+                    <!-- <button class="btn btn-success btn-xs" v-on:click="terima(row)">Terima</button> -->
+                    <b-col lg="6" class="pb-2">
+                        <b-button variant="success" size="sm" @click="terima(row)">
+                            Terima
+                        </b-button>
+                        <b-button variant="danger" size="sm" @click="tolak(row)">
+                            Tolak
+                        </b-button>
+                    </b-col>
+                    <!-- <b-col lg="3" class="pb-2"></b-col> -->
+                    <!-- <button class="btn btn-danger btn-xs" v-on:click="tolak(row)">Tolak</button> -->
                 </template>
                 
                 <!-- untuk SIUP -->
                 <template v-slot:cell(siup)="row">
-                    <button class="btn btn-info btn-xs" @click="openSiupModal(row)">
+                    <b-col lg="8" class="pb-2"><b-button variant="info" size="sm" @click="openSiupModal(row)">
                         <i class="fas fa-eye"></i>&nbsp; Lihat
-                    </button>
+                    </b-button></b-col>
                 </template>
                 
                 <!-- untuk Role user -->

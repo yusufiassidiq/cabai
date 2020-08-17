@@ -4,14 +4,14 @@
         <div class="row">
             <div class="col-md-4 mb-2">
                 <div class="form-inline">
-                    <label class="mr-2">Menampilkan</label>
+                    <label class="mr-2">Showing</label>
                     <select class="form-control" v-model="meta.per_page" @change="loadPerPage">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
                     </select>
-                    <label class="ml-2">data</label>
+                    <label class="ml-2">Entries</label>
                 </div>
             </div> 
             <div class="col-md-4 offset-md-4">
@@ -24,19 +24,18 @@
                 <b-table responsive striped hover :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" show-empty>
                     <!-- Untuk Hapus mitra -->
                     <template v-slot:cell(aksiKelolaMitra)="row">
-                        <button class="btn btn-danger btn-xs" @click="deleteMitra(row)">Hapus</button>
+                        <b-button variant="danger" size="sm" @click="deleteMitra(row)"> Hapus </b-button>
                     </template>
                     <!-- untuk menerima/menolak pembentukan mitra -->
                     <template v-slot:cell(aksiPembentukanMitra)="row">
-                        <button type="button" class="btn btn-success btn-xs" @click="accMitra(row)" >Terima</button>
-                        <button type="button" class="btn btn-danger btn-xs" @click="rejectMitra(row)">Tolak</button>
+                        <b-button variant="success" size="sm" @click="accMitra(row)"> Terima </b-button>
+                        <b-button variant="danger" size="sm" @click="rejectMitra(row)"> Tolak </b-button>
                     </template>
                     <!-- untuk menambahkan pembentukan kemitraan -->
                     <template v-slot:cell(aksiTambahMitra)="row">
-                        <a href="#" class="btn btn-success btn-xs" @click="tambahMitra(row)">
-                            <i class="fas fa-plus-square white"></i>
-                            Tambah
-                        </a>
+                        <b-button variant="success" size="sm" @click="tambahMitra(row)">
+                            <i class="fas fa-plus-square white"></i>&ensp;Tambah 
+                        </b-button>
                     </template>
                     <template v-slot:cell(role)="row">
                         {{ row.item.role | filterRoleUser}}
@@ -62,7 +61,7 @@
                 </b-table>
             </div>
             <div class="col-md-6">
-                <p>Menampilkan {{ meta.form }} dari {{ meta.to }} dari keseluruhan {{ meta.total }} data</p>
+                Showing {{ meta.from }} to {{ meta.to }} of {{ meta.total }} items
             </div>
             <div class="col-md-6">
                 <b-pagination

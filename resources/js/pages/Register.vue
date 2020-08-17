@@ -56,6 +56,30 @@
                             </select>
                           </div>
                           <span class="help-block" v-if="has_error && errors.role">{{ errors.role }}</span>
+                          <label>SIUP</label>
+                          <div
+                            class="input-group mb-3"
+                            v-bind:class="{ 'has-error': has_error && errors.fotosk }"
+                          >
+                            <div class="input-group ">
+                              <div class="custom-file">
+                                <!-- <input type="file" v-on:change="onFileChange" class="form-control "> -->
+                                <input type="file" v-on:change="onFileChange" class="custom-file-input form-control" id="exampleInputFile" />
+                                <label class="custom-file-label" for="exampleInputFile" id="exampleInputFile">Pilih file</label>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="help-block" v-if="has_error && errors.fotosk">{{ errors.fotosk }}</span>
+                          <div class="row">
+                            <div class="col-12 fotosk">
+                              <img :src="fotosk" class="img-responsive">
+                            </div>
+                          </div>
+                          <div class="row btncstm">
+                        <div class="col-12 ">
+                          <button type="submit" class="btn btn-primary btn-block">Daftar</button>
+                        </div>
+                      </div>
                         </div>
                         <div class="col-md-6">
                           <label>Email</label>
@@ -91,31 +115,9 @@
                         </div>
                       </div>
 
-                      <label>Unggah Surat Izin Usaha Perdagangan (SIUP)</label>
-                      <div
-                        class="input-group mb-3"
-                        v-bind:class="{ 'has-error': has_error && errors.fotosk }"
-                      >
-                        <div class="input-group ">
-                          <div class="custom-file">
-                            <!-- <input type="file" v-on:change="onFileChange" class="form-control "> -->
-                            <input type="file" v-on:change="onFileChange" class="custom-file-input form-control" id="exampleInputFile" />
-                            <label class="custom-file-label" for="exampleInputFile" id="exampleInputFile">Pilih file</label>
-                          </div>
-                        </div>
-                      </div>
-                      <span class="help-block" v-if="has_error && errors.fotosk">{{ errors.fotosk }}</span>
-                      <div class="row">
-                        <div class="col-12 fotosk">
-                          <img :src="fotosk" class="img-responsive">
-                        </div>
-                      </div>
+                      
                       <!-- <br> -->
-                      <div class="row btncstm">
-                        <div class="col-12 ">
-                          <button type="submit" class="btn btn-primary btn-block">Daftar</button>
-                        </div>
-                      </div>
+                      
                     </form>
                   </div>
                   <div class="card-footer">

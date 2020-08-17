@@ -49,7 +49,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalHasilPanenLabel">Tambahkan Hasil Panen</h5>
+            <h5 class="modal-title" id="modalHasilPanenLabel">Edit Hasil Panen</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -68,12 +68,20 @@
                 <has-error :form="form" field="pra_produksi_id"></has-error>
               </div>
               <div class="form-group col-md">
-                <label>Jumlah panen (Kg)</label>
+                <label>Jumlah panen</label>
                 <input v-model="form.jumlah_cabai" type="number"
                   class="form-control" placeholder="Masukan jumlah panen"
                   :class="{ 'is-invalid': form.errors.has('jumlah_cabai') }"
                 />
                 <has-error :form="form" field="jumlah_cabai"></has-error>
+              </div>
+              <div class="form-group col-md">
+                <label>Satuan cabai</label>
+                <select v-model="satuan" class="form-control" required >
+                  <option value="Kg">Kg</option>
+                  <option value="Kwintal">Kwintal</option>
+                  <option value="Ton">Ton</option>
+                </select>
               </div>
 
               <div class="form-group col-md">
@@ -111,10 +119,10 @@ export default {
     return {
       fields:[
         { key: 'tanggal_panen', sortable: true, label:"Tanggal panen"},
-        { key: 'kode_lahan', sortable: true, label:"Nama Lahan"},
+        { key: 'kode_lahan', sortable: true, label:"Nama pahan"},
         { key: 'jenis_cabai', sortable: true, label:"Jenis cabai"},
-        { key: 'jumlah_panen', sortable: true, label:"Tanggal panen"},
-        { key: 'action', sortable: true, label:"Aksi"},
+        { key: 'jumlah_panen', sortable: true, label:"Jumlah panen"},
+        { key: 'action', sortable: false, label:"Aksi"},
       ],
       items: [],
       meta: [],
@@ -124,6 +132,7 @@ export default {
       sortBy: 'updated_at',
       sortByDesc: false,
       datalahan: {},
+      satuan:'Kg',
       editmode: false, 
       form: new Form({
         id: "",
@@ -200,15 +209,11 @@ export default {
     // Memperbarui Hasil Panen
     updatePanen() {
       this.$Progress.start();
-      this.form
-        .put("/panen/update/" + this.form.id)
+      this.form.put("/panen/update/" + this.form.id)
         .then(() => {
           this.getPanen()
           $("#modalHasilPanen").trigger("click");
-          toast.fire({
-            icon: "success",
-            title: "Data panen berhasil diperbarui"
-          });
+          toast.fire({ icon: "success", title: "Data panen berhasil diperbarui"});
           this.$Progress.finish();
         })
         .catch(() => {

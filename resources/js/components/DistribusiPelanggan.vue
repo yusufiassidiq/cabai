@@ -15,7 +15,8 @@
           @tolakPenawaranPemasok="modalTolakPenawaran"
           @cabaidiTerima="sudahDiterima"
           @deleteDistribusi="deletePermintaanCabai"
-          @requestUlang="modalRequestUlang">
+          @requestUlang="modalRequestUlang"
+          @ubahsatuan="ubahSatuan">
         </app-datatable>
       </div>
     </div>
@@ -179,9 +180,9 @@ export default {
         { key: 'tanggal_pengiriman', sortable: true, label:"Tgl kirim"},
         { key: 'status', sortable: true, label:"Status"},
         { key: 'keterangan', sortable: true, label:"Keterangan"},
-        { key: 'AksiPelanggan', sortable: true, label:"Aksi"},
+        { key: 'AksiPelanggan', sortable: false, label:"Aksi"},
       ],
-      items: [],
+      items: [], 
       meta: [],
       current_page: 1,
       per_page: 10,
@@ -351,6 +352,9 @@ export default {
           }
         });
     },
+    ubahSatuan(val){
+      console.log(val)
+    },
     newModal() {
       this.requestUlang = false;
       document.getElementById("pemasok__id").disabled = false;
@@ -434,7 +438,6 @@ export default {
       this.formReceived.jumlah_cabai = data.jumlah_cabai;
       this.formReceived.jenis_cabai = data.jenis_cabai;
       this.formReceived.id = data.id;
-      // console.log(this.formReceived.jumlah_cabai)
       swal
         .fire({
           title: "Konfirmasi Pesanan",
@@ -450,14 +453,7 @@ export default {
             this.formReceived
               .put("/inventaris/stokMasuk/" + data.id)
               .then(response => {
-                swal.fire(
-                  "Konfirmasi Pesanan",
-                  data.jumlah_cabai +
-                    " Kg " +
-                    data.jenis_cabai +
-                    " telah diterima",
-                  "success"
-                );
+                swal.fire( "Konfirmasi Pesanan", data.jumlah_cabai + " Kg " + data.jenis_cabai + " telah diterima", "success");
                 this.getDistribusi()
                 this.$Progress.finish();
               })
