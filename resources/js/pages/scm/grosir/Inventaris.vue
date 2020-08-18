@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Inventaris</h1>
+          <h1 class="m-0 text-dark">Stok</h1>
         </div>
         <!-- /.col -->
         <div class="col-sm-6">
@@ -14,7 +14,7 @@
             <li class="breadcrumb-item">
               <a href="#">Grosir</a>
             </li>
-            <li class="breadcrumb-item active">Inventaris</li>
+            <li class="breadcrumb-item active">Stok</li>
           </ol>
         </div>
         <!-- /.col -->

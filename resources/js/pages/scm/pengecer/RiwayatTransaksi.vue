@@ -67,8 +67,8 @@
   </div>
 </template>
 <script>
-import riwayatdistribusiPelanggan from "../../../components/RiwTransaksiDgnPelanggan"
-import riwayatdistribusiPemasok from './../../../components/RiwTransaksiDgnPemasok'
+import riwayatdistribusiPelanggan from "../../../components/RiwayatDistribusiPemasok"
+import riwayatdistribusiPemasok from './../../../components/RiwayatDistribusiPelanggan'
 export default {
   components: {
     riwTransaksi: riwayatdistribusiPelanggan,

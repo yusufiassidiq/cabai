@@ -54,7 +54,7 @@
   </div>
 </template>
 <script>
-import listPengajuan from "../../../components/TransaksiDenganPemasok";
+import listPengajuan from "../../../components/DistribusiPelanggan";
 export default {
   components: {
     pengajuan:listPengajuan

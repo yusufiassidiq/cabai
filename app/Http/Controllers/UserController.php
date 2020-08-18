@@ -8,7 +8,7 @@ use Auth;
 use App\Kemitraan;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator; 
 use App\Transaksi;
 use App\Inventaris;
 use Carbon\Carbon;
@@ -25,7 +25,7 @@ class UserController extends Controller
     }    
 
     public function show(Request $request, $id){
-        $user = User::find($id);        
+        $user = User::find($id);         
         return response()->json(
             [
                 'status' => 'success',
@@ -33,27 +33,46 @@ class UserController extends Controller
             ], 200);
     }
     // public function seeToken(){
-    //     $token = JWTAuth::getToken();
+    //     $token = JWTAuth::getToken(); 
     //     $isiToken = JWTAuth::getPayload($token)->toArray();
     //     return $isiToken;
     // }
 
     public function requesteduser(){
-        $users = DB::table('users')->where('status', '=', '0')->paginate(6);
-        return response()->json(
-            [
-                'status' => 'success',
-                'users' => $users->toArray()
-            ], 200);
+        $users = User::where('status', '=', '0')->orderBy(request()->sortby, request()->sortbydesc)
+            ->when(request()->q, function($users){
+                $users = $users->where([
+                    ['status', '=', '0'],
+                    ['name', 'LIKE', '%' . request()->q . '%']
+                ])->orwhere([
+                    ['status', '=', '0'],
+                    ['email', 'LIKE', '%' . request()->q . '%']
+                ])->orwhere([
+                    ['status', '=', '0'],
+                    ['role', 'LIKE', '%' . request()->q . '%']
+                ]);
+            })->paginate(request()->per_page);
+        return response()->json([ 'status' => 'success', 'users' => $users->toArray()], 200);
     }
 
     public function validateduser(){
-        $users = DB::table('users')->where('status', '=', '1')->where('role', '!=', '1')->paginate(6);
-        return response()->json(
-            [
-                'status' => 'success',
-                'users' => $users->toArray()
-            ], 200);
+        $users = User::where('status', '=', '1')->where('role', '!=', '1')->orderBy(request()->sortby, request()->sortbydesc)
+            ->when(request()->q, function($users){
+                $users = $users->where([
+                    ['status', '=', '1'],
+                    ['role', '!=', '1'],
+                    ['name', 'LIKE', '%' . request()->q . '%']
+                ])->orwhere([
+                    ['status', '=', '1'],
+                    ['role', '!=', '1'],
+                    ['role', 'LIKE', '%' . request()->q . '%']
+                ])->orwhere([
+                    ['status', '=', '1'],
+                    ['role', '!=', '1'],
+                    ['email', 'LIKE', '%' . request()->q . '%']
+                ]);
+            })->paginate(request()->per_page);
+        return response()->json([ 'status' => 'success', 'users' => $users->toArray()], 200);
     }
 
     public function getMitraProdusen(){
@@ -72,8 +91,8 @@ class UserController extends Controller
             }
             $j++;
         }
-        // return $listuser;
-        $listProdusen = User::where('role',2)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
+        $listProdusen = User::where('role',2)->where('status',1)->whereNotIn('id',$listuser)
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         foreach ($listProdusen as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -86,6 +105,7 @@ class UserController extends Controller
     }
 
     public function getMitraPengepul(){
+        // belum ada fitur search
         $userId = Auth::user()->id;
         $mitra = Kemitraan::whereHas('user1')->get();
         $j=0;
@@ -101,7 +121,8 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listPengepul = User::where('role',3)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
+        $listPengepul = User::where('role',3)->where('status',1)->whereNotIn('id',$listuser)
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         foreach ($listPengepul as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -114,6 +135,7 @@ class UserController extends Controller
     }
 
     public function getMitraGrosir(){
+        // belum ada fitur search
         $userId = Auth::user()->id;
         $mitra = Kemitraan::whereHas('user1')->get();
         $j=0;
@@ -129,7 +151,8 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listGrosir = User::where('role',4)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
+        $listGrosir = User::where('role',4)->where('status',1)->whereNotIn('id',$listuser)
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         foreach ($listGrosir as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -157,7 +180,8 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listPengecer = User::where('role',5)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
+        $listPengecer = User::where('role',5)->where('status',1)->whereNotIn('id',$listuser)
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         foreach ($listPengecer as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -185,7 +209,8 @@ class UserController extends Controller
             }
             $j++;
         }
-        $listKonsumen = User::where('role',6)->where('status',1)->whereNotIn('id',$listuser)->paginate(6);
+        $listKonsumen = User::where('role',6)->where('status',1)->whereNotIn('id',$listuser)
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         foreach ($listKonsumen as $i){
             $i->lokasiKabupaten = $i->lokasi()->first()->kabupaten;
             $i->lokasiKecamatan = $i->lokasi()->first()->kecamatan;
@@ -281,7 +306,8 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $listPengajuanMitra = Kemitraan::orWhere(function($query)use($userId){
             $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
-        })->where('status',0)->where('action_user',$userId)->paginate(6);
+        })->where('status',0)->where('action_user',$userId)
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         $j=0;
         
         foreach ($listPengajuanMitra as $i){
@@ -307,7 +333,8 @@ class UserController extends Controller
         $userId = Auth::user()->id;
         $listPermintaanMitra = Kemitraan::orWhere(function($query)use($userId){
             $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
-        })->where('status',0)->whereNotIn('action_user',[$userId])->paginate(6);
+        })->where('status',0)->whereNotIn('action_user',[$userId])
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         $j=0;
         foreach ($listPermintaanMitra as $i){
             if($listPermintaanMitra[$j]->flag == 0){
@@ -329,11 +356,28 @@ class UserController extends Controller
     }
 
     public function listMitraSaya(){
+        // Query = select * from USER where (status = 1 and user2_id = userId) OR
+        // (status = 1 and user1_id = userId)
         $userId = Auth::user()->id;
-        $listMitraSaya = Kemitraan::orWhere(function($query)use($userId){
-            $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
-        })->where('status',1)->paginate(6);
+        // $listMitraSaya = Kemitraan::orWhere(function($query)use($userId){
+        //     $query->orWhere('user2_id',$userId)->orWhere('user1_id',$userId);
+        // })->where('status',1)->paginate(6);
         
+        // $listMitraSaya = Kemitraan::where([
+        //     ['status', '=', 1],
+        //     ['user2_id', '=', $userId]
+        // ])->orwhere([
+        //     ['status', '=', 1],
+        //     ['user1_id', '=', $userId]
+        // ])->paginate(6);
+
+        $listMitraSaya = Kemitraan::where([
+            ['status', '=', 1],
+            ['user2_id', '=', $userId]
+        ])->orwhere([
+            ['status', '=', 1],
+            ['user1_id', '=', $userId]
+        ])->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         $j=0;
         foreach($listMitraSaya as $i){
             $user1 = $i->user1_id;
@@ -355,10 +399,7 @@ class UserController extends Controller
             $j++;
         }
         // dd($listMitraSaya);
-        return response()->json([
-            'status' => 'success', 
-            'data' => $listMitraSaya->toArray()
-        ], 200);
+        return response()->json([ 'status' => 'success', 'data' => $listMitraSaya->toArray() ], 200);
     }
 
     public function listMitraPemasok(){
@@ -442,8 +483,7 @@ class UserController extends Controller
         ])->orWhere([
             ['pemasok_id','=',$userId],
             ['status_pemesanan', '=', 0],
-        ])
-        ->orderBy('updated_at','DESC')->paginate(6);
+        ])->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
         foreach($transaksi as $i){
             $i->nama = $i->user()->first()->name;
         }
@@ -458,8 +498,31 @@ class UserController extends Controller
         $transaksi = Transaksi::where([
             ['pemasok_id','=',$userId],
             ['status_pemesanan', '=', 1],
-        ])
-        ->orderBy('tanggal_pengiriman','DESC')->paginate(6);
+        ])->orderBy(request()->sortby, request()->sortbydesc)
+        ->when(request()->q, function($transaksi){
+            $transaksi = $transaksi->where([
+                ['pemasok_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['tanggal_pengiriman', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['pemasok_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['jenis_cabai', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['pemasok_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['jumlah_cabai', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['pemasok_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['harga', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['pemasok_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['tanggal_diterima', 'LIKE', '%' . request()->q . '%']
+            ]);
+            // filter berdasarkan nama masih belum bisa
+        })->paginate(request()->per_page);
         foreach($transaksi as $i){
             $i->nama = $i->user()->first()->name;
         }
@@ -477,7 +540,7 @@ class UserController extends Controller
             ['user_id','=',$userId],
             ['status_pemesanan', '=', 0],
         ])
-        ->orderBy('updated_at','DESC')->paginate(6);
+        ->orderBy(request()->sortby, request()->sortbydesc)->paginate(request()->per_page);
 
         $j=0;
         foreach($transaksi as $i){
@@ -502,9 +565,31 @@ class UserController extends Controller
         $transaksi = Transaksi::where([
             ['user_id','=',$userId],
             ['status_pemesanan', '=', 1],
-        ])
-        ->orderBy('tanggal_diterima','DESC')->paginate(6);
-
+        ])->orderBy(request()->sortby, request()->sortbydesc)
+        ->when(request()->q, function($transaksi){
+            $transaksi = $transaksi->where([
+                ['user_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['tanggal_pengiriman', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['user_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['jenis_cabai', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['user_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['jumlah_cabai', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['user_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['harga', 'LIKE', '%' . request()->q . '%']
+            ])->orwhere([
+                ['user_id','=',Auth::user()->id],
+                ['status_pemesanan', '=', 1],
+                ['tanggal_diterima', 'LIKE', '%' . request()->q . '%']
+            ]);
+            // filter berdasarkan nama masih belum bisa
+        })->paginate(request()->per_page);
         $j=0;
         foreach($transaksi as $i){
             $id_pemasok = $transaksi[$j]->pemasok_id;

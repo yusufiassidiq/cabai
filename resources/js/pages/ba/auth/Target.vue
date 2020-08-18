@@ -59,12 +59,7 @@
                 <h5 class="card-title">Grafik Target Penjualan Cabai</h5>
 
                 <div class="card-tools">
-                  <a id="download">
-                    <button class="btn btn-primary float-right bg-flat-color-1" @click="downloadChart">
-                    <!-- Download Icon -->
-                    <i class="fa fa-download"></i>
-                    </button>
-                  </a>
+                  
                   <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button> -->

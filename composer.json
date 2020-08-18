@@ -10,13 +10,15 @@
     "require": {
         "php": "^7.2",
         "ext-gd": "*",
+        "darkaonline/l5-swagger": "6.*",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.5",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "laravel/ui": "1.2",
         "pusher/pusher-php-server": "~3.0",
-        "tymon/jwt-auth": "dev-develop"
+        "tymon/jwt-auth": "dev-develop",
+        "zircote/swagger-php": "2.*"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

@@ -344,11 +344,11 @@
     },
     mounted () {
       this.getData()
-      this.getInventaris()
+      this.getStok()
       this.getInfoKemitraan()
       window.setInterval(() => {
         this.getData()
-        this.getInventaris()
+        this.getStok()
         this.getInfoKemitraan()
       }, 1800000)
     },
@@ -483,7 +483,7 @@
           var chart2 = this.$refs.chart2;
           var ctx2 = chart2.getContext("2d");
           var myChart2 = new Chart(ctx2, {
-            type : 'line',
+            type : 'bar',
             data:{
               labels:response.data.last6Month,
               datasets:[
@@ -559,7 +559,7 @@
           this.errored= true
         });
       },
-      getInventaris() {
+      getStok() {
       axios.get("/inventaris/list").then(response => {
         // cabai besar
         if(response.data.data[0].jenis_cabai = "Cabai besar")

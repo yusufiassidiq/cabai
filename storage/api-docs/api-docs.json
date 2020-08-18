@@ -1,0 +1,618 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "L5 Swagger API",
+        "description": "L5 Swagger API description",
+        "contact": {
+            "email": "your-email@domain.com"
+        },
+        "version": "1.0.0"
+    },
+    "host": "127.0.0.1:8000",
+    "basePath": "",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/api/addTarget": {
+            "post": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Add Target",
+                "operationId": "store",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "tahun": {
+                                    "description": "passing tahun from body",
+                                    "type": "string",
+                                    "example": "2020"
+                                },
+                                "bulan": {
+                                    "description": "passing bulan from body",
+                                    "type": "string",
+                                    "example": "Januari"
+                                },
+                                "jenis_cabai": {
+                                    "description": "passing jenis_cabai from body",
+                                    "type": "string",
+                                    "example": "Cabai rawit"
+                                },
+                                "jumlah_cabai": {
+                                    "description": "passing jumlah_cabai from body",
+                                    "type": "integer",
+                                    "example": 200
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/updateTarget/{id}": {
+            "put": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Update Target",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "tahun": {
+                                    "description": "passing tahun from body",
+                                    "type": "string"
+                                },
+                                "bulan": {
+                                    "description": "passing bulan from body",
+                                    "type": "string"
+                                },
+                                "jenis_cabai": {
+                                    "description": "passing jenis_cabai from body",
+                                    "type": "string"
+                                },
+                                "jumlah_cabai": {
+                                    "description": "passing jumlah_cabai from body",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/deleteTarget/{id}": {
+            "delete": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Delete Target",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "successful deleted"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/getFilterTarget": {
+            "get": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Get Filter for Target",
+                "operationId": "Filter",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/getTarget/{tahun}": {
+            "get": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Get Target",
+                "operationId": "get",
+                "parameters": [
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/getFilterPengeluaran": {
+            "get": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Get Filter for Pengeluaran",
+                "operationId": "Filter",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/getPengeluaran/{bulan}/{tahun}": {
+            "get": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Get Target",
+                "operationId": "get",
+                "parameters": [
+                    {
+                        "name": "bulan",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/getFilterPenjualan": {
+            "get": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Get Filter for Penjualan",
+                "operationId": "Filter",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/getPenjualan/{bulan}/{tahun}": {
+            "get": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Get Penjualan",
+                "operationId": "get",
+                "parameters": [
+                    {
+                        "name": "bulan",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/getHarga": {
+            "get": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Get Rekap Harga",
+                "operationId": "get",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/getSummaryProdusen": {
+            "get": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Get Dashboard for Produsen",
+                "operationId": "get",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/getFilterPasokan": {
+            "get": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Get Filter for Pasokan",
+                "operationId": "Filter",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/getPasokan/{bulan}/{tahun}": {
+            "get": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Get Pasokan",
+                "operationId": "get",
+                "parameters": [
+                    {
+                        "name": "bulan",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/getSummaryOthers": {
+            "get": {
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Get Dashboard for Pedagang",
+                "operationId": "get",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/getUserCount": {
+            "get": {
+                "tags": [
+                    "analysis for public"
+                ],
+                "summary": "Get Testing",
+                "operationId": "testing",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register User",
+                "operationId": "register",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "example": "name"
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "example": "email@email.com"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "abcd"
+                                },
+                                "role": {
+                                    "type": "string",
+                                    "example": "2"
+                                },
+                                "kabupaten": {
+                                    "type": "string",
+                                    "example": "KABUPATEN BOGOR"
+                                },
+                                "kecamatan": {
+                                    "type": "string",
+                                    "example": "CIAMPEA"
+                                },
+                                "kelurahan": {
+                                    "type": "string",
+                                    "example": "CIHIDEUNG ILIR"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "422": {
+                        "description": "unprocessable entity"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login User",
+                "operationId": "login",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "example": "email@email.com"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "abcd"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {},
+    "securityDefinitions": {
+        "bearer": {
+            "type": "apiKey",
+            "description": "Authorization token obtained from logging in.",
+            "name": "Authorization",
+            "in": "header",
+            "scheme": "bearer"
+        }
+    }
+}

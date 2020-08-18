@@ -54,7 +54,7 @@
   </div>
 </template>
 <script>
-import listPermintaan from "../../../components/TransaksiDenganPelanggan";
+import listPermintaan from "../../../components/DistribusiPemasok";
 export default {
   components: {
     permintaan: listPermintaan

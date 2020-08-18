@@ -1,133 +1,90 @@
 <template>
   <div class="col-md-12">
     <div class="card">
-      <div class="card-header">
-        <vue-progress-bar></vue-progress-bar>
-        <h3 class="card-title">Daftar Grosir</h3>
-        <div class="card-tools">
-          <div class="input-group input-group-sm" style="width: 150px;">
-            <input
-              type="text"
-              class="form-control input-sm float-right"
-              placeholder="Cari User"
-              v-model="stringNama"
-            />
-            <div class="input-group-append">
-              <button class="btn btn-default">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
+          <div class="card-body">
+            <app-datatable
+              :items="items" :fields="fields"
+              :meta="meta" @per_page= "handlePerPage"
+              @pagination="handlePagination" @search="handleSearch"
+              @sort="handleSort" @tambahMitraKu="tambahMitra">
+            </app-datatable>
           </div>
         </div>
-      </div>
-      <!-- /.card-header -->
-      <div class="card-body table-responsive p-0">
-        <div class="row">
-          <table class="table table-hover text-nowrap">
-            <thead>
-              <tr>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr v-if="!filteredNama.length">
-                <td colspan="3" align="center">Tidak ada mitra yang dapat ditambahkan</td>
-              </tr>
-              <tr v-for="data in filteredNama" :key="data.id">
-                <td>{{data.name}}</td>
-                <td>{{data.lokasiKelurahan | filterAlamat}}, {{data.lokasiKecamatan | filterAlamat}}, {{data.lokasiKabupaten | filterAlamat}}</td>
-                <td>
-                  <a href="#" class="btn btn-success btn-xs" @click="addMitra(data.id, data.name)">
-                    <i class="fas fa-plus-square white"></i>
-                    Tambah sebagai mitra
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="row">
-          <div class="col-md-6 d-flex justify-content-start align-self-center">
-            <div
-              style="padding-left: 20px"
-            >Menampilkan {{ pagination.current_page }} dari {{ pagination.last_page }} halaman</div>
-          </div>
-
-          <div
-            class="col-md-6 d-flex justify-content-end align-self-end"
-            style="padding-right: 30px"
-          >
-            <div class="dataTables_paginate paging_simple_numbers">
-              <ul class="pagination">
-                <li>
-                  <button
-                    href="#"
-                    class="btn btn-default"
-                    v-on:click="fetchPaginateGrosir(pagination.prev_page_url)"
-                    :disabled="!pagination.prev_page_url"
-                  >Sebelumnya</button>
-                </li>
-
-                <li>
-                  <button
-                    class="btn btn-default"
-                    v-on:click="fetchPaginateGrosir(pagination.next_page_url)"
-                    :disabled="!pagination.next_page_url"
-                  >Selanjutnya</button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /.card-body -->
-    </div>
   </div>
 </template>
 <script>
+import KemitraanDatatable from '../components/datatable/KemitraanDatatable'
 export default {
+  components:{
+    'app-datatable': KemitraanDatatable
+  },
   data() {
     return {
-      dataMitra: {},
-      // variabel untuk search
-      stringNama: "",
-      // pagination
-      pagination: [],
-      url_getMitra: "/kemitraan/grosir/list"
+      fields:[
+        { key: 'name', sortable: true, label:"Nama"},
+        { key: 'lokasiKabupaten', sortable: true, label: "Kabupaten"},
+        { key: 'lokasiKecamatan', sortable: true, label: "kecamatan"},
+        { key: 'lokasiKelurahan', sortable: true, label: "Kelurahan"},
+        { key: 'aksiTambahMitra', sortable: false, label: "Aksi"},
+      ],
+      items: [],
+      meta: [],
+      current_page: 1,
+      per_page: 10,
+      search: '',
+      sortBy: 'updated_at',
+      sortByDesc: false,
     };
   },
+  created(){
+    this.getListGrosir()
+  },
   methods: {
-    // prev & next paggination
-    fetchPaginateGrosir(url) {
-      this.url_getMitra = url;
-      this.getMitra();
+    getListGrosir(){
+      let current_page = this.search == '' ? this.current_page : 1
+      axios.get('/kemitraan/grosir/list', {
+        params: {
+          page: current_page,
+          per_page: this.per_page,
+          q: this.search,
+          sortby: this.sortBy,
+          sortbydesc: this.sortByDesc ? 'DESC' : 'ASC'
+        }
+      })
+      .then((response) => {
+        let getData = response.data.data
+        this.items = getData.data,
+        this.meta = {
+          total: getData.total,
+          current_page: getData.current_page,
+          per_page: getData.per_page,
+          from: getData.from,
+          to: getData.to
+        }
+      })
     },
-    // set up pagination
-    makePagination(data) {
-      let pagination = {
-        current_page: data.current_page,
-        last_page: data.last_page,
-        next_page_url: data.next_page_url,
-        prev_page_url: data.prev_page_url
-      };
-      this.pagination = pagination;
+    handlePerPage(val) {
+        this.per_page = val 
+        this.getListGrosir() 
     },
-    // Mendapatkan data Mitra
-    getMitra() {
-      let $this = this;
-      axios.get(this.url_getMitra).then(response => {
-        this.dataMitra = response.data.data.data;
-        $this.makePagination(response.data.data);
-      });
+    handlePagination(val) {
+        this.current_page = val 
+        this.getListGrosir()
     },
-    addMitra(id_grosir, nama) {
+    handleSearch(val) {
+        this.search = val 
+        this.getListGrosir()
+    },
+    handleSort(val) {
+        this.sortBy = val.sortBy
+        this.sortByDesc = val.sortDesc
+        this.getListGrosir()
+    },
+    tambahMitra(id) {
       swal
         .fire({
           title: "Mengajukan Permintaan",
-          text: "Apakah anda yakin menambahkan " + nama + " sebagai mitra?",
+          text: "Apakah anda yakin menambahkan mitra?",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
@@ -137,54 +94,20 @@ export default {
           if (result.value) {
             this.$Progress.start();
             axios
-              .post("/kemitraan/request/" + id_grosir)
+              .post("/kemitraan/request/" + id)
               .then(() => {
-                UpdateData.$emit("ListGrosir");
-                swal.fire(
-                  "Mengajukan Permintaan",
-                  "Berhasil mengajukan kemitraan",
-                  "success"
-                );
+                this.getListGrosir()
+                swal.fire( "Mengajukan Permintaan", "Berhasil mengajukan kemitraan", "success" );
                 this.$Progress.finish();
               })
               .catch(() => {
                 this.$Progress.fail();
-                swal.fire(
-                  "Gagal!",
-                  "Terdapat permasalahan saat menyimpan",
-                  "error"
-                );
+                swal.fire( "Gagal!", "Terdapat permasalahan saat menyimpan", "error" );
               });
           }
         });
+      this.$Progress.finish();
     }
-  },
-  computed: {
-    filteredNama: function() {
-      var namaUser = this.dataMitra;
-      var stringNama = this.stringNama;
-
-      if (!stringNama) {
-        return namaUser;
-      }
-
-      var searchString = stringNama.trim().toLowerCase();
-
-      namaUser = namaUser.filter(function(item) {
-        if (item.name.toLowerCase().indexOf(stringNama) !== -1) {
-          return item;
-        }
-      });
-
-      return namaUser;
-    }
-  },
-  mounted() {
-    this.getMitra();
-    // Custom event on Vue js
-    UpdateData.$on("ListGrosir", () => {
-      this.getMitra();
-    });
   }
 };
 </script>

@@ -54,7 +54,7 @@
   </div>
 </template>
 <script>
-import riwayatdistribusi from "../../../components/RiwTransaksiDgnPelanggan";
+import riwayatdistribusi from "../../../components/RiwayatDistribusiPemasok";
 export default {
   components: {
     riwTransaksi: riwayatdistribusi

@@ -20,9 +20,48 @@ use DB;
 class AnalysisController extends Controller
 {
     /**
-     * Show the form for creating a new resource.
+     * @SWG\Post(
+     *   path="/api/addTarget",
+     *   summary="Add Target",
+     *   operationId="store",
+     *   tags={"analysis"},
+     *   @SWG\Parameter(
+     *         name="body",
+     *         in="body",              
+     *         required=true, 
+     *        @SWG\Schema(
+     *              @SWG\Property(
+     *                  property="tahun",
+     *                  type="string",
+     *                  description="passing tahun from body", 
+     *                  example="2020"
+     *              ),        
+     *              @SWG\Property(   
+     *                  property="bulan",
+     *                  type="string",
+     *                  description="passing bulan from body", 
+     *                  example="Januari" 
+     *              ),
+     *              @SWG\Property(   
+     *                  property="jenis_cabai",
+     *                  type="string",
+     *                  description="passing jenis_cabai from body", 
+     *                  example="Cabai rawit" 
+     *              ),
+     *              @SWG\Property(   
+     *                  property="jumlah_cabai",
+     *                  type="integer",
+     *                  description="passing jumlah_cabai from body", 
+     *                  example=200
+     *              ),
+     *         )
+     *       ), 
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   security={ {"bearer": {}} },
+     * )
      *
-     * @return \Illuminate\Http\Response
      */
     public function addTarget(Request $request)
     {
@@ -64,46 +103,51 @@ class AnalysisController extends Controller
             'status' => 'success',
         ]);
     }
-
     /**
-     * Store a newly created resource in storage.
+     * @SWG\Put(
+     *   path="/api/updateTarget/{id}",
+     *   summary="Update Target",
+     *   operationId="update",
+     *   tags={"analysis"},
+     *   @SWG\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true, 
+     *          type="integer" 
+     *   ),  
+     *   @SWG\Parameter(
+     *         name="body",
+     *         in="body",              
+     *         required=true, 
+     *         @SWG\Schema(
+     *              @SWG\Property(
+     *                  property="tahun",
+     *                  type="string",
+     *                  description="passing tahun from body", 
+     *              ),        
+     *              @SWG\Property(   
+     *                  property="bulan",
+     *                  type="string",
+     *                  description="passing bulan from body", 
+     *              ),
+     *              @SWG\Property(   
+     *                  property="jenis_cabai",
+     *                  type="string",
+     *                  description="passing jenis_cabai from body", 
+     *              ),
+     *              @SWG\Property(   
+     *                  property="jumlah_cabai",
+     *                  type="integer",
+     *                  description="passing jumlah_cabai from body", 
+     *              ),
+     *         )
+     *       ), 
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   security={ {"bearer": {}} },
+     * )
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function updateTarget(Request $request, $id)
     {
@@ -116,12 +160,24 @@ class AnalysisController extends Controller
         ]);
         return response()->json(['status' => 'success'], 200);
     }
-
     /**
-     * Remove the specified resource from storage.
+     * @SWG\Delete(
+     *   path="/api/deleteTarget/{id}",
+     *   summary="Delete Target",
+     *   operationId="delete",
+     *   tags={"analysis"},
+     *   @SWG\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true, 
+     *          type="integer" 
+     *   ),  
+     *   @SWG\Response(response=204, description="successful deleted"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   security={ {"bearer": {}} },
+     * )
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function deleteTarget($id)
     {
@@ -129,6 +185,19 @@ class AnalysisController extends Controller
         $target->delete();
         return 204;
     }
+    /**
+     * @SWG\Get(
+     *   path="/api/getFilterTarget",
+     *   summary="Get Filter for Target",
+     *   operationId="Filter",
+     *   tags={"analysis"},
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   security={ {"bearer": {}} },
+     * )
+     *
+     */
     public function getFilterTarget()
     {
         $roleUser = Auth::user()->role;
@@ -157,9 +226,23 @@ class AnalysisController extends Controller
         ]);
     }
     /**
-     * Display a listing of the resource.
+     * @SWG\Get(
+     *   path="/api/getTarget/{tahun}",
+     *   summary="Get Target",
+     *   operationId="get",
+     *   tags={"analysis"},
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   @SWG\Parameter(
+     *          name="tahun",
+     *          in="path",
+     *          required=true, 
+     *          type="string" 
+     *      ),  
+     *    security={ {"bearer": {}} },
+     * )
      *
-     * @return \Illuminate\Http\Response
      */
     public function getTarget(Request $request, $tahun)
     {
@@ -241,6 +324,19 @@ class AnalysisController extends Controller
             'besar' => $data_targetBesar,
         ]);
     }
+    /**
+     * @SWG\Get(
+     *   path="/api/getFilterPengeluaran",
+     *   summary="Get Filter for Pengeluaran",
+     *   operationId="Filter",
+     *   tags={"analysis"},
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   security={ {"bearer": {}} },
+     * )
+     *
+     */
     public function getFilterPengeluaran()
     {
         $roleUser = Auth::user()->role;
@@ -264,6 +360,31 @@ class AnalysisController extends Controller
             'tahun' => $year,
         ]);
     }
+    /**
+     * @SWG\Get(
+     *   path="/api/getPengeluaran/{bulan}/{tahun}",
+     *   summary="Get Target",
+     *   operationId="get",
+     *   tags={"analysis"},
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   @SWG\Parameter(
+     *          name="bulan",
+     *          in="path",
+     *          required=true, 
+     *          type="string" 
+     *      ),  
+     *   @SWG\Parameter(
+     *          name="tahun",
+     *          in="path",
+     *          required=true, 
+     *          type="string" 
+     *      ), 
+     *    security={ {"bearer": {}} },
+     * )
+     *
+     */
     public function getPengeluaran(Request $request, $bulan, $tahun){
         $idUser = Auth::user()->id; //mengambil id dari user yang sedang login
         $roleUser = Auth::user()->role;
@@ -330,6 +451,19 @@ class AnalysisController extends Controller
             'pengeluaran' => $dataTabel,
         ]);
     }
+    /**
+     * @SWG\Get(
+     *   path="/api/getFilterPenjualan",
+     *   summary="Get Filter for Penjualan",
+     *   operationId="Filter",
+     *   tags={"analysis"},
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   security={ {"bearer": {}} },
+     * )
+     *
+     */
     public function getFilterPenjualan()
     {
         $roleUser = Auth::user()->role;
@@ -357,6 +491,31 @@ class AnalysisController extends Controller
             'tahun' => $year,
         ]);
     }
+    /**
+     * @SWG\Get(
+     *   path="/api/getPenjualan/{bulan}/{tahun}",
+     *   summary="Get Penjualan",
+     *   operationId="get",
+     *   tags={"analysis"},
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   @SWG\Parameter(
+     *          name="bulan",
+     *          in="path",
+     *          required=true, 
+     *          type="string" 
+     *      ),  
+     *   @SWG\Parameter(
+     *          name="tahun",
+     *          in="path",
+     *          required=true, 
+     *          type="string" 
+     *      ), 
+     *    security={ {"bearer": {}} },
+     * )
+     *
+     */
     public function getPenjualan(Request $request, $bulan, $tahun)
     {
         $roleUser = Auth::user()->role;
@@ -370,9 +529,6 @@ class AnalysisController extends Controller
         $monthYearNow = $parse->isoFormat('MMMM YYYY');
         //BUAT RANGE TANGGAL PADA BULAN TERKAIT
         $array_date = range($parse->startOfMonth()->format('d'), $parse->endOfMonth()->format('d'));
-        //GET DATA TRANSAKSI BERDASARKAN BULAN & TANGGAL YANG DIMINTA.
-        //GROUP / KELOMPOKKAN BERDASARKAN TANGGALNYA
-        //SUM DATA AMOUNT DAN SIMPAN KE NAMA BARU YAKNI TOTAL
         $transaksi = Transaksi::where([
                 ['pemasok_id',$idUser],
                 ['status_permintaan','3'],
@@ -418,6 +574,19 @@ class AnalysisController extends Controller
             'besar' => $cabaiByDayBesar,
         ]);
     }
+    /**
+     * @SWG\Get(
+     *   path="/api/getHarga",
+     *   summary="Get Rekap Harga",
+     *   operationId="get",
+     *   tags={"analysis"},
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   security={ {"bearer": {}} },
+     * )
+     *
+     */
     public function getHarga(){
         $roleUser = Auth::user()->role;
         $dateNow=Carbon::now()->isoFormat('dddd, Do MMMM YYYY');
@@ -639,6 +808,19 @@ class AnalysisController extends Controller
             'dateNow' => $dateNow, 
         ]);
     }
+    /**
+     * @SWG\Get(
+     *   path="/api/getSummaryProdusen",
+     *   summary="Get Dashboard for Produsen",
+     *   operationId="get",
+     *   tags={"analysis"},
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   security={ {"bearer": {}} },
+     * )
+     *
+     */
     public function getSummaryProdusen(){
         $roleUser = Auth::user()->role;
         $idUser = Auth::user()->id;
@@ -895,6 +1077,19 @@ class AnalysisController extends Controller
             'targetByJenisCabai' => $targetMonthNow,
         ]);
     }
+    /**
+     * @SWG\Get(
+     *   path="/api/getFilterPasokan",
+     *   summary="Get Filter for Pasokan",
+     *   operationId="Filter",
+     *   tags={"analysis"},
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   security={ {"bearer": {}} },
+     * )
+     *
+     */
     public function getFilterPasokan()
     {
         $roleUser = Auth::user()->role;
@@ -922,6 +1117,31 @@ class AnalysisController extends Controller
             'tahun' => $year,
         ]);
     }
+    /**
+     * @SWG\Get(
+     *   path="/api/getPasokan/{bulan}/{tahun}",
+     *   summary="Get Pasokan",
+     *   operationId="get",
+     *   tags={"analysis"},
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   @SWG\Parameter(
+     *          name="bulan",
+     *          in="path",
+     *          required=true, 
+     *          type="string" 
+     *      ),  
+     *   @SWG\Parameter(
+     *          name="tahun",
+     *          in="path",
+     *          required=true, 
+     *          type="string" 
+     *      ), 
+     *    security={ {"bearer": {}} },
+     * )
+     *
+     */
     public function getPasokan(Request $request, $bulan, $tahun)
     {
         $roleUser = Auth::user()->role;
@@ -994,6 +1214,19 @@ class AnalysisController extends Controller
             'roleUser' => $roleUser,
         ]);
     }
+    /**
+     * @SWG\Get(
+     *   path="/api/getSummaryOthers",
+     *   summary="Get Dashboard for Pedagang",
+     *   operationId="get",
+     *   tags={"analysis"},
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *   security={ {"bearer": {}} },
+     * )
+     *
+     */
     public function getSummaryOthers(){
         $roleUser = Auth::user()->role;
         $idUser = Auth::user()->id;

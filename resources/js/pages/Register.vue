@@ -1,157 +1,135 @@
 <template>
-  <div class="hold-transition login-page">
-    <div class="login-box">
-      <div class="login-logo">
-        <p class="font-putih">
-          <b>SCM</b>Cabai
-        </p>
-      </div>
-      <vue-progress-bar></vue-progress-bar>
-      <!-- /.Register-logo -->
-      <div class="card">
-        <div class="card-body login-card-body">
-          <p class="login-box-msg">Pendaftaran anggota baru</p>
-
-          <form autocomplete="off" @submit.prevent="register" v-if="!success" method="post">
-            <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.name }">
-              <input
-                type="text"
-                id="name"
-                class="form-control"
-                placeholder="Nama"
-                v-model="name"
-                required
-              />
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-user"></span>
+  <div class="page-wrapper bg-cabai p-t-100 p-b-100 font-robo">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-1">
+                <!-- <h5 class="card-title d-flex justify-content-center" >Registrasi</h5> -->
+                <div class="regist-page d-flex justify-content-center">
+                  <h2>Registrasi akun</h2>
                 </div>
-              </div>
-            </div>
-            <span class="help-block" v-if="has_error && errors.name">{{ errors.name }}</span>
+                <div class="card-body">
+                  <div class="container">
+                    <form autocomplete="off" @submit.prevent="register" v-if="!success" method="post">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label>Nama</label>
+                          <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.name }">
+                            <input type="text" id="name" class="form-control" placeholder="Masukan nama anda" v-model="name" required />
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="help-block" v-if="has_error && errors.name">{{ errors.name }}</span>
+                          
+                          <label>Password</label>
+                          <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.password }">
+                            <input id="password" type="password" class="form-control" placeholder="Masukan password" v-model="password" required />
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-eye" v-on:click="lihatpassword('password')"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
 
-            <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.email }">
-              <input
-                type="email"
-                id="email"
-                class="form-control"
-                placeholder="Email"
-                v-model="email"
-                required
-              />
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-envelope"></span>
+                          <label>Masukan ulang password</label>
+                          <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.password }" >
+                            <input type="password" id="password_confirmation" class="form-control" v-model="password_confirmation" placeholder="Masukan ulang Password" required />
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-eye" v-on:click="lihatpassword('password_confirmation')"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
+
+                          <label>Role</label>
+                          <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.role }">
+                            <select id="role" class="form-control" v-model="role" required>
+                              <option value selected disabled>Pilih role</option>
+                              <option value="2">Produsen</option>
+                              <option value="3">Pengepul</option>
+                              <option value="4">Grosir</option>
+                              <option value="5">Pengecer</option>
+                              <option value="6">Konsumen</option>
+                            </select>
+                          </div>
+                          <span class="help-block" v-if="has_error && errors.role">{{ errors.role }}</span>
+                          <label>SIUP</label>
+                          <div
+                            class="input-group mb-3"
+                            v-bind:class="{ 'has-error': has_error && errors.fotosk }"
+                          >
+                            <div class="input-group ">
+                              <div class="custom-file">
+                                <!-- <input type="file" v-on:change="onFileChange" class="form-control "> -->
+                                <input type="file" v-on:change="onFileChange" class="custom-file-input form-control" id="exampleInputFile" />
+                                <label class="custom-file-label" for="exampleInputFile" id="exampleInputFile">Pilih file</label>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="help-block" v-if="has_error && errors.fotosk">{{ errors.fotosk }}</span>
+                          <div class="row">
+                            <div class="col-12 fotosk">
+                              <img :src="fotosk" class="img-responsive">
+                            </div>
+                          </div>
+                          <div class="row btncstm">
+                        <div class="col-12 ">
+                          <button type="submit" class="btn btn-primary btn-block">Daftar</button>
+                        </div>
+                      </div>
+                        </div>
+                        <div class="col-md-6">
+                          <label>Email</label>
+                          <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.email }">
+                            <input type="email" id="email" class="form-control" placeholder="Masukan email" v-model="email" required/>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="help-block" v-if="has_error && errors.email">{{ errors.email }}</span>
+                          <label>Kabupaten</label>
+                          <div class="input-group mb-3">
+                            <select class="form-control" v-model="kabupaten" id="kabupaten" required>
+                              <option selected value>Pilih Kabupaten</option>
+                            </select>
+                          </div>
+
+                          <label>Kota</label>
+                          <div class="input-group mb-3">
+                            <select class="form-control m-b" v-model="kecamatan" id="kecamatan" required>
+                              <option selected value>Pilih Kecamatan</option>
+                            </select>
+                          </div>
+
+                          <label>Kabupaten</label>
+                          <div class="input-group mb-3">
+                            <select class="form-control m-b" v-model="kelurahan" id="kelurahan" required>
+                              <option selected value>Pilih Kelurahan</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      
+                      <!-- <br> -->
+                      
+                    </form>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">Sudah punya akun?</small>
+                    <router-link to="/login">
+                      <small>Masuk</small>
+                    </router-link>
+                  </div>
                 </div>
-              </div>
             </div>
-            <span class="help-block" v-if="has_error && errors.email">{{ errors.email }}</span>
-
-            <div class="input-group mb-3" v-bind:class="{ 'has-error': has_error && errors.role }">
-              <select id="role" class="form-control" v-model="role" required>
-                <option value selected disabled>Pilih Peran Keanggotaan</option>
-                <option value="2">Produsen</option>
-                <option value="3">Pengepul</option>
-                <option value="4">Grosir</option>
-                <option value="5">Pengecer</option>
-                <option value="6">Konsumen</option>
-              </select>
-            </div>
-            <span class="help-block" v-if="has_error && errors.role">{{ errors.role }}</span>
-
-            <div class="input-group mb-3">
-              <select class="form-control" v-model="kabupaten" id="kabupaten" required>
-                <option selected value>Pilih Kabupaten</option>
-              </select>
-            </div>
-
-            <div class="input-group mb-3">
-              <select class="form-control m-b" v-model="kecamatan" id="kecamatan" required>
-                <option selected value>Pilih Kecamatan</option>
-              </select>
-            </div>
-
-            <div class="input-group mb-3">
-              <select class="form-control m-b" v-model="kelurahan" id="kelurahan" required>
-                <option selected value>Pilih Kelurahan</option>
-              </select>
-            </div>
-
-            <div
-              class="input-group mb-3"
-              v-bind:class="{ 'has-error': has_error && errors.password }"
-            >
-              <input
-                type="password"
-                class="form-control"
-                placeholder="Password"
-                v-model="password"
-                required
-              />
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-lock"></span>
-                </div>
-              </div>
-            </div>
-            <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
-
-            <div
-              class="input-group mb-3"
-              v-bind:class="{ 'has-error': has_error && errors.password }"
-            >
-              <input
-                type="password"
-                id="password_confirmation"
-                class="form-control"
-                v-model="password_confirmation"
-                placeholder="Masukan ulang Password"
-                required
-              />
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-lock"></span>
-                </div>
-              </div>
-            </div>
-            <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
-
-            <label>Unggah Surat Izin Usaha Perdagangan (SIUP)</label>
-            <div
-              class="input-group mb-3"
-              v-bind:class="{ 'has-error': has_error && errors.fotosk }"
-            >
-              <div class="input-group ">
-                <div class="custom-file">
-                  <!-- <input type="file" v-on:change="onFileChange" class="form-control "> -->
-                  <input type="file" v-on:change="onFileChange" class="custom-file-input form-control" id="exampleInputFile" />
-                  <label class="custom-file-label" for="exampleInputFile" id="exampleInputFile">Pilih file</label>
-                </div>
-              </div>
-            </div>
-            <span class="help-block" v-if="has_error && errors.fotosk">{{ errors.fotosk }}</span>
-            <div class="row">
-              <div class="col-12 fotosk">
-                <img :src="fotosk" class="img-responsive">
-              </div>
-            </div>
-            <!-- <br> -->
-            <div class="row btncstm">
-              <div class="col-12 ">
-                <button type="submit" class="btn btn-primary btn-block">Daftar</button>
-              </div>
-            </div>
-          </form>
         </div>
-        <div class="card-footer">
-          <small class="text-muted">Sudah punya akun?</small>
-          <router-link to="/login">
-            <small>Masuk</small>
-          </router-link>
-        </div>
-      </div>
     </div>
-  </div>
 </template>
 <style scoped>
     .btncstm{
@@ -197,162 +175,119 @@ export default {
       };
       xhr.send();
     }
-
-    var hasil = makeRequest("GET", "https://x.rajaapi.com/poe", function(
-      err,
-      datums
-    ) {
-      if (err) {
-        throw err;
-      }
-      hasil = JSON.parse(datums);
-      var return_first = hasil.token;
-
-      // var return_first = function() {
-      // var tmp = null;
-      // $.ajax({
-      //     'async': false,
-      //     'type': "get",
-      //     'global': false,
-      //     'dataType': 'json',
-      //     'url': 'https://x.rajaapi.com/poe',
-      //     'success': function(data) {
-      //         tmp = data.token;
-      //     },
-      // });
-      // // console.log(tmp)
-      // return tmp;
-      // }();
-
-      $(document).ready(function() {
-        var propinsi = 32; //id jawa barat
-        $.ajax({
-          url:
-            "https://x.rajaapi.com/MeP7c5ne" +
-            return_first +
-            "/m/wilayah/kabupaten",
-          data: "idpropinsi=" + propinsi,
-          type: "GET",
-          dataType: "json",
-          success: function(json) {
-            if (json.code == 200) {
-              for (var i = 0; i < Object.keys(json.data).length; i++) {
-                $("#kabupaten").append(
-                  $("<option>")
-                    .text(json.data[i].name)
-                    .attr("value", json.data[i].name)
-                    .attr("idnya", json.data[i].id)
-                );
-              }
-            } else {
-              $("#kecamatan").append(
-                $("<option>")
-                  .text("Data tidak di temukan")
-                  .attr("value", "Data tidak di temukan")
-              );
-            }
-          }
-        });
-
-        $("#kabupaten").change(function() {
-          // var kabupaten = $("#kabupaten").val();
-          var kabupaten = $("#kabupaten option:selected").attr("idnya");
+  
+    $(document).ready(function() {
+          var propinsi = 32; //id jawa barat
           $.ajax({
             url:
-              "https://x.rajaapi.com/MeP7c5ne" +
-              return_first +
-              "/m/wilayah/kecamatan",
-            data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi,
+              "https://dev.farizdotid.com/api/daerahindonesia/kota",
+            data: "id_provinsi=" + propinsi,
             type: "GET",
-            cache: false,
             dataType: "json",
             success: function(json) {
-              $("#kecamatan").html("");
-              if (json.code == 200) {
+              if(json){
+                for (var i = 0; i < Object.keys(json.kota_kabupaten).length; i++) {
+                  $("#kabupaten").append(
+                    $("<option>")
+                      .text(json.kota_kabupaten[i].nama)
+                      .attr("value", json.kota_kabupaten[i].nama)
+                      .attr("idnya", json.kota_kabupaten[i].id)
+                  );
+                }
+              }
+              else {
                 $("#kecamatan").append(
                   $("<option>")
-                    .text("Pilih Kecamatan")
-                    .attr("value", "")
+                    .text("Data tidak di temukan")
+                    .attr("value", "Data tidak di temukan")
                 );
-                for (var i = 0; i < Object.keys(json.data).length; i++) {
+              }
+            }
+          });
+          $("#kabupaten").change(function() {
+            var kabupaten = $("#kabupaten option:selected").attr("idnya");
+            $.ajax({
+              url:
+                "https://dev.farizdotid.com/api/daerahindonesia/kecamatan",
+              data: "id_kota=" + kabupaten,
+              type: "GET",
+              dataType: "json",
+              success: function(json) {
+                $("#kecamatan").html("");
+                if (json) {
                   $("#kecamatan").append(
                     $("<option>")
-                      .text(json.data[i].name)
-                      .attr("value", json.data[i].name)
-                      .attr("idnya", json.data[i].id)
+                      .text("Pilih Kecamatan")
+                      .attr("value", "")
+                  );
+                  for (var i = 0; i < Object.keys(json.kecamatan).length; i++) {
+                    $("#kecamatan").append(
+                      $("<option>")
+                        .text(json.kecamatan[i].nama)
+                        .attr("value", json.kecamatan[i].nama)
+                        .attr("idnya", json.kecamatan[i].id)
+                    );
+                  }
+                  $("#kelurahan").html(
+                    $("<option>")
+                      .text("Pilih Kelurahan")
+                      .attr("value", "")
+                  );
+                } else {
+                  $("#kecamatan").append(
+                    $("<option>")
+                      .text("Data tidak di temukan")
+                      .attr("value", "Data tidak di temukan")
                   );
                 }
-                $("#kelurahan").html(
-                  $("<option>")
-                    .text("Pilih Kelurahan")
-                    .attr("value", "")
-                );
-              } else {
-                $("#kecamatan").append(
-                  $("<option>")
-                    .text("Data tidak di temukan")
-                    .attr("value", "Data tidak di temukan")
-                );
               }
-            }
+            });
           });
-        });
-        $("#kecamatan").change(function() {
-          // var kecamatan = $("#kecamatan").val();
-          var kecamatan = $("#kecamatan option:selected").attr("idnya");
-          $.ajax({
-            url:
-              "https://x.rajaapi.com/MeP7c5ne" +
-              return_first +
-              "/m/wilayah/kelurahan",
-            data:
-              "idkabupaten=" +
-              kabupaten +
-              "&idpropinsi=" +
-              propinsi +
-              "&idkecamatan=" +
-              kecamatan,
-            type: "GET",
-            dataType: "json",
-            cache: false,
-            success: function(json) {
-              $("#kelurahan").html("");
-              if (json.code == 200) {
-                $("#kelurahan").html(
-                  $("<option>")
-                    .text("Pilih Kelurahan")
-                    .attr("value", "")
-                );
-                for (var i = 0; i < Object.keys(json.data).length; i++) {
+          $("#kecamatan").change(function() {
+            var kecamatan = $("#kecamatan option:selected").attr("idnya");
+            $.ajax({
+              url:
+                "https://dev.farizdotid.com/api/daerahindonesia/kelurahan",
+              data:
+                "id_kecamatan=" + kecamatan,
+              type: "GET",
+              dataType: "json",
+              success: function(json) {
+                $("#kelurahan").html("");
+                if (json) {
+                  $("#kelurahan").html(
+                    $("<option>")
+                      .text("Pilih Kelurahan")
+                      .attr("value", "")
+                  );
+                  for (var i = 0; i < Object.keys(json.kelurahan).length; i++) {
+                    $("#kelurahan").append(
+                      $("<option>")
+                        .text(json.kelurahan[i].nama)
+                        .attr("value", json.kelurahan[i].nama)
+                    );
+                  }
+                } else {
                   $("#kelurahan").append(
                     $("<option>")
-                      .text(json.data[i].name)
-                      .attr("value", json.data[i].name)
+                      .text("Data tidak di temukan")
+                      .attr("value", "Data tidak di temukan")
                   );
                 }
-              } else {
-                $("#kelurahan").append(
-                  $("<option>")
-                    .text("Data tidak di temukan")
-                    .attr("value", "Data tidak di temukan")
-                );
               }
-            }
+            });
           });
-        });
-      });
-      // if (localStorage.getItem('reloaded')) {
-      //     // The page was just reloaded. Clear the value from local storage
-      //     // so that it will reload the next time this page is visited.
-      //     localStorage.removeItem('reloaded');
-      // } else {
-      //     // Set a flag so that we know not to reload the page twice.
-      //     localStorage.setItem('reloaded', '1');
-      //     location.reload();
-      // }
     });
   },
   methods: {
+    lihatpassword(id){
+      var x = document.getElementById(id);
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    },
     onFileChange(e) {
         let files = e.target.files || e.dataTransfer.files;
         if (!files.length)

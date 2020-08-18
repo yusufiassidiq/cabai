@@ -18,6 +18,19 @@ use DateTime;
 
 class AnalysisHomeController extends Controller
 {
+        /**
+     * @SWG\Get(
+     *   path="/api/getUserCount",
+     *   summary="Get Testing",
+     *   operationId="testing",
+     *   tags={"analysis for public"},
+     *   @SWG\Response(response=200, description="successful operation"),
+     *   @SWG\Response(response=406, description="not acceptable"),
+     *   @SWG\Response(response=500, description="internal server error"),
+     *      
+     * )
+     *
+     */
     public function index()
     {
         //
