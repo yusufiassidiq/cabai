@@ -239,7 +239,6 @@
           bulan : "",
           jenis_cabai: "",
           jumlah_cabai:"",
-          
         })
       };
     },

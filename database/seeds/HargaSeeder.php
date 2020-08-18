@@ -21,7 +21,7 @@ class HargaSeeder extends Seeder
         $pengecer = User::where('role',5)->pluck('id');
         $konsumen = User::where('role',6)->pluck('id');
 
-        $jenis_cabai='Cabai besar';
+        $jenis_cabai='Cabai keriting';
 
         $awal = Carbon::now()->subweek(4);
 

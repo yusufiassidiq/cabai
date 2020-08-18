@@ -193,6 +193,7 @@ class AnalysisHomeController extends Controller
                     ->get();
         }
 
+        $hargaNew[0] = $hargaNew[1] = $hargaNew[2] = 0;
         $awal = Carbon::now()->subweek(4);
         for ($i = 0; $i < 28; $i++) {
             $array_date[$i] = $awal->format('Y-m-d');
