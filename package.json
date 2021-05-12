@@ -31,7 +31,7 @@
     "dependencies": {
         "@websanova/vue-auth": "^2.22.0-beta",
         "bootstrap-vue": "^2.16.0",
-        "chart.js": "^2.9.3",
+        "chart.js": "^2.9.4",
         "es6-promise": "^4.2.8",
         "laravel-echo": "^1.7.0",
         "pusher-js": "^6.0.2",
